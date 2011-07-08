@@ -1,0 +1,26 @@
+<aspectj>
+<aspects>
+<aspect name="com.springsource.roo.pizzashop.domain.Base_Roo_JavaBean"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Topping_Roo_JavaBean"/>
+<aspect name="com.springsource.roo.pizzashop.web.PizzaOrderController_Roo_Controller"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Topping_Roo_Entity"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Base_Roo_Configurable"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Pizza_Roo_Configurable"/>
+<aspect name="com.springsource.roo.pizzashop.web.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
+<aspect name="com.springsource.roo.pizzashop.domain.PizzaOrder_Roo_Configurable"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Topping_Roo_Configurable"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Pizza_Roo_JavaBean"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Pizza_Roo_ToString"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Pizza_Roo_Entity"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Topping_Roo_ToString"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Base_Roo_Entity"/>
+<aspect name="com.springsource.roo.pizzashop.domain.PizzaOrder_Roo_Entity"/>
+<aspect name="com.springsource.roo.pizzashop.web.ToppingController_Roo_Controller"/>
+<aspect name="com.springsource.roo.pizzashop.domain.PizzaOrder_Roo_JavaBean"/>
+<aspect name="com.springsource.roo.pizzashop.domain.PizzaOrder_Roo_ToString"/>
+<aspect name="com.springsource.roo.pizzashop.web.PizzaController_Roo_Controller"/>
+<aspect name="com.springsource.roo.pizzashop.web.BaseController_Roo_Controller"/>
+<aspect name="com.springsource.roo.pizzashop.domain.Base_Roo_ToString"/>
+</aspects>
+</aspectj>
+
