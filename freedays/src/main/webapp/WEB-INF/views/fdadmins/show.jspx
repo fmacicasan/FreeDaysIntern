@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_freedays_app_FDAdmin" object="${fdadmin}" path="/fdadmins" z="MEuC91CiZ1SVMN0/hf4jwVxpNLE=">
-        <field:display field="appRegUser" id="s_freedays_app_FDAdmin_appRegUser" object="${fdadmin}" z="pcqYK1T+GmbewgA2iNICYn+iLy4="/>
-    </page:show>
-</div>
