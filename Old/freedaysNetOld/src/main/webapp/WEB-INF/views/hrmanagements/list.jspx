@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_freedays_app_HRManagement" items="${hrmanagements}" z="PXXj5yrKdlNrbbq8hwa7UqBQjjk=">
+        <table:table data="${hrmanagements}" id="l_freedays_app_HRManagement" path="/hrmanagements" z="54HPPEXXnK4otH2OEDmXM8vE6tY=">
+            <table:column id="c_freedays_app_HRManagement_appRegUser" property="appRegUser" z="a/Opajse/+s+UHykzNdOb0pl8j8="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_freedays_domain_RequestGranter" items="${requestgranters}" z="DxErtUya9m2YoK4aSZPrglWPyXA=">
+        <table:table data="${requestgranters}" id="l_freedays_domain_RequestGranter" path="/requestgranters" z="O6eB/DDWtv+y9Wnov19epMzcY4g=">
+            <table:column id="c_freedays_domain_RequestGranter_appRegUser" property="appRegUser" z="8DhHU9ynrd5XzGmWWcXpFH4PMBQ="/>
+        </table:table>
+    </page:list>
+</div>

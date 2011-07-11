@@ -1,0 +1,32 @@
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 23:33:18
+project --topLevelPackage freedays
+hint
+persistence setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY 
+database properties list
+entity --class ~.domain.RegularUser --testAutomatically 
+hint
+field string --fieldName username --unique --notNull --sizeMin 3
+field string --fieldName password --notNull --sizeMin 6
+field string --fieldName email --notNull --comment AddRegex
+entity --class ~.domain.ApplicationRegularUser --abstract --inheritanceType TABLE_PER_CLASS 
+field reference --fieldName regularUser --type ~.domain.RegularUser
+entity --class AdvancedUserRole --abstract --inheritanceType TABLE_PER_CLASS 
+field reference --fieldName appRegUser --type ~.domain.ApplicationRegularUser
+entity --class ~.domain.RequestGranter --extends ~.domain.AdvancedUserRole --testAutomatically 
+focus --class ~.Domain.ApplicationRegularUser
+field set --fieldName roles --type ~.domain.AdvancedUserRole
+field reference --fieldName granter --type ~.domain.RequestGranter
+entity --class ~.domain.Admin --testAutomatically --extends ~.domain.AdvancedUserRole
+entity --class ~.domain.ApplicationAdmin --abstract --extends ~.domain.AdvancedUserRole --inheritanceType TABLE_PER_CLASS
+entity --class ~.app.FDAdmin --extends ~.domain.ApplicationAdmin --testAutomatically 
+entity --class ~.app.HRManagement --extends ~.domain.AdvancedUserRole --testAutomatically 
+entity --class ~.app.FDUser --extends ~.domain.ApplicationRegularUser --testAutomatically 
+field date --fieldName hireDate --type java.util.Calendar --dateFormat SHORT --notNull --past 
+field number --fieldName initDays --type java.lang.Integer --notNull --min 2 --max 7
+field number --fieldName maxFreeDays --type java.lang.Integer --notNull --min 21
+perform tests
+// script --file ..\log.roo
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-11 23:42:38
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 23:46:04
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-11 23:54:32
