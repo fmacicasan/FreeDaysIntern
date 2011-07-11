@@ -1,2 +1,54 @@
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 15:49:02
 project --topLevelPackage freedays
+hint
+persistence setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY 
+database properties list
+entity --class ~.domain.RegularUser --testAutomatically 
+hint
+quit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-11 16:15:14
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 16:15:19
+// [failed] entity --class ~.domain.RegularUser
+field string --fieldName username --unique --notNull --sizeMin 3
+field string --fieldName password --notNull --sizeMin 6
+field email template --fieldName email --async
+// [failed] entity --class ~.Domain.ApplicationRegularUser --testAutomatically --abstract 
+entity --class ~.Domain.ApplicationRegularUser --abstract 
+field reference --fieldName regularUser --type ~.domain.RegularUser
+entity --class ~.domain.AdvanceUserRole --abstract 
+// [failed] field reference --fieldName user --type ~.domain.ApplicationRegularUser
+field reference --fieldName appRegUser --type ~.domain.ApplicationRegularUser
+// [failed] entity --class ~.domain.ApplicationRegularUser
+field set --fieldName roles --type ~.domain.AdvanceUserRole
+entity --class ~.domain.RequestGranter --extends ~.domain.AdvanceUserRole --testAutomatically 
+// [failed] entity --class ~.domain.ApplicationRegularUser
+// [failed] entity --class ~.domain.ApplicationRegularUser --abstract --inheritanceType SINGLE_TABLE --identifierColumn appRegularUser_type --identifierType java.lang.String
+entity --class AdvancedUserRole --abstract --inheritanceType TABLE_PER_CLASS 
+field reference --fieldName appRegUser --type ~.domain.ApplicationRegularUser
+// [failed] entity --class ~.domain.ApplicationRegularUser
+// [failed] field reference --fieldName granter --type ~.domain.Reg
+field reference --fieldName granter --type ~.domain.RegularUser
+// [failed] entity --class ~.domain.RequestGranter --testAutomatically 
+entity --class ~.domain.Admin --testAutomatically --extends ~.domain.AdvancedUserRole
+entity --class ~.domain.ApplicationAdmin --abstract --extends ~.domain.AdvancedUserRole
+entity --class ~.app.FDAdmin --extends ~.domain.ApplicationAdmin --testAutomatically 
+entity --class ~.app.HRManagement --extends ~.domain.AdvancedUserRole --testAutomatically 
+entity --class ~.app.FDUser --extends ~.domain.ApplicationRegularUser --testAutomatically 
+field date --fieldName hireDate --type java.util.Calendar --dateFormat SHORT --notNull --past 
+field number --fieldName initDays --type java.lang.Integer --notNull --min 2 --max 7
+field number --fieldName maxFreeDays --type java.lang.Integer --notNull --min 21
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// [failed] entity --class ~.domain.RegularUser
+field string --fieldName emailAddr --regexp \b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b --notNull 
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 18:27:53
+perform tests
+perform tests
+// [failed] entity --class ~.domain.RegularUser
+field string --fieldName email --notNull --comment AddRegex
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 18:33:16
+controller all --package ~.web
