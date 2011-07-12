@@ -47,3 +47,6 @@ exit
 perform tests
 exit
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-12 15:20:10
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 17:42:09
+perform tests
+perform tests
