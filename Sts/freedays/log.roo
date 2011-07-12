@@ -32,3 +32,14 @@ exit
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-11 23:54:32
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 09:45:23
 controller all --package freedays.controller
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 14:27:30
+focus --class ~.domain.RegularUser
+field string --fieldName surename --notNull
+field string --fieldName firstname --notNull 
+field boolean --fieldName deleted --notNull
+field boolean --fieldName activ --notNull
+field date --fieldName lastmodified --type java.util.Calendar --dateTimeFormatPattern "yyyy-MM-dd hh:mm:ss" --notNull 
+field string --fieldName usermodify --notNull
+field date --fieldName creationdate --type java.util.Calendar --notNull --dateTimeFormatPattern "yyyy-MM-dd hh:mm:ss"
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-12 14:52:54

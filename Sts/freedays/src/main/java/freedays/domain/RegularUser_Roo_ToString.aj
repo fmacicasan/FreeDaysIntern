@@ -9,9 +9,16 @@ privileged aspect RegularUser_Roo_ToString {
     
     public String RegularUser.toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("Activ: ").append(getActiv()).append(", ");
+        sb.append("Creationdate: ").append(getCreationdate() == null ? "null" : getCreationdate().getTime()).append(", ");
+        sb.append("Deleted: ").append(getDeleted()).append(", ");
         sb.append("Email: ").append(getEmail()).append(", ");
+        sb.append("Firstname: ").append(getFirstname()).append(", ");
         sb.append("Id: ").append(getId()).append(", ");
+        sb.append("Lastmodified: ").append(getLastmodified() == null ? "null" : getLastmodified().getTime()).append(", ");
         sb.append("Password: ").append(getPassword()).append(", ");
+        sb.append("Surename: ").append(getSurename()).append(", ");
+        sb.append("Usermodify: ").append(getUsermodify()).append(", ");
         sb.append("Username: ").append(getUsername()).append(", ");
         sb.append("Version: ").append(getVersion());
         return sb.toString();

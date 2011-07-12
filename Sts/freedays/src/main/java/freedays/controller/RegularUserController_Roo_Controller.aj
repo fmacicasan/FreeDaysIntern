@@ -27,6 +27,7 @@ privileged aspect RegularUserController_Roo_Controller {
     public String RegularUserController.create(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("regularUser", regularUser);
+            addDateTimeFormatPatterns(uiModel);
             return "regularusers/create";
         }
         uiModel.asMap().clear();
@@ -37,11 +38,13 @@ privileged aspect RegularUserController_Roo_Controller {
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String RegularUserController.createForm(Model uiModel) {
         uiModel.addAttribute("regularUser", new RegularUser());
+        addDateTimeFormatPatterns(uiModel);
         return "regularusers/create";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String RegularUserController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("regularuser", RegularUser.findRegularUser(id));
         uiModel.addAttribute("itemId", id);
         return "regularusers/show";
@@ -57,6 +60,7 @@ privileged aspect RegularUserController_Roo_Controller {
         } else {
             uiModel.addAttribute("regularusers", RegularUser.findAllRegularUsers());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "regularusers/list";
     }
     
@@ -64,6 +68,7 @@ privileged aspect RegularUserController_Roo_Controller {
     public String RegularUserController.update(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("regularUser", regularUser);
+            addDateTimeFormatPatterns(uiModel);
             return "regularusers/update";
         }
         uiModel.asMap().clear();
@@ -74,6 +79,7 @@ privileged aspect RegularUserController_Roo_Controller {
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String RegularUserController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("regularUser", RegularUser.findRegularUser(id));
+        addDateTimeFormatPatterns(uiModel);
         return "regularusers/update";
     }
     
@@ -89,6 +95,11 @@ privileged aspect RegularUserController_Roo_Controller {
     @ModelAttribute("regularusers")
     public Collection<RegularUser> RegularUserController.populateRegularUsers() {
         return RegularUser.findAllRegularUsers();
+    }
+    
+    void RegularUserController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("regularUser_lastmodified_date_format", "yyyy-MM-dd hh:mm:ss");
+        uiModel.addAttribute("regularUser_creationdate_date_format", "yyyy-MM-dd hh:mm:ss");
     }
     
     String RegularUserController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

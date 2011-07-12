@@ -3,7 +3,9 @@
 
 package freedays.domain;
 
+import java.lang.Boolean;
 import java.lang.String;
+import java.util.Calendar;
 
 privileged aspect RegularUser_Roo_JavaBean {
     
@@ -29,6 +31,62 @@ privileged aspect RegularUser_Roo_JavaBean {
     
     public void RegularUser.setEmail(String email) {
         this.email = email;
+    }
+    
+    public String RegularUser.getSurename() {
+        return this.surename;
+    }
+    
+    public void RegularUser.setSurename(String surename) {
+        this.surename = surename;
+    }
+    
+    public String RegularUser.getFirstname() {
+        return this.firstname;
+    }
+    
+    public void RegularUser.setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+    
+    public Boolean RegularUser.getDeleted() {
+        return this.deleted;
+    }
+    
+    public void RegularUser.setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+    
+    public Boolean RegularUser.getActiv() {
+        return this.activ;
+    }
+    
+    public void RegularUser.setActiv(Boolean activ) {
+        this.activ = activ;
+    }
+    
+    public Calendar RegularUser.getLastmodified() {
+        return this.lastmodified;
+    }
+    
+    public void RegularUser.setLastmodified(Calendar lastmodified) {
+        this.lastmodified = lastmodified;
+    }
+    
+    public String RegularUser.getUsermodify() {
+        return this.usermodify;
+    }
+    
+    public void RegularUser.setUsermodify(String usermodify) {
+        this.usermodify = usermodify;
+    }
+    
+    public Calendar RegularUser.getCreationdate() {
+        return this.creationdate;
+    }
+    
+    public void RegularUser.setCreationdate(Calendar creationdate) {
+        this.creationdate = creationdate;
     }
     
 }

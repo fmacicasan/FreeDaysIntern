@@ -21,6 +21,13 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
         setUsername(obj, index);
         setPassword(obj, index);
         setEmail(obj, index);
+        setSurename(obj, index);
+        setFirstname(obj, index);
+        setDeleted(obj, index);
+        setActiv(obj, index);
+        setLastmodified(obj, index);
+        setUsermodify(obj, index);
+        setCreationdate(obj, index);
         return obj;
     }
     
@@ -37,6 +44,41 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
     public void RegularUserDataOnDemand.setEmail(RegularUser obj, int index) {
         java.lang.String email = "email_" + index;
         obj.setEmail(email);
+    }
+    
+    public void RegularUserDataOnDemand.setSurename(RegularUser obj, int index) {
+        java.lang.String surename = "surename_" + index;
+        obj.setSurename(surename);
+    }
+    
+    public void RegularUserDataOnDemand.setFirstname(RegularUser obj, int index) {
+        java.lang.String firstname = "firstname_" + index;
+        obj.setFirstname(firstname);
+    }
+    
+    public void RegularUserDataOnDemand.setDeleted(RegularUser obj, int index) {
+        java.lang.Boolean deleted = Boolean.TRUE;
+        obj.setDeleted(deleted);
+    }
+    
+    public void RegularUserDataOnDemand.setActiv(RegularUser obj, int index) {
+        java.lang.Boolean activ = Boolean.TRUE;
+        obj.setActiv(activ);
+    }
+    
+    public void RegularUserDataOnDemand.setLastmodified(RegularUser obj, int index) {
+        java.util.Calendar lastmodified = java.util.Calendar.getInstance();
+        obj.setLastmodified(lastmodified);
+    }
+    
+    public void RegularUserDataOnDemand.setUsermodify(RegularUser obj, int index) {
+        java.lang.String usermodify = "usermodify_" + index;
+        obj.setUsermodify(usermodify);
+    }
+    
+    public void RegularUserDataOnDemand.setCreationdate(RegularUser obj, int index) {
+        java.util.Calendar creationdate = java.util.Calendar.getInstance();
+        obj.setCreationdate(creationdate);
     }
     
     public RegularUser RegularUserDataOnDemand.getSpecificRegularUser(int index) {

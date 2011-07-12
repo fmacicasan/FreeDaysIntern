@@ -30,7 +30,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     static class freedays.controller.ApplicationConversionServiceFactoryBean.RegularUserConverter implements Converter<RegularUser, String>  {
         public String convert(RegularUser regularUser) {
-            return new StringBuilder().append(regularUser.getUsername()).append(" ").append(regularUser.getPassword()).append(" ").append(regularUser.getEmail()).toString();
+            return new StringBuilder().append(regularUser.getUsername()).append(" ").append(regularUser.getPassword()).append(" ").append(regularUser.getEmail()).append(" ").append(regularUser.getSurename()).toString();
         }
         
     }

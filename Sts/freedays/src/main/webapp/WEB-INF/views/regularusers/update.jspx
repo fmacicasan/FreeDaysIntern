@@ -6,5 +6,12 @@
         <field:input field="username" id="c_freedays_domain_RegularUser_username" min="3" required="true" z="Y36MgYMFR26Cgz1EBL09opf6ffs="/>
         <field:input field="password" id="c_freedays_domain_RegularUser_password" min="6" required="true" z="F/ogpwvB2OqXR67afmje3nPZHdk="/>
         <field:input field="email" id="c_freedays_domain_RegularUser_email" required="true" validationMessageCode="field_invalid_email" z="kWommBnkAeoeIN3pIU9znHKiqko="/>
+        <field:input field="surename" id="c_freedays_domain_RegularUser_surename" required="true" z="POxYmJd2jSMnWVLRxNMf5qOlO9Y="/>
+        <field:input field="firstname" id="c_freedays_domain_RegularUser_firstname" required="true" z="4Vqg8aD08b0xYrGvmRXKQx6R6iY="/>
+        <field:checkbox field="deleted" id="c_freedays_domain_RegularUser_deleted" z="2zEl3mE3aVirUZ/9VazluSMPi6U="/>
+        <field:checkbox field="activ" id="c_freedays_domain_RegularUser_activ" z="QeIUKdXq2m/qb9su8paehCWoY/o="/>
+        <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" required="true" z="z0VTw4kzCIT0Lv4NUVcFSv8I/nY="/>
+        <field:input field="usermodify" id="c_freedays_domain_RegularUser_usermodify" required="true" z="/aBlW8fDwrJqefQHUSZMtYALP7g="/>
+        <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" required="true" z="bND23k8ZZ3WhjMI+mhA1lXdHeq8="/>
     </form:update>
 </div>
