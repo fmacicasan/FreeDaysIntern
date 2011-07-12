@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.283" errors="0" skipped="0" tests="9" name="freedays.domain.RequestGranterIntegrationTest">
+<testsuite failures="0" time="0.261" errors="0" skipped="0" tests="9" name="freedays.domain.RequestGranterIntegrationTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_21\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_21\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\target\surefire\surefirebooter2600998733025908123.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\target\surefire\surefirebooter2194159784337828552.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\FMACIC~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -59,13 +59,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.008" classname="freedays.domain.RequestGranterIntegrationTest" name="testMarkerMethod"/>
-  <testcase time="0.032" classname="freedays.domain.RequestGranterIntegrationTest" name="testFlush"/>
-  <testcase time="0.027" classname="freedays.domain.RequestGranterIntegrationTest" name="testMerge"/>
-  <testcase time="0.03" classname="freedays.domain.RequestGranterIntegrationTest" name="testPersist"/>
-  <testcase time="0.038" classname="freedays.domain.RequestGranterIntegrationTest" name="testRemove"/>
-  <testcase time="0.036" classname="freedays.domain.RequestGranterIntegrationTest" name="testCountRequestGranters"/>
-  <testcase time="0.035" classname="freedays.domain.RequestGranterIntegrationTest" name="testFindRequestGranter"/>
-  <testcase time="0.035" classname="freedays.domain.RequestGranterIntegrationTest" name="testFindAllRequestGranters"/>
-  <testcase time="0.035" classname="freedays.domain.RequestGranterIntegrationTest" name="testFindRequestGranterEntries"/>
+  <testcase time="0.009" classname="freedays.domain.RequestGranterIntegrationTest" name="testMarkerMethod"/>
+  <testcase time="0.037" classname="freedays.domain.RequestGranterIntegrationTest" name="testFlush"/>
+  <testcase time="0.026" classname="freedays.domain.RequestGranterIntegrationTest" name="testMerge"/>
+  <testcase time="0.027" classname="freedays.domain.RequestGranterIntegrationTest" name="testPersist"/>
+  <testcase time="0.034" classname="freedays.domain.RequestGranterIntegrationTest" name="testRemove"/>
+  <testcase time="0.034" classname="freedays.domain.RequestGranterIntegrationTest" name="testCountRequestGranters"/>
+  <testcase time="0.029" classname="freedays.domain.RequestGranterIntegrationTest" name="testFindRequestGranter"/>
+  <testcase time="0.031" classname="freedays.domain.RequestGranterIntegrationTest" name="testFindAllRequestGranters"/>
+  <testcase time="0.029" classname="freedays.domain.RequestGranterIntegrationTest" name="testFindRequestGranterEntries"/>
 </testsuite>
