@@ -30,3 +30,5 @@ exit
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-11 23:42:38
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 23:46:04
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-11 23:54:32
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 09:45:23
+controller all --package freedays.controller
