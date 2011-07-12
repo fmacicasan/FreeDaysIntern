@@ -43,3 +43,7 @@ field string --fieldName usermodify --notNull
 field date --fieldName creationdate --type java.util.Calendar --notNull --dateTimeFormatPattern "yyyy-MM-dd hh:mm:ss"
 exit
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-12 14:52:54
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 15:18:23
+perform tests
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-12 15:20:10
