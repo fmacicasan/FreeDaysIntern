@@ -34,8 +34,8 @@
 <aspect name="freedays.controller.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
 <aspect name="freedays.controller.RegularUserController_Roo_Controller"/>
 <aspect name="freedays.domain.ApplicationRegularUser_Roo_ToString"/>
-<aspect name="freedays.app.FDUser_Roo_Entity"/>
 <aspect name="freedays.app.HRManagement_Roo_Entity"/>
+<aspect name="freedays.app.FDUser_Roo_Entity"/>
 <aspect name="freedays.controller.FDAdminController_Roo_Controller"/>
 <aspect name="freedays.domain.ApplicationRegularUser_Roo_JavaBean"/>
 </aspects>

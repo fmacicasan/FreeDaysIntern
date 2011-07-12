@@ -11,8 +11,8 @@
 <aspect name="freedays.domain.AdminIntegrationTest_Roo_IntegrationTest"/>
 <aspect name="freedays.app.FDUserDataOnDemand_Roo_Configurable"/>
 <aspect name="freedays.domain.RequestGranterIntegrationTest_Roo_Configurable"/>
-<aspect name="freedays.domain.RequestGranterDataOnDemand_Roo_DataOnDemand"/>
 <aspect name="freedays.app.FDUserIntegrationTest_Roo_Configurable"/>
+<aspect name="freedays.domain.RequestGranterDataOnDemand_Roo_DataOnDemand"/>
 <aspect name="freedays.domain.AdminDataOnDemand_Roo_DataOnDemand"/>
 <aspect name="freedays.app.HRManagementIntegrationTest_Roo_Configurable"/>
 <aspect name="freedays.app.HRManagementDataOnDemand_Roo_Configurable"/>
