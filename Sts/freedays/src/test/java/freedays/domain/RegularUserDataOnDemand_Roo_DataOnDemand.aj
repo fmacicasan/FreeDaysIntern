@@ -26,8 +26,8 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
         setDeleted(obj, index);
         setActiv(obj, index);
         setLastmodified(obj, index);
-        setUsermodify(obj, index);
         setCreationdate(obj, index);
+        setUsermodify(obj, index);
         return obj;
     }
     
@@ -71,14 +71,14 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
         obj.setLastmodified(lastmodified);
     }
     
-    public void RegularUserDataOnDemand.setUsermodify(RegularUser obj, int index) {
-        java.lang.String usermodify = "usermodify_" + index;
-        obj.setUsermodify(usermodify);
-    }
-    
     public void RegularUserDataOnDemand.setCreationdate(RegularUser obj, int index) {
         java.util.Calendar creationdate = java.util.Calendar.getInstance();
         obj.setCreationdate(creationdate);
+    }
+    
+    public void RegularUserDataOnDemand.setUsermodify(RegularUser obj, int index) {
+        freedays.domain.RegularUser usermodify = obj;
+        obj.setUsermodify(usermodify);
     }
     
     public RegularUser RegularUserDataOnDemand.getSpecificRegularUser(int index) {

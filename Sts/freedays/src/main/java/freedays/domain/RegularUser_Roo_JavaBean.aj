@@ -3,6 +3,7 @@
 
 package freedays.domain;
 
+import freedays.domain.RegularUser;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.Calendar;
@@ -73,20 +74,20 @@ privileged aspect RegularUser_Roo_JavaBean {
         this.lastmodified = lastmodified;
     }
     
-    public String RegularUser.getUsermodify() {
-        return this.usermodify;
-    }
-    
-    public void RegularUser.setUsermodify(String usermodify) {
-        this.usermodify = usermodify;
-    }
-    
     public Calendar RegularUser.getCreationdate() {
         return this.creationdate;
     }
     
     public void RegularUser.setCreationdate(Calendar creationdate) {
         this.creationdate = creationdate;
+    }
+    
+    public RegularUser RegularUser.getUsermodify() {
+        return this.usermodify;
+    }
+    
+    public void RegularUser.setUsermodify(RegularUser usermodify) {
+        this.usermodify = usermodify;
     }
     
 }
