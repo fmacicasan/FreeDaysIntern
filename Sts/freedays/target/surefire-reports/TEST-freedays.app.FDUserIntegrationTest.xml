@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.314" errors="0" skipped="0" tests="9" name="freedays.app.FDUserIntegrationTest">
+<testsuite failures="0" time="1.224" errors="0" skipped="0" tests="9" name="freedays.app.FDUserIntegrationTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_21\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_21\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\target\surefire\surefirebooter1057485650903011711.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\target\surefire\surefirebooter6087480716673951789.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\FMACIC~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -59,13 +59,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.01" classname="freedays.app.FDUserIntegrationTest" name="testMarkerMethod"/>
-  <testcase time="0.232" classname="freedays.app.FDUserIntegrationTest" name="testFlush"/>
-  <testcase time="0.169" classname="freedays.app.FDUserIntegrationTest" name="testMerge"/>
-  <testcase time="0.189" classname="freedays.app.FDUserIntegrationTest" name="testPersist"/>
-  <testcase time="0.147" classname="freedays.app.FDUserIntegrationTest" name="testRemove"/>
-  <testcase time="0.133" classname="freedays.app.FDUserIntegrationTest" name="testCountFDUsers"/>
-  <testcase time="0.14" classname="freedays.app.FDUserIntegrationTest" name="testFindFDUser"/>
-  <testcase time="0.145" classname="freedays.app.FDUserIntegrationTest" name="testFindAllFDUsers"/>
-  <testcase time="0.142" classname="freedays.app.FDUserIntegrationTest" name="testFindFDUserEntries"/>
+  <testcase time="0.009" classname="freedays.app.FDUserIntegrationTest" name="testMarkerMethod"/>
+  <testcase time="0.241" classname="freedays.app.FDUserIntegrationTest" name="testFlush"/>
+  <testcase time="0.172" classname="freedays.app.FDUserIntegrationTest" name="testMerge"/>
+  <testcase time="0.169" classname="freedays.app.FDUserIntegrationTest" name="testPersist"/>
+  <testcase time="0.146" classname="freedays.app.FDUserIntegrationTest" name="testRemove"/>
+  <testcase time="0.128" classname="freedays.app.FDUserIntegrationTest" name="testCountFDUsers"/>
+  <testcase time="0.115" classname="freedays.app.FDUserIntegrationTest" name="testFindFDUser"/>
+  <testcase time="0.119" classname="freedays.app.FDUserIntegrationTest" name="testFindAllFDUsers"/>
+  <testcase time="0.118" classname="freedays.app.FDUserIntegrationTest" name="testFindFDUserEntries"/>
 </testsuite>
