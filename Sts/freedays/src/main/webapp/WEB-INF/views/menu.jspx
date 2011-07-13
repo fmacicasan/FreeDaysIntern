@@ -1,35 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-        <menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
-            <menu:item id="i_hrmanagement_new" messageCode="global_menu_new" url="/hrmanagements?form" z="gh9MLkRfGMg1hyfIdmD30xS0S38="/>
-            <menu:item id="i_hrmanagement_list" messageCode="global_menu_list" url="/hrmanagements?page=1&amp;size=${empty param.size ? 10 : param.size}" z="rK2fdLVRaF6oqHWiKvL8M6q1aso="/>
-        </menu:category>
-        <menu:category id="c_requestgranter" z="qIRPS1WXPxXt+NR0tZV12KCGyNQ=">
-            <menu:item id="i_requestgranter_new" messageCode="global_menu_new" url="/requestgranters?form" z="+XhU9I7K3Vfd760t4dz28PtbDTI="/>
-            <menu:item id="i_requestgranter_list" messageCode="global_menu_list" url="/requestgranters?page=1&amp;size=${empty param.size ? 10 : param.size}" z="EwwdvD61VT2WIInKk+Kbc696EYk="/>
-        </menu:category>
-        <menu:category id="c_admin" z="yJekxb7XuSQP9KBD9S6wbwLaHZY=">
-            <menu:item id="i_admin_new" messageCode="global_menu_new" url="/admins?form" z="TPmBX+1lfAP8gYU/pX/jcYwsTfM="/>
-            <menu:item id="i_admin_list" messageCode="global_menu_list" url="/admins?page=1&amp;size=${empty param.size ? 10 : param.size}" z="JRwUq6a+WGX2NnSSZCd4lcreuMk="/>
-        </menu:category>
-        <menu:category id="c_regularuser" z="f0656ccKE9tZTK8IgpHTnLvK31o=">
-            <menu:item id="i_regularuser_new" messageCode="global_menu_new" url="/regularusers?form" z="mJnN9ca8ulLAQ68LRQlrBZlmV1k="/>
-            <menu:item id="i_regularuser_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="zvHfaaOX/ix7VJtd901LqD/gAg4="/>
-        </menu:category>
-        <menu:category id="c_fduser" z="oTLNSHRQ4yDI1lQjPTS1rrrrduY=">
-            <menu:item id="i_fduser_new" messageCode="global_menu_new" url="/fdusers?form" z="Qdsa6WGJlB3M2+gN+qG6Cb7AWZQ="/>
-            <menu:item id="i_fduser_list" messageCode="global_menu_list" url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="pkNWU4h6kpXe7wSaynWgJxFsvqE="/>
-        </menu:category>
-        <menu:category id="c_fdadmin" z="AulS1dtJIr8ICL3kM4HL5nx9TT4=">
-            <menu:item id="i_fdadmin_new" messageCode="global_menu_new" url="/fdadmins?form" z="Xrs016jQViqY9Ef6+bMllnlzMjg="/>
-            <menu:item id="i_fdadmin_list" messageCode="global_menu_list" url="/fdadmins?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qGMWtTuiSPvEBVAO/4gA3z4P+gM="/>
-        </menu:category>
-        <menu:category id="c_admin_regular_user" z="">
-        	<menu:item id="i_admin_regular_user_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}"  z="" />
-        	<menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search"  z="" />
-        </menu:category>
-    </menu:menu>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+		<menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
+			<menu:item id="i_hrmanagement_new" messageCode="global_menu_new"
+				url="/hrmanagements?form" z="gh9MLkRfGMg1hyfIdmD30xS0S38=" />
+			<menu:item id="i_hrmanagement_list" messageCode="global_menu_list"
+				url="/hrmanagements?page=1&amp;size=${empty param.size ? 10 : param.size}"
+				z="rK2fdLVRaF6oqHWiKvL8M6q1aso=" />
+		</menu:category>
+		<menu:category id="c_requestgranter" z="qIRPS1WXPxXt+NR0tZV12KCGyNQ=">
+			<menu:item id="i_requestgranter_new" messageCode="global_menu_new"
+				url="/requestgranters?form" z="+XhU9I7K3Vfd760t4dz28PtbDTI=" />
+			<menu:item id="i_requestgranter_list" messageCode="global_menu_list"
+				url="/requestgranters?page=1&amp;size=${empty param.size ? 10 : param.size}"
+				z="EwwdvD61VT2WIInKk+Kbc696EYk=" />
+		</menu:category>
+		<menu:category id="c_admin" z="yJekxb7XuSQP9KBD9S6wbwLaHZY=">
+			<menu:item id="i_admin_new" messageCode="global_menu_new"
+				url="/admins?form" z="TPmBX+1lfAP8gYU/pX/jcYwsTfM=" />
+			<menu:item id="i_admin_list" messageCode="global_menu_list"
+				url="/admins?page=1&amp;size=${empty param.size ? 10 : param.size}"
+				z="JRwUq6a+WGX2NnSSZCd4lcreuMk=" />
+		</menu:category>
+		<menu:category id="c_regularuser" z="f0656ccKE9tZTK8IgpHTnLvK31o=">
+			<menu:item id="i_regularuser_new" messageCode="global_menu_new"
+				url="/regularusers?form" z="mJnN9ca8ulLAQ68LRQlrBZlmV1k=" />
+			<menu:item id="i_regularuser_list" messageCode="global_menu_list"
+				url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}"
+				z="zvHfaaOX/ix7VJtd901LqD/gAg4=" />
+		</menu:category>
+		<menu:category id="c_fduser" z="oTLNSHRQ4yDI1lQjPTS1rrrrduY=">
+			<menu:item id="i_fduser_new" messageCode="global_menu_new"
+				url="/fdusers?form" z="Qdsa6WGJlB3M2+gN+qG6Cb7AWZQ=" />
+			<menu:item id="i_fduser_list" messageCode="global_menu_list"
+				url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}"
+				z="pkNWU4h6kpXe7wSaynWgJxFsvqE=" />
+		</menu:category>
+		<menu:category id="c_fdadmin" z="AulS1dtJIr8ICL3kM4HL5nx9TT4=">
+			<menu:item id="i_fdadmin_new" messageCode="global_menu_new"
+				url="/fdadmins?form" z="Xrs016jQViqY9Ef6+bMllnlzMjg=" />
+			<menu:item id="i_fdadmin_list" messageCode="global_menu_list"
+				url="/fdadmins?page=1&amp;size=${empty param.size ? 10 : param.size}"
+				z="qGMWtTuiSPvEBVAO/4gA3z4P+gM=" />
+		</menu:category>
+		<menu:category id="c_admin_regular_user" z="">
+			<menu:item id="i_admin_regular_user_list"
+				messageCode="global_menu_list"
+				url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}"
+				z="" />
+			<menu:item id="i_admin_regular_user_search"
+				messageCode="global_menu_search" url="/regularusers?search" z="" />
+		</menu:category>
+	</menu:menu>
 </div>
