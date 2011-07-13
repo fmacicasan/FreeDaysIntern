@@ -97,11 +97,6 @@ privileged aspect RegularUserController_Roo_Controller {
         return RegularUser.findAllRegularUsers();
     }
     
-    void RegularUserController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("regularUser_lastmodified_date_format", "yyyy-MM-dd hh:mm:ss");
-        uiModel.addAttribute("regularUser_creationdate_date_format", "yyyy-MM-dd hh:mm:ss");
-    }
-    
     String RegularUserController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {

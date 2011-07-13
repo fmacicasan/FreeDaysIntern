@@ -14,13 +14,12 @@ privileged aspect RegularUser_Roo_ToString {
         sb.append("Deleted: ").append(getDeleted()).append(", ");
         sb.append("Email: ").append(getEmail()).append(", ");
         sb.append("Firstname: ").append(getFirstname()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
         sb.append("Lastmodified: ").append(getLastmodified() == null ? "null" : getLastmodified().getTime()).append(", ");
         sb.append("Password: ").append(getPassword()).append(", ");
+        sb.append("SearchCriteria: ").append(getSearchCriteria() == null ? "null" : getSearchCriteria().size()).append(", ");
         sb.append("Surename: ").append(getSurename()).append(", ");
         sb.append("Usermodifier: ").append(getUsermodifier()).append(", ");
-        sb.append("Username: ").append(getUsername()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("Username: ").append(getUsername());
         return sb.toString();
     }
     

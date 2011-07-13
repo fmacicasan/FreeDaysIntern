@@ -6,15 +6,26 @@ import org.springframework.roo.addon.tostring.RooToString;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @RooJavaBean
 @RooToString
 @RooEntity
 public class RegularUser {
+	
+	private static final String[] SEARCH_FILTERS={"username","email","surename","firstname","deleted","activ","usermodified"};
 
     @NotNull
     @Column(unique = true)
@@ -51,4 +62,51 @@ public class RegularUser {
     private Calendar creationdate;
 
     private String usermodifier;
+
+    /**
+     * Search all the RegularUser entities with username LIKE searchKey
+     * @param searchKey the Search object -> wrapper for Search filters
+     * @return a List with all matching RegularUser
+     */
+	public static List<RegularUser> findAllRegularUsersLike(Search search) {
+		EntityManager emag =  RegularUser.entityManager();
+		
+		TypedQuery<RegularUser> query = emag.createQuery("SELECT o FROM RegularUser o WHERE o."+search.getSearchKey()+" LIKE ?1",RegularUser.class);
+		//query.setParameter(1, search.getSearchKey());
+		query.setParameter(1, search.searchValueLike());
+		List<RegularUser> result =  query.getResultList();
+		System.out.println(query.getParameter(1).getName());
+		System.out.println("RegularUser list size:"+result.size());
+		return result;
+	}
+
+	@PersistenceContext
+    transient EntityManager entityManager;
+
+	public static long countRegularUsers() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM RegularUser o", Long.class).getSingleResult();
+    }
+
+	public static final EntityManager entityManager() {
+        EntityManager em = new RegularUser().entityManager;
+        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+        return em;
+    }
+
+	public static List<RegularUser> findAllRegularUsers() {
+        return entityManager().createQuery("SELECT o FROM RegularUser o", RegularUser.class).getResultList();
+    }
+
+	public static RegularUser findRegularUser(Long id) {
+        if (id == null) return null;
+        return entityManager().find(RegularUser.class, id);
+    }
+
+	public static List<RegularUser> findRegularUserEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM RegularUser o", RegularUser.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+	
+	public static List<String> getSearchCriteria(){
+		return Arrays.asList(RegularUser.SEARCH_FILTERS);
+	}
 }
