@@ -8,9 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.ui.Model;
@@ -41,11 +39,6 @@ privileged aspect RegularUserController_Roo_Controller {
     public String RegularUserController.createForm(Model uiModel) {
         uiModel.addAttribute("regularUser", new RegularUser());
         addDateTimeFormatPatterns(uiModel);
-        List dependencies = new ArrayList();
-        if (RegularUser.countRegularUsers() == 0) {
-            dependencies.add(new String[]{"regularuser", "regularusers"});
-        }
-        uiModel.addAttribute("dependencies", dependencies);
         return "regularusers/create";
     }
     

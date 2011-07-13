@@ -55,7 +55,9 @@ perform tests
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-12 18:25:03
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-13 09:41:26
 focus --class ~.domain.RegularUser
-field reference --fieldName usermodify --type ~.domain.RegularUser --notNull
+field reference --fieldName usermodify --type ~.domain.RegularUser
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-13 10:04:11
 security setup
 logging setup --level DEBUG 
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-13 10:46:15
+perform tests

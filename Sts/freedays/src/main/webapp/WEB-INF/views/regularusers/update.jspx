@@ -12,6 +12,6 @@
         <field:checkbox field="activ" id="c_freedays_domain_RegularUser_activ" z="QeIUKdXq2m/qb9su8paehCWoY/o="/>
         <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" required="true" z="z0VTw4kzCIT0Lv4NUVcFSv8I/nY="/>
         <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" required="true" z="bND23k8ZZ3WhjMI+mhA1lXdHeq8="/>
-        <field:select field="usermodify" id="c_freedays_domain_RegularUser_usermodify" itemValue="id" items="${regularusers}" path="/regularusers" required="true" z="KgjnkSgy7Aovihr1oS7YT2x2Oec="/>
+        <field:select field="usermodify" id="c_freedays_domain_RegularUser_usermodify" itemValue="id" items="${regularusers}" path="/regularusers" z="5Yyi4USagd9zCdK5iRULcn1QwyY="/>
     </form:update>
 </div>

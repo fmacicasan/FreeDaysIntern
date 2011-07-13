@@ -51,7 +51,6 @@ public class RegularUser {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Calendar creationdate;
 
-    @NotNull
     @ManyToOne
     private freedays.domain.RegularUser usermodify;
 }
