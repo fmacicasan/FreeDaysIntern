@@ -81,12 +81,12 @@ privileged aspect RegularUser_Roo_JavaBean {
         this.creationdate = creationdate;
     }
     
-    public String RegularUser.getUsermodify() {
-        return this.usermodify;
+    public String RegularUser.getUsermodifier() {
+        return this.usermodifier;
     }
     
-    public void RegularUser.setUsermodify(String usermodify) {
-        this.usermodify = usermodify;
+    public void RegularUser.setUsermodifier(String usermodifier) {
+        this.usermodifier = usermodifier;
     }
     
 }

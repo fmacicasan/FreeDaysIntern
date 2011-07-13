@@ -59,3 +59,19 @@ field string --fieldName usermodify
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-13 10:04:11
 security setup
 logging setup --level DEBUG 
+perform tests
+focus --class ~.domain.RegularUser
+field string --fieldName usermodify
+perform tests
+perform tests
+field string --fieldName usermodify
+perform tests
+focus --class ~.domain.RegularUser
+field string --fieldName usermodify
+perform tests
+focus --class ~.domain.RegularUser
+field string --fieldName usermodifier
+perform tests
+perform tests
+perform tests
+perform tests

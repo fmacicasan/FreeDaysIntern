@@ -10,7 +10,6 @@ import java.util.Calendar;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
@@ -51,6 +50,5 @@ public class RegularUser {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Calendar creationdate;
 
-
-    private String usermodify;
+    private String usermodifier;
 }

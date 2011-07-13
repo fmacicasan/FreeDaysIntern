@@ -27,7 +27,7 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
         setActiv(obj, index);
         setLastmodified(obj, index);
         setCreationdate(obj, index);
-        setUsermodify(obj, index);
+        setUsermodifier(obj, index);
         return obj;
     }
     
@@ -76,9 +76,9 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
         obj.setCreationdate(creationdate);
     }
     
-    public void RegularUserDataOnDemand.setUsermodify(RegularUser obj, int index) {
-        java.lang.String usermodify = "usermodify_" + index;
-        obj.setUsermodify(usermodify);
+    public void RegularUserDataOnDemand.setUsermodifier(RegularUser obj, int index) {
+        java.lang.String usermodifier = "usermodifier_" + index;
+        obj.setUsermodifier(usermodifier);
     }
     
     public RegularUser RegularUserDataOnDemand.getSpecificRegularUser(int index) {
