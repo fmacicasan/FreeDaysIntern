@@ -77,7 +77,7 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
     }
     
     public void RegularUserDataOnDemand.setUsermodify(RegularUser obj, int index) {
-        freedays.domain.RegularUser usermodify = obj;
+        java.lang.String usermodify = "usermodify_" + index;
         obj.setUsermodify(usermodify);
     }
     

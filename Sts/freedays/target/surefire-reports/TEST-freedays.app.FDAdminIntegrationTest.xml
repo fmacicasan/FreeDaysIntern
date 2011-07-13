@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="2.625" errors="0" skipped="0" tests="9" name="freedays.app.FDAdminIntegrationTest">
+<testsuite failures="0" time="2.606" errors="0" skipped="0" tests="9" name="freedays.app.FDAdminIntegrationTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_21\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_21\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\target\surefire\surefirebooter6038276082935334269.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\target\surefire\surefirebooter1235003270348755692.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\FMACIC~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -59,13 +59,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="1.976" classname="freedays.app.FDAdminIntegrationTest" name="testMarkerMethod"/>
-  <testcase time="0.23" classname="freedays.app.FDAdminIntegrationTest" name="testCountFDAdmins"/>
-  <testcase time="0.048" classname="freedays.app.FDAdminIntegrationTest" name="testFindFDAdmin"/>
-  <testcase time="0.045" classname="freedays.app.FDAdminIntegrationTest" name="testFindAllFDAdmins"/>
-  <testcase time="0.044" classname="freedays.app.FDAdminIntegrationTest" name="testFindFDAdminEntries"/>
-  <testcase time="0.038" classname="freedays.app.FDAdminIntegrationTest" name="testFlush"/>
-  <testcase time="0.037" classname="freedays.app.FDAdminIntegrationTest" name="testMerge"/>
-  <testcase time="0.035" classname="freedays.app.FDAdminIntegrationTest" name="testPersist"/>
-  <testcase time="0.039" classname="freedays.app.FDAdminIntegrationTest" name="testRemove"/>
+  <testcase time="1.944" classname="freedays.app.FDAdminIntegrationTest" name="testMarkerMethod"/>
+  <testcase time="0.226" classname="freedays.app.FDAdminIntegrationTest" name="testCountFDAdmins"/>
+  <testcase time="0.046" classname="freedays.app.FDAdminIntegrationTest" name="testFindFDAdmin"/>
+  <testcase time="0.046" classname="freedays.app.FDAdminIntegrationTest" name="testFindAllFDAdmins"/>
+  <testcase time="0.045" classname="freedays.app.FDAdminIntegrationTest" name="testFindFDAdminEntries"/>
+  <testcase time="0.043" classname="freedays.app.FDAdminIntegrationTest" name="testFlush"/>
+  <testcase time="0.044" classname="freedays.app.FDAdminIntegrationTest" name="testMerge"/>
+  <testcase time="0.042" classname="freedays.app.FDAdminIntegrationTest" name="testPersist"/>
+  <testcase time="0.047" classname="freedays.app.FDAdminIntegrationTest" name="testRemove"/>
 </testsuite>

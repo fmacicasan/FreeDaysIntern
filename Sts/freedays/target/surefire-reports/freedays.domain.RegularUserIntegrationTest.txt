@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: freedays.domain.RegularUserIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.097 sec <<< FAILURE!
-testFlush(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.01 sec  <<< ERROR!
+Tests run: 9, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.102 sec <<< FAILURE!
+testFlush(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.011 sec  <<< ERROR!
 org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]
 	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:311)
 	at org.springframework.orm.jpa.aspectj.JpaExceptionTranslatorAspect.ajc$afterThrowing$org_springframework_orm_jpa_aspectj_JpaExceptionTranslatorAspect$1$18a1ac9(JpaExceptionTranslatorAspect.aj:15)
@@ -311,7 +311,7 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExce
 	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:57)
 	... 65 more
 
-testRemove(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.01 sec  <<< ERROR!
+testRemove(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.011 sec  <<< ERROR!
 org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]
 	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:311)
 	at org.springframework.orm.jpa.aspectj.JpaExceptionTranslatorAspect.ajc$afterThrowing$org_springframework_orm_jpa_aspectj_JpaExceptionTranslatorAspect$1$18a1ac9(JpaExceptionTranslatorAspect.aj:15)
@@ -414,7 +414,7 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExce
 	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:57)
 	... 65 more
 
-testCountRegularUsers(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.009 sec  <<< ERROR!
+testCountRegularUsers(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.01 sec  <<< ERROR!
 org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]
 	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:311)
 	at org.springframework.orm.jpa.aspectj.JpaExceptionTranslatorAspect.ajc$afterThrowing$org_springframework_orm_jpa_aspectj_JpaExceptionTranslatorAspect$1$18a1ac9(JpaExceptionTranslatorAspect.aj:15)
@@ -517,7 +517,7 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExce
 	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:57)
 	... 65 more
 
-testFindRegularUser(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.01 sec  <<< ERROR!
+testFindRegularUser(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.011 sec  <<< ERROR!
 org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]
 	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:311)
 	at org.springframework.orm.jpa.aspectj.JpaExceptionTranslatorAspect.ajc$afterThrowing$org_springframework_orm_jpa_aspectj_JpaExceptionTranslatorAspect$1$18a1ac9(JpaExceptionTranslatorAspect.aj:15)
@@ -620,7 +620,7 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExce
 	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:57)
 	... 65 more
 
-testFindAllRegularUsers(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.01 sec  <<< ERROR!
+testFindAllRegularUsers(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.011 sec  <<< ERROR!
 org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]
 	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:311)
 	at org.springframework.orm.jpa.aspectj.JpaExceptionTranslatorAspect.ajc$afterThrowing$org_springframework_orm_jpa_aspectj_JpaExceptionTranslatorAspect$1$18a1ac9(JpaExceptionTranslatorAspect.aj:15)
@@ -723,7 +723,7 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExce
 	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:57)
 	... 65 more
 
-testFindRegularUserEntries(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.01 sec  <<< ERROR!
+testFindRegularUserEntries(freedays.domain.RegularUserIntegrationTest)  Time elapsed: 0.011 sec  <<< ERROR!
 org.springframework.orm.jpa.JpaSystemException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not insert: [freedays.domain.RegularUser]
 	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:311)
 	at org.springframework.orm.jpa.aspectj.JpaExceptionTranslatorAspect.ajc$afterThrowing$org_springframework_orm_jpa_aspectj_JpaExceptionTranslatorAspect$1$18a1ac9(JpaExceptionTranslatorAspect.aj:15)

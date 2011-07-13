@@ -18,6 +18,7 @@ privileged aspect RegularUser_Roo_ToString {
         sb.append("Lastmodified: ").append(getLastmodified() == null ? "null" : getLastmodified().getTime()).append(", ");
         sb.append("Password: ").append(getPassword()).append(", ");
         sb.append("Surename: ").append(getSurename()).append(", ");
+        sb.append("Usermodify: ").append(getUsermodify()).append(", ");
         sb.append("Username: ").append(getUsername()).append(", ");
         sb.append("Version: ").append(getVersion());
         return sb.toString();
