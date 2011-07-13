@@ -13,4 +13,7 @@
 <definition extends="default" name="regularusers/update">
         <put-attribute name="body" value="/WEB-INF/views/regularusers/update.jspx"/>
     </definition>
+<definition extends="default" name="regularusers/search">
+        <put-attribute name="body" value="/WEB-INF/views/regularusers/search.jspx"/>
+    </definition>
 </tiles-definitions>

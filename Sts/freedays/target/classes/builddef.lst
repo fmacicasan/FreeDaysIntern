@@ -16,8 +16,8 @@ C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\contr
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\controller\FDAdminController_Roo_Controller.aj
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\controller\ApplicationConversionServiceFactoryBean.java
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domain\RegularUser_Roo_Configurable.aj
-C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\controller\RegularUserController_Roo_Controller.aj
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domain\RegularUser_Roo_JavaBean.aj
+C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\controller\RegularUserController_Roo_Controller.aj
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\app\FDAdmin.java
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\app\FDUser.java
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\controller\FDUserController.java
@@ -55,6 +55,7 @@ C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domai
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domain\RequestGranter_Roo_Configurable.aj
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domain\Admin.java
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\app\HRManagement_Roo_ToString.aj
+C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\controller\UAdminController.java
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domain\ApplicationRegularUser_Roo_Entity.aj
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domain\RequestGranter.java
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\app\FDUser_Roo_Entity.aj
@@ -63,5 +64,6 @@ C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domai
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\app\FDUser_Roo_Configurable.aj
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\controller\RequestGranterController.java
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\app\FDUser_Roo_ToString.aj
+C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\controller\UAdminController_Roo_Controller.aj
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\domain\Admin_Roo_Configurable.aj
 C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freedays\src\main\java\freedays\app\HRManagement_Roo_Entity.aj

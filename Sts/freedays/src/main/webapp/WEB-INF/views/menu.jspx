@@ -27,5 +27,9 @@
             <menu:item id="i_fdadmin_new" messageCode="global_menu_new" url="/fdadmins?form" z="Xrs016jQViqY9Ef6+bMllnlzMjg="/>
             <menu:item id="i_fdadmin_list" messageCode="global_menu_list" url="/fdadmins?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qGMWtTuiSPvEBVAO/4gA3z4P+gM="/>
         </menu:category>
+        <menu:category id="c_admin_regular_user" z="">
+        	<menu:item id="i_admin_regular_user_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}"  z="" />
+        	<menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search"  z="" />
+        </menu:category>
     </menu:menu>
 </div>
