@@ -3,4 +3,5 @@ database.properties
 
 
 *.class
-database.properties    
+*.class
+database.properties
