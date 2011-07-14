@@ -51,16 +51,20 @@ public class RegularUserController {
         return "regularusers/search";
     }
 	
-//    @RequestMapping(value = "/{id}", params = "search", method = RequestMethod.GET)
-//	public String updateSearch(@PathVariable("id") Long id, Model uiModel) {
-//	    //uiModel.addAttribute("regularUser", RegularUser.findRegularUser(id));
-//	    //addDateTimeFormatPatterns(uiModel);
-//	    return "regularusers/search";
-//	}
     
     void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("regularUser_lastmodified_date_format", "hh:mm:ss dd-MM-yyyy");
         uiModel.addAttribute("regularUser_creationdate_date_format", "hh:mm:ss dd-MM-yyyy");
     }
 
+
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        RegularUser.deleteRegularUser(id);
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/regularusers";
+    }
 }

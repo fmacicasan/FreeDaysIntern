@@ -2,16 +2,16 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu_freedays_domain_RegularUser" modelAttribute="regularUser" path="/regularusers" versionField="Version" z="FRt68AiJkfTtHZzydG1BNcGgjyw=">
+    <form:update id="fu_freedays_domain_RegularUser" modelAttribute="regularUser" path="/regularusers" versionField="Version" save_button="Update" z="FRt68AiJkfTtHZzydG1BNcGgjyw=">
         <field:input field="username" id="c_freedays_domain_RegularUser_username" min="3" required="true" z="Y36MgYMFR26Cgz1EBL09opf6ffs="/>
         <field:input field="password" id="c_freedays_domain_RegularUser_password" min="6" required="true" z="F/ogpwvB2OqXR67afmje3nPZHdk="/>
         <field:input field="email" id="c_freedays_domain_RegularUser_email" required="true" validationMessageCode="field_invalid_email" z="kWommBnkAeoeIN3pIU9znHKiqko="/>
         <field:input field="surename" id="c_freedays_domain_RegularUser_surename" required="true" z="POxYmJd2jSMnWVLRxNMf5qOlO9Y="/>
-        <field:input field="firstname" id="c_freedays_domain_RegularUser_firstname" required="true" z="4Vqg8aD08b0xYrGvmRXKQx6R6iY="/>
-        <field:checkbox field="deleted" id="c_freedays_domain_RegularUser_deleted" z="2zEl3mE3aVirUZ/9VazluSMPi6U="/>
+        <field:input field="firstname" id="c_freedays_domain_RegularUser_firstname"  required="true" z="4Vqg8aD08b0xYrGvmRXKQx6R6iY="/>
+        <field:checkbox field="deleted" id="c_freedays_domain_RegularUser_deleted" readonly="true" z="2zEl3mE3aVirUZ/9VazluSMPi6U="/>
         <field:checkbox field="activ" id="c_freedays_domain_RegularUser_activ" z="QeIUKdXq2m/qb9su8paehCWoY/o="/>
-        <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" required="true" z="z0VTw4kzCIT0Lv4NUVcFSv8I/nY="/>
-        <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" required="true" z="bND23k8ZZ3WhjMI+mhA1lXdHeq8="/>
+        <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" readonly="true" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" required="true" z="z0VTw4kzCIT0Lv4NUVcFSv8I/nY="/>
+        <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" readonly="true" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" required="true" z="bND23k8ZZ3WhjMI+mhA1lXdHeq8="/>
         <field:input field="usermodifier" id="c_freedays_domain_RegularUser_usermodifier" z="cT7HC9uBwajdrNaljGJjD43P94A="/>
     </form:update>
 </div>

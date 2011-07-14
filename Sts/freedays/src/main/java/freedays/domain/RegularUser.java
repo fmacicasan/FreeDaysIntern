@@ -1,5 +1,7 @@
 package freedays.domain;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -14,6 +16,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
@@ -45,18 +49,15 @@ public class RegularUser {
     @NotNull
     private String firstname;
 
-    @NotNull
     private Boolean deleted;
 
     @NotNull
     private Boolean activ;
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Calendar lastmodified;
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Calendar creationdate;
@@ -108,5 +109,23 @@ public class RegularUser {
 	
 	public static List<String> getSearchCriteria(){
 		return Arrays.asList(RegularUser.SEARCH_FILTERS);
+	}
+	
+	@PrePersist
+	protected void onCreate(){
+		this.creationdate=Calendar.getInstance();
+		this.lastmodified=Calendar.getInstance();
+	}
+	
+	@PreUpdate
+	protected void onUpdate(){
+		this.lastmodified=Calendar.getInstance();
+	}
+
+	public static void deleteRegularUser(Long id2) {
+		RegularUser regularU = RegularUser.findRegularUser(id2);
+		regularU.setDeleted(true);
+		regularU.persist();
+		
 	}
 }

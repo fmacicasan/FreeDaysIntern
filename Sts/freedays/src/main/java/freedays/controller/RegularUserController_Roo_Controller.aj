@@ -83,15 +83,6 @@ privileged aspect RegularUserController_Roo_Controller {
         return "regularusers/update";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String RegularUserController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        RegularUser.findRegularUser(id).remove();
-        uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/regularusers";
-    }
-    
     @ModelAttribute("regularusers")
     public Collection<RegularUser> RegularUserController.populateRegularUsers() {
         return RegularUser.findAllRegularUsers();
