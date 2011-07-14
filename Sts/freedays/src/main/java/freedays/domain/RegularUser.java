@@ -25,7 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @RooEntity
 public class RegularUser {
 	
-	private static final String[] SEARCH_FILTERS={"username","email","surename","firstname","deleted","activ","usermodified"};
+	private static final String[] SEARCH_FILTERS={"username","email","surename","firstname","usermodifier"};
 
     @NotNull
     @Column(unique = true)
