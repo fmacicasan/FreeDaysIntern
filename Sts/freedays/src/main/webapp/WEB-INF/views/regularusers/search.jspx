@@ -23,8 +23,8 @@
             <table:column id="c_freedays_domain_RegularUser_firstname" property="firstname" z="VSC2sQYH91s/dMoZvF6Bv03NTZ8="/>
             <table:column id="c_freedays_domain_RegularUser_deleted" property="deleted" z="r3Rb12SHqSNkiZO2lNBKHu6MHA8="/>
             <table:column id="c_freedays_domain_RegularUser_activ" property="activ" z=""/>
-            <table:column id="c_freedays_domain_RegularUser_lastmodified" property="lastmodified" z=""/>
-            <table:column id="c_freedays_domain_RegularUser_creationdate" property="creationdate" z=""/>
+            <table:column id="c_freedays_domain_RegularUser_lastmodified" property="lastmodified" calendar="true" maxLength="20" dateTimePattern="${regularUser_lastmodified_date_format}" z=""/>
+            <table:column id="c_freedays_domain_RegularUser_creationdate" property="creationdate" calendar="true" maxLength="20" dateTimePattern="${regularUser_creationdate_date_format}" z=""/>
             <table:column id="c_freedays_domain_RegularUser_usermodifier" property="usermodifier" z=""/>
         </table:table>
     </page:list>

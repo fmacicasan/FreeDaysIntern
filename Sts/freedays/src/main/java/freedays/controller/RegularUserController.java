@@ -59,8 +59,8 @@ public class RegularUserController {
 //	}
     
     void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("regularUser_lastmodified_date_format", "yyyy-MM-dd hh:mm:ss");
-        uiModel.addAttribute("regularUser_creationdate_date_format", "yyyy-MM-dd hh:mm:ss");
+        uiModel.addAttribute("regularUser_lastmodified_date_format", "hh:mm:ss dd-MM-yyyy");
+        uiModel.addAttribute("regularUser_creationdate_date_format", "hh:mm:ss dd-MM-yyyy");
     }
 
 }

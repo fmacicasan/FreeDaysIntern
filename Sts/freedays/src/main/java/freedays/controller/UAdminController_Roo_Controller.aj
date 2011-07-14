@@ -98,8 +98,8 @@ privileged aspect UAdminController_Roo_Controller {
     }
     
     void UAdminController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("regularUser_lastmodified_date_format", "yyyy-MM-dd hh:mm:ss");
-        uiModel.addAttribute("regularUser_creationdate_date_format", "yyyy-MM-dd hh:mm:ss");
+        uiModel.addAttribute("regularUser_lastmodified_date_format", "hh:mm:ss dd-MM-yyyy");
+        uiModel.addAttribute("regularUser_creationdate_date_format", "hh:mm:ss dd-MM-yyyy");
     }
     
     String UAdminController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
