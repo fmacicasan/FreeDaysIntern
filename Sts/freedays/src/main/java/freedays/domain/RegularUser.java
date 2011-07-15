@@ -141,7 +141,7 @@ public class RegularUser {
 	public static void deleteRegularUser(Long id2) {
 		RegularUser regularU = RegularUser.findRegularUser(id2);
 		regularU.setDeleted(true);
-		regularU.merge();
+		regularU.persist();
 		
 	}
 }
