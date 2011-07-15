@@ -33,7 +33,7 @@ public class RegularUser {
 
     @NotNull
     @Column(unique = true)
-    @Size(min = 3)
+    @Size(min = 3, max = 45)
     private String username;
 
     @NotNull
@@ -107,21 +107,35 @@ public class RegularUser {
         return entityManager().createQuery("SELECT o FROM RegularUser o", RegularUser.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 	
+	/**
+	 * Retrieval of the associated search criteria
+	 * @return list of criteria fields
+	 */
 	public static List<String> getSearchCriteria(){
 		return Arrays.asList(RegularUser.SEARCH_FILTERS);
 	}
 	
+	/**
+	 * Insertion trigger simulation
+	 */
 	@PrePersist
 	protected void onCreate(){
 		this.creationdate=Calendar.getInstance();
 		this.lastmodified=Calendar.getInstance();
 	}
 	
+	/**
+	 * Update trigger simulation
+	 */
 	@PreUpdate
 	protected void onUpdate(){
 		this.lastmodified=Calendar.getInstance();
 	}
-
+	
+	/**
+	 * Mark deletion of user without actual removal
+	 * @param id2 user identifier
+	 */
 	public static void deleteRegularUser(Long id2) {
 		RegularUser regularU = RegularUser.findRegularUser(id2);
 		regularU.setDeleted(true);

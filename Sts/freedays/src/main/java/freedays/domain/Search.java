@@ -2,6 +2,11 @@ package freedays.domain;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
+/**
+ * Wrapper for search-ale
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 public class Search {
 
