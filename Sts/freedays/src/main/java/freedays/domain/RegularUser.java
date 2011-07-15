@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
@@ -48,21 +50,18 @@ public class RegularUser implements Serializable {
 	@NotNull
 	private String firstname;
 
-	@NotNull
-	private Boolean deleted;
+    private Boolean deleted;
 
 	@NotNull
 	private Boolean activ;
 
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
-	private Calendar lastmodified;
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
+    private Calendar lastmodified;
 
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
-	private Calendar creationdate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
+    private Calendar creationdate;
 
 	private String usermodifier;
 
@@ -111,20 +110,48 @@ public class RegularUser implements Serializable {
 	}
 
 	public static RegularUser findRegularUser(Long id) {
-		if (id == null)
-			return null;
-		return entityManager().find(RegularUser.class, id);
-	}
+        if (id == null) return null;
+        return entityManager().find(RegularUser.class, id);
+    }
 
-	public static List<RegularUser> findRegularUserEntries(int firstResult,
-			int maxResults) {
-		return entityManager()
-				.createQuery("SELECT o FROM RegularUser o", RegularUser.class)
-				.setFirstResult(firstResult).setMaxResults(maxResults)
-				.getResultList();
-	}
-
-	public static List<String> getSearchCriteria() {
+	public static List<RegularUser> findRegularUserEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM RegularUser o", RegularUser.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+	
+	/**
+	 * Retrieval of the associated search criteria
+	 * @return list of criteria fields
+	 */
+	public static List<String> getSearchCriteria(){
 		return Arrays.asList(RegularUser.SEARCH_FILTERS);
+	}
+	
+	/**
+	 * Insertion trigger simulation
+	 */
+	@PrePersist
+	protected void onCreate(){
+		this.creationdate=Calendar.getInstance();
+		this.lastmodified=Calendar.getInstance();
+		this.deleted = false;
+	}
+	
+	/**
+	 * Update trigger simulation
+	 */
+	@PreUpdate
+	protected void onUpdate(){
+		this.lastmodified=Calendar.getInstance();
+	}
+	
+	/**
+	 * Mark deletion of user without actual removal
+	 * @param id2 user identifier
+	 */
+	public static void deleteRegularUser(Long id2) {
+		RegularUser regularU = RegularUser.findRegularUser(id2);
+		regularU.setDeleted(true);
+		regularU.persist();
+		
 	}
 }

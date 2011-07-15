@@ -70,4 +70,21 @@ public class RegularUserController {
 				"hh:mm:ss dd-MM-yyyy");
 	}
 
+
+    /**
+     * Mark user as <i>deleted</i> without physical removal
+     * @param id
+     * @param page
+     * @param size
+     * @param uiModel 
+     * @return redirection to user listing
+     */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        RegularUser.deleteRegularUser(id);
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/regularusers";
+    }
 }
