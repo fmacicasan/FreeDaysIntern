@@ -31,9 +31,10 @@ public class RegularUser {
 	
 	private static final String[] SEARCH_FILTERS={"username","email","surename","firstname","usermodifier"};
 
+	public static final String blah ="blah";
     @NotNull
     @Column(unique = true)
-    @Size(min = 3, max = 45)
+    @Size(min = 3, max = 45, message=blah)
     private String username;
 
     @NotNull
@@ -122,6 +123,7 @@ public class RegularUser {
 	protected void onCreate(){
 		this.creationdate=Calendar.getInstance();
 		this.lastmodified=Calendar.getInstance();
+		this.deleted = false;
 	}
 	
 	/**
@@ -139,7 +141,7 @@ public class RegularUser {
 	public static void deleteRegularUser(Long id2) {
 		RegularUser regularU = RegularUser.findRegularUser(id2);
 		regularU.setDeleted(true);
-		regularU.persist();
+		regularU.merge();
 		
 	}
 }

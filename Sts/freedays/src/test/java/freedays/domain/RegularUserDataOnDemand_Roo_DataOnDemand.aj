@@ -33,6 +33,9 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
     
     public void RegularUserDataOnDemand.setUsername(RegularUser obj, int index) {
         java.lang.String username = "username_" + index;
+        if (username.length() > 45) {
+            username = username.substring(0, 45);
+        }
         obj.setUsername(username);
     }
     

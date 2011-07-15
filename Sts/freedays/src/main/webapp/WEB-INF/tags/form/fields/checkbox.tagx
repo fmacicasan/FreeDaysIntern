@@ -30,7 +30,7 @@
       </label>
       <c:choose>
         <c:when test="${disableFormBinding}">
-          <input id="_${sec_field}_id" name="${sec_field}" type="checkbox" readonly="${readonly}"/>
+          <input id="_${sec_field}_id" name="${sec_field}" type="checkbox" />
         </c:when>
         <c:otherwise>
           <form:checkbox id="_${sec_field}_id" path="${sec_field}" />
