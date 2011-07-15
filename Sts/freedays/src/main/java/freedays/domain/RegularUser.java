@@ -29,7 +29,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 @RooEntity
 public class RegularUser {
 	
-	private static final String[] SEARCH_FILTERS={"username","email","surename","firstname","usermodifier"};
+	/**
+	 * 0 - username
+	 * 1 - email
+	 * 2 - surename
+	 * 3 - firstname
+	 * 4 - usermodifier
+	 */
+	public static final String[] SEARCH_FILTERS={"username","email","surename","firstname","usermodifier"};
 
 	public static final String blah ="blah";
     @NotNull
