@@ -1,5 +1,6 @@
 package freedays.domain;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -11,35 +12,34 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import freedays.util.InternationalMessagesHolder;
-
 @RooJavaBean
 @RooToString
 @RooEntity
-public class RegularUser {
+public class RegularUser implements Serializable {
 
 	private static final String[] SEARCH_FILTERS = { "username", "email",
 			"surename", "firstname", "usermodifier" };
 
 	@NotNull
 	@Column(unique = true)
-	@Size(min = 3, max = 45)
+	// TODO check what's going on
+	@Length(min = 3, max = 45, message = "#{messages['field_invalid_length']}")
 	private String username;
 
 	@NotNull
-	@Size(min = 6, max = 45)
+	@Length(min = 6, max = 45)
 	private String password;
 
 	@NotNull
-	@Pattern(regexp = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")
+	@Email(message = "#{messages['field_invalid_email']}")
 	private String email;
 
 	@NotNull
@@ -81,6 +81,7 @@ public class RegularUser {
 						+ " LIKE ?1", RegularUser.class);
 		// query.setParameter(1, search.getSearchKey());
 		query.setParameter(1, search.searchValueLike());
+		// TODO use logger
 		List<RegularUser> result = query.getResultList();
 		System.out.println(query.getParameter(1).getName());
 		System.out.println("RegularUser list size:" + result.size());
