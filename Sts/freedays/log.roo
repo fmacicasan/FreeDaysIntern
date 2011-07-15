@@ -97,4 +97,8 @@ perform test
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-14 16:08:38
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-15 12:56:31
 perform tests
+perform tests// [failed] perform tests
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-15 17:16:51
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-15 17:17:04
 perform tests
