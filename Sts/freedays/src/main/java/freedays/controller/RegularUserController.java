@@ -23,44 +23,51 @@ import org.springframework.web.util.WebUtils;
 @RequestMapping("/regularusers")
 @Controller
 public class RegularUserController {
-	
+
 	@RequestMapping(params = "search", method = RequestMethod.GET)
-    public String createSearch(Model uiModel) {
-        //uiModel.addAttribute("regularUser", new RegularUser());
-        //addDateTimeFormatPatterns(uiModel);
-		uiModel.addAttribute("search",new Search());
+	public String createSearch(Model uiModel) {
+		// uiModel.addAttribute("regularUser", new RegularUser());
+		// addDateTimeFormatPatterns(uiModel);
+		uiModel.addAttribute("search", new Search());
 		uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria());
 		uiModel.addAttribute("regularusers", RegularUser.findAllRegularUsers());
 		addDateTimeFormatPatterns(uiModel);
-        return "regularusers/search";
-    }
-	
+		return "regularusers/search";
+	}
+
 	@RequestMapping(params = "search", method = RequestMethod.POST)
-    public String doSearch(@Valid Search search, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+	public String doSearch(@Valid Search search, BindingResult bindingResult,
+			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors() || search.isNotValid()) {
-            uiModel.addAttribute("search", search);
-            uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria()); //added on both branches
-            addDateTimeFormatPatterns(uiModel);
-            return "regularusers/search";
-        }
-        uiModel.asMap().clear();
-        uiModel.addAttribute("search", search);
-        uiModel.addAttribute("regularusers", RegularUser.findAllRegularUsersLike(search));
-        uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria());
-        addDateTimeFormatPatterns(uiModel);
-        return "regularusers/search";
-    }
+			uiModel.addAttribute("search", search);
+			uiModel.addAttribute("searchOptions",
+					RegularUser.getSearchCriteria()); // added on both branches
+			addDateTimeFormatPatterns(uiModel);
+			return "regularusers/search";
+		}
+		uiModel.asMap().clear();
+		uiModel.addAttribute("search", search);
+		uiModel.addAttribute("regularusers",
+				RegularUser.findAllRegularUsersLike(search));
+		uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria());
+		addDateTimeFormatPatterns(uiModel);
+		return "regularusers/search";
+	}
+
+	// @RequestMapping(value = "/{id}", params = "search", method =
+	// RequestMethod.GET)
+	// public String updateSearch(@PathVariable("id") Long id, Model uiModel) {
+	// //uiModel.addAttribute("regularUser", RegularUser.findRegularUser(id));
+	// //addDateTimeFormatPatterns(uiModel);
+	// return "regularusers/search";
+	// }
 	
-//    @RequestMapping(value = "/{id}", params = "search", method = RequestMethod.GET)
-//	public String updateSearch(@PathVariable("id") Long id, Model uiModel) {
-//	    //uiModel.addAttribute("regularUser", RegularUser.findRegularUser(id));
-//	    //addDateTimeFormatPatterns(uiModel);
-//	    return "regularusers/search";
-//	}
-    
-    void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("regularUser_lastmodified_date_format", "hh:mm:ss dd-MM-yyyy");
-        uiModel.addAttribute("regularUser_creationdate_date_format", "hh:mm:ss dd-MM-yyyy");
-    }
+	//TODO put date format in a constants file
+	void addDateTimeFormatPatterns(Model uiModel) {
+		uiModel.addAttribute("regularUser_lastmodified_date_format",
+				"hh:mm:ss dd-MM-yyyy");
+		uiModel.addAttribute("regularUser_creationdate_date_format",
+				"hh:mm:ss dd-MM-yyyy");
+	}
 
 }
