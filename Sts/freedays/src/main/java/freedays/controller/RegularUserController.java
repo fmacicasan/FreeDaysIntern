@@ -2,6 +2,7 @@ package freedays.controller;
 
 import freedays.domain.RegularUser;
 import freedays.domain.Search;
+import freedays.util.MailUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
@@ -51,6 +52,7 @@ public class RegularUserController {
 				RegularUser.findAllRegularUsersLike(search));
 		uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria());
 		addDateTimeFormatPatterns(uiModel);
+		//MailUtils.send("flo.macicasan@gmail.com", "sa nu ana are mere", "Te rog sa nu te duci dupa paine.Sper sa nu ajungem tarziu.Florin");
 		return "regularusers/search";
 	}
 
@@ -61,7 +63,7 @@ public class RegularUserController {
 	// //addDateTimeFormatPatterns(uiModel);
 	// return "regularusers/search";
 	// }
-	
+
 	//TODO put date format in a constants file
 	void addDateTimeFormatPatterns(Model uiModel) {
 		uiModel.addAttribute("regularUser_lastmodified_date_format",

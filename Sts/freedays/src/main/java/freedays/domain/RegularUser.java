@@ -26,8 +26,15 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooEntity
 public class RegularUser implements Serializable {
-
-	private static final String[] SEARCH_FILTERS = { "username", "email",
+	
+	/**
+	 * 0 - username
+	 * 1 - email
+	 * 2 - surename
+	 * 3 - firstname
+	 * 4 - usermodifier
+	 */
+	public static final String[] SEARCH_FILTERS = { "username", "email",
 			"surename", "firstname", "usermodifier" };
 
 	@NotNull

@@ -3,10 +3,8 @@
 
 package freedays.domain;
 
-import freedays.domain.RegularUserDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +16,6 @@ privileged aspect RegularUserIntegrationTest_Roo_IntegrationTest {
     declare @type: RegularUserIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
     declare @type: RegularUserIntegrationTest: @Transactional;
-    
-    @Autowired
-    private RegularUserDataOnDemand RegularUserIntegrationTest.dod;
     
     @Test
     public void RegularUserIntegrationTest.testCountRegularUsers() {
