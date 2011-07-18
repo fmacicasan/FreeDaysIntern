@@ -33,20 +33,12 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
     
     public void RegularUserDataOnDemand.setUsername(RegularUser obj, int index) {
         java.lang.String username = "username_" + index;
-        if (username.length() > 45) {
-            username = username.substring(0, 45);
-        }
         obj.setUsername(username);
     }
     
     public void RegularUserDataOnDemand.setPassword(RegularUser obj, int index) {
         java.lang.String password = "password_" + index;
         obj.setPassword(password);
-    }
-    
-    public void RegularUserDataOnDemand.setEmail(RegularUser obj, int index) {
-        java.lang.String email = "email_" + index;
-        obj.setEmail(email);
     }
     
     public void RegularUserDataOnDemand.setSurename(RegularUser obj, int index) {

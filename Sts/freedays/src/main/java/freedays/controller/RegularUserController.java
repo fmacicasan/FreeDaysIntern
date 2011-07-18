@@ -52,7 +52,9 @@ public class RegularUserController {
 				RegularUser.findAllRegularUsersLike(search));
 		uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria());
 		addDateTimeFormatPatterns(uiModel);
-		//MailUtils.send("flo.macicasan@gmail.com", "sa nu ana are mere", "Te rog sa nu te duci dupa paine.Sper sa nu ajungem tarziu.Florin");
+		//System.out.println("will start");
+		//new MailUtils().send("flo.macicasan@gmail.com", "sa nu ana are mere", "Te rog sa nu te duci dupa paine.Sper sa nu ajungem tarziu.Florin");
+		//System.out.println("will finish");
 		return "regularusers/search";
 	}
 

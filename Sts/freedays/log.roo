@@ -103,3 +103,23 @@ exit
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-15 17:17:04
 perform tests
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-15 17:22:34
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-18 09:13:36
+perform tests
+perform tests
+perform tests
+// [failed] test integration --entity freedays.util.PhraseUtils
+test mock --entity freedays.util.PhraseUtils
+test stub
+help test stub
+test stub --class freedays.util.PhraseUtils
+test mock --entity freedays.util.PhraseUtils
+perform tests
+// [failed] perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-18 13:30:51
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-18 14:06:24
+perform tests
+// [failed] perform tests
+perform tests

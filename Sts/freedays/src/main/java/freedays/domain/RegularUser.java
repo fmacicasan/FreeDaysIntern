@@ -89,8 +89,8 @@ public class RegularUser implements Serializable {
 		query.setParameter(1, search.searchValueLike());
 		// TODO use logger
 		List<RegularUser> result = query.getResultList();
-		System.out.println(query.getParameter(1).getName());
-		System.out.println("RegularUser list size:" + result.size());
+		//System.out.println(query.getParameter(1).getName());
+		//System.out.println("RegularUser list size:" + result.size());
 		return result;
 	}
 
