@@ -30,10 +30,24 @@
       </label>
       <c:choose>
         <c:when test="${disableFormBinding}">
-          <input id="_${sec_field}_id" name="${sec_field}" type="checkbox" />
+          <c:choose>
+          	<c:when test="${readonly}">
+          		<input id="_${sec_field}_id" name="${sec_field}" type="checkbox" checked="" />
+          	</c:when>
+          	<c:otherwise>
+          		<input id="_${sec_field}_id" name="${sec_field}" type="checkbox"/>
+          	</c:otherwise>
+          </c:choose>
         </c:when>
         <c:otherwise>
-          <form:checkbox id="_${sec_field}_id" path="${sec_field}" />
+          <c:choose>
+          	<c:when test="${readonly}">
+          		<form:checkbox id="_${sec_field}_id" path="${sec_field}" checked="" />
+          	</c:when>
+          	<c:otherwise>
+          		<form:checkbox id="_${sec_field}_id" path="${sec_field}"/>
+          	</c:otherwise>
+          </c:choose>
         </c:otherwise>
       </c:choose>
       <script type="text/javascript">

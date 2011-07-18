@@ -76,6 +76,14 @@
 			</div>
 		</form>
 		
+		<spring:url value="/recoverpass" var="form_recover" />
+		<form name="rp" action="${fn:escapeXml(form_recover)}" method="GET">
+			<div class="submit">
+				<spring:message code="button_recover" var="recover_label" htmlEscape="false" />
+				<input id="recover" type="submit" value="${fn:escapeXml(recover_label)}" />
+			</div>
+		</form>
+		
 	</util:panel>
 </div>
 

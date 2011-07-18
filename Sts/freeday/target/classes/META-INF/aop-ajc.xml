@@ -2,7 +2,6 @@
 <aspects>
 <aspect name="freedays.controller.UAdminController_Roo_Controller"/>
 <aspect name="freedays.domain.RegularUser_Roo_JavaBean"/>
-<aspect name="freedays.controller.UAdminController_Roo_Controller_Finder"/>
 <aspect name="freedays.domain.AdvancedUserRole_Roo_Entity"/>
 <aspect name="freedays.controller.FDUserController_Roo_Controller"/>
 <aspect name="freedays.controller.AdminController_Roo_Controller"/>
@@ -38,10 +37,8 @@
 <aspect name="freedays.controller.RegularUserController_Roo_Controller"/>
 <aspect name="freedays.domain.ApplicationRegularUser_Roo_ToString"/>
 <aspect name="freedays.controller.FDAdminController_Roo_Controller"/>
-<aspect name="freedays.domain.RegularUser_Roo_Finder"/>
 <aspect name="freedays.app.HRManagement_Roo_Entity"/>
 <aspect name="freedays.app.FDUser_Roo_Entity"/>
-<aspect name="freedays.controller.RegularUserController_Roo_Controller_Finder"/>
 <aspect name="freedays.domain.ApplicationRegularUser_Roo_JavaBean"/>
 </aspects>
 </aspectj>

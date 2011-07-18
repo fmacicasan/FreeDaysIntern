@@ -12,7 +12,7 @@
         <field:checkbox field="activ" id="c_freedays_domain_RegularUser_activ" z="QeIUKdXq2m/qb9su8paehCWoY/o="/>
         <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" readonly="true" required="true" z="user-managed"/>
         <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" readonly="true" required="true" z="user-managed"/>
-        <field:input field="usermodifier" id="c_freedays_domain_RegularUser_usermodifier" z="cT7HC9uBwajdrNaljGJjD43P94A="/>
-        <field:checkbox field="deleted" id="c_freedays_domain_RegularUser_deleted" z="2zEl3mE3aVirUZ/9VazluSMPi6U="/>
+        <field:input field="usermodifier" id="c_freedays_domain_RegularUser_usermodifier" readonly="true" z="user-managed"/>
+        <field:checkbox field="deleted" id="c_freedays_domain_RegularUser_deleted" readonly="true" z="user-managed"/>
     </form:update>
 </div>
