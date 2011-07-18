@@ -22,6 +22,9 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import freedays.util.MailUtils;
+import freedays.util.PhraseUtils;
+
 @RooJavaBean
 @RooToString
 @RooEntity
@@ -169,6 +172,28 @@ public class RegularUser implements Serializable {
 		RegularUser regularU = RegularUser.findRegularUser(id2);
 		regularU.setDeleted(true);
 		regularU.persist();
-		
+	}
+
+	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
+	private static final String RESET_PASS_MESSAGE = "Your new password is:";
+	public static boolean resetPassword(String email2) {
+		List<RegularUser> list = RegularUser.findRegularUserByEmail(email2);
+		if(list.size()!=1){
+			return false;
+		}
+		RegularUser ru = list.get(0);
+		String newPass = PhraseUtils.getRandomPhrase();
+		ru.setPassword(newPass);
+		MailUtils.send(ru.getEmail(), RESET_PASS_TITLE, RESET_PASS_MESSAGE+newPass);
+		ru.persist();
+		return true;
+	}
+
+	public static List<RegularUser> findRegularUserByEmail(String email) {
+		if (email == null || email.length() == 0) throw new IllegalArgumentException("The email argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.email = :email", RegularUser.class);
+        q.setParameter("email", email);
+        return q.getResultList();
 	}
 }
