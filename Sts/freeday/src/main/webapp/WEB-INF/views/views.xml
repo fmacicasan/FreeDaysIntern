@@ -23,5 +23,9 @@
 	    </definition>
 	<definition extends="public" name="recoverpass">
 	       <put-attribute name="body" value="/WEB-INF/views/recoverpass.jspx"/>
-	   </definition>	  
+	   </definition>	 
+	   
+  <definition extends="public" name="register">
+     <put-attribute name="body" value="/WEB-INF/views/register.jspx"/>
+  </definition>	 
 </tiles-definitions>
