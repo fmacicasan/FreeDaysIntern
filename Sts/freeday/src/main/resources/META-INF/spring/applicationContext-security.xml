@@ -13,7 +13,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         
         <!-- Configure these elements to secure URIs in your application -->
         <intercept-url pattern="/regularusers" access="permitAll" />
-        <intercept-url pattern="/admins/**" access="permitAll"/>
+        <intercept-url pattern="/admins/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/regularusers/**" access="permitAll" />
         <intercept-url pattern="/login/**" access="permitAll" />
         <intercept-url pattern="/**" access="permitAll" />
@@ -24,7 +24,10 @@ class="freedays.controller.AuthentificationController">
 </beans:bean>
 <!-- Configure Authentication mechanism -->
     <authentication-manager alias="authenticationManager">
-     <authentication-provider ref="AuthenticationController"/>
+     <authentication-provider ref="AuthenticationController">
+     <password-encoder hash="sha-256"/>
+     <jdbc-user-service data-source-ref="dataSource" authorities-by-username-query="select u.username, app.roles from RegularUser u, ApplicationRegularUser app, FDUser fd where u.id = fd.id and app.id = fd.application_regular_user and u.id = ?" users-by-username-query="select username,password from RegularUser where username = ?"/>
+     </authentication-provider>
 </authentication-manager>
 
 </beans:beans>
