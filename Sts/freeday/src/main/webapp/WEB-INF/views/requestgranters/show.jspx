@@ -3,6 +3,6 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_freedays_domain_RequestGranter" object="${requestgranter}" path="/requestgranters" z="UcZmmGXNcZIXoq2VhoBgQkTcJRo=">
-        <field:display field="appRegUser" id="s_freedays_domain_RequestGranter_appRegUser" object="${requestgranter}" z="WybShFynJh4mt3y/Fz9vZ+HLgE0="/>
+        <field:display field="appRegUsers" id="s_freedays_domain_RequestGranter_appRegUsers" object="${requestgranter}" z="JvouC/N8OJomrDqc9ZaG82o9pBs="/>
     </page:show>
 </div>

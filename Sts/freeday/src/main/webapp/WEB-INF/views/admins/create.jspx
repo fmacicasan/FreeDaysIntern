@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_freedays_domain_Admin" modelAttribute="admin" path="/admins" render="${empty dependencies}" z="Qul1DkcSzRQHD7HyKj6Sif4pzII=">
-        <field:select field="appRegUser" id="c_freedays_domain_Admin_appRegUser" itemValue="id" items="${applicationregularusers}" path="/applicationregularusers" z="nKcpjEq4x9N/gukBmMm8WuKJ6cs="/>
+        <field:select field="appRegUsers" id="c_freedays_domain_Admin_appRegUsers" itemValue="id" items="${applicationregularusers}" multiple="true" path="/applicationregularusers" z="r39CmTdkvbwn9G8dL05ZZSoL57w="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_domain_Admin" render="${not empty dependencies}" z="PnQqZcHU8RvdNUW0Fwwq9XnuqHM="/>
 </div>

@@ -5,7 +5,6 @@ package freedays.app;
 
 import freedays.app.FDUser;
 import freedays.domain.RegularUserDataOnDemand;
-import freedays.domain.RequestGranterDataOnDemand;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     
     @Autowired
     private RegularUserDataOnDemand FDUserDataOnDemand.regularUserDataOnDemand;
-    
-    @Autowired
-    private RequestGranterDataOnDemand FDUserDataOnDemand.requestGranterDataOnDemand;
     
     public FDUser FDUserDataOnDemand.getNewTransientFDUser(int index) {
         freedays.app.FDUser obj = new freedays.app.FDUser();
@@ -41,7 +37,7 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     }
     
     public void FDUserDataOnDemand.setGranter(FDUser obj, int index) {
-        freedays.domain.RequestGranter granter = requestGranterDataOnDemand.getRandomRequestGranter();
+        freedays.domain.ApplicationRegularUser granter = null;
         obj.setGranter(granter);
     }
     

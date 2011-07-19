@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_freedays_domain_RequestGranter" items="${requestgranters}" z="DxErtUya9m2YoK4aSZPrglWPyXA=">
         <table:table data="${requestgranters}" id="l_freedays_domain_RequestGranter" path="/requestgranters" z="O6eB/DDWtv+y9Wnov19epMzcY4g=">
-            <table:column id="c_freedays_domain_RequestGranter_appRegUser" property="appRegUser" z="8DhHU9ynrd5XzGmWWcXpFH4PMBQ="/>
+            <table:column id="c_freedays_domain_RequestGranter_appRegUsers" property="appRegUsers" z="Jsp1HyipyooQvHtcLbhBpL8o6f8="/>
         </table:table>
     </page:list>
 </div>

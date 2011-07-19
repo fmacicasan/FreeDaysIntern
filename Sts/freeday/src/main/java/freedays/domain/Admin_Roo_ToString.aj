@@ -9,7 +9,7 @@ privileged aspect Admin_Roo_ToString {
     
     public String Admin.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("AppRegUser: ").append(getAppRegUser()).append(", ");
+        sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("Version: ").append(getVersion());
         return sb.toString();

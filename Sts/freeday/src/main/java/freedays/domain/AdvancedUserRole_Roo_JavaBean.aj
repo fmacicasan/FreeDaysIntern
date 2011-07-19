@@ -4,15 +4,16 @@
 package freedays.domain;
 
 import freedays.domain.ApplicationRegularUser;
+import java.util.Set;
 
 privileged aspect AdvancedUserRole_Roo_JavaBean {
     
-    public ApplicationRegularUser AdvancedUserRole.getAppRegUser() {
-        return this.appRegUser;
+    public Set<ApplicationRegularUser> AdvancedUserRole.getAppRegUsers() {
+        return this.appRegUsers;
     }
     
-    public void AdvancedUserRole.setAppRegUser(ApplicationRegularUser appRegUser) {
-        this.appRegUser = appRegUser;
+    public void AdvancedUserRole.setAppRegUsers(Set<ApplicationRegularUser> appRegUsers) {
+        this.appRegUsers = appRegUsers;
     }
     
 }

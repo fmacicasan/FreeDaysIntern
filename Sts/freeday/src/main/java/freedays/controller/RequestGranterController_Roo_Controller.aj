@@ -3,7 +3,6 @@
 
 package freedays.controller;
 
-import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RequestGranter;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
@@ -85,11 +84,6 @@ privileged aspect RequestGranterController_Roo_Controller {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/requestgranters";
-    }
-    
-    @ModelAttribute("applicationregularusers")
-    public Collection<ApplicationRegularUser> RequestGranterController.populateApplicationRegularUsers() {
-        return ApplicationRegularUser.findAllApplicationRegularUsers();
     }
     
     @ModelAttribute("requestgranters")

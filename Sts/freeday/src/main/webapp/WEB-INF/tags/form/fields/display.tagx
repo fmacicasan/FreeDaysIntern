@@ -12,6 +12,7 @@
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
 
 		<jsp:directive.attribute name="fd_isSet" type="java.lang.Boolean" required="false" description="Used to mark if displayed field is a Set" />
+  		<jsp:directive.attribute name="fd_actualSet" type="java.util.Collection" required="false" rtexprvalue="true" description="The actual collection relevant only if isSet=true" />
   <c:if test="${empty render or render}">
     <c:if test="${not empty object and empty label}">
       <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="label" htmlEscape="false" />
@@ -43,17 +44,18 @@
           </c:when>
           <c:otherwise>
             <!-- Added Flo: required if the object's field is a Set => a simple spring:eval will generate errors -->
-            <c:choose>
-            	<c:when test="${empty fd_isSet}">
+            <!--<c:choose>
+            	<c:when test="${(fd_isSet eq false) or (empty fd_actualSet)}">
             		<spring:eval expression="object[field]" />
             	</c:when>
             	<c:otherwise>
-            		<c:forEach items="${object[field]}" var="item">
-            			<!-- <spring:eval expression="${item}" />-->
-            			<!-- <form:input path="item" readonly="true" />. -->
+            		<c:forEach items="${fd_actualSet}" var="item">
+            			<c:out value="asd" />
+            			<spring:eval expression="${item}" />
             		</c:forEach>
             	</c:otherwise>
-            </c:choose>
+            </c:choose>-->
+            <spring:eval expression="object[field]" />
             <!-- end Added Flo -->
           </c:otherwise>
         </c:choose>
