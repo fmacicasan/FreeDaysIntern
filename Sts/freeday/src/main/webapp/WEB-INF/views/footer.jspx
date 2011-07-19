@@ -9,6 +9,17 @@
       <spring:message code="button_home"/>
     </a>
   </span>
+  <!-- Login link in the footer tile. -->
+	<c:if test="${pageContext['request'].userPrincipal == null}">
+		<c:out value=" | "/>
+		<span>
+			<spring:url value="login" var="login"/>
+			<a href="${login}">
+			  <spring:message code="security_login"/>
+			</a>
+		</span>
+	</c:if>
+  
   <c:if test="${pageContext['request'].userPrincipal != null}">
     <c:out value=" | "/>
     <span>
