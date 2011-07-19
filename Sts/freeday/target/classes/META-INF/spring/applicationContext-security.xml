@@ -13,8 +13,8 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         
         <!-- Configure these elements to secure URIs in your application -->
         <intercept-url pattern="/regularusers" access="permitAll" />
-        <intercept-url pattern="/admins/**" access="hasRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_EDITOR')"/>
-        <intercept-url pattern="/regularusers/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/admins/**" access="permitAll"/>
+        <intercept-url pattern="/regularusers/**" access="permitAll" />
         <intercept-url pattern="/login/**" access="permitAll" />
         <intercept-url pattern="/**" access="permitAll" />
     </http>

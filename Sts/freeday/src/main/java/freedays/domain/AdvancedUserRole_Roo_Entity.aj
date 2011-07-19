@@ -23,13 +23,13 @@ privileged aspect AdvancedUserRole_Roo_Entity {
     
     declare @type: AdvancedUserRole: @Entity;
     
-    declare @type: AdvancedUserRole: @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS);
+    declare @type: AdvancedUserRole: @Inheritance(strategy = InheritanceType.SINGLE_TABLE);
     
     @PersistenceContext
     transient EntityManager AdvancedUserRole.entityManager;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long AdvancedUserRole.id;
     
