@@ -68,8 +68,8 @@
 		
 		
 		
-		<spring:url value="/regularusers?form" var="form_register" />
-		<form name="f" action="${form_register}" method="GET">
+		<spring:url value="/register" var="form_register" />
+		<form name="r" action="${fn:escapeXml(form_register)}" method="GET">
 			<div class="submit">
 				<spring:message code="button_register" var="register_label"
 					htmlEscape="false" />
