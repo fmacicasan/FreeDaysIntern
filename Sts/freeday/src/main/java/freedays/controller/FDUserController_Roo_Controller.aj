@@ -28,31 +28,11 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect FDUserController_Roo_Controller {
     
-    @RequestMapping(method = RequestMethod.POST)
-    public String FDUserController.create(@Valid FDUser FDUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("FDUser", FDUser);
-            addDateTimeFormatPatterns(uiModel);
-            return "fdusers/create";
-        }
-        uiModel.asMap().clear();
-        FDUser.persist();
-        return "redirect:/fdusers/" + encodeUrlPathSegment(FDUser.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String FDUserController.createForm(Model uiModel) {
         uiModel.addAttribute("FDUser", new FDUser());
         addDateTimeFormatPatterns(uiModel);
         return "fdusers/create";
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String FDUserController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("fduser", FDUser.findFDUser(id));
-        uiModel.addAttribute("itemId", id);
-        return "fdusers/show";
     }
     
     @RequestMapping(method = RequestMethod.GET)

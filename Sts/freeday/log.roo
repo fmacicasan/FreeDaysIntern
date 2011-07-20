@@ -129,10 +129,4 @@ perform tests
 perform tests
 backup
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-18 19:11:14
-backup 
-// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-19 13:56:44
-hint
-// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-19 14:04:31
-// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-19 14:06:15
-quit
-// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-19 16:32:06
+backup

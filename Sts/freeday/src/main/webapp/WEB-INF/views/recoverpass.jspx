@@ -31,7 +31,7 @@
 		<form:form modelAttribute="${resetpass}" action="${fn:escapeXml(form_resetpassword)}" method="POST" >
 			<input type="text" name="email" />
 			<spring:message code="button_resetpass" var="reset_label" htmlEscape="false" />
-		<input id="reset" type="submit" value="${fn:escapeXml(reset_label)}" />
+			<input id="reset" type="submit" value="${fn:escapeXml(reset_label)}" />
 		</form:form>
 		
 	</util:panel>
