@@ -32,4 +32,18 @@ public class FDUser extends ApplicationRegularUser {
     @NotNull
     @Min(21L)
     private Integer maxFreeDays;
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+//        sb.append("Granter: ").append(getGranter()).append(", ");
+//        sb.append("HireDate: ").append(getHireDate() == null ? "null" : getHireDate().getTime()).append(", ");
+//        sb.append("Id: ").append(getId()).append(", ");
+//        sb.append("InitDays: ").append(getInitDays()).append(", ");
+//        sb.append("MaxFreeDays: ").append(getMaxFreeDays()).append(", ");
+//        sb.append("RegularUser: ")
+        sb.append(getRegularUser()).append(" ");
+//        sb.append("Roles: ").append(getRoles() == null ? "null" : getRoles().size()).append(", ");
+//        sb.append("Version: ").append(getVersion());
+        return sb.toString();
+    }
 }

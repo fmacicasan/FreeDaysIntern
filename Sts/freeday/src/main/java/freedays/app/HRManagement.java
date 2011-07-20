@@ -12,4 +12,13 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooEntity
 @DiscriminatorValue("HRManagement")
 public class HRManagement extends AdvancedUserRole {
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+//        sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
+//        sb.append("Id: ").append(getId()).append(", ");
+//        sb.append("Version: ").append(getVersion());
+        sb.append("HRManagement");
+        return sb.toString();
+    }
 }

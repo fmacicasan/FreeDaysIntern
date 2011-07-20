@@ -196,4 +196,24 @@ public class RegularUser implements Serializable {
         q.setParameter("email", email);
         return q.getResultList();
 	}
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+//        sb.append("Activ: ").append(getActiv()).append(", ");
+//        sb.append("Creationdate: ").append(getCreationdate() == null ? "null" : getCreationdate().getTime()).append(", ");
+//        sb.append("Deleted: ").append(getDeleted()).append(", ");
+//        sb.append("Email: ").append(getEmail()).append(", ");
+       // sb.append("Firstname: ");
+        sb.append(getFirstname()).append(" ");
+//        sb.append("Id: ").append(getId()).append(", ");
+//        sb.append("Lastmodified: ").append(getLastmodified() == null ? "null" : getLastmodified().getTime()).append(", ");
+//        sb.append("Password: ").append(getPassword()).append(", ");
+//        sb.append("SearchCriteria: ").append(getSearchCriteria() == null ? "null" : getSearchCriteria().size()).append(", ");
+        //sb.append("Surename: ").
+        sb.append(getSurename());
+//        sb.append("Usermodifier: ").append(getUsermodifier()).append(", ");
+//        sb.append("Username: ").append(getUsername()).append(", ");
+//        sb.append("Version: ").append(getVersion());
+        return sb.toString();
+    }
 }
