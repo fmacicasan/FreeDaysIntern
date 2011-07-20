@@ -3,6 +3,6 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_freedays_domain_Admin" object="${admin}" path="/admins" z="TRZasyzBBF+nxP2S/7rx7B0DNus=">
-        <field:display field="appRegUser" id="s_freedays_domain_Admin_appRegUser" object="${admin}" z="GHR05DfeE+/QjdH+PXNbnyqGwOw="/>
+        <field:display field="appRegUsers" id="s_freedays_domain_Admin_appRegUsers" object="${admin}" z="I0i3WdafM0jTk+U7jVIMcxkwM+k="/>
     </page:show>
 </div>

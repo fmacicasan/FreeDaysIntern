@@ -4,8 +4,8 @@
 package freedays.domain;
 
 import freedays.domain.AdvancedUserRole;
+import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
-import freedays.domain.RequestGranter;
 import java.util.Set;
 
 privileged aspect ApplicationRegularUser_Roo_JavaBean {
@@ -26,11 +26,11 @@ privileged aspect ApplicationRegularUser_Roo_JavaBean {
         this.roles = roles;
     }
     
-    public RequestGranter ApplicationRegularUser.getGranter() {
+    public ApplicationRegularUser ApplicationRegularUser.getGranter() {
         return this.granter;
     }
     
-    public void ApplicationRegularUser.setGranter(RequestGranter granter) {
+    public void ApplicationRegularUser.setGranter(ApplicationRegularUser granter) {
         this.granter = granter;
     }
     

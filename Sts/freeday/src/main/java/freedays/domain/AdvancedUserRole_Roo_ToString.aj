@@ -9,9 +9,7 @@ privileged aspect AdvancedUserRole_Roo_ToString {
     
     public String AdvancedUserRole.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("AppRegUser: ").append(getAppRegUser()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size());
         return sb.toString();
     }
     

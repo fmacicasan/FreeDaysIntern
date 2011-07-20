@@ -18,13 +18,7 @@ privileged aspect FDAdminDataOnDemand_Roo_DataOnDemand {
     
     public FDAdmin FDAdminDataOnDemand.getNewTransientFDAdmin(int index) {
         freedays.app.FDAdmin obj = new freedays.app.FDAdmin();
-        setAppRegUser(obj, index);
         return obj;
-    }
-    
-    public void FDAdminDataOnDemand.setAppRegUser(FDAdmin obj, int index) {
-        freedays.domain.ApplicationRegularUser appRegUser = null;
-        obj.setAppRegUser(appRegUser);
     }
     
     public FDAdmin FDAdminDataOnDemand.getSpecificFDAdmin(int index) {

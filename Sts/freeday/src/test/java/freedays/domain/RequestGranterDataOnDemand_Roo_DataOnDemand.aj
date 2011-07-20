@@ -18,13 +18,7 @@ privileged aspect RequestGranterDataOnDemand_Roo_DataOnDemand {
     
     public RequestGranter RequestGranterDataOnDemand.getNewTransientRequestGranter(int index) {
         freedays.domain.RequestGranter obj = new freedays.domain.RequestGranter();
-        setAppRegUser(obj, index);
         return obj;
-    }
-    
-    public void RequestGranterDataOnDemand.setAppRegUser(RequestGranter obj, int index) {
-        freedays.domain.ApplicationRegularUser appRegUser = null;
-        obj.setAppRegUser(appRegUser);
     }
     
     public RequestGranter RequestGranterDataOnDemand.getSpecificRequestGranter(int index) {

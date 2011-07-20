@@ -91,8 +91,7 @@ privileged aspect AdvancedUserRole_Roo_Entity {
     }
     
     public static final EntityManager AdvancedUserRole.entityManager() {
-        EntityManager em = new AdvancedUserRole() {
-        }.entityManager;
+        EntityManager em = new AdvancedUserRole().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }

@@ -18,13 +18,7 @@ privileged aspect AdminDataOnDemand_Roo_DataOnDemand {
     
     public Admin AdminDataOnDemand.getNewTransientAdmin(int index) {
         freedays.domain.Admin obj = new freedays.domain.Admin();
-        setAppRegUser(obj, index);
         return obj;
-    }
-    
-    public void AdminDataOnDemand.setAppRegUser(Admin obj, int index) {
-        freedays.domain.ApplicationRegularUser appRegUser = null;
-        obj.setAppRegUser(appRegUser);
     }
     
     public Admin AdminDataOnDemand.getSpecificAdmin(int index) {

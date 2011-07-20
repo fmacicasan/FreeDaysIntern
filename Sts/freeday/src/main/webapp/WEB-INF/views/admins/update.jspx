@@ -3,6 +3,6 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_freedays_domain_Admin" modelAttribute="admin" path="/admins" versionField="Version" z="hQbxXYXPqh2we7c+XJ1kg/8s8Vg=">
-        <field:select field="appRegUser" id="c_freedays_domain_Admin_appRegUser" itemValue="id" items="${applicationregularusers}" path="/applicationregularusers" z="nKcpjEq4x9N/gukBmMm8WuKJ6cs="/>
+        <field:select field="appRegUsers" id="c_freedays_domain_Admin_appRegUsers" itemValue="id" items="${applicationregularusers}" multiple="true" path="/applicationregularusers" z="r39CmTdkvbwn9G8dL05ZZSoL57w="/>
     </form:update>
 </div>

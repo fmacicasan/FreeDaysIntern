@@ -34,8 +34,12 @@ public class FDUserController {
     public String show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
         System.out.println("cucurigu");
-        //uiModel.addAttribute("fduser", FDUser.findFDUser(id));
-        //uiModel.addAttribute("itemId", id);
+        System.out.println("cucurigu");
+        FDUser fdu = FDUser.findFDUser(id);
+        uiModel.addAttribute("fduser",fdu );
+        System.out.println("Roles for the dude"+fdu.getRoles().size());
+        uiModel.addAttribute("fduser_col", fdu.getRoles());
+        uiModel.addAttribute("itemId", id);
         return "fdusers/show";
     }
 }

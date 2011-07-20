@@ -18,13 +18,7 @@ privileged aspect HRManagementDataOnDemand_Roo_DataOnDemand {
     
     public HRManagement HRManagementDataOnDemand.getNewTransientHRManagement(int index) {
         freedays.app.HRManagement obj = new freedays.app.HRManagement();
-        setAppRegUser(obj, index);
         return obj;
-    }
-    
-    public void HRManagementDataOnDemand.setAppRegUser(HRManagement obj, int index) {
-        freedays.domain.ApplicationRegularUser appRegUser = null;
-        obj.setAppRegUser(appRegUser);
     }
     
     public HRManagement HRManagementDataOnDemand.getSpecificHRManagement(int index) {
