@@ -5,8 +5,8 @@ package freedays.controller;
 
 import freedays.app.FDUser;
 import freedays.domain.AdvancedUserRole;
+import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
-import freedays.domain.RequestGranter;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
@@ -87,14 +87,14 @@ privileged aspect FDUserController_Roo_Controller {
         return AdvancedUserRole.findAllAdvancedUserRoles();
     }
     
+    @ModelAttribute("applicationregularusers")
+    public Collection<ApplicationRegularUser> FDUserController.populateApplicationRegularUsers() {
+        return ApplicationRegularUser.findAllApplicationRegularUsers();
+    }
+    
     @ModelAttribute("regularusers")
     public Collection<RegularUser> FDUserController.populateRegularUsers() {
         return RegularUser.findAllRegularUsers();
-    }
-    
-    @ModelAttribute("requestgranters")
-    public Collection<RequestGranter> FDUserController.populateRequestGranters() {
-        return RequestGranter.findAllRequestGranters();
     }
     
     void FDUserController.addDateTimeFormatPatterns(Model uiModel) {

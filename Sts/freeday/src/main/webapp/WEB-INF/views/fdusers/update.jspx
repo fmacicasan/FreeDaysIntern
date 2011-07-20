@@ -5,7 +5,7 @@
     <form:update id="fu_freedays_app_FDUser" modelAttribute="FDUser" path="/fdusers" versionField="Version" z="XbiGh7IKHfq9EpGp5wnXA0C3pqA=">
         <field:select field="regularUser" id="c_freedays_app_FDUser_regularUser" itemValue="id" items="${regularusers}" path="/regularusers" z="W3OVwEVRLg9XyJwFKCuYsC09xg0="/>
         <field:select field="roles" id="c_freedays_app_FDUser_roles" itemValue="id" items="${advanceduserroles}" multiple="true" path="/advanceduserroles" z="1EdHlL0WWXMc/4SFKNbIO5Bxu5Y="/>
-        <field:select field="granter" id="c_freedays_app_FDUser_granter" itemValue="id" items="${requestgranters}" path="/requestgranters" z="kwg6TajEFmLvFib4/BsfY2E4qiw="/>
+        <field:select field="granter" id="c_freedays_app_FDUser_granter" itemValue="id" items="${applicationregularusers}" path="/applicationregularusers" z="H2qkmIguYBoNzEQssFN/2j8e8KI="/>
         <field:datetime dateTimePattern="${FDUser_hiredate_date_format}" field="hireDate" id="c_freedays_app_FDUser_hireDate" past="true" required="true" z="UL2JHQcvQ2oeXATiz/9ZHo+yWFM="/>
         <field:input field="initDays" id="c_freedays_app_FDUser_initDays" max="7" min="2" required="true" validationMessageCode="field_invalid_integer" z="d50q3gY6S6gEGXCg/mwBEdj4YmE="/>
         <field:input field="maxFreeDays" id="c_freedays_app_FDUser_maxFreeDays" min="21" required="true" validationMessageCode="field_invalid_integer" z="YX2Hy4s4nkQx6satjVwxS1ftTUs="/>

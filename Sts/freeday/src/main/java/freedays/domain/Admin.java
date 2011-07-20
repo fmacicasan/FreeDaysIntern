@@ -11,4 +11,13 @@ import javax.persistence.Entity;
 @RooEntity
 @DiscriminatorValue("Admin")
 public class Admin extends AdvancedUserRole {
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+//        sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
+//        sb.append("Id: ").append(getId()).append(", ");
+//        sb.append("Version: ").append(getVersion());
+        sb.append("Admin");
+        return sb.toString();
+    }
 }

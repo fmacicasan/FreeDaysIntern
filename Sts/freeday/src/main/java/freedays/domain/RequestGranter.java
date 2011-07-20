@@ -10,6 +10,16 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooEntity
 
-@DiscriminatorValue("RequestGranter")
+@DiscriminatorValue(RequestGranter.DISCRIM)
 public class RequestGranter extends AdvancedUserRole {
+
+	public static final String DISCRIM = "RequestGranter";
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+//        sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
+//        sb.append("Id: ").append(getId()).append(", ");
+//        sb.append("Version: ").append(getVersion());
+        sb.append(RequestGranter.DISCRIM);
+        return sb.toString();
+    }
 }

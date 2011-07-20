@@ -26,4 +26,13 @@ public class AdvancedUserRole {
 
     @ManyToMany(cascade=CascadeType.ALL, mappedBy="roles")
     private Set<ApplicationRegularUser> appRegUsers = new HashSet<ApplicationRegularUser>();
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+        //sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
+       // sb.append("Id: ").append(getId()).append(", ");
+        //sb.append("Version: ").append(getVersion());
+        sb.append("AdvUserRole:");
+        return sb.toString();
+    }
 }

@@ -5,8 +5,10 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.RooConversionService;
     
+import freedays.app.FDUser;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
+import freedays.domain.RegularUser;
 import java.util.Set;
 /**
  * A central place to register application Converters and Formatters. 
@@ -58,4 +60,30 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getAdvancedUserRoleConverter());
 	}
 	
+
+	public void installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(new FDUserConverter());
+        registry.addConverter(new RegularUserConverter());
+    }
+
+	public void afterPropertiesSet() {
+        super.afterPropertiesSet();
+        installLabelConverters(getObject());
+    }
+
+	static class FDUserConverter implements Converter<FDUser, String>  {
+        public String convert(FDUser fDUser) {
+            //return new StringBuilder().append(fDUser.getHireDate()).append(" ").append(fDUser.getInitDays()).append(" ").append(fDUser.getMaxFreeDays()).toString();
+        	return fDUser.toString();
+        }
+        
+    }
+
+	static class RegularUserConverter implements Converter<RegularUser, String>  {
+        public String convert(RegularUser regularUser) {
+            //return new StringBuilder().append(regularUser.getUsername()).append(" ").append(regularUser.getPassword()).append(" ").append(regularUser.getEmail()).append(" ").append(regularUser.getSurename()).toString();
+        	return regularUser.toString();
+        }
+        
+    }
 }
