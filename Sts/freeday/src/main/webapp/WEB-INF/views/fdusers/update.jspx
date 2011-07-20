@@ -9,5 +9,6 @@
         <field:datetime dateTimePattern="${FDUser_hiredate_date_format}" field="hireDate" id="c_freedays_app_FDUser_hireDate" past="true" required="true" z="UL2JHQcvQ2oeXATiz/9ZHo+yWFM="/>
         <field:input field="initDays" id="c_freedays_app_FDUser_initDays" max="7" min="2" required="true" validationMessageCode="field_invalid_integer" z="d50q3gY6S6gEGXCg/mwBEdj4YmE="/>
         <field:input field="maxFreeDays" id="c_freedays_app_FDUser_maxFreeDays" min="21" required="true" validationMessageCode="field_invalid_integer" z="YX2Hy4s4nkQx6satjVwxS1ftTUs="/>
+        <field:simple field="requests" id="c_freedays_app_FDUser_requests" messageCode="entity_reference_not_managed" messageCodeAttribute="Request" z="W50ULV2Hxk6OeZgcsPybUaGbPw4="/>
     </form:update>
 </div>

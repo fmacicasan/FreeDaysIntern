@@ -136,3 +136,33 @@ perform tests
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-20 09:40:34
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 10:08:37
 perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 11:08:42
+focus --class freedays.domain.ApplicationRegularUser
+entity --class freedays.domain.Request --testAutomatically 
+focus --class freedays.domain.ApplicationRegularUser
+field set --fieldName requests --type freedays.domain.Request --cardinality ONE_TO_MANY --mappedBy appreguser
+focus --class freedays.domain.Request
+field reference --fieldName appreguser --type freedays.domain.ApplicationRegularUser --cardinality MANY_TO_ONE
+entity --class freedays.app.FreeDay --testAutomatically 
+// [failed] field date --fieldName date --type java.util.Calendar --dateFormat SHORT --future --notNull
+field date --fieldName requestdate --type java.util.Calendar --dateFormat SHORT --future --notNull
+focus --class freedays.domain.Request
+field reference --fieldName requestable --type freedays.app.FreeDay --notNull --cardinality ONE_TO_ONE
+// [failed] entity --class freedays.domain.ApprovalStrategy --abstract --testAutomatically --inheritanceType SINGLE_TABLE --identifierColumn strategy_type --identifierType java.lang.String
+entity --class freedays.domain.ApprovalStrategy --abstract --inheritanceType SINGLE_TABLE --identifierColumn strategy_type --identifierType java.lang.String
+field reference --fieldName succesor --type freedays.domain.ApprovalStrategy --cardinality ONE_TO_ONE 
+focus --class freedays.app.FreeDay
+field reference --fieldName aproval --type freedays.domain.ApprovalStrategy
+
+enum type --class freedays.app.RequestStatus
+enum constant --name PENDING
+enum constant --name INTERMEDIATE
+enum constant --name GRANTED
+enum constant --name REJECTED
+focus --class freedays.domain.Request
+field enum --fieldName status --type freedays.app.RequestStatus --notNull
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 16:50:55
+backup
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 20:31:52
+perform tests

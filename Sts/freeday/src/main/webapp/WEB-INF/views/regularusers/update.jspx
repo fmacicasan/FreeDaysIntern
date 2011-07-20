@@ -9,7 +9,7 @@
         <field:input field="surename" id="c_freedays_domain_RegularUser_surename" required="true" z="POxYmJd2jSMnWVLRxNMf5qOlO9Y="/>
         <field:input field="firstname" id="c_freedays_domain_RegularUser_firstname" required="true" z="4Vqg8aD08b0xYrGvmRXKQx6R6iY="/>
         <!-- <field:checkbox field="deleted" id="c_freedays_domain_RegularUser_deleted" readonly="true" z="user-managed"/> -->
-        <field:checkbox field="activ" id="c_freedays_domain_RegularUser_activ" readonly="true" z="QeIUKdXq2m/qb9su8paehCWoY/o="/>
+        <field:checkbox field="activ" id="c_freedays_domain_RegularUser_activ" readonly="true" z="user-managed"/>
         <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" readonly="true" required="true" z="user-managed"/>
         <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" readonly="true" required="true" z="user-managed"/>
         <field:input field="usermodifier" id="c_freedays_domain_RegularUser_usermodifier" readonly="true" z="user-managed"/>

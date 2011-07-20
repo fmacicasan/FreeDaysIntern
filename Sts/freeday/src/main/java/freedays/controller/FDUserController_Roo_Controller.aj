@@ -7,6 +7,7 @@ import freedays.app.FDUser;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
+import freedays.domain.Request;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
@@ -95,6 +96,11 @@ privileged aspect FDUserController_Roo_Controller {
     @ModelAttribute("regularusers")
     public Collection<RegularUser> FDUserController.populateRegularUsers() {
         return RegularUser.findAllRegularUsers();
+    }
+    
+    @ModelAttribute("requests")
+    public Collection<Request> FDUserController.populateRequests() {
+        return Request.findAllRequests();
     }
     
     void FDUserController.addDateTimeFormatPatterns(Model uiModel) {
