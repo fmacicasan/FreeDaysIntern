@@ -44,17 +44,18 @@
           </c:when>
           <c:otherwise>
             <!-- Added Flo: required if the object's field is a Set => a simple spring:eval will generate errors -->
-            <c:choose>
+            <!--<c:choose>
             	<c:when test="${(fd_isSet eq false) or (empty fd_actualSet)}">
-            		<spring:eval expression="object[field]" />
+            		
             	</c:when>
             	<c:otherwise>
-            		<c:forEach items="${fd_actualSet}" var="item">
-            			<c:out value="asd" />
-            			<spring:eval expression="${item}" />
-            		</c:forEach>
+             		<c:forEach items="${fd_actualSet}" var="item"> 
+            			<c:out value="asd" /> 
+             			<spring:eval expression="${item}" /> 
+             		</c:forEach>
             	</c:otherwise>
-            </c:choose>
+            </c:choose> -->
+        		<spring:eval expression="object[field]" />
             <!-- <spring:eval expression="object[field]" />-->
             <!-- end Added Flo -->
           </c:otherwise>

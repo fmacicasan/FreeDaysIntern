@@ -1,13 +1,16 @@
 package freedays.controller;
 
+import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import freedays.app.FDUser;
+import freedays.domain.ApplicationRegularUser;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +27,6 @@ public class FDUserController {
             addDateTimeFormatPatterns(uiModel);
             return "fdusers/create";
         }
-        System.out.println("testing gogo");
         uiModel.asMap().clear();
         FDUser.persist();
         return "redirect:/fdusers/" + encodeUrlPathSegment(FDUser.getId().toString(), httpServletRequest);
@@ -33,13 +35,15 @@ public class FDUserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
-        System.out.println("cucurigu");
-        System.out.println("cucurigu");
         FDUser fdu = FDUser.findFDUser(id);
         uiModel.addAttribute("fduser",fdu );
-        System.out.println("Roles for the dude"+fdu.getRoles().size());
         uiModel.addAttribute("fduser_col", fdu.getRoles());
         uiModel.addAttribute("itemId", id);
         return "fdusers/show";
     }
+
+//	@ModelAttribute("applicationregularusers")
+//    public Collection<ApplicationRegularUser> populateApplicationRegularUsers() {
+//        return ApplicationRegularUser.findAllRequestGranters();
+//    }
 }

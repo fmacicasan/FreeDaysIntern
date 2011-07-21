@@ -6,6 +6,7 @@
         <menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
             <menu:item id="i_hrmanagement_new" messageCode="global_menu_new" url="/hrmanagements?form" z="gh9MLkRfGMg1hyfIdmD30xS0S38="/>
             <menu:item id="i_hrmanagement_list" messageCode="global_menu_list" url="/hrmanagements?page=1&amp;size=${empty param.size ? 10 : param.size}" z="rK2fdLVRaF6oqHWiKvL8M6q1aso="/>
+            <menu:item id="i_hrmanagement_list_fd_users" messageCode="empty" url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
         </menu:category>
         <menu:category id="c_requestgranter" z="qIRPS1WXPxXt+NR0tZV12KCGyNQ=">
             <menu:item id="i_requestgranter_new" messageCode="global_menu_new" url="/requestgranters?form" z="+XhU9I7K3Vfd760t4dz28PtbDTI="/>
@@ -29,10 +30,10 @@
         </menu:category>
         <menu:category id="c_admin_regular_user" z="">
             <menu:item id="i_admin_regular_user_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z=""/>
-            <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z="" />
+            <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z=""/>
         </menu:category>
         <menu:category id="c_account" z="">
-            <menu:item id="i_regular_user_update" messageCode="global_menu"  url="/updateRegularUsers" z=""/>
+            <menu:item id="i_regular_user_update" messageCode="global_menu" url="/updateRegularUsers" z=""/>
         </menu:category>
         <menu:category id="c_request" z="K3H2XFvnqlPuvp7YsYXLCJyWwHQ=">
             <menu:item id="i_request_new" messageCode="global_menu_new" url="/requests?form" z="vXscIy5n1QOw1AlVbhpVIpJCppg="/>

@@ -30,6 +30,19 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             }
         };
     }
+	
+	Converter<Set<AdvancedUserRole>, String> getAdvancedUserRoleSetConverter() {
+        return new Converter<Set<AdvancedUserRole>, String>() {
+            public String convert(Set<AdvancedUserRole> set) {
+                //return Joiner.on(",").join(properties.toArray());
+            	StringBuilder sb = new StringBuilder();
+            	for(AdvancedUserRole aru:set){
+            		sb.append(aru.toString());
+            	}
+                return sb.toString();// 1
+            }
+        };
+    }
     
     Converter<ApplicationRegularUser, String> getApplicationRegularUserConverter(){
     	return new Converter<ApplicationRegularUser, String>(){
@@ -56,6 +69,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		super.installFormatters(registry);
 		// Register application converters and formatters
 		registry.addConverter(getApplicationRegularUserSetConverter());
+		registry.addConverter(getAdvancedUserRoleSetConverter());
         registry.addConverter(getApplicationRegularUserConverter());
         registry.addConverter(getAdvancedUserRoleConverter());
 	}

@@ -5,6 +5,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import freedays.domain.RegularUser;
 import javax.persistence.ManyToOne;
+
+import java.util.Collection;
 import java.util.Set;
 import freedays.domain.AdvancedUserRole;
 import java.util.HashSet;
@@ -33,4 +35,5 @@ public abstract class ApplicationRegularUser {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "appreguser")
     private Set<Request> requests = new HashSet<Request>();
+
 }
