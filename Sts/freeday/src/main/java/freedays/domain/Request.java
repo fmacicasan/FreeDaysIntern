@@ -7,7 +7,10 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import freedays.domain.ApplicationRegularUser;
 
+import javax.persistence.EntityManager;
 import javax.persistence.ManyToOne;
+import javax.persistence.TypedQuery;
+
 import freedays.app.FreeDay;
 import javax.validation.constraints.NotNull;
 import javax.persistence.OneToOne;
@@ -102,4 +105,14 @@ public class Request {
     	sb.append(this.status);
     	return sb.toString();
     }
+
+	public static long countGrantedRequests(ApplicationRegularUser fdUser, RequestStatus status) {
+		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
+		EntityManager em = Request.entityManager();
+        TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser = :fduser AND status = :status", Long.class);
+        q.setParameter("fduser", fdUser);
+        q.setParameter("status", status);
+        return q.getSingleResult();
+		
+	}
 }
