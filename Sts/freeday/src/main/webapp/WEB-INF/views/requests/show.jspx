@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_freedays_domain_Request" object="${request}" path="/requests" z="G3xFi2PczXUVkUmQI82Ufrx0Krg=">
+        <field:display field="appreguser" id="s_freedays_domain_Request_appreguser" object="${request}" z="Jwc8eOPnLFW2VfY96+B+cmsHVIk="/>
+        <field:display field="requestable" id="s_freedays_domain_Request_requestable" object="${request}" z="4hi+FrjKAeXIEsimQWu8AHfWV1Q="/>
+        <field:display field="status" id="s_freedays_domain_Request_status" object="${request}" z="RPStuM82/ATqK5kqJkOft1kjRyo="/>
+    </page:show>
+</div>

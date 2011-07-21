@@ -9,4 +9,9 @@ public class RegularUserDataOnDemand {
         java.lang.String email = "email_" + index +"@test.tst";
         obj.setEmail(email);
     }
+	
+	public static RegularUser generateRegularUser(){
+		RegularUserDataOnDemand rudod = new RegularUserDataOnDemand();
+		return rudod.getRandomRegularUser();
+	}
 }

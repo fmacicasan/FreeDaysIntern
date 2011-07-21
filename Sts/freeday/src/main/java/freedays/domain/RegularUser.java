@@ -1,5 +1,7 @@
 package freedays.domain;
 
+import freedays.util.MailUtils;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -22,7 +24,6 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import freedays.util.MailUtils;
 import freedays.util.PhraseUtils;
 
 @RooJavaBean

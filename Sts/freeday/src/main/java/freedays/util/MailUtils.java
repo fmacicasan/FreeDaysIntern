@@ -9,8 +9,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 
 /**
  * Mail Utilities
@@ -86,5 +84,11 @@ public class MailUtils {
     	};
     	th.start();
         
+    }
+    
+    public static void main(String[] args){
+    	//test works for concurrent sending
+    	MailUtils.send("iulia_teglas@yahoo.com", "Hello", "testam sa nuramaname");
+    	MailUtils.send("burtoflex89@yahoo.com","Hello","cucurigu sa nu iti muti cuibu");
     }
 }

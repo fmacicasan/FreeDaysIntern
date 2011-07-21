@@ -1,10 +1,11 @@
 package freedays.controller;
 
+import freedays.util.MailUtils;
 import freedays.domain.RegularUser;
 import freedays.domain.Search;
-import freedays.util.MailUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -90,5 +91,33 @@ public class RegularUserController {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/regularusers";
+    }
+
+	@RequestMapping(method = RequestMethod.POST)
+    public String create(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("regularUser", regularUser);
+            addDateTimeFormatPatterns(uiModel);
+            return "regularusers/create";
+        }
+        uiModel.asMap().clear();
+        Principal p = httpServletRequest.getUserPrincipal();
+        regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
+        regularUser.persist();
+        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
+    }
+
+	@RequestMapping(method = RequestMethod.PUT)
+    public String update(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("regularUser", regularUser);
+            addDateTimeFormatPatterns(uiModel);
+            return "regularusers/update";
+        }
+        uiModel.asMap().clear();
+        Principal p = httpServletRequest.getUserPrincipal();
+        regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
+        regularUser.merge();
+        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
     }
 }

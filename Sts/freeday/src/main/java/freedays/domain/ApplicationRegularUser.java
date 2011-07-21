@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import freedays.domain.RequestGranter;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import freedays.domain.Request;
+import javax.persistence.OneToMany;
 
 @RooJavaBean
 @RooToString
@@ -23,13 +25,12 @@ public abstract class ApplicationRegularUser {
     private RegularUser regularUser;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-    		name="AppRegUser_AdvRole",
-    		joinColumns=@JoinColumn(name="user_id"),
-    		inverseJoinColumns=@JoinColumn(name="role_id")
-    )
+    @JoinTable(name = "AppRegUser_AdvRole", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<AdvancedUserRole> roles = new HashSet<AdvancedUserRole>();
 
     @ManyToOne
     private ApplicationRegularUser granter;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "appreguser")
+    private Set<Request> requests = new HashSet<Request>();
 }

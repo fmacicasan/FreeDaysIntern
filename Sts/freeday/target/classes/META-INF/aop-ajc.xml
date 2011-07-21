@@ -1,9 +1,16 @@
 <aspectj>
 <aspects>
+<aspect name="freedays.domain.Request_Roo_JavaBean"/>
+<aspect name="freedays.domain.ApprovalStrategy_Roo_Configurable"/>
 <aspect name="freedays.controller.RequestGranterController_Roo_Controller"/>
+<aspect name="freedays.app.FreeDay_Roo_Entity"/>
 <aspect name="freedays.domain.RegularUser_Roo_Entity"/>
+<aspect name="freedays.domain.ApprovalStrategy_Roo_ToString"/>
+<aspect name="freedays.app.FreeDay_Roo_JavaBean"/>
 <aspect name="freedays.domain.RequestGranter_Roo_Configurable"/>
+<aspect name="freedays.app.FreeDay_Roo_Configurable"/>
 <aspect name="freedays.domain.Admin_Roo_Entity"/>
+<aspect name="freedays.domain.Request_Roo_Entity"/>
 <aspect name="freedays.domain.RequestGranter_Roo_Entity"/>
 <aspect name="freedays.domain.ResetPass_Roo_JavaBean"/>
 <aspect name="freedays.domain.ApplicationRegularUser_Roo_Configurable"/>
@@ -12,23 +19,27 @@
 <aspect name="freedays.controller.UAdminController_Roo_Controller"/>
 <aspect name="freedays.domain.RegularUser_Roo_JavaBean"/>
 <aspect name="freedays.domain.AdvancedUserRole_Roo_Entity"/>
-<aspect name="freedays.controller.AdminController_Roo_Controller"/>
+<aspect name="freedays.domain.ApprovalStrategy_Roo_JavaBean"/>
 <aspect name="freedays.controller.FDUserController_Roo_Controller"/>
+<aspect name="freedays.controller.AdminController_Roo_Controller"/>
 <aspect name="freedays.domain.RegularUser_Roo_Configurable"/>
 <aspect name="freedays.app.FDUser_Roo_Configurable"/>
 <aspect name="freedays.domain.Search_Roo_JavaBean"/>
 <aspect name="freedays.domain.AdvancedUserRole_Roo_JavaBean"/>
 <aspect name="freedays.controller.HRManagementController_Roo_Controller"/>
+<aspect name="freedays.domain.Request_Roo_Configurable"/>
 <aspect name="freedays.app.FDAdmin_Roo_Entity"/>
 <aspect name="freedays.domain.Admin_Roo_Configurable"/>
 <aspect name="freedays.app.FDUser_Roo_JavaBean"/>
+<aspect name="freedays.controller.RequestController_Roo_Controller"/>
 <aspect name="freedays.app.FDAdmin_Roo_Configurable"/>
 <aspect name="freedays.app.HRManagement_Roo_Configurable"/>
+<aspect name="freedays.domain.ApprovalStrategy_Roo_Entity"/>
 <aspect name="freedays.domain.ApplicationRegularUser_Roo_Entity"/>
 <aspect name="freedays.domain.AdvancedUserRole_Roo_Configurable"/>
 <aspect name="freedays.domain.ApplicationRegularUser_Roo_ToString"/>
-<aspect name="freedays.app.HRManagement_Roo_Entity"/>
 <aspect name="freedays.controller.FDAdminController_Roo_Controller"/>
+<aspect name="freedays.app.HRManagement_Roo_Entity"/>
 <aspect name="freedays.domain.ApplicationRegularUser_Roo_JavaBean"/>
 </aspects>
 </aspectj>
