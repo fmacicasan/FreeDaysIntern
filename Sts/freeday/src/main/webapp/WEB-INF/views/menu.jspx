@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:sec="http://www.springframework.org/security/tags" id="menu" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-        <menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
-            <menu:item id="i_hrmanagement_new" messageCode="global_menu_new" url="/hrmanagements?form" z="gh9MLkRfGMg1hyfIdmD30xS0S38="/>
-            <menu:item id="i_hrmanagement_list" messageCode="global_menu_list" url="/hrmanagements?page=1&amp;size=${empty param.size ? 10 : param.size}" z="rK2fdLVRaF6oqHWiKvL8M6q1aso="/>
-        </menu:category>
+      <sec:authorize ifAllGranted="ROLE_ADMIN">
+	        <menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
+	            <menu:item id="i_hrmanagement_new" messageCode="global_menu_new" url="/hrmanagements?form" z="gh9MLkRfGMg1hyfIdmD30xS0S38="/>
+	            <menu:item id="i_hrmanagement_list" messageCode="global_menu_list" url="/hrmanagements?page=1&amp;size=${empty param.size ? 10 : param.size}" z="rK2fdLVRaF6oqHWiKvL8M6q1aso="/>
+	        </menu:category>
+       </sec:authorize>
         <menu:category id="c_requestgranter" z="qIRPS1WXPxXt+NR0tZV12KCGyNQ=">
             <menu:item id="i_requestgranter_new" messageCode="global_menu_new" url="/requestgranters?form" z="+XhU9I7K3Vfd760t4dz28PtbDTI="/>
             <menu:item id="i_requestgranter_list" messageCode="global_menu_list" url="/requestgranters?page=1&amp;size=${empty param.size ? 10 : param.size}" z="EwwdvD61VT2WIInKk+Kbc696EYk="/>
