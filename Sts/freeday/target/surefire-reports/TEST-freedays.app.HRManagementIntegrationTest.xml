@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.121" errors="0" skipped="0" tests="9" name="freedays.app.HRManagementIntegrationTest">
+<testsuite failures="0" time="0.119" errors="0" skipped="0" tests="9" name="freedays.app.HRManagementIntegrationTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_21\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freeday"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_21\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freeday\target\surefire\surefirebooter3536725942436607243.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freeday\target\surefire\surefirebooter4503095804421576897.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\FMACIC~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -59,13 +59,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.011" classname="freedays.app.HRManagementIntegrationTest" name="testMarkerMethod"/>
-  <testcase time="0.019" classname="freedays.app.HRManagementIntegrationTest" name="testFlush"/>
-  <testcase time="0.008" classname="freedays.app.HRManagementIntegrationTest" name="testMerge"/>
-  <testcase time="0.014" classname="freedays.app.HRManagementIntegrationTest" name="testPersist"/>
+  <testcase time="0.01" classname="freedays.app.HRManagementIntegrationTest" name="testMarkerMethod"/>
+  <testcase time="0.014" classname="freedays.app.HRManagementIntegrationTest" name="testFlush"/>
+  <testcase time="0.01" classname="freedays.app.HRManagementIntegrationTest" name="testMerge"/>
+  <testcase time="0.015" classname="freedays.app.HRManagementIntegrationTest" name="testPersist"/>
   <testcase time="0.019" classname="freedays.app.HRManagementIntegrationTest" name="testRemove"/>
   <testcase time="0.013" classname="freedays.app.HRManagementIntegrationTest" name="testCountHRManagements"/>
-  <testcase time="0.009" classname="freedays.app.HRManagementIntegrationTest" name="testFindHRManagement"/>
+  <testcase time="0.008" classname="freedays.app.HRManagementIntegrationTest" name="testFindHRManagement"/>
   <testcase time="0.012" classname="freedays.app.HRManagementIntegrationTest" name="testFindAllHRManagements"/>
-  <testcase time="0.011" classname="freedays.app.HRManagementIntegrationTest" name="testFindHRManagementEntries"/>
+  <testcase time="0.012" classname="freedays.app.HRManagementIntegrationTest" name="testFindHRManagementEntries"/>
 </testsuite>
