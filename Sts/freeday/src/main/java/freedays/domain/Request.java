@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import freedays.app.RequestStatus;
 import javax.persistence.Enumerated;
 
+
 @RooJavaBean
 @RooToString
 @RooEntity

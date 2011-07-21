@@ -14,6 +14,7 @@ public enum RequestStatus {
     INTERMEDIATE, 
     GRANTED, 
     REJECTED;
+    
     public RequestStatus getNext(){
     	RequestStatus[] vals = RequestStatus.values();
     	int ordinal = this.ordinal();
