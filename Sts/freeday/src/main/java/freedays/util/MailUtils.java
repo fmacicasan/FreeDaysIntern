@@ -9,8 +9,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 
 /**
  * Mail Utilities
@@ -20,8 +18,6 @@ import org.springframework.stereotype.Component;
 public class MailUtils {
 	private static final String SOURCE = "pfa.parvu.marinica@gmail.com";
 	private static final String PASS = "sitemami01";
-	
-	
     /**
      * <b>public static void send (String to, String subject, String
      * content)</b>
@@ -41,7 +37,6 @@ public class MailUtils {
     	Thread th = new Thread(){
     		public void run(){
     			//this.checkOperation();
-    			System.out.println("sending mail to:"+to);
     			Properties props = new Properties();
     	        props.put("mail.smtp.host", "smtp.gmail.com");
     	        props.put("mail.smtp.socketFactory.port", "465");
@@ -72,7 +67,6 @@ public class MailUtils {
     	        } catch (MessagingException e) {
     	            throw new RuntimeException(e);
     	        }
-    	        System.out.println("Finished sending mail to:"+to);
     		}
     		
     		private void checkOperation(){
@@ -92,4 +86,9 @@ public class MailUtils {
         
     }
     
+    public static void main(String[] args){
+    	//test works for concurrent sending
+    	MailUtils.send("iulia_teglas@yahoo.com", "Hello", "testam sa nuramaname");
+    	MailUtils.send("burtoflex89@yahoo.com","Hello","cucurigu sa nu iti muti cuibu");
+    }
 }

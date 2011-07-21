@@ -1,9 +1,12 @@
 package freedays.domain;
 
 
+import freedays.util.MailUtils;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.test.RooIntegrationTest;
+
 
 @RooIntegrationTest(entity = RegularUser.class)
 public class RegularUserIntegrationTest {
@@ -27,6 +30,9 @@ public class RegularUserIntegrationTest {
         java.util.List<RegularUser> all = freedays.domain.RegularUser.findAllRegularUsersLike(search);
         org.junit.Assert.assertTrue("Search method did not find added unit", all.contains(obj));
     }
+    
+
+	
 
 	@Autowired
     private RegularUserDataOnDemand dod;

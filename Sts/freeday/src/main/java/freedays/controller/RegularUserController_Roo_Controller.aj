@@ -10,9 +10,7 @@ import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,18 +20,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect RegularUserController_Roo_Controller {
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public String RegularUserController.create(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("regularUser", regularUser);
-            addDateTimeFormatPatterns(uiModel);
-            return "regularusers/create";
-        }
-        uiModel.asMap().clear();
-        regularUser.persist();
-        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String RegularUserController.createForm(Model uiModel) {
@@ -62,18 +48,6 @@ privileged aspect RegularUserController_Roo_Controller {
         }
         addDateTimeFormatPatterns(uiModel);
         return "regularusers/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public String RegularUserController.update(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("regularUser", regularUser);
-            addDateTimeFormatPatterns(uiModel);
-            return "regularusers/update";
-        }
-        uiModel.asMap().clear();
-        regularUser.merge();
-        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)

@@ -1,10 +1,11 @@
 package freedays.domain;
 
+import freedays.util.MailUtils;
+
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import freedays.domain.ApplicationRegularUser;
-import freedays.util.MailUtils;
 
 import javax.persistence.ManyToOne;
 import freedays.app.FreeDay;
