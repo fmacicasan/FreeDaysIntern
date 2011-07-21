@@ -29,10 +29,10 @@
         </menu:category>
         <menu:category id="c_admin_regular_user" z="">
             <menu:item id="i_admin_regular_user_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z=""/>
-            <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z=""/>
+            <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z="" />
         </menu:category>
         <menu:category id="c_account" z="">
-            <menu:item id="i_regular_user_update" messageCode="global_menu" url="/regularusers/?form" z=""/>
+            <menu:item id="i_regular_user_update" messageCode="global_menu"  url="/regularusers/${sessionScope.userID}?form" z=""/>
         </menu:category>
     </menu:menu>
 </div>
