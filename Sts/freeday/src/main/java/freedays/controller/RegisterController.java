@@ -29,6 +29,7 @@ public class RegisterController {
 		}
 		uiModel.asMap().clear();
 		regularUser.persist();
+
 		return "redirect:/regularusers/"
 				+ encodeUrlPathSegment(regularUser.getId().toString(),
 						httpServletRequest);

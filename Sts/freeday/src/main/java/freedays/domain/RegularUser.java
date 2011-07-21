@@ -217,4 +217,12 @@ public class RegularUser implements Serializable {
 //        sb.append("Version: ").append(getVersion());
         return sb.toString();
     }
+
+	public static TypedQuery<RegularUser> findRegularUsersByUsername(String username) {
+		 if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+	        EntityManager em = RegularUser.entityManager();
+	        TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.username = :username ", RegularUser.class);
+	        q.setParameter("username", username);
+	        return q;
+	}
 }

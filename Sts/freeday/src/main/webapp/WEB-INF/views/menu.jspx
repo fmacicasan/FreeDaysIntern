@@ -31,10 +31,10 @@
         </menu:category>
         <menu:category id="c_admin_regular_user" z="">
             <menu:item id="i_admin_regular_user_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z=""/>
-            <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z=""/>
+            <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z="" />
         </menu:category>
         <menu:category id="c_account" z="">
-            <menu:item id="i_regular_user_update" messageCode="global_menu" url="/regularusers/?form" z=""/>
+            <menu:item id="i_regular_user_update" messageCode="global_menu"  url="/updateRegularUsers" z=""/>
         </menu:category>
         <menu:category id="c_request" z="K3H2XFvnqlPuvp7YsYXLCJyWwHQ=">
             <menu:item id="i_request_new" messageCode="global_menu_new" url="/requests?form" z="vXscIy5n1QOw1AlVbhpVIpJCppg="/>

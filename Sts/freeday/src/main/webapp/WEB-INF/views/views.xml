@@ -30,5 +30,6 @@
 	   
   <definition extends="public" name="register">
      <put-attribute name="body" value="/WEB-INF/views/register.jspx"/>
-  </definition>	 
+  </definition>	
+   
 </tiles-definitions>
