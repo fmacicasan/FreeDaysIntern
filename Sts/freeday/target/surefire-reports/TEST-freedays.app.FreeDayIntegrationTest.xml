@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.394" errors="0" skipped="0" tests="9" name="freedays.app.FreeDayIntegrationTest">
+<testsuite failures="0" time="0.393" errors="0" skipped="0" tests="9" name="freedays.app.FreeDayIntegrationTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_21\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freeday"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_21\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freeday\target\surefire\surefirebooter4503095804421576897.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\fmacicasan\git\FreeDaysIntern\Sts\freeday\target\surefire\surefirebooter2293340924003807648.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\FMACIC~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -63,9 +63,9 @@
   <testcase time="0.052" classname="freedays.app.FreeDayIntegrationTest" name="testFlush"/>
   <testcase time="0.046" classname="freedays.app.FreeDayIntegrationTest" name="testMerge"/>
   <testcase time="0.045" classname="freedays.app.FreeDayIntegrationTest" name="testPersist"/>
-  <testcase time="0.049" classname="freedays.app.FreeDayIntegrationTest" name="testRemove"/>
-  <testcase time="0.048" classname="freedays.app.FreeDayIntegrationTest" name="testCountFreeDays"/>
-  <testcase time="0.042" classname="freedays.app.FreeDayIntegrationTest" name="testFindFreeDay"/>
-  <testcase time="0.052" classname="freedays.app.FreeDayIntegrationTest" name="testFindAllFreeDays"/>
-  <testcase time="0.047" classname="freedays.app.FreeDayIntegrationTest" name="testFindFreeDayEntries"/>
+  <testcase time="0.045" classname="freedays.app.FreeDayIntegrationTest" name="testRemove"/>
+  <testcase time="0.046" classname="freedays.app.FreeDayIntegrationTest" name="testCountFreeDays"/>
+  <testcase time="0.056" classname="freedays.app.FreeDayIntegrationTest" name="testFindFreeDay"/>
+  <testcase time="0.042" classname="freedays.app.FreeDayIntegrationTest" name="testFindAllFreeDays"/>
+  <testcase time="0.044" classname="freedays.app.FreeDayIntegrationTest" name="testFindFreeDayEntries"/>
 </testsuite>

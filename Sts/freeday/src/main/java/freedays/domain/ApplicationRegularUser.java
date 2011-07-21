@@ -41,7 +41,8 @@ public abstract class ApplicationRegularUser {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "appreguser")
     private Set<Request> requests = new HashSet<Request>();
     
-   // @Transactional
+   
+    //@Transactional
 	public static Set<AdvancedUserRole> getAllRolesByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
@@ -52,4 +53,5 @@ public abstract class ApplicationRegularUser {
         Set<AdvancedUserRole> set = aru.getRoles();
         return set;
 	}
+
 }
