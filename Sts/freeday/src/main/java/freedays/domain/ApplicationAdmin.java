@@ -17,6 +17,6 @@ public abstract class ApplicationAdmin extends AdvancedUserRole {
 //        sb.append("Id: ").append(getId()).append(", ");
 //        sb.append("Version: ").append(getVersion());
         sb.append("AppAdmin");
-        return sb.toString();
+        return sb.toString().toUpperCase();
     }
 }

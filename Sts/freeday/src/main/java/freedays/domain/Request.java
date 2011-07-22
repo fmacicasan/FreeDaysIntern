@@ -103,7 +103,7 @@ public class Request {
     	sb.append(this.requestable);
     	sb.append(" with status ");
     	sb.append(this.status);
-    	return sb.toString();
+    	return sb.toString().toUpperCase();
     }
 
 	public static long countGrantedRequests(ApplicationRegularUser fdUser, RequestStatus status) {

@@ -216,7 +216,7 @@ public class RegularUser implements Serializable {
 //        sb.append("Usermodifier: ").append(getUsermodifier()).append(", ");
 //        sb.append("Username: ").append(getUsername()).append(", ");
 //        sb.append("Version: ").append(getVersion());
-        return sb.toString();
+        return sb.toString().toUpperCase();
     }
 
 	public static TypedQuery<RegularUser> findRegularUsersByUsername(String username) {
