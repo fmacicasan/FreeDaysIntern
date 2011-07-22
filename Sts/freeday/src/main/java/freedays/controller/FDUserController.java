@@ -42,8 +42,10 @@ public class FDUserController {
         return "fdusers/show";
     }
 
-//	@ModelAttribute("applicationregularusers")
-//    public Collection<ApplicationRegularUser> populateApplicationRegularUsers() {
-//        return ApplicationRegularUser.findAllRequestGranters();
-//    }
+	@ModelAttribute("applicationregularusers")
+    public Collection<ApplicationRegularUser> populateApplicationRegularUsers() {
+        return ApplicationRegularUser.findAllRequestGranters();
+    }
+	
+	
 }

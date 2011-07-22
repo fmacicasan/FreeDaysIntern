@@ -19,7 +19,8 @@ public class FDAdmin extends AdvancedUserRole {
 //        sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
 //        sb.append("Id: ").append(getId()).append(", ");
 //        sb.append("Version: ").append(getVersion());
+        sb.append(super.toString());
         sb.append("FDAdmin");
-        return sb.toString();
+        return sb.toString().toUpperCase();
     }
 }

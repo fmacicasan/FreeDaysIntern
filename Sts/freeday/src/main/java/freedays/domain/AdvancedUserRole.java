@@ -32,7 +32,7 @@ public class AdvancedUserRole {
         //sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
        // sb.append("Id: ").append(getId()).append(", ");
         //sb.append("Version: ").append(getVersion());
-        sb.append("AdvUserRole:");
+        sb.append("ROLE_");
         return sb.toString();
     }
 }

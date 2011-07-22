@@ -3,6 +3,7 @@ package freedays.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NonUniqueResultException;
@@ -23,6 +24,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.util.StringUtils;
 
+import freedays.domain.AdvancedUserRole;
+import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
 
 public class AuthentificationController extends
@@ -50,7 +53,11 @@ public class AuthentificationController extends
 					.findRegularUsersByUsernameAndPasswordEquals(username,
 							password).getSingleResult();
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
-		} catch (EmptyResultDataAccessException e) {
+			Set<AdvancedUserRole> set = ApplicationRegularUser.getAllRolesByUsername(username);
+			for (AdvancedUserRole aur : set) {
+				authorities.add(new GrantedAuthorityImpl(aur.toString()));
+			}
+		}catch (EmptyResultDataAccessException e){
 			throw new BadCredentialsException("Invalid username or password");
 		} catch (EntityNotFoundException e) {
 			throw new BadCredentialsException("Invalid user");

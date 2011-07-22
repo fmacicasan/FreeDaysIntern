@@ -88,11 +88,6 @@ privileged aspect FDUserController_Roo_Controller {
         return AdvancedUserRole.findAllAdvancedUserRoles();
     }
     
-    @ModelAttribute("applicationregularusers")
-    public Collection<ApplicationRegularUser> FDUserController.populateApplicationRegularUsers() {
-        return ApplicationRegularUser.findAllApplicationRegularUsers();
-    }
-    
     @ModelAttribute("regularusers")
     public Collection<RegularUser> FDUserController.populateRegularUsers() {
         return RegularUser.findAllRegularUsers();
