@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import freedays.app.FDUser;
 import freedays.domain.ApplicationRegularUser;
+import freedays.domain.RegularUser;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,33 +20,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/fdusers")
 @Controller
 public class FDUserController {
-	
-    @RequestMapping(method = RequestMethod.POST)
-    public String create(@Valid FDUser FDUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("FDUser", FDUser);
-            addDateTimeFormatPatterns(uiModel);
-            return "fdusers/create";
-        }
-        uiModel.asMap().clear();
-        FDUser.persist();
-        return "redirect:/fdusers/" + encodeUrlPathSegment(FDUser.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        FDUser fdu = FDUser.findFDUser(id);
-        uiModel.addAttribute("fduser",fdu );
-        uiModel.addAttribute("fduser_col", fdu.getRoles());
-        uiModel.addAttribute("itemId", id);
-        return "fdusers/show";
-    }
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(@Valid FDUser FDUser, BindingResult bindingResult,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		if (bindingResult.hasErrors()) {
+			uiModel.addAttribute("FDUser", FDUser);
+			addDateTimeFormatPatterns(uiModel);
+			return "fdusers/create";
+		}
+		uiModel.asMap().clear();
+		FDUser.persist();
+		return "redirect:/fdusers/"
+				+ encodeUrlPathSegment(FDUser.getId().toString(),
+						httpServletRequest);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String show(@PathVariable("id") Long id, Model uiModel) {
+		addDateTimeFormatPatterns(uiModel);
+		FDUser fdu = FDUser.findFDUser(id);
+		uiModel.addAttribute("fduser", fdu);
+		uiModel.addAttribute("fduser_col", fdu.getRoles());
+		uiModel.addAttribute("itemId", id);
+		return "fdusers/show";
+	}
 
 	@ModelAttribute("applicationregularusers")
-    public Collection<ApplicationRegularUser> populateApplicationRegularUsers() {
-        return ApplicationRegularUser.findAllRequestGranters();
-    }
-	
-	
+	public Collection<ApplicationRegularUser> populateApplicationRegularUsers() {
+		return ApplicationRegularUser.findAllRequestGranters();
+	}
+
+	@ModelAttribute("regularusers")
+	public Collection<RegularUser> populateRegularUsers() {
+		return RegularUser.findAllRegularUsersUnasociated();
+	}
 }

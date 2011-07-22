@@ -68,7 +68,7 @@ public class FDUser extends ApplicationRegularUser {
 			time -= now.getTimeInMillis();
 		}
 		
-		remainingDays += TimeUnit.MILLISECONDS.toDays(time) * this.maxFreeDays / now.getActualMaximum(Calendar.DAY_OF_YEAR);
+		remainingDays += TimeUnit.MILLISECONDS.toDays(time) * (this.maxFreeDays-this.initDays) / now.getActualMaximum(Calendar.DAY_OF_YEAR);
 		
 		remainingDays -= Request.countGrantedRequests(this,RequestStatus.GRANTED);
 		
