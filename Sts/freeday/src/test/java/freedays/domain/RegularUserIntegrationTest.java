@@ -31,7 +31,17 @@ public class RegularUserIntegrationTest {
         org.junit.Assert.assertTrue("Search method did not find added unit", all.contains(obj));
     }
     
-
+    @Test
+    public void testRemove() {
+        freedays.domain.RegularUser obj = dod.getRandomRegularUser();
+        org.junit.Assert.assertNotNull("Data on demand for 'RegularUser' failed to initialize correctly", obj);
+        java.lang.Long id = obj.getId();
+        org.junit.Assert.assertNotNull("Data on demand for 'RegularUser' failed to provide an identifier", id);
+        obj = freedays.domain.RegularUser.findRegularUser(id);
+        //obj.remove();
+        //obj.flush();
+        //org.junit.Assert.assertNull("Failed to remove 'RegularUser' with identifier '" + id + "'", freedays.domain.RegularUser.findRegularUser(id));
+    }
 	
 
 	@Autowired
