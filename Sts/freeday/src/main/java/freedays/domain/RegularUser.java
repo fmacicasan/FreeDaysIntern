@@ -23,6 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.transaction.annotation.Transactional;
 
 import freedays.util.PhraseUtils;
 
@@ -215,7 +216,7 @@ public class RegularUser implements Serializable {
 //        sb.append("Usermodifier: ").append(getUsermodifier()).append(", ");
 //        sb.append("Username: ").append(getUsername()).append(", ");
 //        sb.append("Version: ").append(getVersion());
-        return sb.toString();
+        return sb.toString().toUpperCase();
     }
 
 	public static TypedQuery<RegularUser> findRegularUsersByUsername(String username) {

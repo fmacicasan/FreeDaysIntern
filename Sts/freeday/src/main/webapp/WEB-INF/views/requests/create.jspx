@@ -8,4 +8,6 @@
         <field:select field="status" id="c_freedays_domain_Request_status" items="${requeststatuses}" path="requeststatuses" z="G27/4elZ6RfIlAheQ/J7eNqY06A="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_domain_Request" render="${not empty dependencies}" z="bZ9tHsEoBzWYMaxtKi3t7PaNRxo="/>
+	<spring:message code="request_remainingdays" arguments="${remainingDaysCount}" />
 </div>
+	

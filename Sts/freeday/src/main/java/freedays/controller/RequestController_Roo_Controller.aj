@@ -27,23 +27,6 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect RequestController_Roo_Controller {
     
-    @RequestMapping(method = RequestMethod.POST)
-    public String RequestController.create(@Valid Request request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("request", request);
-            return "requests/create";
-        }
-        uiModel.asMap().clear();
-        request.persist();
-        return "redirect:/requests/" + encodeUrlPathSegment(request.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(params = "form", method = RequestMethod.GET)
-    public String RequestController.createForm(Model uiModel) {
-        uiModel.addAttribute("request", new Request());
-        return "requests/create";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String RequestController.show(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("request", Request.findRequest(id));
