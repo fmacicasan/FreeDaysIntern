@@ -20,7 +20,7 @@ INSERT INTO `fduser`(`id`,`version`,`granter`,`regular_user`,`hire_date`,`init_d
 INSERT INTO `fduser`(`id`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_free_days`)VALUES(112,0,null,112,"2011-07-10 01:21:09",2,23);
 INSERT INTO `fduser`(`id`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_free_days`)VALUES(113,0,null,113,"2011-07-11 01:21:09",5,25);
 INSERT INTO `fduser`(`id`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_free_days`)VALUES(114,0,null,114,"2010-07-20 01:21:09",3,26);
-INSERT INTO `fduser`(`id`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_free_days`)VALUES(115,0,null,115,"2001-07-20 01:21:09",4,22);
+INSERT INTO `fduser`(`id`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_free_days`)VALUES(115,0,111,115,"2001-07-20 01:21:09",4,22);
 INSERT INTO `fduser`(`id`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_free_days`)VALUES(116,0,null,116,"2006-07-20 01:21:09",3,27);
 INSERT INTO `fduser`(`id`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_free_days`)VALUES(117,0,null,117,"2009-07-20 01:21:09",4,23);
 

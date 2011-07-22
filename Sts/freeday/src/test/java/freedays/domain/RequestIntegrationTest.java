@@ -39,6 +39,10 @@ public class RequestIntegrationTest {
 //    	Assert.assertEquals("error @ level 1 email", "iulia_teglas@yahoo.com",level1.getRegularUser().getEmail());
 //    	Assert.assertEquals("error @ user email", "burtoflex89@yahoo.com",appreguser.getRegularUser().getEmail());
 //    	
+//    	Assert.assertNotNull("null approval for user 1",requestable.getApproval());
+//    	Assert.assertNotNull("null approval for user 2",requestable.getApproval().getSuccesor());
+//    	Assert.assertNull("null approval for top user 3",requestable.getApproval().getSuccesor().getSuccesor());
+//    	
 //    	Request req = new Request();
 //    	req.setAppreguser(appreguser);
 //    	req.setRequestable(requestable);

@@ -13,4 +13,7 @@
 <definition extends="default" name="requests/update">
         <put-attribute name="body" value="/WEB-INF/views/requests/update.jspx"/>
     </definition>
+<definition extends="default" name="requests/request">
+        <put-attribute name="body" value="/WEB-INF/views/requests/request.jspx"/>
+    </definition>
 </tiles-definitions>

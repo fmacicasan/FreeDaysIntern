@@ -12,6 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
+import freedays.util.ApprovalUtils;
+
 import javax.persistence.ManyToOne;
 
 @RooJavaBean
@@ -41,5 +43,12 @@ public class FreeDay {
     
     public String toString(){
     	return String.format("%1$tA, %1$te %1$tB %1$tY", this.requestdate);
+    }
+    
+    public static FreeDay createFreeDay(Calendar date){
+    	FreeDay fd = new FreeDay();
+    	fd.setRequestdate(date);
+    	fd.setApproval(ApprovalUtils.getDefaultApprovalStrategy());
+    	return fd;
     }
 }

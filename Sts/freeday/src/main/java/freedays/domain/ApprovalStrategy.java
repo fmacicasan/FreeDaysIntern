@@ -21,4 +21,19 @@ public abstract class ApprovalStrategy {
     
     public abstract ApplicationRegularUser getApprover(ApplicationRegularUser user);
     
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+        //sb.append("Id: ").append(getId()).append(", ");
+        //sb.append("Version: ").append(getVersion());
+        return sb.toString();
+    }
+    
+
+	public ApprovalStrategy getSuccesor() {
+        return this.succesor;
+    }
+
+	public void setSuccesor(ApprovalStrategy succesor) {
+        this.succesor = succesor;
+    }
 }

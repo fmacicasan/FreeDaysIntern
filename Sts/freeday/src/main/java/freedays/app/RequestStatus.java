@@ -29,7 +29,11 @@ public enum RequestStatus {
     	return vals[vals.length-1];
     }
 	public static boolean isInit(RequestStatus status) {
-		return RequestStatus.values()[0].equals(status);
+		return RequestStatus.getInit().equals(status);
 	}
+	
+	 public static RequestStatus getInit(){
+	    	return RequestStatus.values()[0];
+	    }
     
 }

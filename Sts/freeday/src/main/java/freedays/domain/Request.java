@@ -1,5 +1,7 @@
 package freedays.domain;
 
+import java.util.Calendar;
+
 import freedays.util.MailUtils;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -11,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.ManyToOne;
 import javax.persistence.TypedQuery;
 
+import freedays.app.FDUser;
 import freedays.app.FreeDay;
 import javax.validation.constraints.NotNull;
 import javax.persistence.OneToOne;
@@ -113,6 +116,17 @@ public class Request {
         q.setParameter("fduser", fdUser);
         q.setParameter("status", status);
         return q.getSingleResult();
+		
+	}
+	
+	public static void create(Calendar date, String username) {
+		Request req = new Request();
+		req.setStatus(RequestStatus.getInit());
+		req.setAppreguser(FDUser.findFDUserByUsername(username));
+		req.setRequestable(FreeDay.createFreeDay(date));
+		System.out.println(req);
+		req.persist();
+		req.init();
 		
 	}
 }
