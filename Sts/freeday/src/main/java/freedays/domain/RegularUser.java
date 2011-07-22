@@ -5,6 +5,7 @@ import freedays.util.MailUtils;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -225,5 +226,10 @@ public class RegularUser implements Serializable {
 	        TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.username = :username ", RegularUser.class);
 	        q.setParameter("username", username);
 	        return q;
+	}
+
+	public static Collection<RegularUser> findAllRegularUsersUnasociated() {
+		return entityManager().createQuery("SELECT o FROM RegularUser o WHERE o.id NOT IN (SELECT f.regularUser FROM FDUser f) ",
+				RegularUser.class).getResultList();
 	}
 }
