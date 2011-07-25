@@ -35,3 +35,8 @@ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(115,1);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(116,3);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(117,4);
 
+delete from `approval_strategy`
+INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("LevelTop",12,0,null);
+INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("Level1",13,0,12);
+
+

@@ -10,6 +10,8 @@ import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
 import freedays.domain.RequestBean;
 
+import org.joda.time.format.DateTimeFormat;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,10 +28,14 @@ public class RequestController {
 	
 	@RequestMapping(params = "form", method = RequestMethod.GET)
     public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
-        uiModel.addAttribute("request", new RequestBean());
+        uiModel.addAttribute("reqbean", new RequestBean());
+        addDateTimeFormatPatterns(uiModel);
         String username = httpServletRequest.getUserPrincipal().getName();
+        
+        //TODO: place this in FDUser functionality
         FDUser aru = FDUser.findFDUserByUsername(username);
         uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
+        System.out.println("testing");
         return "requests/request";
     }
 
@@ -37,7 +43,7 @@ public class RequestController {
     public String create(@Valid RequestBean request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
         	System.out.println("ciuyciulete");
-            uiModel.addAttribute("request", request);
+            uiModel.addAttribute("reqbean", request);
             return "requests/request";
         }
         System.out.println("cacenflitz");
@@ -65,4 +71,10 @@ public class RequestController {
         request.persist();
         return "redirect:/requests/" + encodeUrlPathSegment(request.getId().toString(), httpServletRequest);
     }
+	
+    void addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("request_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+    }
+	
+	
 }

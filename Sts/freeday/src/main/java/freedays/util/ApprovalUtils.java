@@ -7,7 +7,8 @@ import freedays.domain.ApprovalStrategy;
 
 public class ApprovalUtils {
 	public static ApprovalStrategy getDefaultApprovalStrategy(){
-		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-FreeDaysApprovalStrategy.xml");
-		return (ApprovalStrategy) ac.getBean("level1");
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-FreeDaysApprovalStrategy.xml");
+//		return (ApprovalStrategy) ac.getBean("level1");
+		return null;
 	}
 }

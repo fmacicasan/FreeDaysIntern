@@ -134,6 +134,7 @@ public class RegularUser implements Serializable {
     public static TypedQuery<RegularUser> findRegularUsersByUsernameAndPasswordEquals(String username, String password) {
         if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         if (password == null || password.length() == 0) throw new IllegalArgumentException("The password argument is required");
+        System.out.println("cucuriguuuu!!!");
         EntityManager em = RegularUser.entityManager();
         TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.username = :username AND o.password = :password", RegularUser.class);
         q.setParameter("username", username);

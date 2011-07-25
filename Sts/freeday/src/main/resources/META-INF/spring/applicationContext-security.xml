@@ -28,7 +28,8 @@ class="freedays.controller.AuthentificationController">
     
      <authentication-provider ref="AuthenticationController">
      	 <password-encoder hash="sha-256"/>
-     	 <jdbc-user-service data-source-ref="dataSource" authorities-by-username-query="select u.username, app.roles from RegularUser u, ApplicationRegularUser app, FDUser fd where u.id = fd.id and app.id = fd.application_regular_user and u.id = ?" users-by-username-query="select username,password from RegularUser where username = ?"/>
+     	 <jdbc-user-service data-source-ref="dataSource"  />
+     	 <!-- users-by-username-query="SELECT username,password,activ FROM RegularUser WHERE username = ?" authorities-by-username-query="select u.username, app.roles from RegularUser u, ApplicationRegularUser app, FDUser fd where u.id = fd.id and app.id = fd.application_regular_user and u.id = ?"-->
      </authentication-provider>
 </authentication-manager>
 

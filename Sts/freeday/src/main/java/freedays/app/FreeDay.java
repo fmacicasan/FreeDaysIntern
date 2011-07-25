@@ -45,10 +45,11 @@ public class FreeDay {
     	return String.format("%1$tA, %1$te %1$tB %1$tY", this.requestdate);
     }
     
-    public static FreeDay createFreeDay(Calendar date){
+    public static FreeDay createPersistentFreeDay(Calendar date){
     	FreeDay fd = new FreeDay();
     	fd.setRequestdate(date);
-    	fd.setApproval(ApprovalUtils.getDefaultApprovalStrategy());
+    	fd.setApproval(AppStrategL1.getDefaultInitialStrateg());
+    	fd.persist();
     	return fd;
     }
 }

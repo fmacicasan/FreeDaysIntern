@@ -123,7 +123,7 @@ public class Request {
 		Request req = new Request();
 		req.setStatus(RequestStatus.getInit());
 		req.setAppreguser(FDUser.findFDUserByUsername(username));
-		req.setRequestable(FreeDay.createFreeDay(date));
+		req.setRequestable(FreeDay.createPersistentFreeDay(date));
 		System.out.println(req);
 		req.persist();
 		req.init();

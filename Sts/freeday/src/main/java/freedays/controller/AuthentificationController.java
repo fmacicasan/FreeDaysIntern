@@ -30,7 +30,6 @@ import freedays.domain.RegularUser;
 
 public class AuthentificationController extends
 		AbstractUserDetailsAuthenticationProvider  {
-	private RegularUser regularUser;
 
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
@@ -49,7 +48,7 @@ public class AuthentificationController extends
 		}
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		try {
-			regularUser = RegularUser
+			RegularUser regularUser = RegularUser
 					.findRegularUsersByUsernameAndPasswordEquals(username,
 							password).getSingleResult();
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
