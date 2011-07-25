@@ -3,10 +3,8 @@
 
 package freedays.app;
 
-import freedays.app.FreeDayDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +16,6 @@ privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
     declare @type: FreeDayIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
     declare @type: FreeDayIntegrationTest: @Transactional;
-    
-    @Autowired
-    private FreeDayDataOnDemand FreeDayIntegrationTest.dod;
     
     @Test
     public void FreeDayIntegrationTest.testCountFreeDays() {
@@ -98,18 +93,6 @@ privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
         obj.persist();
         obj.flush();
         org.junit.Assert.assertNotNull("Expected 'FreeDay' identifier to no longer be null", obj.getId());
-    }
-    
-    @Test
-    public void FreeDayIntegrationTest.testRemove() {
-        freedays.app.FreeDay obj = dod.getRandomFreeDay();
-        org.junit.Assert.assertNotNull("Data on demand for 'FreeDay' failed to initialize correctly", obj);
-        java.lang.Long id = obj.getId();
-        org.junit.Assert.assertNotNull("Data on demand for 'FreeDay' failed to provide an identifier", id);
-        obj = freedays.app.FreeDay.findFreeDay(id);
-        obj.remove();
-        obj.flush();
-        org.junit.Assert.assertNull("Failed to remove 'FreeDay' with identifier '" + id + "'", freedays.app.FreeDay.findFreeDay(id));
     }
     
 }
