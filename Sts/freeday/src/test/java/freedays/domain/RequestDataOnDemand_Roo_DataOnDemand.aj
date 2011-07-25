@@ -26,6 +26,7 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
         setAppreguser(obj, index);
         setRequestable(obj, index);
         setStatus(obj, index);
+        setApprover(obj, index);
         return obj;
     }
     
@@ -42,6 +43,11 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     public void RequestDataOnDemand.setStatus(Request obj, int index) {
         freedays.app.RequestStatus status = freedays.app.RequestStatus.class.getEnumConstants()[0];
         obj.setStatus(status);
+    }
+    
+    public void RequestDataOnDemand.setApprover(Request obj, int index) {
+        freedays.domain.ApplicationRegularUser approver = null;
+        obj.setApprover(approver);
     }
     
     public Request RequestDataOnDemand.getSpecificRequest(int index) {

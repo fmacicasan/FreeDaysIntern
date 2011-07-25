@@ -1,6 +1,7 @@
 package freedays.domain;
 
 import java.util.Calendar;
+import java.util.List;
 
 import freedays.util.MailUtils;
 
@@ -43,6 +44,9 @@ public class Request {
     @Enumerated
     private RequestStatus status;
     
+    @ManyToOne
+    private ApplicationRegularUser approver;
+    
     public void init(){
     	if(RequestStatus.isInit(this.status)){
     		requestApproval();
@@ -77,8 +81,8 @@ public class Request {
     	return this.requestable.nextApproval();
     }
     private void requestApproval(){
-    	ApplicationRegularUser nextApprover = this.requestable.getApprover(this.appreguser);
-    	String mailTo = nextApprover.getRegularUser().getEmail();
+    	this.approver = this.requestable.getApprover(this.appreguser);
+    	String mailTo = this.approver.getRegularUser().getEmail();
     	StringBuilder sb = new StringBuilder();
     	sb.append(Request.FD_APPROVAL_REQ_CONTENT);
     	sb.append(this.toString());
@@ -119,14 +123,31 @@ public class Request {
 		
 	}
 	
-	public static void create(Calendar date, String username) {
+	public static void createPersistentReq(Calendar date, String username) {
 		Request req = new Request();
 		req.setStatus(RequestStatus.getInit());
 		req.setAppreguser(FDUser.findFDUserByUsername(username));
 		req.setRequestable(FreeDay.createPersistentFreeDay(date));
 		System.out.println(req);
-		req.persist();
 		req.init();
+		req.persist();
 		
+		
+	}
+
+	public static List<Request> findAllRequestsByUsername(String username) {
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username ", Request.class);
+        q.setParameter("username", username);
+        return q.getResultList();
+	}
+
+	public static Object findAllPendingApprovalsByUsername(String username) {
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username ", Request.class);
+        q.setParameter("username", username);
+        return q.getResultList();
 	}
 }

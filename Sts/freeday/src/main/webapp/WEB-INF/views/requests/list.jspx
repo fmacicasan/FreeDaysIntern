@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:sec="http://www.springframework.org/security/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_freedays_domain_Request" items="${requests}" z="5Qwdc4XMUgG47Qlt4p4E7Dv9w/8=">
-        <table:table data="${requests}" id="l_freedays_domain_Request" path="/requests" z="j77WCPJkYhAqlbyjpTKnFdol4wE=">
-            <table:column id="c_freedays_domain_Request_appreguser" property="appreguser" z="LxMf2kKeK05ERbejry2usKz92l4="/>
+    <page:list id="pl_freedays_domain_Request" items="${requests}" z="5Qwdc4XMUgG47Qlt4p4E7Dv9w/8=" >
+        <table:table data="${requests}" id="l_freedays_domain_Request" path="/requests" z="j77WCPJkYhAqlbyjpTKnFdol4wE="  >
+            <table:column id="c_freedays_domain_Request_appreguser" property="appreguser" z="LxMf2kKeK05ERbejry2usKz92l4=" />
             <table:column id="c_freedays_domain_Request_requestable" property="requestable" z="WvaaUHCu8+PdFPFbZtH7eUmoHhQ="/>
             <table:column id="c_freedays_domain_Request_status" property="status" z="/0j6Zu0EKj1TNhv30mUCaQ7sEP0="/>
+            <table:column id="c_freedays_domain_Request_approver" property="approver" z="Y8RzQ4a/FNn87HsgujZI0wi3pSg="/>
         </table:table>
     </page:list>
 </div>

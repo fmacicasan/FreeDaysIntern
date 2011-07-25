@@ -6,5 +6,6 @@
         <field:display field="appreguser" id="s_freedays_domain_Request_appreguser" object="${request}" z="Jwc8eOPnLFW2VfY96+B+cmsHVIk="/>
         <field:display field="requestable" id="s_freedays_domain_Request_requestable" object="${request}" z="4hi+FrjKAeXIEsimQWu8AHfWV1Q="/>
         <field:display field="status" id="s_freedays_domain_Request_status" object="${request}" z="RPStuM82/ATqK5kqJkOft1kjRyo="/>
+        <field:display field="approver" id="s_freedays_domain_Request_approver" object="${request}" z="iDwR2kruP7sD5+6o0ZLaLJxkakY="/>
     </page:show>
 </div>

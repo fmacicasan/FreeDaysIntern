@@ -13,6 +13,7 @@ import freedays.domain.RequestBean;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RooWebScaffold(path = "requests", formBackingObject = Request.class)
 @RequestMapping("/requests")
@@ -50,7 +52,7 @@ public class RequestController {
         
         //uiModel.asMap().clear();
         //request.persist();
-        Request.create(request.getDate(),httpServletRequest.getUserPrincipal().getName());
+        Request.createPersistentReq(request.getDate(),httpServletRequest.getUserPrincipal().getName());
         return "index";
     }
 
@@ -74,6 +76,19 @@ public class RequestController {
 	
     void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("request_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+    }
+    
+    @RequestMapping(params= "own", method = RequestMethod.GET)
+    public String listOwn(Model uiModel, Principal p){
+    	uiModel.addAttribute("requests",Request.findAllRequestsByUsername(p.getName()));
+    	return "requests/list";
+    }
+    
+    @Secured({"ROLE_REQUESTGRANTER"})
+    @RequestMapping(params= "approve", method = RequestMethod.GET)
+    public String listApprove(Model uiModel, Principal p){
+    	uiModel.addAttribute("requests",Request.findAllPendingApprovalsByUsername(p.getName()));
+    	return "requests/list";
     }
 	
 	

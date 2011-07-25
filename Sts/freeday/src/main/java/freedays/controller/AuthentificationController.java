@@ -51,6 +51,7 @@ public class AuthentificationController extends
 			RegularUser regularUser = RegularUser
 					.findRegularUsersByUsernameAndPasswordEquals(username,
 							password).getSingleResult();
+			System.out.println("terminator salvation!!");
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
 			Set<AdvancedUserRole> set = ApplicationRegularUser.getAllRolesByUsername(username);
 			for (AdvancedUserRole aur : set) {

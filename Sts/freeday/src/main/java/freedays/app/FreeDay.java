@@ -23,7 +23,7 @@ public class FreeDay {
 
     @NotNull
     @Future
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
     private Calendar requestdate;
 

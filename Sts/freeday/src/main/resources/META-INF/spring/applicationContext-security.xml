@@ -18,8 +18,9 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <intercept-url pattern="/**" access="permitAll" />
        
     </http>
-
-
+    
+	<global-method-security  secured-annotations="enabled" pre-post-annotations="enabled"/>
+	
 <beans:bean name="AuthenticationController"
 class="freedays.controller.AuthentificationController">
 </beans:bean>
