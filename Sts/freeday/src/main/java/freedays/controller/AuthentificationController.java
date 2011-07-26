@@ -54,6 +54,7 @@ public class AuthentificationController extends
 			System.out.println("terminator salvation!!");
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
 			Set<AdvancedUserRole> set = ApplicationRegularUser.getAllRolesByUsername(username);
+			System.out.println("problemici");
 			for (AdvancedUserRole aur : set) {
 				authorities.add(new GrantedAuthorityImpl(aur.toString()));
 			}

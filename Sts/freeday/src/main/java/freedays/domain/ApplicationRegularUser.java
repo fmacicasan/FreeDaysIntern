@@ -1,5 +1,6 @@
 package freedays.domain;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -18,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import freedays.domain.RequestGranter;
@@ -48,13 +50,19 @@ public abstract class ApplicationRegularUser {
     //@Transactional
 	public static Set<AdvancedUserRole> getAllRolesByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
-        EntityManager em = RegularUser.entityManager();
-        TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o JOIN FETCH o.roles WHERE o.regularUser.username = :username", ApplicationRegularUser.class);
-        q.setParameter("username", username);
-        ApplicationRegularUser aru = q.getSingleResult();
-        //System.out.println("Aruu coming!!"+aru.toString());
-        Set<AdvancedUserRole> set = aru.getRoles();
-        return set;
+		Set<AdvancedUserRole> set;
+		try{
+			EntityManager em = RegularUser.entityManager();
+	        TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o JOIN FETCH o.roles WHERE o.regularUser.username = :username", ApplicationRegularUser.class);
+	        q.setParameter("username", username);
+	        ApplicationRegularUser aru = q.getSingleResult();
+	        //System.out.println("Aruu coming!!"+aru.toString());
+	        set = aru.getRoles();
+        }catch(EmptyResultDataAccessException  e){
+        	set = new HashSet<AdvancedUserRole>();
+        	//System.out.println("testing:"+e);
+        }
+	    return set;
 	}
 
 	public static Collection<ApplicationRegularUser> findAllRequestGranters() {

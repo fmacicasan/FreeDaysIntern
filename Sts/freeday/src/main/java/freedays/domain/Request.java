@@ -61,6 +61,7 @@ public class Request {
     		setApproveStatus();
     		informApproveRequest();
     	}
+    	
     }
     public void deny(){
     	setDenyStatus();
@@ -154,5 +155,21 @@ public class Request {
 		return Request.findAllRequestsByUsername(aru.getRegularUser().getUsername()).size()
 				- Request.countRequests(aru, RequestStatus.GRANTED)
 				- Request.countRequests(aru, RequestStatus.REJECTED);
+	}
+
+	public static void approve(Long id2) {
+		if (id2 == null) throw new IllegalArgumentException("The id argument is required");
+		Request req = Request.findRequest(id2);
+		req.approve();
+		req.persist();
+	}
+
+	public static void deny(Long id2) {
+		if (id2 == null) throw new IllegalArgumentException("The id argument is required");
+		Request req = Request.findRequest(id2);
+		req.deny();
+		//TODO: who should call the persisting?? the request or the calling object?
+		req.persist();
+		
 	}
 }
