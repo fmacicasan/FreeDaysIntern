@@ -10,6 +10,8 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,7 @@ import org.springframework.web.util.WebUtils;
 @Controller
 public class RegularUserController {
 
+	@PreAuthorize("hasRole('ROLE_ADMIN'")
 	@RequestMapping(params = "search", method = RequestMethod.GET)
 	public String createSearch(Model uiModel) {
 		// uiModel.addAttribute("regularUser", new RegularUser());
@@ -37,6 +40,7 @@ public class RegularUserController {
 		return "regularusers/search";
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN'")
 	@RequestMapping(params = "search", method = RequestMethod.POST)
 	public String doSearch(@Valid Search search, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {

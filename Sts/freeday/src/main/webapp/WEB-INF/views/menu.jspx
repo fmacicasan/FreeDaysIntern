@@ -59,12 +59,16 @@
 	            <menu:item id="i_regular_user_update" messageCode="global_menu" url="/updateRegularUsers" z=""/>
 	        </menu:category>
          </sec:authorize>
-        <sec:authorize ifAnyGranted="ROLE_USER, ROLE_FDADMIN">
+        <sec:authorize ifAnyGranted="ROLE_USER, ROLE_FDADMIN, ROLE_REQUESTGRANTER">
 	        <menu:category id="c_request" z="K3H2XFvnqlPuvp7YsYXLCJyWwHQ=">
-	            <sec:authorize ifAllGranted="ROLE_USER">
+	              <sec:authorize ifAllGranted="ROLE_USER">
 	            	<menu:item id="i_request_new" messageCode="global_menu_new" url="/requests?form" z="vXscIy5n1QOw1AlVbhpVIpJCppg="/>
+	            	<menu:item id="i_request_list_own" messageCode="global_menu_list" url="/requests?own"  z="user-managed" />
 	            </sec:authorize>
-		        <sec:authorize ifAllGranted="ROLE_FDADMIN">
+	            <sec:authorize ifAllGranted="ROLE_REQUESTGRANTER">
+	            	<menu:item id="i_request_list_approve" messageCode="global_menu_list" url="/requests?approve"  z="user-managed" />
+	            </sec:authorize>
+		        <sec:authorize ifAllGranted="ROLE_FDADMIN" >
 	            	<menu:item id="i_request_list" messageCode="global_menu_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="zR+uAsU8p+xT+34YNGm0eI2d/Dk="/>
 	         	</sec:authorize>
 	        </menu:category>

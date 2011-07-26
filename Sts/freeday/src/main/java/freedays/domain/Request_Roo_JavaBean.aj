@@ -33,4 +33,12 @@ privileged aspect Request_Roo_JavaBean {
         this.status = status;
     }
     
+    public ApplicationRegularUser Request.getApprover() {
+        return this.approver;
+    }
+    
+    public void Request.setApprover(ApplicationRegularUser approver) {
+        this.approver = approver;
+    }
+    
 }

@@ -1,5 +1,8 @@
 package freedays.domain;
 
+import java.util.Calendar;
+import java.util.List;
+
 import freedays.util.MailUtils;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -11,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.ManyToOne;
 import javax.persistence.TypedQuery;
 
+import freedays.app.FDUser;
 import freedays.app.FreeDay;
 import javax.validation.constraints.NotNull;
 import javax.persistence.OneToOne;
@@ -40,6 +44,9 @@ public class Request {
     @Enumerated
     private RequestStatus status;
     
+    @ManyToOne
+    private ApplicationRegularUser approver;
+
     public void init(){
     	if(RequestStatus.isInit(this.status)){
     		requestApproval();
@@ -74,8 +81,8 @@ public class Request {
     	return this.requestable.nextApproval();
     }
     private void requestApproval(){
-    	ApplicationRegularUser nextApprover = this.requestable.getApprover(this.appreguser);
-    	String mailTo = nextApprover.getRegularUser().getEmail();
+    	this.approver = this.requestable.getApprover(this.appreguser);
+    	String mailTo = this.approver.getRegularUser().getEmail();
     	StringBuilder sb = new StringBuilder();
     	sb.append(Request.FD_APPROVAL_REQ_CONTENT);
     	sb.append(this.toString());
@@ -106,13 +113,46 @@ public class Request {
     	return sb.toString().toUpperCase();
     }
 
-	public static long countGrantedRequests(ApplicationRegularUser fdUser, RequestStatus status) {
+	public static long countRequests(ApplicationRegularUser fdUser, RequestStatus status) {
 		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
 		EntityManager em = Request.entityManager();
-        TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser = :fduser AND status = :status", Long.class);
-        q.setParameter("fduser", fdUser);
+        TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser.regularUser.username = :fduser AND status = :status", Long.class);
+        q.setParameter("fduser", fdUser.getRegularUser().getUsername());
         q.setParameter("status", status);
-        return q.getSingleResult();
+        return q.getSingleResult();	
+	}
+	
+	public static void createPersistentReq(Calendar date, String username) {
+		Request req = new Request();
+		req.setStatus(RequestStatus.getInit());
+		req.setAppreguser(FDUser.findFDUserByUsername(username));
+		req.setRequestable(FreeDay.createPersistentFreeDay(date));
+		System.out.println(req);
+		req.init();
+		req.persist();
 		
+		
+	}
+
+	public static List<Request> findAllRequestsByUsername(String username) {
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username ", Request.class);
+        q.setParameter("username", username);
+        return q.getResultList();
+	}
+
+	public static Object findAllPendingApprovalsByUsername(String username) {
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username ", Request.class);
+        q.setParameter("username", username);
+        return q.getResultList();
+	}
+
+	public static long countActiveRequests(FDUser aru) {
+		return Request.findAllRequestsByUsername(aru.getRegularUser().getUsername()).size()
+				- Request.countRequests(aru, RequestStatus.GRANTED)
+				- Request.countRequests(aru, RequestStatus.REJECTED);
 	}
 }

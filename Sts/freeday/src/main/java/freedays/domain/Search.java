@@ -1,6 +1,7 @@
 package freedays.domain;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.util.StringUtils;
 
 /**
  * Wrapper for search-ale
@@ -10,7 +11,6 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 @RooJavaBean
 public class Search {
 
-	
 	private String searchKey;
 	private String searchValue;
 	
@@ -38,24 +38,13 @@ public class Search {
 	 * @return
 	 */
 	public boolean isValid(){
-		return  Search.isStringValid(this.searchKey) && Search.isStringValid(this.searchValue);
+		return StringUtils.hasText(this.searchKey) && StringUtils.hasText(this.searchValue);
 	}
 	
 	public boolean isNotValid(){
 		return !isValid();
 	}
 	
-	/**
-	 * Checks validity of string (not null, not empty)
-	 * TODO: add not whitespace
-	 * @param str the string to be checked
-	 * @return true for valid / false for invalid
-	 */
-	public static boolean isStringValid(String str){
-		if(str==null)return false;
-		if(str.isEmpty())return false;
-		return true;
-	}
 	
 	
 	

@@ -52,7 +52,7 @@ public abstract class ApplicationRegularUser {
         TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o JOIN FETCH o.roles WHERE o.regularUser.username = :username", ApplicationRegularUser.class);
         q.setParameter("username", username);
         ApplicationRegularUser aru = q.getSingleResult();
-        //System.out.println(aru.toString());
+        //System.out.println("Aruu coming!!"+aru.toString());
         Set<AdvancedUserRole> set = aru.getRoles();
         return set;
 	}
