@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:spring="http://www.springframework.org/tags" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_freedays_domain_Request" object="${request}" path="/requests" z="G3xFi2PczXUVkUmQI82Ufrx0Krg=">
@@ -8,4 +8,14 @@
         <field:display field="status" id="s_freedays_domain_Request_status" object="${request}" z="RPStuM82/ATqK5kqJkOft1kjRyo="/>
         <field:display field="approver" id="s_freedays_domain_Request_approver" object="${request}" z="iDwR2kruP7sD5+6o0ZLaLJxkakY="/>
     </page:show>
+    
+    <spring:url value="/requests/${itemId}?eval" var="form_request" />
+	<form name="input_req" action="${fn:escapeXml(form_request)}" method="POST">
+		<div class="submit">
+			<spring:message code="request_approve_button" var="request_approve_label" htmlEscape="false" />
+			<input name="approve" type="submit" value="${fn:escapeXml(request_approve_label)}" />
+			<spring:message code="request_deny_button" var="request_deny_label" htmlEscape="false" />
+			<input name="deny" type="submit" value="${fn:escapeXml(request_deny_label)}" />
+		</div>
+	</form>
 </div>

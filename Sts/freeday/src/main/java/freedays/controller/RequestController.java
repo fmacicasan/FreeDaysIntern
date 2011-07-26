@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,6 +57,42 @@ public class RequestController {
         Request.createPersistentReq(request.getDate(),httpServletRequest.getUserPrincipal().getName());
         return "index";
     }
+	
+//	@RequestMapping(value = "/{id}", params = "eval", method = RequestMethod.POST)
+//	public String evalRequest(@PathVariable("id") Long id,@RequestParam(value="approve") String approve,@RequestParam(value="deny", required=false) String deny, Model uiModel){
+//			
+//		if(approve != null){
+//			Request.approve(id);
+//		} else{
+//			if(deny != null){
+//				Request.deny(id);
+//			} else {
+//				System.out.println("Eroriuy!");
+//			}
+//		}
+//		
+//		return "redirect:/requests?approve";
+//	}
+	
+	@RequestMapping(value = "/{id}", params = {"eval","approve"}, method = RequestMethod.POST)
+	public String evalRequestApprove(@PathVariable("id") Long id, Model uiModel){
+			
+		Request.approve(id);
+		System.out.println("Approved!");
+		
+		uiModel.asMap().clear();
+		return "redirect:/requests?approve";
+	}
+	
+	@RequestMapping(value = "/{id}", params = {"eval","deny"}, method = RequestMethod.POST)
+	public String evalRequestDeny(@PathVariable("id") Long id, Model uiModel){
+		
+		Request.deny(id);
+		System.out.println("Eroriuy!");
+		
+		uiModel.asMap().clear();
+		return "redirect:/requests?approve";
+	}
 
 
 	@RequestMapping(params = "for", method = RequestMethod.GET)

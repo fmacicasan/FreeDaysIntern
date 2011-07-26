@@ -6,6 +6,7 @@ import org.springframework.format.support.FormattingConversionServiceFactoryBean
 import org.springframework.roo.addon.web.mvc.controller.RooConversionService;
     
 import freedays.app.FDUser;
+import freedays.app.FreeDay;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
@@ -64,6 +65,15 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     	};
     }
     
+    Converter<FreeDay, String> getFreeDayConverter(){
+    	return new Converter<FreeDay, String>(){
+			@Override
+			public String convert(FreeDay source) {
+				return source.toString();
+			}
+    	};
+    }
+    
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
@@ -72,6 +82,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		registry.addConverter(getAdvancedUserRoleSetConverter());
         registry.addConverter(getApplicationRegularUserConverter());
         registry.addConverter(getAdvancedUserRoleConverter());
+        registry.addConverter(getFreeDayConverter());
 	}
 	
 
