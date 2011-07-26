@@ -19,9 +19,10 @@ public class FreeDayDataOnDemand {
 		Calendar requestdate = new GregorianCalendar(instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH) + 1);
 		fd.setRequestdate(requestdate);
 		
-		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-FreeDaysApprovalStrategy.xml");
-		ApprovalStrategy app = (ApprovalStrategy) ac.getBean("level1");
-		fd.setApproval(app);
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-FreeDaysApprovalStrategy.xml");
+//		ApprovalStrategy app = (ApprovalStrategy) ac.getBean("level1");
+//		fd.setApproval(app);
+		fd.setApproval(AppStrategL1.getDefaultInitialStrateg());
 //		ApprovalStrategy app2 = new AppStrategLTop();
 //		app2.setSuccesor(null);
 //		ApprovalStrategy app1 = new  AppStrategL1();
