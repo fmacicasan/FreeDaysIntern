@@ -46,7 +46,7 @@ public class Request {
     
     @ManyToOne
     private ApplicationRegularUser approver;
-    
+
     public void init(){
     	if(RequestStatus.isInit(this.status)){
     		requestApproval();
@@ -113,14 +113,13 @@ public class Request {
     	return sb.toString().toUpperCase();
     }
 
-	public static long countGrantedRequests(ApplicationRegularUser fdUser, RequestStatus status) {
+	public static long countRequests(ApplicationRegularUser fdUser, RequestStatus status) {
 		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
 		EntityManager em = Request.entityManager();
-        TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser = :fduser AND status = :status", Long.class);
-        q.setParameter("fduser", fdUser);
+        TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser.regularUser.username = :fduser AND status = :status", Long.class);
+        q.setParameter("fduser", fdUser.getRegularUser().getUsername());
         q.setParameter("status", status);
-        return q.getSingleResult();
-		
+        return q.getSingleResult();	
 	}
 	
 	public static void createPersistentReq(Calendar date, String username) {
@@ -149,5 +148,11 @@ public class Request {
         TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username ", Request.class);
         q.setParameter("username", username);
         return q.getResultList();
+	}
+
+	public static long countActiveRequests(FDUser aru) {
+		return Request.findAllRequestsByUsername(aru.getRegularUser().getUsername()).size()
+				- Request.countRequests(aru, RequestStatus.GRANTED)
+				- Request.countRequests(aru, RequestStatus.REJECTED);
 	}
 }

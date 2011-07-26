@@ -7,4 +7,6 @@
     	<field:input field="reason" id="fc_freedays_domain_requestbean_reason"></field:input>
     </form:create>
     <spring:message arguments="${remainingDaysCount}" code="request_remainingdays"/>
+	<br />
+    <spring:message arguments="${activeRequestCount}" code="request_activerequests"/>
 </div>

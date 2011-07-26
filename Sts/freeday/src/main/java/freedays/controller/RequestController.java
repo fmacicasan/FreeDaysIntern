@@ -37,6 +37,7 @@ public class RequestController {
         //TODO: place this in FDUser functionality
         FDUser aru = FDUser.findFDUserByUsername(username);
         uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
+        uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
         System.out.println("testing");
         return "requests/request";
     }

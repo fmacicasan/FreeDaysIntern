@@ -67,11 +67,11 @@ public class FDUser extends ApplicationRegularUser {
 			now.set(Calendar.DAY_OF_YEAR, 1);
 			time -= now.getTimeInMillis();
 		}
-		
+
 		remainingDays += TimeUnit.MILLISECONDS.toDays(time) * (this.maxFreeDays-this.initDays) / now.getActualMaximum(Calendar.DAY_OF_YEAR);
-		
-		remainingDays -= Request.countGrantedRequests(this,RequestStatus.GRANTED);
-		
+
+		remainingDays -= Request.countRequests(this, RequestStatus.GRANTED);
+
 		return remainingDays;
 		
 	}

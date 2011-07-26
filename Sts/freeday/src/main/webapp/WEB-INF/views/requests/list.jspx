@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:sec="http://www.springframework.org/security/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:sec="http://www.springframework.org/security/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    
+    
+    <c:set var="var_delete" value="false" />
+    <c:set var="var_create" value="false" />
+    <c:set var="var_update" value="false" />
+    
+    <sec:authorize ifAnyGranted="ROLE_REQUESTGRANTER">
+    	<c:set var="var_update" value="true" />
+    </sec:authorize>
+    
+
     <page:list id="pl_freedays_domain_Request" items="${requests}" z="5Qwdc4XMUgG47Qlt4p4E7Dv9w/8=" >
-        <table:table data="${requests}" id="l_freedays_domain_Request" path="/requests" z="j77WCPJkYhAqlbyjpTKnFdol4wE="  >
+        <table:table data="${requests}" id="l_freedays_domain_Request" path="/requests" z="j77WCPJkYhAqlbyjpTKnFdol4wE=" delete="${var_delete}" create="${var_create}" update="${var_update}" >
             <table:column id="c_freedays_domain_Request_appreguser" property="appreguser" z="LxMf2kKeK05ERbejry2usKz92l4=" />
             <table:column id="c_freedays_domain_Request_requestable" property="requestable" z="WvaaUHCu8+PdFPFbZtH7eUmoHhQ="/>
             <table:column id="c_freedays_domain_Request_status" property="status" z="/0j6Zu0EKj1TNhv30mUCaQ7sEP0="/>
