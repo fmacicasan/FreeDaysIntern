@@ -10,6 +10,7 @@ import freedays.app.FDUser;
 import freedays.domain.RegularUser;
 import javax.persistence.ManyToOne;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 import freedays.domain.AdvancedUserRole;
@@ -31,9 +32,11 @@ import javax.persistence.OneToMany;
 @RooJavaBean
 @RooToString
 @RooEntity(inheritanceType = "TABLE_PER_CLASS")
-public abstract class ApplicationRegularUser {
+public abstract class ApplicationRegularUser  implements Serializable{
 
-    @ManyToOne
+	private static final long serialVersionUID = 1L;
+
+	@ManyToOne
     private RegularUser regularUser;
 
     @ManyToMany(cascade = CascadeType.ALL)//, fetch=FetchType.EAGER 

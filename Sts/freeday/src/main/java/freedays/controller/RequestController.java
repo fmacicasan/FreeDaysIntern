@@ -63,7 +63,7 @@ public class RequestController {
         
         //uiModel.asMap().clear();
         //request.persist();
-        Request.createPersistentReq(request.getDate(),httpServletRequest.getUserPrincipal().getName());
+        Request.createPersistentReq(request.getReqdate(),httpServletRequest.getUserPrincipal().getName());
         return "index";
     }
 	

@@ -1,12 +1,15 @@
 package freedays.controller;
 
 import freedays.util.MailUtils;
+import freedays.validation.RegularUserValidator;
 import freedays.domain.RegularUser;
 import freedays.domain.Search;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
@@ -96,6 +99,12 @@ public class RegularUserController {
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/regularusers";
     }
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model uiModel) {
+      
+        return "redirect:/login";
+    }
 
 	@RequestMapping(method = RequestMethod.POST)
     public String create(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -107,9 +116,19 @@ public class RegularUserController {
         uiModel.asMap().clear();
         Principal p = httpServletRequest.getUserPrincipal();
         regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
-        regularUser.persist();
-        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
-    }
+       
+        if( RegularUserValidator.validate(regularUser) ){
+	        regularUser.persist();
+	        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
+	        }
+        else{
+        	httpServletRequest.setAttribute("errorMessage","Email already taken."); 
+        	uiModel.addAttribute("regularUser", regularUser);
+            addDateTimeFormatPatterns(uiModel);
+        	return "regularusers/create";
+        }
+        
+	}
 
 	@RequestMapping(method = RequestMethod.PUT)
     public String update(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {

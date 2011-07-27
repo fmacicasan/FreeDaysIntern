@@ -12,9 +12,9 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 public class RequestBean {
 	
 	@Future
-	@NotNull
 	@DateTimeFormat(style = "S-")
-	private Calendar date;
+	@NotNull
+	private Calendar reqdate;
 	
 	private String reason;
 }

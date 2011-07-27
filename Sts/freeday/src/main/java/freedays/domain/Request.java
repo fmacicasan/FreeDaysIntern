@@ -1,5 +1,6 @@
 package freedays.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,7 +26,7 @@ import javax.persistence.Enumerated;
 @RooJavaBean
 @RooToString
 @RooEntity
-public class Request {
+public class Request   implements Serializable{
 
 	
 	private static final String FD_APPROVAL_REQ_SUBJECT = "FreeDays - Approval Request";
