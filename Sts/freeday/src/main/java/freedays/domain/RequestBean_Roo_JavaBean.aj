@@ -8,12 +8,12 @@ import java.util.Calendar;
 
 privileged aspect RequestBean_Roo_JavaBean {
     
-    public Calendar RequestBean.getDate() {
-        return this.date;
+    public Calendar RequestBean.getReqdate() {
+        return this.reqdate;
     }
     
-    public void RequestBean.setDate(Calendar date) {
-        this.date = date;
+    public void RequestBean.setReqdate(Calendar reqdate) {
+        this.reqdate = reqdate;
     }
     
     public String RequestBean.getReason() {

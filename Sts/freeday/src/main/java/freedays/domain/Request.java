@@ -1,5 +1,6 @@
 package freedays.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,7 +26,7 @@ import javax.persistence.Enumerated;
 @RooJavaBean
 @RooToString
 @RooEntity
-public class Request {
+public class Request   implements Serializable{
 
 	
 	private static final String FD_APPROVAL_REQ_SUBJECT = "FreeDays - Approval Request";
@@ -34,6 +35,9 @@ public class Request {
 	private static final String FD_APPROVAL_REQ_CONTENT = "Hello! you have new Request to approve!!\n";
 	private static final String FD_INFORM_CONTENT_DENY = "Your Request not approved!";
 	private static final String FD_INFORM_CONTENT_APPROVE = "Your Request approved!";
+	private static final String FD_INFORM_CONTENT_CANCEL = "Request canceled!";
+	
+	public static boolean DEBUG = false;
     
 	@ManyToOne
     private ApplicationRegularUser appreguser;
@@ -49,12 +53,19 @@ public class Request {
 
     public void init(){
     	if(RequestStatus.isInit(this.status)){
-    		requestApproval();
+    		//ApplicationRegularUser oldApprover = this.approver;
+    		advanceApprover();
+    		if(this.approver != null){// && !this.approver.isSame(oldApprover)){
+    			requestApproval();
+    		} else {
+    			setApproveStatus();
+        		informApproveRequest();
+    		}
     	}
     }
     
     public void approve(){
-    	if(advanceApproval()){
+    	if(canAdvance()){
     		advanceStatus();
     		requestApproval(); 	
     	} else {
@@ -63,9 +74,15 @@ public class Request {
     	}
     	
     }
+    
     public void deny(){
     	setDenyStatus();
     	informDenyRequest();
+    }
+      
+    public void cancel(){
+    	setCancelStatus();
+    	informCancelRequest();
     }
     
     private void setDenyStatus(){
@@ -74,15 +91,29 @@ public class Request {
     private void setApproveStatus(){
     	this.status = this.status.setGranted();
     }
+    private void setCancelStatus(){
+    	this.status = this.status.setCanceled();
+    }
     private void advanceStatus(){
     	this.status = this.status.getNext();
     }
-    
+    private boolean canAdvance(){
+    	if(advanceApproval()){
+    		ApplicationRegularUser oldApprover = this.approver;
+    		advanceApprover();
+    		return this.approver != null && !this.approver.isSame(oldApprover); //TODO check also if the approver changed, if not it is the same and shouldn't advance  
+    	}
+    	return false;
+    	
+    }
     private boolean advanceApproval(){
     	return this.requestable.nextApproval();
     }
-    private void requestApproval(){
+    private void advanceApprover(){
     	this.approver = this.requestable.getApprover(this.appreguser);
+    }
+    private void requestApproval(){
+    	
     	String mailTo = this.approver.getRegularUser().getEmail();
     	StringBuilder sb = new StringBuilder();
     	sb.append(Request.FD_APPROVAL_REQ_CONTENT);
@@ -91,10 +122,21 @@ public class Request {
     }
     
     private void informApproveRequest(){
-    	this.informRequest(Request.FD_INFORM_CONTENT_APPROVE);
+    	if(!Request.DEBUG){
+    		this.informRequest(Request.FD_INFORM_CONTENT_APPROVE);
+    	}
+    		
     }
     private void informDenyRequest(){
-    	this.informRequest(Request.FD_INFORM_CONTENT_DENY);
+    	if(!Request.DEBUG){
+    		this.informRequest(Request.FD_INFORM_CONTENT_DENY);
+    	}	
+    }
+    
+    private void informCancelRequest(){
+    	if(!Request.DEBUG){
+    		this.informRequest(Request.FD_INFORM_CONTENT_CANCEL);
+    	}
     }
     private void informRequest(String msg){
     	StringBuilder sb = new StringBuilder();
@@ -131,8 +173,6 @@ public class Request {
 		System.out.println(req);
 		req.init();
 		req.persist();
-		
-		
 	}
 
 	public static List<Request> findAllRequestsByUsername(String username) {
@@ -143,7 +183,7 @@ public class Request {
         return q.getResultList();
 	}
 
-	public static Object findAllPendingApprovalsByUsername(String username) {
+	public static List<Request> findAllPendingApprovalsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
         TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username ", Request.class);

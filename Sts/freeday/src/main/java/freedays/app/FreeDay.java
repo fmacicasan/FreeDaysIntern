@@ -3,6 +3,8 @@ package freedays.app;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import java.io.Serializable;
 import java.util.Calendar;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Future;
@@ -19,7 +21,7 @@ import javax.persistence.ManyToOne;
 @RooJavaBean
 @RooToString
 @RooEntity
-public class FreeDay {
+public class FreeDay  implements Serializable {
 
     @NotNull
     @Future

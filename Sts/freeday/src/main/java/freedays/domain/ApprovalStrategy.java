@@ -1,5 +1,7 @@
 package freedays.domain;
 
+import java.io.Serializable;
+
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -14,7 +16,7 @@ import javax.persistence.OneToOne;
 @RooEntity(inheritanceType = "SINGLE_TABLE")
 @DiscriminatorColumn(name="strategy_type",discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("AdvancedUserRole")
-public abstract class ApprovalStrategy {
+public abstract class ApprovalStrategy   implements Serializable{
 
     @OneToOne
     private freedays.domain.ApprovalStrategy succesor;

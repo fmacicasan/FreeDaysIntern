@@ -1,6 +1,7 @@
 package freedays.controller;
 
 import freedays.util.MailUtils;
+import freedays.validation.RegularUserValidator;
 import freedays.domain.RegularUser;
 import freedays.domain.Search;
 
@@ -116,10 +117,18 @@ public class RegularUserController {
         Principal p = httpServletRequest.getUserPrincipal();
         regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
        
-        regularUser.persist();
+        if( RegularUserValidator.validate(regularUser) ){
+	        regularUser.persist();
+	        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
+	        }
+        else{
+        	httpServletRequest.setAttribute("errorMessage","Email already taken."); 
+        	uiModel.addAttribute("regularUser", regularUser);
+            addDateTimeFormatPatterns(uiModel);
+        	return "regularusers/create";
+        }
         
-        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
-    }
+	}
 
 	@RequestMapping(method = RequestMethod.PUT)
     public String update(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {

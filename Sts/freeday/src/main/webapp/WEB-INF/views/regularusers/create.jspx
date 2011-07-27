@@ -20,6 +20,7 @@
         <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" render="false" z="user-managed"/>
         <field:input field="usermodifier" id="c_freedays_domain_RegularUser_usermodifier"    render="false" z="user-managed"/>
+      ${errorMessage}
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_domain_RegularUser" render="${not empty dependencies}" z="OG4zIjNW8zaSGDZzxQ/R00+3U3U="/>
 </div>

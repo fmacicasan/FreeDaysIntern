@@ -16,6 +16,7 @@
 			<input name="approve" type="submit" value="${fn:escapeXml(request_approve_label)}" />
 			<spring:message code="request_deny_button" var="request_deny_label" htmlEscape="false" />
 			<input name="deny" type="submit" value="${fn:escapeXml(request_deny_label)}" />
+			
 		</div>
 	</form>
 </div>

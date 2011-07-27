@@ -1,5 +1,6 @@
 package freedays.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ import javax.persistence.ManyToMany;
 @RooEntity(inheritanceType="SINGLE_TABLE")
 @DiscriminatorColumn(name="roleType",discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("AdvancedUserRole")
-public class AdvancedUserRole {
+public class AdvancedUserRole  implements Serializable {
 
     @ManyToMany(cascade=CascadeType.ALL, mappedBy="roles")
     private Set<ApplicationRegularUser> appRegUsers = new HashSet<ApplicationRegularUser>();

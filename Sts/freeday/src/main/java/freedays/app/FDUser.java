@@ -7,6 +7,8 @@ import freedays.domain.Request;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
@@ -24,9 +26,12 @@ import javax.validation.constraints.Max;
 @RooJavaBean
 @RooToString
 @RooEntity
-public class FDUser extends ApplicationRegularUser {
+public class FDUser extends ApplicationRegularUser{
 
-    @NotNull
+
+	private static final long serialVersionUID = 1L;
+
+	@NotNull
     @Past
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
