@@ -1,27 +1,21 @@
 package freedays.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NonUniqueResultException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.util.StringUtils;
 
 import freedays.domain.AdvancedUserRole;
@@ -51,10 +45,11 @@ public class AuthentificationController extends
 			RegularUser regularUser = RegularUser
 					.findRegularUsersByUsernameAndPasswordEquals(username,
 							password).getSingleResult();
-			System.out.println("terminator salvation!!");
+			if (!regularUser.getActiv()){
+				throw new BadCredentialsException(
+					"You are not an active user");}
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
 			Set<AdvancedUserRole> set = ApplicationRegularUser.getAllRolesByUsername(username);
-			System.out.println("problemici");
 			for (AdvancedUserRole aur : set) {
 				authorities.add(new GrantedAuthorityImpl(aur.toString()));
 			}

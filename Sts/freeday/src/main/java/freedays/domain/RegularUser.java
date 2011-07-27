@@ -1,8 +1,10 @@
 package freedays.domain;
 
+import freedays.annotations.UniqueEmail;
 import freedays.util.MailUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
@@ -10,6 +12,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -31,6 +36,7 @@ import freedays.util.PhraseUtils;
 @RooJavaBean
 @RooToString
 @RooEntity
+//@UniqueEmail
 public class RegularUser implements Serializable {
 	
 	/**
@@ -196,9 +202,22 @@ public class RegularUser implements Serializable {
 	public static List<RegularUser> findRegularUserByEmail(String email) {
 		if (email == null || email.length() == 0) throw new IllegalArgumentException("The email argument is required");
         EntityManager em = RegularUser.entityManager();
-        TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.email = :email", RegularUser.class);
+        TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.email = :email ", RegularUser.class);
         q.setParameter("email", email);
-        return q.getResultList();
+        
+        List<RegularUser> list = new ArrayList<RegularUser>();
+        list.add(q.getSingleResult());
+        return list;
+	}
+	
+	@Transactional
+	public static long countRegularUserByEmail(String email) {
+		if (email == null || email.length() == 0) throw new IllegalArgumentException("The email argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM RegularUser AS o WHERE o.email = :email and o.deleted = 0", Long.class);
+        q.setParameter("email", email);
+        
+        return q.getSingleResult();
 	}
 
 	public String toString() {
@@ -233,4 +252,20 @@ public class RegularUser implements Serializable {
 		return entityManager().createQuery("SELECT o FROM RegularUser o WHERE o.id NOT IN (SELECT f.regularUser FROM FDUser f) ",
 				RegularUser.class).getResultList();
 	}
+
+	
+
+	@Transactional
+    public void persist() {
+        if (this.entityManager == null) this.entityManager = entityManager();
+        
+        if (email == null || email.length() == 0) throw new IllegalArgumentException("The email argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM RegularUser AS o WHERE o.email = :email and o.deleted = 0", Long.class);
+        q.setParameter("email", email);
+        
+        if( q.getSingleResult()==0){
+        	this.entityManager.persist(this);
+        	}
+    }
 }

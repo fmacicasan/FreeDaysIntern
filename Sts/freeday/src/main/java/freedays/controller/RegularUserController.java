@@ -7,6 +7,8 @@ import freedays.domain.Search;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
@@ -96,6 +98,12 @@ public class RegularUserController {
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/regularusers";
     }
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model uiModel) {
+      
+        return "redirect:/login";
+    }
 
 	@RequestMapping(method = RequestMethod.POST)
     public String create(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -107,7 +115,9 @@ public class RegularUserController {
         uiModel.asMap().clear();
         Principal p = httpServletRequest.getUserPrincipal();
         regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
+       
         regularUser.persist();
+        
         return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
     }
 

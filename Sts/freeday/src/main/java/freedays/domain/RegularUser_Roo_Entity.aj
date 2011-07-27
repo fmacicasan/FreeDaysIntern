@@ -43,12 +43,6 @@ privileged aspect RegularUser_Roo_Entity {
     }
     
     @Transactional
-    public void RegularUser.persist() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.persist(this);
-    }
-    
-    @Transactional
     public void RegularUser.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
