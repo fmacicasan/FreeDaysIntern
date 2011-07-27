@@ -34,6 +34,7 @@ public class Request {
 	private static final String FD_APPROVAL_REQ_CONTENT = "Hello! you have new Request to approve!!\n";
 	private static final String FD_INFORM_CONTENT_DENY = "Your Request not approved!";
 	private static final String FD_INFORM_CONTENT_APPROVE = "Your Request approved!";
+	private static final String FD_INFORM_CONTENT_CANCEL = "Request canceled!";
 	
 	public static boolean DEBUG = false;
     
@@ -51,8 +52,9 @@ public class Request {
 
     public void init(){
     	if(RequestStatus.isInit(this.status)){
+    		//ApplicationRegularUser oldApprover = this.approver;
     		advanceApprover();
-    		if(this.approver != null){
+    		if(this.approver != null){// && !this.approver.isSame(oldApprover)){
     			requestApproval();
     		} else {
     			setApproveStatus();
@@ -76,6 +78,11 @@ public class Request {
     	setDenyStatus();
     	informDenyRequest();
     }
+      
+    public void cancel(){
+    	setCancelStatus();
+    	informCancelRequest();
+    }
     
     private void setDenyStatus(){
     	this.status = this.status.setDenied();
@@ -83,13 +90,17 @@ public class Request {
     private void setApproveStatus(){
     	this.status = this.status.setGranted();
     }
+    private void setCancelStatus(){
+    	this.status = this.status.setCanceled();
+    }
     private void advanceStatus(){
     	this.status = this.status.getNext();
     }
     private boolean canAdvance(){
     	if(advanceApproval()){
+    		ApplicationRegularUser oldApprover = this.approver;
     		advanceApprover();
-    		return this.approver != null;
+    		return this.approver != null && !this.approver.isSame(oldApprover); //TODO check also if the approver changed, if not it is the same and shouldn't advance  
     	}
     	return false;
     	
@@ -119,6 +130,12 @@ public class Request {
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_DENY);
     	}	
+    }
+    
+    private void informCancelRequest(){
+    	if(!Request.DEBUG){
+    		this.informRequest(Request.FD_INFORM_CONTENT_CANCEL);
+    	}
     }
     private void informRequest(String msg){
     	StringBuilder sb = new StringBuilder();

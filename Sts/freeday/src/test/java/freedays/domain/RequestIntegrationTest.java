@@ -132,6 +132,16 @@ public class RequestIntegrationTest {
     }
     
     @Test
+    public void testApproveLevel1User(){
+    	request.setAppreguser(level1);
+    	request.init();
+    	ApplicationRegularUser aru = request.getApprover();
+    	request.approve();
+    	Assert.assertEquals("level1 - granted approval after first approve", RequestStatus.GRANTED, request.getStatus());
+    	Assert.assertSame("level1 - same approver after granting", aru, request.getApprover());
+    }
+    
+    @Test
     public void testDeny(){
     	request.setAppreguser(appreguser);
     	request.init();

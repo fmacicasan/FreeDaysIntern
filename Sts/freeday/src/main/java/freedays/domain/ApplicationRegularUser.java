@@ -69,4 +69,14 @@ public abstract class ApplicationRegularUser {
 		RequestGranter rg = entityManager().createQuery("SELECT o FROM RequestGranter o JOIN FETCH o.appRegUsers ",RequestGranter.class).getSingleResult();
 		return rg.getAppRegUsers();
 	}
+	
+	/**
+	 * Entity comparison
+	 * 	- checking only id & version for the moment
+	 */
+	public boolean isSame(ApplicationRegularUser aru){
+		return this.getId().equals(aru.getId()) &&
+				this.getVersion().equals(aru.getVersion());
+	}
+
 }
