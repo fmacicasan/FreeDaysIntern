@@ -33,12 +33,13 @@ public class RequestController {
     public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
         uiModel.addAttribute("reqbean", new RequestBean());
         addDateTimeFormatPatterns(uiModel);
-        String username = httpServletRequest.getUserPrincipal().getName();
         
+        String username = httpServletRequest.getUserPrincipal().getName();
         //TODO: place this in FDUser functionality
         FDUser aru = FDUser.findFDUserByUsername(username);
         uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
         uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
+        
         System.out.println("testing");
         return "requests/request";
     }
@@ -46,8 +47,16 @@ public class RequestController {
 	@RequestMapping(method = RequestMethod.POST)
     public String create(@Valid RequestBean request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
+        	
         	System.out.println("ciuyciulete");
+        	
+        	String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        	FDUser aru = FDUser.findFDUserByUsername(username);
+        	uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
+            uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
+
             uiModel.addAttribute("reqbean", request);
+            addDateTimeFormatPatterns(uiModel);
             return "requests/request";
         }
         System.out.println("cacenflitz");
@@ -93,6 +102,16 @@ public class RequestController {
 		uiModel.asMap().clear();
 		return "redirect:/requests?approve";
 	}
+	
+	@RequestMapping(value = "/{id}", params = {"eval","cancel"}, method = RequestMethod.POST)
+	public String evalRequestCancel(@PathVariable("id") Long id, Model uiModel){
+		
+		Request.cancel(id);
+		System.out.println("Eroriuy!");
+		
+		uiModel.asMap().clear();
+		return "redirect:/requests?approve";
+	}
 
 
 	@RequestMapping(params = "for", method = RequestMethod.GET)
@@ -130,4 +149,35 @@ public class RequestController {
     }
 	
 	
+    /**
+     * Renders a request by id
+     * 	- adapted for marking requests of the currently logged user
+     * 		REASON: can't user dynamic verification of role in authorize tag
+     * @param id
+     * @param uiModel
+     * @return
+     */
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Long id, Model uiModel, Principal p) {
+		Request req = Request.findRequest(id);
+        uiModel.addAttribute("request", req);
+        uiModel.addAttribute("itemId", id);
+        uiModel.addAttribute("isApprover",req.isApprover(p.getName()));
+        uiModel.addAttribute("isPersonal",req.isOwner(p.getName()));
+        return "requests/show";
+    }
+
+	/**
+	 * Shouldn't exist but Roo will generate it automatically because of signature mismatch
+	 * @param id
+	 * @param uiModel
+	 * @return
+	 */
+	@RequestMapping(value = "/zzz{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("request", Request.findRequest(id));
+        uiModel.addAttribute("itemId", id);
+        return "requests/show";
+    }
+
 }

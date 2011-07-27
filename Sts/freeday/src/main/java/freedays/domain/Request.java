@@ -211,4 +211,26 @@ public class Request {
 		req.persist();
 		
 	}
+
+	public static void cancel(Long id2) {
+		if (id2 == null) throw new IllegalArgumentException("The id argument is required");
+		Request req = Request.findRequest(id2);
+		req.cancel();
+		req.persist();
+		
+	}
+
+	public boolean isOwner(String name) {
+		if (name == null || name.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		return this.getAppreguser().getRegularUser().getUsername().equals(name);
+	}
+
+	public boolean isApprover(String name) {
+		try{
+			if (name == null || name.length() == 0) throw new IllegalArgumentException("The username argument is required");
+			return this.getApprover().getRegularUser().getUsername().equals(name);
+		}catch(NullPointerException e){
+			return false;
+		}
+	}
 }

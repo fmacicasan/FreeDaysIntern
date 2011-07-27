@@ -10,6 +10,8 @@ import freedays.app.FreeDay;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
+import freedays.domain.RequestBean;
+
 import java.util.Set;
 /**
  * A central place to register application Converters and Formatters. 
@@ -89,6 +91,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public void installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(new FDUserConverter());
         registry.addConverter(new RegularUserConverter());
+        registry.addConverter(new RequestBeanConverter());
     }
 
 	public void afterPropertiesSet() {
@@ -108,7 +111,14 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         public String convert(RegularUser regularUser) {
             //return new StringBuilder().append(regularUser.getUsername()).append(" ").append(regularUser.getPassword()).append(" ").append(regularUser.getEmail()).append(" ").append(regularUser.getSurename()).toString();
         	return regularUser.toString();
-        }
-        
+        } 
     }
+	
+	static class RequestBeanConverter implements Converter<RequestBean, String>{
+		@Override
+		public String convert(RequestBean reqBean){
+			return reqBean.toString();
+		}
+
+	}
 }
