@@ -16,8 +16,8 @@ import javax.mail.internet.MimeMessage;
  */
 //@Component
 public class MailUtils {
-	private static final String SOURCE = "pfa.parvu.marinica@gmail.com";
-	private static final String PASS = "sitemami01";
+	private static final String SOURCE = "internlwtest@gmail.com";
+	private static final String PASS = "weaver01";
     /**
      * <b>public static void send (String to, String subject, String
      * content)</b>
@@ -79,7 +79,7 @@ public class MailUtils {
 				e.printStackTrace();
 				}
 		
-				System.out.println(" Asynchronous method call of send email — Complete ");
+				System.out.println(" Asynchronous method call of send email ï¿½ Complete ");
     		}
     	};
     	th.start();
