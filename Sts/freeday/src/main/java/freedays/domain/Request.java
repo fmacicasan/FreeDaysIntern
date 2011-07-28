@@ -17,6 +17,8 @@ import javax.persistence.TypedQuery;
 
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
+import freedays.app.FreeDayRequest;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.OneToOne;
 import freedays.app.RequestStatus;
@@ -173,15 +175,20 @@ public class Request   implements Serializable{
         return q.getSingleResult();
 	}
 	
-	public static void createPersistentReq(Calendar date, String username) {
+	public static void createPersistentReq(Calendar date,String reason, String username) {
 		Request req = new Request();
 		req.setStatus(RequestStatus.getInit());
 		req.setAppreguser(FDUser.findFDUserByUsername(username));
-		req.setRequestable(FreeDay.createPersistentFreeDay(date));
+		req.setRequestable(FreeDay.createPersistentFreeDay(date,reason));
 		System.out.println(req);
 		req.init();
 		req.persist();
 	}
+	
+	public static void createPersistentReq(FreeDayRequest fdr, String username){
+		Request.createPersistentReq(fdr.getReqdate(), fdr.getReason(), username);
+	}
+
 
 	public static List<Request> findAllRequestsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
@@ -245,7 +252,7 @@ public class Request   implements Serializable{
 			return false;
 		}
 	}
-	public boolean isCancelble(){
+	public boolean isCancelable(){
 		return this.status != RequestStatus.GRANTED
 				&& this.status != RequestStatus.CANCELED
 				&& this.status != RequestStatus.REJECTED;
@@ -254,4 +261,6 @@ public class Request   implements Serializable{
 		FDUser aru = FDUser.findFDUserByUsername(username);
 		return aru.computeAvailableFreeDays();
 	}
+
+
 }

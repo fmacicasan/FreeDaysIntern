@@ -5,6 +5,7 @@ package freedays.app;
 
 import freedays.app.FreeDay;
 import freedays.domain.ApprovalStrategy;
+import java.lang.String;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +28,7 @@ privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
     public FreeDay FreeDayDataOnDemand.getNewTransientFreeDay(int index) {
         FreeDay obj = new FreeDay();
         setApproval(obj, index);
+        setReason(obj, index);
         setRequestdate(obj, index);
         return obj;
     }
@@ -34,6 +36,11 @@ privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
     public void FreeDayDataOnDemand.setApproval(FreeDay obj, int index) {
         ApprovalStrategy approval = null;
         obj.setApproval(approval);
+    }
+    
+    public void FreeDayDataOnDemand.setReason(FreeDay obj, int index) {
+        String reason = "reason_" + index;
+        obj.setReason(reason);
     }
     
     public void FreeDayDataOnDemand.setRequestdate(FreeDay obj, int index) {

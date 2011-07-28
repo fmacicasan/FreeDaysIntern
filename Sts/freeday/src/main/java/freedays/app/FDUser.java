@@ -3,6 +3,7 @@ package freedays.app;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
 import freedays.domain.Request;
+import freedays.validation.annotation.BusinessDay;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -31,8 +32,9 @@ public class FDUser extends ApplicationRegularUser {
 
 	@NotNull
     @Past
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
+	@BusinessDay
     private Calendar hireDate;
 
     @NotNull
