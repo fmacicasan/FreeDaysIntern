@@ -3,7 +3,11 @@ INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("Admin",0)
 -- INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("ApplicationAdmin",0)
 INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("RequestGranter",0)
 INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("FDAdmin",0)
-INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("HRManagement",0)
+INSERT INTO `asdvanced_user_role`(`role_type`,`version`)VALUES("HRManagement",0)
+
+delete from `approval_strategy`
+INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("LevelTop",12,0,null);
+INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("Level1",13,0,12);
 
 
 delete from `regular_user`
@@ -35,10 +39,6 @@ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(114,2);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(115,1);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(116,3);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(117,4);
-
-delete from `approval_strategy`
-INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("LevelTop",12,0,null);
-INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("Level1",13,0,12);
 
 delete from `free_day`
 INSERT INTO `free_day`(`id`,`requestdate`,`version`,`approval`)VALUES(1,"2011-08-06",0,13);

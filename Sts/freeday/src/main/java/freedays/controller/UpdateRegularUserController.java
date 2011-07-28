@@ -12,6 +12,7 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import freedays.domain.RegularUser;
+import freedays.util.DAOUtils;
 
 @RequestMapping("/updateRegularUsers")
 @Controller
@@ -21,9 +22,8 @@ public class UpdateRegularUserController {
 	public String createForm(Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		
-		RegularUser regularUser = RegularUser.findRegularUsersByUsername(
-				httpServletRequest.getUserPrincipal().getName())
-				.getSingleResult();
+		RegularUser regularUser = DAOUtils.getSingleResult(RegularUser.findRegularUsersByUsername(
+				httpServletRequest.getUserPrincipal().getName()));
 		
 		uiModel.addAttribute("regularUser", regularUser);
 		return "regularusers/update";
