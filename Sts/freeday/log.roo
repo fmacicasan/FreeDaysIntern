@@ -199,3 +199,4 @@ field date --fieldName reqdate --type java.util.Calendar --future --dateFormat S
 field string --fieldName reason --notNull 
 controller scaffold --class freedays.app.FreeDayRequest --disallowedOperations delete
 controller scaffold --class freedays.controller.FreeDayRequestController --disallowedOperations delete
+perform tests
