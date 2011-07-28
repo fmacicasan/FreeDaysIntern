@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
+import freedays.util.DAOUtils;
 import freedays.util.MailUtils;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -156,21 +157,21 @@ public class Request   implements Serializable{
     	return sb.toString().toUpperCase();
     }
 
-	public static long countRequests(ApplicationRegularUser fdUser, RequestStatus status) {
+	public static Long countRequests(ApplicationRegularUser fdUser, RequestStatus status) {
 		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
 		EntityManager em = Request.entityManager();
         TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser.regularUser.username = :fduser AND status = :status", Long.class);
         q.setParameter("fduser", fdUser.getRegularUser().getUsername());
         q.setParameter("status", status);
-        return q.getSingleResult();	
+        return DAOUtils.getSingleResult(q);
 	}
 	
-	public static long countAllRequests(ApplicationRegularUser fdUser){
+	public static Long countAllRequests(ApplicationRegularUser fdUser){
 		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
 		EntityManager em = Request.entityManager();
         TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser.regularUser.username = :fduser", Long.class);
         q.setParameter("fduser", fdUser.getRegularUser().getUsername());
-        return q.getSingleResult();
+        return DAOUtils.getSingleResult(q);
 	}
 	
 	public static void createPersistentReq(Calendar date, String username) {

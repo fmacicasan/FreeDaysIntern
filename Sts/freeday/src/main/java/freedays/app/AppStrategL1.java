@@ -1,6 +1,9 @@
 package freedays.app;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.TypedQuery;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -8,6 +11,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
+import freedays.util.DAOUtils;
 
 @RooJavaBean
 @RooToString
@@ -21,7 +25,10 @@ public class AppStrategL1 extends ApprovalStrategy {
 	}
 	
 	public static ApprovalStrategy getDefaultInitialStrateg(){
-		return entityManager().createQuery("SELECT o FROM AppStrategL1 o", AppStrategL1.class).getSingleResult();
+		 TypedQuery<AppStrategL1> q = entityManager().createQuery("SELECT o FROM AppStrategL1 o", AppStrategL1.class);
+		 return DAOUtils.getSingleResult(q);
 	}
+
+	
 
 }
