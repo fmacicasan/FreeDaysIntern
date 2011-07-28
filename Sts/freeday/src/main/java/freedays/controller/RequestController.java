@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import freedays.app.FDUser;
+import freedays.app.FreeDayRequest;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
-import freedays.domain.RequestBean;
 
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -31,7 +31,7 @@ public class RequestController {
 	
 	@RequestMapping(params = "form", method = RequestMethod.GET)
     public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
-        uiModel.addAttribute("reqbean", new RequestBean());
+        uiModel.addAttribute("reqbean", new FreeDayRequest());
         addDateTimeFormatPatterns(uiModel);
         
 //        String username = httpServletRequest.getUserPrincipal().getName();
@@ -41,11 +41,11 @@ public class RequestController {
 //        uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
         
         System.out.println("testing");
-        return "requests/request";
+        return "requests/create";
     }
 
 	@RequestMapping(method = RequestMethod.POST)
-    public String create(@Valid RequestBean request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String create(@Valid FreeDayRequest request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
         	
         	System.out.println("ciuyciulete");
@@ -54,16 +54,16 @@ public class RequestController {
 //        	FDUser aru = FDUser.findFDUserByUsername(username);
 //        	uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
 //            uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
-
+        	uiModel.addAttribute("hasError",true);
             uiModel.addAttribute("reqbean", request);
             addDateTimeFormatPatterns(uiModel);
-            return "requests/request";
+            return "requests/create";
         }
         System.out.println("cacenflitz");
         
         //uiModel.asMap().clear();
         //request.persist();
-        Request.createPersistentReq(request.getReqdate(),httpServletRequest.getUserPrincipal().getName());
+        Request.createPersistentReq(request,httpServletRequest.getUserPrincipal().getName());
         return "index";
     }
 	
@@ -157,7 +157,7 @@ public class RequestController {
         uiModel.addAttribute("itemId", id);
         uiModel.addAttribute("isApprover",req.isApprover(p.getName()));
         uiModel.addAttribute("isPersonal",req.isOwner(p.getName()));
-        uiModel.addAttribute("isCancelable",req.isCancelble());
+        uiModel.addAttribute("isCancelable",req.isCancelable());
         return "requests/show";
     }
 	

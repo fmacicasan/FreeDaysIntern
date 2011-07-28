@@ -198,3 +198,10 @@ perform tests
 // Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-28 12:16:17
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-28 12:17:39
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-28 12:44:21
+class --class freedays.app.FreeDayRequest
+field date --fieldName reqdate --type java.util.Calendar --future --dateFormat SHORT --notNull 
+field string --fieldName reason --notNull 
+controller scaffold --class freedays.app.FreeDayRequest --disallowedOperations delete
+controller scaffold --class freedays.controller.FreeDayRequestController --disallowedOperations delete
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-28 14:22:47

@@ -7,7 +7,6 @@ import freedays.app.FDUser;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApplicationRegularUser.JobRole;
 import freedays.domain.RegularUser;
-import freedays.domain.RegularUserDataOnDemand;
 import java.lang.Integer;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
@@ -28,9 +26,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     private Random FDUserDataOnDemand.rnd = new SecureRandom();
     
     private List<FDUser> FDUserDataOnDemand.data;
-    
-    @Autowired
-    private RegularUserDataOnDemand FDUserDataOnDemand.regularUserDataOnDemand;
     
     public FDUser FDUserDataOnDemand.getNewTransientFDUser(int index) {
         FDUser obj = new FDUser();
@@ -75,7 +70,7 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     }
     
     public void FDUserDataOnDemand.setRegularUser(FDUser obj, int index) {
-        RegularUser regularUser = regularUserDataOnDemand.getRandomRegularUser();
+        RegularUser regularUser = null;
         obj.setRegularUser(regularUser);
     }
     

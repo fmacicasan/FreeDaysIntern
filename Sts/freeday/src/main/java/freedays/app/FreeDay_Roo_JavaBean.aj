@@ -4,6 +4,7 @@
 package freedays.app;
 
 import freedays.domain.ApprovalStrategy;
+import java.lang.String;
 import java.util.Calendar;
 
 privileged aspect FreeDay_Roo_JavaBean {
@@ -22,6 +23,14 @@ privileged aspect FreeDay_Roo_JavaBean {
     
     public void FreeDay.setApproval(ApprovalStrategy approval) {
         this.approval = approval;
+    }
+    
+    public String FreeDay.getReason() {
+        return this.reason;
+    }
+    
+    public void FreeDay.setReason(String reason) {
+        this.reason = reason;
     }
     
 }

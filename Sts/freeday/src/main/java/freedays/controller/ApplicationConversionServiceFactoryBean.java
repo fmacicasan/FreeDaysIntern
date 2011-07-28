@@ -7,10 +7,10 @@ import org.springframework.roo.addon.web.mvc.controller.RooConversionService;
     
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
+import freedays.app.FreeDayRequest;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
-import freedays.domain.RequestBean;
 
 import java.util.Set;
 /**
@@ -91,7 +91,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public void installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(new FDUserConverter());
         registry.addConverter(new RegularUserConverter());
-        registry.addConverter(new RequestBeanConverter());
+        registry.addConverter(new FreeDayRequestConverter());
     }
 
 	public void afterPropertiesSet() {
@@ -114,9 +114,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         } 
     }
 	
-	static class RequestBeanConverter implements Converter<RequestBean, String>{
+	static class FreeDayRequestConverter implements Converter<FreeDayRequest, String>{
 		@Override
-		public String convert(RequestBean reqBean){
+		public String convert(FreeDayRequest reqBean){
 			return reqBean.toString();
 		}
 

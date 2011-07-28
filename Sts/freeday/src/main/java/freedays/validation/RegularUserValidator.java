@@ -1,4 +1,5 @@
-package freedays.validation;
+
+package freedays.validation; 
 
 import freedays.domain.RegularUser;
 
