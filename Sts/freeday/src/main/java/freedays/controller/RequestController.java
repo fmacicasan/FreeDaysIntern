@@ -9,7 +9,6 @@ import freedays.app.FDUser;
 import freedays.app.FreeDayRequest;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
-import freedays.domain.RequestBean;
 
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
