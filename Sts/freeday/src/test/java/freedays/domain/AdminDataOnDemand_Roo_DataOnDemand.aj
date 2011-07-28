@@ -4,20 +4,25 @@
 package freedays.domain;
 
 import freedays.domain.Admin;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect AdminDataOnDemand_Roo_DataOnDemand {
     
     declare @type: AdminDataOnDemand: @Component;
     
-    private Random AdminDataOnDemand.rnd = new java.security.SecureRandom();
+    private Random AdminDataOnDemand.rnd = new SecureRandom();
     
     private List<Admin> AdminDataOnDemand.data;
     
     public Admin AdminDataOnDemand.getNewTransientAdmin(int index) {
-        freedays.domain.Admin obj = new freedays.domain.Admin();
+        Admin obj = new Admin();
         return obj;
     }
     
@@ -40,16 +45,25 @@ privileged aspect AdminDataOnDemand_Roo_DataOnDemand {
     }
     
     public void AdminDataOnDemand.init() {
-        data = freedays.domain.Admin.findAdminEntries(0, 10);
+        data = Admin.findAdminEntries(0, 10);
         if (data == null) throw new IllegalStateException("Find entries implementation for 'Admin' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new java.util.ArrayList<freedays.domain.Admin>();
+        data = new ArrayList<freedays.domain.Admin>();
         for (int i = 0; i < 10; i++) {
-            freedays.domain.Admin obj = getNewTransientAdmin(i);
-            obj.persist();
+            Admin obj = getNewTransientAdmin(i);
+            try {
+                obj.persist();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
+                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
+                    ConstraintViolation<?> cv = it.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                }
+                throw new RuntimeException(msg.toString(), e);
+            }
             obj.flush();
             data.add(obj);
         }

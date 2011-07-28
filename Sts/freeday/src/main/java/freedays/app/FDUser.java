@@ -7,6 +7,8 @@ import freedays.domain.Request;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
@@ -21,12 +23,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
 
+
 @RooJavaBean
 @RooToString
 @RooEntity
 public class FDUser extends ApplicationRegularUser {
 
-    @NotNull
+	@NotNull
     @Past
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
@@ -70,6 +73,7 @@ public class FDUser extends ApplicationRegularUser {
 
 		remainingDays += TimeUnit.MILLISECONDS.toDays(time) * (this.maxFreeDays-this.initDays) / now.getActualMaximum(Calendar.DAY_OF_YEAR);
 
+		remainingDays -= Request.countActiveRequests(this.getRegularUser().getUsername());
 		remainingDays -= Request.countRequests(this, RequestStatus.GRANTED);
 
 		return remainingDays;

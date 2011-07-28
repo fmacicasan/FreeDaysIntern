@@ -165,6 +165,14 @@ public class Request   implements Serializable{
         return q.getSingleResult();	
 	}
 	
+	public static long countAllRequests(ApplicationRegularUser fdUser){
+		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
+		EntityManager em = Request.entityManager();
+        TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser.regularUser.username = :fduser", Long.class);
+        q.setParameter("fduser", fdUser.getRegularUser().getUsername());
+        return q.getSingleResult();
+	}
+	
 	public static void createPersistentReq(Calendar date, String username) {
 		Request req = new Request();
 		req.setStatus(RequestStatus.getInit());
@@ -191,10 +199,13 @@ public class Request   implements Serializable{
         return q.getResultList();
 	}
 
-	public static long countActiveRequests(FDUser aru) {
-		return Request.findAllRequestsByUsername(aru.getRegularUser().getUsername()).size()
+	public static long countActiveRequests(String username) {
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		FDUser aru = FDUser.findFDUserByUsername(username);
+		return Request.countAllRequests(aru)
 				- Request.countRequests(aru, RequestStatus.GRANTED)
-				- Request.countRequests(aru, RequestStatus.REJECTED);
+				- Request.countRequests(aru, RequestStatus.REJECTED)
+				- Request.countRequests(aru, RequestStatus.CANCELED);
 	}
 
 	public static void approve(Long id2) {
@@ -233,5 +244,14 @@ public class Request   implements Serializable{
 		}catch(NullPointerException e){
 			return false;
 		}
+	}
+	public boolean isCancelble(){
+		return this.status != RequestStatus.GRANTED
+				&& this.status != RequestStatus.CANCELED
+				&& this.status != RequestStatus.REJECTED;
+	}
+	public static long computeAvailableFreeDays(String username) {
+		FDUser aru = FDUser.findFDUserByUsername(username);
+		return aru.computeAvailableFreeDays();
 	}
 }

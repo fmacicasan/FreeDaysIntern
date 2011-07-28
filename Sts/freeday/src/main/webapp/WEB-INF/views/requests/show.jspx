@@ -18,18 +18,27 @@
 					<spring:message code="request_deny_button" var="request_deny_label" htmlEscape="false" />
 					<input name="deny" type="submit" value="${fn:escapeXml(request_deny_label)}" />
 				</c:if>
-				<c:choose>
-					<c:when test="${isPersonal}">
-						<spring:message code="request_cancel_button" var="request_cancel_label" htmlEscape="false" />
-						<input name="cancel" type="submit" value="${fn:escapeXml(request_cancel_label)}" />
-					</c:when>
-					<c:otherwise>
-						<sec:authorize access="hasRole('ROLE_FDADMIN')" >
-							<spring:message code="request_cancel_button" var="request_cancel_label" htmlEscape="false" />
-							<input name="cancel" type="submit" value="${fn:escapeXml(request_cancel_label)}" />
-						</sec:authorize>
-					</c:otherwise>
-				</c:choose>
 			</div>
 		</form>
+		
+		<c:if test="${isCancelable}">
+			<spring:url value="/requests/${itemId}?eval" var="form_request" />
+			<form name="input_req" action="${fn:escapeXml(form_request)}" method="POST">
+				<div class="submit">
+					<!-- TODO: after addition of spring security 3.1.0.RC2 no need for choose but add isPersonal in authorize access -->
+					<c:choose>
+						<c:when test="${isPersonal}">
+							<spring:message code="request_cancel_button" var="request_cancel_label" htmlEscape="false" />
+							<input name="cancel" type="submit" value="${fn:escapeXml(request_cancel_label)}" />
+						</c:when>
+						<c:otherwise>
+							<sec:authorize access="hasRole('ROLE_FDADMIN')" >
+								<spring:message code="request_cancel_button" var="request_cancel_label" htmlEscape="false" />
+								<input name="cancel" type="submit" value="${fn:escapeXml(request_cancel_label)}" />
+							</sec:authorize>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</form>
+		</c:if>
 </div>

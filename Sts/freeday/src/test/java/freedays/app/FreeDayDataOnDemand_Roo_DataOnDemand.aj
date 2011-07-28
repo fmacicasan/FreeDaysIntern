@@ -4,33 +4,41 @@
 package freedays.app;
 
 import freedays.app.FreeDay;
+import freedays.domain.ApprovalStrategy;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayDataOnDemand: @Component;
     
-    private Random FreeDayDataOnDemand.rnd = new java.security.SecureRandom();
+    private Random FreeDayDataOnDemand.rnd = new SecureRandom();
     
     private List<FreeDay> FreeDayDataOnDemand.data;
     
     public FreeDay FreeDayDataOnDemand.getNewTransientFreeDay(int index) {
-        freedays.app.FreeDay obj = new freedays.app.FreeDay();
-        setRequestdate(obj, index);
+        FreeDay obj = new FreeDay();
         setApproval(obj, index);
+        setRequestdate(obj, index);
         return obj;
     }
     
-    public void FreeDayDataOnDemand.setRequestdate(FreeDay obj, int index) {
-        java.util.Calendar requestdate = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH) + 1);
-        obj.setRequestdate(requestdate);
+    public void FreeDayDataOnDemand.setApproval(FreeDay obj, int index) {
+        ApprovalStrategy approval = null;
+        obj.setApproval(approval);
     }
     
-    public void FreeDayDataOnDemand.setApproval(FreeDay obj, int index) {
-        freedays.domain.ApprovalStrategy approval = null;
-        obj.setApproval(approval);
+    public void FreeDayDataOnDemand.setRequestdate(FreeDay obj, int index) {
+        Calendar requestdate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
+        obj.setRequestdate(requestdate);
     }
     
     public FreeDay FreeDayDataOnDemand.getSpecificFreeDay(int index) {
@@ -52,16 +60,25 @@ privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
     }
     
     public void FreeDayDataOnDemand.init() {
-        data = freedays.app.FreeDay.findFreeDayEntries(0, 10);
+        data = FreeDay.findFreeDayEntries(0, 10);
         if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDay' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new java.util.ArrayList<freedays.app.FreeDay>();
+        data = new ArrayList<freedays.app.FreeDay>();
         for (int i = 0; i < 10; i++) {
-            freedays.app.FreeDay obj = getNewTransientFreeDay(i);
-            obj.persist();
+            FreeDay obj = getNewTransientFreeDay(i);
+            try {
+                obj.persist();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
+                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
+                    ConstraintViolation<?> cv = it.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                }
+                throw new RuntimeException(msg.toString(), e);
+            }
             obj.flush();
             data.add(obj);
         }

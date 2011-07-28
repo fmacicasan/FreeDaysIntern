@@ -9,5 +9,6 @@
         <field:display calendar="true" dateTimePattern="${FDUser_hiredate_date_format}" field="hireDate" id="s_freedays_app_FDUser_hireDate" object="${fduser}" z="+Ru9vPCp5QsWTbcD/69wmah3Fbg="/>
         <field:display field="initDays" id="s_freedays_app_FDUser_initDays" object="${fduser}" z="AE8ekT6secyWs7qQF9PAVrx4NxI="/>
         <field:display field="maxFreeDays" id="s_freedays_app_FDUser_maxFreeDays" object="${fduser}" z="l/uwOMovRKuz971Ol5Me9R2A59I="/>
+        <field:display field="jobrole" id="s_freedays_app_FDUser_jobrole" object="${fduser}" />
     </page:show>
 </div>

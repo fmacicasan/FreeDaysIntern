@@ -4,76 +4,85 @@
 package freedays.domain;
 
 import freedays.domain.RegularUser;
+import java.lang.Boolean;
+import java.lang.String;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
     
     declare @type: RegularUserDataOnDemand: @Component;
     
-    private Random RegularUserDataOnDemand.rnd = new java.security.SecureRandom();
+    private Random RegularUserDataOnDemand.rnd = new SecureRandom();
     
     private List<RegularUser> RegularUserDataOnDemand.data;
     
     public RegularUser RegularUserDataOnDemand.getNewTransientRegularUser(int index) {
-        freedays.domain.RegularUser obj = new freedays.domain.RegularUser();
-        setUsername(obj, index);
-        setPassword(obj, index);
-        setEmail(obj, index);
-        setSurename(obj, index);
-        setFirstname(obj, index);
-        setDeleted(obj, index);
+        RegularUser obj = new RegularUser();
         setActiv(obj, index);
-        setLastmodified(obj, index);
         setCreationdate(obj, index);
+        setDeleted(obj, index);
+        setEmail(obj, index);
+        setFirstname(obj, index);
+        setLastmodified(obj, index);
+        setPassword(obj, index);
+        setSurename(obj, index);
         setUsermodifier(obj, index);
+        setUsername(obj, index);
         return obj;
     }
     
-    public void RegularUserDataOnDemand.setUsername(RegularUser obj, int index) {
-        java.lang.String username = "username_" + index;
-        obj.setUsername(username);
+    public void RegularUserDataOnDemand.setActiv(RegularUser obj, int index) {
+        Boolean activ = Boolean.TRUE;
+        obj.setActiv(activ);
+    }
+    
+    public void RegularUserDataOnDemand.setCreationdate(RegularUser obj, int index) {
+        Calendar creationdate = Calendar.getInstance();
+        obj.setCreationdate(creationdate);
+    }
+    
+    public void RegularUserDataOnDemand.setDeleted(RegularUser obj, int index) {
+        Boolean deleted = Boolean.TRUE;
+        obj.setDeleted(deleted);
+    }
+    
+    public void RegularUserDataOnDemand.setFirstname(RegularUser obj, int index) {
+        String firstname = "firstname_" + index;
+        obj.setFirstname(firstname);
+    }
+    
+    public void RegularUserDataOnDemand.setLastmodified(RegularUser obj, int index) {
+        Calendar lastmodified = Calendar.getInstance();
+        obj.setLastmodified(lastmodified);
     }
     
     public void RegularUserDataOnDemand.setPassword(RegularUser obj, int index) {
-        java.lang.String password = "password_" + index;
+        String password = "password_" + index;
         obj.setPassword(password);
     }
     
     public void RegularUserDataOnDemand.setSurename(RegularUser obj, int index) {
-        java.lang.String surename = "surename_" + index;
+        String surename = "surename_" + index;
         obj.setSurename(surename);
     }
     
-    public void RegularUserDataOnDemand.setFirstname(RegularUser obj, int index) {
-        java.lang.String firstname = "firstname_" + index;
-        obj.setFirstname(firstname);
-    }
-    
-    public void RegularUserDataOnDemand.setDeleted(RegularUser obj, int index) {
-        java.lang.Boolean deleted = Boolean.TRUE;
-        obj.setDeleted(deleted);
-    }
-    
-    public void RegularUserDataOnDemand.setActiv(RegularUser obj, int index) {
-        java.lang.Boolean activ = Boolean.TRUE;
-        obj.setActiv(activ);
-    }
-    
-    public void RegularUserDataOnDemand.setLastmodified(RegularUser obj, int index) {
-        java.util.Calendar lastmodified = java.util.Calendar.getInstance();
-        obj.setLastmodified(lastmodified);
-    }
-    
-    public void RegularUserDataOnDemand.setCreationdate(RegularUser obj, int index) {
-        java.util.Calendar creationdate = java.util.Calendar.getInstance();
-        obj.setCreationdate(creationdate);
-    }
-    
     public void RegularUserDataOnDemand.setUsermodifier(RegularUser obj, int index) {
-        java.lang.String usermodifier = "usermodifier_" + index;
+        String usermodifier = "usermodifier_" + index;
         obj.setUsermodifier(usermodifier);
+    }
+    
+    public void RegularUserDataOnDemand.setUsername(RegularUser obj, int index) {
+        String username = "username_" + index;
+        obj.setUsername(username);
     }
     
     public RegularUser RegularUserDataOnDemand.getSpecificRegularUser(int index) {
@@ -95,16 +104,25 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
     }
     
     public void RegularUserDataOnDemand.init() {
-        data = freedays.domain.RegularUser.findRegularUserEntries(0, 10);
+        data = RegularUser.findRegularUserEntries(0, 10);
         if (data == null) throw new IllegalStateException("Find entries implementation for 'RegularUser' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new java.util.ArrayList<freedays.domain.RegularUser>();
+        data = new ArrayList<freedays.domain.RegularUser>();
         for (int i = 0; i < 10; i++) {
-            freedays.domain.RegularUser obj = getNewTransientRegularUser(i);
-            obj.persist();
+            RegularUser obj = getNewTransientRegularUser(i);
+            try {
+                obj.persist();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
+                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
+                    ConstraintViolation<?> cv = it.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                }
+                throw new RuntimeException(msg.toString(), e);
+            }
             obj.flush();
             data.add(obj);
         }

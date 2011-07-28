@@ -3,10 +3,18 @@
 
 package freedays.domain;
 
+import freedays.app.FreeDay;
 import freedays.app.FreeDayDataOnDemand;
+import freedays.app.RequestStatus;
+import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +22,7 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     
     declare @type: RequestDataOnDemand: @Component;
     
-    private Random RequestDataOnDemand.rnd = new java.security.SecureRandom();
+    private Random RequestDataOnDemand.rnd = new SecureRandom();
     
     private List<Request> RequestDataOnDemand.data;
     
@@ -22,32 +30,32 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     private FreeDayDataOnDemand RequestDataOnDemand.freeDayDataOnDemand;
     
     public Request RequestDataOnDemand.getNewTransientRequest(int index) {
-        freedays.domain.Request obj = new freedays.domain.Request();
+        Request obj = new Request();
         setAppreguser(obj, index);
+        setApprover(obj, index);
         setRequestable(obj, index);
         setStatus(obj, index);
-        setApprover(obj, index);
         return obj;
     }
     
     public void RequestDataOnDemand.setAppreguser(Request obj, int index) {
-        freedays.domain.ApplicationRegularUser appreguser = null;
+        ApplicationRegularUser appreguser = null;
         obj.setAppreguser(appreguser);
     }
     
+    public void RequestDataOnDemand.setApprover(Request obj, int index) {
+        ApplicationRegularUser approver = null;
+        obj.setApprover(approver);
+    }
+    
     public void RequestDataOnDemand.setRequestable(Request obj, int index) {
-        freedays.app.FreeDay requestable = freeDayDataOnDemand.getSpecificFreeDay(index);
+        FreeDay requestable = freeDayDataOnDemand.getSpecificFreeDay(index);
         obj.setRequestable(requestable);
     }
     
     public void RequestDataOnDemand.setStatus(Request obj, int index) {
-        freedays.app.RequestStatus status = freedays.app.RequestStatus.class.getEnumConstants()[0];
+        RequestStatus status = RequestStatus.class.getEnumConstants()[0];
         obj.setStatus(status);
-    }
-    
-    public void RequestDataOnDemand.setApprover(Request obj, int index) {
-        freedays.domain.ApplicationRegularUser approver = null;
-        obj.setApprover(approver);
     }
     
     public Request RequestDataOnDemand.getSpecificRequest(int index) {
@@ -69,16 +77,25 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     }
     
     public void RequestDataOnDemand.init() {
-        data = freedays.domain.Request.findRequestEntries(0, 10);
+        data = Request.findRequestEntries(0, 10);
         if (data == null) throw new IllegalStateException("Find entries implementation for 'Request' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new java.util.ArrayList<freedays.domain.Request>();
+        data = new ArrayList<freedays.domain.Request>();
         for (int i = 0; i < 10; i++) {
-            freedays.domain.Request obj = getNewTransientRequest(i);
-            obj.persist();
+            Request obj = getNewTransientRequest(i);
+            try {
+                obj.persist();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
+                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
+                    ConstraintViolation<?> cv = it.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                }
+                throw new RuntimeException(msg.toString(), e);
+            }
             obj.flush();
             data.add(obj);
         }

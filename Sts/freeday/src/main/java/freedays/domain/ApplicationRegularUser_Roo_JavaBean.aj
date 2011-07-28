@@ -43,4 +43,12 @@ privileged aspect ApplicationRegularUser_Roo_JavaBean {
         this.requests = requests;
     }
     
+    public JobRole ApplicationRegularUser.getJobrole() {
+        return this.jobrole;
+    }
+    
+    public void ApplicationRegularUser.setJobrole(JobRole jobrole) {
+        this.jobrole = jobrole;
+    }
+    
 }

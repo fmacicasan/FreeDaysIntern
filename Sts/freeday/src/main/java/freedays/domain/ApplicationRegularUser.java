@@ -17,6 +17,7 @@ import freedays.domain.AdvancedUserRole;
 import java.util.HashSet;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
@@ -32,8 +33,12 @@ import javax.persistence.OneToMany;
 @RooJavaBean
 @RooToString
 @RooEntity(inheritanceType = "TABLE_PER_CLASS")
-public abstract class ApplicationRegularUser  implements Serializable{
+public abstract class ApplicationRegularUser  implements Serializable {
 
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
@@ -48,6 +53,10 @@ public abstract class ApplicationRegularUser  implements Serializable{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "appreguser")
     private Set<Request> requests = new HashSet<Request>();
+    
+    public enum JobRole{DEV, QA, SDET, PM, IT, EM, PO, SE, PS}
+    @Enumerated
+    private JobRole jobrole;
     
    
     //@Transactional

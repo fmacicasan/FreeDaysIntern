@@ -1,11 +1,14 @@
 package freedays.controller;
 
+import java.util.Arrays;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import freedays.app.FDUser;
+import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
+import freedays.domain.ApplicationRegularUser.JobRole;
 import freedays.domain.RegularUser;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
@@ -55,4 +58,9 @@ public class FDUserController {
 	public Collection<RegularUser> populateRegularUsers() {
 		return RegularUser.findAllRegularUsersUnasociated();
 	}
+	
+    @ModelAttribute("jobroles")
+    public Collection<JobRole> populateJobRoles() {
+        return Arrays.asList(JobRole.class.getEnumConstants());
+    }
 }

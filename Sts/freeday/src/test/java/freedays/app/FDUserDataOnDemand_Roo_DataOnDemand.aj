@@ -4,9 +4,20 @@
 package freedays.app;
 
 import freedays.app.FDUser;
+import freedays.domain.ApplicationRegularUser;
+import freedays.domain.ApplicationRegularUser.JobRole;
+import freedays.domain.RegularUser;
 import freedays.domain.RegularUserDataOnDemand;
+import java.lang.Integer;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +25,7 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FDUserDataOnDemand: @Component;
     
-    private Random FDUserDataOnDemand.rnd = new java.security.SecureRandom();
+    private Random FDUserDataOnDemand.rnd = new SecureRandom();
     
     private List<FDUser> FDUserDataOnDemand.data;
     
@@ -22,44 +33,50 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     private RegularUserDataOnDemand FDUserDataOnDemand.regularUserDataOnDemand;
     
     public FDUser FDUserDataOnDemand.getNewTransientFDUser(int index) {
-        freedays.app.FDUser obj = new freedays.app.FDUser();
-        setRegularUser(obj, index);
+        FDUser obj = new FDUser();
         setGranter(obj, index);
         setHireDate(obj, index);
         setInitDays(obj, index);
+        setJobrole(obj, index);
         setMaxFreeDays(obj, index);
+        setRegularUser(obj, index);
         return obj;
     }
     
-    public void FDUserDataOnDemand.setRegularUser(FDUser obj, int index) {
-        freedays.domain.RegularUser regularUser = regularUserDataOnDemand.getRandomRegularUser();
-        obj.setRegularUser(regularUser);
-    }
-    
     public void FDUserDataOnDemand.setGranter(FDUser obj, int index) {
-        freedays.domain.ApplicationRegularUser granter = null;
+        ApplicationRegularUser granter = null;
         obj.setGranter(granter);
     }
     
     public void FDUserDataOnDemand.setHireDate(FDUser obj, int index) {
-        java.util.Calendar hireDate = new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH) - 1);
+        Calendar hireDate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - 1);
         obj.setHireDate(hireDate);
     }
     
     public void FDUserDataOnDemand.setInitDays(FDUser obj, int index) {
-        java.lang.Integer initDays = new Integer(index);
+        Integer initDays = new Integer(index);
         if (initDays < 2 || initDays > 7) {
             initDays = 7;
         }
         obj.setInitDays(initDays);
     }
     
+    public void FDUserDataOnDemand.setJobrole(FDUser obj, int index) {
+        JobRole jobrole = JobRole.class.getEnumConstants()[0];
+        obj.setJobrole(jobrole);
+    }
+    
     public void FDUserDataOnDemand.setMaxFreeDays(FDUser obj, int index) {
-        java.lang.Integer maxFreeDays = new Integer(index);
+        Integer maxFreeDays = new Integer(index);
         if (maxFreeDays < 21) {
             maxFreeDays = 21;
         }
         obj.setMaxFreeDays(maxFreeDays);
+    }
+    
+    public void FDUserDataOnDemand.setRegularUser(FDUser obj, int index) {
+        RegularUser regularUser = regularUserDataOnDemand.getRandomRegularUser();
+        obj.setRegularUser(regularUser);
     }
     
     public FDUser FDUserDataOnDemand.getSpecificFDUser(int index) {
@@ -81,16 +98,25 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     }
     
     public void FDUserDataOnDemand.init() {
-        data = freedays.app.FDUser.findFDUserEntries(0, 10);
+        data = FDUser.findFDUserEntries(0, 10);
         if (data == null) throw new IllegalStateException("Find entries implementation for 'FDUser' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new java.util.ArrayList<freedays.app.FDUser>();
+        data = new ArrayList<freedays.app.FDUser>();
         for (int i = 0; i < 10; i++) {
-            freedays.app.FDUser obj = getNewTransientFDUser(i);
-            obj.persist();
+            FDUser obj = getNewTransientFDUser(i);
+            try {
+                obj.persist();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
+                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
+                    ConstraintViolation<?> cv = it.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                }
+                throw new RuntimeException(msg.toString(), e);
+            }
             obj.flush();
             data.add(obj);
         }

@@ -83,7 +83,7 @@ privileged aspect RequestIntegrationTest_Roo_IntegrationTest {
         obj = freedays.domain.Request.findRequest(id);
         boolean modified =  dod.modifyRequest(obj);
         java.lang.Integer currentVersion = obj.getVersion();
-        freedays.domain.Request merged = (freedays.domain.Request) obj.merge();
+        freedays.domain.Request merged =  obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'Request' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);

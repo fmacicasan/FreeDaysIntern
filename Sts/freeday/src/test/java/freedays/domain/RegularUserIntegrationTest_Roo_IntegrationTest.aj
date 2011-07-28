@@ -78,7 +78,7 @@ privileged aspect RegularUserIntegrationTest_Roo_IntegrationTest {
         obj = freedays.domain.RegularUser.findRegularUser(id);
         boolean modified =  dod.modifyRegularUser(obj);
         java.lang.Integer currentVersion = obj.getVersion();
-        freedays.domain.RegularUser merged = (freedays.domain.RegularUser) obj.merge();
+        freedays.domain.RegularUser merged =  obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'RegularUser' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);

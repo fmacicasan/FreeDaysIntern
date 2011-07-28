@@ -78,7 +78,7 @@ privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
         obj = freedays.app.FreeDay.findFreeDay(id);
         boolean modified =  dod.modifyFreeDay(obj);
         java.lang.Integer currentVersion = obj.getVersion();
-        freedays.app.FreeDay merged = (freedays.app.FreeDay) obj.merge();
+        freedays.app.FreeDay merged =  obj.merge();
         obj.flush();
         org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         org.junit.Assert.assertTrue("Version for 'FreeDay' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);

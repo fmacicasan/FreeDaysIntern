@@ -34,11 +34,11 @@ public class RequestController {
         uiModel.addAttribute("reqbean", new RequestBean());
         addDateTimeFormatPatterns(uiModel);
         
-        String username = httpServletRequest.getUserPrincipal().getName();
-        //TODO: place this in FDUser functionality
-        FDUser aru = FDUser.findFDUserByUsername(username);
-        uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
-        uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
+//        String username = httpServletRequest.getUserPrincipal().getName();
+//        //TODO: place this in FDUser functionality
+//        FDUser aru = FDUser.findFDUserByUsername(username);
+//        uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
+//        uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
         
         System.out.println("testing");
         return "requests/request";
@@ -50,10 +50,10 @@ public class RequestController {
         	
         	System.out.println("ciuyciulete");
         	
-        	String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        	FDUser aru = FDUser.findFDUserByUsername(username);
-        	uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
-            uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
+//        	String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//        	FDUser aru = FDUser.findFDUserByUsername(username);
+//        	uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
+//            uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
 
             uiModel.addAttribute("reqbean", request);
             addDateTimeFormatPatterns(uiModel);
@@ -112,13 +112,6 @@ public class RequestController {
 		uiModel.asMap().clear();
 		return "redirect:/requests?approve";
 	}
-
-
-	@RequestMapping(params = "for", method = RequestMethod.GET)
-    public String createForm(Model uiModel) {
-        uiModel.addAttribute("request", new Request());
-        return "requests/create";
-    }
 	
 	@RequestMapping(params = "form",method = RequestMethod.POST)
     public String create(@Valid Request request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -164,20 +157,22 @@ public class RequestController {
         uiModel.addAttribute("itemId", id);
         uiModel.addAttribute("isApprover",req.isApprover(p.getName()));
         uiModel.addAttribute("isPersonal",req.isOwner(p.getName()));
+        uiModel.addAttribute("isCancelable",req.isCancelble());
         return "requests/show";
+    }
+	
+	
+    @ModelAttribute("activeRequestCount")
+	public long populateRemaningDaysCount(){
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		return Request.countActiveRequests(username);
+	}
+    
+    @ModelAttribute("remainingDaysCount")
+    public long populateRemainingDaysCount(){
+    	String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		return Request.computeAvailableFreeDays(username);
     }
 
-	/**
-	 * Shouldn't exist but Roo will generate it automatically because of signature mismatch
-	 * @param id
-	 * @param uiModel
-	 * @return
-	 */
-	@RequestMapping(value = "/zzz{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("request", Request.findRequest(id));
-        uiModel.addAttribute("itemId", id);
-        return "requests/show";
-    }
 
 }
