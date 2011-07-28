@@ -3,7 +3,7 @@ INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("Admin",0)
 -- INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("ApplicationAdmin",0)
 INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("RequestGranter",0)
 INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("FDAdmin",0)
-INSERT INTO `asdvanced_user_role`(`role_type`,`version`)VALUES("HRManagement",0)
+INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("HRManagement",0)
 
 delete from `approval_strategy`
 INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("LevelTop",12,0,null);

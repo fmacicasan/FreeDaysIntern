@@ -49,9 +49,13 @@ public class AuthentificationController extends
 		}
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		try {
-			RegularUser regularUser =DAOUtils.getSingleResult(RegularUser
+			/*changed from dau because we need to throw error if no1 is found. 
+			 * If null is returned then regularUser is null and no
+			 * BadCredentialsException is thrown
+			*/
+			RegularUser regularUser =RegularUser
 					.findRegularUsersByUsernameAndPasswordEquals(username,
-							password));
+							password).getSingleResult();
 
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
 			Set<AdvancedUserRole> set = ApplicationRegularUser.getAllRolesByUsername(username);
