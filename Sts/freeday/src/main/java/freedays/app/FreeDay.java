@@ -56,6 +56,7 @@ public class FreeDay {
     }
     
     public static FreeDay createPersistentFreeDay(Calendar date, String reason){
+		if (date == null) throw new IllegalArgumentException("The date argument is required");
     	FreeDay fd = new FreeDay();
     	fd.setRequestdate(date);
     	fd.setReason(reason);

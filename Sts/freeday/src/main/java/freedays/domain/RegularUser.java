@@ -25,6 +25,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.transaction.annotation.Transactional;
 
+import freedays.util.DAOUtils;
 import freedays.util.MailUtils;
 import freedays.util.PhraseUtils;
 
@@ -91,18 +92,16 @@ public class RegularUser implements Serializable {
 		query.setParameter(1, search.searchValueLike());
 		// TODO use logger
 		List<RegularUser> result = query.getResultList();
-		// System.out.println(query.getParameter(1).getName());
-		// System.out.println("RegularUser list size:" + result.size());
 		return result;
 	}
 
 	@PersistenceContext
 	transient EntityManager entityManager;
 
-	public static long countRegularUsers() {
-		return entityManager().createQuery(
-				"SELECT COUNT(o) FROM RegularUser o", Long.class)
-				.getSingleResult();
+	public static Long countRegularUsers() {
+		TypedQuery<Long> q = entityManager().createQuery(
+				"SELECT COUNT(o) FROM RegularUser o", Long.class);
+		return DAOUtils.getSingleResult(q);
 	}
 
 	public static final EntityManager entityManager() {
@@ -216,13 +215,11 @@ public class RegularUser implements Serializable {
 				RegularUser.class);
 		q.setParameter("email", email);
 
-		List<RegularUser> list = new ArrayList<RegularUser>();
-		list.add(q.getSingleResult());
-		return list;
+		return q.getResultList();
 	}
 
-	@Transactional
-	public static long countRegularUserByEmail(String email) {
+//	@Transactional
+	public static Long countRegularUserByEmail(String email) {
 		if (email == null || email.length() == 0)
 			throw new IllegalArgumentException("The email argument is required");
 		EntityManager em = RegularUser.entityManager();
@@ -231,10 +228,9 @@ public class RegularUser implements Serializable {
 						"SELECT COUNT(o) FROM RegularUser AS o WHERE o.email = :email and o.deleted = 0",
 						Long.class);
 		q.setParameter("email", email);
-		long count = q.getSingleResult();
+		
+		return DAOUtils.getSingleResult(q);
 
-		em.clear();
-		return count;
 	}
 
 	public String toString() {

@@ -1,34 +1,28 @@
 package freedays.domain;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.EntityManager;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NoResultException;
+import javax.persistence.OneToMany;
+import javax.persistence.TypedQuery;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.transaction.annotation.Transactional;
 
-import freedays.app.FDUser;
-import freedays.domain.RegularUser;
-import javax.persistence.ManyToOne;
-
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Set;
-import freedays.domain.AdvancedUserRole;
-import java.util.HashSet;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-
-import freedays.domain.RequestGranter;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import freedays.domain.Request;
-import javax.persistence.OneToMany;
+import freedays.util.DAOUtils;
 
 @RooJavaBean
 @RooToString
@@ -62,23 +56,20 @@ public abstract class ApplicationRegularUser  implements Serializable {
     //@Transactional
 	public static Set<AdvancedUserRole> getAllRolesByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
-		Set<AdvancedUserRole> set;
-		try{
+		Set<AdvancedUserRole> set=new HashSet<AdvancedUserRole>();
 			EntityManager em = RegularUser.entityManager();
 	        TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o JOIN FETCH o.roles WHERE o.regularUser.username = :username", ApplicationRegularUser.class);
 	        q.setParameter("username", username);
-	        ApplicationRegularUser aru = q.getSingleResult();
-	        //System.out.println("Aruu coming!!"+aru.toString());
-	        set = aru.getRoles();
-        }catch(EmptyResultDataAccessException  e){
-        	set = new HashSet<AdvancedUserRole>();
-        	//System.out.println("testing:"+e);
-        }
+	        ApplicationRegularUser aru = DAOUtils.getSingleResult(q);
+
+	        if(aru!=null)
+	          set = aru.getRoles();
 	    return set;
 	}
 
 	public static Collection<ApplicationRegularUser> findAllRequestGranters() {
-		RequestGranter rg = entityManager().createQuery("SELECT o FROM RequestGranter o JOIN FETCH o.appRegUsers ",RequestGranter.class).getSingleResult();
+		TypedQuery<RequestGranter> q = entityManager().createQuery("SELECT o FROM RequestGranter o JOIN FETCH o.appRegUsers ",RequestGranter.class);
+		RequestGranter rg=DAOUtils.getSingleResult(q);
 		return rg.getAppRegUsers();
 	}
 	
