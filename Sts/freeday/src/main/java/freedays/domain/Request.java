@@ -7,6 +7,7 @@ import java.util.List;
 import freedays.util.DAOUtils;
 import freedays.util.MailUtils;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.ManyToOne;
 import javax.persistence.TypedQuery;
 
+import freedays.app.AppStrategL1;
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
 import freedays.app.FreeDayRequest;
@@ -165,7 +167,13 @@ public class Request   implements Serializable{
         TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser.regularUser.username = :fduser AND status = :status", Long.class);
         q.setParameter("fduser", fdUser.getRegularUser().getUsername());
         q.setParameter("status", status);
-        return DAOUtils.getSingleResult(q);
+        Long res;
+		try{
+			res=q.getSingleResult();
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+		return res;
 	}
 	
 	public static Long countAllRequests(ApplicationRegularUser fdUser){
@@ -173,7 +181,13 @@ public class Request   implements Serializable{
 		EntityManager em = Request.entityManager();
         TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM Request AS o WHERE o.appreguser.regularUser.username = :fduser", Long.class);
         q.setParameter("fduser", fdUser.getRegularUser().getUsername());
-        return DAOUtils.getSingleResult(q);
+        Long res;
+		try{
+			res=q.getSingleResult();
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+		return res;
 	}
 	
 	public static void createPersistentReq(Calendar date,String reason, String username) {

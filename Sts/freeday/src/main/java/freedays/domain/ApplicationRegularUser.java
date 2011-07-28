@@ -60,16 +60,24 @@ public abstract class ApplicationRegularUser  implements Serializable {
 			EntityManager em = RegularUser.entityManager();
 	        TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o JOIN FETCH o.roles WHERE o.regularUser.username = :username", ApplicationRegularUser.class);
 	        q.setParameter("username", username);
-	        ApplicationRegularUser aru = DAOUtils.getSingleResult(q);
-
-	        if(aru!=null)
-	          set = aru.getRoles();
+	        ApplicationRegularUser aru;
+	        try{
+	         aru= q.getSingleResult();
+	        }catch(EmptyResultDataAccessException e){
+				return set;
+			}
+	        set = aru.getRoles();
 	    return set;
 	}
 
 	public static Collection<ApplicationRegularUser> findAllRequestGranters() {
 		TypedQuery<RequestGranter> q = entityManager().createQuery("SELECT o FROM RequestGranter o JOIN FETCH o.appRegUsers ",RequestGranter.class);
-		RequestGranter rg=DAOUtils.getSingleResult(q);
+		RequestGranter rg=null;
+		try{
+		     rg=q.getSingleResult();
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
 		return rg.getAppRegUsers();
 	}
 	

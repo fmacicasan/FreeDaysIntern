@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.TypedQuery;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -26,7 +27,13 @@ public class AppStrategL1 extends ApprovalStrategy {
 	
 	public static ApprovalStrategy getDefaultInitialStrateg(){
 		 TypedQuery<AppStrategL1> q = entityManager().createQuery("SELECT o FROM AppStrategL1 o", AppStrategL1.class);
-		 return DAOUtils.getSingleResult(q);
+		 AppStrategL1 res;
+			try{
+				res=q.getSingleResult();
+			}catch(EmptyResultDataAccessException e){
+				return null;
+			}
+			return res;
 	}
 
 	

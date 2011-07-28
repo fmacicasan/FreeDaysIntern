@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -101,7 +102,14 @@ public class RegularUser implements Serializable {
 	public static Long countRegularUsers() {
 		TypedQuery<Long> q = entityManager().createQuery(
 				"SELECT COUNT(o) FROM RegularUser o", Long.class);
-		return DAOUtils.getSingleResult(q);
+		Long res;
+		try{
+			res= q.getSingleResult();
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+		return res;
+		
 	}
 
 	public static final EntityManager entityManager() {
@@ -228,9 +236,13 @@ public class RegularUser implements Serializable {
 						"SELECT COUNT(o) FROM RegularUser AS o WHERE o.email = :email and o.deleted = 0",
 						Long.class);
 		q.setParameter("email", email);
-		
-		return DAOUtils.getSingleResult(q);
-
+		Long res;
+		try{
+			res=q.getSingleResult();
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+		return res;
 	}
 
 	public String toString() {

@@ -12,11 +12,12 @@ import javax.persistence.TypedQuery;
  * 
  */
 public class DAOUtils {
-	public static <T> T getSingleResult(TypedQuery<T> q) {
-		List<T> results = q.getResultList();
-		if (!results.isEmpty()) {
-			return results.get(0);
-		}
-		return null;
-	}
+//	public static <T> T getSingleResult(TypedQuery<T> q) {
+//		List<T> results = q.getResultList();
+//		if (!results.isEmpty()) {
+//			return results.get(0);
+//		}
+//		return null;
+//	}
 }
+

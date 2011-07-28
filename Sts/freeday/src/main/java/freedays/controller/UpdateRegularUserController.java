@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +22,14 @@ public class UpdateRegularUserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String createForm(Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		
-		RegularUser regularUser = DAOUtils.getSingleResult(RegularUser.findRegularUsersByUsername(
-				httpServletRequest.getUserPrincipal().getName()));
+		try{
+		RegularUser regularUser = RegularUser.findRegularUsersByUsername(
+				httpServletRequest.getUserPrincipal().getName()).getSingleResult();
 		
 		uiModel.addAttribute("regularUser", regularUser);
+		
+		}catch(EmptyResultDataAccessException e){
+		}
 		return "regularusers/update";
 	}
 
