@@ -35,20 +35,6 @@ privileged aspect FDUserController_Roo_Controller {
         return "fdusers/create";
     }
     
-    @RequestMapping(method = RequestMethod.GET)
-    public String FDUserController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("fdusers", FDUser.findFDUserEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) FDUser.countFDUsers() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("fdusers", FDUser.findAllFDUsers());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "fdusers/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT)
     public String FDUserController.update(@Valid FDUser FDUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -75,11 +61,6 @@ privileged aspect FDUserController_Roo_Controller {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/fdusers";
-    }
-    
-    @ModelAttribute("fdusers")
-    public Collection<FDUser> FDUserController.populateFDUsers() {
-        return FDUser.findAllFDUsers();
     }
     
     @ModelAttribute("advanceduserroles")

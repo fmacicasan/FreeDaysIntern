@@ -217,3 +217,9 @@ perform tests
 exit
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-29 12:21:31
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-29 12:21:42
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-29 11:18:47
+hint
+hint logging
+logging setup --level DEBUG 
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-29 12:38:55
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-29 12:39:05

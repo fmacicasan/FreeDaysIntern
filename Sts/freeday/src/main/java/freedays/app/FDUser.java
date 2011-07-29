@@ -1,6 +1,7 @@
 package freedays.app;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -95,6 +96,21 @@ public class FDUser extends ApplicationRegularUser {
            return  results.get(0);
         else
            return null;
+	}
+
+	public static Collection<FDUser> findAllActiveFDUsers() {
+		TypedQuery<FDUser> q = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.regularUser.deleted = :deleted ", FDUser.class);
+        q.setParameter("deleted", false);
+        List<FDUser> results = q.getResultList();
+		return results;
+	}
+
+	public static List<FDUser> findActiveFDUserEntries(int firstResult, int maxResults) {
+		return entityManager().createQuery("SELECT o FROM FDUser o WHERE o.regularUser.deleted = false", FDUser.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+	}
+
+	public static float countActiveFDUsers() {
+		 return entityManager().createQuery("SELECT COUNT(o) FROM FDUser o WHERE o.regularUser.deleted = false", Long.class).getSingleResult();
 	}
 	
 	

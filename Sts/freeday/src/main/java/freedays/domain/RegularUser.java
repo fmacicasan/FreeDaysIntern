@@ -1,7 +1,6 @@
 package freedays.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
@@ -26,7 +25,6 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.transaction.annotation.Transactional;
 
-import freedays.util.DAOUtils;
 import freedays.util.MailUtils;
 import freedays.util.PhraseUtils;
 
@@ -388,10 +386,12 @@ public class RegularUser implements Serializable {
     public void remove() {
 		this.setDeleted(true);
 		this.persist();
+		//this.setUsermodifier(SecurityContextHolder.getContext().getAuthentication().getName());
 //        if (this.entityManager == null) this.entityManager = entityManager();
 //        if (this.entityManager.contains(this)) {
 //            this.entityManager.remove(this);
 //        } else {
+//            RegularUser attached = RegularUser.findRegularUser(this.getId());
 //            RegularUser attached = RegularUser.findRegularUser(this.id);
 //            this.entityManager.remove(attached);
 //        }

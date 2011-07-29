@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -53,6 +54,8 @@ public abstract class ApplicationRegularUser  implements Serializable {
     @Enumerated
     private JobRole jobrole;
     
+	@PersistenceContext
+	transient EntityManager entityManager;
    
     //@Transactional
 	public static Set<AdvancedUserRole> getAllRolesByUsername(String username) {
