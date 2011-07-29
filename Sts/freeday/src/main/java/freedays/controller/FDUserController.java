@@ -59,6 +59,11 @@ public class FDUserController {
 		return RegularUser.findAllRegularUsersUnasociated();
 	}
 	
+	@ModelAttribute("isRenderable")
+	public boolean pupulateIsRenderable(){
+		return !populateRegularUsers().isEmpty();
+	}
+	
     @ModelAttribute("jobroles")
     public Collection<JobRole> populateJobRoles() {
         return Arrays.asList(JobRole.class.getEnumConstants());

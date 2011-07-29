@@ -44,6 +44,9 @@ public class FDUser extends ApplicationRegularUser {
     @NotNull
     @Min(21L)
     private Integer maxFreeDays;
+    
+    @NotNull
+    private Integer maxDerogation;
 
 	public String toString() {
         StringBuilder sb = new StringBuilder();

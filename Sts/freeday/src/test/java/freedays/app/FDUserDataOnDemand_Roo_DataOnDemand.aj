@@ -33,6 +33,7 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
         setHireDate(obj, index);
         setInitDays(obj, index);
         setJobrole(obj, index);
+        setMaxDerogation(obj, index);
         setMaxFreeDays(obj, index);
         setRegularUser(obj, index);
         return obj;
@@ -59,6 +60,11 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     public void FDUserDataOnDemand.setJobrole(FDUser obj, int index) {
         JobRole jobrole = JobRole.class.getEnumConstants()[0];
         obj.setJobrole(jobrole);
+    }
+    
+    public void FDUserDataOnDemand.setMaxDerogation(FDUser obj, int index) {
+        Integer maxDerogation = new Integer(index);
+        obj.setMaxDerogation(maxDerogation);
     }
     
     public void FDUserDataOnDemand.setMaxFreeDays(FDUser obj, int index) {

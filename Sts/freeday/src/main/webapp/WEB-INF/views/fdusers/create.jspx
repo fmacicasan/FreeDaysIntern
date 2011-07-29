@@ -2,15 +2,19 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_freedays_app_FDUser" modelAttribute="FDUser" path="/fdusers" render="${empty dependencies}" z="eVXP6ZvFowVxiVqj7cF5jtjDK8E=">
-        <field:select field="regularUser" id="c_freedays_app_FDUser_regularUser" itemValue="id" items="${regularusers}" path="/uadmin" z="w92IcSnD9ASxtxJV1kLpjudrlIk="/>
+    <form:create id="fc_freedays_app_FDUser" modelAttribute="FDUser" path="/fdusers" render="${empty dependencies and isRenderable}" z="user-managed">
+        <field:select field="regularUser" id="c_freedays_app_FDUser_regularUser" itemValue="id" items="${regularusers}" path="/uadmin" z="user-managed"/>
         <field:select field="roles" id="c_freedays_app_FDUser_roles" itemValue="id" items="${advanceduserroles}" multiple="true" path="/advanceduserroles" z="1EdHlL0WWXMc/4SFKNbIO5Bxu5Y="/>
         <field:select field="granter" id="c_freedays_app_FDUser_granter" itemValue="id" items="${applicationregularusers}" path="/applicationregularusers" z="H2qkmIguYBoNzEQssFN/2j8e8KI="/>
         <field:datetime dateTimePattern="${FDUser_hiredate_date_format}" field="hireDate" id="c_freedays_app_FDUser_hireDate" past="true" required="true" z="UL2JHQcvQ2oeXATiz/9ZHo+yWFM="/>
         <field:input field="initDays" id="c_freedays_app_FDUser_initDays" max="7" min="2" required="true" validationMessageCode="field_invalid_integer" z="d50q3gY6S6gEGXCg/mwBEdj4YmE="/>
         <field:input field="maxFreeDays" id="c_freedays_app_FDUser_maxFreeDays" min="21" required="true" validationMessageCode="field_invalid_integer" z="YX2Hy4s4nkQx6satjVwxS1ftTUs="/>
-        <field:simple field="requests" render="false" id="c_freedays_app_FDUser_requests" messageCode="entity_reference_not_managed" messageCodeAttribute="Request" z="user-managed"/>
-        <field:select field="jobrole" id="c_freedays_app_FDUser_jobrole" items="${jobroles}" path="jobroles"/>
+        <field:simple field="requests" id="c_freedays_app_FDUser_requests" messageCode="entity_reference_not_managed" messageCodeAttribute="Request" render="false" z="user-managed"/>
+        <field:select field="jobrole" id="c_freedays_app_FDUser_jobrole" items="${jobroles}" path="jobroles" z="user-managed"/>
+        <field:input field="maxDerogation" id="c_freedays_app_FDUser_maxDerogation" required="true" validationMessageCode="field_invalid_integer" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_app_FDUser" render="${not empty dependencies}" z="R6glMHX1C2ZnRbou4VX89lBl2v0="/>
+    <c:if test="${not isRenderable}">
+    	<spring:message code="default_fduser_no_regularuser"  />
+    </c:if>
 </div>

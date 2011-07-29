@@ -32,4 +32,12 @@ privileged aspect FDUser_Roo_JavaBean {
         this.maxFreeDays = maxFreeDays;
     }
     
+    public Integer FDUser.getMaxDerogation() {
+        return this.maxDerogation;
+    }
+    
+    public void FDUser.setMaxDerogation(Integer maxDerogation) {
+        this.maxDerogation = maxDerogation;
+    }
+    
 }

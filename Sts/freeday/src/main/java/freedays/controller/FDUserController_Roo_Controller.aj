@@ -6,7 +6,6 @@ package freedays.controller;
 import freedays.app.FDUser;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
-import freedays.domain.RegularUser;
 import freedays.domain.Request;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
