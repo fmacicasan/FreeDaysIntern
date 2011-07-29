@@ -193,8 +193,9 @@ public class RegularUser implements Serializable {
 	 */
 	public static void deleteRegularUser(Long id2) {
 		RegularUser regularU = RegularUser.findRegularUser(id2);
-		regularU.setDeleted(true);
-		regularU.persist();
+		regularU.remove();
+//		regularU.setDeleted(true);
+//		regularU.persist();
 	}
 
 	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
@@ -382,4 +383,17 @@ public class RegularUser implements Serializable {
 		return true;
 	}
 
+
+	@Transactional
+    public void remove() {
+		this.setDeleted(true);
+		this.persist();
+//        if (this.entityManager == null) this.entityManager = entityManager();
+//        if (this.entityManager.contains(this)) {
+//            this.entityManager.remove(this);
+//        } else {
+//            RegularUser attached = RegularUser.findRegularUser(this.id);
+//            this.entityManager.remove(attached);
+//        }
+    }
 }

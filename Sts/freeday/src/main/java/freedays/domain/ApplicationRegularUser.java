@@ -21,6 +21,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.transaction.annotation.Transactional;
 
 import freedays.util.DAOUtils;
 
@@ -90,4 +91,16 @@ public abstract class ApplicationRegularUser  implements Serializable {
 				this.getVersion().equals(aru.getVersion());
 	}
 
+
+	@Transactional
+    public void remove() {
+		this.getRegularUser().remove();
+//        if (this.entityManager == null) this.entityManager = entityManager();
+//        if (this.entityManager.contains(this)) {
+//            this.entityManager.remove(this);
+//        } else {
+//            ApplicationRegularUser attached = ApplicationRegularUser.findApplicationRegularUser(this.id);
+//            this.entityManager.remove(attached);
+//        }
+    }
 }

@@ -60,17 +60,6 @@ privileged aspect ApplicationRegularUser_Roo_Entity {
     }
     
     @Transactional
-    public void ApplicationRegularUser.remove() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        if (this.entityManager.contains(this)) {
-            this.entityManager.remove(this);
-        } else {
-            ApplicationRegularUser attached = ApplicationRegularUser.findApplicationRegularUser(this.id);
-            this.entityManager.remove(attached);
-        }
-    }
-    
-    @Transactional
     public void ApplicationRegularUser.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
