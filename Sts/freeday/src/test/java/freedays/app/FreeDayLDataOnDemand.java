@@ -12,11 +12,11 @@ import org.springframework.roo.addon.dod.RooDataOnDemand;
 import freedays.domain.ApprovalStrategy;
 
 @RooDataOnDemand(entity = FreeDayL.class)
-public class FreeDayDataOnDemand {
+public class FreeDayLDataOnDemand {
 	
 	private Random rnd = new SecureRandom();
 	
-	public static FreeDay generateFreeDay(){
+	public static FreeDayL generateFreeDay(){
 		FreeDayL fd = new FreeDayL();
 		
 		Calendar instance = Calendar.getInstance();

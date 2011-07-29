@@ -13,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 privileged aspect FreeDay_Roo_Entity {
     
     declare @type: FreeDay: @Entity;
+    
+    declare @type: FreeDay: @Inheritance(strategy = InheritanceType.SINGLE_TABLE);
     
     @PersistenceContext
     transient EntityManager FreeDay.entityManager;
@@ -87,7 +91,9 @@ privileged aspect FreeDay_Roo_Entity {
     }
     
     public static final EntityManager FreeDay.entityManager() {
-        EntityManager em = new FreeDay().entityManager;
+        EntityManager em = new FreeDay() {
+            public boolean isCancelable() { throw new UnsupportedOperationException(); }
+        }.entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }

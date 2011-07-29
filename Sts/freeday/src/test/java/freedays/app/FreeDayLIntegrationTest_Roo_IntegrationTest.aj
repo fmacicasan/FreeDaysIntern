@@ -9,23 +9,23 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
+privileged aspect FreeDayLIntegrationTest_Roo_IntegrationTest {
     
-    declare @type: FreeDayIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
+    declare @type: FreeDayLIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
     
-    declare @type: FreeDayIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
+    declare @type: FreeDayLIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
-    declare @type: FreeDayIntegrationTest: @Transactional;
+    declare @type: FreeDayLIntegrationTest: @Transactional;
     
     @Test
-    public void FreeDayIntegrationTest.testCountFreeDayLs() {
+    public void FreeDayLIntegrationTest.testCountFreeDayLs() {
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", dod.getRandomFreeDayL());
         long count = freedays.app.FreeDayL.countFreeDayLs();
         org.junit.Assert.assertTrue("Counter for 'FreeDayL' incorrectly reported there were no entries", count > 0);
     }
     
     @Test
-    public void FreeDayIntegrationTest.testFindFreeDayL() {
+    public void FreeDayLIntegrationTest.testFindFreeDayL() {
         freedays.app.FreeDayL obj = dod.getRandomFreeDayL();
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", obj);
         java.lang.Long id = obj.getId();
@@ -36,7 +36,7 @@ privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void FreeDayIntegrationTest.testFindAllFreeDayLs() {
+    public void FreeDayLIntegrationTest.testFindAllFreeDayLs() {
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", dod.getRandomFreeDayL());
         long count = freedays.app.FreeDayL.countFreeDayLs();
         org.junit.Assert.assertTrue("Too expensive to perform a find all test for 'FreeDayL', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
@@ -46,7 +46,7 @@ privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void FreeDayIntegrationTest.testFindFreeDayLEntries() {
+    public void FreeDayLIntegrationTest.testFindFreeDayLEntries() {
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", dod.getRandomFreeDayL());
         long count = freedays.app.FreeDayL.countFreeDayLs();
         if (count > 20) count = 20;
@@ -56,7 +56,7 @@ privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void FreeDayIntegrationTest.testFlush() {
+    public void FreeDayLIntegrationTest.testFlush() {
         freedays.app.FreeDayL obj = dod.getRandomFreeDayL();
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", obj);
         java.lang.Long id = obj.getId();
@@ -70,7 +70,7 @@ privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void FreeDayIntegrationTest.testMerge() {
+    public void FreeDayLIntegrationTest.testMerge() {
         freedays.app.FreeDayL obj = dod.getRandomFreeDayL();
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", obj);
         java.lang.Long id = obj.getId();
@@ -85,7 +85,7 @@ privileged aspect FreeDayIntegrationTest_Roo_IntegrationTest {
     }
     
     @Test
-    public void FreeDayIntegrationTest.testPersist() {
+    public void FreeDayLIntegrationTest.testPersist() {
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", dod.getRandomFreeDayL());
         freedays.app.FreeDayL obj = dod.getNewTransientFreeDayL(Integer.MAX_VALUE);
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to provide a new transient entity", obj);

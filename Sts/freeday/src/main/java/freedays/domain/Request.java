@@ -19,7 +19,7 @@ import javax.persistence.TypedQuery;
 
 import freedays.app.AppStrategL1;
 import freedays.app.FDUser;
-import freedays.app.FreeDay;
+import freedays.app.FreeDayL;
 import freedays.app.FreeDayRequest;
 
 import javax.validation.constraints.NotNull;
@@ -48,7 +48,7 @@ public class Request   implements Serializable{
     private ApplicationRegularUser appreguser;
 
     @OneToOne
-    private FreeDay requestable;
+    private FreeDayL requestable;
 
     @Enumerated
     private RequestStatus status;
@@ -195,7 +195,7 @@ public class Request   implements Serializable{
 		Request req = new Request();
 		req.setStatus(RequestStatus.getInit());
 		req.setAppreguser(FDUser.findFDUserByUsername(username));
-		req.setRequestable(FreeDay.createPersistentFreeDay(date,reason));
+		req.setRequestable(FreeDayL.createPersistentFreeDay(date,reason));
 		System.out.println(req);
 		req.init();
 		req.persist();
@@ -268,11 +268,15 @@ public class Request   implements Serializable{
 			return false;
 		}
 	}
-	public boolean isCancelable(){
+	
+	public  boolean isCancelable(){
 		return this.status != RequestStatus.GRANTED
 				&& this.status != RequestStatus.CANCELED
-				&& this.status != RequestStatus.REJECTED;
+				&& this.status != RequestStatus.REJECTED
+				&& this.requestable.isCancelable();
+		
 	}
+	
 	public static long computeAvailableFreeDays(String username) {
 		FDUser aru = FDUser.findFDUserByUsername(username);
 		return aru.computeAvailableFreeDays();

@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 
 @RooIntegrationTest(entity = FreeDayL.class)
-public class FreeDayIntegrationTest {
+public class FreeDayLIntegrationTest {
 
     @Autowired
-    private FreeDayDataOnDemand dod;
+    private FreeDayLDataOnDemand dod;
     
     @Test
     public void testMarkerMethod() {

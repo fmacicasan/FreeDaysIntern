@@ -15,13 +15,13 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
-privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
+privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
     
-    declare @type: FreeDayDataOnDemand: @Component;
+    declare @type: FreeDayLDataOnDemand: @Component;
     
-    private List<FreeDayL> FreeDayDataOnDemand.data;
+    private List<FreeDayL> FreeDayLDataOnDemand.data;
     
-    public FreeDayL FreeDayDataOnDemand.getNewTransientFreeDayL(int index) {
+    public FreeDayL FreeDayLDataOnDemand.getNewTransientFreeDayL(int index) {
         FreeDayL obj = new FreeDayL();
         setApproval(obj, index);
         setReason(obj, index);
@@ -29,17 +29,17 @@ privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
         return obj;
     }
     
-    public void FreeDayDataOnDemand.setApproval(FreeDayL obj, int index) {
+    public void FreeDayLDataOnDemand.setApproval(FreeDayL obj, int index) {
         ApprovalStrategy approval = null;
         obj.setApproval(approval);
     }
     
-    public void FreeDayDataOnDemand.setReason(FreeDayL obj, int index) {
+    public void FreeDayLDataOnDemand.setReason(FreeDayL obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
     }
     
-    public FreeDayL FreeDayDataOnDemand.getSpecificFreeDayL(int index) {
+    public FreeDayL FreeDayLDataOnDemand.getSpecificFreeDayL(int index) {
         init();
         if (index < 0) index = 0;
         if (index > (data.size() - 1)) index = data.size() - 1;
@@ -47,17 +47,17 @@ privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
         return FreeDayL.findFreeDayL(obj.getId());
     }
     
-    public FreeDayL FreeDayDataOnDemand.getRandomFreeDayL() {
+    public FreeDayL FreeDayLDataOnDemand.getRandomFreeDayL() {
         init();
         FreeDayL obj = data.get(rnd.nextInt(data.size()));
         return FreeDayL.findFreeDayL(obj.getId());
     }
     
-    public boolean FreeDayDataOnDemand.modifyFreeDayL(FreeDayL obj) {
+    public boolean FreeDayLDataOnDemand.modifyFreeDayL(FreeDayL obj) {
         return false;
     }
     
-    public void FreeDayDataOnDemand.init() {
+    public void FreeDayLDataOnDemand.init() {
         data = FreeDayL.findFreeDayLEntries(0, 10);
         if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayL' illegally returned null");
         if (!data.isEmpty()) {

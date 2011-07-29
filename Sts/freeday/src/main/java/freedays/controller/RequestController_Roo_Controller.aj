@@ -3,7 +3,7 @@
 
 package freedays.controller;
 
-import freedays.app.FreeDay;
+import freedays.app.FreeDayL;
 import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
@@ -66,9 +66,9 @@ privileged aspect RequestController_Roo_Controller {
         return "redirect:/requests";
     }
     
-    @ModelAttribute("freedays")
-    public Collection<FreeDay> RequestController.populateFreeDays() {
-        return FreeDay.findAllFreeDays();
+    @ModelAttribute("freedayls")
+    public Collection<FreeDayL> RequestController.populateFreeDayLs() {
+        return FreeDayL.findAllFreeDayLs();
     }
     
     @ModelAttribute("requeststatuses")

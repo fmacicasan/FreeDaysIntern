@@ -4,18 +4,8 @@
 package freedays.app;
 
 import freedays.domain.ApprovalStrategy;
-import java.lang.String;
-import java.util.Calendar;
 
 privileged aspect FreeDay_Roo_JavaBean {
-    
-    public Calendar FreeDay.getRequestdate() {
-        return this.requestdate;
-    }
-    
-    public void FreeDay.setRequestdate(Calendar requestdate) {
-        this.requestdate = requestdate;
-    }
     
     public ApprovalStrategy FreeDay.getApproval() {
         return this.approval;
@@ -23,14 +13,6 @@ privileged aspect FreeDay_Roo_JavaBean {
     
     public void FreeDay.setApproval(ApprovalStrategy approval) {
         this.approval = approval;
-    }
-    
-    public String FreeDay.getReason() {
-        return this.reason;
-    }
-    
-    public void FreeDay.setReason(String reason) {
-        this.reason = reason;
     }
     
 }

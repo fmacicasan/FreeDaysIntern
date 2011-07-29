@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 
 import freedays.app.FDUserDataOnDemand;
-import freedays.app.FreeDay;
-import freedays.app.FreeDayDataOnDemand;
+import freedays.app.FreeDayL;
+import freedays.app.FreeDayLDataOnDemand;
 import freedays.app.RequestStatus;
 import freedays.domain.Request;
 
@@ -26,7 +26,7 @@ public class RequestIntegrationTest {
 		Request.DEBUG = true;
 		
 		RequestStatus status = RequestStatus.values()[0];
-		FreeDay requestable = FreeDayDataOnDemand.generateFreeDay();
+		FreeDayL requestable = FreeDayLDataOnDemand.generateFreeDay();
 		request = new Request();
 		request.setStatus(status);
 		request.setRequestable(requestable);

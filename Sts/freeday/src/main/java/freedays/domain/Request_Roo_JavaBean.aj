@@ -3,7 +3,7 @@
 
 package freedays.domain;
 
-import freedays.app.FreeDay;
+import freedays.app.FreeDayL;
 import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
 
@@ -17,11 +17,11 @@ privileged aspect Request_Roo_JavaBean {
         this.appreguser = appreguser;
     }
     
-    public FreeDay Request.getRequestable() {
+    public FreeDayL Request.getRequestable() {
         return this.requestable;
     }
     
-    public void Request.setRequestable(FreeDay requestable) {
+    public void Request.setRequestable(FreeDayL requestable) {
         this.requestable = requestable;
     }
     

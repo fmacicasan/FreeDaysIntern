@@ -34,6 +34,32 @@
       <c:set value="false" var="required" />
     </c:if>
     
+<!--     <c:if test="${empty future}">
+    	<c:set value="false" var="future" />
+    </c:if>
+    
+    <c:if test="${empty past}">
+    	<c:set value="false" var="past"/>
+    </c:if>
+    
+    <c:if test="${past}">
+    <c:out value="past"/>
+    	<c:set var="maxxx">
+    		
+    		<jsp:expression>new java.text.SimpleDateFormat("mm-dd-yyyy").format(java.util.Calendar.getInstance().getTime())</jsp:expression>
+    	</c:set>
+    </c:if>
+    
+    <c:if test="${future}">
+    	<c:set var="minnn">
+    		 <jsp:expression>new java.text.SimpleDateFormat("mm-dd-yyyy").format(java.util.Calendar.getInstance().getTime())</jsp:expression>
+    	</c:set>
+    	<c:set var="maxxx" />
+    	<c:out value="futureeeee"/>
+    </c:if> -->
+    
+    
+    
     
     <c:if test="${empty readonly}">
       <c:set value="false" var="readonly" />
@@ -75,7 +101,8 @@
         <c:set var="sec_dateTimePattern">
           <spring:escapeBody javaScriptEscape="true">${dateTimePattern}</spring:escapeBody>
         </c:set>
-        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${sec_field_validation}', invalidMessage: '${sec_field_invalid}', required: ${required}, constraints: {datePattern : '${sec_dateTimePattern}', required : ${required}}, datePattern : '${sec_dateTimePattern}'}})); </script>
+        <!-- min : '${minnn}', max : '${maxxx}', for restricting based on future/past values 29072011_testing failed --> 
+        Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${sec_field_validation}', invalidMessage: '${sec_field_invalid}', required: ${required}, constraints: {datePattern : '${sec_dateTimePattern}',required : ${required}}, datePattern : '${sec_dateTimePattern}'}})); </script>
     </div>
     <br />
   </c:if>
