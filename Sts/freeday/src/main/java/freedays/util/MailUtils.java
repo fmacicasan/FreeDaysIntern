@@ -18,7 +18,8 @@ import javax.mail.internet.MimeMessage;
 public class MailUtils {
 	private static final String SOURCE = "internlwtest@gmail.com";
 	private static final String PASS = "weaver01";
-    /**
+    
+	/**
      * <b>public static void send (String to, String subject, String
      * content)</b>
      * <p>

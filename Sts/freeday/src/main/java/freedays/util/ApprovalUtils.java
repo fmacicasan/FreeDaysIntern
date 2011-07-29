@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import freedays.domain.ApprovalStrategy;
 
+@Deprecated
 public class ApprovalUtils {
 	public static ApprovalStrategy getDefaultApprovalStrategy(){
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-FreeDaysApprovalStrategy.xml");

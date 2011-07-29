@@ -106,7 +106,8 @@ public class Request   implements Serializable{
     	if(advanceApproval()){
     		ApplicationRegularUser oldApprover = this.approver;
     		advanceApprover();
-    		return this.approver != null && !this.approver.isSame(oldApprover); //TODO check also if the approver changed, if not it is the same and shouldn't advance  
+    		//TODO: don't return false if the approver did not change, only stop the approval request
+    		return this.approver != null && !this.approver.isSame(oldApprover); // check also if the approver changed, if not it is the same and shouldn't advance  
     	}
     	return false;
     	

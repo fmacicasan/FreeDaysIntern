@@ -3,6 +3,11 @@ package freedays.util;
 import java.security.SecureRandom;
 
 
+/**
+ * Utility class responsible for the generation of random passwords.
+ * @author fmacicasan
+ *
+ */
 public class PhraseUtils {
 	
 	public static final int MIN_LENGTH = 7;
@@ -66,6 +71,12 @@ public class PhraseUtils {
 	
 	private static final SecureRandom rand = new SecureRandom();
 	
+	/**
+	 * Generates a random password with a random length.
+	 * The guaranteed minimal length is MIN_LENGTH with
+	 * a positive variation of [0 ... MAX_VARIATION]
+	 * @return the random password
+	 */
 	public static String getRandomPhrase(){
 		int length = PhraseUtils.MIN_LENGTH + PhraseUtils.rand.nextInt(MAX_VARIATION);
 		
@@ -78,6 +89,10 @@ public class PhraseUtils {
 		return sb.toString();
 	}
 	
+	/**
+	 * Generates a random password with maximal length.
+	 * @return the password with maximal length.
+	 */
 	public static int getPasswordMaxLength(){
 		return PhraseUtils.MIN_LENGTH+PhraseUtils.MAX_VARIATION;
 	}
