@@ -34,12 +34,6 @@ public class RequestController {
         uiModel.addAttribute("reqbean", new FreeDayRequest());
         addDateTimeFormatPatterns(uiModel);
         
-//        String username = httpServletRequest.getUserPrincipal().getName();
-//        //TODO: place this in FDUser functionality
-//        FDUser aru = FDUser.findFDUserByUsername(username);
-//        uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
-//        uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
-        
         System.out.println("testing");
         return "requests/create";
     }
@@ -50,10 +44,6 @@ public class RequestController {
         	
         	System.out.println("ciuyciulete");
         	
-//        	String username = SecurityContextHolder.getContext().getAuthentication().getName();
-//        	FDUser aru = FDUser.findFDUserByUsername(username);
-//        	uiModel.addAttribute("remainingDaysCount",aru.computeAvailableFreeDays());
-//            uiModel.addAttribute("activeRequestCount",Request.countActiveRequests(aru));
         	uiModel.addAttribute("hasError",true);
             uiModel.addAttribute("reqbean", request);
             addDateTimeFormatPatterns(uiModel);
@@ -64,24 +54,10 @@ public class RequestController {
         //uiModel.asMap().clear();
         //request.persist();
         Request.createPersistentReq(request,httpServletRequest.getUserPrincipal().getName());
-        return "index";
+        uiModel.asMap().clear();
+        return "redirect:/requests?own";
     }
 	
-//	@RequestMapping(value = "/{id}", params = "eval", method = RequestMethod.POST)
-//	public String evalRequest(@PathVariable("id") Long id,@RequestParam(value="approve") String approve,@RequestParam(value="deny", required=false) String deny, Model uiModel){
-//			
-//		if(approve != null){
-//			Request.approve(id);
-//		} else{
-//			if(deny != null){
-//				Request.deny(id);
-//			} else {
-//				System.out.println("Eroriuy!");
-//			}
-//		}
-//		
-//		return "redirect:/requests?approve";
-//	}
 	
 	@RequestMapping(value = "/{id}", params = {"eval","approve"}, method = RequestMethod.POST)
 	public String evalRequestApprove(@PathVariable("id") Long id, Model uiModel){
