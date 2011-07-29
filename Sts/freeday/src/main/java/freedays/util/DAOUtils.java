@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
  * @author gparvu
  * 
  */
+@Deprecated
 public class DAOUtils {
 //	public static <T> T getSingleResult(TypedQuery<T> q) {
 //		List<T> results = q.getResultList();

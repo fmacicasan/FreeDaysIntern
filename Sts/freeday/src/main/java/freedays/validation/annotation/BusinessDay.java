@@ -16,6 +16,8 @@ import javax.validation.Payload;
 import freedays.validation.CheckBusinessDayValidator;
 
 /**
+ * Restricts a Calendar instance to days representing working days.
+ * It won't validate any Calendar.SUNDAY or Calendar.SATURDAY obj.
  * @author fmacicasan
  *
  */

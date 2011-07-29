@@ -4,7 +4,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.util.StringUtils;
 
 /**
- * Wrapper for search-ale
+ * Wrapper for search requests.
  * @author fmacicasan
  *
  */

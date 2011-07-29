@@ -7,6 +7,11 @@ import javax.validation.ConstraintValidatorContext;
 
 import freedays.validation.annotation.BusinessDay;
 
+/**
+ * Validator used by the {@link freedays.validation.annotation.BusinessDay @BusinessDay} annotation.
+ * @author fmacicasan
+ *
+ */
 public class CheckBusinessDayValidator implements ConstraintValidator<BusinessDay, Calendar>{
 
 	@Override

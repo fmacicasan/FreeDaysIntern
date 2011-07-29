@@ -1,7 +1,9 @@
 package freedays.app;
 
+import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,6 +13,8 @@ import freedays.domain.ApprovalStrategy;
 
 @RooDataOnDemand(entity = FreeDay.class)
 public class FreeDayDataOnDemand {
+	
+	private Random rnd = new SecureRandom();
 	
 	public static FreeDay generateFreeDay(){
 		FreeDay fd = new FreeDay();
@@ -32,4 +36,10 @@ public class FreeDayDataOnDemand {
 		return fd;
 		
 	}
+
+	public void setRequestdate(FreeDay obj, int index) {
+        Calendar requestdate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), rnd.nextInt(Calendar.THURSDAY)+2);
+        obj.setRequestdate(requestdate);
+    }
+
 }

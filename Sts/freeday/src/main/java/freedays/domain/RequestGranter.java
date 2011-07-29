@@ -9,7 +9,6 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooEntity
-
 @DiscriminatorValue(RequestGranter.DISCRIM)
 public class RequestGranter extends AdvancedUserRole {
 
