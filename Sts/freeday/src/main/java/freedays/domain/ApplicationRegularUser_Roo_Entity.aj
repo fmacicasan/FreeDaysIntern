@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,9 +23,6 @@ privileged aspect ApplicationRegularUser_Roo_Entity {
     declare @type: ApplicationRegularUser: @Entity;
     
     declare @type: ApplicationRegularUser: @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS);
-    
-    @PersistenceContext
-    transient EntityManager ApplicationRegularUser.entityManager;
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -57,17 +53,6 @@ privileged aspect ApplicationRegularUser_Roo_Entity {
     public void ApplicationRegularUser.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
-    }
-    
-    @Transactional
-    public void ApplicationRegularUser.remove() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        if (this.entityManager.contains(this)) {
-            this.entityManager.remove(this);
-        } else {
-            ApplicationRegularUser attached = ApplicationRegularUser.findApplicationRegularUser(this.id);
-            this.entityManager.remove(attached);
-        }
     }
     
     @Transactional

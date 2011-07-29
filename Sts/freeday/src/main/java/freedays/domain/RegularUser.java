@@ -24,6 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import freedays.util.DAOUtils;
@@ -193,8 +194,9 @@ public class RegularUser implements Serializable {
 	 */
 	public static void deleteRegularUser(Long id2) {
 		RegularUser regularU = RegularUser.findRegularUser(id2);
-		regularU.setDeleted(true);
-		regularU.persist();
+		regularU.remove();
+		
+		
 	}
 
 	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
@@ -382,4 +384,18 @@ public class RegularUser implements Serializable {
 		return true;
 	}
 
+
+	@Transactional
+    public void remove() {
+		this.setDeleted(true);
+		//this.setUsermodifier(SecurityContextHolder.getContext().getAuthentication().getName());
+		this.persist();
+//        if (this.entityManager == null) this.entityManager = entityManager();
+//        if (this.entityManager.contains(this)) {
+//            this.entityManager.remove(this);
+//        } else {
+//            RegularUser attached = RegularUser.findRegularUser(this.getId());
+//            this.entityManager.remove(attached);
+//        }
+    }
 }
