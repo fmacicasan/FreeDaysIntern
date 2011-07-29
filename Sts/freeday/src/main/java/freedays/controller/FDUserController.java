@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RooWebScaffold(path = "fdusers", formBackingObject = FDUser.class)
 @RequestMapping("/fdusers")
@@ -62,5 +63,24 @@ public class FDUserController {
     @ModelAttribute("jobroles")
     public Collection<JobRole> populateJobRoles() {
         return Arrays.asList(JobRole.class.getEnumConstants());
+    }
+
+	@ModelAttribute("fdusers")
+    public Collection<FDUser> populateFDUsers() {
+        return FDUser.findAllActiveFDUsers();
+    }
+
+	@RequestMapping(method = RequestMethod.GET)
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            uiModel.addAttribute("fdusers", FDUser.findActiveFDUserEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
+            float nrOfPages = (float) FDUser.countActiveFDUsers() / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            uiModel.addAttribute("fdusers", FDUser.findAllActiveFDUsers());
+        }
+        addDateTimeFormatPatterns(uiModel);
+        return "fdusers/list";
     }
 }

@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_freedays_app_FDUser" modelAttribute="FDUser" path="/fdusers" render="${empty dependencies}" z="eVXP6ZvFowVxiVqj7cF5jtjDK8E=">
-        <field:select field="regularUser" id="c_freedays_app_FDUser_regularUser" itemValue="id" items="${regularusers}" path="/uadmin" z="w92IcSnD9ASxtxJV1kLpjudrlIk="/>
+        <field:select field="regularUser" id="c_freedays_app_FDUser_regularUser" itemValue="id" items="${regularusers}" path="/uadmin" z="user-managed"/>
         <field:select field="roles" id="c_freedays_app_FDUser_roles" itemValue="id" items="${advanceduserroles}" multiple="true" path="/advanceduserroles" z="1EdHlL0WWXMc/4SFKNbIO5Bxu5Y="/>
         <field:select field="granter" id="c_freedays_app_FDUser_granter" itemValue="id" items="${applicationregularusers}" path="/applicationregularusers" z="H2qkmIguYBoNzEQssFN/2j8e8KI="/>
         <field:datetime dateTimePattern="${FDUser_hiredate_date_format}" field="hireDate" id="c_freedays_app_FDUser_hireDate" past="true" required="true" z="UL2JHQcvQ2oeXATiz/9ZHo+yWFM="/>
