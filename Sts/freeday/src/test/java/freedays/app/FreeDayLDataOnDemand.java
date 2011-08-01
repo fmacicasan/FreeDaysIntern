@@ -22,7 +22,7 @@ public class FreeDayLDataOnDemand {
 		
 		Calendar instance = Calendar.getInstance();
 		Calendar requestdate = new GregorianCalendar(instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH) + 1);
-		fd.setRequestdate(requestdate);
+		fd.setLegalday(requestdate);
 		
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-FreeDaysApprovalStrategy.xml");
 //		ApprovalStrategy app = (ApprovalStrategy) ac.getBean("level1");
@@ -40,7 +40,7 @@ public class FreeDayLDataOnDemand {
 
 	public void setRequestdate(FreeDayL obj, int index) {
         Calendar requestdate = DateUtils.generateFutureBusinessDay();
-        obj.setRequestdate(requestdate);
+        obj.setLegalday(requestdate);
     }
 
 }

@@ -2,6 +2,7 @@ package freedays.util;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 /**
  * Utility class used for date generation & manipulation.
@@ -15,7 +16,7 @@ public class DateUtils {
 	 * @return a value between Calendar.MONDAY and Calendar.FRIDAY
 	 */
 	public static int generateRandomBusinessDayOfWeek(){
-		return new java.util.Random().nextInt(Calendar.THURSDAY)+2;
+		return new Random().nextInt(Calendar.THURSDAY)+2;
 	}
 	
 	
@@ -25,5 +26,17 @@ public class DateUtils {
 	
 	public static Calendar generatePastBusinessDay(){
 		return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) - 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
+	}
+	
+	public static Calendar generateFutureWeekendDay(){
+		//return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomWeekendDayOfWeek());
+		Calendar instance = Calendar.getInstance();
+		instance.set(Calendar.YEAR, instance.get(Calendar.YEAR)+1);
+		instance.set(Calendar.DAY_OF_WEEK, DateUtils.generateRandomWeekendDayOfWeek());
+		return instance;
+	}
+	
+	public static int generateRandomWeekendDayOfWeek() {
+		 return Calendar.SATURDAY; //Saturday is the normal recovery day of week
 	}
 }

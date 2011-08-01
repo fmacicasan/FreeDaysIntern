@@ -5,14 +5,14 @@ package freedays.app;
 
 import java.util.Calendar;
 
-privileged aspect FreeDayL_Roo_JavaBean {
+privileged aspect FreeDayC_Roo_JavaBean {
     
-    public Calendar FreeDayL.getLegalday() {
-        return this.legalday;
+    public Calendar FreeDayC.getRequestdate() {
+        return this.requestdate;
     }
     
-    public void FreeDayL.setLegalday(Calendar legalday) {
-        this.legalday = legalday;
+    public void FreeDayC.setRequestdate(Calendar requestdate) {
+        this.requestdate = requestdate;
     }
     
 }

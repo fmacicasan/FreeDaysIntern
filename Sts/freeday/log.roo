@@ -238,3 +238,16 @@ perform tests
 perform tests
 perform tests
 perform tests
+entity --class freedays.app.FreeDayC --extends freedays.app.FreeDay --testAutomatically 
+field date --fieldName requestdate --type java.util.Calendar --future --notNull --dateFormat SHORT
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-01 10:13:44
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-01 10:13:52
+entity --class freedays.app.FreeDayR --extends freedays.app.FreeDay --testAutomatically 
+field date --fieldName recoverdate --type java.util.Calendar --future --notNull --dateFormat SHORT
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests

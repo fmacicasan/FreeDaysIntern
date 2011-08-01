@@ -16,7 +16,7 @@ public class CheckBusinessDayValidator implements ConstraintValidator<BusinessDa
 
 	@Override
 	public void initialize(BusinessDay constraintAnnotation) {
-		// TODO Auto-generated method stub
+		// nothing here
 		
 	}
 

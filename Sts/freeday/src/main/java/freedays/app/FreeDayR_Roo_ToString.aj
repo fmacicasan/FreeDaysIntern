@@ -5,13 +5,16 @@ package freedays.app;
 
 import java.lang.String;
 
-privileged aspect FreeDay_Roo_ToString {
+privileged aspect FreeDayR_Roo_ToString {
     
-    public String FreeDay.toString() {
+    public String FreeDayR.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Approval: ").append(getApproval()).append(", ");
         sb.append("Date: ").append(getDate() == null ? "null" : getDate().getTime()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
         sb.append("Reason: ").append(getReason()).append(", ");
+        sb.append("Recoverdate: ").append(getRecoverdate() == null ? "null" : getRecoverdate().getTime()).append(", ");
+        sb.append("Version: ").append(getVersion()).append(", ");
         sb.append("Cancelable: ").append(isCancelable());
         return sb.toString();
     }

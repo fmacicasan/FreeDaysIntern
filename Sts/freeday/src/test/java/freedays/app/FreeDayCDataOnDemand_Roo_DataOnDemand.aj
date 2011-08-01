@@ -3,75 +3,79 @@
 
 package freedays.app;
 
-import freedays.app.FreeDayL;
+import freedays.app.FreeDayC;
 import freedays.domain.ApprovalStrategy;
 import java.lang.String;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
-privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
+privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
     
-    declare @type: FreeDayLDataOnDemand: @Component;
+    declare @type: FreeDayCDataOnDemand: @Component;
     
-    private List<FreeDayL> FreeDayLDataOnDemand.data;
+    private Random FreeDayCDataOnDemand.rnd = new SecureRandom();
     
-    public FreeDayL FreeDayLDataOnDemand.getNewTransientFreeDayL(int index) {
-        FreeDayL obj = new FreeDayL();
+    private List<FreeDayC> FreeDayCDataOnDemand.data;
+    
+    public FreeDayC FreeDayCDataOnDemand.getNewTransientFreeDayC(int index) {
+        FreeDayC obj = new FreeDayC();
         setApproval(obj, index);
-        setLegalday(obj, index);
         setReason(obj, index);
+        setRequestdate(obj, index);
         return obj;
     }
     
-    public void FreeDayLDataOnDemand.setApproval(FreeDayL obj, int index) {
+    public void FreeDayCDataOnDemand.setApproval(FreeDayC obj, int index) {
         ApprovalStrategy approval = null;
         obj.setApproval(approval);
     }
     
-    public void FreeDayLDataOnDemand.setLegalday(FreeDayL obj, int index) {
-        Calendar legalday = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
-        obj.setLegalday(legalday);
-    }
-    
-    public void FreeDayLDataOnDemand.setReason(FreeDayL obj, int index) {
+    public void FreeDayCDataOnDemand.setReason(FreeDayC obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
     }
     
-    public FreeDayL FreeDayLDataOnDemand.getSpecificFreeDayL(int index) {
+    public void FreeDayCDataOnDemand.setRequestdate(FreeDayC obj, int index) {
+        Calendar requestdate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
+        obj.setRequestdate(requestdate);
+    }
+    
+    public FreeDayC FreeDayCDataOnDemand.getSpecificFreeDayC(int index) {
         init();
         if (index < 0) index = 0;
         if (index > (data.size() - 1)) index = data.size() - 1;
-        FreeDayL obj = data.get(index);
-        return FreeDayL.findFreeDayL(obj.getId());
+        FreeDayC obj = data.get(index);
+        return FreeDayC.findFreeDayC(obj.getId());
     }
     
-    public FreeDayL FreeDayLDataOnDemand.getRandomFreeDayL() {
+    public FreeDayC FreeDayCDataOnDemand.getRandomFreeDayC() {
         init();
-        FreeDayL obj = data.get(rnd.nextInt(data.size()));
-        return FreeDayL.findFreeDayL(obj.getId());
+        FreeDayC obj = data.get(rnd.nextInt(data.size()));
+        return FreeDayC.findFreeDayC(obj.getId());
     }
     
-    public boolean FreeDayLDataOnDemand.modifyFreeDayL(FreeDayL obj) {
+    public boolean FreeDayCDataOnDemand.modifyFreeDayC(FreeDayC obj) {
         return false;
     }
     
-    public void FreeDayLDataOnDemand.init() {
-        data = FreeDayL.findFreeDayLEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayL' illegally returned null");
+    public void FreeDayCDataOnDemand.init() {
+        data = FreeDayC.findFreeDayCEntries(0, 10);
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayC' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new ArrayList<freedays.app.FreeDayL>();
+        data = new ArrayList<freedays.app.FreeDayC>();
         for (int i = 0; i < 10; i++) {
-            FreeDayL obj = getNewTransientFreeDayL(i);
+            FreeDayC obj = getNewTransientFreeDayC(i);
             try {
                 obj.persist();
             } catch (ConstraintViolationException e) {

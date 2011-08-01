@@ -44,8 +44,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
         obj.setGranter(granter);
     }
     
-
-    
     public void FDUserDataOnDemand.setInitDays(FDUser obj, int index) {
         Integer initDays = new Integer(index);
         if (initDays < 2 || initDays > 7) {

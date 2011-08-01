@@ -30,15 +30,15 @@ public class FreeDayL extends FreeDay {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
     @BusinessDay
-    private Calendar requestdate;
+    private Calendar legalday;
     
-    private String reason;
+    
 
 
     
     public String toString(){
     	StringBuilder sb = new StringBuilder();
-    	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.requestdate));
+    	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.legalday));
     	sb.append(" reason -> ");
     	sb.append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
     		
@@ -48,18 +48,21 @@ public class FreeDayL extends FreeDay {
     public static FreeDayL createPersistentFreeDay(Calendar date, String reason){
 		if (date == null) throw new IllegalArgumentException("The date argument is required");
     	FreeDayL fd = new FreeDayL();
-    	fd.setRequestdate(date);
+    	fd.setLegalday(date);
     	fd.setReason(reason);
     	fd.setApproval(AppStrategL1.getDefaultInitialStrateg());
     	fd.persist();
     	return fd;
     }
+
+	@Override
+	public Calendar getDate() {
+		return this.getLegalday();
+	}
     
 
     
-	public boolean isCancelable() {
-		return this.requestdate.after(Calendar.getInstance());
-	}
+	
 
 
 }

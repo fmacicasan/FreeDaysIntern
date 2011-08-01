@@ -3,75 +3,74 @@
 
 package freedays.app;
 
-import freedays.app.FreeDayL;
+import freedays.app.FreeDayR;
 import freedays.domain.ApprovalStrategy;
 import java.lang.String;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
-privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
+privileged aspect FreeDayRDataOnDemand_Roo_DataOnDemand {
     
-    declare @type: FreeDayLDataOnDemand: @Component;
+    declare @type: FreeDayRDataOnDemand: @Component;
     
-    private List<FreeDayL> FreeDayLDataOnDemand.data;
+    private Random FreeDayRDataOnDemand.rnd = new SecureRandom();
     
-    public FreeDayL FreeDayLDataOnDemand.getNewTransientFreeDayL(int index) {
-        FreeDayL obj = new FreeDayL();
+    private List<FreeDayR> FreeDayRDataOnDemand.data;
+    
+    public FreeDayR FreeDayRDataOnDemand.getNewTransientFreeDayR(int index) {
+        FreeDayR obj = new FreeDayR();
         setApproval(obj, index);
-        setLegalday(obj, index);
         setReason(obj, index);
+        setRecoverdate(obj, index);
         return obj;
     }
     
-    public void FreeDayLDataOnDemand.setApproval(FreeDayL obj, int index) {
+    public void FreeDayRDataOnDemand.setApproval(FreeDayR obj, int index) {
         ApprovalStrategy approval = null;
         obj.setApproval(approval);
     }
     
-    public void FreeDayLDataOnDemand.setLegalday(FreeDayL obj, int index) {
-        Calendar legalday = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
-        obj.setLegalday(legalday);
-    }
-    
-    public void FreeDayLDataOnDemand.setReason(FreeDayL obj, int index) {
+    public void FreeDayRDataOnDemand.setReason(FreeDayR obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
     }
     
-    public FreeDayL FreeDayLDataOnDemand.getSpecificFreeDayL(int index) {
+    public FreeDayR FreeDayRDataOnDemand.getSpecificFreeDayR(int index) {
         init();
         if (index < 0) index = 0;
         if (index > (data.size() - 1)) index = data.size() - 1;
-        FreeDayL obj = data.get(index);
-        return FreeDayL.findFreeDayL(obj.getId());
+        FreeDayR obj = data.get(index);
+        return FreeDayR.findFreeDayR(obj.getId());
     }
     
-    public FreeDayL FreeDayLDataOnDemand.getRandomFreeDayL() {
+    public FreeDayR FreeDayRDataOnDemand.getRandomFreeDayR() {
         init();
-        FreeDayL obj = data.get(rnd.nextInt(data.size()));
-        return FreeDayL.findFreeDayL(obj.getId());
+        FreeDayR obj = data.get(rnd.nextInt(data.size()));
+        return FreeDayR.findFreeDayR(obj.getId());
     }
     
-    public boolean FreeDayLDataOnDemand.modifyFreeDayL(FreeDayL obj) {
+    public boolean FreeDayRDataOnDemand.modifyFreeDayR(FreeDayR obj) {
         return false;
     }
     
-    public void FreeDayLDataOnDemand.init() {
-        data = FreeDayL.findFreeDayLEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayL' illegally returned null");
+    public void FreeDayRDataOnDemand.init() {
+        data = FreeDayR.findFreeDayREntries(0, 10);
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayR' illegally returned null");
         if (!data.isEmpty()) {
             return;
         }
         
-        data = new ArrayList<freedays.app.FreeDayL>();
+        data = new ArrayList<freedays.app.FreeDayR>();
         for (int i = 0; i < 10; i++) {
-            FreeDayL obj = getNewTransientFreeDayL(i);
+            FreeDayR obj = getNewTransientFreeDayR(i);
             try {
                 obj.persist();
             } catch (ConstraintViolationException e) {

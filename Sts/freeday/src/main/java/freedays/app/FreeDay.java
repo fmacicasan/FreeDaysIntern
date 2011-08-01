@@ -24,7 +24,7 @@ public abstract class FreeDay {
     @ManyToOne
     private ApprovalStrategy approval;
     
-    
+    private String reason;
     
     public ApplicationRegularUser getApprover(ApplicationRegularUser user){
     	return this.approval.getApprover(user);
@@ -37,5 +37,9 @@ public abstract class FreeDay {
     	return true;
     }
     
-	public abstract boolean isCancelable();
+    public boolean isCancelable() {
+		return this.getDate().after(Calendar.getInstance());
+	}
+    
+    public abstract Calendar getDate();
 }
