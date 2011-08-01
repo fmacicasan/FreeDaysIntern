@@ -12,13 +12,16 @@ public enum RequestStatus {
 
     PENDING, 
     INTERMEDIATE,
+   // MATCHED,
+    //WAITING,
     CANCELED,
     GRANTED, 
     REJECTED;
     
     /**
-     * Special States: Canceled, Granted and Rejected
+     * Special States: Canceled, Granted and Rejected 
      */
+    //<blockquote>and Waiting (typeC/R without matching typeR/C) and Matched</blackquote>
     private static final int SPECIAL_FINAL_STATES_COUNT = 3;
     
     public RequestStatus getNext(){
@@ -26,16 +29,23 @@ public enum RequestStatus {
     	int ordinal = this.ordinal();
     	return (ordinal+RequestStatus.SPECIAL_FINAL_STATES_COUNT<vals.length-1)?vals[ordinal+1]:vals[ordinal];
     }
-    
-    public RequestStatus setCanceled(){
+//    public static RequestStatus getMatched(){
+//    	RequestStatus[] vals = RequestStatus.values();
+//    	return vals[vals.length-5];
+//    }
+//    public static RequestStatus getWaiting(){
+//    	RequestStatus[] vals = RequestStatus.values();
+//    	return vals[vals.length-4];
+//    }
+    public static RequestStatus getCanceled(){
     	RequestStatus[] vals = RequestStatus.values();
     	return vals[vals.length-3];
     }
-    public RequestStatus setGranted(){
+    public static RequestStatus getGranted(){
     	RequestStatus[] vals = RequestStatus.values();
     	return vals[vals.length-2];
     }
-    public RequestStatus setDenied(){
+    public static RequestStatus getDenied(){
     	RequestStatus[] vals = RequestStatus.values();
     	return vals[vals.length-1];
     }

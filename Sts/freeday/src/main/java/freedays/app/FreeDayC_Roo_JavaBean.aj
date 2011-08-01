@@ -3,6 +3,7 @@
 
 package freedays.app;
 
+import freedays.app.FreeDayR;
 import java.util.Calendar;
 
 privileged aspect FreeDayC_Roo_JavaBean {
@@ -13,6 +14,14 @@ privileged aspect FreeDayC_Roo_JavaBean {
     
     public void FreeDayC.setRequestdate(Calendar requestdate) {
         this.requestdate = requestdate;
+    }
+    
+    public FreeDayR FreeDayC.getRecover() {
+        return this.recover;
+    }
+    
+    public void FreeDayC.setRecover(FreeDayR recover) {
+        this.recover = recover;
     }
     
 }

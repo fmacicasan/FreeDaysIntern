@@ -38,8 +38,7 @@ public class FreeDayDataOnDemand {
 	}
 
 	public void setRequestdate(FreeDayL obj, int index) {
-        Calendar requestdate = DateUtils.generateFutureBusinessDay();
-        obj.setLegalday(requestdate);
+        obj.setLegalday(DateUtils.generateFutureBusinessDay());
     }
 
 }

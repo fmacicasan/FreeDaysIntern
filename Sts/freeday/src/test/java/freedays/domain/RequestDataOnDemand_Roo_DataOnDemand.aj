@@ -3,8 +3,8 @@
 
 package freedays.domain;
 
-import freedays.app.FreeDayL;
-import freedays.app.FreeDayLDataOnDemand;
+import freedays.app.FreeDay;
+import freedays.app.FreeDayDataOnDemand;
 import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
@@ -27,7 +27,7 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     private List<Request> RequestDataOnDemand.data;
     
     @Autowired
-    private FreeDayLDataOnDemand RequestDataOnDemand.freeDayLDataOnDemand;
+    private FreeDayDataOnDemand RequestDataOnDemand.freeDayDataOnDemand;
     
     public Request RequestDataOnDemand.getNewTransientRequest(int index) {
         Request obj = new Request();
@@ -49,7 +49,7 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     }
     
     public void RequestDataOnDemand.setRequestable(Request obj, int index) {
-        FreeDayL requestable = freeDayLDataOnDemand.getSpecificFreeDayL(index);
+        FreeDay requestable = freeDayDataOnDemand.getSpecificFreeDayL(index);
         obj.setRequestable(requestable);
     }
     

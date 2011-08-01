@@ -19,6 +19,7 @@ import javax.persistence.TypedQuery;
 
 import freedays.app.AppStrategL1;
 import freedays.app.FDUser;
+import freedays.app.FreeDay;
 import freedays.app.FreeDayL;
 import freedays.app.FreeDayRequest;
 
@@ -48,7 +49,7 @@ public class Request   implements Serializable{
     private ApplicationRegularUser appreguser;
 
     @OneToOne
-    private FreeDayL requestable;
+    private FreeDay requestable;
 
     @Enumerated
     private RequestStatus status;
@@ -91,13 +92,16 @@ public class Request   implements Serializable{
     }
     
     private void setDenyStatus(){
-    	this.status = this.status.setDenied();
+    	this.status = RequestStatus.getDenied();
+    	requestable.setFinalFailStatus();
     }
     private void setApproveStatus(){
-    	this.status = this.status.setGranted();
+    	this.status = RequestStatus.getGranted();
+    	requestable.setFinalApproveStatus();
     }
     private void setCancelStatus(){
-    	this.status = this.status.setCanceled();
+    	this.status =RequestStatus.getCanceled();
+    	requestable.setFinalFailStatus();
     }
     private void advanceStatus(){
     	this.status = this.status.getNext();

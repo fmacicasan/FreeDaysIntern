@@ -20,8 +20,7 @@ public class FreeDayLDataOnDemand {
 	public static FreeDayL generateFreeDay(){
 		FreeDayL fd = new FreeDayL();
 		
-		Calendar instance = Calendar.getInstance();
-		Calendar requestdate = new GregorianCalendar(instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH) + 1);
+		Calendar requestdate = DateUtils.generateFutureBusinessDay();
 		fd.setLegalday(requestdate);
 		
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-FreeDaysApprovalStrategy.xml");
@@ -39,8 +38,12 @@ public class FreeDayLDataOnDemand {
 	}
 
 	public void setRequestdate(FreeDayL obj, int index) {
-        Calendar requestdate = DateUtils.generateFutureBusinessDay();
-        obj.setLegalday(requestdate);
+        obj.setLegalday(DateUtils.generateFutureBusinessDay());
     }
 
+
+	public void setApproval(FreeDayL obj, int index) {
+        ApprovalStrategy approval = null;
+        obj.setApproval(AppStrategL1.getDefaultInitialStrateg());
+    }
 }

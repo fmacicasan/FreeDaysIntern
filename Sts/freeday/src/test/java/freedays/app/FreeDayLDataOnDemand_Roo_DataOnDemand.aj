@@ -3,8 +3,8 @@
 
 package freedays.app;
 
+import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayL;
-import freedays.domain.ApprovalStrategy;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,12 +26,8 @@ privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
         setApproval(obj, index);
         setLegalday(obj, index);
         setReason(obj, index);
+        setStatus(obj, index);
         return obj;
-    }
-    
-    public void FreeDayLDataOnDemand.setApproval(FreeDayL obj, int index) {
-        ApprovalStrategy approval = null;
-        obj.setApproval(approval);
     }
     
     public void FreeDayLDataOnDemand.setLegalday(FreeDayL obj, int index) {
@@ -42,6 +38,11 @@ privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
     public void FreeDayLDataOnDemand.setReason(FreeDayL obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
+    }
+    
+    public void FreeDayLDataOnDemand.setStatus(FreeDayL obj, int index) {
+        FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
+        obj.setStatus(status);
     }
     
     public FreeDayL FreeDayLDataOnDemand.getSpecificFreeDayL(int index) {

@@ -3,8 +3,9 @@
 
 package freedays.app;
 
+import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayC;
-import freedays.domain.ApprovalStrategy;
+import freedays.app.FreeDayRDataOnDemand;
 import java.lang.String;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
@@ -25,17 +27,17 @@ privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
     
     private List<FreeDayC> FreeDayCDataOnDemand.data;
     
+    @Autowired
+    private FreeDayRDataOnDemand FreeDayCDataOnDemand.freeDayRDataOnDemand;
+    
     public FreeDayC FreeDayCDataOnDemand.getNewTransientFreeDayC(int index) {
         FreeDayC obj = new FreeDayC();
         setApproval(obj, index);
         setReason(obj, index);
+        setRecover(obj, index);
         setRequestdate(obj, index);
+        setStatus(obj, index);
         return obj;
-    }
-    
-    public void FreeDayCDataOnDemand.setApproval(FreeDayC obj, int index) {
-        ApprovalStrategy approval = null;
-        obj.setApproval(approval);
     }
     
     public void FreeDayCDataOnDemand.setReason(FreeDayC obj, int index) {
@@ -43,9 +45,9 @@ privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
         obj.setReason(reason);
     }
     
-    public void FreeDayCDataOnDemand.setRequestdate(FreeDayC obj, int index) {
-        Calendar requestdate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
-        obj.setRequestdate(requestdate);
+    public void FreeDayCDataOnDemand.setStatus(FreeDayC obj, int index) {
+        FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
+        obj.setStatus(status);
     }
     
     public FreeDayC FreeDayCDataOnDemand.getSpecificFreeDayC(int index) {

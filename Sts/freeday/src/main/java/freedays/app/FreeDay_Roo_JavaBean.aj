@@ -24,4 +24,12 @@ privileged aspect FreeDay_Roo_JavaBean {
         this.reason = reason;
     }
     
+    public FreeDayStatus FreeDay.getStatus() {
+        return this.status;
+    }
+    
+    public void FreeDay.setStatus(FreeDayStatus status) {
+        this.status = status;
+    }
+    
 }

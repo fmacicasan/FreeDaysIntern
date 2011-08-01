@@ -3,8 +3,8 @@
 
 package freedays.app;
 
+import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayR;
-import freedays.domain.ApprovalStrategy;
 import java.lang.String;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -30,17 +30,19 @@ privileged aspect FreeDayRDataOnDemand_Roo_DataOnDemand {
         setApproval(obj, index);
         setReason(obj, index);
         setRecoverdate(obj, index);
+        setRequest(obj, index);
+        setStatus(obj, index);
         return obj;
-    }
-    
-    public void FreeDayRDataOnDemand.setApproval(FreeDayR obj, int index) {
-        ApprovalStrategy approval = null;
-        obj.setApproval(approval);
     }
     
     public void FreeDayRDataOnDemand.setReason(FreeDayR obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
+    }
+    
+    public void FreeDayRDataOnDemand.setStatus(FreeDayR obj, int index) {
+        FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
+        obj.setStatus(status);
     }
     
     public FreeDayR FreeDayRDataOnDemand.getSpecificFreeDayR(int index) {

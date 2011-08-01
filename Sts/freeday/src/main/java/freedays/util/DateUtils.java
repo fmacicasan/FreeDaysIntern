@@ -5,7 +5,9 @@ import java.util.GregorianCalendar;
 import java.util.Random;
 
 /**
- * Utility class used for date generation & manipulation.
+ * Utility class used for date generation & manipulation.'
+ * NOTE:
+ * 	Investigat: problems with Gregorian Calendar conversion of DAY_OF_WEEK => switched to Calendar.
  * @author fmacicasan
  *
  */
@@ -21,11 +23,19 @@ public class DateUtils {
 	
 	
 	public static Calendar generateFutureBusinessDay(){
-		return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
+		//return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
+		Calendar instance = Calendar.getInstance();
+		instance.set(Calendar.YEAR, instance.get(Calendar.YEAR)+1);
+		instance.set(Calendar.DAY_OF_WEEK, DateUtils.generateRandomBusinessDayOfWeek());
+		return instance;
 	}
 	
 	public static Calendar generatePastBusinessDay(){
-		return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) - 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
+		//return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) - 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
+		Calendar instance = Calendar.getInstance();
+		instance.set(Calendar.YEAR, instance.get(Calendar.YEAR)-1);
+		instance.set(Calendar.DAY_OF_WEEK, DateUtils.generateRandomBusinessDayOfWeek());
+		return instance;
 	}
 	
 	public static Calendar generateFutureWeekendDay(){

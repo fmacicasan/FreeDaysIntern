@@ -41,7 +41,7 @@ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(116,3);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(117,4);
 
 delete from `free_day`
-INSERT INTO `free_day`(`free_day_type`,`id`,`requestdate`,`version`,`approval`)VALUES("typeL",1,"2011-08-06",0,13);
+INSERT INTO `free_day`(`free_day_type`,`id`,`legalday`,`version`,`approval`)VALUES("typeL",1,"2011-08-08",0,13);
 
 delete from `request`
 INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(1,0,0,115,111,1);

@@ -32,19 +32,6 @@ public class FreeDayL extends FreeDay {
     @BusinessDay
     private Calendar legalday;
     
-    
-
-
-    
-    public String toString(){
-    	StringBuilder sb = new StringBuilder();
-    	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.legalday));
-    	sb.append(" reason -> ");
-    	sb.append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
-    		
-    	return sb.toString();
-    }
-    
     public static FreeDayL createPersistentFreeDay(Calendar date, String reason){
 		if (date == null) throw new IllegalArgumentException("The date argument is required");
     	FreeDayL fd = new FreeDayL();
@@ -65,4 +52,22 @@ public class FreeDayL extends FreeDay {
 	
 
 
+
+	public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Approval: ").append(getApproval()).append(", ");
+//        sb.append("Date: ").append(getDate() == null ? "null" : getDate().getTime()).append(", ");
+//        sb.append("Id: ").append(getId()).append(", ");
+//        sb.append("Legalday: ").append(getLegalday() == null ? "null" : getLegalday().getTime()).append(", ");
+//        sb.append("Reason: ").append(getReason()).append(", ");
+//        sb.append("Version: ").append(getVersion()).append(", ");
+//        sb.append("Cancelable: ").append(isCancelable());
+//        return sb.toString();
+		return super.toString();
+    }
+
+	@Override
+	public FreeDayStatus getApproveStatus() {
+		return FreeDayStatus.COMPLETED_SUCCESS;
+	}
 }
