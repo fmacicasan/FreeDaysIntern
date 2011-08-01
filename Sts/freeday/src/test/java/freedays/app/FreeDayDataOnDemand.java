@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.roo.addon.dod.RooDataOnDemand;
 
 import freedays.domain.ApprovalStrategy;
+import freedays.util.DateUtils;
 
 @RooDataOnDemand(entity = FreeDayL.class)
 public class FreeDayDataOnDemand {
@@ -38,7 +39,7 @@ public class FreeDayDataOnDemand {
 	}
 
 	public void setRequestdate(FreeDayL obj, int index) {
-        Calendar requestdate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), rnd.nextInt(Calendar.THURSDAY)+2);
+        Calendar requestdate = DateUtils.generateFutureBusinessDay();
         obj.setRequestdate(requestdate);
     }
 

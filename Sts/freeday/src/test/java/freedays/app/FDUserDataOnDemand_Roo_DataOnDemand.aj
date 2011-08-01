@@ -44,10 +44,7 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
         obj.setGranter(granter);
     }
     
-    public void FDUserDataOnDemand.setHireDate(FDUser obj, int index) {
-        Calendar hireDate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - 1);
-        obj.setHireDate(hireDate);
-    }
+
     
     public void FDUserDataOnDemand.setInitDays(FDUser obj, int index) {
         Integer initDays = new Integer(index);

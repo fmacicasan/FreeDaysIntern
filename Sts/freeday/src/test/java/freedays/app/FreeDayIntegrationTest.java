@@ -8,7 +8,7 @@ import org.springframework.roo.addon.test.RooIntegrationTest;
 public class FreeDayIntegrationTest {
 
     @Autowired
-    private FreeDayDataOnDemand dod;
+    private FreeDayLDataOnDemand dod;
     
     @Test
     public void testMarkerMethod() {

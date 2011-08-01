@@ -1,9 +1,13 @@
 package freedays.app;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.springframework.roo.addon.dod.RooDataOnDemand;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUserDataOnDemand;
+import freedays.util.DateUtils;
 
 @RooDataOnDemand(entity = FDUser.class)
 public class FDUserDataOnDemand {
@@ -27,6 +31,16 @@ public class FDUserDataOnDemand {
 		fdu.setGranter(granter);
 		return fdu;
 	}
+	
+	/**
+	 * Creates a valid day respecting the @Past and @BusinessDay constrains
+	 * @param obj
+	 * @param index
+	 */
+    public void setHireDate(FDUser obj, int index) {
+        Calendar hireDate = DateUtils.generatePastBusinessDay();
+        obj.setHireDate(hireDate);
+    }
 
 
 }
