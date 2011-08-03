@@ -25,4 +25,8 @@ privileged aspect FreeDayC_Roo_Entity {
         return entityManager().find(FreeDayC.class, id);
     }
     
+    public static List<FreeDayC> FreeDayC.findFreeDayCEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM FreeDayC o", FreeDayC.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+    
 }

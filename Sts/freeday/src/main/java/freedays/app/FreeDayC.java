@@ -97,10 +97,10 @@ public class FreeDayC extends FreeDay implements FreeDayRCMatchable<FreeDayR> {
 		//TOOD: thing at avoid uplicats atr equest
 	}
 
-	public static List<FreeDayC> findFreeDayCEntries(int firstResult, int maxResults) {
-        TypedQuery<FreeDayC> tqfdc = entityManager().createQuery("SELECT o FROM FreeDayC o WHERE o.id >= :firstResult AND o.id <= :maxResults", FreeDayC.class);
-        tqfdc.setParameter("firstResult",(long)firstResult);
-        tqfdc.setParameter("maxResults",(long)maxResults);
-        return tqfdc.getResultList();
-    }
+//	public static List<FreeDayC> findFreeDayCEntries(int firstResult, int maxResults) {
+//        TypedQuery<FreeDayC> tqfdc = entityManager().createQuery("SELECT o FROM FreeDayC o WHERE o.id >= :firstResult AND o.id <= :maxResults", FreeDayC.class);
+//        tqfdc.setParameter("firstResult",(long)firstResult);
+//        tqfdc.setParameter("maxResults",(long)maxResults);
+//        return tqfdc.getResultList();
+//    }
 }

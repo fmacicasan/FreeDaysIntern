@@ -5,8 +5,21 @@ import org.springframework.roo.addon.dod.RooDataOnDemand;
 import freedays.domain.ApprovalStrategy;
 import freedays.util.DateUtils;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
 @RooDataOnDemand(entity = FreeDayR.class)
 public class FreeDayRDataOnDemand {
+	
+	private Random rnd = new SecureRandom();
+    
+    private List<FreeDayR> data;
 
 	public void setRecoverdate(FreeDayR obj, int index) {
         obj.setRecoverdate(DateUtils.generateFutureWeekendDay());
@@ -26,5 +39,30 @@ public class FreeDayRDataOnDemand {
 	public void setRequest(FreeDayR obj, int index) {
         FreeDayC request = null;
         obj.setRequest(request);
+    }
+
+	public void init() {
+//        data = FreeDayR.findFreeDayREntries(0, 10);
+//        if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayR' illegally returned null");
+//        if (!data.isEmpty()) {
+//            return;
+//        }
+        
+        data = new ArrayList<freedays.app.FreeDayR>();
+        for (int i = 0; i < 10; i++) {
+            FreeDayR obj = getNewTransientFreeDayR(i);
+            try {
+                obj.persist();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
+                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
+                    ConstraintViolation<?> cv = it.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                }
+                throw new RuntimeException(msg.toString(), e);
+            }
+            obj.flush();
+            data.add(obj);
+        }
     }
 }

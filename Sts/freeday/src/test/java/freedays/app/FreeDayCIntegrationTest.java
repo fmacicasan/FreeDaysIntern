@@ -32,12 +32,18 @@ public class FreeDayCIntegrationTest {
 		
 		FreeDayCDataOnDemand fdcdod = new FreeDayCDataOnDemand();
 		FreeDayC requestableC = fdcdod.getRandomFreeDayC();
+		while(requestableC.getMatch()!=null){
+			requestableC = fdcdod.getRandomFreeDayC();
+		}
 		requestC = new Request();
 		requestC.setStatus(status);
 		requestC.setRequestable(requestableC);
 		
 		FreeDayRDataOnDemand fdrdod = new FreeDayRDataOnDemand();
 		FreeDayR requestableR = fdrdod.getRandomFreeDayR();
+		while(requestableR.getMatch()!=null){
+			requestableR = fdrdod.getRandomFreeDayR();
+		}
 		requestR = new Request();
 		requestR.setStatus(status);
 		requestR.setRequestable(requestableR);
