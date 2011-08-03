@@ -23,7 +23,7 @@ import freedays.validation.annotation.BusinessDay;
 @RooJavaBean
 @RooEntity
 @DiscriminatorValue("typeC")
-public class FreeDayC extends FreeDay implements FreeDayRCMatchable<FreeDayR> {
+public class FreeDayC extends FreeDaysRCMatch {
 
     @NotNull
     @Future
@@ -54,38 +54,42 @@ public class FreeDayC extends FreeDay implements FreeDayRCMatchable<FreeDayR> {
 //		return super.toString();
 //    }
 
-	@Override
-	public FreeDayStatus getApproveStatus() {
-		return FreeDayStatus.WAITING;
-	}
+//	@Override
+//	public FreeDayStatus getApproveStatus() {
+//		return FreeDayStatus.WAITING;
+//	}
+
+//	@Override
+//	public boolean match(FreeDayRCMatchable match) {
+//		if(this.canMatch() &&  match.canMatch())return false;
+//		this.setMatch(match);
+//		match.setMatch(this);
+//		this.setMergedStatus();
+//		match.setMergedStatus();
+//		//this.persist();
+//		//match.persist();
+//		return true;
+//	}
 
 	@Override
-	public boolean match(FreeDayR match) {
-		if(this.canMatch() &&  match.canMatch())return false;
-		this.setMatch(match);
-		match.setMatch(this);
-		this.setMergedStatus();
-		match.setMergedStatus();
-		//this.persist();
-		//match.persist();
-		return true;
-	}
-
-	@Override
-	public void setMatch(FreeDayR match) {
-		this.recover = match;
+	public void setMatch(FreeDaysRCMatch match) {
+		try{
+			this.recover = (FreeDayR) match;
+		}catch(ClassCastException e){
+			throw new IllegalArgumentException("The math argument is invalid: should be FreeDayR");
+		}
 		
 	}
 
 	@Override
-	public FreeDayR getMatch() {
+	public FreeDaysRCMatch getMatch() {
 		return this.recover;
 	}
 
-	@Override
-	public boolean canMatch() {
-		return this.getMatch() != null;
-	}
+//	@Override
+//	public boolean canMatch() {
+//		return this.getMatch() != null;
+//	}
 
 	public static List<FreeDayC> getAllUnmatchedRequestsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
@@ -94,8 +98,20 @@ public class FreeDayC extends FreeDay implements FreeDayRCMatchable<FreeDayR> {
 		q.setParameter("username",username);
 		q.setParameter("status", FreeDayStatus.WAITING);
 		return q.getResultList();
-		//TOOD: thing at avoid uplicats atr equest
+		//TOOD: think at avoid duplicates at request
 	}
+
+	@Override
+	protected void setDate(Calendar date) {
+		this.setRequestdate(date);
+		
+	}
+
+//	@Override
+//	protected void initialize(FreeDayRequest fdr) {
+//		this.setMatch(fdr.getMatch());
+//		
+//	}
 
 //	public static List<FreeDayC> findFreeDayCEntries(int firstResult, int maxResults) {
 //        TypedQuery<FreeDayC> tqfdc = entityManager().createQuery("SELECT o FROM FreeDayC o WHERE o.id >= :firstResult AND o.id <= :maxResults", FreeDayC.class);

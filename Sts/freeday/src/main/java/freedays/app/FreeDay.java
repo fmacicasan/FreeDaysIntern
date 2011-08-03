@@ -57,7 +57,11 @@ public abstract class FreeDay {
     }
     
     protected abstract Calendar getDate();
+    protected abstract void setDate(Calendar date);
 	protected abstract FreeDayStatus  getApproveStatus();
+	protected abstract void initialize(FreeDayRequest fdr);
+	protected abstract void finalizeFail();
+
 	
 	public void setInitStatus(){
 		this.status = FreeDayStatus.IN_PROGRESS;
@@ -66,9 +70,10 @@ public abstract class FreeDay {
 	public void setFinalApproveStatus(){
 		this.status = this.getApproveStatus();
 	}
+	
 	public void setFinalFailStatus(){
 		this.status = FreeDayStatus.COMPLETED_FAILURE;
-		
+		this.finalizeFail();
 	}
 	
 	protected void setMergedStatus(){
@@ -77,11 +82,13 @@ public abstract class FreeDay {
 	
     public static FreeDay createPersistentFreeDay(FreeDayRequest fdr){
 		if (fdr == null) throw new IllegalArgumentException("The FreeDayRequest argument is required");
-    	FreeDay fd = new FreeDayL();
-    	//fd.setLegalday(date);
+    	FreeDay fd = FreeDayFactory.create(fdr);
+    	fd.initialize(fdr);
+    	fd.setInitStatus();
+    	fd.setDate(fdr.getReqdate());
     	fd.setReason(fdr.getReason());
     	fd.setApproval(AppStrategL1.getDefaultInitialStrateg());
-    	//fd.persist();
+    	fd.persist();
     	return fd;
     }
 }

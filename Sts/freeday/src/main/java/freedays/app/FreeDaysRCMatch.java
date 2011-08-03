@@ -2,6 +2,8 @@ package freedays.app;
 
 import java.util.Calendar;
 
+import freedays.app.FreeDay.FreeDayStatus;
+
 
 /**
  * Class used to extract the common behavior exhibited during the matching process of two objects implementing
@@ -10,30 +12,67 @@ import java.util.Calendar;
  *
  * @param <T> represents the class to which the matching is restricted. It must <b>extend</b> {@link freedays.app.FreeDay FreeDay}.
  */
-@Deprecated
-public abstract class  FreeDaysRCMatch<T extends FreeDay> extends FreeDay implements FreeDayRCMatchable<T>{
-
-	@Override
-	public boolean match(T match) {
-		// TODO Auto-generated method stub
-		return false;
+  public abstract class  FreeDaysRCMatch extends FreeDay{
+	
+	  
+	
+	public boolean match(FreeDaysRCMatch match) {
+		if(match == null)throw new IllegalArgumentException("The username argument is required");
+		if(match.canMatch())return false;
+		//this.setMatch(match);
+		match.setMatch(this);
+		//this.setMergedStatus();
+		match.setMergedStatus();
+		//this.persist();
+		match.persist();
+		return true;
 	}
 
-	@Override
-	public abstract void setMatch(T match);
+	public abstract void setMatch(FreeDaysRCMatch match);
+	public abstract FreeDaysRCMatch getMatch();
 
-	@Override
-	public abstract T getMatch();
-
-	@Override
 	public boolean canMatch() {
 		return this.getMatch() != null;
 	}
 
 	@Override
-	public abstract Calendar getDate();
+	protected abstract Calendar getDate();
 
 	@Override
-	public abstract FreeDayStatus getApproveStatus();
+	protected abstract void setDate(Calendar date);
+
+	@Override
+	public FreeDayStatus getApproveStatus() {
+		//TODO: replace with catch from exception thrown by match
+		if(this.getMatch() == null){
+			return FreeDayStatus.WAITING;
+		}
+		if(this.match(this.getMatch())){
+			return FreeDayStatus.COMPLETED_SUCCESS;
+		} else {
+			//if it gets here then the matching cannot take place => the current match was already
+			//matched so the request goes back in waiting state.
+			this.setMatch(null);
+			return FreeDayStatus.WAITING;
+		}
+	}
+
+	@Override
+	protected void initialize(FreeDayRequest fdr) {
+		FreeDaysRCMatch match = fdr.getMatch();
+		this.setMatch(match);
+		if(match != null){
+			match.setInitStatus();
+			match.persist();
+		}
+	}
+	
+	@Override
+	protected void finalizeFail(){
+		FreeDaysRCMatch match = this.getMatch();
+		if(match != null){
+			match.setFinalApproveStatus();
+		}
+	}
 
 }

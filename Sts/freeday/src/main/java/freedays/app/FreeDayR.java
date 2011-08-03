@@ -24,7 +24,7 @@ import freedays.validation.annotation.Weekend;
 @RooToString
 @RooEntity
 @DiscriminatorValue("typeR")
-public class FreeDayR extends FreeDay implements FreeDayRCMatchable<FreeDayC> {
+public class FreeDayR extends FreeDaysRCMatch {
 
     @NotNull
     @Future
@@ -55,37 +55,39 @@ public class FreeDayR extends FreeDay implements FreeDayRCMatchable<FreeDayC> {
 		return super.toString();
     }
 
+	
+
+//	@Override
+//	public boolean match(FreeDayRCMatchable match) {
+//		if(match == null)throw new IllegalArgumentException("The username argument is required");
+//		if(match.canMatch())return false;
+//		//this.setMatch(match);
+//		match.setMatch(this);
+//		//this.setMergedStatus();
+//		match.setMergedStatus();
+//		//this.persist();
+//		match.persist();
+//		return true;
+//	}
+
 	@Override
-	public FreeDayStatus getApproveStatus() {
-		return FreeDayStatus.WAITING;
+	public void setMatch(FreeDaysRCMatch match) {
+		try{
+			this.request = (FreeDayC)match;
+		}catch(ClassCastException e){
+			throw new IllegalArgumentException("The math argument is invalid: should be FreeDayC");
+		}
 	}
 
 	@Override
-	public boolean match(FreeDayC match) {
-		if(this.canMatch() &&  match.canMatch())return false;
-		this.setMatch(match);
-		match.setMatch(this);
-		this.setMergedStatus();
-		match.setMergedStatus();
-		//this.persist();
-		//match.persist();
-		return true;
-	}
-
-	@Override
-	public void setMatch(FreeDayC match) {
-		this.request = match;
-	}
-
-	@Override
-	public FreeDayC getMatch() {
+	public FreeDaysRCMatch getMatch() {
 		return this.request;
 	}
 
-	@Override
-	public boolean canMatch() {
-		return this.getMatch() != null;
-	}
+//	@Override
+//	public boolean canMatch() {
+//		return this.getMatch() != null;
+//	}
 	
 	public static List<FreeDayR> getAllUnmatchedRequestsByUsername(String username){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
@@ -95,4 +97,12 @@ public class FreeDayR extends FreeDay implements FreeDayRCMatchable<FreeDayC> {
 		q.setParameter("status", FreeDayStatus.WAITING);
 		return q.getResultList();
 	}
+
+	@Override
+	protected void setDate(Calendar date) {
+		this.setRecoverdate(date);
+		
+	}
+
+	
 }

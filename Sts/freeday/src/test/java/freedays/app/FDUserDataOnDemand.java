@@ -41,6 +41,31 @@ public class FDUserDataOnDemand {
         Calendar hireDate = DateUtils.generatePastBusinessDay();
         obj.setHireDate(hireDate);
     }
+    
+    public FDUser getRandomNormalUser(){
+    	FDUser fdu = new FDUserDataOnDemand().getRandomFDUser();
+		while(fdu.getGranter() == null ||
+				(fdu.getGranter() != null && fdu.getGranter().getGranter() == null)){
+			fdu = new FDUserDataOnDemand().getRandomFDUser();
+		}
+		return fdu;
+    }
+    
+    public FDUser getRandomLevel1User(){
+    	FDUser fdu = new FDUserDataOnDemand().getRandomFDUser();
+		while(fdu.getGranter() == null){
+			fdu = new FDUserDataOnDemand().getRandomFDUser();
+		}
+		return fdu;
+    }
+    
+    public FDUser getRandomLevelTopUser(){
+    	FDUser fdu = new FDUserDataOnDemand().getRandomFDUser();
+		while(fdu.getGranter() != null){
+			fdu = new FDUserDataOnDemand().getRandomFDUser();
+		}
+		return fdu;
+    }
 
 
 }

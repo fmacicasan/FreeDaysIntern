@@ -39,7 +39,7 @@ public class FreeDayRequest {
     @Enumerated
     private RequestType reqtype;
     
-    private FreeDay match;
+    private FreeDaysRCMatch match;
     
     public static FreeDayRequest generateReq(RequestType rt){
     	FreeDayRequest fdr = new FreeDayRequest();

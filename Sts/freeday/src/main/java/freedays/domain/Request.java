@@ -195,7 +195,7 @@ public class Request   implements Serializable{
 		return res;
 	}
 	
-	public static void createPersistentReq(FreeDayRequest fdr, String username) {
+	public static Request createPersistentReq(FreeDayRequest fdr, String username) {
 		Request req = new Request();
 		req.setStatus(RequestStatus.getInit());
 		req.setAppreguser(FDUser.findFDUserByUsername(username));
@@ -203,6 +203,7 @@ public class Request   implements Serializable{
 		System.out.println(req);
 		req.init();
 		req.persist();
+		return req;
 	}
 	
 //	public static void createPersistentReq(FreeDayRequest fdr, String username){
@@ -229,10 +230,11 @@ public class Request   implements Serializable{
 	public static long countActiveRequests(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		FDUser aru = FDUser.findFDUserByUsername(username);
-		return Request.countAllRequests(aru)
-				- Request.countRequests(aru, RequestStatus.GRANTED)
-				- Request.countRequests(aru, RequestStatus.REJECTED)
-				- Request.countRequests(aru, RequestStatus.CANCELED);
+		long all =  Request.countAllRequests(aru);
+		long granted = Request.countRequests(aru, RequestStatus.GRANTED);
+		long rejected = Request.countRequests(aru, RequestStatus.REJECTED);
+		long canceled = Request.countRequests(aru, RequestStatus.CANCELED);
+		return all - granted - rejected - canceled;
 	}
 
 	public static void approve(Long id2) {

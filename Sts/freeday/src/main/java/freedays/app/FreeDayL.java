@@ -39,12 +39,6 @@ public class FreeDayL extends FreeDay {
 		return this.getLegalday();
 	}
     
-
-    
-	
-
-
-
 	public String toString() {
 //        StringBuilder sb = new StringBuilder();
 //        sb.append("Approval: ").append(getApproval()).append(", ");
@@ -61,5 +55,33 @@ public class FreeDayL extends FreeDay {
 	@Override
 	public FreeDayStatus getApproveStatus() {
 		return FreeDayStatus.COMPLETED_SUCCESS;
+	}
+
+
+
+
+
+
+
+	@Override
+	protected void setDate(Calendar date) {
+		this.setLegalday(date);
+		
+	}
+
+
+
+
+
+
+
+	@Override
+	protected void initialize(FreeDayRequest fdr) {
+		// nothing special here
+	}
+
+	@Override
+	protected void finalizeFail() {
+		// nothing special here	
 	}
 }

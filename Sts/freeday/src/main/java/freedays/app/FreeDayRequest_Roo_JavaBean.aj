@@ -3,7 +3,7 @@
 
 package freedays.app;
 
-import freedays.app.FreeDay;
+import freedays.app.FreeDaysRCMatch;
 import java.lang.String;
 import java.util.Calendar;
 
@@ -33,11 +33,11 @@ privileged aspect FreeDayRequest_Roo_JavaBean {
         this.reqtype = reqtype;
     }
     
-    public FreeDay FreeDayRequest.getMatch() {
+    public FreeDaysRCMatch FreeDayRequest.getMatch() {
         return this.match;
     }
     
-    public void FreeDayRequest.setMatch(FreeDay match) {
+    public void FreeDayRequest.setMatch(FreeDaysRCMatch match) {
         this.match = match;
     }
     
