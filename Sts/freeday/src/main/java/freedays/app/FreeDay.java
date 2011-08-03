@@ -52,7 +52,7 @@ public abstract class FreeDay {
     	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate()));
     	sb.append(" reason -> ");
     	sb.append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
-    		
+    	sb.append(" int status " + this.getStatus());
     	return sb.toString();
     }
     
@@ -68,9 +68,20 @@ public abstract class FreeDay {
 	}
 	public void setFinalFailStatus(){
 		this.status = FreeDayStatus.COMPLETED_FAILURE;
+		
 	}
 	
 	protected void setMergedStatus(){
 		this.status = FreeDayStatus.COMPLETED_SUCCESS;
 	}
+	
+    public static FreeDay createPersistentFreeDay(FreeDayRequest fdr){
+		if (fdr == null) throw new IllegalArgumentException("The FreeDayRequest argument is required");
+    	FreeDay fd = new FreeDayL();
+    	//fd.setLegalday(date);
+    	fd.setReason(fdr.getReason());
+    	fd.setApproval(AppStrategL1.getDefaultInitialStrateg());
+    	//fd.persist();
+    	return fd;
+    }
 }

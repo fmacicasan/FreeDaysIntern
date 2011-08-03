@@ -1,14 +1,25 @@
 package freedays.controller;
 
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import freedays.app.FDUser;
+import freedays.app.FreeDay;
+import freedays.app.FreeDayC;
+import freedays.app.FreeDayR;
+import freedays.app.FreeDayRCMatchable;
 import freedays.app.FreeDayRequest;
+import freedays.app.FreeDayRequest.RequestType;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
+import freedays.domain.ApplicationRegularUser.JobRole;
 
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -29,31 +40,46 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RequestController {
 	
-	@RequestMapping(params = "form", method = RequestMethod.GET)
-    public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
-        uiModel.addAttribute("reqbean", new FreeDayRequest());
-        addDateTimeFormatPatterns(uiModel);
-        
+	
+	@RequestMapping(params = "form=l", method = RequestMethod.GET)
+    public String createForm(Model uiModel) {
+        uiModel.addAttribute("reqbean", FreeDayRequest.generateReq(RequestType.L));
+        uiModel.addAttribute("typeLMarker",true);
         System.out.println("testing");
         return "requests/create";
     }
+	
+	@RequestMapping(params = "form=c", method = RequestMethod.GET)
+	public String createFormReqC(Model uiModel,Principal p){
+		uiModel.addAttribute("reqbean", FreeDayRequest.generateReq(RequestType.C));
+		uiModel.addAttribute("matchings",FreeDayR.getAllUnmatchedRequestsByUsername(p.getName()));
+		return "requests/create";
+	}
+	
+	@RequestMapping(params = "form=r", method = RequestMethod.GET)
+	public String createFormReqR(Model uiModel, Principal p){
+		uiModel.addAttribute("reqbean", FreeDayRequest.generateReq(RequestType.R));
+		uiModel.addAttribute("matchings",FreeDayC.getAllUnmatchedRequestsByUsername(p.getName()));
+		return "requests/create";
+	}
+		
 
 	@RequestMapping(method = RequestMethod.POST)
-    public String create(@Valid FreeDayRequest request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String create(@Valid FreeDayRequest request, BindingResult bindingResult, Model uiModel, Principal p) {
         if (bindingResult.hasErrors()) {
         	
         	System.out.println("ciuyciulete");
         	
         	uiModel.addAttribute("hasError",true);
             uiModel.addAttribute("reqbean", request);
-            addDateTimeFormatPatterns(uiModel);
+//            addDateTimeFormatPatterns(uiModel);
             return "requests/create";
         }
         System.out.println("cacenflitz");
         
         //uiModel.asMap().clear();
         //request.persist();
-        Request.createPersistentReq(request,httpServletRequest.getUserPrincipal().getName());
+        Request.createPersistentReq(request,p.getName());
         uiModel.asMap().clear();
         return "redirect:/requests?own";
     }
@@ -89,20 +115,20 @@ public class RequestController {
 		return "redirect:/requests?approve";
 	}
 	
-	@RequestMapping(params = "form",method = RequestMethod.POST)
-    public String create(@Valid Request request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("request", request);
-            return "requests/create";
-        }
-        uiModel.asMap().clear();
-        request.persist();
-        return "redirect:/requests/" + encodeUrlPathSegment(request.getId().toString(), httpServletRequest);
-    }
+//	@RequestMapping(params = "form",method = RequestMethod.POST)
+//    public String create(@Valid Request request, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+//        if (bindingResult.hasErrors()) {
+//            uiModel.addAttribute("request", request);
+//            return "requests/create";
+//        }
+//        uiModel.asMap().clear();
+//        request.persist();
+//        return "redirect:/requests/" + encodeUrlPathSegment(request.getId().toString(), httpServletRequest);
+//    }
 	
-    void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("request_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
-    }
+//    void addDateTimeFormatPatterns(Model uiModel) {
+//        uiModel.addAttribute("request_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+//    }
     
     @RequestMapping(params= "own", method = RequestMethod.GET)
     public String listOwn(Model uiModel, Principal p){
@@ -149,6 +175,17 @@ public class RequestController {
     	String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return Request.computeAvailableFreeDays(username);
     }
-
+    
+    @ModelAttribute("requesttypes")
+    public Collection<RequestType> populateRequestTypes() {
+        return Arrays.asList(RequestType.class.getEnumConstants());
+    }
+    
+    @ModelAttribute("request_date_format")
+    public String populateRequestDateFormat(){
+    	return DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale());
+    }
+    
+    
 
 }

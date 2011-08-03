@@ -89,6 +89,8 @@ public class FreeDayCIntegrationTest {
 		Assert.assertNull("normal level merge requests - not null merge object",fdr.getMatch());
 		
 		Assert.assertTrue("normal level merge request - problem at match",fdc.match(fdr));
+		fdc.persist();
+		fdr.persist();
 		Assert.assertNotNull("normal level check match - remained null fdc",fdc.getMatch());
 		Assert.assertNotNull("normal level check match - remained null fdr",fdr.getMatch());
 		Assert.assertSame("normal level check match - matching failed fdr",  fdc,fdr.getMatch());

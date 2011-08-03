@@ -5,6 +5,7 @@ import java.util.Calendar;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import freedays.util.ValidationUtils;
 import freedays.validation.annotation.BusinessDay;
 
 /**
@@ -22,9 +23,10 @@ public class CheckBusinessDayValidator implements ConstraintValidator<BusinessDa
 
 	@Override
 	public boolean isValid(Calendar value, ConstraintValidatorContext context) {
-		int dayOfWeek = value.get(Calendar.DAY_OF_WEEK);
-		return dayOfWeek != Calendar.SATURDAY
-				&& dayOfWeek != Calendar.SUNDAY;
+//		int dayOfWeek = value.get(Calendar.DAY_OF_WEEK);
+//		return dayOfWeek != Calendar.SATURDAY
+//				&& dayOfWeek != Calendar.SUNDAY;
+		return ValidationUtils.checkBusinessDay(value);
 	}
 
 

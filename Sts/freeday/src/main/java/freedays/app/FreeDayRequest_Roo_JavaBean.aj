@@ -3,6 +3,7 @@
 
 package freedays.app;
 
+import freedays.app.FreeDay;
 import java.lang.String;
 import java.util.Calendar;
 
@@ -22,6 +23,22 @@ privileged aspect FreeDayRequest_Roo_JavaBean {
     
     public void FreeDayRequest.setReason(String reason) {
         this.reason = reason;
+    }
+    
+    public RequestType FreeDayRequest.getReqtype() {
+        return this.reqtype;
+    }
+    
+    public void FreeDayRequest.setReqtype(RequestType reqtype) {
+        this.reqtype = reqtype;
+    }
+    
+    public FreeDay FreeDayRequest.getMatch() {
+        return this.match;
+    }
+    
+    public void FreeDayRequest.setMatch(FreeDay match) {
+        this.match = match;
     }
     
 }

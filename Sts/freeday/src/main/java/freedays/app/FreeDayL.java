@@ -32,15 +32,7 @@ public class FreeDayL extends FreeDay {
     @BusinessDay
     private Calendar legalday;
     
-    public static FreeDayL createPersistentFreeDay(Calendar date, String reason){
-		if (date == null) throw new IllegalArgumentException("The date argument is required");
-    	FreeDayL fd = new FreeDayL();
-    	fd.setLegalday(date);
-    	fd.setReason(reason);
-    	fd.setApproval(AppStrategL1.getDefaultInitialStrateg());
-    	fd.persist();
-    	return fd;
-    }
+
 
 	@Override
 	public Calendar getDate() {

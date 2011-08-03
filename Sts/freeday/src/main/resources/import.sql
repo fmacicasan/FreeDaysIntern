@@ -41,10 +41,48 @@ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(116,3);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(117,4);
 
 delete from `free_day`
-INSERT INTO `free_day`(`free_day_type`,`id`,`legalday`,`version`,`approval`)VALUES("typeL",1,"2011-08-08",0,13);
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`legalday`,`version`,`approval`)VALUES("typeL",31,"Test1",0,"2011-08-08",0,13);
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`legalday`,`version`,`approval`)VALUES("typeL",32,"Test2",2,"2011-08-09",0,12);
+--in progress
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",15,"TestCc",0,0,"2011-08-04",13,null);
+--waiting
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",11,"TestCc",1,0,"2011-08-04",12,null);
+--failure reject
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",12,"TestCc",3,0,"2011-08-04",13,null);
+--failure cancel
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",13,"TestCc",3,0,"2011-08-04",13,null);
+--in progress
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`recoverdate`,`approval`,`request`)VALUES("typeR",20,"TestRr",0,0,"2011-08-06",13,null);
+--waiting
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`recoverdate`,`approval`,`request`)VALUES("typeR",21,"TestRr",1,0,"2011-08-06",12,null);
+
+--waiting
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",14,"TestCc",1,0,"2011-08-04",12,null);
+--waiting
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`recoverdate`,`approval`,`request`)VALUES("typeR",22,"TestRr",1,0,"2011-08-06",12,null);
+UPDATE `free_day` SET`status` = 2,`version` = 1,`recover` = 22 WHERE `id` = 14;
+UPDATE `free_day` SET`status` = 2,`version` = 1,`request` = 14 WHERE `id` = 22;
 
 delete from `request`
-INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(1,0,0,115,111,1);
-
+--pending
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(1,0,0,115,111,31);
+--pending
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(2,0,0,115,111,15);
+--pending
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(3,0,0,115,111,20);
+--granted
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(4,3,0,115,111,11);
+--rejected
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(5,4,0,115,111,12);
+--canceled
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(6,2,0,115,111,13);
+--granted
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(7,3,0,115,111,21);
+--granted
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(8,3,0,115,111,14);
+--granted
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(9,3,0,115,111,22);
+--granted
+INSERT INTO `request`(`id`,`status`,`version`,`appreguser`,`approver`,`requestable`)VALUES(10,3,0,115,111,32);
 
 

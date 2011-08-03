@@ -10,7 +10,7 @@
         <field:input field="initDays" id="c_freedays_app_FDUser_initDays" max="7" min="2" required="true" validationMessageCode="field_invalid_integer" z="d50q3gY6S6gEGXCg/mwBEdj4YmE="/>
         <field:input field="maxFreeDays" id="c_freedays_app_FDUser_maxFreeDays" min="21" required="true" validationMessageCode="field_invalid_integer" z="YX2Hy4s4nkQx6satjVwxS1ftTUs="/>
         <field:simple field="requests" id="c_freedays_app_FDUser_requests" messageCode="entity_reference_not_managed" messageCodeAttribute="Request" render="false" z="user-managed"/>
-        <field:select field="jobrole" id="c_freedays_app_FDUser_jobrole" items="${jobroles}" path="jobroles" z="user-managed"/>
+        <field:select  field="jobrole" id="c_freedays_app_FDUser_jobrole" items="${jobroles}" path="jobroles" z="user-managed"/>
         <field:input field="maxDerogation" id="c_freedays_app_FDUser_maxDerogation" required="true" validationMessageCode="field_invalid_integer" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_app_FDUser" render="${not empty dependencies}" z="R6glMHX1C2ZnRbou4VX89lBl2v0="/>

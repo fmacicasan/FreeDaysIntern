@@ -195,19 +195,19 @@ public class Request   implements Serializable{
 		return res;
 	}
 	
-	public static void createPersistentReq(Calendar date,String reason, String username) {
+	public static void createPersistentReq(FreeDayRequest fdr, String username) {
 		Request req = new Request();
 		req.setStatus(RequestStatus.getInit());
 		req.setAppreguser(FDUser.findFDUserByUsername(username));
-		req.setRequestable(FreeDayL.createPersistentFreeDay(date,reason));
+		req.setRequestable(FreeDay.createPersistentFreeDay(fdr));
 		System.out.println(req);
 		req.init();
 		req.persist();
 	}
 	
-	public static void createPersistentReq(FreeDayRequest fdr, String username){
-		Request.createPersistentReq(fdr.getReqdate(), fdr.getReason(), username);
-	}
+//	public static void createPersistentReq(FreeDayRequest fdr, String username){
+//		Request.createPersistentReq(fdr.getReqdate(), fdr.getReason(), username);
+//	}
 
 
 	public static List<Request> findAllRequestsByUsername(String username) {

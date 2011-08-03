@@ -7,13 +7,10 @@ import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayC;
 import freedays.app.FreeDayRDataOnDemand;
 import java.lang.String;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +19,6 @@ import org.springframework.stereotype.Component;
 privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayCDataOnDemand: @Component;
-    
-    private Random FreeDayCDataOnDemand.rnd = new SecureRandom();
-    
-    private List<FreeDayC> FreeDayCDataOnDemand.data;
     
     @Autowired
     private FreeDayRDataOnDemand FreeDayCDataOnDemand.freeDayRDataOnDemand;
@@ -55,12 +48,6 @@ privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
         if (index < 0) index = 0;
         if (index > (data.size() - 1)) index = data.size() - 1;
         FreeDayC obj = data.get(index);
-        return FreeDayC.findFreeDayC(obj.getId());
-    }
-    
-    public FreeDayC FreeDayCDataOnDemand.getRandomFreeDayC() {
-        init();
-        FreeDayC obj = data.get(rnd.nextInt(data.size()));
         return FreeDayC.findFreeDayC(obj.getId());
     }
     
