@@ -72,7 +72,7 @@ public class FreeDayCIntegrationTest {
 	}
 	
 	@Test
-	public void testMergeNormalUser(){
+	public void testMergeNormalUserMechanimsLowLevel(){
 		requestC.setAppreguser(appreguser);
 		requestC.init();
 		requestC.approve();
@@ -122,7 +122,7 @@ public class FreeDayCIntegrationTest {
 	
 	
 	@Test
-	public void testRequestApproveDay(){
+	public void testRequestDayMechanismHighLevel(){
 		
 		FDUser fdu = new FDUserDataOnDemand().getRandomNormalUser();
 		String username =  fdu.getRegularUser().getUsername();

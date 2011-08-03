@@ -9,6 +9,7 @@ import freedays.app.FDUser;
 import freedays.app.FreeDay;
 import freedays.app.FreeDayL;
 import freedays.app.FreeDayRequest;
+import freedays.app.FreeDaysRCMatch;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
@@ -74,6 +75,17 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 			public String convert(FreeDay source) {
 				return source.toString();
 			}
+    	};
+    }
+    
+    Converter<FreeDaysRCMatch, String> getFreeDayRCMatchConverter(){
+    	return new Converter<FreeDaysRCMatch, String>(){
+
+			@Override
+			public String convert(FreeDaysRCMatch source) {
+				return source.toString();
+			}
+    		
     	};
     }
     

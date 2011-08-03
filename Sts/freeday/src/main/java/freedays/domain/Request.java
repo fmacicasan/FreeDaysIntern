@@ -223,6 +223,7 @@ public class Request   implements Serializable{
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
         TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username ", Request.class);
+        //TODO: change the searched status only for the ones that need approval
         q.setParameter("username", username);
         return q.getResultList();
 	}

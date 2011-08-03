@@ -72,7 +72,7 @@ public class RequestController {
         	
         	uiModel.addAttribute("hasError",true);
             uiModel.addAttribute("reqbean", request);
-//            addDateTimeFormatPatterns(uiModel);
+            
             return "requests/create";
         }
         System.out.println("cacenflitz");

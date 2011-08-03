@@ -2,6 +2,9 @@ package freedays.app;
 
 import java.util.Calendar;
 
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+
 import freedays.app.FreeDay.FreeDayStatus;
 
 
@@ -12,7 +15,9 @@ import freedays.app.FreeDay.FreeDayStatus;
  *
  * @param <T> represents the class to which the matching is restricted. It must <b>extend</b> {@link freedays.app.FreeDay FreeDay}.
  */
-  public abstract class  FreeDaysRCMatch extends FreeDay{
+@RooJavaBean
+@RooEntity
+public abstract class  FreeDaysRCMatch extends FreeDay{
 	
 	  
 	
