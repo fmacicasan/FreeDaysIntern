@@ -1,6 +1,8 @@
 package freedays.app;
 
 import java.util.Calendar;
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Future;
 import javax.persistence.Enumerated;
@@ -46,4 +48,20 @@ public class FreeDayRequest {
     	fdr.setReqtype(rt);
     	return fdr;
     }
+    
+//    @SuppressWarnings("unchecked")
+//	public static <T extends FreeDay> List<T> getMatchings(String username, RequestType rt){
+//	    		//TODO: catch the ClassCastException if any.
+//	    		switch(rt){
+//		    		case R:
+//		    			return FreeDayR.getAllUnmatchedRequestsByUsername(username);
+//		    			
+//		    		case C:
+//		    			return (List<T>) FreeDayC.getAllUnmatchedRequestsByUsername(username);
+//		    		default:
+//		    			//throw new IllegalArgumentException("The RequestType argument is invalid: should be R or C");
+//		    			return null;
+//	    		}
+//    		
+//    }
 }

@@ -49,4 +49,8 @@ public class DateUtils {
 	public static int generateRandomWeekendDayOfWeek() {
 		 return Calendar.SATURDAY; //Saturday is the normal recovery day of week
 	}
+	
+	public static String printShortDate(Calendar date){
+		return String.format("%1$td.%1$tm", date);
+	}
 }

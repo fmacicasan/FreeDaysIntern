@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import freedays.app.FreeDayRequest.RequestType;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
 import freedays.validation.annotation.BusinessDay;
@@ -49,7 +50,10 @@ public class FreeDayL extends FreeDay {
 //        sb.append("Version: ").append(getVersion()).append(", ");
 //        sb.append("Cancelable: ").append(isCancelable());
 //        return sb.toString();
-		return super.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append(" L");
+		return sb.toString();
     }
 
 	@Override
@@ -57,23 +61,10 @@ public class FreeDayL extends FreeDay {
 		return FreeDayStatus.COMPLETED_SUCCESS;
 	}
 
-
-
-
-
-
-
 	@Override
 	protected void setDate(Calendar date) {
-		this.setLegalday(date);
-		
+		this.setLegalday(date);	
 	}
-
-
-
-
-
-
 
 	@Override
 	protected void initialize(FreeDayRequest fdr) {
@@ -83,5 +74,11 @@ public class FreeDayL extends FreeDay {
 	@Override
 	protected void finalizeFail() {
 		// nothing special here	
+	}
+	
+
+	@Override
+	protected RequestType getType() {
+		return RequestType.L;
 	}
 }

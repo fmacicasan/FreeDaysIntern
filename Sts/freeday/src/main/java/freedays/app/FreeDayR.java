@@ -17,7 +17,9 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import freedays.app.FreeDayRequest.RequestType;
 import freedays.domain.RegularUser;
+import freedays.util.DateUtils;
 import freedays.validation.annotation.Weekend;
 
 @RooJavaBean
@@ -52,7 +54,14 @@ public class FreeDayR extends FreeDaysRCMatch {
 //        sb.append("Version: ").append(getVersion()).append(", ");
 //        sb.append("Cancelable: ").append(isCancelable());
 //        return sb.toString();
-		return super.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append(" R");
+		if(this.getMatch()!=null){
+			sb.append("/").append(DateUtils.printShortDate(this.getMatch().getDate()));
+		}
+		
+		return sb.toString();
     }
 
 	
@@ -102,6 +111,13 @@ public class FreeDayR extends FreeDaysRCMatch {
 	protected void setDate(Calendar date) {
 		this.setRecoverdate(date);
 		
+	}
+	
+
+
+	@Override
+	protected RequestType getType() {
+		return RequestType.R;
 	}
 
 	

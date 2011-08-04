@@ -9,4 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/hrmanagements")
 @Controller
 public class HRManagementController {
+	
+	
 }

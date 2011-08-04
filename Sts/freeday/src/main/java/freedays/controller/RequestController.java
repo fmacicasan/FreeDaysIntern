@@ -72,7 +72,16 @@ public class RequestController {
         	
         	uiModel.addAttribute("hasError",true);
             uiModel.addAttribute("reqbean", request);
-            
+            // populate based on type with the corresponding matchings
+            switch(request.getReqtype()){
+	            case L:
+	            	uiModel.addAttribute("matchings",FreeDayR.getAllUnmatchedRequestsByUsername(p.getName()));
+	            	break;
+	            case R:
+	            	uiModel.addAttribute("matchings",FreeDayC.getAllUnmatchedRequestsByUsername(p.getName()));
+	            	break;
+	            default:;
+            }
             return "requests/create";
         }
         System.out.println("cacenflitz");

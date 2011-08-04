@@ -12,6 +12,7 @@
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_HRMANAGEMENT">
                     <menu:item id="i_hrmanagement_list_fd_users" messageCode="global_menu" url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z=""/>
+                	<menu:item id="i_hrmanagement_list_freedays" url="/report?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed" />
                 </sec:authorize>
             </menu:category>
         </sec:authorize>

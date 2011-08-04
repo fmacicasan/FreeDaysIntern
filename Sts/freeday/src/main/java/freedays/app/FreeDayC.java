@@ -18,6 +18,8 @@ import javax.persistence.TypedQuery;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import freedays.app.FreeDay.FreeDayStatus;
+import freedays.app.FreeDayRequest.RequestType;
+import freedays.util.DateUtils;
 import freedays.validation.annotation.BusinessDay;
 
 @RooJavaBean
@@ -40,19 +42,25 @@ public class FreeDayC extends FreeDaysRCMatch {
 		return this.getRequestdate();
 	}
 
-//	public String toString() {
-////        StringBuilder sb = new StringBuilder();
-////        sb.append("Approval: ").append(getApproval()).append(", ");
-////        sb.append("Date: ").append(getDate() == null ? "null" : getDate().getTime()).append(", ");
-////        sb.append("Id: ").append(getId()).append(", ");
-////        sb.append("Reason: ").append(getReason()).append(", ");
-////        sb.append("Recover: ").append(getRecover()).append(", ");
-////        sb.append("Requestdate: ").append(getRequestdate() == null ? "null" : getRequestdate().getTime()).append(", ");
-////        sb.append("Version: ").append(getVersion()).append(", ");
-////        sb.append("Cancelable: ").append(isCancelable());
-////        return sb.toString();
-//		return super.toString();
-//    }
+	public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Approval: ").append(getApproval()).append(", ");
+//        sb.append("Date: ").append(getDate() == null ? "null" : getDate().getTime()).append(", ");
+//        sb.append("Id: ").append(getId()).append(", ");
+//        sb.append("Reason: ").append(getReason()).append(", ");
+//        sb.append("Recover: ").append(getRecover()).append(", ");
+//        sb.append("Requestdate: ").append(getRequestdate() == null ? "null" : getRequestdate().getTime()).append(", ");
+//        sb.append("Version: ").append(getVersion()).append(", ");
+//        sb.append("Cancelable: ").append(isCancelable());
+//        return sb.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append(" C");
+		if(this.getMatch()!=null){
+			sb.append("/").append(DateUtils.printShortDate(this.getMatch().getDate()));
+		}
+		return sb.toString();
+    }
 
 //	@Override
 //	public FreeDayStatus getApproveStatus() {
@@ -105,6 +113,11 @@ public class FreeDayC extends FreeDaysRCMatch {
 	protected void setDate(Calendar date) {
 		this.setRequestdate(date);
 		
+	}
+
+	@Override
+	protected RequestType getType() {
+		return RequestType.C;
 	}
 
 //	@Override

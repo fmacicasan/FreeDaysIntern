@@ -224,6 +224,14 @@ public class RegularUser implements Serializable {
 
 		return q.getResultList();
 	}
+	
+	public String getFullName(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.firstname);
+		sb.append(" ");
+		sb.append(this.surename);
+		return sb.toString();
+	}
 
 //	@Transactional
 	public static Long countRegularUserByEmail(String email) {

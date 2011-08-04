@@ -6,6 +6,7 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDay.FreeDayStatus;
+import freedays.util.DateUtils;
 
 
 /**
@@ -78,6 +79,17 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 		if(match != null){
 			match.setFinalApproveStatus();
 		}
+	}
+	
+	@Override
+	public String reportPrint(){
+		if(this.getMatch()!=null){
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.reportPrint());
+			sb.append("/").append(DateUtils.printShortDate(this.getMatch().getDate())).append(this.getMatch().getType());
+			return sb.toString();
+		}
+		return super.reportPrint();
 	}
 
 }
