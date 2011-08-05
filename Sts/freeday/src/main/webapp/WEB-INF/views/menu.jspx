@@ -3,7 +3,11 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-        <menu:category id="c_general" z=""/>
+        <menu:category id="c_general" z="user-managed">
+        	<sec:authorize ifAnyGranted="ROLE_USER">
+        		<menu:item id="c_general_reportvacation" url="/report/vacation" z="user-managed"/>
+        	</sec:authorize>
+        </menu:category>
         <sec:authorize ifAnyGranted="ROLE_AAA,ROLE_HRMANAGEMENT">
             <menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
                 <sec:authorize ifAllGranted="ROLE_AAA">
@@ -62,9 +66,10 @@
         <sec:authorize ifAnyGranted="ROLE_USER, ROLE_FDADMIN, ROLE_REQUESTGRANTER">
             <menu:category id="c_request" z="K3H2XFvnqlPuvp7YsYXLCJyWwHQ=">
                 <sec:authorize ifAllGranted="ROLE_USER">
-                    <menu:item id="i_request_new_l" messageCode="global_menu_new" url="/requests?form=l" z="user-managed"/>
+                    <menu:item id="i_request_new" messageCode="global_menu_new" url="/requests?form=l" z="user-managed"/>
                     <menu:item id="i_request_new_c" messageCode="global_menu_new" url="/requests?form=c" z="user-managed"/>
                     <menu:item id="i_request_new_r" messageCode="global_menu_new" url="/requests?form=r" z="user-managed"/>
+                    <menu:item id="i_request_new_v" messageCode="global_menu_new" url="/requests?form=v" z="user-managed"/>
                     <menu:item id="i_request_list_own" messageCode="global_menu_list" url="/requests?own" z="user-managed"/>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_REQUESTGRANTER">
@@ -73,7 +78,6 @@
                 <sec:authorize ifAllGranted="ROLE_FDADMIN">
                     <menu:item id="i_request_list" messageCode="global_menu_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="zR+uAsU8p+xT+34YNGm0eI2d/Dk="/>
                 </sec:authorize>
-                <menu:item id="i_request_new" messageCode="global_menu_new" url="/requests?form" z="vXscIy5n1QOw1AlVbhpVIpJCppg="/>
             </menu:category>
         </sec:authorize>
     </menu:menu>

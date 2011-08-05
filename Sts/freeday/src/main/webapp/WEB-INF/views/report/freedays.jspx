@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_freedays_app_Freedaysreport" items="${display}" z="user-managed">
+       <c:set var="colCounter" value="${tablewidth}" />
+       <spring:eval var="colCounter" expression="colCounter+2" />
+       <table>
+       <!-- maximum 20 days per screen => add pages for more!! -->
+       <thead>
+       		<tr>
+       			<th><spring:message code="freedaysreport_name" /> </th>
+       			<th><spring:message code="freedaysreport_role" /></th>
+       			<c:forEach var="i" begin="1" end="${tablewidth}">
+       				<th><spring:message code="freedaysreport_day" /></th>
+       			</c:forEach>
+       		</tr>
+       	</thead>
+       	<c:forEach items="${display}" var="item">
+       		<spring:eval expression="item['user']" var="user" />
+     		<spring:eval expression="item['jobrole']" var="jobrole" />
+     		<spring:eval expression="item['freedays']" var="freedays" />
+       		<tr>
+       			<td><c:out value="${user}" /></td>
+       			<td><c:out value="${jobrole}" /></td>
+       			<c:set value="${tablewidth}" var="dayCnt" />
+       			<c:forEach items="${freedays}" var="freeday">
+       				<spring:eval expression="dayCnt - 1" var="dayCnt" />
+       				<td><c:out value="${freeday}" /> </td>
+       			</c:forEach>
+       			<c:forEach var="i" begin="1" end="${dayCnt}">
+       				<td></td>
+       			</c:forEach>
+       		</tr>
+       	</c:forEach>
+       </table>
+    </page:list>
+</div>

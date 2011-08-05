@@ -14,6 +14,9 @@ public class FreeDayFactory {
 			case R:
 				ret = new FreeDayR();
 				break;
+			case V:
+				ret = new FreeDayVacation();
+				break;
 			default:
 				throw new IllegalArgumentException("The request type is not supported!");	
 		}

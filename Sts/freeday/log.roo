@@ -289,3 +289,13 @@ perform tests
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-05 09:10:14
 perform tests
 perform tests
+entity --class freedays.app.FreeDayVacation --extends freedays.app.FreeDay --testAutomatically 
+// [failed] field date --type java.util.Calendar --fieldName start --dateFormat SHORT --future --notNull
+field date --type java.util.Calendar --fieldName beginning --dateFormat SHORT --future --notNull
+// [failed] field date --type java.util.Calendar --fieldName end --dateFormat SHORT --future --notNull
+// [failed] field date --type java.util.Calendar --fieldName final --dateFormat SHORT --future --notNull
+field date --type java.util.Calendar --fieldName finish --dateFormat SHORT --future --notNull
+// [failed] field number --fieldName confidence --type int
+field number --fieldName confidence --type int
+perform tests
+perform tests

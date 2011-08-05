@@ -1,6 +1,8 @@
 package freedays.app;
 
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -37,6 +39,10 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 	public abstract void setMatch(FreeDaysRCMatch match);
 	public abstract FreeDaysRCMatch getMatch();
 
+	protected void setMergedStatus(){
+		super.setStatus(FreeDayStatus.COMPLETED_SUCCESS);
+	}
+	
 	public boolean canMatch() {
 		return this.getMatch() != null;
 	}
@@ -82,12 +88,14 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 	}
 	
 	@Override
-	public String reportPrint(){
+	public List<String> reportPrint(){
 		if(this.getMatch()!=null){
 			StringBuilder sb = new StringBuilder();
 			sb.append(super.reportPrint());
 			sb.append("/").append(DateUtils.printShortDate(this.getMatch().getDate())).append(this.getMatch().getType());
-			return sb.toString();
+			List<String> lst = new LinkedList<String>();
+			lst.add(sb.toString());
+			return lst;
 		}
 		return super.reportPrint();
 	}

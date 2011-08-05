@@ -1,8 +1,12 @@
 package freedays.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Utility class used for date generation & manipulation.'
@@ -52,5 +56,34 @@ public class DateUtils {
 	
 	public static String printShortDate(Calendar date){
 		return String.format("%1$td.%1$tm", date);
+	}
+	
+	public static long dateDifferenceInDays(Calendar start, Calendar end){
+		if(start == null)throw new IllegalArgumentException("The start argument is required");
+		if(end == null)throw new IllegalArgumentException("The end argument is required");
+		if(!start.before(end)) throw new IllegalArgumentException("start must be before end"); 
+		
+		long time = end.getTimeInMillis();
+		time -= start.getTimeInMillis();
+		return TimeUnit.MILLISECONDS.toDays(time);
+	}
+	
+	public static Calendar dateAddDay(Calendar start, Long days){
+		Calendar finish = (Calendar) start.clone();
+		finish.add(Calendar.DAY_OF_YEAR, days.intValue());
+		return finish;
+	}
+	
+	public static Calendar convString2Calendar(String s){
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		Calendar c = Calendar.getInstance();
+		try {
+			Date d = df.parse(s);
+			c.setTime(d);
+			return c;
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("The s argument must respect format mm/dd/yyyy");
+		}
+		
 	}
 }

@@ -62,8 +62,9 @@ public class MailUtils {
     	                    InternetAddress.parse(to));
     	            message.setSubject(subject);
     	            message.setText(content);
-
-    	            Transport.send(message);
+    	            
+    	            //TODO: solve problem with disabled gmail account
+    	            //Transport.send(message);
 
     	        } catch (MessagingException e) {
     	            throw new RuntimeException(e);

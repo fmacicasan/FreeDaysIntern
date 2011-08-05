@@ -17,6 +17,8 @@ import freedays.app.FreeDayR;
 import freedays.app.FreeDayRCMatchable;
 import freedays.app.FreeDayRequest;
 import freedays.app.FreeDayRequest.RequestType;
+import freedays.app.FreeDayRequestVacation;
+import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
 import freedays.domain.ApplicationRegularUser.JobRole;
@@ -43,7 +45,7 @@ public class RequestController {
 	
 	@RequestMapping(params = "form=l", method = RequestMethod.GET)
     public String createForm(Model uiModel) {
-        uiModel.addAttribute("reqbean", FreeDayRequest.generateReq(RequestType.L));
+        uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.L));
         uiModel.addAttribute("typeLMarker",true);
         System.out.println("testing");
         return "requests/create";
@@ -51,16 +53,22 @@ public class RequestController {
 	
 	@RequestMapping(params = "form=c", method = RequestMethod.GET)
 	public String createFormReqC(Model uiModel,Principal p){
-		uiModel.addAttribute("reqbean", FreeDayRequest.generateReq(RequestType.C));
+		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.C));
 		uiModel.addAttribute("matchings",FreeDayR.getAllUnmatchedRequestsByUsername(p.getName()));
 		return "requests/create";
 	}
 	
 	@RequestMapping(params = "form=r", method = RequestMethod.GET)
 	public String createFormReqR(Model uiModel, Principal p){
-		uiModel.addAttribute("reqbean", FreeDayRequest.generateReq(RequestType.R));
+		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.R));
 		uiModel.addAttribute("matchings",FreeDayC.getAllUnmatchedRequestsByUsername(p.getName()));
 		return "requests/create";
+	}
+	
+	@RequestMapping(params = "form=v", method = RequestMethod.GET)
+	public String createFormReqV(Model uiModel){
+		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.V));
+		return "requests/vacation";
 	}
 		
 
@@ -92,6 +100,19 @@ public class RequestController {
         uiModel.asMap().clear();
         return "redirect:/requests?own";
     }
+	
+	@RequestMapping(value="/vacation", method = RequestMethod.POST)
+	public String createVacation(@Valid FreeDayRequestVacation request, BindingResult bindingResult, Model uiModel, Principal p){
+		if(bindingResult.hasErrors()){
+			uiModel.addAttribute("hasError", true);
+			uiModel.addAttribute("reqbean", request);
+			return "requests/create"; 
+		}
+		Request.createPersistentReq(request, p.getName());
+		uiModel.asMap().clear();
+		return "redirect:/requests?own";
+	}
+	
 	
 	
 	@RequestMapping(value = "/{id}", params = {"eval","approve"}, method = RequestMethod.POST)
@@ -188,6 +209,11 @@ public class RequestController {
     @ModelAttribute("requesttypes")
     public Collection<RequestType> populateRequestTypes() {
         return Arrays.asList(RequestType.class.getEnumConstants());
+    }
+    
+    @ModelAttribute("confidencelevels")
+    public Collection<ConfidenceLevel> populateConfidenceLevels(){
+    	return Arrays.asList(ConfidenceLevel.class.getEnumConstants());
     }
     
     @ModelAttribute("request_date_format")

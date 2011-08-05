@@ -38,4 +38,13 @@ public class AppStrategL1 extends ApprovalStrategy {
 
 	
 
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+        //sb.append("DefaultInitialStrateg: ").append(getDefaultInitialStrateg()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("Succesor: ").append(getSuccesor()).append(", ");
+        sb.append("Version: ").append(getVersion());
+        return sb.toString();
+    }
 }

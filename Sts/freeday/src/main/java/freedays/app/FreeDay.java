@@ -2,6 +2,7 @@ package freedays.app;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.DiscriminatorColumn;
@@ -54,12 +55,19 @@ public abstract class FreeDay {
 		return this.getDate().after(Calendar.getInstance());
 	}
     
+    public boolean isReportable(){
+    	return this.getDate().before(Calendar.getInstance()) &&
+    			(this.getStatus() == FreeDayStatus.WAITING
+    				|| this.getStatus() == FreeDayStatus.COMPLETED_SUCCESS);
+    }
+    
     public String toString(){
     	StringBuilder sb = new StringBuilder();
     	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate()));
     	sb.append(" reason -> ");
     	sb.append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
     	sb.append(" int status " + this.getStatus());
+    	sb.append("of type ").append(this.getType());
     	//sb.append(String.format("%1$te.%1$tb", this.getDate()));
     	return sb.toString();
     }
@@ -85,9 +93,7 @@ public abstract class FreeDay {
 		this.finalizeFail();
 	}
 	
-	protected void setMergedStatus(){
-		this.status = FreeDayStatus.COMPLETED_SUCCESS;
-	}
+
 	
     public static FreeDay createPersistentFreeDay(FreeDayRequest fdr){
 		if (fdr == null) throw new IllegalArgumentException("The FreeDayRequest argument is required");
@@ -127,10 +133,26 @@ public abstract class FreeDay {
 		return lfds;
 	}
 
-	public String reportPrint() {
+	public List<String> reportPrint() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(DateUtils.printShortDate(this.getDate()));
 		sb.append(this.getType());
-		return sb.toString();
+		List<String> lst = new LinkedList<String>();
+		lst.add(sb.toString());
+		return lst;
 	}
+
+	public static List<FreeDayUserList> getAllUserVacations(Calendar start, Calendar end) {
+		if(start == null)throw new IllegalArgumentException("the start argument is required");
+		if(end == null)throw new IllegalArgumentException("the end argument is required");
+		if(start.after(end))throw new IllegalArgumentException("the start should be before the end");
+		List<FreeDayUserList> fdrl = new ArrayList<FreeDayUserList>();
+		//TODO: decide weather to make report for all users or only all active users
+		List<FDUser> fdul = FDUser.findAllFDUsers();
+		for (FDUser fdUser : fdul) {
+			fdrl.add(FreeDayUserList.generateVacationList(fdUser,start,end));
+		}
+		return fdrl;
+	}
+
 }

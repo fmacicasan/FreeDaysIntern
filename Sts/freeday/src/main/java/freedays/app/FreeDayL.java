@@ -21,7 +21,6 @@ import freedays.validation.annotation.BusinessDay;
 import javax.persistence.ManyToOne;
 
 @RooJavaBean
-@RooToString
 @RooEntity
 @DiscriminatorValue("typeL")
 public class FreeDayL extends FreeDay {
@@ -40,21 +39,21 @@ public class FreeDayL extends FreeDay {
 		return this.getLegalday();
 	}
     
-	public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("Approval: ").append(getApproval()).append(", ");
-//        sb.append("Date: ").append(getDate() == null ? "null" : getDate().getTime()).append(", ");
-//        sb.append("Id: ").append(getId()).append(", ");
-//        sb.append("Legalday: ").append(getLegalday() == null ? "null" : getLegalday().getTime()).append(", ");
-//        sb.append("Reason: ").append(getReason()).append(", ");
-//        sb.append("Version: ").append(getVersion()).append(", ");
-//        sb.append("Cancelable: ").append(isCancelable());
-//        return sb.toString();
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append(" L");
-		return sb.toString();
-    }
+//	public String toString() {
+////        StringBuilder sb = new StringBuilder();
+////        sb.append("Approval: ").append(getApproval()).append(", ");
+////        sb.append("Date: ").append(getDate() == null ? "null" : getDate().getTime()).append(", ");
+////        sb.append("Id: ").append(getId()).append(", ");
+////        sb.append("Legalday: ").append(getLegalday() == null ? "null" : getLegalday().getTime()).append(", ");
+////        sb.append("Reason: ").append(getReason()).append(", ");
+////        sb.append("Version: ").append(getVersion()).append(", ");
+////        sb.append("Cancelable: ").append(isCancelable());
+////        return sb.toString();
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(super.toString());
+//		sb.append(" L");
+//		return sb.toString();
+//    }
 
 	@Override
 	public FreeDayStatus getApproveStatus() {

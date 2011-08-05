@@ -36,15 +36,27 @@ public class FreeDayRequest {
      * @author fmacicasan
      *
      */
-    public enum RequestType {L,C,R};
+    public enum RequestType {L,C,R,V};
     @NotNull
     @Enumerated
     private RequestType reqtype;
     
     private FreeDaysRCMatch match;
     
-    public static FreeDayRequest generateReq(RequestType rt){
-    	FreeDayRequest fdr = new FreeDayRequest();
+    public static FreeDayRequest generateReqFactory(RequestType rt){
+    	FreeDayRequest fdr;
+    	switch(rt){
+	    	case L:
+	    	case C:
+	    	case R:
+	    		fdr = new FreeDayRequest();
+	    		break;
+	    	case V:
+	    		fdr = new FreeDayRequestVacation();
+	    		break;
+	    	default:
+	    		throw new IllegalArgumentException("The request type is not supported!");	
+    	}
     	fdr.setReqtype(rt);
     	return fdr;
     }

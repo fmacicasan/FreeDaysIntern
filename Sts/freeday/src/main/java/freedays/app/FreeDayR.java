@@ -56,7 +56,6 @@ public class FreeDayR extends FreeDaysRCMatch {
 //        return sb.toString();
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
-		sb.append(" R");
 		if(this.getMatch()!=null){
 			sb.append("/").append(DateUtils.printShortDate(this.getMatch().getDate()));
 		}
