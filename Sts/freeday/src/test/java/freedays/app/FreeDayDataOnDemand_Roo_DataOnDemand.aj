@@ -36,11 +36,6 @@ privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
         obj.setApproval(approval);
     }
     
-    public void FreeDayDataOnDemand.setLegalday(FreeDayL obj, int index) {
-        Calendar legalday = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
-        obj.setLegalday(legalday);
-    }
-    
     public void FreeDayDataOnDemand.setReason(FreeDayL obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);

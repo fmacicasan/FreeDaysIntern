@@ -4,6 +4,7 @@
 package freedays.domain;
 
 import freedays.app.FreeDay;
+import freedays.app.FreeDayDataOnDemand;
 import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
@@ -23,6 +25,9 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     private Random RequestDataOnDemand.rnd = new SecureRandom();
     
     private List<Request> RequestDataOnDemand.data;
+    
+    @Autowired
+    private FreeDayDataOnDemand RequestDataOnDemand.freeDayDataOnDemand;
     
     public Request RequestDataOnDemand.getNewTransientRequest(int index) {
         Request obj = new Request();
@@ -44,7 +49,7 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     }
     
     public void RequestDataOnDemand.setRequestable(Request obj, int index) {
-        FreeDay requestable = null;
+        FreeDay requestable = freeDayDataOnDemand.getSpecificFreeDayL(index);
         obj.setRequestable(requestable);
     }
     

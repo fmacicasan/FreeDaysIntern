@@ -46,4 +46,9 @@ public class FreeDayLDataOnDemand {
         ApprovalStrategy approval = null;
         obj.setApproval(AppStrategL1.getDefaultInitialStrateg());
     }
+
+	public void setLegalday(FreeDayL obj, int index) {
+       // Calendar legalday = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
+        obj.setLegalday(DateUtils.generateFutureBusinessDay());
+    }
 }
