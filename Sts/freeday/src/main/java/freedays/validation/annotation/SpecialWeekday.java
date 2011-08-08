@@ -28,7 +28,7 @@ import freedays.validation.CheckSpecialWeekdayValidator;
 @Constraint(validatedBy = CheckSpecialWeekdayValidator.class)
 @Documented
 public @interface SpecialWeekday {
-	String message() default "Date must be during weekends";
+	String message() default "Specialized date constrain!";
 	Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
