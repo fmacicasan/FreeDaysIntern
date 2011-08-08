@@ -1,0 +1,16 @@
+#spring security
+##annotations
+	http://stackoverflow.com/questions/3087548/can-spring-security-use-preauthorize-on-spring-controllers-methods
+	http://blog.solidcraft.eu/2011/03/spring-security-by-example-securing.html
+	http://stsmedia.net/spring-finance-part-6-spring-security-3-integration/
+	http://www.jeviathon.com/2009/08/spring-security-30-worth-frustration.html
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/el-access.html
+	http://blog.springsource.com/2009/06/03/spring-security-300m1-released/
+	http://maruhgar.blogspot.com/2011/02/migrating-to-spring-security-31.html
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/taglibs.html
+	
+#3/3.1
+	http://www.infoq.com/presentations/Spring-Security-3
+
+#spring
+http://git.springsource.org/s2gx-2010

@@ -11,6 +11,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.security.access.prepost.PostFilter;
+
 import freedays.domain.ApplicationRegularUser;
 
 import javax.persistence.EntityManager;
@@ -211,6 +213,7 @@ public class Request   implements Serializable{
 //	}
 
 
+	
 	public static List<Request> findAllRequestsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
@@ -222,11 +225,13 @@ public class Request   implements Serializable{
 	public static List<Request> findAllPendingApprovalsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
-        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username ", Request.class);
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username and o.status NOT IN :finishstates ", Request.class);
         //TODO: change the searched status only for the ones that need approval
         q.setParameter("username", username);
+        q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
         return q.getResultList();
 	}
+	
 
 	public static long countActiveRequests(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");

@@ -14,7 +14,15 @@ body {
 #header {
 	margin-bottom: 1em;
 }
-
+#colr{
+	background-color: red;
+}
+#coly{
+	background-color: yellow;
+}
+#colg{
+	background-color: aqua;
+}
 #wrapper {
 	width:100%;
 	min-width: 100%;

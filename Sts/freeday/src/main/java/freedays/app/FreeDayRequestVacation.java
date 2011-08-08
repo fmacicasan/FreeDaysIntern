@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDayVacation.ConfidenceLevel;
+import freedays.validation.annotation.BusinessDay;
 
 @RooJavaBean
 public class FreeDayRequestVacation extends FreeDayRequest {
@@ -19,6 +20,7 @@ public class FreeDayRequestVacation extends FreeDayRequest {
     @Future(message="date must be in future!")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
+	@BusinessDay
     private Calendar finish;
 	
 	private ConfidenceLevel confidence;

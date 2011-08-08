@@ -1,0 +1,13 @@
+TODO:
+	- add Service layer instead of static method calls
+	- put security annotations on the services instead of the controllers
+	
+	- on update should also check the validity of the RegularUser
+	- update a request by the FDUser???
+	- what if not approved and the date already passed ??
+	- visitor for permissions instead of instanceof
+	
+	- change register/recoverpass/change pass/
+	- improve validity restricting request to one for a calendar date
+	- request more than one day / request
+	- solve the @BusinessDay and stuff error display

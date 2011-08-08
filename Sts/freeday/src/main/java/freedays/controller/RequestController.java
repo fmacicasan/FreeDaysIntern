@@ -27,6 +27,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +43,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RequestController {
 	
-	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=l", method = RequestMethod.GET)
     public String createForm(Model uiModel) {
         uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.L));
@@ -51,6 +52,7 @@ public class RequestController {
         return "requests/create";
     }
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=c", method = RequestMethod.GET)
 	public String createFormReqC(Model uiModel,Principal p){
 		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.C));
@@ -58,6 +60,7 @@ public class RequestController {
 		return "requests/create";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=r", method = RequestMethod.GET)
 	public String createFormReqR(Model uiModel, Principal p){
 		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.R));
@@ -65,13 +68,14 @@ public class RequestController {
 		return "requests/create";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=v", method = RequestMethod.GET)
 	public String createFormReqV(Model uiModel){
 		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.V));
 		return "requests/vacation";
 	}
 		
-
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
     public String create(@Valid FreeDayRequest request, BindingResult bindingResult, Model uiModel, Principal p) {
         if (bindingResult.hasErrors()) {
@@ -101,12 +105,13 @@ public class RequestController {
         return "redirect:/requests?own";
     }
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="/vacation", method = RequestMethod.POST)
 	public String createVacation(@Valid FreeDayRequestVacation request, BindingResult bindingResult, Model uiModel, Principal p){
 		if(bindingResult.hasErrors()){
 			uiModel.addAttribute("hasError", true);
 			uiModel.addAttribute("reqbean", request);
-			return "requests/create"; 
+			return "requests/vacation"; 
 		}
 		Request.createPersistentReq(request, p.getName());
 		uiModel.asMap().clear();
@@ -114,7 +119,7 @@ public class RequestController {
 	}
 	
 	
-	
+	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
 	@RequestMapping(value = "/{id}", params = {"eval","approve"}, method = RequestMethod.POST)
 	public String evalRequestApprove(@PathVariable("id") Long id, Model uiModel){
 			
@@ -125,6 +130,7 @@ public class RequestController {
 		return "redirect:/requests?approve";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
 	@RequestMapping(value = "/{id}", params = {"eval","deny"}, method = RequestMethod.POST)
 	public String evalRequestDeny(@PathVariable("id") Long id, Model uiModel){
 		
@@ -135,6 +141,7 @@ public class RequestController {
 		return "redirect:/requests?approve";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_FDADMIN') or hasPermission(#id, 'Request', 'own')")
 	@RequestMapping(value = "/{id}", params = {"eval","cancel"}, method = RequestMethod.POST)
 	public String evalRequestCancel(@PathVariable("id") Long id, Model uiModel){
 		
@@ -160,13 +167,16 @@ public class RequestController {
 //        uiModel.addAttribute("request_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
 //    }
     
+	//will find only intended requests
+	@PreAuthorize("isAuthenticated()")
     @RequestMapping(params= "own", method = RequestMethod.GET)
     public String listOwn(Model uiModel, Principal p){
     	uiModel.addAttribute("requests",Request.findAllRequestsByUsername(p.getName()));
     	return "requests/list";
     }
     
-    @Secured({"ROLE_REQUESTGRANTER"})
+    
+    @PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
     @RequestMapping(params= "approve", method = RequestMethod.GET)
     public String listApprove(Model uiModel, Principal p){
     	uiModel.addAttribute("requests",Request.findAllPendingApprovalsByUsername(p.getName()));
@@ -182,11 +192,15 @@ public class RequestController {
      * @param uiModel
      * @return
      */
+    @PreAuthorize("hasRole('ROLE_FDADMIN')" +
+    		" or hasPermission(#id, 'Request', 'own')" +
+    		" or hasPermission(#id, 'Request', 'approve')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model uiModel, Principal p) {
 		Request req = Request.findRequest(id);
         uiModel.addAttribute("request", req);
         uiModel.addAttribute("itemId", id);
+        //TODO: added req.isCancelable() to isApprover & isPersonal so that we can't approve/deny if the date passed
         uiModel.addAttribute("isApprover",req.isApprover(p.getName()));
         uiModel.addAttribute("isPersonal",req.isOwner(p.getName()));
         uiModel.addAttribute("isCancelable",req.isCancelable());

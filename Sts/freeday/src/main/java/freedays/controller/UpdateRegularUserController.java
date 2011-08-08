@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import freedays.util.DAOUtils;
 @Controller
 public class UpdateRegularUserController {
 
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(method = RequestMethod.GET)
 	public String createForm(Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -33,6 +35,7 @@ public class UpdateRegularUserController {
 		return "regularusers/update";
 	}
 
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(HttpServletRequest httpServletRequest) {
 		String userID = (String) httpServletRequest.getSession().getAttribute(

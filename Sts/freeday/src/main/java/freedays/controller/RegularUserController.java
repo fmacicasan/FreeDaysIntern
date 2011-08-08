@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ import org.springframework.web.util.WebUtils;
 @Controller
 public class RegularUserController {
 
-	@PreAuthorize("hasRole('ROLE_ADMIN'")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(params = "search", method = RequestMethod.GET)
 	public String createSearch(Model uiModel) {
 		// uiModel.addAttribute("regularUser", new RegularUser());
@@ -43,7 +44,7 @@ public class RegularUserController {
 		return "regularusers/search";
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN'")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(params = "search", method = RequestMethod.POST)
 	public String doSearch(@Valid Search search, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
@@ -91,6 +92,7 @@ public class RegularUserController {
      * @param uiModel 
      * @return redirection to user listing
      */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         RegularUser.deleteRegularUser(id);
@@ -100,12 +102,7 @@ public class RegularUserController {
         return "redirect:/regularusers";
     }
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model uiModel) {
-      
-        return "redirect:/login";
-    }
-
+	@PreAuthorize("hasRole('ROLE_ADMIN') or !isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
     public String create(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -119,7 +116,10 @@ public class RegularUserController {
        
         if( RegularUserValidator.validate(regularUser) ){
 	        regularUser.persist();
-	        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
+	        //return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
+	        uiModel.addAttribute("regularuser", regularUser);
+	        uiModel.addAttribute("itemId", regularUser.getId());
+	        return "regularusers/show";
 	        }
         else{
         	httpServletRequest.setAttribute("errorMessage","Email already taken."); 
@@ -129,7 +129,7 @@ public class RegularUserController {
         }
         
 	}
-
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasPermission(#regularUser,'own')")
 	@RequestMapping(method = RequestMethod.PUT)
     public String update(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -137,10 +137,22 @@ public class RegularUserController {
             addDateTimeFormatPatterns(uiModel);
             return "regularusers/update";
         }
+        //TODO: should also check the validity of the RegularUser
         uiModel.asMap().clear();
         Principal p = httpServletRequest.getUserPrincipal();
         regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
         regularUser.merge();
         return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
+    }
+
+
+
+	@PostAuthorize("hasRole('ROLE_ADMIN') or hasPermission(#id,'RegularUser', 'own')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("regularuser", RegularUser.findRegularUser(id));
+        uiModel.addAttribute("itemId", id);
+        return "regularusers/show";
     }
 }

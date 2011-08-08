@@ -3,6 +3,7 @@ package freedays.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,12 +18,14 @@ import freedays.domain.ResetPass;
 @Controller
 public class RecoverPassController {
 
+	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method=RequestMethod.GET)
 	public String createRecoverPass(Model uiModel){
 		uiModel.addAttribute("resetpass", new ResetPass());
 		return "recoverpass";
 	}
 	
+	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method=RequestMethod.POST)
 	public String recoverPass(@Valid ResetPass resetpass, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {

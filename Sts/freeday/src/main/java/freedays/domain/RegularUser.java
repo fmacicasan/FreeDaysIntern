@@ -288,6 +288,12 @@ public class RegularUser implements Serializable {
 		return q;
 	}
 
+	
+	/**
+	 * Offers the collection of all the RegularUsers that are not having an associated
+	 * FDUser.
+	 * @return collection representing all regularUsers not having an associated FDUser.
+	 */
 	public static Collection<RegularUser> findAllRegularUsersUnasociated() {
 		return entityManager()
 				.createQuery(
@@ -390,6 +396,10 @@ public class RegularUser implements Serializable {
 	}
 
 
+	/**
+	 * Custom removal operation. It will set the deleted flag
+	 * without an actual removal from the data source.
+	 */
 	@Transactional
     public void remove() {
 		this.setDeleted(true);

@@ -3,6 +3,7 @@
 
 package freedays.app;
 
+import java.lang.Integer;
 import java.lang.String;
 import java.util.List;
 
@@ -30,6 +31,14 @@ privileged aspect FreeDayUserList_Roo_JavaBean {
     
     public void FreeDayUserList.setFreedays(List<String> freedays) {
         this.freedays = freedays;
+    }
+    
+    public List<Integer> FreeDayUserList.getVacations() {
+        return this.vacations;
+    }
+    
+    public void FreeDayUserList.setVacations(List<Integer> vacations) {
+        this.vacations = vacations;
     }
     
 }

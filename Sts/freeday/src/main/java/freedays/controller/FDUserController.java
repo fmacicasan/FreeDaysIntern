@@ -11,6 +11,7 @@ import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApplicationRegularUser.JobRole;
 import freedays.domain.RegularUser;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FDUserController {
 
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid FDUser FDUser, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
@@ -39,7 +41,8 @@ public class FDUserController {
 				+ encodeUrlPathSegment(FDUser.getId().toString(),
 						httpServletRequest);
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN') or T(freedays.app.FDUser).findFDUser(#id).regularUser.username == principal.name")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model uiModel) {
 		addDateTimeFormatPatterns(uiModel);
@@ -75,6 +78,7 @@ public class FDUserController {
         return FDUser.findAllActiveFDUsers();
     }
 
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {

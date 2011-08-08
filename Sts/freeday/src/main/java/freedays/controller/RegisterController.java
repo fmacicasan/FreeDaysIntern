@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import freedays.domain.RegularUser;
 @Controller
 public class RegisterController {
 
+	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid RegularUser regularUser,
 			BindingResult bindingResult, Model uiModel,
@@ -30,11 +32,13 @@ public class RegisterController {
 		uiModel.asMap().clear();
 		regularUser.persist();
 
-		return "redirect:/regularusers/"
-				+ encodeUrlPathSegment(regularUser.getId().toString(),
-						httpServletRequest);
+		uiModel.addAttribute("regularuser", regularUser);
+        uiModel.addAttribute("itemId", regularUser.getId());
+        return "regularusers/show";
+
 	}
 
+	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method = RequestMethod.GET)
 	public String createForm(Model uiModel) {
 		uiModel.addAttribute("regularUser", new RegularUser());

@@ -250,7 +250,15 @@ table td form {
 	vertical-align: middle;
 	margin: 0px;
 }
-
+#colr{
+	background-color: red;
+}
+#coly{
+	background-color: yellow;
+}
+#colg{
+	background-color: aqua;
+}
 table th {
 	font-size: 0.9em;
 	text-align: left;

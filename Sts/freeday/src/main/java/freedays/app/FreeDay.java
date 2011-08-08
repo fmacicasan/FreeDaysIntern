@@ -72,11 +72,28 @@ public abstract class FreeDay {
     	return sb.toString();
     }
     
+    
     protected abstract Calendar getDate();
     protected abstract void setDate(Calendar date);
 	protected abstract FreeDayStatus  getApproveStatus();
+	
+	/**
+	 * Performs custom child initialization needed upon creation
+	 * of child instances but not supported via the FreeDay creation
+	 * process. Any new member a child defines should be initialized
+	 * using this method.
+	 * @param fdr the request holding the initialization information
+	 */
 	protected abstract void initialize(FreeDayRequest fdr);
+	
+	/**
+	 * Performs custom child finalization when a Request fails.
+	 * Any specialized fail behavior a child needs to implement
+	 * should be implemented using this method.
+	 */
 	protected abstract void finalizeFail();
+	
+	
 	protected abstract RequestType getType();
 
 	

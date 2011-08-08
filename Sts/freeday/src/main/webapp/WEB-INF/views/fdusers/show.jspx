@@ -10,7 +10,7 @@
         <field:display field="initDays" id="s_freedays_app_FDUser_initDays" object="${fduser}" z="AE8ekT6secyWs7qQF9PAVrx4NxI="/>
         <field:display field="maxFreeDays" id="s_freedays_app_FDUser_maxFreeDays" object="${fduser}" z="l/uwOMovRKuz971Ol5Me9R2A59I="/>
         <field:display field="jobrole" id="s_freedays_app_FDUser_jobrole" object="${fduser}" z="user-managed"/>
-        <field:display field="maxDerogation" id="c_freedays_app_FDUser_maxderogation" object="${fduser}" z="user-managed"/>
-        <field:display field="maxDerogation" id="s_freedays_app_FDUser_maxDerogation" object="${fduser}" z="hOUYeKrGXuklD/3CQqV9gbPNnro="/>
+        <!--  <field:display field="maxDerogation" id="c_freedays_app_FDUser_maxderogation" object="${fduser}" z="user-managed"/>-->
+        <field:display field="maxDerogation" id="s_freedays_app_FDUser_maxDerogation" object="${fduser}" z="user-managed"/>
     </page:show>
 </div>

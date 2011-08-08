@@ -1,5 +1,8 @@
 package freedays.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Describe the possible status values form a Request
  * 	- CANCELED/GRANTED/REJECTED status should be on position n-2/n-1/n
@@ -56,5 +59,13 @@ public enum RequestStatus {
 	 public static RequestStatus getInit(){
 	    	return RequestStatus.values()[0];
 	    }
+	 
+	 public static List<RequestStatus> getPossibleFinalStatusList(){
+		 List<RequestStatus> lst = new ArrayList<RequestStatus>();
+		 lst.add(RequestStatus.getCanceled());
+		 lst.add(RequestStatus.getDenied());
+		 lst.add(RequestStatus.getGranted());
+		 return lst;
+	 }
     
 }

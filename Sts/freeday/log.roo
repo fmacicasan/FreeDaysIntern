@@ -299,3 +299,11 @@ field date --type java.util.Calendar --fieldName finish --dateFormat SHORT --fut
 field number --fieldName confidence --type int
 perform tests
 perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-06 17:46:47
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-06 20:49:54
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-07 18:32:52
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-08 00:42:11
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-08 08:01:24
+// [failed] perform tests
+perform tests

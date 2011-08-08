@@ -18,6 +18,7 @@ public class FreeDayUserList {
 	private String user;
 	private String jobrole;
 	private List<String> freedays;
+	private List<Integer> vacations;
 	
 	public static FreeDayUserList generateFreeDaysList(String username){
 		FDUser fdu = FDUser.findFDUserByUsername(username);
@@ -58,26 +59,29 @@ public class FreeDayUserList {
 		fdul.setUser(fdu.getRegularUser().getFullName());
 		fdul.setJobrole(fdu.getJobrole().toString());
 		//TODO: get only between the two values not all vacations
-		fdul.setFreedays(transformVacation2String4Report(FreeDayVacation.getAllGrantedVacationsByUsername(fdu.getRegularUser().getUsername()),start,end));
+		fdul.setVacations(transformVacation2String4Report(FreeDayVacation.getAllGrantedVacationsByUsername(fdu.getRegularUser().getUsername()),start,end));
 		return fdul;
 	}
 
-	private static List<String> transformVacation2String4Report(List<FreeDayVacation> allgrantvac, Calendar start, Calendar end) {
+	private static List<Integer> transformVacation2String4Report(List<FreeDayVacation> allgrantvac, Calendar start, Calendar end) {
 		long span = DateUtils.dateDifferenceInDays(start, end);
-		List<String> list = new LinkedList<String>();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(long i=0;i<span;i++){
+			list.add(0);
+		}
 		for (FreeDayVacation vacation : allgrantvac) {
 			if(vacation.getDate().after(start)){
 				long before = DateUtils.dateDifferenceInDays(start, vacation.getDate());
-				for(long i=0;i<before;i++){
-					list.add("no");
-				}
+//				for(Long i=0L;i<before;i++){
+//					list.set(i.intValue(), 0);
+//				}
 				long during = (before+vacation.getSpan()<span)?before+vacation.getSpan():span;
-				for(long i=before;i<during;i++){
-					list.add("yes");
+				for(Long i=before;i<=during;i++){
+					list.set(i.intValue(),vacation.getConfidence().ordinal()+1);
 				}
-				for(long i=during;i<span;i++){
-					list.add("no");
-				}
+//				for(Long i=during;i<span;i++){
+//					list.set(i.intValue(),0);
+//				}
 			}
 		}
 		return list;

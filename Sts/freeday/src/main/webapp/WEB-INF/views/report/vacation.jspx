@@ -12,7 +12,7 @@
        			<th><spring:message code="freedaysreport_name" /> </th>
        			<th><spring:message code="freedaysreport_role" /></th>
        			<c:forEach var="i" begin="1" end="${length}">
-       				<th><spring:message var="i" /></th>
+       				<th title="${daysDateList[i]}" />
        			</c:forEach>
        		</tr>
        	</thead>
@@ -20,16 +20,26 @@
        	<c:forEach items="${vacations}" var="item">
        		<spring:eval expression="item['user']" var="user" />
      		<spring:eval expression="item['jobrole']" var="jobrole" />
-     		<spring:eval expression="item['freedays']" var="freedays" />
+     		<spring:eval expression="item['vacations']" var="vacation" />
        		<tr>
        			<td><c:out value="${user}" /></td>
        			<td><c:out value="${jobrole}" /></td>
-       			<c:forEach items="${freedays}" var="day" >
-       				<td>
-       					<c:if test="${empty day}">
-       						<c:out value="a" />
-       					</c:if> 
-       				</td>
+       			<c:forEach var="i" begin="1" end="${length}">
+       					<c:choose>
+	       					<c:when test="${vacation[i]==1}">
+	       						<c:set var="colid" value="colg" />
+	       					</c:when>
+	       					<c:when test="${vacation[i]==2}">
+	       						<c:set var="colid" value="coly" />
+	       					</c:when>
+	       					<c:when test="${vacation[i]==3}">
+	       						<c:set var="colid" value="colr" />
+	       					</c:when>
+	       					<c:otherwise>
+	       						<c:set var="colid" value="" />
+	       					</c:otherwise>
+       					</c:choose>
+       					<td title="${daysDateList[i]}"  id="${colid}" />
        			</c:forEach>
        		</tr>
        	</c:forEach>

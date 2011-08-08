@@ -10,6 +10,9 @@ import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,21 +24,17 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect RegularUserController_Roo_Controller {
     
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String RegularUserController.createForm(Model uiModel) {
         uiModel.addAttribute("regularUser", new RegularUser());
         addDateTimeFormatPatterns(uiModel);
         return "regularusers/create";
     }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String RegularUserController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("regularuser", RegularUser.findRegularUser(id));
-        uiModel.addAttribute("itemId", id);
-        return "regularusers/show";
-    }
-    
+	
+	
+	    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public String RegularUserController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
@@ -50,6 +49,7 @@ privileged aspect RegularUserController_Roo_Controller {
         return "regularusers/list";
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String RegularUserController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("regularUser", RegularUser.findRegularUser(id));
