@@ -13,6 +13,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.validation.annotation.BusinessDay;
 import freedays.validation.annotation.SpecialWeekday;
+import freedays.validation.annotation.UniqueDayPerActiveOrApprovedReq;
 
 /**
  * Wrapper class for a request creation.
@@ -21,6 +22,7 @@ import freedays.validation.annotation.SpecialWeekday;
  */
 @RooJavaBean
 @SpecialWeekday
+@UniqueDayPerActiveOrApprovedReq
 public class FreeDayRequest {
 
     @NotNull

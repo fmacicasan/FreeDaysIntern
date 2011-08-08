@@ -52,7 +52,7 @@ public class FreeDayVacation extends FreeDay {
     private ConfidenceLevel confidence;
 
     @Override
-    protected Calendar getDate() {
+    public Calendar getDate() {
         return this.getBeginning();
     }
 

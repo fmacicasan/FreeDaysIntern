@@ -78,6 +78,8 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
+    <bean class="freedays.security.UserContextServiceImlp" id="userContextService"  />
+    
     
     
 </beans>

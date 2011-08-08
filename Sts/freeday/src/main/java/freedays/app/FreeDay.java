@@ -12,6 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -135,7 +138,7 @@ public abstract class FreeDay {
      * the primary date of the FreeDay.
      * @return the calendar instance
      */
-    protected abstract Calendar getDate();
+    public abstract Calendar getDate();
     
     /**
      * Sets the primary date of a child instance.
@@ -290,5 +293,15 @@ public abstract class FreeDay {
 		}
 		return fdrl;
 	}
+	
+	public static List<FreeDay> getAllNotFailedRequestsByUsername(String username){
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		EntityManager em = RegularUser.entityManager();
+		TypedQuery<FreeDay> q = em.createQuery("SELECT o FROM FreeDay o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", FreeDay.class);
+        q.setParameter("username", username);
+        q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        return q.getResultList(); 
 
+	}
+	
 }

@@ -69,7 +69,7 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 	}
 
 	@Override
-	protected abstract Calendar getDate();
+	public abstract Calendar getDate();
 
 	@Override
 	protected abstract void setDate(Calendar date);
