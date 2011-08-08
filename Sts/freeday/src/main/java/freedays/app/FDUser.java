@@ -24,7 +24,12 @@ import freedays.domain.RegularUser;
 import freedays.domain.Request;
 import freedays.validation.annotation.BusinessDay;
 
-
+/**
+ * Class describing a specific FreeDay user.
+ * @see ApplicationRegularUser
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity
@@ -63,6 +68,16 @@ public class FDUser extends ApplicationRegularUser {
         return sb.toString();
     }
 	
+	/**
+	 * Computes the remaining legal free days available for request.
+	 * A fraction of the maximimFreeDays will be available based on the 
+	 * amount of time that passed from the start of the working year 
+	 * (if the subject was employed in the current year the hire date
+	 * otherwise the beginning of the year). This fraction is adjusted
+	 * with a initial bonus value (initDays). Also all active and granted
+	 * requests are subtracted from the fraction.
+	 * @return the legal free days available for request
+	 */
 	public long computeAvailableFreeDays(){
 		
 		long remainingDays = this.initDays;
@@ -84,7 +99,12 @@ public class FDUser extends ApplicationRegularUser {
 		return remainingDays;
 		
 	}
-
+	
+	/**
+	 * 
+	 * @param username a string representing a RegularUser username
+	 * @return its associated FDUser
+	 */
 	public static FDUser findFDUserByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
@@ -97,7 +117,11 @@ public class FDUser extends ApplicationRegularUser {
         else
            return null;
 	}
-
+	
+	/**
+	 * Returns the list of all active FDUsers.
+	 * @return
+	 */
 	public static Collection<FDUser> findAllActiveFDUsers() {
 		TypedQuery<FDUser> q = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.regularUser.deleted = :deleted ", FDUser.class);
         q.setParameter("deleted", false);
@@ -105,10 +129,23 @@ public class FDUser extends ApplicationRegularUser {
 		return results;
 	}
 
+	/**
+	 * Returns a sublist of the active FDUsers list. The sublist is
+	 * bound by the firstResult and maxResults parameter.
+	 * 
+	 * @param firstResult position of the first retrieved fduser
+	 * @param maxResults the maximum number of results to retrieve
+	 * @return
+	 * @see TypedQuery
+	 */
 	public static List<FDUser> findActiveFDUserEntries(int firstResult, int maxResults) {
 		return entityManager().createQuery("SELECT o FROM FDUser o WHERE o.regularUser.deleted = false", FDUser.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
 	}
 
+	/**
+	 * Returns the number of active FDUsers.
+	 * @return
+	 */
 	public static float countActiveFDUsers() {
 		 return entityManager().createQuery("SELECT COUNT(o) FROM FDUser o WHERE o.regularUser.deleted = false", Long.class).getSingleResult();
 	}

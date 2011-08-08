@@ -17,22 +17,34 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Inheritance;
 import javax.persistence.ManyToMany;
 
+/**
+ * Describes an special user role.
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity(inheritanceType="SINGLE_TABLE")
 @DiscriminatorColumn(name="roleType",discriminatorType=DiscriminatorType.STRING)
 @DiscriminatorValue("AdvancedUserRole")
-public class AdvancedUserRole {
+public abstract class AdvancedUserRole {
 
     @ManyToMany(cascade=CascadeType.ALL, mappedBy="roles")
     private Set<ApplicationRegularUser> appRegUsers = new HashSet<ApplicationRegularUser>();
+    
+    protected abstract String getRole();
 
+    /**
+     * <p>Returns a role textual representation prefixed with "ROLE_" and converted to uppercase.</p> 
+     * {@inheritDoc}
+     */
 	public String toString() {
         StringBuilder sb = new StringBuilder();
         //sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
        // sb.append("Id: ").append(getId()).append(", ");
         //sb.append("Version: ").append(getVersion());
         sb.append("ROLE_");
-        return sb.toString();
+        sb.append(this.getRole());
+        return sb.toString().toUpperCase();
     }
 }

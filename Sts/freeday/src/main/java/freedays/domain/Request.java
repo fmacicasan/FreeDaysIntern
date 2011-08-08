@@ -59,6 +59,10 @@ public class Request   implements Serializable{
     @ManyToOne
     private ApplicationRegularUser approver;
 
+    /**
+     * Initialization of a newly created request. It represents
+     * the starting point of the approval process.
+     */
     public void init(){
     	if(RequestStatus.isInit(this.status)){
     		//ApplicationRegularUser oldApprover = this.approver;
@@ -72,6 +76,9 @@ public class Request   implements Serializable{
     	}
     }
     
+    /**
+     * Approve the current request.
+     */
     public void approve(){
     	if(canAdvance()){
     		advanceStatus();
@@ -83,31 +90,60 @@ public class Request   implements Serializable{
     	
     }
     
+    /**
+     * Denies the current request.
+     */
     public void deny(){
     	setDenyStatus();
     	informDenyRequest();
     }
-      
+     
+    /**
+     * Cancels the current request.
+     */
     public void cancel(){
     	setCancelStatus();
     	informCancelRequest();
     }
     
+    /**
+     * Sets the request's deny status.
+     * Also the request object's final fail status.
+     */
     private void setDenyStatus(){
     	this.status = RequestStatus.getDenied();
     	requestable.setFinalFailStatus();
     }
+    
+    /**
+     * Sets the request's approve status.
+     * Also the requestobject's final approve status.
+     */
     private void setApproveStatus(){
     	this.status = RequestStatus.getGranted();
     	requestable.setFinalApproveStatus();
     }
+    
+    /**
+     * Sets the request's cancel status.
+     * Also the request object's final fail status.
+     */
     private void setCancelStatus(){
     	this.status =RequestStatus.getCanceled();
     	requestable.setFinalFailStatus();
     }
+    
+    /**
+     * Modifies the request's status for intermediate states.
+     */
     private void advanceStatus(){
     	this.status = this.status.getNext();
     }
+    
+    /**
+     * Verifies weather or not the request chain can advance.
+     * @return false if the chain stops
+     */
     private boolean canAdvance(){
     	if(advanceApproval()){
     		ApplicationRegularUser oldApprover = this.approver;
@@ -118,12 +154,24 @@ public class Request   implements Serializable{
     	return false;
     	
     }
+    /**
+     * Advance the approval in the Approval Chain
+     * @return
+     */
     private boolean advanceApproval(){
     	return this.requestable.nextApproval();
     }
+    
+    /**
+     * Refresh the approver based on the approval strategy.
+     */
     private void advanceApprover(){
     	this.approver = this.requestable.getApprover(this.appreguser);
     }
+    
+    /**
+     * Request approval via e-mail 
+     */
     private void requestApproval(){
     	
     	String mailTo = this.approver.getRegularUser().getEmail();

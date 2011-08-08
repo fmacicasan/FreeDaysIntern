@@ -20,6 +20,13 @@ import freedays.validation.annotation.BusinessDay;
 
 import javax.persistence.ManyToOne;
 
+/**
+ * Class representing a TypeL free day request. Such a 
+ * request represents a legal free day and can be made
+ * if the user has available legal days.
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooEntity
 @DiscriminatorValue("typeL")

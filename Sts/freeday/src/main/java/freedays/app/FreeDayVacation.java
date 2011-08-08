@@ -22,6 +22,12 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * Class representing a TypeV request. Such a request
+ * represents a vacation taken between two business days. 
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity
@@ -37,6 +43,11 @@ public class FreeDayVacation extends FreeDay {
     @NotNull
     private long span;
 
+    /**
+     * Describes the priority of the request.
+     * @author fmacicasan
+     *
+     */
     public enum ConfidenceLevel{LOW, MEDIUM, HIGH};
     private ConfidenceLevel confidence;
 

@@ -1,7 +1,5 @@
 package freedays.app;
 
-import java.util.List;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.TypedQuery;
 
@@ -12,19 +10,33 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
-import freedays.util.DAOUtils;
 
+/**
+ * Approval strategy describing a request to the immediate
+ * superior. 
+ * @see ApprovalStrategy
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity
 @DiscriminatorValue("Level1")
 public class AppStrategL1 extends ApprovalStrategy {
-
+	
+	/**
+	 * Returns the immediate granter of the provided user.
+	 */
 	@Override
 	public ApplicationRegularUser getApprover(ApplicationRegularUser user) {
 		return user.getGranter();
 	}
 	
+	/**
+	 * Obtains the initial strategy in the approval chain corresponding
+	 * to a Request for a FreeDay.
+	 * @return the initial strategy in the approval chain
+	 */
 	public static ApprovalStrategy getDefaultInitialStrateg(){
 		 TypedQuery<AppStrategL1> q = entityManager().createQuery("SELECT o FROM AppStrategL1 o", AppStrategL1.class);
 		 AppStrategL1 res;

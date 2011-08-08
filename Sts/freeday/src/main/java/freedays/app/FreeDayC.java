@@ -22,6 +22,16 @@ import freedays.app.FreeDayRequest.RequestType;
 import freedays.util.DateUtils;
 import freedays.validation.annotation.BusinessDay;
 
+/**
+ * Class that represents a TypeC free day request. Such a request
+ * can be made:
+ * 	<ul>
+ *  <li>on demand if the user has available derogations</li>
+ *  <li>in conjunction with a TypeR waiting request</li>
+ * 	</ul>
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooEntity
 @DiscriminatorValue("typeC")

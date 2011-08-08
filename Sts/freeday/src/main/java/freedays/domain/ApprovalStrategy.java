@@ -9,6 +9,14 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.OneToOne;
 
+/**
+ * Abstract class describing a general strategy for approval.
+ * It also holds a successor reference used for the approval
+ * chain generation. The chain will end when such a reference
+ * becomes null.
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity(inheritanceType = "SINGLE_TABLE")
@@ -16,9 +24,21 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("AdvancedUserRole")
 public abstract class ApprovalStrategy {
 
+	/**
+	 * The successor in the approval chain of the current strategy.
+	 * Null for no successor.
+	 */
     @OneToOne
     private freedays.domain.ApprovalStrategy succesor;
     
+    /**
+     * Abstract method describing the current approval strategy.
+     * Given the initial user (the one that makes the Request that 
+     * needs approval) based on the child of the ApprovalStrategy
+     * an approver is generated.
+     * @param user the user that makes the request that needs approval
+     * @return the user that is responsible for approving
+     */
     public abstract ApplicationRegularUser getApprover(ApplicationRegularUser user);
     
 	public String toString() {
@@ -28,11 +48,19 @@ public abstract class ApprovalStrategy {
         return sb.toString();
     }
     
-
+	/**
+	 * Returns the successor in the approval chain.
+	 * Null for no successor.
+	 * @return the successor in the approval chain
+	 */
 	public ApprovalStrategy getSuccesor() {
         return this.succesor;
     }
 
+	/**
+	 * 
+	 * @param succesor the successor in the approval chain
+	 */
 	public void setSuccesor(ApprovalStrategy succesor) {
         this.succesor = succesor;
     }

@@ -14,6 +14,11 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import freedays.validation.annotation.BusinessDay;
 import freedays.validation.annotation.SpecialWeekday;
 
+/**
+ * Wrapper class for a request creation.
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @SpecialWeekday
 public class FreeDayRequest {
@@ -32,6 +37,7 @@ public class FreeDayRequest {
      * 		<li>TypeL -> Legal free day</li>
      * 		<li>TypeC -> Compensation free day received on request or for a previous TypeR day</li>
      * 		<li>TypeR -> Recovery day for a TypeC free day</li>
+     * 		<li>TypeV -> Vacation request</li>
      *  </ul>
      * @author fmacicasan
      *
@@ -43,6 +49,14 @@ public class FreeDayRequest {
     
     private FreeDaysRCMatch match;
     
+    /**
+     * Factory used for the creation of FreeDayRequest form wrappers.
+     * This creation is dependent on the type of the request.
+     * @param rt the type of the request
+     * @return a form wrapper for the selected request type
+     * @see FreeDayRequest 
+     * @see RequestType
+     */
     public static FreeDayRequest generateReqFactory(RequestType rt){
     	FreeDayRequest fdr;
     	switch(rt){

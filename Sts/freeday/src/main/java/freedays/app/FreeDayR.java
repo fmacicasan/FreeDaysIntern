@@ -22,6 +22,16 @@ import freedays.domain.RegularUser;
 import freedays.util.DateUtils;
 import freedays.validation.annotation.Weekend;
 
+/**
+ * Class that represents a TypeR free day request. Such a request
+ * can be made:
+ * 	<ul>
+ *  <li>on demand if the user worked an extra day (in weekend)</li>
+ *  <li>in conjunction with a TypeC waiting request</li>
+ * 	</ul>
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity

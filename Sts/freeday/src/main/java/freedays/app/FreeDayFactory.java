@@ -1,5 +1,10 @@
 package freedays.app;
 
+/**
+ * Factory used for creation of FreeDay child based on their type.
+ * @author fmacicasan
+ *
+ */
 public class FreeDayFactory {
 
 	public static FreeDay create(FreeDayRequest fdr){

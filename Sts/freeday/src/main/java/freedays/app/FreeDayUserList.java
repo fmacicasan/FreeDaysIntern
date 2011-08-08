@@ -2,16 +2,15 @@ package freedays.app;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
-import freedays.app.FreeDayRequest.RequestType;
-import freedays.domain.RegularUser;
 import freedays.util.DateUtils;
 
+/**
+ * Wrapper class for report generation.
+ */
 @RooJavaBean
 public class FreeDayUserList {
 	
@@ -20,11 +19,17 @@ public class FreeDayUserList {
 	private List<String> freedays;
 	private List<Integer> vacations;
 	
+	/**
+	 * Generates a list of granted FreeDays requests based on the provided username
+	 */
 	public static FreeDayUserList generateFreeDaysList(String username){
 		FDUser fdu = FDUser.findFDUserByUsername(username);
 		return FreeDayUserList.generateFreeDaysList(fdu);
 	}
 	
+	/**
+	 * Generates a list of granted FreeDays requests for the provided FDUser
+	 */
 	public static FreeDayUserList generateFreeDaysList(FDUser fdu){
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getFullName());
@@ -33,6 +38,9 @@ public class FreeDayUserList {
 		return fdul;
 	}
 
+	/**
+	 * Prepares the list of generated FreeDay-s for report printing
+	 */
 	private static List<String> transformFreeDay2String4Report(List<FreeDay> allGrantedFreeDayByUsername) {
 		List<String> ls = new ArrayList<String>();
 		for (FreeDay fd : allGrantedFreeDayByUsername) {
@@ -44,6 +52,10 @@ public class FreeDayUserList {
 		return ls;
 	}
 
+	/**
+	 * Computes the maximum width of the free day report based on the maximum
+	 * number of freedays associated with fduser from the report.
+	 */
 	public static Long computeTableWidth(List<FreeDayUserList> lfd) {
 		long max = -1;
 		for (FreeDayUserList fdul : lfd) {
@@ -53,7 +65,9 @@ public class FreeDayUserList {
 		return max;
 	}
 	
-
+	/**
+	 * Generates a list of granted vacation requests for the provided FDUser
+	 */
 	public static FreeDayUserList generateVacationList(FDUser fdu,Calendar start, Calendar end) {
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getFullName());
@@ -63,6 +77,10 @@ public class FreeDayUserList {
 		return fdul;
 	}
 
+	
+	/**
+	 * Prepares the list of generated vacations for report printing
+	 */
 	private static List<Integer> transformVacation2String4Report(List<FreeDayVacation> allgrantvac, Calendar start, Calendar end) {
 		long span = DateUtils.dateDifferenceInDays(start, end);
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -72,16 +90,10 @@ public class FreeDayUserList {
 		for (FreeDayVacation vacation : allgrantvac) {
 			if(vacation.getDate().after(start)){
 				long before = DateUtils.dateDifferenceInDays(start, vacation.getDate());
-//				for(Long i=0L;i<before;i++){
-//					list.set(i.intValue(), 0);
-//				}
 				long during = (before+vacation.getSpan()<span)?before+vacation.getSpan():span;
 				for(Long i=before;i<=during;i++){
 					list.set(i.intValue(),vacation.getConfidence().ordinal()+1);
 				}
-//				for(Long i=during;i<span;i++){
-//					list.set(i.intValue(),0);
-//				}
 			}
 		}
 		return list;

@@ -12,8 +12,8 @@ import freedays.util.DateUtils;
 
 
 /**
- * Class used to extract the common behavior exhibited during the matching process of two objects implementing
- * the {@link freedays.app.FreeDayRCMatchable FreeDayRCMatchable} interface.
+ * Class used to extract the common behavior exhibited during the matching process of two objects 
+ * matchable objects. Such objects need a complement to finalize.
  * @author fmacicasan
  *
  * @param <T> represents the class to which the matching is restricted. It must <b>extend</b> {@link freedays.app.FreeDay FreeDay}.
@@ -23,7 +23,12 @@ import freedays.util.DateUtils;
 public abstract class  FreeDaysRCMatch extends FreeDay{
 	
 	  
-	
+	/**
+	 * Performs the match with a complement
+	 * @param match the complement of the current request
+	 * @return true if the matching completed successfully
+	 * @See FreeDaysRCMatch
+	 */
 	public boolean match(FreeDaysRCMatch match) {
 		if(match == null)throw new IllegalArgumentException("The username argument is required");
 		if(match.canMatch())return false;
@@ -35,14 +40,30 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 		match.persist();
 		return true;
 	}
-
+	
+	/**
+	 * Abstract method used by to register their matching complement.
+	 * @param match
+	 */
 	public abstract void setMatch(FreeDaysRCMatch match);
+	
+	/**
+	 * Abstract method used to get the matching complement.
+	 */
 	public abstract FreeDaysRCMatch getMatch();
 
+	/**
+	 * Changes the status of a mergeable free day after the
+	 * merging took place.
+	 */
 	protected void setMergedStatus(){
 		super.setStatus(FreeDayStatus.COMPLETED_SUCCESS);
 	}
 	
+	/**
+	 * Verifies if a match can take place.
+	 * @return
+	 */
 	public boolean canMatch() {
 		return this.getMatch() != null;
 	}

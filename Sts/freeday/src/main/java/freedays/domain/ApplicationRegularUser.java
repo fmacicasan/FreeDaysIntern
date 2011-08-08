@@ -26,6 +26,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import freedays.util.DAOUtils;
 
+/**
+ * Abstract class describing an general application user.
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity(inheritanceType = "TABLE_PER_CLASS")
@@ -95,6 +100,11 @@ public abstract class ApplicationRegularUser  implements Serializable {
 	}
 
 
+	/**
+	 * Adapted operation for the removal of the
+	 * underlying regular User without a direct
+	 * database removal.
+	 */
 	@Transactional
     public void remove() {
 		this.getRegularUser().remove();
