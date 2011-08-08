@@ -78,7 +78,7 @@ public class DateUtils {
 	 * @return the textual representation of date
 	 */
 	public static String printShortDate(Calendar date){
-		return String.format("%1$td.%1$tm", date);
+		return String.format("%1$td.%1$tm", date);// %1$tk %1$tm
 	}
 	
 	/**
@@ -95,6 +95,7 @@ public class DateUtils {
 		
 		long time = end.getTimeInMillis();
 		time -= start.getTimeInMillis();
+		System.out.println(time);
 		return TimeUnit.MILLISECONDS.toDays(time);
 	}
 	
