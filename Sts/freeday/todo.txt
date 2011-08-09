@@ -1,3 +1,14 @@
+TODO in STS -
+	- permit approval/deny only if the request is : cancelable freeday, not approved/denied/canceled
+	- add a choice probability for the characters at password generation
+	- @reportfreedays controller get jst the active users
+	- @find all pending approvals by username, search only the ones thatneed approval
+	- @check weekend validation util verify only with !businessday
+	- report all users or just active ones?
+	- get vacations only between the two provided dates
+	- change all catch clauses @ throw exception, catch only when is needed
+	- !!! disabled gmail accout
+
 TODO:
 	- add Service layer instead of static method calls
 	- put security annotations on the services instead of the controllers
