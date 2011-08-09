@@ -149,6 +149,15 @@ public class FDUser extends ApplicationRegularUser {
 	public static float countActiveFDUsers() {
 		 return entityManager().createQuery("SELECT COUNT(o) FROM FDUser o WHERE o.regularUser.deleted = false", Long.class).getSingleResult();
 	}
+
+	public static boolean isUnassociated(RegularUser regularUser) {
+		try{
+			return RegularUser.findAllRegularUsersUnasociated().contains(regularUser);
+		}catch(Exception e){
+			System.out.println("termicacasaedasd");
+			return false;
+		}
+	}
 	
 	
 }

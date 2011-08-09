@@ -60,7 +60,8 @@
         </sec:authorize>
         <sec:authorize ifAllGranted="ROLE_USER">
             <menu:category id="c_account" z="">
-                <menu:item id="i_regular_user_update" messageCode="global_menu" url="/updateRegularUsers" z=""/>
+                <menu:item id="i_regular_user_update" messageCode="global_menu" url="/account" z=""/>
+                <menu:item id="i_account_fduser_view" messageCode="global_menu_view" url="/account/fduser" z="user-managed"  />
             </menu:category>
         </sec:authorize>
         <sec:authorize ifAnyGranted="ROLE_USER, ROLE_FDADMIN, ROLE_REQUESTGRANTER">

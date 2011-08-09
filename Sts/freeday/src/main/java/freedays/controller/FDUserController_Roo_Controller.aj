@@ -47,13 +47,6 @@ privileged aspect FDUserController_Roo_Controller {
         return "redirect:/fdusers/" + encodeUrlPathSegment(FDUser.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String FDUserController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("FDUser", FDUser.findFDUser(id));
-        addDateTimeFormatPatterns(uiModel);
-        return "fdusers/update";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String FDUserController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         FDUser.findFDUser(id).remove();

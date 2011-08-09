@@ -1,5 +1,6 @@
 package freedays.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
@@ -91,5 +92,17 @@ public class FDUserController {
         }
         addDateTimeFormatPatterns(uiModel);
         return "fdusers/list";
+    }
+
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
+    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+		FDUser fdu = FDUser.findFDUser(id);
+		Collection<FDUser> col = new ArrayList<FDUser>();
+		col.add(fdu);
+        uiModel.addAttribute("FDUser", fdu );
+        uiModel.addAttribute("regularusers", col);
+        addDateTimeFormatPatterns(uiModel);
+        return "fdusers/update";
     }
 }

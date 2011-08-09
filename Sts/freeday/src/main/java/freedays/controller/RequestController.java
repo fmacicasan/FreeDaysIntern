@@ -86,7 +86,7 @@ public class RequestController {
             uiModel.addAttribute("reqbean", request);
             // populate based on type with the corresponding matchings
             switch(request.getReqtype()){
-	            case L:
+	            case C:
 	            	uiModel.addAttribute("matchings",FreeDayR.getAllUnmatchedRequestsByUsername(p.getName()));
 	            	break;
 	            case R:

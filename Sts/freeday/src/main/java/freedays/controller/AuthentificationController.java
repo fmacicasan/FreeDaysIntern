@@ -1,33 +1,27 @@
 package freedays.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NonUniqueResultException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.util.StringUtils;
 
+import freedays.app.FDUser;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
-import freedays.util.DAOUtils;
 
 public class AuthentificationController extends
 		AbstractUserDetailsAuthenticationProvider  {
@@ -50,9 +44,13 @@ public class AuthentificationController extends
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		try {
 			RegularUser regularUser =RegularUser
-					.findRegularUsersByUsernameAndPasswordEquals(username,
-							password).getSingleResult();
-
+					.findRegularUsersByUsername(username).getSingleResult();
+			
+			if(!regularUser.getPassword().equals(password)) throw new BadCredentialsException("Invalid username or password");
+			if(!regularUser.getActiv()) throw new BadCredentialsException("Your account has been disabled!");
+			if(regularUser.getDeleted()) throw new BadCredentialsException("Your accout has been deleted!");
+			if(FDUser.isUnassociated(regularUser)) throw new BadCredentialsException("Your account has not been processed yet! - (4Test) needs FDUser creation!");
+			
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
 			Set<AdvancedUserRole> set = ApplicationRegularUser.getAllRolesByUsername(username);
 			for (AdvancedUserRole aur : set) {

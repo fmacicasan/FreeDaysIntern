@@ -2,10 +2,11 @@ TODO in STS -
 	- permit approval/deny only if the request is : cancelable freeday, not approved/denied/canceled
 	- add a choice probability for the characters at password generation
 	- @reportfreedays controller get jst the active users
-	- @find all pending approvals by username, search only the ones thatneed approval
+	- @find all pending approvals by username, search only the ones that need approval
 	- @check weekend validation util verify only with !businessday
 	- report all users or just active ones?
 	- get vacations only between the two provided dates
+		- !!!add pages to reports
 	- change all catch clauses @ throw exception, catch only when is needed
 	- !!! disabled gmail accout
 
@@ -14,16 +15,26 @@ TODO:
 	- put security annotations on the services instead of the controllers
 	
 	- on update should also check the validity of the RegularUser
-	- update a request by the FDUser???
-	- what if not approved and the date already passed ??
+	- ??update a request by the FDUser???
+	- ??what if not approved and the date already passed ??
 	- visitor for permissions instead of instanceof
 	
-	- change register/recoverpass/change pass/
+	- change register/recoverpass/change pass change info/ login process and password encryption
+		- update regular user info problem with redirect to /regularusers
 	- DONE improve validity restricting request to one for a calendar date
 		- verify also if vacation intersects some day already approved!
+			- consider annotation for validity
 	- request more than one day / request
 	- solve the @BusinessDay and stuff error display
 	
-	- add page for FDUser visualization of a registered user
-	- restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser
-	- change the register/change pass/ change info/ login process and password encryption
+	- DONE verify the active & deleted flag on login
+		- consider using the User class
+	- @Searchable annotation
+	- FDUser creation, add NULL FDUser for top granter
+		- prototype & replace with null
+	- Type R/C day creation add NULL for no match
+	- CRITICAL!! Add YEAR Support
+	
+	- DONE add page for personal FDUser visualization of the registered user
+	- DONE Solve problem at FDUser update with RegularUser transformation
+	- DONE restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser

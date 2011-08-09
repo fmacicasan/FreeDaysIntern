@@ -150,9 +150,11 @@ public class RegularUser implements Serializable {
 		TypedQuery<RegularUser> q = em
 				.createQuery(
 						"SELECT o FROM RegularUser AS o WHERE o.username = :username AND o.password = :password",
-						RegularUser.class);
+						RegularUser.class);// AND o.deleted = :false AND o.activ = :true
 		q.setParameter("username", username);
 		q.setParameter("password", password);
+		//q.setParameter("false", false);
+		//q.setParameter("true", true);
 		return q;
 	}
 
@@ -295,6 +297,7 @@ public class RegularUser implements Serializable {
 	 * @return collection representing all regularUsers not having an associated FDUser.
 	 */
 	public static Collection<RegularUser> findAllRegularUsersUnasociated() {
+		
 		return entityManager()
 				.createQuery(
 						"SELECT o FROM RegularUser o WHERE o.id NOT IN (SELECT f.regularUser FROM FDUser f) ",

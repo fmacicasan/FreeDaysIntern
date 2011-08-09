@@ -173,12 +173,13 @@ public class Request   implements Serializable{
      * Request approval via e-mail 
      */
     private void requestApproval(){
-    	
-    	String mailTo = this.approver.getRegularUser().getEmail();
-    	StringBuilder sb = new StringBuilder();
-    	sb.append(Request.FD_APPROVAL_REQ_CONTENT);
-    	sb.append(this.toString());
-    	MailUtils.send(mailTo,Request.FD_APPROVAL_REQ_SUBJECT,sb.toString());
+    	if(!Request.DEBUG){
+	    	String mailTo = this.approver.getRegularUser().getEmail();
+	    	StringBuilder sb = new StringBuilder();
+	    	sb.append(Request.FD_APPROVAL_REQ_CONTENT);
+	    	sb.append(this.toString()).append("\n\n\n");
+	    	MailUtils.send(mailTo,Request.FD_APPROVAL_REQ_SUBJECT,sb.toString());
+    	}
     }
     
     private void informApproveRequest(){

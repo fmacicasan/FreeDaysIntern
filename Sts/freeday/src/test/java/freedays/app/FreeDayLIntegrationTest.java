@@ -70,20 +70,20 @@ public class FreeDayLIntegrationTest {
     	//FreeDay requestable = FreeDayDataOnDemand.generateFreeDay();
 
     	//ApplicationRegularUser leveltop = FDUserDataOnDemand.generateFDUser(1);
-    	leveltop.getRegularUser().setEmail("parvu_georgian@yahoo.com");
-    	Assert.assertEquals("error @ level top email initial","parvu_georgian@yahoo.com",leveltop.getRegularUser().getEmail());
+    	leveltop.getRegularUser().setEmail("fmacicasan@sdl.com");
+    	Assert.assertEquals("error @ level top email initial","fmacicasan@sdl.com",leveltop.getRegularUser().getEmail());
     	//ApplicationRegularUser level1 = FDUserDataOnDemand.generateFDUser(2,leveltop);
-    	level1.getRegularUser().setEmail("iulia_teglas@yahoo.com");
+    	level1.getRegularUser().setEmail("fmacicasan@sdl.com");
     	//ApplicationRegularUser appreguser = FDUserDataOnDemand.generateFDUser(3,level1);
-    	appreguser.getRegularUser().setEmail("burtoflex89@yahoo.com");
+    	appreguser.getRegularUser().setEmail("fmacicasan@sdl.com");
     	
     	Assert.assertNotSame("distinct users expected top & 1", leveltop.getRegularUser(), level1.getRegularUser());
     	Assert.assertNotSame("distinct users expected top @ reg", leveltop.getRegularUser(), appreguser.getRegularUser());
     	Assert.assertNotSame("distinct users expected 1 @ reg", level1.getRegularUser(), appreguser.getRegularUser());
     	
-    	Assert.assertEquals("error @ level top email","parvu_georgian@yahoo.com",leveltop.getRegularUser().getEmail());
-    	Assert.assertEquals("error @ level 1 email", "iulia_teglas@yahoo.com",level1.getRegularUser().getEmail());
-    	Assert.assertEquals("error @ user email", "burtoflex89@yahoo.com",appreguser.getRegularUser().getEmail());
+    	Assert.assertEquals("error @ level top email","fmacicasan@sdl.com",leveltop.getRegularUser().getEmail());
+    	Assert.assertEquals("error @ level 1 email", "fmacicasan@sdl.com",level1.getRegularUser().getEmail());
+    	Assert.assertEquals("error @ user email", "fmacicasan@sdl.com",appreguser.getRegularUser().getEmail());
     	
     	Assert.assertNotNull("null approval for user 1",request.getRequestable().getApproval());
     	Assert.assertNotNull("null approval for user 2",request.getRequestable().getApproval().getSuccesor());
