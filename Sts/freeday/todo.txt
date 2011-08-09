@@ -8,6 +8,11 @@ TODO:
 	- visitor for permissions instead of instanceof
 	
 	- change register/recoverpass/change pass/
-	- improve validity restricting request to one for a calendar date
+	- DONE improve validity restricting request to one for a calendar date
+		- verify also if vacation intersects some day already approved!
 	- request more than one day / request
 	- solve the @BusinessDay and stuff error display
+	
+	- add page for FDUser visualization of a registered user
+	- restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser
+	- change the register/change pass/ change info/ login process and password encryption

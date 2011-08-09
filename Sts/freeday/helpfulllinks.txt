@@ -1,5 +1,15 @@
-#spring security
-##annotations
+#spring
+	http://git.springsource.org/s2gx-2010
+
+##spring security
+	http://www.viddler.com/explore/oredev/videos/22/
+	http://www.mularien.com/blog/2008/07/07/5-minute-guide-to-spring-security/
+
+##3/3.1
+	http://www.infoq.com/presentations/Spring-Security-3
+	http://www.jeviathon.com/2009/08/spring-security-30-worth-frustration.html
+	
+###annotations
 	http://stackoverflow.com/questions/3087548/can-spring-security-use-preauthorize-on-spring-controllers-methods
 	http://blog.solidcraft.eu/2011/03/spring-security-by-example-securing.html
 	http://stsmedia.net/spring-finance-part-6-spring-security-3-integration/
@@ -9,11 +19,23 @@
 	http://maruhgar.blogspot.com/2011/02/migrating-to-spring-security-31.html
 	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/taglibs.html
 	
-#3/3.1
-	http://www.infoq.com/presentations/Spring-Security-3
+###SpEL access control
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/el-access.html
+	
+###Spring recipies
+	http://code.google.com/p/jgk-spring-recipes/wiki/SpringSecurity
+	
 
-#spring
-http://git.springsource.org/s2gx-2010
+
+##ROO
+	http://blog.springsource.com/2009/06/18/roo-part-3/
+
+##SpEL
+	http://static.springsource.org/spring/docs/3.0.x/reference/expressions.html
+
 
 #JPA query
-http://www.altuure.com/2010/09/23/jpa-criteria-api-by-samples-part-i/
+	http://www.altuure.com/2010/09/23/jpa-criteria-api-by-samples-part-i/
+
+#versioning control
+	http://www.ericsink.com/vcbe/html/index.html
