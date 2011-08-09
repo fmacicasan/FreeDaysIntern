@@ -3,13 +3,12 @@ TODO in STS -
 	- add a choice probability for the characters at password generation
 	- @reportfreedays controller get jst the active users
 	- @find all pending approvals by username, search only the ones that need approval
-	- @check weekend validation util verify only with !businessday
-	- report all users or just active ones?
+	- @check weekend validation - verify only with !businessday
+	- ???report all users or just active ones?
 	- get vacations only between the two provided dates
 		- !!!add pages to reports
 	- change all catch clauses @ throw exception, catch only when is needed
-	- !!! disabled gmail accout
-
+	
 TODO:
 	- add Service layer instead of static method calls
 	- put security annotations on the services instead of the controllers
@@ -23,18 +22,38 @@ TODO:
 		- update regular user info problem with redirect to /regularusers
 	- DONE improve validity restricting request to one for a calendar date
 		- verify also if vacation intersects some day already approved!
-			- consider annotation for validity
+			- consider annotation for validity of RegularUser
 	- request more than one day / request
-	- solve the @BusinessDay and stuff error display
+	- solve the @BusinessDay and @weekend @duplicate error display
 	
 	- DONE verify the active & deleted flag on login
 		- consider using the User class
 	- @Searchable annotation
-	- FDUser creation, add NULL FDUser for top granter
+	- ???FDUser creation, add NULL FDUser for top granter
 		- prototype & replace with null
 	- Type R/C day creation add NULL for no match
 	- CRITICAL!! Add YEAR Support
+	- ?? Ofer posibility for reason input on request denial
 	
 	- DONE add page for personal FDUser visualization of the registered user
 	- DONE Solve problem at FDUser update with RegularUser transformation
 	- DONE restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser
+	- DONE - migrated to SDL account - disabled gmail accout
+	
+	
+	<tr class="footer">
+		<td colspan="13">
+			<span class="new">
+				<a href="/freedays/regularusers?form">
+					<img title="Create new Regular User" src="/freedays/resources/images/add.png" alt="Create new Regular User"/>
+				</a>
+			</span> 
+			List results per page: 
+				<a href="?page=1&amp;size=5">5</a> 10 
+				<a href="?page=1&amp;size=15">15</a> 
+				<a href="?page=1&amp;size=20">20</a> 
+				<a href="?page=1&amp;size=25">25</a> 
+			|  Page 1 of 1 
+		</td>
+	</tr>
+</table>

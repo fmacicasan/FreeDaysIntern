@@ -98,6 +98,28 @@ public class FreeDayUserList {
 		}
 		return list;
 	}
+
+	public static List<FreeDayUserList> subListFreedays(List<FreeDayUserList> lfd, int i, int j) {
+		if(i>=j) throw new IllegalArgumentException("The i parameter should be smaller than j");
+		
+		List<FreeDayUserList> lfdul2 = new ArrayList<FreeDayUserList>();
+		for (FreeDayUserList fdul : lfd) {
+			List<String> lst = fdul.getFreedays();
+			try{
+				fdul.setFreedays(lst.subList(i, j));
+			}catch(IndexOutOfBoundsException e){
+				if(i < lst.size()){
+					fdul.setFreedays(lst.subList(i, lst.size()));
+				} else {
+					fdul.setFreedays(new ArrayList<String>());
+				}
+					
+			}
+			lfdul2.add(fdul);
+		}
+		
+		return lfdul2;
+	}
 	
 	
 	

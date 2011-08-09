@@ -24,16 +24,21 @@ public class ReportController {
 	public String reportFreeDays(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size,Model uiModel){
 		//TODO: change get all to get jst the needed ones and return them
 		List<FreeDayUserList> lfd = FreeDay.getAllUserFreeDays();
-//		if (page != null || size != null) {
-//            int sizeNo = size == null ? 10 : size.intValue();
-//            uiModel.addAttribute("display", FreeDay.getAllUserFreeDays(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-//            uiModel.addAttribute("tablewidth",sizeNo);
-//            float nrOfPages = (float) FreeDayUserList.computeTableWidth(lfd) / sizeNo;
-//            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-//        } else {
+		Long tablewidth = FreeDayUserList.computeTableWidth(lfd);
+		if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            sizeNo = sizeNo < tablewidth.intValue() ? sizeNo : tablewidth.intValue();
+            page = page == null ? 0 : (page.intValue() - 1);
+            page = page > tablewidth.intValue()/sizeNo ? tablewidth.intValue()/sizeNo : page;
+            uiModel.addAttribute("display", FreeDayUserList.subListFreedays(lfd,page * sizeNo,(page+1)* sizeNo));
+            uiModel.addAttribute("tablewidth",sizeNo);
+            float nrOfPages = (float) tablewidth / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
         	uiModel.addAttribute("display", lfd);
-        	uiModel.addAttribute("tablewidth",FreeDayUserList.computeTableWidth(lfd));
-//        }
+        	uiModel.addAttribute("tablewidth",tablewidth);
+        }
+		
 		return "report/freedays";
 	}
 	

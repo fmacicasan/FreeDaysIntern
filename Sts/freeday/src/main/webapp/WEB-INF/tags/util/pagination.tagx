@@ -6,17 +6,23 @@
   <jsp:directive.attribute name="size" type="java.lang.Integer" required="false" rtexprvalue="true" description="The number of records per page (not required, defaults to 10)" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
 
+  <jsp:directive.attribute name="listWhat" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate what items are controled by the pagination (defaults results)" />
+  
   <c:if test="${empty render or render}">
 
     <c:if test="${empty page || page lt 1}">
       <c:set var="page" value="1" />
+    </c:if>
+    
+    <c:if test="${empty listWhat}">
+    	<c:set var="listWhat" value="results" />
     </c:if>
 
     <c:if test="${empty size || size lt 1}">
       <c:set var="size" value="10" />
     </c:if>
 
-    <spring:message code="list_size" var="list_size" htmlEscape="false" />
+    <spring:message code="list_size" arguments="${listWhat}" var="list_size" htmlEscape="false" />
     <c:out value="${list_size} " />
 
     <c:forEach var="i" begin="5" end="25" step="5">

@@ -9,14 +9,9 @@ import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.domain.ApprovalStrategy;
 import java.lang.String;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
@@ -24,8 +19,6 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
     declare @type: FreeDayVacationDataOnDemand: @Component;
     
     private Random FreeDayVacationDataOnDemand.rnd = new SecureRandom();
-    
-    private List<FreeDayVacation> FreeDayVacationDataOnDemand.data;
     
     public FreeDayVacation FreeDayVacationDataOnDemand.getNewTransientFreeDayVacation(int index) {
         FreeDayVacation obj = new FreeDayVacation();
@@ -84,31 +77,6 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
     
     public boolean FreeDayVacationDataOnDemand.modifyFreeDayVacation(FreeDayVacation obj) {
         return false;
-    }
-    
-    public void FreeDayVacationDataOnDemand.init() {
-        data = FreeDayVacation.findFreeDayVacationEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayVacation' illegally returned null");
-        if (!data.isEmpty()) {
-            return;
-        }
-        
-        data = new ArrayList<freedays.app.FreeDayVacation>();
-        for (int i = 0; i < 10; i++) {
-            FreeDayVacation obj = getNewTransientFreeDayVacation(i);
-            try {
-                obj.persist();
-            } catch (ConstraintViolationException e) {
-                StringBuilder msg = new StringBuilder();
-                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
-                    ConstraintViolation<?> cv = it.next();
-                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
-                }
-                throw new RuntimeException(msg.toString(), e);
-            }
-            obj.flush();
-            data.add(obj);
-        }
     }
     
 }
