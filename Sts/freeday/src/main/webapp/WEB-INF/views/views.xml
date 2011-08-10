@@ -24,11 +24,11 @@
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx"/>
   </definition>
   
-	<definition extends="public" name="recoverpass">
+	<definition extends="default" name="recoverpass">
 	       <put-attribute name="body" value="/WEB-INF/views/recoverpass.jspx"/>
 	   </definition>	 
 	   
-  <definition extends="public" name="register">
+  <definition extends="default" name="register">
      <put-attribute name="body" value="/WEB-INF/views/register.jspx"/>
   </definition>	
    

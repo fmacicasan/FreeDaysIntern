@@ -25,7 +25,10 @@
 ###Spring recipies
 	http://code.google.com/p/jgk-spring-recipes/wiki/SpringSecurity
 	
-
+###Concurrency
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/ns-config.html#ns-session-mgmt
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/session-mgmt.html
+	
 
 ##ROO
 	http://blog.springsource.com/2009/06/18/roo-part-3/

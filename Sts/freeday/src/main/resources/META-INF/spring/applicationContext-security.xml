@@ -20,7 +20,9 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 		<intercept-url pattern="/resources/**" access="permitAll()" />
 		<intercept-url pattern="/regularusers" method="POST" access="permitAll()"/> <!--  change this after addition of dedicated register form -->
 		<intercept-url pattern="/**" access="isAuthenticated()" /> <!-- change to isAuthenticated() -->
-       
+       	<session-management>
+        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+    	</session-management>
     </http>
     
 	
