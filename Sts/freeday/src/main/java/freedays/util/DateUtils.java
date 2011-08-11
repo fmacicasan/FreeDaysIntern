@@ -1,13 +1,18 @@
 package freedays.util;
 
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
  * Utility class used for date generation & manipulation.'
@@ -148,5 +153,62 @@ public class DateUtils {
 			ls.add(DateUtils.printShortDate(c));
 		}
 		return ls;
+	}
+	
+	public static List<String> getShortDateList(int month) {
+		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December"); 
+		List<String> ls = new ArrayList<String>();
+		Calendar now =Calendar.getInstance();
+		now.set(Calendar.MONTH, month);
+		now.set(Calendar.DAY_OF_MONTH, 1);
+		for(Calendar c = (Calendar) now.clone();c.get(Calendar.MONTH)==now.get(Calendar.MONTH);c.add(Calendar.DAY_OF_YEAR, 1)){
+			ls.add(DateUtils.printShortDate(c));
+		}
+		return ls;
+	}
+	
+
+	public static int getDaysInMonth(int month) {
+		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December");
+		Calendar now = Calendar.getInstance();
+		now.set(Calendar.MONTH, month);
+		int days = now.getActualMaximum(Calendar.DAY_OF_MONTH);
+		//System.out.println(days);
+		return days;
+	}
+//	public static void main(String[] args){
+//		for(int i=Calendar.JANUARY;i<=Calendar.DECEMBER;i++){
+//			getDaysInMonth(i);
+//		}
+//	}
+
+	public static boolean isSameMonth(Calendar date, int month) {
+		return date.get(Calendar.MONTH) == month;
+	}
+
+	public static int getDay(Calendar date) {
+		return date.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public static List<String> getWeekdayInitialsList(int month) {
+		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December");
+		List<String> ls = new ArrayList<String>();
+		Calendar now =Calendar.getInstance();
+		now.set(Calendar.MONTH, month);
+		now.set(Calendar.DAY_OF_MONTH, 1);
+		for(Calendar c = (Calendar) now.clone();c.get(Calendar.MONTH)==now.get(Calendar.MONTH);c.add(Calendar.DAY_OF_YEAR, 1)){
+			ls.add(DateUtils.printWeekdayInitial(c));
+		}
+		return ls;
+	}
+
+	private static String printWeekdayInitial(Calendar c) {
+		return String.format("%1$tA", c).substring(0,1);
+	}
+
+	public static List<String> getMonthNames() {
+		Locale local =  LocaleContextHolder.getLocale();
+		String[] months = new DateFormatSymbols(local).getMonths();
+		return Arrays.asList(months);
 	}
 }

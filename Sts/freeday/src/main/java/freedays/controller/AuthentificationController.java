@@ -7,10 +7,13 @@ import java.util.Set;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NonUniqueResultException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -23,9 +26,13 @@ import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
 
+@RooJavaBean
 public class AuthentificationController extends
 		AbstractUserDetailsAuthenticationProvider  {
 
+//	@Autowired
+//	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
+	
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication)

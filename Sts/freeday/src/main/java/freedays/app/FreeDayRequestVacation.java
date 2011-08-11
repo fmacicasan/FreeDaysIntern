@@ -12,8 +12,10 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.validation.annotation.BusinessDay;
+import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
 
 @RooJavaBean
+@UniqueVacationPerActiveOrApprovedReq
 public class FreeDayRequestVacation extends FreeDayRequest {
 
 	@NotNull

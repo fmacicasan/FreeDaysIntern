@@ -35,6 +35,19 @@ TODO:
 	- CRITICAL!! Add YEAR Support
 	- ?? Ofer posibility for reason input on request denial
 	
+	- eu si HR raport pe zile la toata lumea
+	- cate au ramas la fiecare din maxim
+	- HR vede approved si numarul real
+	- restu vede si pending si real time number of days
+	- concedii medicale
+	- scurtcircuitare team leader
+	- normal user canceling his request will get access denied for requests?approve
+	- navigare raport pe luni: ian/feb/sept ->....
+	- CRITICAL!! Client Side Date!!!
+	
+	
+	
+	
 	- DONE add page for personal FDUser visualization of the registered user
 	- DONE Solve problem at FDUser update with RegularUser transformation
 	- DONE restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser

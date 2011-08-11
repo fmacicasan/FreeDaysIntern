@@ -1,4 +1,4 @@
-/* main elements */
+	/* main elements */
 
 body,div,td {
 	font-family: Arial, Helvetica, sans-serif;
@@ -14,14 +14,20 @@ body {
 #header {
 	margin-bottom: 1em;
 }
-#colr{
+.colr{
 	background-color: red;
 }
-#coly{
+.coly{
 	background-color: yellow;
 }
-#colg{
+.colg{
 	background-color: aqua;
+}
+.colo{
+	background-color: orange;
+}
+.report{
+	text-align: center;
 }
 #wrapper {
 	width:100%;

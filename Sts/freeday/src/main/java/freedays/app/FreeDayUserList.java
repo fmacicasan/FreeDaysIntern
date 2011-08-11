@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
+import freedays.security.UserContextService;
 import freedays.util.DateUtils;
 
 /**
@@ -16,8 +18,14 @@ public class FreeDayUserList {
 	
 	private String user;
 	private String jobrole;
+	private Long remainingdays;
+	private Long totaldaysleft;
 	private List<String> freedays;
 	private List<Integer> vacations;
+	private List<FreeDayReportWrapper> combined;
+	
+	@Autowired
+	private UserContextService userContextService;
 	
 	/**
 	 * Generates a list of granted FreeDays requests based on the provided username
@@ -34,6 +42,8 @@ public class FreeDayUserList {
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getFullName());
 		fdul.setJobrole(fdu.getJobrole().toString());
+		fdul.setRemainingdays(fdu.computeAvailableFreeDays());
+		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());
 		fdul.setFreedays(transformFreeDay2String4Report(FreeDay.getAllGrantedFreeDayByUsername(fdu.getRegularUser().getUsername())));
 		return fdul;
 	}
@@ -72,8 +82,10 @@ public class FreeDayUserList {
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getFullName());
 		fdul.setJobrole(fdu.getJobrole().toString());
+		fdul.setRemainingdays(fdu.computeAvailableFreeDays());
+		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());
 		//TODO: get only between the two values not all vacations
-		fdul.setVacations(transformVacation2String4Report(FreeDayVacation.getAllGrantedVacationsByUsername(fdu.getRegularUser().getUsername()),start,end));
+		fdul.setVacations(transformVacation2Integer4Report(FreeDayVacation.getAllGrantedVacationsByUsername(fdu.getRegularUser().getUsername()),start,end));
 		return fdul;
 	}
 
@@ -81,7 +93,7 @@ public class FreeDayUserList {
 	/**
 	 * Prepares the list of generated vacations for report printing
 	 */
-	private static List<Integer> transformVacation2String4Report(List<FreeDayVacation> allgrantvac, Calendar start, Calendar end) {
+	private static List<Integer> transformVacation2Integer4Report(List<FreeDayVacation> allgrantvac, Calendar start, Calendar end) {
 		long span = DateUtils.dateDifferenceInDays(start, end);
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		for(long i=0;i<span;i++){
@@ -120,6 +132,51 @@ public class FreeDayUserList {
 		
 		return lfdul2;
 	}
+	
+	public static FreeDayUserList generateAllFreeDays(FDUser fdu,int month){
+		FreeDayUserList fdul = new FreeDayUserList();
+		fdul.setUser(fdu.getRegularUser().getFullName());
+		fdul.setJobrole(fdu.getJobrole().toString());
+		fdul.setRemainingdays(fdu.computeAvailableFreeDays());
+		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());
+		//TODO: get only between the two values not all vacations
+		List<FreeDay> lfdu =FreeDay.getAllNotFailedRequestsByUsername(fdu.getRegularUser().getUsername());
+		fdul.setCombined(tranformFreeDay2Integer4Report(lfdu,month));
+		return fdul;
+	}
+	
+	private static List<FreeDayReportWrapper> tranformFreeDay2Integer4Report(List<FreeDay> freedays,int month){
+		int days = DateUtils.getDaysInMonth(month);
+		ArrayList<FreeDayReportWrapper> list = new ArrayList<FreeDayReportWrapper>();
+		for(long i=0;i<days;i++){
+			FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
+			fdrw.setType(0);
+			list.add(fdrw);
+		}
+		for (FreeDay fd : freedays) {
+			if(fd instanceof FreeDayVacation){
+				FreeDayVacation fdv = (FreeDayVacation)fd;
+				Calendar start = fdv.getBeginning();
+				Calendar end = DateUtils.dateAddDay(start, fdv.getSpan());
+				for(Calendar c = (Calendar)start.clone();DateUtils.isSameMonth(c, month) && c.before(end);c.add(Calendar.DAY_OF_YEAR, 1)){
+					FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
+					fdrw.setType(fd.getType().ordinal()+1);
+					fdrw.setStatus(fd.getStatus().toString().substring(0,1));
+					list.set(DateUtils.getDay(c)-1,fdrw );
+				}
+			} else {
+				if(DateUtils.isSameMonth(fd.getDate(),month)){//remove this if you get the freedays already filtered by month
+					FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
+					fdrw.setType(fd.getType().ordinal()+1);
+					fdrw.setStatus(fd.getStatus().toString().substring(0,1));
+					list.set(DateUtils.getDay(fd.getDate())-1,fdrw );
+				}
+			}
+		}
+		
+		return list;
+	}
+	
 	
 	
 	

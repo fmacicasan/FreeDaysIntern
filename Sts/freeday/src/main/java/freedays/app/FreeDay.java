@@ -294,14 +294,41 @@ public abstract class FreeDay {
 		return fdrl;
 	}
 	
+	public static List<FreeDayUserList> getAllUserFreeDays(int month){
+		List<FreeDayUserList> fdrl = new ArrayList<FreeDayUserList>();
+		//TODO: decide weather to make report for all users or only all active users
+		List<FDUser> fdul = FDUser.findAllFDUsers();
+		for (FDUser fdu : fdul) {
+			fdrl.add(FreeDayUserList.generateAllFreeDays(fdu, month));
+		}
+		return fdrl;
+	}
+	
 	public static List<FreeDay> getAllNotFailedRequestsByUsername(String username){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
-		EntityManager em = RegularUser.entityManager();
+		EntityManager em = FreeDay.entityManager();
 		TypedQuery<FreeDay> q = em.createQuery("SELECT o FROM FreeDay o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", FreeDay.class);
         q.setParameter("username", username);
         q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
         return q.getResultList(); 
-
 	}
+	
+	public static Long countAllNotFailedRequestsByUsername(String username){
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		EntityManager em = FreeDay.entityManager();
+		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDay o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
+        q.setParameter("username", username);
+        q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        return q.getSingleResult(); 
+	}
+	
+	public boolean verifyUniqueness(Calendar date){
+		if(date == null)  throw new IllegalArgumentException("The date argument is required");
+		return this.getDate().equals(date);
+	}
+	
+	
+	
+	
 	
 }

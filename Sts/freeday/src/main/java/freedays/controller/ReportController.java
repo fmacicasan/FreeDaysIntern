@@ -48,10 +48,13 @@ public class ReportController {
 		Calendar start = DateUtils.convString2Calendar("6/20/2011");
 		Calendar end = DateUtils.convString2Calendar("9/09/2011");
 		long span = DateUtils.dateDifferenceInDays(start, end);
-		List<FreeDayUserList> lfd = FreeDay.getAllUserVacations(start,end);
+		int month = Calendar.AUGUST;
+		List<FreeDayUserList> lfd = FreeDay.getAllUserFreeDays(month);
 		uiModel.addAttribute("vacations",lfd);
-		uiModel.addAttribute("length", span);
-		uiModel.addAttribute("daysDateList",DateUtils.getShortDateList(start,end));
+		uiModel.addAttribute("length", DateUtils.getDaysInMonth(month));
+		uiModel.addAttribute("daysDateList",DateUtils.getShortDateList(month));
+		uiModel.addAttribute("daysWeekdayList",DateUtils.getWeekdayInitialsList(month));
+		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
 		return "report/vacation";
 	}
 

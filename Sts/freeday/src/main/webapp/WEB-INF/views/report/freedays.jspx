@@ -11,6 +11,7 @@
        		<tr>
        			<th><spring:message code="freedaysreport_name" /> </th>
        			<th><spring:message code="freedaysreport_role" /></th>
+       			<th><spring:message code="freedaysreport_remainingdays" /></th>
        			<c:forEach var="i" begin="1" end="${tablewidth}">
        				<th><spring:message code="freedaysreport_day" /></th>
        			</c:forEach>
@@ -19,10 +20,12 @@
        	<c:forEach items="${display}" var="item">
        		<spring:eval expression="item['user']" var="user" />
      		<spring:eval expression="item['jobrole']" var="jobrole" />
+     		<spring:eval expression="item['remainingdays']" var="remainingdays" />
      		<spring:eval expression="item['freedays']" var="freedays" />
        		<tr>
        			<td><c:out value="${user}" /></td>
        			<td><c:out value="${jobrole}" /></td>
+       			<td><c:out value="${remainingdays}" /> </td>
        			<c:set value="${tablewidth}" var="dayCnt" />
        			<c:forEach items="${freedays}" var="freeday">
        				<spring:eval expression="dayCnt - 1" var="dayCnt" />

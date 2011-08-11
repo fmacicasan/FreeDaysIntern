@@ -331,10 +331,9 @@ public class Request   implements Serializable{
 	}
 	
 	public  boolean isCancelable(){
-		return this.status != RequestStatus.GRANTED
-				&& this.status != RequestStatus.CANCELED
+		return this.status != RequestStatus.CANCELED
 				&& this.status != RequestStatus.REJECTED
-				&& this.requestable.isCancelable();
+				&& this.requestable.isCancelable(); //this.status != RequestStatus.GRANTED&& 
 		
 	}
 	

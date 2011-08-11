@@ -29,7 +29,7 @@ public class CheckUniqueDayPerActiveOrApprovedReqValidator implements Constraint
 	public boolean isValid(FreeDayRequest fdr, ConstraintValidatorContext arg1) {
 		List<FreeDay> lfd = FreeDay.getAllNotFailedRequestsByUsername(userContextService.getCurrentUser());
 		for (FreeDay freeDay : lfd) {
-			if(freeDay.getDate().equals(fdr.getReqdate())) return false;
+				if(freeDay.verifyUniqueness(fdr.getReqdate())) return false;
 		}
 		return true;
 	}

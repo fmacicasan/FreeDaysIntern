@@ -78,7 +78,7 @@ public class FDUser extends ApplicationRegularUser {
 	 * requests are subtracted from the fraction.
 	 * @return the legal free days available for request
 	 */
-	public long computeAvailableFreeDays(){
+	public Long computeAvailableFreeDays(){
 		
 		long remainingDays = this.initDays;
 		
@@ -93,11 +93,26 @@ public class FDUser extends ApplicationRegularUser {
 
 		remainingDays += TimeUnit.MILLISECONDS.toDays(time) * (this.maxFreeDays-this.initDays) / now.getActualMaximum(Calendar.DAY_OF_YEAR);
 
-		remainingDays -= Request.countActiveRequests(this.getRegularUser().getUsername());
-		remainingDays -= Request.countRequests(this, RequestStatus.GRANTED);
-
-		return remainingDays;
+//		remainingDays -= Request.countActiveRequests(this.getRegularUser().getUsername());
+//		remainingDays -= Request.countRequests(this, RequestStatus.GRANTED);
 		
+		String username = this.getRegularUser().getUsername();
+		remainingDays -= FreeDay.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username);
+		return remainingDays;		
+	}
+	
+	/**
+	 * Remaining days from the total amount available in a year without considering the amount of work until
+	 * the computation point.
+	 * @return
+	 */
+	public Long computeteAvailableFreeDaysTotal(){
+		long remainingDays = this.getMaxFreeDays();
+		String username = this.getRegularUser().getUsername();
+		remainingDays -= FreeDay.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username);
+		return remainingDays;
 	}
 	
 	/**

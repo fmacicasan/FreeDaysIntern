@@ -6,20 +6,16 @@ package freedays.app;
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayL;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayLDataOnDemand: @Component;
     
-    private List<FreeDayL> FreeDayLDataOnDemand.data;
+   
     
     public FreeDayL FreeDayLDataOnDemand.getNewTransientFreeDayL(int index) {
         FreeDayL obj = new FreeDayL();
@@ -56,31 +52,6 @@ privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
     
     public boolean FreeDayLDataOnDemand.modifyFreeDayL(FreeDayL obj) {
         return false;
-    }
-    
-    public void FreeDayLDataOnDemand.init() {
-        data = FreeDayL.findFreeDayLEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayL' illegally returned null");
-        if (!data.isEmpty()) {
-            return;
-        }
-        
-        data = new ArrayList<freedays.app.FreeDayL>();
-        for (int i = 0; i < 10; i++) {
-            FreeDayL obj = getNewTransientFreeDayL(i);
-            try {
-                obj.persist();
-            } catch (ConstraintViolationException e) {
-                StringBuilder msg = new StringBuilder();
-                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
-                    ConstraintViolation<?> cv = it.next();
-                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
-                }
-                throw new RuntimeException(msg.toString(), e);
-            }
-            obj.flush();
-            data.add(obj);
-        }
     }
     
 }

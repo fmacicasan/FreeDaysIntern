@@ -8,10 +8,13 @@ import javax.persistence.DiscriminatorValue;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayRequest.RequestType;
 import freedays.domain.RegularUser;
 import freedays.util.DateUtils;
 import freedays.util.ValidationUtils;
+import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Future;
@@ -111,11 +114,34 @@ public class FreeDayVacation extends FreeDay {
 
 	public static List<FreeDayVacation> getAllGrantedVacationsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
-        EntityManager em = RegularUser.entityManager();
+        EntityManager em = FreeDayVacation.entityManager();
         TypedQuery<FreeDayVacation> q = em.createQuery("SELECT o FROM FreeDayVacation o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND r.status = :approveStatus ", FreeDayVacation.class);
         q.setParameter("username", username);
         q.setParameter("approveStatus",RequestStatus.GRANTED);
         return q.getResultList();
+	}
+	
+	
+	public static Long sumAllVacationSpansByUsername(String username){
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		EntityManager em = FreeDayVacation.entityManager();
+		TypedQuery<Long> q = em.createQuery("SELECT SUM(o.span) FROM FreeDayVacation o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
+        q.setParameter("username", username);
+        q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        Long sum = q.getSingleResult();
+        return sum==null?0:sum;
+	}
+	
+	@Override
+	public boolean verifyUniqueness(Calendar date){
+		if(date == null)  throw new IllegalArgumentException("The date argument is required");
+		return (this.getDate().before(date) && this.getEnd().after(date))
+				|| this.getDate().equals(date)
+				|| this.getEnd().equals(date);
+	}
+	
+	public Calendar getEnd(){
+		return DateUtils.dateAddDay(this.getBeginning(), this.getSpan());
 	}
 
 }

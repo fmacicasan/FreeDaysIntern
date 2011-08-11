@@ -3,7 +3,10 @@
 
 package freedays.app;
 
+import freedays.app.FreeDayReportWrapper;
+import freedays.security.UserContextService;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.String;
 import java.util.List;
 
@@ -25,6 +28,22 @@ privileged aspect FreeDayUserList_Roo_JavaBean {
         this.jobrole = jobrole;
     }
     
+    public Long FreeDayUserList.getRemainingdays() {
+        return this.remainingdays;
+    }
+    
+    public void FreeDayUserList.setRemainingdays(Long remainingdays) {
+        this.remainingdays = remainingdays;
+    }
+    
+    public Long FreeDayUserList.getTotaldaysleft() {
+        return this.totaldaysleft;
+    }
+    
+    public void FreeDayUserList.setTotaldaysleft(Long totaldaysleft) {
+        this.totaldaysleft = totaldaysleft;
+    }
+    
     public List<String> FreeDayUserList.getFreedays() {
         return this.freedays;
     }
@@ -39,6 +58,22 @@ privileged aspect FreeDayUserList_Roo_JavaBean {
     
     public void FreeDayUserList.setVacations(List<Integer> vacations) {
         this.vacations = vacations;
+    }
+    
+    public List<FreeDayReportWrapper> FreeDayUserList.getCombined() {
+        return this.combined;
+    }
+    
+    public void FreeDayUserList.setCombined(List<FreeDayReportWrapper> combined) {
+        this.combined = combined;
+    }
+    
+    public UserContextService FreeDayUserList.getUserContextService() {
+        return this.userContextService;
+    }
+    
+    public void FreeDayUserList.setUserContextService(UserContextService userContextService) {
+        this.userContextService = userContextService;
     }
     
 }
