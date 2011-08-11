@@ -104,6 +104,19 @@ public class DateUtils {
 		return TimeUnit.MILLISECONDS.toDays(time);
 	}
 	
+	public static long dateDifferenceInWorkingDays(Calendar start, Calendar end) {
+		if(start == null)throw new IllegalArgumentException("The start argument is required");
+		if(end == null)throw new IllegalArgumentException("The end argument is required");
+		if(start.compareTo(end)<=0) throw new IllegalArgumentException("start must be before end"); 
+		Long span = 0L;
+		for(Calendar c = (Calendar) start.clone();c.compareTo(end)<=0;c.set(Calendar.DAY_OF_YEAR, 1)){
+			if(ValidationUtils.checkBusinessDay(c)){
+				span ++;
+			}
+		}
+		return span;
+	}
+	
 	/**
 	 * Increase the day count of the Calendar instance with the given amount
 	 * @param start the initial Calendar instance
@@ -155,6 +168,11 @@ public class DateUtils {
 		return ls;
 	}
 	
+	/**
+	 * Minimal string representation of the all displayed dates in a month.
+	 * @param month 
+	 * @return
+	 */
 	public static List<String> getShortDateList(int month) {
 		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December"); 
 		List<String> ls = new ArrayList<String>();
@@ -211,4 +229,54 @@ public class DateUtils {
 		String[] months = new DateFormatSymbols(local).getMonths();
 		return Arrays.asList(months);
 	}
+
+	/**
+	 * returns current month between 1 and 12
+	 * @return
+	 */
+	public static Integer getCurrentMonth() {
+		Calendar c = Calendar.getInstance();
+		return c.get(Calendar.MONTH) + 1;
+	}
+
+	public static boolean isValidMonth(Integer m) {
+		if(m==null) return false;
+		m = DateUtils.transformMonth(m);//bring it between Calendar.January and Calendar.December
+		return Calendar.JANUARY <= m &&  m <= Calendar.DECEMBER;
+	}
+
+	/**
+	 * Transforms application month (1-12) to Calendar month(0-11)
+	 * @param m
+	 * @return
+	 */
+	public static int transformMonth(Integer m) {
+		return --m;
+	}
+
+	/**
+	 * Adds to the provided date the number of business days represented by span.
+	 * @param start initial date
+	 * @param span number of business days
+	 * @return
+	 */
+	public static Calendar dateAddBusinessDay(Calendar start, Long span) {
+		Calendar date = (Calendar) start.clone();
+		if(ValidationUtils.checkWeekend(date)){
+			if(date.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+				date.add(Calendar.DAY_OF_YEAR, 1);
+			}
+			date.add(Calendar.DAY_OF_YEAR, 1);
+		}
+		
+		Long days = span % 5;
+		Long full = (span / 5) * 7;
+		if((Calendar.FRIDAY - date.get(Calendar.DAY_OF_WEEK))<days){
+			days+=2;
+		}
+		date.add(Calendar.DAY_OF_MONTH, days.intValue()+full.intValue());
+		return date;
+	}
+
+	
 }

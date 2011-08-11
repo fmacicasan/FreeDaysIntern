@@ -5,7 +5,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.stereotype.Component;
 
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
@@ -13,7 +15,10 @@ import freedays.util.DateUtils;
 /**
  * Wrapper class for report generation.
  */
+
+@Component
 @RooJavaBean
+@Configurable
 public class FreeDayUserList {
 	
 	private String user;
@@ -137,10 +142,17 @@ public class FreeDayUserList {
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getFullName());
 		fdul.setJobrole(fdu.getJobrole().toString());
-		fdul.setRemainingdays(fdu.computeAvailableFreeDays());
+		
 		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());
 		//TODO: get only between the two values not all vacations
-		List<FreeDay> lfdu =FreeDay.getAllNotFailedRequestsByUsername(fdu.getRegularUser().getUsername());
+		List<FreeDay> lfdu;
+		UserContextService ucs = fdul.getUserContextService();
+		if(ucs.isHR()){
+			lfdu = FreeDay.getAllGrantedFreeDayByUsername(fdu.getRegularUser().getUsername());
+		} else {
+			fdul.setRemainingdays(fdu.computeAvailableFreeDays());
+			lfdu =FreeDay.getAllNotFailedRequestsByUsername(fdu.getRegularUser().getUsername());
+		}
 		fdul.setCombined(tranformFreeDay2Integer4Report(lfdu,month));
 		return fdul;
 	}
@@ -157,12 +169,15 @@ public class FreeDayUserList {
 			if(fd instanceof FreeDayVacation){
 				FreeDayVacation fdv = (FreeDayVacation)fd;
 				Calendar start = fdv.getBeginning();
-				Calendar end = DateUtils.dateAddDay(start, fdv.getSpan());
-				for(Calendar c = (Calendar)start.clone();DateUtils.isSameMonth(c, month) && c.before(end);c.add(Calendar.DAY_OF_YEAR, 1)){
-					FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
-					fdrw.setType(fd.getType().ordinal()+1);
-					fdrw.setStatus(fd.getStatus().toString().substring(0,1));
-					list.set(DateUtils.getDay(c)-1,fdrw );
+				Calendar end = DateUtils.dateAddBusinessDay(start, fdv.getSpan());
+				//replaced before by compareTo to test equality
+				for(Calendar c = (Calendar)start.clone();c.compareTo(end)<=0;c.add(Calendar.DAY_OF_YEAR, 1)){
+					if(DateUtils.isSameMonth(c, month)){
+						FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
+						fdrw.setType(fd.getType().ordinal()+1);
+						fdrw.setStatus(fd.getStatus().toString().substring(0,1));
+						list.set(DateUtils.getDay(c)-1,fdrw );
+					}
 				}
 			} else {
 				if(DateUtils.isSameMonth(fd.getDate(),month)){//remove this if you get the freedays already filtered by month

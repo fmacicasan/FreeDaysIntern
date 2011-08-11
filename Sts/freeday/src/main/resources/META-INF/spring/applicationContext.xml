@@ -52,7 +52,7 @@
      
     <context:component-scan base-package="freedays">
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
-        <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+        <!-- <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>-->
     </context:component-scan>
     
     
@@ -80,7 +80,7 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
-    <bean class="freedays.security.UserContextServiceImlp" id="userContextService"  />
+    <!-- <bean class="freedays.security.UserContextServiceImlp" id="userContextService"  /> -->
     
     <bean class="org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder" id="messageDigestPasswordEncoder">
         <constructor-arg value="sha-256"/>

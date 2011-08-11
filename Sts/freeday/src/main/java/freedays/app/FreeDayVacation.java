@@ -84,7 +84,7 @@ public class FreeDayVacation extends FreeDay {
 		if(!(fdr instanceof FreeDayRequestVacation))throw new IllegalArgumentException("The fdr argument must be of type FreeDayRequestVacation");
 		FreeDayRequestVacation fdrv = (FreeDayRequestVacation)fdr;
 		this.setConfidence(fdrv.getConfidence());
-		this.setSpan(DateUtils.dateDifferenceInDays(fdrv.getReqdate(), fdrv.getFinish()));
+		this.setSpan(DateUtils.dateDifferenceInWorkingDays(fdrv.getReqdate(), fdrv.getFinish()));
 	}
 	
 	@Override

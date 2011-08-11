@@ -18,6 +18,7 @@ import freedays.app.FDUser;
 import freedays.domain.RegularUser;
 import freedays.security.UserContextService;
 import freedays.util.DAOUtils;
+import freedays.util.MailUtils;
 
 @RequestMapping("/account")
 @Controller
@@ -33,7 +34,7 @@ public class AccountController {
 		try{
 		RegularUser regularUser = RegularUser.findRegularUsersByUsername(
 				httpServletRequest.getUserPrincipal().getName()).getSingleResult();
-		
+		MailUtils mu = new MailUtils();
 		uiModel.addAttribute("regularUser", regularUser);
 		
 		}catch(EmptyResultDataAccessException e){

@@ -6,17 +6,11 @@ package freedays.app;
 import freedays.app.FDUser;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApplicationRegularUser.JobRole;
-import freedays.domain.RegularUser;
 import java.lang.Integer;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
@@ -24,8 +18,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     declare @type: FDUserDataOnDemand: @Component;
     
     private Random FDUserDataOnDemand.rnd = new SecureRandom();
-    
-    private List<FDUser> FDUserDataOnDemand.data;
     
     public FDUser FDUserDataOnDemand.getNewTransientFDUser(int index) {
         FDUser obj = new FDUser();
@@ -70,11 +62,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
         obj.setMaxFreeDays(maxFreeDays);
     }
     
-    public void FDUserDataOnDemand.setRegularUser(FDUser obj, int index) {
-        RegularUser regularUser = null;
-        obj.setRegularUser(regularUser);
-    }
-    
     public FDUser FDUserDataOnDemand.getSpecificFDUser(int index) {
         init();
         if (index < 0) index = 0;
@@ -91,31 +78,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     
     public boolean FDUserDataOnDemand.modifyFDUser(FDUser obj) {
         return false;
-    }
-    
-    public void FDUserDataOnDemand.init() {
-        data = FDUser.findFDUserEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'FDUser' illegally returned null");
-        if (!data.isEmpty()) {
-            return;
-        }
-        
-        data = new ArrayList<freedays.app.FDUser>();
-        for (int i = 0; i < 10; i++) {
-            FDUser obj = getNewTransientFDUser(i);
-            try {
-                obj.persist();
-            } catch (ConstraintViolationException e) {
-                StringBuilder msg = new StringBuilder();
-                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
-                    ConstraintViolation<?> cv = it.next();
-                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
-                }
-                throw new RuntimeException(msg.toString(), e);
-            }
-            obj.flush();
-            data.add(obj);
-        }
     }
     
 }

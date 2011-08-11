@@ -14,16 +14,20 @@ body {
 #header {
 	margin-bottom: 1em;
 }
-.colr{
+.legr,.legy,.legg,.lego{
+	display: inline;
+	margin: 0.5%;
+}
+.colr,.legr{
 	background-color: red;
 }
-.coly{
+.coly,.legy{
 	background-color: yellow;
 }
-.colg{
+.colg,.legg{
 	background-color: aqua;
 }
-.colo{
+.colo,.lego{
 	background-color: orange;
 }
 .report{
@@ -186,6 +190,13 @@ h3 {
 h4 {
 	font-size: 14px;
 	line-height: 20px;
+}
+
+.monthfooter{
+	width : 8%;
+	display: inline;
+	text-align: center;
+	float : left;
 }
 
 .errors {

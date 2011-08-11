@@ -97,4 +97,25 @@ public class DateUtilsTest {
 		Assert.assertEquals("invalid date add day implementation",end,DateUtils.dateAddDay(start, span.longValue()));
 	}
 	
+	@Test
+	public void testAddBusinessDay(){
+		Calendar date = Calendar.getInstance();
+		date.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		//date.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY+5);
+		//Assert.assertEquals(String.format("i=%d j=%d",2,0),4, DateUtils.dateAddBusinessDay(date, 0L).get(Calendar.DAY_OF_WEEK));
+		
+		for(Integer i=0;i<7;i++){
+			
+			Integer limit = new java.util.Random().nextInt(100)+7;
+			Integer test=Calendar.MONDAY + i;
+			for(Integer j=0;j<2;j++){
+				 if(test >= Calendar.SATURDAY)test = Calendar.MONDAY;
+				 Assert.assertEquals(String.format("i=%d j=%d day=%d",i,j,date.get(Calendar.DAY_OF_WEEK)),test.longValue(), DateUtils.dateAddBusinessDay(date, j.longValue()).get(Calendar.DAY_OF_WEEK));
+				 test++;
+			}
+			date.add(Calendar.DAY_OF_YEAR, 1);
+		}
+				
+	}
+	
 }

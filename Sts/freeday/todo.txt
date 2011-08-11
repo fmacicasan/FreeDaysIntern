@@ -35,15 +35,16 @@ TODO:
 	- CRITICAL!! Add YEAR Support
 	- ?? Ofer posibility for reason input on request denial
 	
-	- eu si HR raport pe zile la toata lumea
-	- cate au ramas la fiecare din maxim
-	- HR vede approved si numarul real
-	- restu vede si pending si real time number of days
+	- DONE eu si HR raport pe zile la toata lumea
+	- DONE cate au ramas la fiecare din maxim
+	- DONE HR vede approved si numarul real
+	- DONE restu vede si pending si real time number of days
 	- concedii medicale
 	- scurtcircuitare team leader
-	- normal user canceling his request will get access denied for requests?approve
-	- navigare raport pe luni: ian/feb/sept ->....
+	- DONE normal user canceling his request will get access denied for requests?approve
+	- DONE navigare raport pe luni: ian/feb/sept ->....
 	- CRITICAL!! Client Side Date!!!
+	- DONE CRITICAL!! dont's consider the weekend days for the Vacation request when counting available/remaining days
 	
 	
 	
@@ -54,19 +55,3 @@ TODO:
 	- DONE - migrated to SDL account - disabled gmail accout
 	
 	
-	<tr class="footer">
-		<td colspan="13">
-			<span class="new">
-				<a href="/freedays/regularusers?form">
-					<img title="Create new Regular User" src="/freedays/resources/images/add.png" alt="Create new Regular User"/>
-				</a>
-			</span> 
-			List results per page: 
-				<a href="?page=1&amp;size=5">5</a> 10 
-				<a href="?page=1&amp;size=15">15</a> 
-				<a href="?page=1&amp;size=20">20</a> 
-				<a href="?page=1&amp;size=25">25</a> 
-			|  Page 1 of 1 
-		</td>
-	</tr>
-</table>

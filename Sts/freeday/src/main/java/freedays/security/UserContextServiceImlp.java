@@ -5,7 +5,9 @@ import java.util.Collection;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
+@Service("userContextService")
 public class UserContextServiceImlp implements UserContextService{
 
 	@Override
@@ -21,6 +23,11 @@ public class UserContextServiceImlp implements UserContextService{
 		}
 		return false;
 		
+	}
+
+	@Override
+	public boolean isHR() {
+		return hasRole("ROLE_HRMANAGEMENT");
 	}
 
 }

@@ -4,7 +4,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <c:if test="${hasError}">
-    	<spring:message code="default_form_error_msg" arguments="workaround until IN-63(@Future and @BusinessDay) solved" />
+    	<spring:message code="default_form_error_msg" arguments="workaround until IN-63 solved -> error (date should be in Future and a ${daytypeerror} or you already have an active/approved request on the selected day)" />
     </c:if>
     <form:create id="fc_freedays_domain_Request" modelAttribute="reqbean" path="/requests/vacation" render="${empty dependencies}" z="user-managed">
     	<field:input field="reqtype" id="c_freedays_domain_Request_reqtypes"  readonly="true" z="user-managed" />

@@ -88,11 +88,18 @@ public class RequestController {
             switch(request.getReqtype()){
 	            case C:
 	            	uiModel.addAttribute("matchings",FreeDayR.getAllUnmatchedRequestsByUsername(p.getName()));
+	            	uiModel.addAttribute("daytypeerror","BusinessDay");
 	            	break;
 	            case R:
 	            	uiModel.addAttribute("matchings",FreeDayC.getAllUnmatchedRequestsByUsername(p.getName()));
+	            	uiModel.addAttribute("daytypeerror","Weekend");
+	            	break;
+	            case L:
+	            	uiModel.addAttribute("typeLMarker", true);
+	            	uiModel.addAttribute("daytypeerror","BusinessDay");
 	            	break;
 	            default:;
+	            	uiModel.addAttribute("daytypeerror","BusinessDay(both)");
             }
             return "requests/create";
         }
@@ -111,6 +118,7 @@ public class RequestController {
 		if(bindingResult.hasErrors()){
 			uiModel.addAttribute("hasError", true);
 			uiModel.addAttribute("reqbean", request);
+			uiModel.addAttribute("daytypeerror","BusinessDay(both)");
 			return "requests/vacation"; 
 		}
 		Request.createPersistentReq(request, p.getName());

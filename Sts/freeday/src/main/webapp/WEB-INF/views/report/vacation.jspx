@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:sec="http://www.springframework.org/security/tags" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_freedays_app_Freedaysreport" items="${vacations}" z="user-managed">
@@ -17,8 +17,12 @@
        			</c:forEach>
        		</tr>
        		<tr>
-       			<th><spring:message code="freedaysreport_remainingdayscovered" /></th>
-       			<th><spring:message code="freedaysreport_remainingdayslegal" /></th>
+       			<sec:authorize access="!hasRole('ROLE_HRMANAGEMENT')">
+       				<th><spring:message code="freedaysreport_remainingdayscovered" /></th>
+       				<c:set value="1" var="managspan" />
+       			</sec:authorize>
+       			<c:if test="${empty managspan}"> <c:set var="managspan" value="2" /></c:if>
+       			<th colspan="${managspan}"><spring:message code="freedaysreport_remainingdayslegal" /></th>
        			<c:forEach var="i" begin="0" end="${length-1}">
        				<th title="${daysDateList[i]}" >${fn:substringBefore(daysDateList[i],'.')}</th>
        			</c:forEach>
@@ -28,14 +32,19 @@
        	<c:forEach items="${vacations}" var="item">
        		<spring:eval expression="item['user']" var="user" />
      		<spring:eval expression="item['jobrole']" var="jobrole" />
-     		<spring:eval expression="item['remainingdays']" var="remainingdays" />
+     		<sec:authorize ifNotGranted="ROLE_HRMANAGEMENT">
+     			<spring:eval expression="item['remainingdays']" var="remainingdays" />
+     		</sec:authorize>
      		<spring:eval expression="item['totaldaysleft']" var="totaldaysleft" />
      		<spring:eval expression="item['combined']" var="combined" />
        		<tr>
        			<td><c:out value="${user}" /></td>
        			<td><c:out value="${jobrole}" /></td>
-       			<td><c:out value="${remainingdays}" /> </td>
-       			<td><c:out value="${totaldaysleft}" /></td>
+       			<sec:authorize access="!hasRole('ROLE_HRMANAGEMENT')">
+       				<td><c:out value="${remainingdays}" /> </td>
+       			</sec:authorize>
+       			<td colspan="${managspan}"><c:out value="${totaldaysleft}" /></td>
+       			
        			<c:forEach var="i" begin="0" end="${length-1}">
        					<c:choose>
 	       					<c:when test="${combined[i].type == 1}">
@@ -59,14 +68,27 @@
        		</tr>
        	</c:forEach>
        	<tr class="footer">
-       		<td colspan="${colCounter}">
-	       		<c:forEach  items="${fullMonthNames}" var="month">
-	       			<a href="?m=${i}"><c:out value="${month}"/></a><c:out value=" "/>  
+       		<td  colspan="${colCounter}">
+	       		<!--  <c:forEach  items="${fullMonthNames}" var="month">--> 
+	       		<c:forEach var="i" begin="0" end="11">
+	       			<div class="monthfooter">
+	       				<c:choose>
+	       					<c:when test="${param.m==(i+1)}">
+	       						<c:out value="${fullMonthNames[i]}"/>
+	       					</c:when>
+	       					<c:otherwise>
+	       						<a href="?m=${i+1}"><c:out value="${fullMonthNames[i]}"/></a>
+	       					</c:otherwise>
+	       				</c:choose>
+	       			</div>
 	       		</c:forEach>
+	       		<!-- </c:forEach> -->
        		</td>
        	</tr>
        	<tr class="footer" >
-       		<td colspan="${colCounter}">Legend: C=completed W=waiting I=inProgress Red=Vacation Aqua=Legal Yellow=TypeC Orange=TypeR</td>
+       		<td colspan="${colCounter}">
+       			<i><b>Legend:</b></i> C=completed W=waiting I=inProgress <div class="legr">Vacation</div> <div class="legg">Legal</div> <div class="legy">Cerere</div> <div class="lego">Recover</div>
+       		</td>
        	</tr>
        </table>
     </page:list>

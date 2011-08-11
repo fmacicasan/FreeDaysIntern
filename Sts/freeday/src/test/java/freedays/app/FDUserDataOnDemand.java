@@ -1,11 +1,18 @@
 package freedays.app;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.roo.addon.dod.RooDataOnDemand;
 
 import freedays.domain.ApplicationRegularUser;
+import freedays.domain.RegularUser;
 import freedays.domain.RegularUserDataOnDemand;
 import freedays.util.DateUtils;
 
@@ -68,4 +75,35 @@ public class FDUserDataOnDemand {
     }
 
 
+    private List<FDUser> data;
+	public void init() {
+        data = FDUser.findFDUserEntries(0, 10);
+        if (data == null) throw new IllegalStateException("Find entries implementation for 'FDUser' illegally returned null");
+        if (!data.isEmpty()) {
+            return;
+        }
+        
+        data = new ArrayList<freedays.app.FDUser>();
+        for (int i = 0; i < 10; i++) {
+            FDUser obj = getNewTransientFDUser(i);
+            try {
+                obj.persist();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
+                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
+                    ConstraintViolation<?> cv = it.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                }
+                throw new RuntimeException(msg.toString(), e);
+            }
+            obj.flush();
+            data.add(obj);
+        }
+    }
+
+	public void setRegularUser(FDUser obj, int index) {
+		RegularUserDataOnDemand rudod = new RegularUserDataOnDemand();
+        RegularUser regularUser = rudod.getRandomRegularUser();
+        obj.setRegularUser(regularUser);
+    }
 }

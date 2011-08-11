@@ -8,14 +8,11 @@ import freedays.app.FreeDayL;
 import java.lang.String;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayLDataOnDemand: @Component;
-    
-   
     
     public FreeDayL FreeDayLDataOnDemand.getNewTransientFreeDayL(int index) {
         FreeDayL obj = new FreeDayL();

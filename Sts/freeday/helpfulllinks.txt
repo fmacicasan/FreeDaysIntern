@@ -4,6 +4,7 @@
 ##spring security
 	http://www.viddler.com/explore/oredev/videos/22/
 	http://www.mularien.com/blog/2008/07/07/5-minute-guide-to-spring-security/
+	https://www.owasp.org/index.php/Top_10_2007-A7
 
 ##3/3.1
 	http://www.infoq.com/presentations/Spring-Security-3

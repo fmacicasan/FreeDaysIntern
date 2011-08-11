@@ -36,7 +36,6 @@ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(111,2);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(113,1);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(113,2);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(113,3);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(113,4);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(114,2);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(115,1);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(116,3);
@@ -44,7 +43,6 @@ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(117,4);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,1);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,2);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,3);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,4);
 
 delete from `free_day`
 INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`legalday`,`version`,`approval`)VALUES("typeL",31,"Test1",0,"2011-08-08",0,13);

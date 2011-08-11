@@ -44,11 +44,12 @@ public class ReportController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="/vacation", method=RequestMethod.GET)
-	public String reportVacationPlans(Model uiModel){
-		Calendar start = DateUtils.convString2Calendar("6/20/2011");
-		Calendar end = DateUtils.convString2Calendar("9/09/2011");
-		long span = DateUtils.dateDifferenceInDays(start, end);
-		int month = Calendar.AUGUST;
+	public String reportVacationPlans(@RequestParam(value = "m", required = false) Integer m, Model uiModel){
+		if(!DateUtils.isValidMonth(m)){
+			m = DateUtils.getCurrentMonth();
+			return "redirect:/report/vacation?m="+m;
+		}
+		int month = DateUtils.transformMonth(m);
 		List<FreeDayUserList> lfd = FreeDay.getAllUserFreeDays(month);
 		uiModel.addAttribute("vacations",lfd);
 		uiModel.addAttribute("length", DateUtils.getDaysInMonth(month));

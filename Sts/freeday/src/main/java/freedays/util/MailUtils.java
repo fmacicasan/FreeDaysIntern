@@ -10,6 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RooJavaBean
+@Configurable
 public class MailUtils {
 	private static final String SOURCE = "internlwtest@sdl.com";
     
