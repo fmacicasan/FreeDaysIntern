@@ -21,7 +21,7 @@ TODO:
 	- change register/recoverpass/change pass change info/ login process and password encryption
 		- update regular user info problem with redirect to /regularusers
 	- DONE improve validity restricting request to one for a calendar date
-		- verify also if vacation intersects some day already approved!
+		- DONE verify also if vacation intersects some day already approved!
 			- consider annotation for validity of RegularUser
 	- request more than one day / request
 	- solve the @BusinessDay and @weekend @duplicate error display
