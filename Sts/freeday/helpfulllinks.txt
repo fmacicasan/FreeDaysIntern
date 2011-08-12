@@ -45,3 +45,24 @@
 
 #versioning control
 	http://www.ericsink.com/vcbe/html/index.html
+
+http://static.springsource.org/spring-security/site/docs/3.0.x/reference/ldap.html
+
+
+http://laliluna.com/download/java-security-tutorial.pdf
+http://network-security-software.biz/software/spring-security-3-by-packt-publishing-review.html
+http://blog.springsource.com/2010/03/06/behind-the-spring-security-namespace/
+http://blog.springsource.com/2009/01/02/spring-security-customization-part-2-adjusting-secured-session-in-real-time/
+http://blog.springsource.com/2009/06/03/spring-security-300m1-released/
+http://blog.springsource.com/2009/09/28/spring-security-kerberos/
+http://forum.springsource.org/showthread.php?55491-OWASP-TOP-10-Security-Vulnerabilities
+http://www.springsource.com/security/spring-security
+http://blogs.reucon.com/srt/2010/06/26/spring_framework_security_vulnerability_part_1.html
+http://o2platform.files.wordpress.com/2011/07/ounce_springframework_vulnerabilities.pdf
+http://www.cvedetails.com/product-list/vendor_id-252/Vmware.html
+http://stackoverflow.com/questions/4846936/penetration-testing-on-spring-security
+http://static.springsource.org/spring-security/site/docs/3.0.x/reference/security-filter-chain.html#request-matching
+http://static.springsource.org/spring-security/site/docs/3.0.x/reference/core-web-filters.html
+http://static.springsource.org/spring-security/site/docs/3.0.x/reference/authz-arch.html
+http://www.techrepublic.com/whitepapers/two-security-vulnerabilities-in-the-spring-frameworks-mvc/1176999
+http://www.clerkendweller.com/2011/4/5/Website-Vulnerability-Statistics-Spring-2011
