@@ -54,4 +54,6 @@ TODO:
 	- DONE restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser
 	- DONE - migrated to SDL account - disabled gmail accout
 	
+	git gui
+	
 	

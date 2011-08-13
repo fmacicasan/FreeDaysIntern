@@ -2,12 +2,15 @@ package freedays.util;
 
 import java.util.Calendar;
 
+import javassist.bytecode.Descriptor.Iterator;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.mockito.Mockito;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml")
@@ -36,6 +39,16 @@ public class ValidationUtilsTest {
 	public void testCheckWeekendPass(){
 		Calendar date = DateUtils.generateFutureWeekendDay();
 		Assert.assertTrue("validation util - weekend day pass problem", ValidationUtils.checkWeekend(date));
+	}
+	
+	@Test
+	public void testMockitoExample(){
+		java.util.Iterator it = Mockito.mock(java.util.Iterator.class);
+		
+		Mockito.when(it.next()).thenReturn("Hello").thenReturn("World");
+		String result = it.next()+" "+it.next();
+		Assert.assertEquals("Hello World",result);
+		
 	}
 
 }
