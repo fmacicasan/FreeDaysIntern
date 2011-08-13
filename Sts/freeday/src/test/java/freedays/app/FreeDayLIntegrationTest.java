@@ -51,9 +51,11 @@ public class FreeDayLIntegrationTest {
 		FDUserDataOnDemand fdudod = new FDUserDataOnDemand();
 		
 		leveltop = fdudod.getRandomLevelTopUser();
-		level1 = fdudod.getRandomLevel1User();
+		level1 = fdudod.getRandomLevelTopUser();
+		while(level1.equals(leveltop))level1 = fdudod.getRandomLevelTopUser();
 		level1.setGranter(leveltop);
-		appreguser = fdudod.getRandomLevel1User();
+		appreguser = fdudod.getRandomLevelTopUser();
+		while(level1.equals(appreguser)||leveltop.equals(appreguser))appreguser = fdudod.getRandomLevelTopUser();
 		appreguser.setGranter(level1);
 		
 	}

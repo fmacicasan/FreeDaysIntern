@@ -97,11 +97,6 @@ public class PhraseUtils {
 		return PhraseUtils.MIN_LENGTH+PhraseUtils.MAX_VARIATION;
 	}
 	
-	public static void main(String args[]){
-		for(int i=20;i>0;i--){
-			System.out.println(PhraseUtils.getRandomPhrase());
-		}
-	}
 	
 	
 

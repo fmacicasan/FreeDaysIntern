@@ -50,26 +50,26 @@ public class FDUserDataOnDemand {
     }
     
     public FDUser getRandomNormalUser(){
-    	FDUser fdu = new FDUserDataOnDemand().getRandomFDUser();
+    	FDUser fdu = this.getRandomFDUser();
 		while(fdu.getGranter() == null ||
 				(fdu.getGranter() != null && fdu.getGranter().getGranter() == null)){
-			fdu = new FDUserDataOnDemand().getRandomFDUser();
+			fdu = this.getRandomFDUser();
 		}
 		return fdu;
     }
     
     public FDUser getRandomLevel1User(){
-    	FDUser fdu = new FDUserDataOnDemand().getRandomFDUser();
+    	FDUser fdu = this.getRandomFDUser();
 		while(fdu.getGranter() == null){
-			fdu = new FDUserDataOnDemand().getRandomFDUser();
+			fdu = this.getRandomFDUser();
 		}
 		return fdu;
     }
     
     public FDUser getRandomLevelTopUser(){
-    	FDUser fdu = new FDUserDataOnDemand().getRandomFDUser();
+    	FDUser fdu = this.getRandomFDUser();
 		while(fdu.getGranter() != null){
-			fdu = new FDUserDataOnDemand().getRandomFDUser();
+			fdu = this.getRandomFDUser();
 		}
 		return fdu;
     }

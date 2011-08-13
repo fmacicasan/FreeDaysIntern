@@ -5,12 +5,7 @@ package freedays.domain;
 
 import freedays.domain.RequestGranter;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect RequestGranterDataOnDemand_Roo_DataOnDemand {
@@ -18,8 +13,6 @@ privileged aspect RequestGranterDataOnDemand_Roo_DataOnDemand {
     declare @type: RequestGranterDataOnDemand: @Component;
     
     private Random RequestGranterDataOnDemand.rnd = new SecureRandom();
-    
-    private List<RequestGranter> RequestGranterDataOnDemand.data;
     
     public RequestGranter RequestGranterDataOnDemand.getNewTransientRequestGranter(int index) {
         RequestGranter obj = new RequestGranter();
@@ -42,31 +35,6 @@ privileged aspect RequestGranterDataOnDemand_Roo_DataOnDemand {
     
     public boolean RequestGranterDataOnDemand.modifyRequestGranter(RequestGranter obj) {
         return false;
-    }
-    
-    public void RequestGranterDataOnDemand.init() {
-        data = RequestGranter.findRequestGranterEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'RequestGranter' illegally returned null");
-        if (!data.isEmpty()) {
-            return;
-        }
-        
-        data = new ArrayList<freedays.domain.RequestGranter>();
-        for (int i = 0; i < 10; i++) {
-            RequestGranter obj = getNewTransientRequestGranter(i);
-            try {
-                obj.persist();
-            } catch (ConstraintViolationException e) {
-                StringBuilder msg = new StringBuilder();
-                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
-                    ConstraintViolation<?> cv = it.next();
-                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
-                }
-                throw new RuntimeException(msg.toString(), e);
-            }
-            obj.flush();
-            data.add(obj);
-        }
     }
     
 }
