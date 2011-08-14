@@ -28,7 +28,9 @@ import org.springframework.security.authentication.encoding.MessageDigestPasswor
 import org.springframework.transaction.annotation.Transactional;
 
 import freedays.security.UserContextService;
+import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.SignupWrapper;
+import freedays.domain.form.UpdateWrapper;
 import freedays.util.MailUtils;
 import freedays.util.PhraseUtils;
 
@@ -446,5 +448,19 @@ public class RegularUser implements Serializable {
 		ru.setPassword(sw.getPassword());
 		ru.persist();
 		return ru;
+	}
+
+	public void update(UpdateWrapper uw) {
+		this.setEmail(uw.getEmail());
+		this.setFirstname(uw.getFirstname());
+		this.setSurename(uw.getSurename());
+		this.merge();
+		
+	}
+
+	public void update(ChangePassWrapper uw) {
+		this.setPassword(uw.getPassword());
+		this.merge();
+		
 	}
 }

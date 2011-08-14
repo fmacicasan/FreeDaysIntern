@@ -31,5 +31,13 @@
   <definition extends="default" name="register">
      <put-attribute name="body" value="/WEB-INF/views/register.jspx"/>
   </definition>	
+  
+  <definition extends="default" name="account">
+     <put-attribute name="body" value="/WEB-INF/views/account.jspx"/>
+  </definition>	
+  
+    <definition extends="default" name="changepass">
+     <put-attribute name="body" value="/WEB-INF/views/changepass.jspx"/>
+  </definition>	
    
 </tiles-definitions>

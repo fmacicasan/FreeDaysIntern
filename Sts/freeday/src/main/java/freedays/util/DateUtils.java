@@ -107,9 +107,9 @@ public class DateUtils {
 	public static long dateDifferenceInWorkingDays(Calendar start, Calendar end) {
 		if(start == null)throw new IllegalArgumentException("The start argument is required");
 		if(end == null)throw new IllegalArgumentException("The end argument is required");
-		if(start.compareTo(end)<=0) throw new IllegalArgumentException("start must be before end"); 
+		if(start.compareTo(end)>0) throw new IllegalArgumentException("start must be before end"); 
 		Long span = 0L;
-		for(Calendar c = (Calendar) start.clone();c.compareTo(end)<=0;c.set(Calendar.DAY_OF_YEAR, 1)){
+		for(Calendar c = (Calendar) start.clone();c.compareTo(end)<0;c.add(Calendar.DAY_OF_YEAR, 1)){
 			if(ValidationUtils.checkBusinessDay(c)){
 				span ++;
 			}
