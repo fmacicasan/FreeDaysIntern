@@ -5,7 +5,9 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,25 +17,31 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import freedays.domain.RegularUser;
+import freedays.domain.form.SignupWrapper;
 
 @RequestMapping("/register")
 @Controller
 public class RegisterController {
+	
+	@Autowired
+	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
 
 	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(@Valid RegularUser regularUser,
-			BindingResult bindingResult, Model uiModel,
-			HttpServletRequest httpServletRequest) {
+	public String create(@Valid SignupWrapper regularUser,
+			BindingResult bindingResult, Model uiModel) {
 		if (bindingResult.hasErrors()) {
 			uiModel.addAttribute("regularUser", regularUser);
+			uiModel.addAttribute("hasError",true);
 			return "register";
 		}
 		uiModel.asMap().clear();
-		regularUser.persist();
+		String pass = regularUser.getPassword();
+		regularUser.setPassword(messageDigestPasswordEncoder.encodePassword(pass, null));
+		RegularUser ru = RegularUser.signupnew(regularUser);
 
-		uiModel.addAttribute("regularuser", regularUser);
-        uiModel.addAttribute("itemId", regularUser.getId());
+		uiModel.addAttribute("regularuser", ru);
+        uiModel.addAttribute("itemId", ru.getId());
         return "regularusers/show";
 
 	}
@@ -41,8 +49,8 @@ public class RegisterController {
 	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method = RequestMethod.GET)
 	public String createForm(Model uiModel) {
-		uiModel.addAttribute("regularUser", new RegularUser());
-		return "regularusers/create";
+		uiModel.addAttribute("regularUser", new SignupWrapper());
+		return "register";
 	}
 
 	private String encodeUrlPathSegment(String pathSegment,

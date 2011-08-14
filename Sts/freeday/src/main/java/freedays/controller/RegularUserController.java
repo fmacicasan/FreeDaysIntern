@@ -120,8 +120,7 @@ public class RegularUserController {
 	        uiModel.addAttribute("regularuser", regularUser);
 	        uiModel.addAttribute("itemId", regularUser.getId());
 	        return "regularusers/show";
-	        }
-        else{
+	    } else {
         	httpServletRequest.setAttribute("errorMessage","Email already taken."); 
         	uiModel.addAttribute("regularUser", regularUser);
             addDateTimeFormatPatterns(uiModel);

@@ -18,13 +18,17 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+import freedays.security.UserContextService;
+import freedays.domain.form.SignupWrapper;
 import freedays.util.MailUtils;
 import freedays.util.PhraseUtils;
 
@@ -46,7 +50,7 @@ public class RegularUser implements Serializable {
 	private String username;
 
 	@NotNull
-	@Length(min = 6, max = 45)
+	@Length(min = 6)
 	private String password;
 
 	@NotNull
@@ -73,6 +77,11 @@ public class RegularUser implements Serializable {
 	private Calendar creationdate;
 
 	private String usermodifier;
+	
+	@Autowired
+	private transient UserContextService userContextService;;
+	
+	
 
 	/**
 	 * Search all the RegularUser entities with username LIKE searchKey
@@ -175,6 +184,9 @@ public class RegularUser implements Serializable {
 		this.creationdate = Calendar.getInstance();
 		this.lastmodified = Calendar.getInstance();
 		this.deleted = false;
+		this.activ = true;
+		String cu = this.userContextService.getCurrentUser();
+		this.usermodifier=(cu!=null)?cu:this.getUsername();
 	}
 
 	/**
@@ -183,6 +195,8 @@ public class RegularUser implements Serializable {
 	@PreUpdate
 	protected void onUpdate() {
 		this.lastmodified = Calendar.getInstance();
+		String cu = this.userContextService.getCurrentUser();
+		this.usermodifier=(cu!=null)?cu:this.getUsername();
 	}
 
 	/**
@@ -417,4 +431,20 @@ public class RegularUser implements Serializable {
 //            this.entityManager.remove(attached);
 //        }
     }
+
+	/**
+	 * Creates and persists a new regular user based on the signupwrapper object.
+	 * @param regularUser
+	 * @return
+	 */
+	public static RegularUser signupnew(SignupWrapper sw) {
+		RegularUser ru = new RegularUser();
+		ru.setUsername(sw.getUsername());
+		ru.setEmail(sw.getEmail());
+		ru.setSurename(sw.getSurename());
+		ru.setFirstname(sw.getFirstname());
+		ru.setPassword(sw.getPassword());
+		ru.persist();
+		return ru;
+	}
 }

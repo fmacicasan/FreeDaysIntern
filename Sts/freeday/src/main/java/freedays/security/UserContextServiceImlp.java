@@ -12,7 +12,15 @@ public class UserContextServiceImlp implements UserContextService{
 
 	@Override
 	public String getCurrentUser() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
+		try{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth.isAuthenticated()){
+			return auth.getName();
+		}
+		}catch(NullPointerException e){
+			
+		}
+		return null;
 	}
 
 	@Override

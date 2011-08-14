@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.NonUniqueResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,11 +28,12 @@ import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
 
 @RooJavaBean
+@Configurable
 public class AuthentificationController extends
 		AbstractUserDetailsAuthenticationProvider  {
 
-//	@Autowired
-//	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
+	@Autowired
+	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
 	
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
@@ -48,12 +50,14 @@ public class AuthentificationController extends
 		if (!StringUtils.hasText(password)) {
 			throw new BadCredentialsException("Please enter the password!");
 		}
+		String encryptedPassword = messageDigestPasswordEncoder.encodePassword(password, null);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		try {
 			RegularUser regularUser =RegularUser
 					.findRegularUsersByUsername(username).getSingleResult();
 			
-			if(!regularUser.getPassword().equals(password)) throw new BadCredentialsException("Invalid username or password");
+			
+			if(!regularUser.getPassword().equals(encryptedPassword)) throw new BadCredentialsException("Invalid username or password");
 			if(!regularUser.getActiv()) throw new BadCredentialsException("Your account has been disabled!");
 			if(regularUser.getDeleted()) throw new BadCredentialsException("Your accout has been deleted!");
 			if(FDUser.isUnassociated(regularUser)) throw new BadCredentialsException("Your account has not been processed yet! - (4Test) needs FDUser creation!");
