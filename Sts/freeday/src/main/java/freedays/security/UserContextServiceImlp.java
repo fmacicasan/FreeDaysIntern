@@ -1,5 +1,6 @@
 package freedays.security;
 
+import java.security.Principal;
 import java.util.Collection;
 
 import org.springframework.security.core.Authentication;
@@ -15,14 +16,13 @@ public class UserContextServiceImlp implements UserContextService{
 	@Override
 	public String getCurrentUser() {
 		try{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(auth.isAuthenticated()){
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			if(auth.getName().equals("anonymousUser"))return null;
 			return auth.getName();
-		}
 		}catch(NullPointerException e){
-			
+			return null;
 		}
-		return null;
+		
 	}
 
 	@Override
