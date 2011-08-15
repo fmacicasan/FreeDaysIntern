@@ -28,7 +28,7 @@
                 <!-- TODO: after addition of spring security 3.1.0.RC2 no need for choose but add isPersonal in authorize access -->
                 <c:choose>
                     <c:when test="${isPersonal}">
-                     	<spring:url value="/requests/${itemId}?own" var="form_request"/>
+                     	<spring:url value="/requests/${itemId}?eval" var="form_request"/>
 					 	<form action="${fn:escapeXml(form_request)}" method="POST" name="input_req">
 							<div class="submit">
                         		<spring:message code="request_cancel_button" htmlEscape="false" var="request_cancel_label"/>

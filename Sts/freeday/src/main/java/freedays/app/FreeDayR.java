@@ -17,7 +17,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import freedays.app.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.domain.RegularUser;
 import freedays.util.DateUtils;
 import freedays.validation.annotation.Weekend;
@@ -125,7 +125,7 @@ public class FreeDayR extends FreeDaysRCMatch {
 
 
 	@Override
-	protected RequestType getType() {
+	public RequestType getType() {
 		return RequestType.R;
 	}
 

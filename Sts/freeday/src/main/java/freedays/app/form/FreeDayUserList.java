@@ -1,4 +1,4 @@
-package freedays.app;
+package freedays.app.form;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.stereotype.Component;
 
+import freedays.app.FDUser;
+import freedays.app.FreeDay;
+import freedays.app.FreeDayVacation;
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
 

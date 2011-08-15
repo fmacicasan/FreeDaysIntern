@@ -3,8 +3,8 @@ package freedays.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import freedays.app.FreeDayRequest;
-import freedays.app.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequest;
+import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.util.ValidationUtils;
 import freedays.validation.annotation.SpecialWeekday;
 

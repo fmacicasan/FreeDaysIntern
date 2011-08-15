@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,11 +23,11 @@ import freedays.domain.RegularUser;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.UpdateWrapper;
 import freedays.security.UserContextService;
-import freedays.util.DAOUtils;
 import freedays.util.MailUtils;
 
 @RequestMapping("/account")
 @Controller
+@RooJavaBean
 public class AccountController {
 	
 	@Autowired

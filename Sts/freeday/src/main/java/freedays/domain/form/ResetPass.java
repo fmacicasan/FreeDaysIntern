@@ -1,4 +1,4 @@
-package freedays.domain;
+package freedays.domain.form;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 

@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import freedays.domain.RegularUser;
+
 @Service("userContextService")
 public class UserContextServiceImlp implements UserContextService{
 
@@ -36,6 +38,11 @@ public class UserContextServiceImlp implements UserContextService{
 	@Override
 	public boolean isHR() {
 		return hasRole("ROLE_HRMANAGEMENT");
+	}
+
+	@Override
+	public boolean isOwn(RegularUser regularUser) {
+		return regularUser.getUsername().equals(this.getCurrentUser());
 	}
 
 }

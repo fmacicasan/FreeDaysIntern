@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,15 @@ import org.springframework.web.util.WebUtils;
 
 import freedays.domain.RegularUser;
 import freedays.domain.form.SignupWrapper;
+import freedays.security.UserContextService;
 
 @RequestMapping("/register")
 @Controller
+@RooJavaBean
 public class RegisterController {
 	
+	@Autowired
+	private UserContextService userContextService;
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
 

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
-import freedays.util.DAOUtils;
 import freedays.util.MailUtils;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,11 +22,12 @@ import freedays.app.AppStrategL1;
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
 import freedays.app.FreeDayL;
-import freedays.app.FreeDayRequest;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.OneToOne;
 import freedays.app.RequestStatus;
+import freedays.app.form.FreeDayRequest;
+
 import javax.persistence.Enumerated;
 
 

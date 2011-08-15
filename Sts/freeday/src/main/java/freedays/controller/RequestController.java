@@ -15,16 +15,19 @@ import freedays.app.FreeDay;
 import freedays.app.FreeDayC;
 import freedays.app.FreeDayR;
 import freedays.app.FreeDayRCMatchable;
-import freedays.app.FreeDayRequest;
-import freedays.app.FreeDayRequest.RequestType;
-import freedays.app.FreeDayRequestVacation;
 import freedays.app.FreeDayVacation.ConfidenceLevel;
+import freedays.app.form.FreeDayRequest;
+import freedays.app.form.FreeDayRequestVacation;
+import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
 import freedays.domain.ApplicationRegularUser.JobRole;
+import freedays.security.UserContextService;
 
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,7 +44,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RooWebScaffold(path = "requests", formBackingObject = Request.class)
 @RequestMapping("/requests")
 @Controller
+@RooJavaBean
 public class RequestController {
+	
+	@Autowired
+	private UserContextService userContextService;
 	
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=l", method = RequestMethod.GET)
@@ -157,6 +164,9 @@ public class RequestController {
 		System.out.println("Eroriuy!");
 		
 		uiModel.asMap().clear();
+		if(this.userContextService.isOwn(Request.findRequest(id).getAppreguser().getRegularUser())){
+			return "redirect:/requests?own";
+		}
 		return "redirect:/requests?approve";
 	}
 	

@@ -1,6 +1,7 @@
 package freedays.domain;
 
 
+import freedays.domain.form.Search;
 import freedays.util.MailUtils;
 
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class RegularUserIntegrationTest {
         obj = freedays.domain.RegularUser.findRegularUser(id);
         org.junit.Assert.assertNotNull("Find method for 'RegularUser' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'RegularUser' returned the incorrect identifier", id, obj.getId());
-        freedays.domain.Search search = new Search();
+        freedays.domain.form.Search search = new Search();
         search.setSearchKey(RegularUser.SEARCH_FILTERS[0]);
         search.setSearchValue(obj.getUsername());
         java.util.List<RegularUser> all = freedays.domain.RegularUser.findAllRegularUsersLike(search);

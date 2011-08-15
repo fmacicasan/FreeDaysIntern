@@ -1,9 +1,9 @@
-package freedays.app;
+package freedays.app.form;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDay.FreeDayStatus;
-import freedays.app.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequest.RequestType;
 
 @RooJavaBean
 public class FreeDayReportWrapper {

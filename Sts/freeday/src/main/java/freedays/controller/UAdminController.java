@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import freedays.domain.RegularUser;
 
 
-@RooWebScaffold(path = "uadmin", formBackingObject = RegularUser.class)
+//@RooWebScaffold(path = "uadmin", formBackingObject = RegularUser.class)
 @RequestMapping("/uadmin")
 @Controller
 public class UAdminController {

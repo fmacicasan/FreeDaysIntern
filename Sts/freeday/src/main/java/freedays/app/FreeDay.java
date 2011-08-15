@@ -21,7 +21,9 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.util.StringUtils;
 
-import freedays.app.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequest;
+import freedays.app.form.FreeDayUserList;
+import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
 import freedays.domain.RegularUser;
@@ -174,7 +176,7 @@ public abstract class FreeDay {
 	 * @return
 	 * @see RequestType
 	 */
-	protected abstract RequestType getType();
+	public abstract RequestType getType();
 
 	/**
 	 * Sets the initial status. Common for all FreeDays.

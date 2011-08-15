@@ -1,5 +1,7 @@
 package freedays.app;
 
+import freedays.app.form.FreeDayRequest;
+
 /**
  * Factory used for creation of FreeDay child based on their type.
  * @author fmacicasan

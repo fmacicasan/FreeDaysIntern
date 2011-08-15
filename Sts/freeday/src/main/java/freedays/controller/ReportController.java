@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.app.FreeDay;
-import freedays.app.FreeDayUserList;
+import freedays.app.form.FreeDayUserList;
 import freedays.domain.Request;
 import freedays.util.DateUtils;
 

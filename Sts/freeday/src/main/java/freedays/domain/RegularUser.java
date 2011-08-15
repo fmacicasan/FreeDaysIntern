@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import freedays.security.UserContextService;
 import freedays.domain.form.ChangePassWrapper;
+import freedays.domain.form.Search;
 import freedays.domain.form.SignupWrapper;
 import freedays.domain.form.UpdateWrapper;
 import freedays.util.MailUtils;
@@ -81,7 +82,9 @@ public class RegularUser implements Serializable {
 	private String usermodifier;
 	
 	@Autowired
-	private transient UserContextService userContextService;;
+	private transient UserContextService userContextService;
+	@Autowired
+	private transient MessageDigestPasswordEncoder messageDigestPasswordEncoder;
 	
 	
 
@@ -156,7 +159,6 @@ public class RegularUser implements Serializable {
 		if (password == null || password.length() == 0)
 			throw new IllegalArgumentException(
 					"The password argument is required");
-		System.out.println("cucuriguuuu!!!");
 		EntityManager em = RegularUser.entityManager();
 		TypedQuery<RegularUser> q = em
 				.createQuery(
@@ -224,7 +226,8 @@ public class RegularUser implements Serializable {
 		}
 		RegularUser ru = list.get(0);
 		String newPass = PhraseUtils.getRandomPhrase();
-		ru.setPassword(newPass);
+		String encodednewpass = ru.getMessageDigestPasswordEncoder().encodePassword(newPass, null);
+		ru.setPassword(encodednewpass);
 		MailUtils.send(ru.getEmail(), RESET_PASS_TITLE, RESET_PASS_MESSAGE
 				+ newPass);
 		ru.persist();
@@ -462,5 +465,20 @@ public class RegularUser implements Serializable {
 		this.setPassword(uw.getPassword());
 		this.merge();
 		
+	}
+
+	/**
+	 * @return the messageDigestPasswordEncoder
+	 */
+	public MessageDigestPasswordEncoder getMessageDigestPasswordEncoder() {
+		return messageDigestPasswordEncoder;
+	}
+
+	/**
+	 * @param messageDigestPasswordEncoder the messageDigestPasswordEncoder to set
+	 */
+	public void setMessageDigestPasswordEncoder(
+			MessageDigestPasswordEncoder messageDigestPasswordEncoder) {
+		this.messageDigestPasswordEncoder = messageDigestPasswordEncoder;
 	}
 }

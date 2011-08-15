@@ -3,7 +3,7 @@ package freedays.controller;
 import freedays.util.MailUtils;
 import freedays.validation.RegularUserValidator;
 import freedays.domain.RegularUser;
-import freedays.domain.Search;
+import freedays.domain.form.Search;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;

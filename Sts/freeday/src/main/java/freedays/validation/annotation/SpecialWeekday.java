@@ -12,15 +12,15 @@ import javax.validation.Payload;
 import freedays.validation.CheckSpecialWeekdayValidator;
 
 /**
- * Custom validator for {@link freedays.app.FreeDayRequest FreeDayRequest}.
+ * Custom validator for {@link freedays.app.form.FreeDayRequest FreeDayRequest}.
  * It restricts it's Calendar member based on the request type.
  * <ul>
- * 		<li>{@link freedays.app.FreeDayRequest.RequestType TypeL} -> {@link freedays.validation.annotation.BusinessDay BusinessDay}</li>
- * 		<li>{@link freedays.app.FreeDayRequest.RequestType TypeC} -> {@link freedays.validation.annotation.BusinessDay BusinessDay}</li>
- * 		<li>{@link freedays.app.FreeDayRequest.RequestType TypeR} -> {@link freedays.validation.annotation.Weekend Weekend}</li> 
+ * 		<li>{@link freedays.app.form.FreeDayRequest.RequestType TypeL} -> {@link freedays.validation.annotation.BusinessDay BusinessDay}</li>
+ * 		<li>{@link freedays.app.form.FreeDayRequest.RequestType TypeC} -> {@link freedays.validation.annotation.BusinessDay BusinessDay}</li>
+ * 		<li>{@link freedays.app.form.FreeDayRequest.RequestType TypeR} -> {@link freedays.validation.annotation.Weekend Weekend}</li> 
  * </ul>
  * @author fmacicasan
- * @see freedays.app.FreeDayRequest.RequestType
+ * @see freedays.app.form.FreeDayRequest.RequestType
  *
  */
 @Target({ElementType.TYPE})

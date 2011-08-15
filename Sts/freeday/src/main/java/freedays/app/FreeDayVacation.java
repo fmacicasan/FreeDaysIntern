@@ -10,7 +10,9 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
 import freedays.app.FreeDay.FreeDayStatus;
-import freedays.app.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequest;
+import freedays.app.form.FreeDayRequestVacation;
+import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.domain.RegularUser;
 import freedays.util.DateUtils;
 import freedays.util.ValidationUtils;
@@ -75,7 +77,7 @@ public class FreeDayVacation extends FreeDay {
     }
 
     @Override
-    protected RequestType getType() {
+    public RequestType getType() {
         return RequestType.V;
     }
 

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDay;
-import freedays.app.FreeDayRequestVacation;
+import freedays.app.form.FreeDayRequestVacation;
 import freedays.security.UserContextService;
 import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
 @RooJavaBean

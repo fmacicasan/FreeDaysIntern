@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RooWebScaffold(path = "requestgranters", formBackingObject = RequestGranter.class)
+//@RooWebScaffold(path = "requestgranters", formBackingObject = RequestGranter.class)
 @RequestMapping("/requestgranters")
 @Controller
 public class RequestGranterController {

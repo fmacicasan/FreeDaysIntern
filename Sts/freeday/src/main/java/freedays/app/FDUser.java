@@ -169,7 +169,6 @@ public class FDUser extends ApplicationRegularUser {
 		try{
 			return RegularUser.findAllRegularUsersUnasociated().contains(regularUser);
 		}catch(Exception e){
-			System.out.println("termicacasaedasd");
 			return false;
 		}
 	}

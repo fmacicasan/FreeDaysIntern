@@ -8,7 +8,8 @@ import org.junit.Test;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 
 import freedays.app.FreeDay.FreeDayStatus;
-import freedays.app.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequest;
+import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
 import freedays.util.DateUtils;

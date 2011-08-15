@@ -1,4 +1,4 @@
-package freedays.app;
+package freedays.app.form;
 
 import java.util.Calendar;
 import java.util.List;
@@ -11,6 +11,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
+import freedays.app.FreeDaysRCMatch;
 import freedays.validation.annotation.BusinessDay;
 import freedays.validation.annotation.SpecialWeekday;
 import freedays.validation.annotation.UniqueDayPerActiveOrApprovedReq;

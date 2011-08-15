@@ -13,7 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import freedays.app.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequest;
+import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
 import freedays.validation.annotation.BusinessDay;
@@ -84,7 +85,7 @@ public class FreeDayL extends FreeDay {
 	
 
 	@Override
-	protected RequestType getType() {
+	public RequestType getType() {
 		return RequestType.L;
 	}
 }

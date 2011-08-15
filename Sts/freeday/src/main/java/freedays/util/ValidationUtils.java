@@ -31,4 +31,12 @@ public class ValidationUtils {
 		return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
 		//TODO: change to !checkBusinessDay
 	}
+	
+//	public static <T> T getSingleResult(TypedQuery<T> q) {
+//	List<T> results = q.getResultList();
+//	if (!results.isEmpty()) {
+//		return results.get(0);
+//	}
+//	return null;
+//}
 }

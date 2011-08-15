@@ -114,8 +114,56 @@ public class DateUtilsTest {
 				 test++;
 			}
 			date.add(Calendar.DAY_OF_YEAR, 1);
-		}
-				
+		}			
+	}
+	
+	@Test
+	public void testDateDifferenceInWorkingDays(){
+		Calendar date = Calendar.getInstance();
+		Integer i = new java.util.Random().nextInt(100);
+		Calendar then = DateUtils.dateAddBusinessDay(date,i.longValue());
+		Assert.assertEquals(i.longValue(), DateUtils.dateDifferenceInWorkingDays(date, then));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testConvString2CalendarFail(){
+		DateUtils.convString2Calendar("12\124\233");
+	}
+	@Test
+	public void testConvString2CalendarSuccess(){
+		String day = "12/12/1989";
+		Calendar c = DateUtils.convString2Calendar(day);
+		Assert.assertEquals(12, c.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals(Calendar.DECEMBER, c.get(Calendar.MONTH));
+		Assert.assertEquals(1989, c.get(Calendar.YEAR));
+		
+	}
+	
+	@Test
+	public void testGetShortDaysList(){
+		int month = new java.util.Random().nextInt(Calendar.DECEMBER)+Calendar.JANUARY;
+		Assert.assertEquals(DateUtils.getDaysInMonth(month), DateUtils.getShortDateList(month).size());
+	}
+	
+	@Test
+	public void testGetDay(){
+		Calendar c = Calendar.getInstance();
+		Assert.assertEquals(c.get(Calendar.DAY_OF_MONTH), DateUtils.getDay(c));
+	}
+	
+	@Test
+	public void testGetWeekdayInitList(){
+		int month = new java.util.Random().nextInt(Calendar.DECEMBER)+Calendar.JANUARY;
+		Assert.assertEquals(DateUtils.getDaysInMonth(month), DateUtils.getWeekdayInitialsList(month).size());
+	}
+	
+	@Test
+	public void testIsSameMonth(){
+		Calendar c = Calendar.getInstance();
+		Integer cm = DateUtils.getCurrentMonth();
+		Assert.assertTrue(DateUtils.isValidMonth(cm));
+		Assert.assertFalse(DateUtils.isSameMonth(c, cm));
+		Assert.assertTrue(DateUtils.isSameMonth(c, DateUtils.transformMonth(cm)));
 	}
 	
 }
