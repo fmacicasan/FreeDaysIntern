@@ -3,6 +3,7 @@ package freedays.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import freedays.app.FreeDay;
 import freedays.app.form.FreeDayUserList;
 import freedays.domain.Request;
+import freedays.schedule.FreeDayScheduleServiceImpl;
 import freedays.util.DateUtils;
 
 /**
@@ -74,6 +76,8 @@ public class ReportController {
 		uiModel.addAttribute("daysDateList",DateUtils.getShortDateList(month));
 		uiModel.addAttribute("daysWeekdayList",DateUtils.getWeekdayInitialsList(month));
 		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
+		
+		
 		return "report/vacation";
 	}
 

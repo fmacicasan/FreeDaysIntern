@@ -22,6 +22,7 @@ import freedays.app.FDUser;
 import freedays.domain.RegularUser;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.UpdateWrapper;
+import freedays.schedule.FreeDayScheduleServiceImpl;
 import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 
@@ -100,6 +101,10 @@ public class AccountController {
 		uiModel.addAttribute("fduser", fdu);
 		uiModel.addAttribute("fduser_col", fdu.getRoles());
 		uiModel.addAttribute("itemId", fdu.getId());
+		
+		FreeDayScheduleServiceImpl t = new FreeDayScheduleServiceImpl();
+		t.reportFreeDays();
+		
 		return "fdusers/show";
 	}
 	
