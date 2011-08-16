@@ -182,23 +182,37 @@ public class Request   implements Serializable{
     	}
     }
     
+    /**
+     * Constructs an approval message to be sent via email
+     */
     private void informApproveRequest(){
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_APPROVE);
     	}
     		
     }
+    
+    /**
+     * Constructs an denial message to be sent via email
+     */
     private void informDenyRequest(){
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_DENY);
     	}	
     }
     
+    /**
+     * Constructs an cancel message to be sent via email
+     */
     private void informCancelRequest(){
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_CANCEL);
     	}
     }
+    
+    /**
+     * Sends a message via email.
+     */
     private void informRequest(String msg){
     	StringBuilder sb = new StringBuilder();
 		sb.append(msg);
@@ -207,6 +221,9 @@ public class Request   implements Serializable{
     	MailUtils.send(mailTo, Request.FD_INFORM_SUBJECT, sb.toString());
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public String toString(){
     	StringBuilder sb = new StringBuilder();
     	sb.append(this.appreguser.getRegularUser());
@@ -217,6 +234,12 @@ public class Request   implements Serializable{
     	return sb.toString().toUpperCase();
     }
 
+    /**
+     * Counts the number of requests of the given fduser with the given status.
+     * @param fdUser
+     * @param status
+     * @return
+     */
 	public static Long countRequests(ApplicationRegularUser fdUser, RequestStatus status) {
 		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
 		EntityManager em = Request.entityManager();
@@ -232,6 +255,11 @@ public class Request   implements Serializable{
 		return res;
 	}
 	
+	/**
+	 * Counts all the requests associated with a FDUser
+	 * @param fdUser
+	 * @return
+	 */
 	public static Long countAllRequests(ApplicationRegularUser fdUser){
 		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
 		EntityManager em = Request.entityManager();
@@ -246,6 +274,14 @@ public class Request   implements Serializable{
 		return res;
 	}
 	
+	/**
+	 * Creates a persistent request based on the request form wrapper. It behaves
+	 * polimorphically for all the currently supported request types with their
+	 * associated request form wrappers.
+	 * @param fdr
+	 * @param username
+	 * @return
+	 */
 	public static Request createPersistentReq(FreeDayRequest fdr, String username) {
 		Request req = new Request();
 		req.setStatus(RequestStatus.getInit());
@@ -262,7 +298,11 @@ public class Request   implements Serializable{
 //	}
 
 
-	
+	/**
+	 * Retrieves all the requests of a regular user identified based on his username.
+	 * @param username
+	 * @return
+	 */
 	public static List<Request> findAllRequestsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
@@ -271,6 +311,12 @@ public class Request   implements Serializable{
         return q.getResultList();
 	}
 
+	/**
+	 * Retrieves all the requests of a regular user identified by its username
+	 * that are under the approval mechanism.
+	 * @param username
+	 * @return
+	 */
 	public static List<Request> findAllPendingApprovalsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
@@ -281,7 +327,13 @@ public class Request   implements Serializable{
         return q.getResultList();
 	}
 	
-
+	
+	/**
+	 * Counts all the requests of a regular user identified by its username
+	 * that are under the approval mechanism.
+	 * @param username
+	 * @return
+	 */
 	public static long countActiveRequests(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		FDUser aru = FDUser.findFDUserByUsername(username);
@@ -292,6 +344,10 @@ public class Request   implements Serializable{
 		return all - granted - rejected - canceled;
 	}
 
+	/**
+	 * Approves a requests identified based on its identifier.
+	 * @param id2
+	 */
 	public static void approve(Long id2) {
 		if (id2 == null) throw new IllegalArgumentException("The id argument is required");
 		Request req = Request.findRequest(id2);
@@ -299,6 +355,10 @@ public class Request   implements Serializable{
 		req.persist();
 	}
 
+	/**
+	 * Denies a requests identified based on its identifier.
+	 * @param id2
+	 */
 	public static void deny(Long id2) {
 		if (id2 == null) throw new IllegalArgumentException("The id argument is required");
 		Request req = Request.findRequest(id2);
@@ -308,6 +368,10 @@ public class Request   implements Serializable{
 		
 	}
 
+	/**
+	 * Cancels a requests identified based on its identifier.
+	 * @param id2
+	 */
 	public static void cancel(Long id2) {
 		if (id2 == null) throw new IllegalArgumentException("The id argument is required");
 		Request req = Request.findRequest(id2);
@@ -316,11 +380,23 @@ public class Request   implements Serializable{
 		
 	}
 
+	/**
+	 * Verifies weather or not the FDUser associated with the regular user identified
+	 * by the provided username is the owner of this
+	 * @param name
+	 * @return
+	 */
 	public boolean isOwner(String name) {
 		if (name == null || name.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		return this.getAppreguser().getRegularUser().getUsername().equals(name);
 	}
 
+	/**
+	 * Verifies weather or not the FDUser associated with the regular user identified
+	 * by the provided username is the current approver of this
+	 * @param name
+	 * @return
+	 */
 	public boolean isApprover(String name) {
 		try{
 			if (name == null || name.length() == 0) throw new IllegalArgumentException("The username argument is required");
@@ -330,6 +406,10 @@ public class Request   implements Serializable{
 		}
 	}
 	
+	/**
+	 * Verifies weather or not this can be canceled.
+	 * @return
+	 */
 	public  boolean isCancelable(){
 		return this.status != RequestStatus.CANCELED
 				&& this.status != RequestStatus.REJECTED
@@ -337,6 +417,12 @@ public class Request   implements Serializable{
 		
 	}
 	
+	/**
+	 * Calculates the available legal days requests that a FDUser associated
+	 * with a regular user identified by the provided username can still make.
+	 * @param username
+	 * @return
+	 */
 	public static long computeAvailableFreeDays(String username) {
 		FDUser aru = FDUser.findFDUserByUsername(username);
 		return aru.computeAvailableFreeDays();

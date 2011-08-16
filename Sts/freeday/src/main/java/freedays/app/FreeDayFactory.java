@@ -9,6 +9,12 @@ import freedays.app.form.FreeDayRequest;
  */
 public class FreeDayFactory {
 
+	/**
+	 * Factory method used for the creation of Free days based on the
+	 * requested type.
+	 * @param fdr
+	 * @return
+	 */
 	public static FreeDay create(FreeDayRequest fdr){
 		FreeDay ret;
 		switch(fdr.getReqtype()){

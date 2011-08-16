@@ -111,6 +111,10 @@ public class RegularUser implements Serializable {
 	@PersistenceContext
 	transient EntityManager entityManager;
 
+	/**
+	 * Counts the number of regular users in the database
+	 * @return
+	 */
 	public static Long countRegularUsers() {
 		TypedQuery<Long> q = entityManager().createQuery(
 				"SELECT COUNT(o) FROM RegularUser o", Long.class);
@@ -124,6 +128,11 @@ public class RegularUser implements Serializable {
 		
 	}
 
+	
+	/**
+	 * Retrieves the associated entity manager
+	 * @return
+	 */
 	public static final EntityManager entityManager() {
 		EntityManager em = new RegularUser().entityManager;
 		if (em == null)
@@ -132,17 +141,32 @@ public class RegularUser implements Serializable {
 		return em;
 	}
 
+	/**
+	 * Retrieves all the regular users
+	 * @return
+	 */
 	public static List<RegularUser> findAllRegularUsers() {
 		return entityManager().createQuery("SELECT o FROM RegularUser o",
 				RegularUser.class).getResultList();
 	}
 
+	/**
+	 * Retrieves a regular user based on his identifier.
+	 * @param id
+	 * @return
+	 */
 	public static RegularUser findRegularUser(Long id) {
 		if (id == null)
 			return null;
 		return entityManager().find(RegularUser.class, id);
 	}
 
+	/**
+	 * Retrieves a number of maxResults regular user entries starting at the first result
+	 * @param firstResult
+	 * @param maxResults
+	 * @return
+	 */
 	public static List<RegularUser> findRegularUserEntries(int firstResult,
 			int maxResults) {
 		return entityManager()
@@ -151,6 +175,13 @@ public class RegularUser implements Serializable {
 				.getResultList();
 	}
 
+	/**
+	 * Finds a regular user based on his username and password.
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@Deprecated
 	public static TypedQuery<RegularUser> findRegularUsersByUsernameAndPasswordEquals(
 			String username, String password) {
 		if (username == null || username.length() == 0)
@@ -219,6 +250,11 @@ public class RegularUser implements Serializable {
 	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
 	private static final String RESET_PASS_MESSAGE = "Your new password is:";
 
+	/**
+	 * Reset's a regular's user password based on his email address.
+	 * @param email2
+	 * @return
+	 */
 	public static boolean resetPassword(String email2) {
 		List<RegularUser> list = RegularUser.findRegularUserByEmail(email2);
 		if (list.size() != 1) {
@@ -234,6 +270,11 @@ public class RegularUser implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Retrieves a regular user based on his email.
+	 * @param email
+	 * @return
+	 */
 	public static List<RegularUser> findRegularUserByEmail(String email) {
 		if (email == null || email.length() == 0)
 			throw new IllegalArgumentException("The email argument is required");
@@ -246,6 +287,10 @@ public class RegularUser implements Serializable {
 		return q.getResultList();
 	}
 	
+	/**
+	 * Provides the complete name of the regular user
+	 * @return
+	 */
 	public String getFullName(){
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.firstname);
@@ -254,6 +299,12 @@ public class RegularUser implements Serializable {
 		return sb.toString();
 	}
 
+	/**
+	 * Counts the apparitions of an email in the regular user database.
+	 * The email should be unique.
+	 * @param email
+	 * @return
+	 */
 //	@Transactional
 	public static Long countRegularUserByEmail(String email) {
 		if (email == null || email.length() == 0)
@@ -295,7 +346,12 @@ public class RegularUser implements Serializable {
 		// sb.append("Version: ").append(getVersion());
 		return sb.toString().toUpperCase();
 	}
-
+	
+	/**
+	 * Selects a regular user based on his unique username.
+	 * @param username
+	 * @return the typed query representing the selection
+	 */
 	public static TypedQuery<RegularUser> findRegularUsersByUsername(
 			String username) {
 		if (username == null || username.length() == 0)
@@ -323,6 +379,9 @@ public class RegularUser implements Serializable {
 						RegularUser.class).getResultList();
 	}
 
+	/**
+	 * Persists the entity.
+	 */
 	@Transactional
 	public void persist() {
 		if (this.entityManager == null)
@@ -453,6 +512,10 @@ public class RegularUser implements Serializable {
 		return ru;
 	}
 
+	/**
+	 * Update method based on the update account form.
+	 * @param uw
+	 */
 	public void update(UpdateWrapper uw) {
 		this.setEmail(uw.getEmail());
 		this.setFirstname(uw.getFirstname());
@@ -461,6 +524,10 @@ public class RegularUser implements Serializable {
 		
 	}
 
+	/**
+	 * Update method based on the change password form.
+	 * @param uw
+	 */
 	public void update(ChangePassWrapper uw) {
 		this.setPassword(uw.getPassword());
 		this.merge();
@@ -480,5 +547,19 @@ public class RegularUser implements Serializable {
 	public void setMessageDigestPasswordEncoder(
 			MessageDigestPasswordEncoder messageDigestPasswordEncoder) {
 		this.messageDigestPasswordEncoder = messageDigestPasswordEncoder;
+	}
+
+	/**
+	 * Counts the regular users based on their username
+	 * @param username
+	 * @return
+	 */
+	public static Long countRegularUserByUsername(String username) {
+		if (username == null || username.length() == 0)throw new IllegalArgumentException("The username2 argument is required");
+		EntityManager em = RegularUser.entityManager();
+		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM RegularUser AS o WHERE o.username = :username and o.deleted = 0",Long.class);
+		q.setParameter("username", username);
+		Long res=q.getSingleResult();
+		return res;
 	}
 }

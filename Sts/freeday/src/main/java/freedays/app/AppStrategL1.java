@@ -50,7 +50,9 @@ public class AppStrategL1 extends ApprovalStrategy {
 
 	
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public String toString() {
         StringBuilder sb = new StringBuilder();
         //sb.append("DefaultInitialStrateg: ").append(getDefaultInitialStrateg()).append(", ");

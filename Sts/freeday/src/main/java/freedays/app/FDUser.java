@@ -54,6 +54,7 @@ public class FDUser extends ApplicationRegularUser {
     @NotNull
     private Integer maxDerogation;
 
+    @Override
 	public String toString() {
         StringBuilder sb = new StringBuilder();
 //        sb.append("Granter: ").append(getGranter()).append(", ");

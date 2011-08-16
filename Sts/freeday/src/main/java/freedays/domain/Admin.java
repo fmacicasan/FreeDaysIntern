@@ -13,21 +13,9 @@ import javax.persistence.Entity;
  *
  */
 @RooJavaBean
-@RooToString
 @RooEntity
 @DiscriminatorValue("Admin")
 public class Admin extends AdvancedUserRole {
-
-	public String toString() {
-//        StringBuilder sb = new StringBuilder();
-////        sb.append("AppRegUsers: ").append(getAppRegUsers() == null ? "null" : getAppRegUsers().size()).append(", ");
-////        sb.append("Id: ").append(getId()).append(", ");
-////        sb.append("Version: ").append(getVersion());
-//        sb.append(super.toString());
-//        sb.append("Admin");
-//        return sb.toString().toUpperCase();
-        return super.toString();
-    }
 
 	@Override
 	protected String getRole() {

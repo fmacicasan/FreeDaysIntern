@@ -12,7 +12,13 @@ import freedays.domain.form.SignupWrapper;
 import freedays.security.UserContextService;
 import freedays.validation.annotation.UniqueDayPerActiveOrApprovedReq;
 import freedays.validation.annotation.UniqueEmail;
+import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
 
+/**
+ * 
+ * @author fmacicasan
+ * @see UniqueEmail
+ */
 @RooJavaBean
 public class CheckUniqueEmailValidator  implements ConstraintValidator<UniqueEmail, String> {
 

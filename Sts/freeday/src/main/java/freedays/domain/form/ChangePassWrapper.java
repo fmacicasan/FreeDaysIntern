@@ -7,6 +7,11 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.validation.annotation.ValidChangePass;
 
+/**
+ * Wrapper class backing the change password form. 
+ * @author fmacicasan
+ *
+ */
 @ValidChangePass
 @RooJavaBean
 public class ChangePassWrapper {

@@ -32,6 +32,10 @@ public abstract class AdvancedUserRole {
     @ManyToMany(cascade=CascadeType.ALL, mappedBy="roles")
     private Set<ApplicationRegularUser> appRegUsers = new HashSet<ApplicationRegularUser>();
     
+    /**
+     * Retrieves the textual representation of the role.
+     * @return
+     */
     protected abstract String getRole();
 
     /**

@@ -13,7 +13,9 @@ import freedays.validation.CheckSamePassValidator;
 import freedays.validation.CheckUniqueEmailValidator;
 
 /**
- * 
+ * Custom validation for the Signum backing object. It restricts
+ * the creation of an regular user to objects having the same
+ * values for the passwords and a username not taken yet.
  * @author fmacicasan
  *
  */

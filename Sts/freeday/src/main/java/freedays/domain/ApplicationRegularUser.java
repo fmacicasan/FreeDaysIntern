@@ -31,7 +31,6 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @RooJavaBean
-@RooToString
 @RooEntity(inheritanceType = "TABLE_PER_CLASS")
 public abstract class ApplicationRegularUser  implements Serializable {
 
@@ -61,6 +60,11 @@ public abstract class ApplicationRegularUser  implements Serializable {
 	@PersistenceContext
 	transient EntityManager entityManager;
    
+	/**
+	 * retrieves all the roles of a regular user identified based on his username.
+	 * @param username
+	 * @return
+	 */
     //@Transactional
 	public static Set<AdvancedUserRole> getAllRolesByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
@@ -78,6 +82,10 @@ public abstract class ApplicationRegularUser  implements Serializable {
 	    return set;
 	}
 
+	/**
+	 * Finds all the application regular users having the request granting role.
+	 * @return
+	 */
 	public static Collection<ApplicationRegularUser> findAllRequestGranters() {
 		TypedQuery<RequestGranter> q = entityManager().createQuery("SELECT o FROM RequestGranter o JOIN FETCH o.appRegUsers ",RequestGranter.class);
 		RequestGranter rg=null;

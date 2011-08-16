@@ -296,6 +296,11 @@ public abstract class FreeDay {
 		return fdrl;
 	}
 	
+	/**
+	 * Retrieves all the free days in a given month
+	 * @param month
+	 * @return
+	 */
 	public static List<FreeDayUserList> getAllUserFreeDays(int month){
 		List<FreeDayUserList> fdrl = new ArrayList<FreeDayUserList>();
 		//TODO: decide weather to make report for all users or only all active users
@@ -306,6 +311,13 @@ public abstract class FreeDay {
 		return fdrl;
 	}
 	
+	/**
+	 * Retrieves all the free days that are under approval or already approved
+	 * that are associated with requests made by a FDUser associated with a 
+	 * RegularUser identified by the provided username.
+	 * @param username
+	 * @return
+	 */
 	public static List<FreeDay> getAllNotFailedRequestsByUsername(String username){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		EntityManager em = FreeDay.entityManager();
@@ -315,6 +327,13 @@ public abstract class FreeDay {
         return q.getResultList(); 
 	}
 	
+	/**
+	 * Counts all the free days that are under approval or already approved
+	 * that are associated with requests made by a FDUser associated with a 
+	 * RegularUser identified by the provided username.
+	 * @param username
+	 * @return
+	 */
 	public static Long countAllNotFailedRequestsByUsername(String username){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		EntityManager em = FreeDay.entityManager();
@@ -324,6 +343,12 @@ public abstract class FreeDay {
         return q.getSingleResult(); 
 	}
 	
+	/**
+	 * Decides weather or not the provided date can be a date corresponding to a
+	 * new free day request.
+	 * @param date
+	 * @return
+	 */
 	public boolean verifyUniqueness(Calendar date){
 		if(date == null)  throw new IllegalArgumentException("The date argument is required");
 		return this.getDate().equals(date);

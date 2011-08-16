@@ -9,6 +9,11 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.validation.annotation.UniqueEmail;
 
+/**
+ * Wrapper class backing the update account form.
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 public class UpdateWrapper {
 	@NotNull

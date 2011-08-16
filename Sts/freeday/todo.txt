@@ -5,8 +5,8 @@ TODO in STS -
 	- @find all pending approvals by username, search only the ones that need approval
 	- @check weekend validation - verify only with !businessday
 	- ???report all users or just active ones?
-	- get vacations only between the two provided dates
-		- !!!add pages to reports
+	- DONE per month get vacations only between the two provided dates
+		- DONE months!!!add pages to reports
 	- change all catch clauses @ throw exception, catch only when is needed
 	
 TODO:
@@ -18,11 +18,11 @@ TODO:
 	- ??what if not approved and the date already passed ??
 	- visitor for permissions instead of instanceof
 	
-	- change register/recoverpass/change pass change info/ login process and password encryption
-		- update regular user info problem with redirect to /regularusers
+	- DONE change register/recoverpass/change pass change info/ login process and password encryption
+		- DONE update regular user info problem with redirect to /regularusers
 	- DONE improve validity restricting request to one for a calendar date
 		- DONE verify also if vacation intersects some day already approved!
-			- consider annotation for validity of RegularUser
+			- DONE consider annotation for validity of RegularUser
 	- request more than one day / request
 	- solve the @BusinessDay and @weekend @duplicate error display
 	
@@ -53,6 +53,8 @@ TODO:
 	- DONE Solve problem at FDUser update with RegularUser transformation
 	- DONE restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser
 	- DONE - migrated to SDL account - disabled gmail accout
+	
+	- integrate with LDAP service (exchange)
 	
 	git gui
 	

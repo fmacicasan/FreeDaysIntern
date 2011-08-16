@@ -107,6 +107,11 @@ public class FreeDayR extends FreeDaysRCMatch {
 //		return this.getMatch() != null;
 //	}
 	
+	/**
+	 * Retrieves all the type R unmatchet requests.
+	 * @param username
+	 * @return
+	 */
 	public static List<FreeDayR> getAllUnmatchedRequestsByUsername(String username){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		EntityManager em = FreeDayR.entityManager();

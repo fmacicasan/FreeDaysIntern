@@ -13,6 +13,12 @@ import freedays.app.FreeDay;
 import freedays.app.form.FreeDayRequestVacation;
 import freedays.security.UserContextService;
 import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
+import freedays.validation.annotation.Weekend;
+/**
+ * 
+ * @author fmacicasan
+ * @see UniqueVacationPerActiveOrApprovedReq
+ */
 @RooJavaBean
 public class CheckUniqueVacationPerActiveOrApprovedReqValidator implements ConstraintValidator<UniqueVacationPerActiveOrApprovedReq, FreeDayRequestVacation> {
 

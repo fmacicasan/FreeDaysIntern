@@ -11,7 +11,11 @@ import freedays.validation.annotation.SamePass;
 import freedays.validation.annotation.UniqueEmail;
 
 
-
+/**
+ * Wrapper class backing the signup form.
+ * @author fmacicasan
+ *
+ */
 @SamePass
 @RooJavaBean
 public class SignupWrapper {

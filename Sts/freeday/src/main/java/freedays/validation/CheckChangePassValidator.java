@@ -12,8 +12,14 @@ import freedays.domain.RegularUser;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.security.UserContextService;
 import freedays.validation.annotation.BusinessDay;
+import freedays.validation.annotation.SamePass;
 import freedays.validation.annotation.ValidChangePass;
 
+/**
+ * 
+ * @author fmacicasan
+ * @see ValidChangePass
+ */
 public class CheckChangePassValidator implements ConstraintValidator<ValidChangePass, ChangePassWrapper> {
 
 	@Autowired

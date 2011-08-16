@@ -8,6 +8,11 @@ import javax.validation.ConstraintValidatorContext;
 import freedays.util.ValidationUtils;
 import freedays.validation.annotation.Weekend;
 
+/**
+ * 
+ * @author fmacicasan
+ * @see Weekend
+ */
 public class CheckWeekendDayValidator implements ConstraintValidator<Weekend, Calendar> {
 
 	@Override

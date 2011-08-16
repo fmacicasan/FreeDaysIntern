@@ -114,6 +114,12 @@ public class FreeDayVacation extends FreeDay {
 		return ls;
 	}
 
+	/**
+	 * Retrieves all the approved vacations based on the username of their
+	 * associated regular user.
+	 * @param username
+	 * @return
+	 */
 	public static List<FreeDayVacation> getAllGrantedVacationsByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = FreeDayVacation.entityManager();
@@ -123,7 +129,13 @@ public class FreeDayVacation extends FreeDay {
         return q.getResultList();
 	}
 	
-	
+	/**
+	 * Computes the sum of all the approved/under approval vacation requests
+	 * made by a FDUser associated to a regular user identified by the
+	 * provided username
+	 * @param username
+	 * @return
+	 */
 	public static Long sumAllVacationSpansByUsername(String username){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		EntityManager em = FreeDayVacation.entityManager();
@@ -134,6 +146,10 @@ public class FreeDayVacation extends FreeDay {
         return sum==null?0:sum;
 	}
 	
+	/**
+	 * Verifies weather or no the provieded calendar instance can represent
+	 * a date for a new free day request.
+	 */
 	@Override
 	public boolean verifyUniqueness(Calendar date){
 		if(date == null)  throw new IllegalArgumentException("The date argument is required");
@@ -142,6 +158,10 @@ public class FreeDayVacation extends FreeDay {
 				|| this.getEnd().equals(date);
 	}
 	
+	/**
+	 * COmputes the final date of the associated vacation.
+	 * @return
+	 */
 	public Calendar getEnd(){
 		return DateUtils.dateAddDay(this.getBeginning(), this.getSpan());
 	}

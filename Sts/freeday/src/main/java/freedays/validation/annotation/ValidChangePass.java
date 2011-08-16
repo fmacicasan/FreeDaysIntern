@@ -13,7 +13,9 @@ import freedays.validation.CheckChangePassValidator;
 import freedays.validation.CheckSamePassValidator;
 
 /**
- * 
+ * Validator for the change pass form. It verifies weather
+ * the old pass matches the existing pass and the other
+ * two match.
  * @author fmacicasan
  *
  */

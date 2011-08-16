@@ -15,6 +15,13 @@ import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.validation.annotation.BusinessDay;
 import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
 
+/**
+ * Wrapper class for the vacation request. It extends the form
+ * needed for the request for a single day.
+ * @author fmacicasan
+ * @see FreeDayRequest
+ *
+ */
 @RooJavaBean
 @UniqueVacationPerActiveOrApprovedReq
 public class FreeDayRequestVacation extends FreeDayRequest {
