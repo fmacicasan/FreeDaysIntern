@@ -114,7 +114,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     
     
     
-    
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
@@ -155,6 +157,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		/**
 		 * Converts a FDUser to it's textual representation
 		 */
+		@Override
         public String convert(FDUser fDUser) {
             //return new StringBuilder().append(fDUser.getHireDate()).append(" ").append(fDUser.getInitDays()).append(" ").append(fDUser.getMaxFreeDays()).toString();
         	return fDUser.toString();
@@ -171,6 +174,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		/**
 		 * Converts a RegularUser to it's textual representation
 		 */
+		@Override
         public String convert(RegularUser regularUser) {
             //return new StringBuilder().append(regularUser.getUsername()).append(" ").append(regularUser.getPassword()).append(" ").append(regularUser.getEmail()).append(" ").append(regularUser.getSurename()).toString();
         	return regularUser.toString();

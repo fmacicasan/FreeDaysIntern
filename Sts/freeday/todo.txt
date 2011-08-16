@@ -55,7 +55,9 @@ TODO:
 	- DONE - migrated to SDL account - disabled gmail accout
 	
 	- integrate with LDAP service (exchange)
-        - add mail send for user creation to FDADMIN/HRMANAGEMENT
+    - add mail send for user creation to FDADMIN/HRMANAGEMENT
+	- mail raport doar ziua curenta
+	- la sfarsitul zilei sa verific zilele under approval ce inca nu au fost aprobate
         
 	
 	git gui

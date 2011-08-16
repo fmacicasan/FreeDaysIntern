@@ -69,6 +69,7 @@ public class MailUtils {
     	Thread th = new Thread(){
     		
     		
+    		@Override
     		public void run(){
     			SimpleMailMessage mail = new SimpleMailMessage();
         		mail.setTo(to);

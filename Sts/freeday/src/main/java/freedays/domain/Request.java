@@ -30,7 +30,12 @@ import freedays.app.form.FreeDayRequest;
 
 import javax.persistence.Enumerated;
 
-
+/**
+ * Class describing a request. It is associated with a Application Reuglar user, a Requestable object and
+ * an approver. It;s status is described by the request status.
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity

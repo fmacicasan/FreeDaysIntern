@@ -35,6 +35,11 @@ import freedays.domain.form.UpdateWrapper;
 import freedays.util.MailUtils;
 import freedays.util.PhraseUtils;
 
+/**
+ * Class describing a normal user that can authenticate.
+ * @author fmacicasan
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEntity
