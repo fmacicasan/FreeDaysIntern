@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import freedays.domain.RegularUser;
 import freedays.domain.form.ResetPass;
 
+/**
+ * Controller used to intercept requests related to the password recovery process.
+ * @author fmacicasan
+ *
+ */
 @RequestMapping("/recoverpass")
 @Controller
 public class RecoverPassController {

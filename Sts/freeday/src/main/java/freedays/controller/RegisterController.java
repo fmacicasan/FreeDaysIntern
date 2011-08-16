@@ -21,6 +21,9 @@ import freedays.domain.RegularUser;
 import freedays.domain.form.SignupWrapper;
 import freedays.security.UserContextService;
 
+/**
+ * Controller used to intercept registration related requests
+ */
 @RequestMapping("/register")
 @Controller
 @RooJavaBean

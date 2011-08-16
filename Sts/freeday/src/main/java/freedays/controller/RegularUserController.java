@@ -27,6 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+/**
+ * Controller used to handle regular user related requests.
+ * @author fmacicasan
+ *
+ */
 @RooWebScaffold(path = "regularusers", formBackingObject = RegularUser.class)
 @RequestMapping("/regularusers")
 @Controller

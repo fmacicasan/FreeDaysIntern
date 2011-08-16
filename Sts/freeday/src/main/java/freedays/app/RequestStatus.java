@@ -27,6 +27,10 @@ public enum RequestStatus {
     //<blockquote>and Waiting (typeC/R without matching typeR/C) and Matched</blackquote>
     private static final int SPECIAL_FINAL_STATES_COUNT = 3;
     
+    /**
+     * Retrieves the next corresponding next status
+     * @return
+     */
     public RequestStatus getNext(){
     	RequestStatus[] vals = RequestStatus.values();
     	int ordinal = this.ordinal();
@@ -40,26 +44,50 @@ public enum RequestStatus {
 //    	RequestStatus[] vals = RequestStatus.values();
 //    	return vals[vals.length-4];
 //    }
+    /**
+     * Retrieves the cancelation status
+     * @return
+     */
     public static RequestStatus getCanceled(){
     	RequestStatus[] vals = RequestStatus.values();
     	return vals[vals.length-3];
     }
+    /**
+     * Retrieves the granted status
+     * @return
+     */
     public static RequestStatus getGranted(){
     	RequestStatus[] vals = RequestStatus.values();
     	return vals[vals.length-2];
     }
+    /**
+     * Retrieves the denial status
+     * @return
+     */
     public static RequestStatus getDenied(){
     	RequestStatus[] vals = RequestStatus.values();
     	return vals[vals.length-1];
     }
+    /**
+     * Retrieves the initial status
+     * @param status
+     * @return
+     */
 	public static boolean isInit(RequestStatus status) {
 		return RequestStatus.getInit().equals(status);
 	}
 	
+	/**
+	 * Retreives the initial status
+	 * @return
+	 */
 	 public static RequestStatus getInit(){
 	    	return RequestStatus.values()[0];
 	    }
 	 
+	 /**
+	  * Retrieves the posible finalization status.
+	  */
 	 public static List<RequestStatus> getPossibleFinalStatusList(){
 		 List<RequestStatus> lst = new ArrayList<RequestStatus>();
 		 lst.add(RequestStatus.getCanceled());

@@ -123,7 +123,7 @@ public abstract class FreeDay {
     				|| this.getStatus() == FreeDayStatus.COMPLETED_SUCCESS); //status completed sucessfull
     }
     
-    
+    @Override
     public String toString(){
     	StringBuilder sb = new StringBuilder();
     	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate()));

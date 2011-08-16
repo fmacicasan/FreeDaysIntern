@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 
@@ -30,6 +31,12 @@ public class MailUtils {
 	@Autowired
     private MailSender mailSender;
 	
+	/**
+	 * Sends the simple mail message via the corresponding MailSender
+	 * @param smm
+	 * @see MailSender
+	 * @see SimpleMailMessage
+	 */
 	public void send(SimpleMailMessage smm){
 		mailSender.send(smm);
 	}
@@ -57,64 +64,64 @@ public class MailUtils {
      * @param content
      *            - Content
      */
-	//@Async
     public static void send(final String to, final String subject, final String content) {
 		//change with Executor and Runnable or some other spring thingy
     	Thread th = new Thread(){
     		
     		
     		public void run(){
-//    			SimpleMailMessage mail = new SimpleMailMessage();
-//        		mail.setTo(to);
-//        		mail.setSubject(subject);
-//        		mail.setText(content);
-//        		MailUtils mu = new MailUtils();
-//        		
-//        		mu.send(mail);
+    			SimpleMailMessage mail = new SimpleMailMessage();
+        		mail.setTo(to);
+        		mail.setSubject(subject);
+        		mail.setText(content);
+        		mail.setFrom(MailUtils.SOURCE);
+        		MailUtils mu = new MailUtils();
         		
-////    			//this.checkOperation();
-   			Properties props = new Properties();
-//////    	        props.put("mail.smtp.host", "smtp.gmail.com");
-//////    	        props.put("mail.smtp.socketFactory.port", "465");
-//////    	        props.put("mail.smtp.socketFactory.class",
-//////    	                "javax.net.ssl.SSLSocketFactory");
-//////    	        props.put("mail.smtp.auth", "true");
-//////    	        props.put("mail.smtp.port", "465");
-////    	        // props.put("mail.debug", "true");
-////    			
-////    			
-   	        props.put("mail.smtp.host", "clujservices01");
-////    	        //props.put("mail.smtp.socketFactory.port", "465");
-//////    	        props.put("mail.smtp.socketFactory.class",
-//////    	                "javax.net.ssl.SSLSocketFactory");
-   	        props.put("mail.smtp.auth", "false");
-////    	        //props.put("mail.smtp.port", "465");
-   	        props.put("mail.smtp.port", "25");
-////    	        // props.put("mail.debug", "true");
-////    	        
-//////    	        Session session = Session.getDefaultInstance(props,
-//////    	                new javax.mail.Authenticator() {
-//////    	                    protected PasswordAuthentication getPasswordAuthentication() {
-//////    	                        return new PasswordAuthentication(
-//////    	                                MailUtils.SOURCE, MailUtils.PASS);
-//////    	                    }
-//////    	                });
-   	        Session session = Session.getDefaultInstance(props, null);
-////
-    	        try {
-    	            Message message = new MimeMessage(session);
-    	            message.setFrom(new InternetAddress(MailUtils.SOURCE));
-    	            message.setRecipients(Message.RecipientType.TO,
-    	                    InternetAddress.parse(to));
-    	            message.setSubject(subject);
-    	            message.setText(content);
-    	            
-    	            //TODO: solve problem with disabled gmail account
-    	            Transport.send(message);
-
-    	        } catch (MessagingException e) {
-    	            e.printStackTrace();
-    	        }
+        		mu.send(mail);
+        		
+//////    			//this.checkOperation();
+//   			Properties props = new Properties();
+////////    	        props.put("mail.smtp.host", "smtp.gmail.com");
+////////    	        props.put("mail.smtp.socketFactory.port", "465");
+////////    	        props.put("mail.smtp.socketFactory.class",
+////////    	                "javax.net.ssl.SSLSocketFactory");
+////////    	        props.put("mail.smtp.auth", "true");
+////////    	        props.put("mail.smtp.port", "465");
+//////    	        // props.put("mail.debug", "true");
+//////    			
+//////    			
+//   	        props.put("mail.smtp.host", "clujservices01");
+//////    	        //props.put("mail.smtp.socketFactory.port", "465");
+////////    	        props.put("mail.smtp.socketFactory.class",
+////////    	                "javax.net.ssl.SSLSocketFactory");
+//   	        props.put("mail.smtp.auth", "false");
+//////    	        //props.put("mail.smtp.port", "465");
+//   	        props.put("mail.smtp.port", "25");
+//////    	        // props.put("mail.debug", "true");
+//////    	        
+////////    	        Session session = Session.getDefaultInstance(props,
+////////    	                new javax.mail.Authenticator() {
+////////    	                    protected PasswordAuthentication getPasswordAuthentication() {
+////////    	                        return new PasswordAuthentication(
+////////    	                                MailUtils.SOURCE, MailUtils.PASS);
+////////    	                    }
+////////    	                });
+//   	        Session session = Session.getDefaultInstance(props, null);
+//////
+//    	        try {
+//    	            Message message = new MimeMessage(session);
+//    	            message.setFrom(new InternetAddress(MailUtils.SOURCE));
+//    	            message.setRecipients(Message.RecipientType.TO,
+//    	                    InternetAddress.parse(to));
+//    	            message.setSubject(subject);
+//    	            message.setText(content);
+//    	            
+//    	            //TODO: solve problem with disabled gmail account
+//    	            Transport.send(message);
+//
+//    	        } catch (MessagingException e) {
+//    	            e.printStackTrace();
+//    	        }
     		}
     		
     		private void checkOperation(){

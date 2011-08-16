@@ -15,6 +15,11 @@ import freedays.app.form.FreeDayUserList;
 import freedays.domain.Request;
 import freedays.util.DateUtils;
 
+/**
+ * Controler used to intercept report related requests.
+ * @author fmacicasan
+ *
+ */
 @RequestMapping("/report")
 @Controller
 public class ReportController {

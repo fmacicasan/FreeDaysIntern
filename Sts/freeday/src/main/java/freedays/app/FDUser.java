@@ -166,6 +166,11 @@ public class FDUser extends ApplicationRegularUser {
 		 return entityManager().createQuery("SELECT COUNT(o) FROM FDUser o WHERE o.regularUser.deleted = false", Long.class).getSingleResult();
 	}
 
+	/**
+	 * Verifies weather or not the FDUser has an associated Regular User.
+	 * @param regularUser
+	 * @return
+	 */
 	public static boolean isUnassociated(RegularUser regularUser) {
 		try{
 			return RegularUser.findAllRegularUsersUnasociated().contains(regularUser);

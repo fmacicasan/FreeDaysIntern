@@ -137,6 +137,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(new FreeDayRequestConverter());
     }
 
+	/**
+	 * Hook for custom label installment
+	 */
 	@Override
 	public void afterPropertiesSet() {
         super.afterPropertiesSet();
@@ -149,6 +152,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	 *
 	 */
 	static class FDUserConverter implements Converter<FDUser, String>  {
+		/**
+		 * Converts a FDUser to it's textual representation
+		 */
         public String convert(FDUser fDUser) {
             //return new StringBuilder().append(fDUser.getHireDate()).append(" ").append(fDUser.getInitDays()).append(" ").append(fDUser.getMaxFreeDays()).toString();
         	return fDUser.toString();
@@ -162,6 +168,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	 *
 	 */
 	static class RegularUserConverter implements Converter<RegularUser, String>  {
+		/**
+		 * Converts a RegularUser to it's textual representation
+		 */
         public String convert(RegularUser regularUser) {
             //return new StringBuilder().append(regularUser.getUsername()).append(" ").append(regularUser.getPassword()).append(" ").append(regularUser.getEmail()).append(" ").append(regularUser.getSurename()).toString();
         	return regularUser.toString();
@@ -174,6 +183,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	 *
 	 */
 	static class FreeDayRequestConverter implements Converter<FreeDayRequest, String>{
+		/**
+		 * Converts a FreeDayRequest to it's textual representation
+		 */
 		@Override
 		public String convert(FreeDayRequest reqBean){
 			return reqBean.toString();

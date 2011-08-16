@@ -25,6 +25,11 @@ import freedays.domain.form.UpdateWrapper;
 import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 
+/**
+ * Controller used to intercept account related requests
+ * @author fmacicasan
+ *
+ */
 @RequestMapping("/account")
 @Controller
 @RooJavaBean

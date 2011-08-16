@@ -27,6 +27,12 @@ import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
 
+/**
+ * Controller used to intercept authentication requests generated due to the
+ * access of privileged resources.
+ * @author iteglas
+ *
+ */
 @RooJavaBean
 @Configurable
 public class AuthentificationController extends

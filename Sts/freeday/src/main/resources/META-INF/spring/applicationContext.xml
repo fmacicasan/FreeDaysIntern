@@ -90,7 +90,6 @@
         <property name="host" value="${email.host}"/>
         <property name="protocol" value="${email.protocol}"/>
         <property name="port" value="${email.port}"/>
-        <property name="username" value="${email.username}"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">false</prop>

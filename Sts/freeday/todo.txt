@@ -13,7 +13,7 @@ TODO:
 	- add Service layer instead of static method calls
 	- put security annotations on the services instead of the controllers
 	
-	- on update should also check the validity of the RegularUser
+	- DONE via the UpdateAccount wrapper!! on update should also check the validity of the RegularUser
 	- ??update a request by the FDUser???
 	- ??what if not approved and the date already passed ??
 	- visitor for permissions instead of instanceof

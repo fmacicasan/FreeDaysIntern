@@ -185,7 +185,11 @@ public class DateUtils {
 		return ls;
 	}
 	
-
+	/**
+	 * Returns the number of days in a given month
+	 * @param month between Calendar.JANUARY and Calendar.DECEMBER
+	 * @return
+	 */
 	public static int getDaysInMonth(int month) {
 		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December");
 		Calendar now = Calendar.getInstance();
@@ -200,14 +204,30 @@ public class DateUtils {
 //		}
 //	}
 
+	/**
+	 * Verifies weather or not the calendar instance is in the given month
+	 * @param date
+	 * @param month between Calendar.JANUARY and Calendar.DECEMBER
+	 * @return
+	 */
 	public static boolean isSameMonth(Calendar date, int month) {
 		return date.get(Calendar.MONTH) == month;
 	}
 
+	/**
+	 * Returs the month day of a given date
+	 * @param date
+	 * @return
+	 */
 	public static int getDay(Calendar date) {
 		return date.get(Calendar.DAY_OF_MONTH);
 	}
 
+	/**
+	 * Retrieves all the initials of the days in the corresponding month
+	 * @param month valid between Calendar.JANUARY and Calendar.DECEMBER
+	 * @return
+	 */
 	public static List<String> getWeekdayInitialsList(int month) {
 		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December");
 		List<String> ls = new ArrayList<String>();
@@ -220,10 +240,19 @@ public class DateUtils {
 		return ls;
 	}
 
+	/**
+	 * Retrieves the initial of the weekday represented by the calendar instance.
+	 * @param c
+	 * @return
+	 */
 	private static String printWeekdayInitial(Calendar c) {
 		return String.format("%1$tA", c).substring(0,1);
 	}
 
+	
+	/**
+	 * Retrieves the localized month names
+	 */
 	public static List<String> getMonthNames() {
 		Locale local =  LocaleContextHolder.getLocale();
 		String[] months = new DateFormatSymbols(local).getMonths();
@@ -239,6 +268,11 @@ public class DateUtils {
 		return c.get(Calendar.MONTH) + 1;
 	}
 
+	/**
+	 * Verifies weather or not a month is valid (between 1 and 12)
+	 * @param m
+	 * @return
+	 */
 	public static boolean isValidMonth(Integer m) {
 		if(m==null) return false;
 		m = DateUtils.transformMonth(m);//bring it between Calendar.January and Calendar.December

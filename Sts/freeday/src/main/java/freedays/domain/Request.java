@@ -225,6 +225,7 @@ public class Request   implements Serializable{
      * Textual representation of a request.
      * {@inheritDoc}
      */
+    @Override
     public String toString(){
     	StringBuilder sb = new StringBuilder();
     	sb.append(this.appreguser.getRegularUser());
