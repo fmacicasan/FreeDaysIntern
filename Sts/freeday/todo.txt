@@ -55,6 +55,8 @@ TODO:
 	- DONE - migrated to SDL account - disabled gmail accout
 	
 	- integrate with LDAP service (exchange)
+        - add mail send for user creation to FDADMIN/HRMANAGEMENT
+        
 	
 	git gui
 	
