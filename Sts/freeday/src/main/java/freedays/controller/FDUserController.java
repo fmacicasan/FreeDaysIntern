@@ -27,6 +27,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FDUserController {
 
+	/**
+	 * Handler for the creation of a new FDUser.
+	 * @param FDUser
+	 * @param bindingResult
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @return
+	 */
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid FDUser FDUser, BindingResult bindingResult,
@@ -43,6 +51,12 @@ public class FDUserController {
 						httpServletRequest);
 	}
 	
+	/**
+	 * Handler for the display of a FDUSer based on his identifier
+	 * @param id
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN') or T(freedays.app.FDUser).findFDUser(#id).regularUser.username == principal.name")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model uiModel) {
@@ -54,31 +68,56 @@ public class FDUserController {
 		return "fdusers/show";
 	}
 
+	/**
+	 * Model attribute exposed to the view containing all the application regular users.
+	 * @return
+	 */
 	@ModelAttribute("applicationregularusers")
 	public Collection<ApplicationRegularUser> populateApplicationRegularUsers() {
 		return ApplicationRegularUser.findAllRequestGranters();
 	}
 
+	/**
+	 * Model attribute exposed to the view containing all the regular user that have
+	 * no associated FDUser yet.
+	 * @return
+	 */
 	@ModelAttribute("regularusers")
 	public Collection<RegularUser> populateRegularUsers() {
 		return RegularUser.findAllRegularUsersUnasociated();
 	}
 	
+	/**
+	 * Model attribute exposed to the view deciding weather or not new FDUser-s can be created.
+	 * @return
+	 */
 	@ModelAttribute("isRenderable")
 	public boolean pupulateIsRenderable(){
 		return !populateRegularUsers().isEmpty();
 	}
 	
+	/**
+	 * Model attribute exposed to the view containing all the possible job roles.
+	 * @return
+	 */
     @ModelAttribute("jobroles")
     public Collection<JobRole> populateJobRoles() {
         return Arrays.asList(JobRole.class.getEnumConstants());
     }
 
+    /**
+	 * Model attribute exposed to the view containing all the active FDUsers.
+	 * @return
+	 */
 	@ModelAttribute("fdusers")
     public Collection<FDUser> populateFDUsers() {
         return FDUser.findAllActiveFDUsers();
     }
 
+	/**
+	 * Handler for listing the FDUsers
+	 * @return
+	 */
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
@@ -94,6 +133,10 @@ public class FDUserController {
         return "fdusers/list";
     }
 
+	/**
+	 * Handler for the update of a FDUser
+	 * @return
+	 */
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {

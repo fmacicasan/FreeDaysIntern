@@ -24,7 +24,20 @@ import freedays.validation.CheckUniqueEmailValidator;
 @Constraint(validatedBy = CheckSamePassValidator.class)
 @Documented
 public @interface SamePass {
+	/**
+	 * Specifies the error message in case of invalidity.
+	 * @return
+	 */
 	String message() default "passwords dont match!";
+	/**
+	 * Defines a group 
+	 * @return
+	 */
 	Class<?>[] groups() default {};
+	
+	/**
+	 * Specifies the severity of the constraint.
+	 * @return
+	 */
     Class<? extends Payload>[] payload() default {};
 }

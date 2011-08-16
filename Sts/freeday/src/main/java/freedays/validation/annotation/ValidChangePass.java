@@ -24,7 +24,20 @@ import freedays.validation.CheckSamePassValidator;
 @Constraint(validatedBy = CheckChangePassValidator.class)
 @Documented
 public @interface ValidChangePass {
+    /**
+	 * Specifies the error message in case of invalidity.
+	 * @return
+	 */
 	String message() default "change pass not valid pass missmatch or not equal!";
+	/**
+	 * Defines a group 
+	 * @return
+	 */
 	Class<?>[] groups() default {};
+	
+	/**
+	 * Specifies the severity of the constraint.
+	 * @return
+	 */
     Class<? extends Payload>[] payload() default {};
 }

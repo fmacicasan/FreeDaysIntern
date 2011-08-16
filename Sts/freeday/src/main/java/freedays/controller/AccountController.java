@@ -35,6 +35,13 @@ public class AccountController {
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
 
+	
+	/**
+	 * Populates the account information form.
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(method = RequestMethod.GET)
 	public String createForm(Model uiModel,
@@ -54,6 +61,13 @@ public class AccountController {
 		return "account";
 	}
 
+	/**
+	 * Persists the changes in the account info.
+	 * @param uw
+	 * @param bindingResult
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid UpdateWrapper uw, BindingResult bindingResult, Model uiModel) {
@@ -68,6 +82,11 @@ public class AccountController {
 	}
 
 	
+	/**
+	 * Retrieves the FDUser info associated to the currently logged user.
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="fduser", method = RequestMethod.GET)
 	public String viewFDuser(Model uiModel) {	
@@ -79,6 +98,11 @@ public class AccountController {
 		return "fdusers/show";
 	}
 	
+	/**
+	 * Creates a change password form.
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="changepass", method = RequestMethod.GET)
 	public String changePass(Model uiModel){
@@ -86,6 +110,13 @@ public class AccountController {
 		return "changepass";
 	}
 	
+	/**
+	 * Update the regular user information related to a password change.
+	 * @param newpass
+	 * @param bindingResult
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="changepass",method = RequestMethod.POST)
 	public String updatePass(@Valid ChangePassWrapper newpass, BindingResult bindingResult, Model uiModel) {

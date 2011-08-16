@@ -324,6 +324,9 @@ public class RegularUser implements Serializable {
 		return res;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		// sb.append("Activ: ").append(getActiv()).append(", ");
@@ -390,6 +393,9 @@ public class RegularUser implements Serializable {
 		entityManager.flush();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -414,6 +420,9 @@ public class RegularUser implements Serializable {
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

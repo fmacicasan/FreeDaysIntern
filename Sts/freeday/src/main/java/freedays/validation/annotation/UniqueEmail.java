@@ -20,7 +20,20 @@ import freedays.validation.CheckUniqueEmailValidator;
 @Constraint(validatedBy = CheckUniqueEmailValidator.class)
 @Documented
 public @interface UniqueEmail {
+	/**
+	 * Specifies the error message in case of invalidity.
+	 * @return
+	 */
 	String message() default "email not valid!";
+	/**
+	 * Defines a group 
+	 * @return
+	 */
 	Class<?>[] groups() default {};
+	
+	/**
+	 * Specifies the severity of the constraint.
+	 * @return
+	 */
     Class<? extends Payload>[] payload() default {};
 }

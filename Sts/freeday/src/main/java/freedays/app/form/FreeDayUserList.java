@@ -119,6 +119,13 @@ public class FreeDayUserList {
 		return list;
 	}
 
+	/**
+	 * Sublist based on the retrieved FreeDayUserList for the given interval of pagination
+	 * @param lfd
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	public static List<FreeDayUserList> subListFreedays(List<FreeDayUserList> lfd, int i, int j) {
 		if(i>=j) throw new IllegalArgumentException("The i parameter should be smaller than j");
 		
@@ -141,6 +148,12 @@ public class FreeDayUserList {
 		return lfdul2;
 	}
 	
+	/**
+	 * Retrieves all the free days report representations for the given FDUser in the given month
+	 * @param fdu
+	 * @param month
+	 * @return
+	 */
 	public static FreeDayUserList generateAllFreeDays(FDUser fdu,int month){
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getFullName());
@@ -160,6 +173,12 @@ public class FreeDayUserList {
 		return fdul;
 	}
 	
+	/**
+	 * Retrieves the necessary info from the created list of report representations.
+	 * @param freedays
+	 * @param month
+	 * @return
+	 */
 	private static List<FreeDayReportWrapper> tranformFreeDay2Integer4Report(List<FreeDay> freedays,int month){
 		int days = DateUtils.getDaysInMonth(month);
 		ArrayList<FreeDayReportWrapper> list = new ArrayList<FreeDayReportWrapper>();

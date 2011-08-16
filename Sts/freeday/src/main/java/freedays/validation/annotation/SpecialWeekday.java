@@ -28,7 +28,20 @@ import freedays.validation.CheckSpecialWeekdayValidator;
 @Constraint(validatedBy = CheckSpecialWeekdayValidator.class)
 @Documented
 public @interface SpecialWeekday {
+	/**
+	 * Specifies the error message in case of invalidity.
+	 * @return
+	 */
 	String message() default "Specialized date constrain!";
+	/**
+	 * Defines a group 
+	 * @return
+	 */
 	Class<?>[] groups() default {};
+	
+	/**
+	 * Specifies the severity of the constraint.
+	 * @return
+	 */
     Class<? extends Payload>[] payload() default {};
 }

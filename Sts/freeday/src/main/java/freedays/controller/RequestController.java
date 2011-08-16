@@ -50,6 +50,11 @@ public class RequestController {
 	@Autowired
 	private UserContextService userContextService;
 	
+	/**
+	 * Retrieves the TypeL registration form
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=l", method = RequestMethod.GET)
     public String createForm(Model uiModel) {
@@ -59,6 +64,12 @@ public class RequestController {
         return "requests/create";
     }
 	
+	/**
+	 * Retrieves the typeC registration form
+	 * @param uiModel
+	 * @param p
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=c", method = RequestMethod.GET)
 	public String createFormReqC(Model uiModel,Principal p){
@@ -67,6 +78,12 @@ public class RequestController {
 		return "requests/create";
 	}
 	
+	/**
+	 * Retrieves the typeR registration form
+	 * @param uiModel
+	 * @param p
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=r", method = RequestMethod.GET)
 	public String createFormReqR(Model uiModel, Principal p){
@@ -75,13 +92,26 @@ public class RequestController {
 		return "requests/create";
 	}
 	
+	/**
+	 * Retrieves the typeV registration form
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=v", method = RequestMethod.GET)
 	public String createFormReqV(Model uiModel){
 		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.V));
 		return "requests/vacation";
 	}
-		
+	
+	/**
+	 * Handler for free day request creation
+	 * @param request
+	 * @param bindingResult
+	 * @param uiModel
+	 * @param p
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
     public String create(@Valid FreeDayRequest request, BindingResult bindingResult, Model uiModel, Principal p) {
@@ -119,6 +149,14 @@ public class RequestController {
         return "redirect:/requests?own";
     }
 	
+	/**
+	 * Handler for vacation creation
+	 * @param request
+	 * @param bindingResult
+	 * @param uiModel
+	 * @param p
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="/vacation", method = RequestMethod.POST)
 	public String createVacation(@Valid FreeDayRequestVacation request, BindingResult bindingResult, Model uiModel, Principal p){
@@ -133,7 +171,12 @@ public class RequestController {
 		return "redirect:/requests?own";
 	}
 	
-	
+	/**
+	 * Handler for request evaluation upon approval
+	 * @param id
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
 	@RequestMapping(value = "/{id}", params = {"eval","approve"}, method = RequestMethod.POST)
 	public String evalRequestApprove(@PathVariable("id") Long id, Model uiModel){
@@ -145,6 +188,12 @@ public class RequestController {
 		return "redirect:/requests?approve";
 	}
 	
+	/**
+	 * Handler for request evaluation upon denial
+	 * @param id
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
 	@RequestMapping(value = "/{id}", params = {"eval","deny"}, method = RequestMethod.POST)
 	public String evalRequestDeny(@PathVariable("id") Long id, Model uiModel){
@@ -156,6 +205,12 @@ public class RequestController {
 		return "redirect:/requests?approve";
 	}
 	
+	/**
+	 * Handler for request evaluation upon cancelation
+	 * @param id
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_FDADMIN') or hasPermission(#id, 'Request', 'own')")
 	@RequestMapping(value = "/{id}", params = {"eval","cancel"}, method = RequestMethod.POST)
 	public String evalRequestCancel(@PathVariable("id") Long id, Model uiModel){
@@ -185,6 +240,12 @@ public class RequestController {
 //        uiModel.addAttribute("request_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
 //    }
     
+	/**
+	 * Handler for personal request listing
+	 * @param id
+	 * @param uiModel
+	 * @return
+	 */
 	//will find only intended requests
 	@PreAuthorize("isAuthenticated()")
     @RequestMapping(params= "own", method = RequestMethod.GET)
@@ -193,7 +254,12 @@ public class RequestController {
     	return "requests/list";
     }
     
-    
+	/**
+	 * Handler for the listing of requests in need of approval
+	 * @param id
+	 * @param uiModel
+	 * @return
+	 */
     @PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
     @RequestMapping(params= "approve", method = RequestMethod.GET)
     public String listApprove(Model uiModel, Principal p){
@@ -225,29 +291,48 @@ public class RequestController {
         return "requests/show";
     }
 	
-	
+    /**
+	 * Model attribute exposed to the view containing the number of active requests of the authenticated user.
+	 * @return
+	 */
     @ModelAttribute("activeRequestCount")
 	public long populateRemaningDaysCount(){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return Request.countActiveRequests(username);
 	}
     
+    /**
+	 * Model attribute exposed to the view containing the number of available requests of the authenticated user.
+	 * @return
+	 */
     @ModelAttribute("remainingDaysCount")
     public long populateRemainingDaysCount(){
     	String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return Request.computeAvailableFreeDays(username);
     }
     
+    /**
+	 * Model attribute exposed to the view containing the possible request types.
+	 * @return
+	 */
     @ModelAttribute("requesttypes")
     public Collection<RequestType> populateRequestTypes() {
         return Arrays.asList(RequestType.class.getEnumConstants());
     }
     
+    /**
+	 * Model attribute exposed to the view containing the possible confidence levels.
+	 * @return
+	 */
     @ModelAttribute("confidencelevels")
     public Collection<ConfidenceLevel> populateConfidenceLevels(){
     	return Arrays.asList(ConfidenceLevel.class.getEnumConstants());
     }
     
+    /**
+	 * Model attribute exposed to the view containing the default date format.
+	 * @return
+	 */
     @ModelAttribute("request_date_format")
     public String populateRequestDateFormat(){
     	return DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale());

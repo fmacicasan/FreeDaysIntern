@@ -23,7 +23,20 @@ import freedays.validation.CheckUniqueVacationPerActiveOrApprovedReqValidator;
 @Constraint(validatedBy = CheckUniqueVacationPerActiveOrApprovedReqValidator.class)
 @Documented
 public @interface UniqueVacationPerActiveOrApprovedReq {
+	/**
+	 * Specifies the error message in case of invalidity.
+	 * @return
+	 */
 	String message() default "Vacation overlaps some active/approved req!";
+	/**
+	 * Defines a group 
+	 * @return
+	 */
 	Class<?>[] groups() default {};
+	
+	/**
+	 * Specifies the severity of the constraint.
+	 * @return
+	 */
     Class<? extends Payload>[] payload() default {};
 }

@@ -41,6 +41,9 @@ public abstract class ApprovalStrategy {
      */
     public abstract ApplicationRegularUser getApprover(ApplicationRegularUser user);
     
+    /**
+     * {@inheritDoc}
+     */
 	public String toString() {
         StringBuilder sb = new StringBuilder();
         //sb.append("Id: ").append(getId()).append(", ");

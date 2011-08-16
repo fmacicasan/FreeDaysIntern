@@ -19,6 +19,13 @@ import freedays.util.DateUtils;
 @Controller
 public class ReportController {
 	
+	/**
+	 * Handler for retrieving the free days report in the day-by-day representation
+	 * @param page
+	 * @param size
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_HRMANAGEMENT')")
 	@RequestMapping(method=RequestMethod.GET)
 	public String reportFreeDays(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size,Model uiModel){
@@ -42,6 +49,12 @@ public class ReportController {
 		return "report/freedays";
 	}
 	
+	/**
+	 * Handler for retrieving the updated version of the report organized by months
+	 * @param m
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="/vacation", method=RequestMethod.GET)
 	public String reportVacationPlans(@RequestParam(value = "m", required = false) Integer m, Model uiModel){

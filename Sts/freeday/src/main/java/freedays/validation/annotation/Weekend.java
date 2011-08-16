@@ -22,7 +22,20 @@ import freedays.validation.CheckWeekendDayValidator;
 @Constraint(validatedBy = CheckWeekendDayValidator.class)
 @Documented
 public @interface Weekend {
+	/**
+	 * Specifies the error message in case of invalidity.
+	 * @return
+	 */
 	String message() default "Date must be during weekends";
+	/**
+	 * Defines a group 
+	 * @return
+	 */
 	Class<?>[] groups() default {};
+	
+	/**
+	 * Specifies the severity of the constraint.
+	 * @return
+	 */
     Class<? extends Payload>[] payload() default {};
 }

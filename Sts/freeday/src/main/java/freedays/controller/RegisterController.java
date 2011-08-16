@@ -31,6 +31,9 @@ public class RegisterController {
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
 
+	/**
+	 * Handler for creating a new regular user (signup procesS)
+	 */
 	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid SignupWrapper regularUser,
@@ -51,6 +54,11 @@ public class RegisterController {
 
 	}
 
+	/**
+	 * Handler for retrieving the update form
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method = RequestMethod.GET)
 	public String createForm(Model uiModel) {
@@ -58,16 +66,4 @@ public class RegisterController {
 		return "register";
 	}
 
-	private String encodeUrlPathSegment(String pathSegment,
-			HttpServletRequest httpServletRequest) {
-		String enc = httpServletRequest.getCharacterEncoding();
-		if (enc == null) {
-			enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
-		}
-		try {
-			pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
-		} catch (UnsupportedEncodingException uee) {
-		}
-		return pathSegment;
-	}
 }

@@ -32,6 +32,11 @@ import org.springframework.web.util.WebUtils;
 @Controller
 public class RegularUserController {
 
+	/**
+	 * Handler for  retrieving the search form
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(params = "search", method = RequestMethod.GET)
 	public String createSearch(Model uiModel) {
@@ -44,6 +49,14 @@ public class RegularUserController {
 		return "regularusers/search";
 	}
 
+	/**
+	 * Handler for posting a search request
+	 * @param search
+	 * @param bindingResult
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(params = "search", method = RequestMethod.POST)
 	public String doSearch(@Valid Search search, BindingResult bindingResult,
@@ -102,6 +115,14 @@ public class RegularUserController {
         return "redirect:/regularusers";
     }
 	
+	/**
+	 * Handler for creating a new regular user (by a admnistrator)
+	 * @param regularUser
+	 * @param bindingResult
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN') or !isAuthenticated()")
 	@RequestMapping(method = RequestMethod.POST)
     public String create(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -128,6 +149,15 @@ public class RegularUserController {
         }
         
 	}
+	
+	/**
+	 * Handler for updating the information associated with a regular user
+	 * @param regularUser
+	 * @param bindingResult
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasPermission(#regularUser,'own')")
 	@RequestMapping(method = RequestMethod.PUT)
     public String update(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -146,6 +176,12 @@ public class RegularUserController {
 
 
 
+	/**
+	 * Handler for displaying a regular user based on his identifier
+	 * @param id
+	 * @param uiModel
+	 * @return
+	 */
 	@PostAuthorize("hasRole('ROLE_ADMIN') or hasPermission(#id,'RegularUser', 'own')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model uiModel) {

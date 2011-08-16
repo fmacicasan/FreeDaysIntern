@@ -41,6 +41,10 @@ public class Search {
 		return StringUtils.hasText(this.searchKey) && StringUtils.hasText(this.searchValue);
 	}
 	
+	/**
+	 * Verifies invalidity of the search object
+	 * @return
+	 */
 	public boolean isNotValid(){
 		return !isValid();
 	}

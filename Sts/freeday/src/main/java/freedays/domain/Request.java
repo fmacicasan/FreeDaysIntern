@@ -222,6 +222,7 @@ public class Request   implements Serializable{
     }
     
     /**
+     * Textual representation of a request.
      * {@inheritDoc}
      */
     public String toString(){

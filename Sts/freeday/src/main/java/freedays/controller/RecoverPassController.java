@@ -18,6 +18,11 @@ import freedays.domain.form.ResetPass;
 @Controller
 public class RecoverPassController {
 
+	/**
+	 * Handler for retrieving the reset pass form
+	 * @param uiModel
+	 * @return
+	 */
 	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method=RequestMethod.GET)
 	public String createRecoverPass(Model uiModel){
@@ -25,6 +30,14 @@ public class RecoverPassController {
 		return "recoverpass";
 	}
 	
+	/**
+	 * Handler for posting the change password request
+	 * @param resetpass
+	 * @param bindingResult
+	 * @param uiModel
+	 * @param httpServletRequest
+	 * @return
+	 */
 	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method=RequestMethod.POST)
 	public String recoverPass(@Valid ResetPass resetpass, BindingResult bindingResult,
