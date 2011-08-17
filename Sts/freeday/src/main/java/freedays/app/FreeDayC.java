@@ -38,7 +38,9 @@ import freedays.validation.annotation.BusinessDay;
 public class FreeDayC extends FreeDaysRCMatch {
 
     @NotNull
-    @Future
+  //@Future removed to solve IN-105 request creation is still restricted from the wrapper but in the backend
+    //such entities should be matched so they will be processed some time in the future with an already specified
+    //date
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
     @BusinessDay

@@ -60,7 +60,7 @@ TODO:
 	- la sfarsitul zilei sa verific zilele under approval ce inca nu au fost aprobate
 	
 	- transaction fails if the date to be matched is in the Past
-	- SOLVED FDUser update will fail due to invalid regular user
+	- DONE FDUser update will fail due to invalid regular user
         
 	
 	git gui
