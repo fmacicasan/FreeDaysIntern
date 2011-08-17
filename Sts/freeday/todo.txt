@@ -15,7 +15,7 @@ TODO:
 	
 	- DONE via the UpdateAccount wrapper!! on update should also check the validity of the RegularUser
 	- ??update a request by the FDUser???
-	- ??what if not approved and the date already passed ??
+	- ??what if not approved and the date already passed ?? CANCEL IT!
 	- visitor for permissions instead of instanceof
 	
 	- DONE change register/recoverpass/change pass change info/ login process and password encryption
@@ -56,8 +56,11 @@ TODO:
 	
 	- integrate with LDAP service (exchange)
     - add mail send for user creation to FDADMIN/HRMANAGEMENT
-	- mail raport doar ziua curenta
+	- DONE mail raport doar ziua curenta
 	- la sfarsitul zilei sa verific zilele under approval ce inca nu au fost aprobate
+	
+	- transaction fails if the date to be matched is in the Past
+	- SOLVED FDUser update will fail due to invalid regular user
         
 	
 	git gui

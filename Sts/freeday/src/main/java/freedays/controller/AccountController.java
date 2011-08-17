@@ -102,9 +102,6 @@ public class AccountController {
 		uiModel.addAttribute("fduser_col", fdu.getRoles());
 		uiModel.addAttribute("itemId", fdu.getId());
 		
-		FreeDayScheduleServiceImpl t = new FreeDayScheduleServiceImpl();
-		t.reportFreeDays();
-		
 		return "fdusers/show";
 	}
 	

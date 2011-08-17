@@ -27,10 +27,12 @@ public class UserContextServiceImlp implements UserContextService{
 
 	@Override
 	public boolean hasRole(String role) {
-		Collection<GrantedAuthority> auth = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		for (GrantedAuthority ga : auth) {
-			if(ga.getAuthority().equals(role))return true;
-		}
+		try{
+			Collection<GrantedAuthority> auth = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+			for (GrantedAuthority ga : auth) {
+				if(ga.getAuthority().equals(role))return true;
+			}
+		}catch(NullPointerException e){}
 		return false;
 		
 	}

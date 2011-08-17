@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -29,7 +31,7 @@ public class MailUtils {
 	private static final String SOURCE = "internlwtest@sdl.com";
     
 	@Autowired
-    private MailSender mailSender;
+    private JavaMailSenderImpl mailSender;
 	
 	/**
 	 * Sends the simple mail message via the corresponding MailSender
@@ -40,6 +42,23 @@ public class MailUtils {
 	public void send(SimpleMailMessage smm){
 		mailSender.send(smm);
 	}
+	
+	public void sendHtmlMsg(final String to, final String subject, final String content){
+    	MimeMessage mm = mailSender.createMimeMessage();
+    	MimeMessageHelper helper = new MimeMessageHelper(mm);
+    	try {
+			helper.setTo(to);
+			helper.setFrom(MailUtils.SOURCE);
+			helper.setSubject(subject);
+			helper.setText(content, true);
+			mailSender.send(mm);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+	
 //	@Autowired
 //    private transient MailSender mailSender;
 //
@@ -140,6 +159,23 @@ public class MailUtils {
 
     	};
     	th.start();
-    } 
     }
+    
+    public static void sendHtml(final String to, final String subject, final String content) {
+		//change with Executor and Runnable or some other spring thingy
+    	Thread th = new Thread(){
+    		
+    		@Override
+    		public void run(){
+        		MailUtils mu = new MailUtils();
+        		
+        		mu.sendHtmlMsg(to,subject,content);
+    		}
+
+
+    	};
+    	th.start();
+    }
+    
+}
     

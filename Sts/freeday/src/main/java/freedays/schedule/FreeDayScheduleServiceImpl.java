@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
+import freedays.app.form.FreeDayUserList;
 import freedays.controller.ReportController;
 import freedays.util.DateUtils;
 import freedays.util.MailUtils;
@@ -30,39 +31,81 @@ import freedays.util.MailUtils;
 @RooJavaBean
 public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 
-	@Autowired
-	ApplicationContext applicationContext;
+	public static final String SUBJECT = "DailyReport";
+//	@Autowired
+//	ApplicationContext applicationContext;
 	
+	@Autowired
+	private String reportDestinationAddress;
+	
+	//don't use annotation due to double discovery by both the web and the app context
 	//@Scheduled(cron="0 * * * * MON-FRI")
 	@Override
 	public void reportFreeDays() {
 //		MockHttpServletRequest request = new MockHttpServletRequest();
 //		MockHttpServletResponse response = new MockHttpServletResponse();
-//		HandlerAdapter handlerAdapter = applicationContext.getBean(SimpleControllerHandlerAdapter.class);
-		ReportController rc = applicationContext.getBean(ReportController.class);
-		Model uiModel = new BindingAwareModelMap();
-		String view = rc.reportVacationPlans(DateUtils.getCurrentMonth(), uiModel);
-		ModelAndView mav = new ModelAndView(view,uiModel.asMap());
-		ViewResolver vr = applicationContext.getBean(UrlBasedViewResolver.class);
-		try {
-			View resolvedView = vr.resolveViewName(view, LocaleContextHolder.getLocale());
-			System.out.println(resolvedView.getContentType());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+//		HandlerAdapter handlerAdapter = new AnnotationMethodHandlerAdapter();
+//		request.setMethod("GET");
+//		request.setRequestURI("/report/vacation");
+//		request.setParameter("m", DateUtils.getCurrentMonth().toString());
+//		ReportController rc = applicationContext.getBean(ReportController.class);
+//		Map<String,Object> uiModel;
 //		try {
-//			final ModelAndView mav = handlerAdapter.handle(request, response, rc);
-//		} catch (Exception e) {
-//			System.out.println("naspa");
-//			e.printStackTrace();
+//			ModelAndView mav = handlerAdapter.handle(request, response, rc);
+//			uiModel = mav.getModel();
+//		String view = mav.getViewName();
+//		View v = new InternalResourceView("views/report/vacation.jspx");
+//		View vv = new InternalResourceView("WEB-INF/views/report/vacation.jspx");
+//		View vvv = new InternalResourceView("webapp/WEB-INF/views/report/vacation.jspx");
+//		View vvvv = new InternalResourceView("report/vacation.jspx");
+//		
+//		View vw = new InternalResourceView("/WEB-INF/views/report/vacation.jspx");
+//		
+//		
+//		//UrlBasedViewResolver irvr = new UrlBasedViewResolver();
+//		UrlBasedViewResolver irvr = (UrlBasedViewResolver) applicationContext.getBean("tilesViewResolver2");
+////		irvr.setViewClass(JstlView.class);
+////		irvr.setPrefix("/WEB-INF/views/");
+////		irvr.setSuffix(".jspx");
+////		irvr.setApplicationContext(applicationContext);
+////		irvr.setAttributesMap(uiModel);
+////		irvr.setServletContext(servletContext);
+//		try {
+//			View asd = irvr.resolveViewName(view, LocaleContextHolder.getLocale());
+//			System.out.println(asd.getContentType());
+//		
+//		
+//			v.getContentType();
+//			System.out.println(v.getContentType());
+//			Map<String,Object> m = uiModel;
+//			for (Entry<String, Object> ie : m.entrySet()) {
+//				request.setAttribute(ie.getKey(), ie.getValue());
+//			}
+//			
+//				asd.render(null, request, response);
+//				System.out.println(response.getContentAsString());
+//				System.out.println(response.getContentType());
+//				System.out.println(response.getContentAsByteArray());
+//				System.out.println(response.getHeaderNames());
+//				System.out.println(response.getStatus());
+//				System.out.println(response.getContentLength());
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
 //		}
 		
+		int m = DateUtils.getCurrentMonth();
+		String month1 = FreeDayUserList.generateHtmlReport(m);
+		String month2 = FreeDayUserList.generateHtmlReport(m+1);
 		
 		
-		MailUtils.send("fmacicasan@sdl.com", "TestSchedule", "You will be scheduleed");
-		MailUtils.send("mcodrea@sdl.com", "TestSchedule", "You will be scheduleed");
+		
+		MailUtils.sendHtml(this.getReportDestinationAddress(), FreeDayScheduleServiceImpl.SUBJECT, month1+"<br/>"+month2);
 		
 	}
 

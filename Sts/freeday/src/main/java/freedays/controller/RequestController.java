@@ -14,7 +14,6 @@ import freedays.app.FDUser;
 import freedays.app.FreeDay;
 import freedays.app.FreeDayC;
 import freedays.app.FreeDayR;
-import freedays.app.FreeDayRCMatchable;
 import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequestVacation;

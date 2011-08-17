@@ -214,6 +214,125 @@ public class FreeDayUserList {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * @param m between 1 and 12
+	 * @return
+	 */
+	public static String generateHtmlReport(int m){
+		int month = DateUtils.transformMonth(m);
+		List<FreeDayUserList> lfd = FreeDay.getAllUserFreeDays(month);
+		int daysinmonth = DateUtils.getDaysInMonth(month);
+		List<String> shortDateList = DateUtils.getShortDateList(month);
+		List<String> weekdayinitials = DateUtils.getWeekdayInitialsList(month);
+		List<String> monthnames = DateUtils.getMonthNames();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("<style>")
+		.append(".legr,.legy,.legg,.lego{display: inline;margin: 0.5%;}")
+		.append(".colr,.legr{background-color: red;}")
+		.append(".coly,.legy{background-color: yellow;}")
+		.append(".colg,.legg{background-color: aqua;}")
+		.append(".colo,.lego{background-color: orange;}")
+		.append(".report{text-align: center;}")
+		.append("tr:nth-child(odd) {background-color: #FFFFFF;}")
+		.append("tr:nth-child(even) {background-color: #EFEFEF;}")
+		.append("table {background: #EEEEEE;margin: 2px 0 0 0;border: 1px solid #BBBBBB;border-collapse: collapse;width: 100%}")
+		.append("table table {margin: -5px 0;border: 0px solid #e0e7d3;width: 100%;}")
+		.append("table td,table th {padding: 2px;border: 1px solid #CCCCCC;}")
+		.append("table {background: #EEEEEE;margin: 2px 0 0 0;border: 1px solid #BBBBBB;border-collapse: collapse;width: 100%}")
+		.append("#footer {background:#fff;border:none;margin-top:15px;border-top:1px solid #999999;}")
+		.append(".monthfooter{width : 8%;display: inline;text-align: center;float : left;}")
+		.append("</style>");
+		sb.append("<table class='report'>");
+			sb.append("<thead>");
+				sb.append("<tr>");
+					sb.append("<th rowspan='2'>Name</th>");
+					sb.append("<th rowspan='2'>Role</th>");
+					sb.append("<th colspan='2'>Remaining Days</th>");
+					for(int i=0;i<daysinmonth;i++){
+						sb.append("<th>").append(weekdayinitials.get(i)).append("</th>");
+					}
+	   			sb.append("</tr>");
+	   			sb.append("<tr>");
+	   				sb.append("<th>Covered Days</th>");
+	   				sb.append("<th>Remaining Legal</th>");
+	   				for(int i=0;i<daysinmonth;i++){
+	   					//consider also split('.') rather than substring
+	   					sb.append("<th>").append(shortDateList.get(i).substring(0, 2)).append("</th>");
+	   				}
+       			sb.append("</tr>");	
+			sb.append("</thead>");
+			for (FreeDayUserList fdul : lfd) {
+				sb.append("<tr>");
+				sb.append("<td>").append(fdul.getUser()).append("</td>");
+				sb.append("<td>").append(fdul.getJobrole()).append("</td>");
+				sb.append("<td>").append(fdul.getRemainingdays()).append("</td>");
+				sb.append("<td>").append(fdul.getTotaldaysleft()).append("</td>");
+				for(int i=0;i<daysinmonth;i++){
+					FreeDayReportWrapper fdrw = fdul.getCombined().get(i);
+					if(fdrw.getStatus()!=null){
+						String dispclass = "";
+	   					switch(fdrw.getType()){
+		   					case 1:
+		   						dispclass="colg";
+		   						break;
+		   					case 2:
+		   						dispclass="coly";
+		   						break;
+		   					case 3:
+		   						dispclass="colo";
+		   						break;
+		   					case 4:
+		   						dispclass="colr";
+		   						break;
+		   					default:
+		   						dispclass="";
+	   					}
+	   					sb.append("<td align='center' class='")
+	   					.append(dispclass).append("'>")
+	   					.append(fdrw.getStatus())
+	   					.append("</td>");
+					} else {
+						sb.append("<td></td>");
+					}
+   				}
+				sb.append("</tr>");
+			}
+//			sb.append("<tr class='footer' >");
+//				sb.append("<td style='display : inline;' colspan='").append(daysinmonth+4).append("'>");
+//					for(int i=0;i<11;i++){
+//						sb.append("<div style='width : 8%;text-align: center;float : left;' >");
+//							if(i+1==m){
+//								sb.append("<b>").append(monthnames.get(i)).append("</b> ");
+//							} else {
+//								sb.append(monthnames.get(i));
+//							}
+//		       			sb.append("</div>");
+//					}
+//				sb.append("</td>");
+//	   		sb.append("</tr>");
+//			sb.append("<tr class='footer' >");
+//				sb.append("<td colspan='").append(daysinmonth+4).append("'>");
+//					sb.append("<i><b>Legend:</b></i> C=completed W=waiting I=inProgress <div class='legr'>Vacation</div> <div class='legg'>Legal</div> <div class='legy'>Cerere</div> <div class='lego'>Recover</div>");
+//				sb.append("</td>");
+//       		sb.append("</tr>");
+			sb.append("<tr class='footer' >");
+				sb.append("<td align='center' colspan='").append(daysinmonth+4).append("'>");
+					sb.append("<b>").append(monthnames.get(m-1)).append("</b> ");
+				sb.append("</td>");
+	   		sb.append("</tr>");
+			sb.append("<tr class='footer' >");
+				sb.append("<td colspan='").append(daysinmonth+4).append("'>");
+					sb.append("<i><b>Legend:</b></i> C=completed W=waiting I=inProgress Red=Vacation Blue=Legal Yellow=Cerere Orange=Recover");
+				sb.append("</td>");
+	   		sb.append("</tr>");
+		sb.append("</table>");
+		
+		
+		return sb.toString();
+	}
+	
 	
 	
 	

@@ -3,15 +3,15 @@
 
 package freedays.util;
 
-import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 privileged aspect MailUtils_Roo_JavaBean {
     
-    public MailSender MailUtils.getMailSender() {
+    public JavaMailSenderImpl MailUtils.getMailSender() {
         return this.mailSender;
     }
     
-    public void MailUtils.setMailSender(MailSender mailSender) {
+    public void MailUtils.setMailSender(JavaMailSenderImpl mailSender) {
         this.mailSender = mailSender;
     }
     

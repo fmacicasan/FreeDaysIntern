@@ -151,4 +151,18 @@ public class FDUserController {
         addDateTimeFormatPatterns(uiModel);
         return "fdusers/update";
     }
+
+	@RequestMapping(method = RequestMethod.PUT)
+    public String update(@Valid FDUser fdu, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("FDUser", fdu);
+            addDateTimeFormatPatterns(uiModel);
+            return "fdusers/update";
+        }
+        uiModel.asMap().clear();
+        FDUser back = FDUser.findFDUser(fdu.getId());
+        fdu.setRegularUser(back.getRegularUser());
+        fdu.merge();
+        return "redirect:/fdusers/" + encodeUrlPathSegment(fdu.getId().toString(), httpServletRequest);
+    }
 }
