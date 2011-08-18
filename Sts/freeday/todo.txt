@@ -75,9 +75,24 @@ TODO:
 	- DONE solve the minor bugs discovered that will enter in this realease
 	- DONE add new DB users & schemas for release & marcel
 	- DONE configure the release machine (tomcat)
-	- create "empty" db import.sql
+	- DONEcreate "empty" db import.sql
 	- create the git TAG
-	- write some user guidelines
-	- mail I+B+Some1Elese with info
+	- DONEwrite some user guidelines
+	- DONE mail I+B+Some1Elese with info Florina&Dan
+	
+	IMPROVEMENTS:
+	
+	Florina:
+		- change page displayed after register with some info
+		- send mail to admn after register for account processing
+		- send mail to user after account is processed
+		- change submit name for the button with Login
+	
+	Bogdan:
+		1)	Calendar – see attached – the Month and the days of the week, would be best to be described in words (August or Aug and Mon or M)
+		2)	Calendar – If possible – if you can color code the weekends in a different shade or color I think it would improve the efficiency
+		3)	Once you figure out how to modify the form dynamically, I believe all 4 type of request links can be merged into one, and based on the Type of the request… to modify the input fields. It will create less confusion.
+		4)	The approved email has no formatting
+
 	
 	
