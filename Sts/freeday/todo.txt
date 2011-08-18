@@ -73,8 +73,8 @@ TODO:
 	
 	RELEASE TODO:
 	- DONE solve the minor bugs discovered that will enter in this realease
-	- configure the release machine (tomcat)
-	- add new DB users & schemas for release & marcel
+	- DONE add new DB users & schemas for release & marcel
+	- DONE configure the release machine (tomcat)
 	- create "empty" db import.sql
 	- create the git TAG
 	- write some user guidelines

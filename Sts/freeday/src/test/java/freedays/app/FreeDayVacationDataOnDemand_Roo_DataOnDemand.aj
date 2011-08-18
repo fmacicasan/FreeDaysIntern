@@ -37,7 +37,7 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
     }
     
     public void FreeDayVacationDataOnDemand.setBeginning(FreeDayVacation obj, int index) {
-        Calendar beginning = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
+        Calendar beginning = Calendar.getInstance();
         obj.setBeginning(beginning);
     }
     

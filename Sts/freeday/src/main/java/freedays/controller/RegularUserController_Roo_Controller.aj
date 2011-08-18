@@ -34,7 +34,7 @@ privileged aspect RegularUserController_Roo_Controller {
 	
 	
 	    
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FDADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public String RegularUserController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
