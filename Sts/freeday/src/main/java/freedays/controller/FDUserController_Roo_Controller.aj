@@ -8,42 +8,17 @@ import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
 import java.io.UnsupportedEncodingException;
-import java.lang.Integer;
-import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect FDUserController_Roo_Controller {
-    
-    @RequestMapping(params = "form", method = RequestMethod.GET)
-    public String FDUserController.createForm(Model uiModel) {
-        uiModel.addAttribute("FDUser", new FDUser());
-        addDateTimeFormatPatterns(uiModel);
-        return "fdusers/create";
-    }
-    
-        
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String FDUserController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        FDUser.findFDUser(id).remove();
-        uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/fdusers";
-    }
     
     @ModelAttribute("advanceduserroles")
     public Collection<AdvancedUserRole> FDUserController.populateAdvancedUserRoles() {

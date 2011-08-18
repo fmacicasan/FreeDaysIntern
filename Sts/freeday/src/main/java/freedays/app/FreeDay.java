@@ -110,7 +110,9 @@ public abstract class FreeDay {
      * @return true if the FreeDay can be canceled.
      */
     public boolean isCancelable() {
-		return this.getDate().after(Calendar.getInstance()); //in future
+    	//can be canceled if represents a date in the future
+    	//or today
+		return this.getDate().compareTo(Calendar.getInstance()) >= 0; //in future
 	}
     
     /**
@@ -127,10 +129,10 @@ public abstract class FreeDay {
     public String toString(){
     	StringBuilder sb = new StringBuilder();
     	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate()));
-    	sb.append(" reason -> ");
+    	sb.append(" reason: ");
     	sb.append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
-    	sb.append(" int status " + this.getStatus());
-    	sb.append("of type ").append(this.getType());
+    	sb.append(" type").append(this.getType());
+    	sb.append(" (").append(this.getStatus()).append(")");
     	//sb.append(String.format("%1$te.%1$tb", this.getDate()));
     	return sb.toString();
     }
@@ -352,6 +354,21 @@ public abstract class FreeDay {
 	public boolean verifyUniqueness(Calendar date){
 		if(date == null)  throw new IllegalArgumentException("The date argument is required");
 		return this.getDate().equals(date);
+	}
+
+	/**
+	 * Counts all the type C free days that are under approval or already approved
+	 * associated with a request made by the provided FDUser
+	 * @param fdUser
+	 * @return
+	 */
+	public static long countAllNotFailedTypeCRequestsByFDUser(FDUser fdUser) {
+		if (fdUser == null) throw new IllegalArgumentException("The fdUser argument is required");
+		EntityManager em = FreeDay.entityManager();
+		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDayC o, Request r WHERE r.appreguser = :fdUser AND r.requestable = o AND o.status != :completedfailure", Long.class);
+        q.setParameter("fdUser", fdUser);
+        q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        return q.getSingleResult(); 
 	}
 	
 	

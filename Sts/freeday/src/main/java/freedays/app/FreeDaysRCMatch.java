@@ -97,7 +97,7 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 		this.setMatch(match);
 		if(match != null){
 			match.setInitStatus();
-			match.persist();
+			match.merge();
 		}
 	}
 	

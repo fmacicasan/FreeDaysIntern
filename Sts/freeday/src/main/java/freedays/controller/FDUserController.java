@@ -60,7 +60,7 @@ public class FDUserController {
 	 * @param uiModel
 	 * @return
 	 */
-	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN') or T(freedays.app.FDUser).findFDUser(#id).regularUser.username == principal.name")
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model uiModel) {
 		addDateTimeFormatPatterns(uiModel);
@@ -152,6 +152,7 @@ public class FDUserController {
         return "fdusers/update";
     }
 
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.PUT)
     public String update(@Valid FDUser fdu, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -164,5 +165,23 @@ public class FDUserController {
         fdu.setRegularUser(back.getRegularUser());
         fdu.merge();
         return "redirect:/fdusers/" + encodeUrlPathSegment(fdu.getId().toString(), httpServletRequest);
+    }
+
+	@PreAuthorize("hasRole('ROLE_HRMANAGEMENT') or hasRole('ROLE_FDADMIN')")
+    @RequestMapping(params = "form", method = RequestMethod.GET)
+    public String createForm(Model uiModel) {
+        uiModel.addAttribute("FDUser", new FDUser());
+        addDateTimeFormatPatterns(uiModel);
+        return "fdusers/create";
+    }
+
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        FDUser.findFDUser(id).remove();
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/fdusers";
     }
 }

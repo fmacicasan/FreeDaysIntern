@@ -3,14 +3,16 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_freedays_app_FDUser" items="${fdusers}" z="QjU3+dY5f3A2jsizI+UZ8p2Jqr0=">
-        <table:table data="${fdusers}" id="l_freedays_app_FDUser"  path="/fdusers" z="/RqxFE5KSxYtz/LFYr+/v+qoXsk=">
-            <table:column id="c_freedays_app_FDUser_regularUser" property="regularUser" z="Szxe0G4Ug/EvpEX22jskBuZW2TA="/>
-            <table:column id="c_freedays_app_FDUser_roles" property="roles" z="32vDJg2+Ni8hx7bLB0ke9uf6JoM="/>
-            <table:column id="c_freedays_app_FDUser_granter" property="granter" z="QEkqapRbUB5tXhRKHBN05Ke0jks="/>
-            <table:column calendar="true" dateTimePattern="${FDUser_hiredate_date_format}" id="c_freedays_app_FDUser_hireDate" property="hireDate" z="ELNPT8eF/Tam7iVSCXaV79dChnI="/>
-            <table:column id="c_freedays_app_FDUser_requests" property="requests" z="aNDoJyOtBR9B3eTw3nROuN/NRFE="/>
+        <table:table data="${fdusers}" id="l_freedays_app_FDUser"  path="/fdusers" z="user-managed">
+            <table:column maxLength="-1" id="c_freedays_app_FDUser_regularUser" property="regularUser" z="user-managed"/>
             <table:column id="c_freedays_app_FDUser_jobrole" property="jobrole" z="user-managed"/>
+            <table:column calendar="true" dateTimePattern="${FDUser_hiredate_date_format}" id="c_freedays_app_FDUser_hireDate" property="hireDate" z="user-managed"/>
+            <table:column id="c_freedays_app_FDUser_initDays" property="initDays" z="user-managed" />
+            <table:column id="c_freedays_app_FDUser_maxFreeDays" property="maxFreeDays" z="user-managed" />
             <table:column id="c_freedays_app_FDUser_maxderogation" property="maxDerogation" z="user-managed" />
+            <table:column maxLength="-1" id="c_freedays_app_FDUser_roles" property="roles" z="user-managed"/>
+            <table:column maxLength="-1" id="c_freedays_app_FDUser_granter" property="granter" z="user-managed"/>
+			<table:column render="false" id="c_freedays_app_FDUser_requests" property="requests" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

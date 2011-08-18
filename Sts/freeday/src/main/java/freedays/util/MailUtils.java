@@ -144,18 +144,18 @@ public class MailUtils {
 //    	        }
     		}
     		
-    		private void checkOperation(){
-    			System.out.println(" I Will be formatting html mail and sending it  ");
-				try {
-				Thread.sleep(5000);
-		
-				} catch (InterruptedException e) {
-		
-				e.printStackTrace();
-				}
-		
-				System.out.println(" Asynchronous method call of send email � Complete ");
-    		}
+//    		private void checkOperation(){
+//    			System.out.println(" I Will be formatting html mail and sending it  ");
+//				try {
+//				Thread.sleep(5000);
+//		
+//				} catch (InterruptedException e) {
+//		
+//				e.printStackTrace();
+//				}
+//		
+//				System.out.println(" Asynchronous method call of send email � Complete ");
+//    		}
 
     	};
     	th.start();

@@ -40,7 +40,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class FreeDayVacation extends FreeDay {
 
     @NotNull
-    @Future
+  //@Future removed to solve IN-105 request creation is still restricted from the wrapper but in the backend
+    //such entities should be matched so they will be processed some time in the future with an already specified
+    //date
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
     private Calendar beginning;
@@ -93,8 +95,8 @@ public class FreeDayVacation extends FreeDay {
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Vacation Request:");
-		sb.append(" from->").append(DateUtils.printShortDate(this.getDate()));
-		sb.append(" to->").append(DateUtils.printShortDate(DateUtils.dateAddDay(this.getDate(), this.getSpan())));
+		sb.append(" from ").append(DateUtils.printShortDate(this.getDate()));
+		sb.append(" to ").append(DateUtils.printShortDate(DateUtils.dateAddDay(this.getDate(), this.getSpan())));
 		return sb.toString();
 	}
 	

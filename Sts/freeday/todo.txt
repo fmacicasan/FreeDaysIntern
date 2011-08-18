@@ -57,12 +57,27 @@ TODO:
 	- integrate with LDAP service (exchange)
     - add mail send for user creation to FDADMIN/HRMANAGEMENT
 	- DONE mail raport doar ziua curenta
-	- la sfarsitul zilei sa verific zilele under approval ce inca nu au fost aprobate
+	- DONE la sfarsitul zilei sa verific zilele under approval ce inca nu au fost aprobate
 	
-	- transaction fails if the date to be matched is in the Past
+	- DONE transaction fails if the date to be matched is in the Past
+		- DONE removed annotation(L&V) - same with any update to a @Future column that are made when that date represents past
+		- DONE removed annotation - typeL solve this somehow!!
 	- DONE FDUser update will fail due to invalid regular user
-        
 	
+	- change register redirect to some page stating that the account is under processing and he will receive some mail confirmation when he can start using the service
+    - add javadoc generation
+	- DONE with push in - problem at securing the controller handlers in the aspects
+	- DONE provide some info for the approver
+	- add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
 	git gui
+	
+	RELEASE TODO:
+	- DONE solve the minor bugs discovered that will enter in this realease
+	- configure the release machine (tomcat)
+	- add new DB users & schemas for release & marcel
+	- create "empty" db import.sql
+	- create the git TAG
+	- write some user guidelines
+	- mail I+B+Some1Elese with info
 	
 	

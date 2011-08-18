@@ -17,5 +17,4 @@
     <c:if test="${not isRenderable}">
     	<spring:message code="default_fduser_no_regularuser"  />
     </c:if>
-    <jsp:expression>new java.text.SimpleDateFormat("mm-dd-yyyy").format(java.util.Calendar.getInstance().getTime())</jsp:expression>
 </div>

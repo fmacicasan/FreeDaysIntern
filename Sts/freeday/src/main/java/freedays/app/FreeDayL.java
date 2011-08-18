@@ -34,7 +34,8 @@ import javax.persistence.ManyToOne;
 public class FreeDayL extends FreeDay {
 
     @NotNull
-    @Future
+  //@Future removed to solve IN-105 request creation is still restricted from the wrapper but in the backend
+    //such entities should be processed (autoDeny) if the date they represent becomes past
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
     @BusinessDay

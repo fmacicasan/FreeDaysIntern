@@ -46,9 +46,10 @@ public class Request   implements Serializable{
 	private static final String FD_INFORM_SUBJECT = "FreeDays - Status Information";
 	
 	private static final String FD_APPROVAL_REQ_CONTENT = "Hello! you have new Request to approve!!\n";
-	private static final String FD_INFORM_CONTENT_DENY = "Your Request not approved!";
+	private static final String FD_INFORM_CONTENT_DENY = "Your Request was denied!";
 	private static final String FD_INFORM_CONTENT_APPROVE = "Your Request approved!";
 	private static final String FD_INFORM_CONTENT_CANCEL = "Request canceled!";
+	private static final String FD_INFORM_CONTENT_AUTODENY="Your Request was automatically denied!";
 	
 	public static boolean DEBUG = false;
     
@@ -101,6 +102,15 @@ public class Request   implements Serializable{
     public void deny(){
     	setDenyStatus();
     	informDenyRequest();
+    }
+    
+    /**
+     * Automatically denies a request if it's associated
+     * requestable object passed it's intended date
+     */
+    public void autoDeny(){
+    	setDenyStatus();
+    	informAutoDenyRequest();
     }
      
     /**
@@ -203,6 +213,15 @@ public class Request   implements Serializable{
     private void informDenyRequest(){
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_DENY);
+    	}	
+    }
+    
+    /**
+     * Constructs an automatic denial message to be sent via email
+     */
+    private void informAutoDenyRequest(){
+    	if(!Request.DEBUG){
+    		this.informRequest(Request.FD_INFORM_CONTENT_AUTODENY);
     	}	
     }
     
@@ -433,6 +452,31 @@ public class Request   implements Serializable{
 	public static long computeAvailableFreeDays(String username) {
 		FDUser aru = FDUser.findFDUserByUsername(username);
 		return aru.computeAvailableFreeDays();
+	}
+	
+	/**
+	 * Computes the remainnig derogation of the FDUser associated with
+	 * the regular user identified by the provided username
+	 * @param username
+	 * @return
+	 */
+	public static long computeAvailableDerogations(String username) {
+		FDUser aru = FDUser.findFDUserByUsername(username);
+		return aru.computeAvailableDerogations();
+	}
+	
+	/**
+	 * Retrieves all the requests of a regular user identified by its username
+	 * that are under the approval mechanism.
+	 * @param username
+	 * @return
+	 */
+	public static List<Request> findAllPendingApprovals() {
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.status NOT IN :finishstates ", Request.class);
+        //TODO: change the searched status only for the ones that need approval
+        q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
+        return q.getResultList();
 	}
 
 

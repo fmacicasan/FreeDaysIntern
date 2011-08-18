@@ -48,22 +48,22 @@ delete from `free_day`
 INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`legalday`,`version`,`approval`)VALUES("typeL",31,"Test1",0,"2011-08-08",0,13);
 INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`legalday`,`version`,`approval`)VALUES("typeL",32,"Test2",2,"2011-08-09",0,12);
 --in progress
-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",15,"TestCc",0,0,"2011-08-04",13,null);
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",15,"TestCc",0,0,"2011-08-01",13,null);
 --waiting
-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",11,"TestCc",1,0,"2011-08-04",12,null);
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",11,"TestCc",1,0,"2011-08-02",12,null);
 --failure reject
-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",12,"TestCc",3,0,"2011-08-04",13,null);
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",12,"TestCc",3,0,"2011-08-03",13,null);
 --failure cancel
 INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",13,"TestCc",3,0,"2011-08-04",13,null);
 --in progress
 INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`recoverdate`,`approval`,`request`)VALUES("typeR",20,"TestRr",0,0,"2011-08-06",13,null);
 --waiting
-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`recoverdate`,`approval`,`request`)VALUES("typeR",21,"TestRr",1,0,"2011-08-06",12,null);
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`recoverdate`,`approval`,`request`)VALUES("typeR",21,"TestRr",1,0,"2011-08-07",12,null);
 
 --waiting
-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",14,"TestCc",1,0,"2011-08-04",12,null);
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",14,"TestCc",1,0,"2011-08-05",12,null);
 --waiting
-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`recoverdate`,`approval`,`request`)VALUES("typeR",22,"TestRr",1,0,"2011-08-06",12,null);
+INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`recoverdate`,`approval`,`request`)VALUES("typeR",22,"TestRr",1,0,"2011-08-13",12,null);
 UPDATE `free_day` SET`status` = 2,`version` = 1,`recover` = 22 WHERE `id` = 14;
 UPDATE `free_day` SET`status` = 2,`version` = 1,`request` = 14 WHERE `id` = 22;
 

@@ -181,7 +181,7 @@ public class RequestController {
 	 * @param uiModel
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
+	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve')")
 	@RequestMapping(value = "/{id}", params = {"eval","approve"}, method = RequestMethod.POST)
 	public String evalRequestApprove(@PathVariable("id") Long id, Model uiModel){
 			
@@ -198,7 +198,7 @@ public class RequestController {
 	 * @param uiModel
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
+	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve')")
 	@RequestMapping(value = "/{id}", params = {"eval","deny"}, method = RequestMethod.POST)
 	public String evalRequestDeny(@PathVariable("id") Long id, Model uiModel){
 		
@@ -282,14 +282,21 @@ public class RequestController {
      */
     @PreAuthorize("hasRole('ROLE_FDADMIN')" +
     		" or hasPermission(#id, 'Request', 'own')" +
-    		" or hasPermission(#id, 'Request', 'approve')")
+    		" or (hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve'))")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model uiModel, Principal p) {
 		Request req = Request.findRequest(id);
         uiModel.addAttribute("request", req);
         uiModel.addAttribute("itemId", id);
         //TODO: added req.isCancelable() to isApprover & isPersonal so that we can't approve/deny if the date passed
-        uiModel.addAttribute("isApprover",req.isApprover(p.getName()));
+        boolean isApprover = req.isApprover(p.getName());
+        uiModel.addAttribute("isApprover",isApprover);
+        if(isApprover){
+        	String username = req.getAppreguser().getRegularUser().getUsername();
+        	uiModel.addAttribute("activeRequestCount", Request.countActiveRequests(username));
+        	uiModel.addAttribute("remainingDaysCount", Request.computeAvailableFreeDays(username));
+        	uiModel.addAttribute("remainingDerogationCount", Request.computeAvailableDerogations(username));
+        }
         uiModel.addAttribute("isPersonal",req.isOwner(p.getName()));
         uiModel.addAttribute("isCancelable",req.isCancelable());
         return "requests/show";
@@ -313,6 +320,17 @@ public class RequestController {
     public long populateRemainingDaysCount(){
     	String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return Request.computeAvailableFreeDays(username);
+    }
+    
+    /**
+     * Model attribute exposed to the view containing the number of remaining
+     * derogations.
+     * @return
+     */
+    @ModelAttribute("remainingDerogationCount")
+    public long populateRemainingDerogationCount(){
+    	String username = this.userContextService.getCurrentUser();
+    	return Request.computeAvailableDerogations(username);
     }
     
     /**

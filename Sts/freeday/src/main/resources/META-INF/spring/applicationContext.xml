@@ -102,6 +102,7 @@
     	twice and repeats the execution from both the web context and the app context  -->
     <task:scheduled-tasks scheduler="myScheduler">
     	<task:scheduled ref="scheduleService" method="reportFreeDays" cron="0 0 17 * * MON-FRI"/>
+    	<task:scheduled ref="scheduleService" method="denyLateRequestsStillUnderApproval" cron="0 0 3 * * MON-FRI"/>
     </task:scheduled-tasks> 
     
     <!--  <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>

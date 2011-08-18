@@ -1,5 +1,7 @@
 package freedays.schedule;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import freedays.app.form.FreeDayUserList;
 import freedays.controller.ReportController;
+import freedays.domain.Request;
 import freedays.util.DateUtils;
 import freedays.util.MailUtils;
 
@@ -111,7 +114,15 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 
 	@Override
 	public void denyLateRequestsStillUnderApproval() {
-		// TODO Auto-generated method stub
+		Request.DEBUG=true;
+		List<Request> lr = Request.findAllPendingApprovals();
+		for (Request request : lr) {
+			if(!request.getRequestable().isCancelable()){
+				request.autoDeny();
+				request.persist();
+			}
+		}
+		Request.DEBUG=false;
 		
 	}
 

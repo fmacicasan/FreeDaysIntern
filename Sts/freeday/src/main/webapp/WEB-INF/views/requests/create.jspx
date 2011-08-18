@@ -32,5 +32,6 @@
     <spring:message arguments="${remainingDaysCount}" code="request_remainingdays"/>
 	<br />
     <spring:message arguments="${activeRequestCount}" code="request_activerequests"/>
-
+	<br />
+	<spring:message arguments="${remainingDerogationCount}" code="request_derogation" />
 </div>

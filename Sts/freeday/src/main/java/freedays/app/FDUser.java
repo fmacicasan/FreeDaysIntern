@@ -178,6 +178,16 @@ public class FDUser extends ApplicationRegularUser {
 			return false;
 		}
 	}
+
+	/**
+	 * Computes the remaining derogations.
+	 * 	NOTE: TODO:count only the company requested days not all the typeC
+	 * @return
+	 */
+	public long computeAvailableDerogations() {
+		long derog = this.getMaxDerogation();
+		return derog - FreeDay.countAllNotFailedTypeCRequestsByFDUser(this);
+	}
 	
 	
 }
