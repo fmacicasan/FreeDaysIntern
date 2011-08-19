@@ -68,5 +68,176 @@ http://www.techrepublic.com/whitepapers/two-security-vulnerabilities-in-the-spri
 http://www.clerkendweller.com/2011/4/5/Website-Vulnerability-Statistics-Spring-2011
 
 
+#javax.mail
+	http://javamail.kenai.com/nonav/javadocs/overview-summary.html#overview_description
+	http://javamail.kenai.com/nonav/javadocs/overview-summary.html#overview_description
+	http://www.javacommerce.com/displaypage.jsp?name=javamail.sql&id=18274
+	http://www.velocityreviews.com/forums/t141237-send-smtp-mail-using-javamail-with-gmail-account.html
+	http://javamail.kenai.com/nonav/javadocs/com/sun/mail/smtp/SMTPAddressFailedException.html
+	http://download.oracle.com/javaee/1.4/api/javax/mail/Session.html#getDefaultInstance%28java.util.Properties%29
+	http://www.springbyexample.org/examples/velocity-email-template.html
+	http://forum.springsource.org/showthread.php?15187-Spring-based-Mail-Template-Framework
+	http://static.springsource.org/spring/docs/2.0.x/reference/mail.html
+	http://www.javaworld.com/javaworld/jw-12-2001/jw-1228-velocity.html
+	http://velocity.apache.org/engine/releases/velocity-1.5/user-guide.html
+	http://stackoverflow.com/questions/772988/inserting-a-java-string-in-another-string-without-concatenation
+	http://javamail.kenai.com/nonav/javadocs/com/sun/mail/smtp/package-summary.html
+	
+#sonar
+	http://wiki.hudson-ci.org/display/HUDSON/Sonar+Plugin
 
+#good programming
+	http://www.artima.com/weblogs/viewpost.jsp?thread=331531
+	http://www.javapractices.com/topic/TopicAction.do?Id=17
+	http://commons.apache.org/lang/api-2.5/org/apache/commons/lang/builder/EqualsBuilder.html
+	http://www.google.ro/search?q=EqualsBuilder%20for%20sets&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np#sclient=psy&hl=ro&client=firefox-a&hs=Zje&rls=org.mozilla:en-US%3Aofficial&channel=np&source=hp&q=EqualsBuilder+for+set+comparison&pbx=1&oq=EqualsBuilder+for+set+comparison&aq=f&aqi=&aql=&gs_sm=e&gs_upl=6368l8229l0l8331l14l11l0l0l0l0l218l1464l2.8.1l11&fp=1&biw=1680&bih=927&cad=b&bav=on.2,or.r_gc.r_pw.
+	
+
+#other frameworks
+	http://www.playframework.org/
+	
+#jsp
+	http://java.sun.com/products/jsp/syntax/1.2/card12.pdf
+	http://download.oracle.com/javaee/1.4/tutorial/doc/JSPX3.html
+	http://download.oracle.com/javaee/5/jstl/1.1/docs/tlddocs/c/tld-summary.html
+	http://www.coderanch.com/t/522721/JSP/java/JSTL-loop
+	http://strutscr.uw.hu/0066.html
+	http://www.daniweb.com/web-development/jsp/threads/31227
+	http://doctype.com/evenly-distribute-items-horizontal-unordered-list
+	http://www.webdigity.com/index.php/topic,108.0.How+to+extend+a+css+class.html
+
+#junit
+	http://junit.sourceforge.net/doc/faq/faq.htm#tests_1
+	http://stackoverflow.com/questions/512184/best-practice-initialize-junit-class-fields-in-setup-or-at-declaration
+	http://www.softwaretestpro.com/Event/1132/?utm_source=Email&utm_medium=email&utm_content=072011-ONLINE-SUMMIT&utm_campaign=TRAINING
+	http://junit.sourceforge.net/doc/faq/faq.htm#tests_7
+	http://simplyblogmadi.blogspot.com/2011/01/spring-mvc-3-junit-test.html
+	http://www.google.ro/search?q=org.springframework.mock.web&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np
+	http://static.springsource.org/spring/docs/2.5.x/reference/testing.html
+	http://static.springsource.org/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-viewresolver
+	http://stackoverflow.com/questions/1401128/how-to-unit-test-a-spring-mvc-controller-using-pathvariable
+	
+#validation
+	http://www.google.ro/search?q=javax.validation%20change%20in%20child&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np
+	http://www.coderanch.com/t/488121/Spring/Validation-error-Failed-convert-property
+	http://download.oracle.com/javase/1,5.0/docs/api/java/util/Formatter.html#syntax
+	http://download.oracle.com/javaee/6/api/javax/validation/Valid.html
+	http://www.google.ro/search?q=junit%20assert%20%40Valid&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np
+	http://stackoverflow.com/questions/2499113/quickest-way-to-clone-a-gregoriancalendar
+	http://www.java-examples.com/compare-date-time-using-after-method-java-calendar
+	http://forums.devx.com/showthread.php?t=143327
+	http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html
+	http://stackoverflow.com/questions/2623610/subtracting-days-in-a-calendar-object
+	http://www.java-forums.org/new-java/38995-gettimeinmillis-function-calendar-class-returns-wrong-values.html
+	http://www.7is7.com/otto/datediff.html
+	http://joda-time.sourceforge.net/apidocs/org/joda/time/DateTime.html
+	http://www.techrepublic.com/blog/howdoi/how-do-i-perform-datetime-arithmetic-with-javas-calendar-class/116
+	http://download.oracle.com/javase/1.4.2/docs/api/java/util/Calendar.html
+	http://download.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html
+	http://www.roseindia.net/jpa/eclipsejpaexamples/sum-function.shtml
+	http://www.coderanch.com/t/548527/java/java/Calculate-Business-Days-between-two
+	http://www.google.ro/search?q=add%20business%20days%20to%20a%20date&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np#sclient=psy&hl=ro&client=firefox-a&hs=u4U&rls=org.mozilla:en-US%3Aofficial&channel=np&source=hp&q=java+add+business+days+to+a+date&pbx=1&oq=java+add+business+days+to+a+date&aq=f&aqi=&aql=&gs_sm=e&gs_upl=3536l3926l0l3981l5l3l0l0l0l1l197l304l0.2l2l0&fp=1&biw=1680&bih=927&bav=on.2,or.r_gc.r_pw.&cad=b
+	
+#typedquery
+	http://www.google.ro/search?q=TypedQuery&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np
+	http://www.google.ro/search?q=javax.persistence%20exceptions&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np
+	http://www.google.ro/search?q=invalid%20state%20exception&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np
+	http://docs.jboss.org/hibernate/core/3.3/reference/en/html/queryhql.html
+	http://download.oracle.com/javaee/5/tutorial/doc/bnbuf.html#bnbvf
+	http://stackoverflow.com/questions/1557085/setting-a-parameter-as-a-list-for-an-in-expression
+	http://www.objectdb.com/api/java/jpa/TypedQuery/getResultList
+
+#uidecoration
+	http://forum.springsource.org/showthread.php?57759-SWF-2-AjaxEventDecoration-and-ElementDecoration
+
+#document
+	http://stackoverflow.com/questions/6102166/why-wont-javadoc-make-my-subclasses-inherit-documentation-from-javas-classes
+	http://stackoverflow.com/questions/195020/what-is-the-best-way-to-use-javadoc-to-document-a-java-enum
+	
+#spring
+	#roo
+	http://java.sun.com/products/jsp/syntax/1.2/card12.pdf
+	http://www.javabeat.net/articles/296-spring-roo-and-jpa-entities-1.html.
+	http://www.slideshare.net/benalexau/introduction-to-spring-roo-100-2805183
+	http://www.slideshare.net/benalexau/spring-roo-100-technical-deep-dive
+	http://twitter.com/#!/benalexau
+	http://forum.springsource.org/forumdisplay.php?67-Roo
+	
+	#DI
+	http://stackoverflow.com/questions/3673765/autowired-dependencies-coming-back-null-every-single-one-of-them
+	http://stackoverflow.com/questions/123598/access-enum-value-using-el-with-jstl
+	http://www.roseindia.net/java/java-get-example/number-days-month.shtml
+	http://stackoverflow.com/questions/4816283/autowired-objects-getting-null-value
+	http://static.springsource.org/spring/docs/2.5.x/api/org/springframework/beans/factory/annotation/Configurable.html
+	
+	#SpEL
+	https://jira.springsource.org/browse/SPR-7244?page=com.atlassian.jira.plugin.system.issuetabpanels%3Aall-tabpanel
+	
+	#Security
+	http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/core/userdetails/UserDetails.html
+	http://snippets.dzone.com/posts/show/3328
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/authz-arch.html
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/technical-overview.html#tech-granted-authority
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/core-services.html#core-services-authentication-manager
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/el-access.html
+	http://static.springsource.org/spring-security/site/faq.html#faq-method-security-in-web-context
+	http://www.infoq.com/springone_2010/
+	http://stackoverflow.com/questions/4275536/spring-security-cookies-after-user-logs-in-and-session-hijacking
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/ns-config.html#ns-session-fixation
+	http://static.springsource.org/spring-security/site/faq.html
+	http://www.wisegeek.com/what-is-the-difference-between-http-and-https.htm
+	http://www.catalysts.cc/wissenswertes/maintain-httpsession-in-spring-security-applications/
+	http://stackoverflow.com/questions/5383159/implment-restful-webservice-with-jersey-and-spring-security
+	http://stackoverflow.com/questions/2137834/spring-security-session-management-setting-and-illegalstateexception
+	https://jira.springsource.org/browse/SEC-1052
+	http://static.springsource.org/spring-security/site/tutorial.html
+	http://61.153.44.88/spring/spring-security/3.0.x/technical-overview.html#tech-intro-sec-context-persistence
+	http://stackoverflow.com/questions/4594004/triggering-ajax-request-in-spring-security-when-session-has-become-invalid
+	
+	#MVC
+	http://stackoverflow.com/questions/4139538/pass-a-request-parameter-in-spring-mvc-3
+	
+	#linux
+	http://linuxers.org/howto/how-install-mysql-server-fedora
+	http://www.tutorialspoint.com/mysql/mysql-database-export.htm
+	http://www.server-world.info/en/note?os=Fedora_12&p=mysql
+	http://community.discountasp.net/showthread.php?t=11972
+	http://www.linuxquestions.org/questions/linux-software-2/how-2-remove-services-from-startup-213792/
+	http://dev.mysql.com/doc/refman/5.1/en/adding-users.html
+	http://www.ehow.com/how_5124543_install-java-using-yum.html
+	http://www.g-loaded.eu/2005/11/06/manage-users-from-the-command-line/
+	http://www.cyberciti.biz/faq/howto-add-new-linux-user-account/
+	http://www.mjmwired.net/resources/mjm-fedora-fc6.html#sudo
+	http://brakertech.com/install-jenkins-redhat/
+	http://www.linuxquestions.org/questions/linux-newbie-8/yum-installation-directory-207688/
+	http://www.wakaleo.com/component/content/article/187
+	http://www.cyberciti.biz/faq/howto-change-rename-user-name-id/
+	http://www.lost-in-code.com/server-management/linux-change-filefolder-owner/
+	http://www.computerhope.com/unix/scp.htm
+	http://en.wikipedia.org/wiki/Ls
+	http://www.tech-recipes.com/rx/66/recursively-change-the-owner-of-all-files-in-a-directory/
+	
+	#schedule
+	http://www.vodori.com/blog/spring3scheduler.html
+	http://krams915.blogspot.com/2011/01/spring-3-task-scheduling-via-scheduled.html
+	http://stackoverflow.com/questions/3672289/spring-3-scheduled-task-running-3-times
+	http://stackoverflow.com/questions/6848965/do-not-run-spring-scheduled-task-on-certain-machine
+	http://geek-dev.info/2011/07/spring-scheduled-task-multiple-e-g-twice-invocations/
+	http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/scheduling/support/CronSequenceGenerator.html
+	http://static.springsource.org/spring/docs/2.5.x/reference/view.html
+	http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/scheduling/support/CronSequenceGenerator.html
+	
+	#maven
+	http://maven.apache.org/plugins/maven-javadoc-plugin/usage.html
+	http://tomcat.apache.org/download-60.cgi
+	http://mirrors.hostingromania.ro/apache.org/tomcat/tomcat-6/v6.0.32/README.html
+	http://en.wikipedia.org/wiki/Rm_%28Unix%29
+	http://www.infoq.com/news/2009/08/google-chose-jetty
+	
+	#git
+	http://www.ericsink.com/vcbe/html/index.html
+	
+	
+	
+	
 
