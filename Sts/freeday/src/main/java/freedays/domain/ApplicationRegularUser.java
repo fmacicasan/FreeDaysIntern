@@ -1,6 +1,7 @@
 package freedays.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -95,6 +96,27 @@ public abstract class ApplicationRegularUser  implements Serializable {
 			return null;
 		}
 		return rg.getAppRegUsers();
+	}
+	
+	public static List<String> findAllAdminEmails() {
+		TypedQuery<Admin> q = entityManager().createQuery("SELECT o FROM Admin o JOIN FETCH o.appRegUsers ",Admin.class);
+		Admin rg=null;
+		try{
+		     rg=q.getSingleResult();
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+		Collection<ApplicationRegularUser> ruc = rg.getAppRegUsers();
+		List<String> ls = new ArrayList<String>();
+		for (ApplicationRegularUser aru : ruc) {
+			//TODO: ugly workarrownd - keep only the sql emails
+			String email = aru.getRegularUser().getEmail();
+			if(email.contains("@sdl.com")){
+				ls.add(email);
+			}
+		}
+		return ls;
+		
 	}
 	
 	/**

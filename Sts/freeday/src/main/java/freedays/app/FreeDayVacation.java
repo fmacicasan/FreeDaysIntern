@@ -96,7 +96,7 @@ public class FreeDayVacation extends FreeDay {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Vacation Request:");
 		sb.append(" from ").append(DateUtils.printShortDate(this.getDate()));
-		sb.append(" to ").append(DateUtils.printShortDate(DateUtils.dateAddDay(this.getDate(), this.getSpan())));
+		sb.append(" to ").append(DateUtils.printShortDate(DateUtils.dateAddBusinessDay(this.getDate(), this.getSpan())));
 		return sb.toString();
 	}
 	
@@ -105,7 +105,7 @@ public class FreeDayVacation extends FreeDay {
 		List<String> ls = new ArrayList<String>();
 		long spn = this.getSpan();
 		for(Long i=0L;i<spn;i++){
-			Calendar newDate = DateUtils.dateAddDay(this.getDate(),i);
+			Calendar newDate = DateUtils.dateAddBusinessDay(this.getDate(),i);
 			if(ValidationUtils.checkBusinessDay(newDate)){
 				StringBuilder sb = new StringBuilder();
 				sb.append(DateUtils.printShortDate(newDate));
@@ -165,7 +165,7 @@ public class FreeDayVacation extends FreeDay {
 	 * @return
 	 */
 	public Calendar getEnd(){
-		return DateUtils.dateAddDay(this.getBeginning(), this.getSpan());
+		return DateUtils.dateAddBusinessDay(this.getBeginning(), this.getSpan());
 	}
 
 }

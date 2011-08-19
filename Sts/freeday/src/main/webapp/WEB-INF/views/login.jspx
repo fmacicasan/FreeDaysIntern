@@ -54,7 +54,7 @@
 			<br />
 			<div class="submit">
 				<script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-				<spring:message code="button_submit" var="submit_label"
+				<spring:message code="button_login" var="submit_label"
 					htmlEscape="false" />
 				<input id="proceed" type="submit"
 					value="${fn:escapeXml(submit_label)}" />

@@ -39,5 +39,9 @@
     <definition extends="default" name="changepass">
      <put-attribute name="body" value="/WEB-INF/views/changepass.jspx"/>
   </definition>	
+  
+  <definition extends="default" name="registerty">
+     <put-attribute name="body" value="/WEB-INF/views/registerty.jspx"/>
+  </definition>	
    
 </tiles-definitions>

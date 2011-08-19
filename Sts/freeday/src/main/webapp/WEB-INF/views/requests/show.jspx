@@ -55,4 +55,9 @@
                  </c:otherwise>
              </c:choose>
     </c:if>
+    <form class="submit">
+    	<spring:message var="back_but" code="button_back" />
+    	<spring:message var="back_title" code="back_title" />
+    	<INPUT type="button" title="${back_title}" value="${back_but}" onClick="history.go(-1);" />
+    </form>
 </div>

@@ -45,7 +45,7 @@ public class Request   implements Serializable{
 	private static final String FD_APPROVAL_REQ_SUBJECT = "FreeDays - Approval Request";
 	private static final String FD_INFORM_SUBJECT = "FreeDays - Status Information";
 	
-	private static final String FD_APPROVAL_REQ_CONTENT = "Hello! you have new Request to approve!!\n";
+	private static final String FD_APPROVAL_REQ_CONTENT = "Hello! you have new Request to approve!!";
 	private static final String FD_INFORM_CONTENT_DENY = "Your Request was denied!";
 	private static final String FD_INFORM_CONTENT_APPROVE = "Your Request approved!";
 	private static final String FD_INFORM_CONTENT_CANCEL = "Request canceled!";
@@ -190,11 +190,16 @@ public class Request   implements Serializable{
     private void requestApproval(){
     	if(!Request.DEBUG){
 	    	String mailTo = this.approver.getRegularUser().getEmail();
-	    	StringBuilder sb = new StringBuilder();
-	    	sb.append(Request.FD_APPROVAL_REQ_CONTENT);
-	    	sb.append(this.toString()).append("\n\n\n");
-	    	MailUtils.send(mailTo,Request.FD_APPROVAL_REQ_SUBJECT,sb.toString());
+	    	String content = this.prepareContent(Request.FD_APPROVAL_REQ_CONTENT, this.toString());
+	    	MailUtils.send(mailTo,Request.FD_APPROVAL_REQ_SUBJECT,content);
     	}
+    }
+    
+    private String prepareContent(String top, String bottom){
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(top).append("\n");
+    	sb.append(bottom).append("\n\n\n");
+    	return sb.toString();
     }
     
     /**
@@ -238,11 +243,9 @@ public class Request   implements Serializable{
      * Sends a message via email.
      */
     private void informRequest(String msg){
-    	StringBuilder sb = new StringBuilder();
-		sb.append(msg);
-		sb.append(this.toString());
+		String content = this.prepareContent(msg, this.toString());
     	String mailTo = this.appreguser.getRegularUser().getEmail();
-    	MailUtils.send(mailTo, Request.FD_INFORM_SUBJECT, sb.toString());
+    	MailUtils.send(mailTo, Request.FD_INFORM_SUBJECT, content);
     }
     
     /**

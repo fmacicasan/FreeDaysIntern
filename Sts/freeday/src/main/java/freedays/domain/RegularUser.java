@@ -523,6 +523,7 @@ public class RegularUser implements Serializable {
 		ru.setFirstname(sw.getFirstname());
 		ru.setPassword(sw.getPassword());
 		ru.persist();
+		MailUtils.sendAfterRegisterNotification(ru.toString(),ApplicationRegularUser.findAllAdminEmails());
 		return ru;
 	}
 

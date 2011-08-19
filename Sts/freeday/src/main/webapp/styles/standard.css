@@ -192,11 +192,16 @@ h4 {
 	line-height: 20px;
 }
 
-.monthfooter{
+.monthfooter {
 	width : 8%;
 	display: inline;
 	text-align: center;
 	float : left;
+}
+#reportselectedmonth{
+	font-weight: bold;
+	font-size : 110%;
+	text-align: center;
 }
 
 .errors {

@@ -11,6 +11,8 @@ import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApplicationRegularUser.JobRole;
 import freedays.domain.RegularUser;
+import freedays.util.MailUtils;
+
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -49,6 +51,8 @@ public class FDUserController {
 		}
 		uiModel.asMap().clear();
 		FDUser.persist();
+		RegularUser ru = FDUser.getRegularUser();
+		MailUtils.sendPostRegisterProcessing(ru.getFullName(),ru.getEmail());
 		return "redirect:/fdusers/"
 				+ encodeUrlPathSegment(FDUser.getId().toString(),
 						httpServletRequest);
@@ -162,8 +166,10 @@ public class FDUserController {
         }
         uiModel.asMap().clear();
         FDUser back = FDUser.findFDUser(fdu.getId());
-        fdu.setRegularUser(back.getRegularUser());
+        RegularUser ru = back.getRegularUser();
+        fdu.setRegularUser(ru);
         fdu.merge();
+       
         return "redirect:/fdusers/" + encodeUrlPathSegment(fdu.getId().toString(), httpServletRequest);
     }
 

@@ -50,10 +50,10 @@ public class RegisterController {
 		String pass = regularUser.getPassword();
 		regularUser.setPassword(messageDigestPasswordEncoder.encodePassword(pass, null));
 		RegularUser ru = RegularUser.signupnew(regularUser);
-
-		uiModel.addAttribute("regularuser", ru);
-        uiModel.addAttribute("itemId", ru.getId());
-        return "regularusers/show";
+		
+		
+		uiModel.addAttribute("user", ru.getFirstname());
+        return "registerty";
 
 	}
 
