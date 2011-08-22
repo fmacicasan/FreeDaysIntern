@@ -357,6 +357,7 @@ public class RegularUser implements Serializable {
 	
 	/**
 	 * Selects a regular user based on his unique username.
+	 *  NOTICE! : case insensitive
 	 * @param username
 	 * @return the typed query representing the selection
 	 */

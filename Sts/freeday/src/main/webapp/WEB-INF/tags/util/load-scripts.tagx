@@ -14,8 +14,8 @@
   <link rel="SHORTCUT ICON" href="${favicon}" />
 
   <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
-  <c:set var="userLocale">
-    <c:out value="${pageContext.response.locale}" default="en" />
+  <c:set var="userLocale" value="en">
+    <!--<c:out value="${pageContext.response.locale}" default="en" />-->
   </c:set>
 
   <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>

@@ -62,7 +62,7 @@ public class AuthentificationController extends
 			RegularUser regularUser =RegularUser
 					.findRegularUsersByUsername(username).getSingleResult();
 			
-			
+			if(!regularUser.getUsername().equals(username)) throw new BadCredentialsException("Invalid username or password");
 			if(!regularUser.getPassword().equals(encryptedPassword)) throw new BadCredentialsException("Invalid username or password");
 			if(!regularUser.getActiv()) throw new BadCredentialsException("Your account has been disabled!");
 			if(regularUser.getDeleted()) throw new BadCredentialsException("Your accout has been deleted!");

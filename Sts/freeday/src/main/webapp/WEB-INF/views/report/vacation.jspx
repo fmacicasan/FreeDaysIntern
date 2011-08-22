@@ -64,7 +64,13 @@
 	       						<c:set var="colid" value="" />
 	       					</c:otherwise>
        					</c:choose>
-       					<td title="${daysDateList[i]}"  class="${colid}" align="center" ><c:out value="${combined[i].status}"/> </td>
+       					<c:set var="weekday" value="S" />
+       					<c:set var="outStatus" value="${combined[i].status}" />
+					    <c:if test="${daysWeekdayList[i]==weekday and combined[i].type != 3}">
+  							<c:set var="colid" value="colb" />
+  							<c:set var="outStatus" value=""/>
+  						</c:if>
+       					<td title="${daysDateList[i]}"  class="${colid}" align="center" ><c:out value="${outStatus}"/> </td>
        			</c:forEach>
        		</tr>
        	</c:forEach>

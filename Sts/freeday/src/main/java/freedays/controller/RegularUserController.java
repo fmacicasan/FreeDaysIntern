@@ -12,10 +12,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +40,10 @@ import org.springframework.web.util.WebUtils;
 @Controller
 public class RegularUserController {
 
+	
+	@Autowired
+	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
+	
 	/**
 	 * Handler for  retrieving the search form
 	 * @param uiModel
@@ -128,7 +135,7 @@ public class RegularUserController {
 	 * @param httpServletRequest
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN') or !isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
     public String create(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -137,10 +144,13 @@ public class RegularUserController {
             return "regularusers/create";
         }
         uiModel.asMap().clear();
-        Principal p = httpServletRequest.getUserPrincipal();
-        regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
+//        Principal p = httpServletRequest.getUserPrincipal();
+//        regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
        
         if( RegularUserValidator.validate(regularUser) ){
+        	String password = regularUser.getPassword();
+        	String encodedpass = messageDigestPasswordEncoder.encodePassword(password, null);
+        	regularUser.setPassword(encodedpass);
 	        regularUser.persist();
 	        //return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
 	        uiModel.addAttribute("regularuser", regularUser);

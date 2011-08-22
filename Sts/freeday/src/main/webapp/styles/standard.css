@@ -30,6 +30,9 @@ body {
 .colo,.lego{
 	background-color: orange;
 }
+.colb{
+	background-color: RGB(189,227,211);
+}
 .report{
 	text-align: center;
 }

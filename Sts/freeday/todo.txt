@@ -3,7 +3,7 @@ TODO in STS -
 	- add a choice probability for the characters at password generation
 	- @reportfreedays controller get jst the active users
 	- @find all pending approvals by username, search only the ones that need approval
-	- @check weekend validation - verify only with !businessday
+	- DONE - maintained validation! @check weekend validation - verify only with !businessday
 	- ???report all users or just active ones?
 	- DONE per month get vacations only between the two provided dates
 		- DONE months!!!add pages to reports
@@ -43,7 +43,7 @@ TODO:
 	- scurtcircuitare team leader
 	- DONE normal user canceling his request will get access denied for requests?approve
 	- DONE navigare raport pe luni: ian/feb/sept ->....
-	- CRITICAL!! Client Side Date!!!
+	- DONE CRITICAL!! Validation still server side!! Client Side Date!!!
 	- DONE CRITICAL!! dont's consider the weekend days for the Vacation request when counting available/remaining days
 	
 	
@@ -55,7 +55,7 @@ TODO:
 	- DONE - migrated to SDL account - disabled gmail accout
 	
 	- integrate with LDAP service (exchange)
-    - add mail send for user creation to FDADMIN/HRMANAGEMENT
+    - DONE add mail send for user creation to FDADMIN/HRMANAGEMENT
 	- DONE mail raport doar ziua curenta
 	- DONE la sfarsitul zilei sa verific zilele under approval ce inca nu au fost aprobate
 	
@@ -64,7 +64,7 @@ TODO:
 		- DONE removed annotation - typeL solve this somehow!!
 	- DONE FDUser update will fail due to invalid regular user
 	
-	- change register redirect to some page stating that the account is under processing and he will receive some mail confirmation when he can start using the service
+	- DONE change register redirect to some page stating that the account is under processing and he will receive some mail confirmation when he can start using the service
     - add javadoc generation
 	- DONE with push in - problem at securing the controller handlers in the aspects
 	- DONE provide some info for the approver
@@ -83,20 +83,34 @@ TODO:
 	IMPROVEMENTS:
 	Discovered:
 		- DONE to string for printing the vacation weekday 
-		- user creation form from admin console
+		- DONE user creation form from admin console
 		- DONE - to verbose!!!!!logging server side
-			- to verbose logging
+			- to verbose logging	
+		- DONE login possible with lowercase/uppercase username
+		- add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
+		- add javadoc generation
+		- integrate with LDAP service (exchange)
+		- concedii medicale
+		- concedii neplatite
+		- scurtcircuitare team leader
+		- request more than one day / request
+		- ?? Ofer posibility for reason input on request denial
 	Florina:
 		- DONE change page displayed after register with some info
 		- DONE send mail to admn after register for account processing
 			-- ugly workarrownd extracting sdl accounts
 		- DONE send mail to user after account is processed
 		- DONE change submit name for the button with SignIn
-		- ??vacation view choice problem
+		- DONE ??vacation view choice problem
+			DONE - due to login possible with other characters
 		- DONE add back button
+		
+		-	DONE Mark weekend days with a different color (e.g. like in xsl calendar template: http://office.microsoft.com/en-us/templates/results.aspx?qu=%22Templates%20for%20Excel%22&ck=1&av=ZXL140#ai:TC010278636| )
+		-	DONE Unmark the weekend days in case the vacation in taken starting in one week and ending in the second one
+
 	
 	Bogdan:
-		1)	Calendar – see attached – the Month and the days of the week, would be best to be described in words (August or Aug and Mon or M)
+		1)	DONE Calendar – see attached – the Month and the days of the week, would be best to be described in words (August or Aug and Mon or M)
 		2)	Calendar – If possible – if you can color code the weekends in a different shade or color I think it would improve the efficiency
 		3)	Once you figure out how to modify the form dynamically, I believe all 4 type of request links can be merged into one, and based on the Type of the request… to modify the input fields. It will create less confusion.
 		4)	DONE The approved email has no formatting
