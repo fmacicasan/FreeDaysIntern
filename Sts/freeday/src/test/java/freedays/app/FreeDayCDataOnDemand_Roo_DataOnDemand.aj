@@ -5,19 +5,14 @@ package freedays.app;
 
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayC;
-import freedays.app.FreeDayRDataOnDemand;
 import java.lang.String;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayCDataOnDemand: @Component;
-    
-    @Autowired
-    private FreeDayRDataOnDemand FreeDayCDataOnDemand.freeDayRDataOnDemand;
     
     public FreeDayC FreeDayCDataOnDemand.getNewTransientFreeDayC(int index) {
         FreeDayC obj = new FreeDayC();

@@ -6,6 +6,7 @@
         <menu:category id="c_general" z="user-managed">
         	<sec:authorize ifAnyGranted="ROLE_USER">
         		<menu:item id="c_general_reportvacation" url="/report/vacation" z="user-managed"/>
+        		<menu:item id="c_general_timesheet" url="/timesheet" z="user-managed" />
         	</sec:authorize>
         </menu:category>
         <sec:authorize ifAnyGranted="ROLE_AAA,ROLE_HRMANAGEMENT">

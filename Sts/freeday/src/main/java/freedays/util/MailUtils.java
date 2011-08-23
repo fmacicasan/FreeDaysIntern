@@ -76,6 +76,7 @@ public class MailUtils {
     		helper.setSubject(subject);
     		helper.setText(content,isHtml);
     		helper.setFrom(MailUtils.SOURCE);
+    	
     		mailSender.send(mm);
     	} catch (MessagingException e) {
 			// TODO Auto-generated catch block
