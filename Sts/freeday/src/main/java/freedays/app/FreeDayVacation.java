@@ -149,7 +149,7 @@ public class FreeDayVacation extends FreeDay {
 	}
 	
 	/**
-	 * Verifies weather or no the provieded calendar instance can represent
+	 * Verifies weather or no the provided calendar instance can represent
 	 * a date for a new free day request.
 	 */
 	@Override

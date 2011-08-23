@@ -2,7 +2,7 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_freedays_app_FDUser" items="${fdusers}" z="QjU3+dY5f3A2jsizI+UZ8p2Jqr0=">
+    <page:list id="pl_freedays_app_FDUser" items="${fdusers}" z="QjU3+dY5f3A2jsizI+UZ8p2Jqr0=" >
         <table:table data="${fdusers}" id="l_freedays_app_FDUser"  path="/fdusers" z="user-managed">
             <table:column maxLength="-1" id="c_freedays_app_FDUser_regularUser" property="regularUser" z="user-managed"/>
             <table:column id="c_freedays_app_FDUser_jobrole" property="jobrole" z="user-managed"/>

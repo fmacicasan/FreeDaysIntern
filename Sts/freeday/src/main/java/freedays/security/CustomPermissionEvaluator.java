@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 
+import freedays.app.FDUser;
 import freedays.domain.RegularUser;
 import freedays.domain.Request;
 
@@ -32,6 +33,12 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 			if(permission.equals("own")){
 				return ru.getUsername().equals(authentication.getName());
 			}
+//			if(permission.equals("list")){
+//				if(authentication.getName().equals(ru.getUsername())){
+//					//ru.setDeletable(true);
+//				}
+//				return true;
+//			}
 		}
 		
 		if(targetDomainObject instanceof Request){
@@ -41,6 +48,19 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				return r.isOwner(authentication.getName());
 			}
 		}
+		
+//		if(targetDomainObject instanceof FDUser){
+//			FDUser fdu = (FDUser) targetDomainObject;
+//			
+//			if(permission.equals("list")){
+//				if(authentication.getName().equals(fdu.getRegularUser().getUsername())){
+//					//fdu.setDeletable(true);
+//				}
+//				return true;
+//			}
+//		}
+		
+
 		
 		throw new UnsupportedOperationException("hasPermission not supported for object and permission");
 	}
@@ -60,6 +80,15 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				if(permission.equals("own")){
 					if(ru==null)return false;
 					return ru.getUsername().equals(authentication.getName());
+				}
+			}
+			
+			if(FDUser.class.getSimpleName().equals(targetType)){
+				FDUser fdu = FDUser.findFDUser(id);
+				
+				if(permission.equals("own")){
+					if(fdu==null)return false;
+					return fdu.getRegularUser().getUsername().equals(authentication.getName());
 				}
 			}
 		

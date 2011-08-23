@@ -18,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.security.access.prepost.PostFilter;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
@@ -138,7 +139,8 @@ public class FDUser extends ApplicationRegularUser {
 	 * Returns the list of all active FDUsers.
 	 * @return
 	 */
-	public static Collection<FDUser> findAllActiveFDUsers() {
+	//@PostFilter("hasPermission(filterObject, 'list')")
+	public static List<FDUser> findAllActiveFDUsers() {
 		TypedQuery<FDUser> q = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.regularUser.deleted = :deleted ", FDUser.class);
         q.setParameter("deleted", false);
         List<FDUser> results = q.getResultList();
@@ -154,6 +156,7 @@ public class FDUser extends ApplicationRegularUser {
 	 * @return
 	 * @see TypedQuery
 	 */
+	//@PostFilter("hasPermission(filterObject, 'list')")
 	public static List<FDUser> findActiveFDUserEntries(int firstResult, int maxResults) {
 		return entityManager().createQuery("SELECT o FROM FDUser o WHERE o.regularUser.deleted = false", FDUser.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
 	}

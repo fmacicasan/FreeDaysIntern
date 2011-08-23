@@ -95,6 +95,7 @@ TODO:
 		- scurtcircuitare team leader
 		- request more than one day / request
 		- ?? Ofer posibility for reason input on request denial
+		- what other information should we offer to a request granter?
 	Florina:
 		- DONE change page displayed after register with some info
 		- DONE send mail to admn after register for account processing
@@ -104,7 +105,6 @@ TODO:
 		- DONE ??vacation view choice problem
 			DONE - due to login possible with other characters
 		- DONE add back button
-		
 		-	DONE Mark weekend days with a different color (e.g. like in xsl calendar template: http://office.microsoft.com/en-us/templates/results.aspx?qu=%22Templates%20for%20Excel%22&ck=1&av=ZXL140#ai:TC010278636| )
 		-	DONE Unmark the weekend days in case the vacation in taken starting in one week and ending in the second one
 
@@ -117,9 +117,9 @@ TODO:
 		
 	Dan:
 		- DONE show selected month more visible
-		- dont see reason for R/C
-		- all months in one year on a single page
-		- double click see detail like in personal thingy
+		- (not discussed) dont see reason for R/C
+		- (not discussed) all months in one year on a single page
+		- (not discussed) double click see detail like in personal thingy
 
 	
 	

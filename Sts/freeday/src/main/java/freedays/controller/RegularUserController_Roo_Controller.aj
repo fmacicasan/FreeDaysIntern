@@ -9,6 +9,8 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -34,20 +36,7 @@ privileged aspect RegularUserController_Roo_Controller {
 	
 	
 	    
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FDADMIN')")
-    @RequestMapping(method = RequestMethod.GET)
-    public String RegularUserController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("regularusers", RegularUser.findRegularUserEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) RegularUser.countRegularUsers() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("regularusers", RegularUser.findAllRegularUsers());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "regularusers/list";
-    }
+
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)

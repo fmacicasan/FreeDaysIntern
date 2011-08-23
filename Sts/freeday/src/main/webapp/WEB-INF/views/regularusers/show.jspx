@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:sec="http://www.springframework.org/security/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_freedays_domain_RegularUser" object="${regularuser}" path="/regularusers" z="IA1hpYmY/P0g3tMN3rBd1ya+W8g=">
+    
+     <c:set value="false" var="var_delete"/>
+    <c:set value="false" var="var_create"/>
+    <c:set value="false" var="var_update"/>
+    <c:set value="false" var="var_list"/>
+    
+     <sec:authorize access="hasRole('ROLE_ADMIN')"  >
+    	<sec:authentication property="principal.username" var="username" />
+    	<!--  <c:out value="${regularuser.username}" /> 
+    	<c:out value="${username}"/>--> 
+    	<c:if test="${username ne regularuser.username }">
+    		<c:set value="true" var="var_delete"/>
+    	</c:if>
+	    <c:set value="true" var="var_create"/>
+	    <c:set value="true" var="var_update"/>
+	    <c:set value="true" var="var_list"/>
+    </sec:authorize> 
+    
+    <page:show id="ps_freedays_domain_RegularUser" object="${regularuser}" path="/regularusers" z="IA1hpYmY/P0g3tMN3rBd1ya+W8g="  create="${var_create}" delete="${var_delete}" update="${var_update}" list="${var_list}" >
         <field:display field="username" id="s_freedays_domain_RegularUser_username" object="${regularuser}" z="8s0x9rGURalvc7HBqJdMocub/f4="/>
         <field:display field="password" id="s_freedays_domain_RegularUser_password" object="${regularuser}" z="3nKjMs36sSBPU06k/bXpEdF1Apw="/>
         <field:display field="email" id="s_freedays_domain_RegularUser_email" object="${regularuser}" z="ElePEpP0SmwF32dBDoeNXmWbD+c="/>

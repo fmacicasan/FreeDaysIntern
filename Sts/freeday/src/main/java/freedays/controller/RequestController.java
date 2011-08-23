@@ -296,6 +296,7 @@ public class RequestController {
         	uiModel.addAttribute("activeRequestCount", Request.countActiveRequests(username));
         	uiModel.addAttribute("remainingDaysCount", Request.computeAvailableFreeDays(username));
         	uiModel.addAttribute("remainingDerogationCount", Request.computeAvailableDerogations(username));
+        	uiModel.addAttribute("remainingTotalDaysCount",Request.computeTotalAvailableFreeDays(username));
         }
         uiModel.addAttribute("isPersonal",req.isOwner(p.getName()));
         uiModel.addAttribute("isCancelable",req.isCancelable());
@@ -307,7 +308,7 @@ public class RequestController {
 	 * @return
 	 */
     @ModelAttribute("activeRequestCount")
-	public long populateRemaningDaysCount(){
+	public long populateActiveDaysCount(){
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return Request.countActiveRequests(username);
 	}
@@ -331,6 +332,12 @@ public class RequestController {
     public long populateRemainingDerogationCount(){
     	String username = this.userContextService.getCurrentUser();
     	return Request.computeAvailableDerogations(username);
+    }
+    
+    @ModelAttribute("remainingTotalDaysCount")
+    public long populateRemaningTotalDaysCount(){
+    	String username = this.userContextService.getCurrentUser();
+    	return Request.computeTotalAvailableFreeDays(username);
     }
     
     /**

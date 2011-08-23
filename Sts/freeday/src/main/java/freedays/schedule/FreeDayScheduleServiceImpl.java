@@ -114,15 +114,16 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 
 	@Override
 	public void denyLateRequestsStillUnderApproval() {
-		Request.DEBUG=true;
+		//Request.DEBUG=true;
 		List<Request> lr = Request.findAllPendingApprovals();
 		for (Request request : lr) {
 			if(!request.getRequestable().isCancelable()){
 				request.autoDeny();
-				request.persist();
+				request.getRequestable().merge();
+				request.merge();
 			}
 		}
-		Request.DEBUG=false;
+		//Request.DEBUG=false;
 		
 	}
 

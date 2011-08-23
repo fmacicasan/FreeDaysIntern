@@ -1,5 +1,6 @@
 package freedays.controller;
 
+import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 import freedays.validation.RegularUserValidator;
 import freedays.domain.RegularUser;
@@ -44,6 +45,9 @@ public class RegularUserController {
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
 	
+	@Autowired
+	private UserContextService userContextService;
+	
 	/**
 	 * Handler for  retrieving the search form
 	 * @param uiModel
@@ -56,9 +60,19 @@ public class RegularUserController {
 		// addDateTimeFormatPatterns(uiModel);
 		uiModel.addAttribute("search", new Search());
 		uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria());
-		uiModel.addAttribute("regularusers", RegularUser.findAllRegularUsers());
+		List<RegularUser> lru = RegularUser.findAllRegularUsers();
+		evaluateDeletable(lru);
+		uiModel.addAttribute("regularusers",lru);
 		addDateTimeFormatPatterns(uiModel);
 		return "regularusers/search";
+	}
+	
+	private void evaluateDeletable(List<RegularUser> lru){
+		for (RegularUser ru : lru) {
+			if(!ru.getUsername().equals(this.userContextService.getCurrentUser())){
+				ru.setDeletable(true);
+			}
+		}
 	}
 
 	/**
@@ -82,8 +96,9 @@ public class RegularUserController {
 		}
 		uiModel.asMap().clear();
 		uiModel.addAttribute("search", search);
-		uiModel.addAttribute("regularusers",
-				RegularUser.findAllRegularUsersLike(search));
+		List<RegularUser> lru = RegularUser.findAllRegularUsersLike(search);
+		evaluateDeletable(lru);
+		uiModel.addAttribute("regularusers",lru);
 		uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria());
 		addDateTimeFormatPatterns(uiModel);
 		//System.out.println("will start");
@@ -117,7 +132,7 @@ public class RegularUserController {
      * @param uiModel 
      * @return redirection to user listing
      */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') and !hasPermission(#id,'RegularUser', 'own')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         RegularUser.deleteRegularUser(id);
@@ -204,5 +219,29 @@ public class RegularUserController {
         uiModel.addAttribute("regularuser", RegularUser.findRegularUser(id));
         uiModel.addAttribute("itemId", id);
         return "regularusers/show";
+    }
+	
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FDADMIN')")
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    	List<RegularUser> lru;
+    	if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            lru = RegularUser.findRegularUserEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo);
+            
+            float nrOfPages = (float) RegularUser.countRegularUsers() / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            lru = RegularUser.findAllRegularUsers();
+        }
+    	//process deletable
+    	for (RegularUser ru : lru) {
+			if(!ru.getUsername().equals(this.userContextService.getCurrentUser())){
+				ru.setDeletable(true);
+			}
+		}
+        uiModel.addAttribute("regularusers", lru);
+        addDateTimeFormatPatterns(uiModel);
+        return "regularusers/list";
     }
 }

@@ -24,6 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -150,6 +151,7 @@ public class RegularUser implements Serializable {
 	 * Retrieves all the regular users
 	 * @return
 	 */
+	//@PostFilter("hasPermission(filterObject, 'list')")
 	public static List<RegularUser> findAllRegularUsers() {
 		return entityManager().createQuery("SELECT o FROM RegularUser o",
 				RegularUser.class).getResultList();
@@ -172,6 +174,7 @@ public class RegularUser implements Serializable {
 	 * @param maxResults
 	 * @return
 	 */
+	//@PostFilter("hasPermission(filterObject, 'list')")
 	public static List<RegularUser> findRegularUserEntries(int firstResult,
 			int maxResults) {
 		return entityManager()
@@ -564,6 +567,7 @@ public class RegularUser implements Serializable {
 			MessageDigestPasswordEncoder messageDigestPasswordEncoder) {
 		this.messageDigestPasswordEncoder = messageDigestPasswordEncoder;
 	}
+	
 
 	/**
 	 * Counts the regular users based on their username
@@ -578,4 +582,5 @@ public class RegularUser implements Serializable {
 		Long res=q.getSingleResult();
 		return res;
 	}
+	
 }

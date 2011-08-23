@@ -482,5 +482,15 @@ public class Request   implements Serializable{
         return q.getResultList();
 	}
 
+	/**
+	 * Computes the total number of days a FDUser identified by username can still have.
+	 * @param username
+	 * @return
+	 */
+	public static long computeTotalAvailableFreeDays(String username) {
+		FDUser aru = FDUser.findFDUserByUsername(username);
+		return aru.computeteAvailableFreeDaysTotal();
+	}
+
 
 }

@@ -3,6 +3,8 @@ package freedays.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -11,8 +13,10 @@ import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApplicationRegularUser.JobRole;
 import freedays.domain.RegularUser;
+import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -32,6 +36,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FDUserController {
 
+
+	@Autowired
+	private UserContextService userContextService;
+	
 	/**
 	 * Handler for the creation of a new FDUser.
 	 * @param FDUser
@@ -128,17 +136,30 @@ public class FDUserController {
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
+        List<FDUser> lfu;
+		if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("fdusers", FDUser.findActiveFDUserEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
+            lfu = FDUser.findActiveFDUserEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo);
             float nrOfPages = (float) FDUser.countActiveFDUsers() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("fdusers", FDUser.findAllActiveFDUsers());
+            lfu = FDUser.findAllActiveFDUsers();
         }
+        
+      //process deletable
+    	evaluateDeletable(lfu);
+    	uiModel.addAttribute("fdusers", lfu);
         addDateTimeFormatPatterns(uiModel);
         return "fdusers/list";
     }
+	
+	private void evaluateDeletable(List<FDUser> lfu){
+		for (FDUser fu : lfu) {
+			if(!fu.getRegularUser().getUsername().equals(this.userContextService.getCurrentUser())){
+				fu.setDeletable(true);
+			}
+		}
+	}
 
 	/**
 	 * Handler for the update of a FDUser
@@ -181,7 +202,7 @@ public class FDUserController {
         return "fdusers/create";
     }
 
-	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN') and !hasPermission(#id,'FDUser', 'own')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         FDUser.findFDUser(id).remove();
