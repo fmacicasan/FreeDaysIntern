@@ -1,5 +1,5 @@
 TODO in STS -
-	- permit approval/deny only if the request is : cancelable freeday, not approved/denied/canceled
+	- DONE permit approval/deny only if the request is : cancelable freeday, not approved/denied/canceled
 	- add a choice probability for the characters at password generation
 	- @reportfreedays controller get jst the active users
 	- @find all pending approvals by username, search only the ones that need approval
@@ -10,21 +10,21 @@ TODO in STS -
 	- change all catch clauses @ throw exception, catch only when is needed
 	
 TODO:
-	- add Service layer instead of static method calls
-	- put security annotations on the services instead of the controllers
+	- V2PLAN add Service layer instead of static method calls
+	- V2PLAN put security annotations on the services instead of the controllers
 	
 	- DONE via the UpdateAccount wrapper!! on update should also check the validity of the RegularUser
-	- ??update a request by the FDUser???
-	- ??what if not approved and the date already passed ?? CANCEL IT!
-	- visitor for permissions instead of instanceof
+	- V2PLAN ??update a request by the FDUser???
+	- DONE ??what if not approved and the date already passed ?? CANCEL IT!
+	- V2PLAN visitor for permissions instead of instanceof
 	
 	- DONE change register/recoverpass/change pass change info/ login process and password encryption
 		- DONE update regular user info problem with redirect to /regularusers
 	- DONE improve validity restricting request to one for a calendar date
 		- DONE verify also if vacation intersects some day already approved!
 			- DONE consider annotation for validity of RegularUser
-	- request more than one day / request
-	- solve the @BusinessDay and @weekend @duplicate error display
+	- V2PLAN request more than one day / request
+	- V2PLAN solve the @BusinessDay and @weekend @duplicate error display
 	
 	- DONE verify the active & deleted flag on login
 		- consider using the User class
@@ -39,8 +39,8 @@ TODO:
 	- DONE cate au ramas la fiecare din maxim
 	- DONE HR vede approved si numarul real
 	- DONE restu vede si pending si real time number of days
-	- concedii medicale
-	- scurtcircuitare team leader
+	- V2PLAN concedii medicale
+	- V2PLAN scurtcircuitare team leader
 	- DONE normal user canceling his request will get access denied for requests?approve
 	- DONE navigare raport pe luni: ian/feb/sept ->....
 	- DONE CRITICAL!! Validation still server side!! Client Side Date!!!
@@ -54,7 +54,7 @@ TODO:
 	- DONE restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser
 	- DONE - migrated to SDL account - disabled gmail accout
 	
-	- integrate with LDAP service (exchange)
+	- V2PLAN integrate with LDAP service (exchange)
     - DONE add mail send for user creation to FDADMIN/HRMANAGEMENT
 	- DONE mail raport doar ziua curenta
 	- DONE la sfarsitul zilei sa verific zilele under approval ce inca nu au fost aprobate
@@ -65,11 +65,10 @@ TODO:
 	- DONE FDUser update will fail due to invalid regular user
 	
 	- DONE change register redirect to some page stating that the account is under processing and he will receive some mail confirmation when he can start using the service
-    - add javadoc generation
+    - V2PLAN add javadoc generation
 	- DONE with push in - problem at securing the controller handlers in the aspects
 	- DONE provide some info for the approver
-	- add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
-	git gui
+	- V2PLAN add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
 	
 	RELEASE TODO:
 	- DONE solve the minor bugs discovered that will enter in this realease
@@ -85,17 +84,16 @@ TODO:
 		- DONE to string for printing the vacation weekday 
 		- DONE user creation form from admin console
 		- DONE - to verbose!!!!!logging server side
-			- to verbose logging	
+			- to verbose logging
+			- improve logging on application specific topics
 		- DONE login possible with lowercase/uppercase username
-		- add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
-		- add javadoc generation
-		- integrate with LDAP service (exchange)
-		- concedii medicale
-		- concedii neplatite
-		- scurtcircuitare team leader
-		- request more than one day / request
-		- ?? Ofer posibility for reason input on request denial
-		- what other information should we offer to a request granter?
+		- V2 add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
+		- V2 integrate with LDAP service (exchange)
+		- V2 concedii medicale
+		- V2 concedii neplatite
+		- V2 scurtcircuitare team leader
+		- V2 request more than one day / request
+		- V2 ?? Ofer posibility for reason input on request denial
 	Florina:
 		- DONE change page displayed after register with some info
 		- DONE send mail to admn after register for account processing
@@ -111,8 +109,8 @@ TODO:
 	
 	Bogdan:
 		1)	DONE Calendar – see attached – the Month and the days of the week, would be best to be described in words (August or Aug and Mon or M)
-		2)	Calendar – If possible – if you can color code the weekends in a different shade or color I think it would improve the efficiency
-		3)	Once you figure out how to modify the form dynamically, I believe all 4 type of request links can be merged into one, and based on the Type of the request… to modify the input fields. It will create less confusion.
+		2)	(no api found yet) Calendar – If possible – if you can color code the weekends in a different shade or color I think it would improve the efficiency
+		3)	V2 Once you figure out how to modify the form dynamically, I believe all 4 type of request links can be merged into one, and based on the Type of the request… to modify the input fields. It will create less confusion.
 		4)	DONE The approved email has no formatting
 		
 	Dan:
@@ -120,6 +118,11 @@ TODO:
 		- (not discussed) dont see reason for R/C
 		- (not discussed) all months in one year on a single page
 		- (not discussed) double click see detail like in personal thingy
+		
+		
+		V2
+		- spring security update to 3.1.0.RC2 (still having some problem with the security:authorize tags)
+		
 
 	
 	

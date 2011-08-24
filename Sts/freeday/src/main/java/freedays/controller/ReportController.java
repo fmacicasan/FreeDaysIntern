@@ -2,6 +2,7 @@ package freedays.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -77,7 +78,7 @@ public class ReportController {
 		uiModel.addAttribute("daysWeekdayList",DateUtils.getWeekdayInitialsList(month));
 		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
 		
-		
+		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("Finish report creation!");
 		return "report/vacation";
 	}
 
