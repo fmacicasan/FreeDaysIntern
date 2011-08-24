@@ -482,10 +482,7 @@
                             <groupId>org.springframework</groupId>
                             <artifactId>spring-aspects</artifactId>
                         </aspectLibrary>
-                        <aspectLibrary>
-                            <groupId>org.springframework.security</groupId>
-                            <artifactId>spring-security-aspects</artifactId>
-                        </aspectLibrary>
+                       
                     </aspectLibraries>
                     <source>1.6</source>
                     <target>1.6</target>
