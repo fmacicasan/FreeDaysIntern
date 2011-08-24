@@ -23,4 +23,14 @@ public class Pattern {
 	public void setNoOfHours(Integer noh) {
 		noOfHours = noh;
 	}
+	public PhaseLabor getPhaseLabor(LaborBilling lbS, Phase phS) {
+		for(int i = 0; i < plArray.size(); i++) {
+			if (plArray.get(i).getLaborBilling().getId().equals(lbS.getId())) 
+			 if (plArray.get(i).getPhase().getID().equals(phS.getID())) {
+				 return plArray.get(i);
+			}
+		}
+		return null;
+		
+	}
 }

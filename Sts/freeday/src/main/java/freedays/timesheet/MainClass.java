@@ -41,7 +41,9 @@ public class MainClass {
 		PhaseLabor plab4 = new PhaseLabor("4", lb1, ph4, (float)10);
 		PhaseLabor plab5 = new PhaseLabor("5", lb1, ph5, (float)30);
 		
-		PhaseLabor plab6 = new PhaseLabor("6", lb2, ph2, (float)100);
+		PhaseLabor plab6 = new PhaseLabor("6", lb2, ph2, (float)40);
+		PhaseLabor plab7 = new PhaseLabor("7", lb1, ph3, (float)40);
+		PhaseLabor plab8 = new PhaseLabor("8", lb2, ph3, (float)20);
 		
 		Pattern sablon = new Pattern(100);
 		sablon.addPhL(plab1);
@@ -52,9 +54,11 @@ public class MainClass {
 		
 		Pattern sablon2 = new Pattern(8);
 		sablon2.addPhL(plab6);
+		sablon2.addPhL(plab7);
+		sablon2.addPhL(plab8);
 		
 		int year1 = 2011;
-	    int month1 = 2;
+	    int month1 = 1;
 	    int day1 = 1;
 	    Date a = getDateFrom(year1,month1,day1);	 
 	    int year2 = 2011;
@@ -73,9 +77,9 @@ public class MainClass {
 	    int month5 = 2;
 	    int day5 = 18;
 	    Date f = getDateFrom(year5,month5,day5);	  
-	    int year6 = 2011;
-	    int month6 = 2;
-	    int day6 = 28;
+	    int year6 = 2013;
+	    int month6 = 12;
+	    int day6 = 31;
 	    Date g = getDateFrom(year6, month6, day6);		
 		Schedule test = new Schedule(a, b, sablon, k);
 		Schedule test2 = new Schedule(c, d, sablon2, k);
@@ -84,9 +88,9 @@ public class MainClass {
 		k.addSchedule(test2);
 		k.addSchedule(test3);
 		
-		for (int i = 1; i < 2; i++) {
-			POIGenerator x = new POIGenerator(k);
-			x.generateDoc("..\\TimeSheetMock" + i + ".xls", i, 2011);
+		for (int i = 0; i < 12; i++) {
+			TimesheetGenerator x = new POIGenerator(k);
+			x.generateDoc("TimeSheet" + i + ".xls", i, 2011);
 		}
 	}
 }
