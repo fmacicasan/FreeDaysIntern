@@ -126,5 +126,7 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 		//Request.DEBUG=false;
 		
 	}
+	
+	
 
 }
