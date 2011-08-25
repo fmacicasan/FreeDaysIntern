@@ -45,9 +45,9 @@ public class MailUtils {
 	 * @see MailSender
 	 * @see SimpleMailMessage
 	 */
-	public void send(SimpleMailMessage smm){
-		mailSender.send(smm);
-	}
+//	public void send(SimpleMailMessage smm){
+//		mailSender.send(smm);
+//	}
 	
 	public void sendHtmlMsg(final List<String> to, final String subject, final String content){
     	this.sendMsg(to, subject, content, true);
@@ -116,14 +116,14 @@ public class MailUtils {
     		
     		@Override
     		public void run(){
-    			SimpleMailMessage mail = new SimpleMailMessage();
-        		mail.setTo(to);
-        		mail.setSubject(subject);
-        		mail.setText(content);
-        		mail.setFrom(MailUtils.SOURCE);
+//    			SimpleMailMessage mail = new SimpleMailMessage();
+//        		mail.setTo(to);
+//        		mail.setSubject(subject);
+//        		mail.setText(content);
+//        		mail.setFrom(MailUtils.SOURCE);
         		MailUtils mu = new MailUtils();
-        		
-        		mu.send(mail);
+        		mu.sendPlainMsg(to, subject, content);
+ //       		mu.send(mail);
         		
 //////    			//this.checkOperation();
 //   			Properties props = new Properties();
