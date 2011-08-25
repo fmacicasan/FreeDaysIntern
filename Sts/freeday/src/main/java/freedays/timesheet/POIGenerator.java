@@ -295,20 +295,22 @@ public class POIGenerator implements TimesheetGenerator{
 	    
 	}
 	private void generateDocHeader() {
-		CellRangeAddress region = CellRangeAddress.valueOf("A1:B1");
+		CellRangeAddress region = CellRangeAddress.valueOf("A1:C1");
 		sheet1.addMergedRegion( region );
 	    sheet1.setDisplayGridlines(false);
 	    Row row = sheet1.createRow((short)0);	 
 	    Cell cellCompany = row.createCell(0);
+		CellRangeAddress regionComp = CellRangeAddress.valueOf("H1:J1");
+		sheet1.addMergedRegion(regionComp);
 	    cellCompany.setCellValue("LANGUAGEWEAVER, INC.");
 	    Cell cellNameLabel = row.createCell(7);
 	    cellNameLabel.setCellValue("EMPLOYEE NAME");
-	    Cell cellName = row.createCell(8);
+	    Cell cellName = row.createCell(10);
 	    cellName.setCellValue(pEmp.getName());
 	    row = sheet1.createRow((short)1);
 	    Cell cellPositionLabel = row.createCell(7);
 	    cellPositionLabel.setCellValue("POSITION");
-	    Cell cellPosition = row.createCell(8);
+	    Cell cellPosition = row.createCell(10);
 	    cellPosition.setCellValue(pEmp.getPosition());
 	}
 	public void generateDoc(String workbookname, int genmonth, int genyear) {
