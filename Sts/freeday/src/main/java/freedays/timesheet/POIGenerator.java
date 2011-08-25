@@ -296,17 +296,21 @@ public class POIGenerator implements TimesheetGenerator{
 	}
 	private void generateDocHeader() {
 		CellRangeAddress region = CellRangeAddress.valueOf("A1:C1");
+		CellRangeAddress regionComp = CellRangeAddress.valueOf("H1:J1");
+		CellRangeAddress regionEmp = CellRangeAddress.valueOf("K1:M1");
+		CellRangeAddress regionPosition = CellRangeAddress.valueOf("K2:M2");
 		sheet1.addMergedRegion( region );
 	    sheet1.setDisplayGridlines(false);
 	    Row row = sheet1.createRow((short)0);	 
 	    Cell cellCompany = row.createCell(0);
-		CellRangeAddress regionComp = CellRangeAddress.valueOf("H1:J1");
 		sheet1.addMergedRegion(regionComp);
 	    cellCompany.setCellValue("LANGUAGEWEAVER, INC.");
 	    Cell cellNameLabel = row.createCell(7);
 	    cellNameLabel.setCellValue("EMPLOYEE NAME");
 	    Cell cellName = row.createCell(10);
 	    cellName.setCellValue(pEmp.getName());
+	    sheet1.addMergedRegion(regionEmp);
+	    sheet1.addMergedRegion(regionPosition);
 	    row = sheet1.createRow((short)1);
 	    Cell cellPositionLabel = row.createCell(7);
 	    cellPositionLabel.setCellValue("POSITION");
