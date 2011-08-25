@@ -12,7 +12,7 @@
        		<tr>
        			<th rowspan="2"><spring:message code="freedaysreport_name" /> </th>
        			<th rowspan="2"><spring:message code="freedaysreport_role" /></th>
-       			<th colspan="2"><spring:message code="freedaysreport_remainingdays" var="report_remainingdays" /><c:out value="${report_remainingdays}"/> </th>
+       			<th colspan="2"><spring:message code="freedaysreport_remainingdays" /></th>
        			<c:forEach var="i" begin="0" end="${length-1}">
        				<th  title="${daysDateList[i]}" >${daysWeekdayList[i]}</th>
        			</c:forEach>
@@ -101,18 +101,67 @@
        			<spring:message code="freedaysreport_legend_matchings" argumentSeparator="," arguments="${matchw}" />
        			<spring:message code="freedaysreport_legend_matchings_i" var="matchi" />
        			<spring:message code="freedaysreport_legend_matchings" argumentSeparator="," arguments="${matchi}" />
-       			<div class="legr"><spring:message code="freedaysreport_legend_typev" /></div> 
-       			<div class="legg"><spring:message code="freedaysreport_legend_typel" /></div> 
-       			<div class="legy"><spring:message code="freedaysreport_legend_typec" /></div> 
-       			<div class="lego"><spring:message code="freedaysreport_legend_typer" /></div>
+       			
+       			<spring:message code="freedaysreport_legend_typev" var="legend_typev" />
+       			<spring:message code="freedaysreport_legend_typel" var="legend_typel" />
+       			<spring:message code="freedaysreport_legend_typec" var="legend_typec" />
+       			<spring:message code="freedaysreport_legend_typer" var="legend_typer" />
+       			<div class="legr"><c:out value="${legend_typev}" /></div> 
+       			<div class="legg"><c:out value="${legend_typel}" /></div> 
+       			<div class="legy"><c:out value="${legend_typec}" /></div> 
+       			<div class="lego"><c:out value="${legend_typer}" /></div>
        			<br/>
-       			<spring:message code="freedaysreport_legend_explanation_title" arguments="${report_remainingdays}" var="paneltitle" />
+       			<spring:message code="freedaysreport_legend_explanation_title" var="paneltitle" />
        			<util:panel title="${paneltitle}" id="vacationreport_legend_panel_id" openPane="false">
        				<ul>
+       					<lh><spring:message code="freedaysreport_remainingdays" /> </lh>
        					<spring:message code="freedaysreport_legend_explanation_work" var="explainwork"  />
-       					<li><b><spring:message code="freedaysreport_remainingdayscovered"/></b>:<spring:message code="freedaysreport_legend_explanation" arguments="${explainwork}" /></li>
+       					<li><b><spring:message code="freedaysreport_remainingdayscovered"/></b>:
+       						<spring:message code="freedaysreport_legend_explanation_p1" arguments="${explainwork}" />
+       						<STRONG><c:out value=" ${explainwork} " /></STRONG>
+       						<spring:message code="freedaysreport_legend_explanation_p2" />
+       					</li>
        					<spring:message code="freedaysreport_legend_explanation_total" var="explaintotal"  />
-       					<li><B><spring:message code="freedaysreport_remainingdayslegal" /></B>:<spring:message code="freedaysreport_legend_explanation" arguments="${explaintotal}" /></li>
+       					<li><B><spring:message code="freedaysreport_remainingdayslegal" /></B>:
+       						<spring:message code="freedaysreport_legend_explanation_p1"/>
+       						<strong><c:out value=" ${explaintotal} " /></strong>
+       						<spring:message code="freedaysreport_legend_explanation_p2" />
+       					</li>
+       				</ul>
+       				
+       				<ul>
+       					<lh><spring:message code="freedays_report_legend_status_title" /></lh>
+       					<li>
+       						<strong><spring:message code="freedays_report_legend_status_c" /></strong>:
+       						<spring:message code="freedays_report_legend_status_c_exp" argumentSeparator="," arguments="${legend_typev},${legend_typel},${legend_typec},${legend_typer}" />
+       					</li>
+       					<li>
+       						<strong><spring:message code="freedays_report_legend_status_w" /></strong>:
+       						<spring:message code="freedays_report_legend_status_w_exp" argumentSeparator="," arguments="${legend_typec},${legend_typer}" />
+       					</li>
+       					<li>
+       						<strong><spring:message code="freedays_report_legend_status_i" /></strong>:
+       						<spring:message code="freedays_report_legend_status_i_exp" />
+       					</li>
+       				</ul>
+       				<ul>
+       					<lh><spring:message code="freedays_report_legend_types_title" /></lh>
+       					<li>
+       						<strong><c:out value="${legend_typev}" /></strong>:
+       						<spring:message code="freedays_report_legend_typev_exp" />
+       					</li>
+       					<li>
+       						<strong><c:out value="${legend_typel}" /></strong>:
+       						<spring:message code="freedays_report_legend_typel_exp" />
+       					</li>
+       					<li>
+       						<strong><c:out value="${legend_typec}" /></strong>:
+       						<spring:message code="freedays_report_legend_typec_exp" arguments="${legend_typer}" />
+       					</li>
+       					<li>
+       						<strong><c:out value="${legend_typer}" /></strong>:
+       						<spring:message code="freedays_report_legend_typer_exp" arguments="${legend_typec}"/>
+       					</li>
        				</ul>
        			</util:panel>
        		</td>
