@@ -16,4 +16,6 @@ public interface FreeDayScheduleService {
 	 * Denies all the requests that are under approval and their date passed.
 	 */
 	public void denyLateRequestsStillUnderApproval();
+	
+	public void generateTimesheets();
 }

@@ -12,8 +12,8 @@
         <table:table create="${var_create}" data="${requests}" delete="${var_delete}" id="l_freedays_domain_Request" path="/requests" update="${var_update}" z="user-managed">
             <table:column id="c_freedays_domain_Request_appreguser" label="Requester" maxLength="-1" property="appreguser" z="user-managed"/>
             <table:column id="c_freedays_domain_Request_requestable" label="FreeDay" maxLength="-1" property="requestable" z="user-managed"/>
-            <table:column id="c_freedays_domain_Request_status" property="status" maxLength="-1" z="/0j6Zu0EKj1TNhv30mUCaQ7sEP0="/>
-            <table:column id="c_freedays_domain_Request_approver" property="approver" maxLength="-1" z="Y8RzQ4a/FNn87HsgujZI0wi3pSg="/>
+            <table:column id="c_freedays_domain_Request_status" maxLength="-1" property="status" z="user-managed"/>
+            <table:column id="c_freedays_domain_Request_approver" maxLength="-1" property="approver" z="user-managed"/>
         </table:table>
     </page:list>
 </div>
