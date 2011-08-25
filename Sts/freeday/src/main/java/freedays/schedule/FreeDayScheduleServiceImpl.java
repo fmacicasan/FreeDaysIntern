@@ -26,6 +26,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import freedays.app.form.FreeDayUserList;
 import freedays.controller.ReportController;
 import freedays.domain.Request;
+import freedays.timesheet.MainClass;
 import freedays.util.DateUtils;
 import freedays.util.MailUtils;
 
@@ -122,11 +123,15 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 				request.getRequestable().merge();
 				request.merge();
 			}
-		}
+		}	
 		//Request.DEBUG=false;
 		
 	}
 	
-	
+	@Override
+	public void generateTimesheets() {
+		MainClass mc = new MainClass();
+		mc.doMain();		
+	}
 
 }

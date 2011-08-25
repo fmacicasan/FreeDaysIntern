@@ -188,11 +188,22 @@ public class POIGenerator implements TimesheetGenerator{
 		cWELabel.setCellStyle(style);
 		Cell WEValue = WE.createCell(10);
 		WEValue.setCellStyle(datestyle);
+		
 		Calendar cloneCurrent = (Calendar) weekEnd.clone();
-		cloneCurrent.add(Calendar.DAY_OF_MONTH, -7);
-		ArrayList<Schedule> schedListWeek;
-		java.util.Date aux = (java.util.Date) weekEnd.getTime();
-		WEValue.setCellValue(aux);
+		cloneCurrent.add(Calendar.DAY_OF_MONTH, -6);
+		Integer daysInMonth = 0;
+		if ((cloneCurrent.get(Calendar.MONTH) != weekEnd.get(Calendar.MONTH))) {
+			if ((endingDay != 5) || ((endingDay == 5) && (((weekEnd.get(Calendar.DAY_OF_MONTH)) == 1) || ((weekEnd.get(Calendar.DAY_OF_MONTH)) == 2)))) {				
+			daysInMonth = cloneCurrent.getActualMaximum(Calendar.DAY_OF_MONTH);
+			Integer currentDay = cloneCurrent.get(Calendar.DAY_OF_MONTH);
+			cloneCurrent.add(Calendar.DAY_OF_MONTH, daysInMonth - currentDay);
+			}
+			else
+			  cloneCurrent = weekEnd;
+		}
+		else
+			cloneCurrent = weekEnd;
+		WEValue.setCellValue((java.util.Date) cloneCurrent.getTime());
 		startingRow += 2;
 	    for(int i = 0; i <= PhLArray.size(); i++) {
 	    	if (i == 0) {
@@ -284,20 +295,22 @@ public class POIGenerator implements TimesheetGenerator{
 	    
 	}
 	private void generateDocHeader() {
-		CellRangeAddress region = CellRangeAddress.valueOf("A1:B1");
+		CellRangeAddress region = CellRangeAddress.valueOf("A1:C1");
 		sheet1.addMergedRegion( region );
 	    sheet1.setDisplayGridlines(false);
 	    Row row = sheet1.createRow((short)0);	 
 	    Cell cellCompany = row.createCell(0);
+		CellRangeAddress regionComp = CellRangeAddress.valueOf("H1:J1");
+		sheet1.addMergedRegion(regionComp);
 	    cellCompany.setCellValue("LANGUAGEWEAVER, INC.");
 	    Cell cellNameLabel = row.createCell(7);
 	    cellNameLabel.setCellValue("EMPLOYEE NAME");
-	    Cell cellName = row.createCell(8);
+	    Cell cellName = row.createCell(10);
 	    cellName.setCellValue(pEmp.getName());
 	    row = sheet1.createRow((short)1);
 	    Cell cellPositionLabel = row.createCell(7);
 	    cellPositionLabel.setCellValue("POSITION");
-	    Cell cellPosition = row.createCell(8);
+	    Cell cellPosition = row.createCell(10);
 	    cellPosition.setCellValue(pEmp.getPosition());
 	}
 	public void generateDoc(String workbookname, int genmonth, int genyear) {

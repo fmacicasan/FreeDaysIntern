@@ -90,7 +90,7 @@ public class MainClass {
 		
 		for (int i = 0; i < 12; i++) {
 			TimesheetGenerator x = new POIGenerator(k);
-			x.generateDoc("TimeSheet" + i + ".xls", i, 2011);
+			x.generateDoc("TimeSheet" + i + ".xls", i, 2012);
 		}
 	}
 }
