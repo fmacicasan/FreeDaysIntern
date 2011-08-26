@@ -67,4 +67,10 @@ public abstract class ApprovalStrategy {
 	public void setSuccesor(ApprovalStrategy succesor) {
         this.succesor = succesor;
     }
+
+	public ApplicationRegularUser getNextApprover(ApplicationRegularUser user) {
+		//add while for top approver retrieval
+		if(this.succesor == null) return null;
+		return this.succesor.getApprover(user);
+	}
 }

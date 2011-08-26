@@ -53,6 +53,9 @@ public abstract class FreeDay {
     	return this.approval.getApprover(user);
     }
     
+    public ApplicationRegularUser getNextApprover(ApplicationRegularUser user){
+    	return this.approval.getNextApprover(user);
+    }
     /**
      * Describes the states in which a FreeDay object can be.
      * These states will mark the status of a FreeDay. Such a status

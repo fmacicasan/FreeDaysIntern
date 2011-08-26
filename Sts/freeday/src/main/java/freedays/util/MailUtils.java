@@ -29,6 +29,8 @@ public class MailUtils {
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_SUBJECT = "FreeDays - Account activation";
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_CONTENT = "Hello %s,\n your account has been processed.\n";
 	private static final String SOURCE = "internlwtest@sdl.com";
+	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT = "Freedays - Request curtesy notification";
+	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT = "Hello %s,\n your subordinate %s has a new request to approve!\n %s \n\n";
     
 	@Autowired
     private JavaMailSenderImpl mailSender;
@@ -199,28 +201,35 @@ public class MailUtils {
 
 	public static void sendAfterRegisterNotification(final String fullname, final List<String> adminemails) {
 		final String content = String.format(MailUtils.DEFAULT_REGISTERNOTIFICATION_CONTENT, fullname);
-		Thread th = new Thread(){
-			@Override
-			public void run(){
-				MailUtils mu = new MailUtils();
-				mu.sendPlainMsg(adminemails, MailUtils.DEFAULT_REGISTERNOTIFICATION_SUBJECT, content);
-			}
-		};
-		th.start();
-		
+		MailUtils.sendAsyncMail(adminemails,  MailUtils.DEFAULT_REGISTERNOTIFICATION_SUBJECT, content);
 	}
 
 	public static void sendPostRegisterProcessing(final String fullname, final String email) {
 		final String content = String.format(MailUtils.DEFAULT_POSTPROCESSINGNOTIF_CONTENT,fullname);
+		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_POSTPROCESSINGNOTIF_SUBJECT, content);
+	}
+	
+	public static void sendUpperRequestNotification(final String email, final String superapprover, final String approver, final String request){
+		final String content = String.format(MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT,superapprover,approver,request);
+		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
+	}
+	
+	
+	
+	public static void sendAsyncMail(final String email, final String subject, final String content){
+		List<String> lst = new ArrayList<String>();
+		lst.add(email);
+		MailUtils.sendAsyncMail(lst, subject, content);
+	}
+	public static void sendAsyncMail(final List<String> email, final String subject, final String content){
 		Thread th = new Thread(){
 			@Override
 			public void run(){
 				MailUtils mu = new MailUtils();
-				mu.sendPlainMsg(email, MailUtils.DEFAULT_POSTPROCESSINGNOTIF_SUBJECT, content);
+				mu.sendPlainMsg(email, subject, content);
 			}
 		};
 		th.start();
-		
 	}
     
 }

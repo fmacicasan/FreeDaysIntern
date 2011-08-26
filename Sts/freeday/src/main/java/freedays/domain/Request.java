@@ -65,6 +65,9 @@ public class Request   implements Serializable{
     		advanceApprover();
     		if(this.approver != null){// && !this.approver.isSame(oldApprover)){
     			requestApproval();
+    			
+    			//inform superior of pending approval at subordinate
+    			informSuperior();
     		} else {
     			setApproveStatus();
         		informApproveRequest();
@@ -182,6 +185,13 @@ public class Request   implements Serializable{
 	    	String mailTo = this.approver.getRegularUser().getEmail();
 	    	String content = this.prepareContent(Request.FD_APPROVAL_REQ_CONTENT, this.toString());
 	    	MailUtils.send(mailTo,Request.FD_APPROVAL_REQ_SUBJECT,content);
+    	}
+    }
+    
+    private void informSuperior(){
+    	if(!Request.DEBUG){
+    		RegularUser superapprover = this.getRequestable().getNextApprover(this.getAppreguser()).getRegularUser();
+    		MailUtils.sendUpperRequestNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
     	}
     }
     
