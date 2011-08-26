@@ -12,9 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -22,8 +19,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.util.StringUtils;
 
 import freedays.app.form.FreeDayRequest;
-import freedays.app.form.FreeDayUserList;
 import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayUserList;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
 import freedays.domain.RegularUser;

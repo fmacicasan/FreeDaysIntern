@@ -2,10 +2,10 @@ package freedays.app;
 
 import javax.persistence.DiscriminatorValue;
 
-import freedays.domain.AdvancedUserRole;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
+
+import freedays.domain.AdvancedUserRole;
 
 /**
  * Class describing a FreeDay administration role.

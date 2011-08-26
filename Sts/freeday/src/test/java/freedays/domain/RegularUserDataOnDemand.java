@@ -14,4 +14,9 @@ public class RegularUserDataOnDemand {
 		RegularUserDataOnDemand rudod = new RegularUserDataOnDemand();
 		return rudod.getRandomRegularUser();
 	}
+
+	public void setUsername(RegularUser obj, int index) {
+        String username = "username_" + index + "@testnew.tst";
+        obj.setUsername(username);
+    }
 }

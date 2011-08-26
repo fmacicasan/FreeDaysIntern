@@ -1,14 +1,6 @@
 package freedays.controller;
 
-import freedays.security.UserContextService;
-import freedays.util.MailUtils;
-import freedays.validation.RegularUserValidator;
-import freedays.domain.RegularUser;
-import freedays.domain.form.Search;
-
-import java.io.UnsupportedEncodingException;
 import java.security.Principal;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,20 +8,21 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.UriUtils;
-import org.springframework.web.util.WebUtils;
+
+import freedays.domain.RegularUser;
+import freedays.domain.form.Search;
+import freedays.security.UserContextService;
+import freedays.validation.RegularUserValidator;
 
 /**
  * Controller used to handle regular user related requests.

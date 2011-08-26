@@ -3,18 +3,16 @@
 
 package freedays.domain;
 
-import freedays.domain.RegularUser;
-import java.lang.Boolean;
-import java.lang.String;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.stereotype.Component;
 
 privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
@@ -80,11 +78,7 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
         obj.setUsermodifier(usermodifier);
     }
     
-    public void RegularUserDataOnDemand.setUsername(RegularUser obj, int index) {
-        String username = "username_" + index;
-        obj.setUsername(username);
-    }
-    
+        
     public RegularUser RegularUserDataOnDemand.getSpecificRegularUser(int index) {
         init();
         if (index < 0) index = 0;

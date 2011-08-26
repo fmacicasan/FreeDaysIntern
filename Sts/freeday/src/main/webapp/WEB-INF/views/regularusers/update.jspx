@@ -5,7 +5,7 @@
     <form:update id="fu_freedays_domain_RegularUser" modelAttribute="regularUser" path="/regularusers" save_button="Update" versionField="Version" z="user-managed">
         <field:input field="username" id="c_freedays_domain_RegularUser_username" required="true" z="user-managed"/>
         <field:input field="password" id="c_freedays_domain_RegularUser_password" required="true" z="ngtuvBXXC/yxg5O7Uev2KG22Ybw="/>
-        <field:input field="email" id="c_freedays_domain_RegularUser_email" required="true" validationMessageCode="field_invalid_email" z="kWommBnkAeoeIN3pIU9znHKiqko="/>
+        <!-- <field:input field="email" id="c_freedays_domain_RegularUser_email" required="true" validationMessageCode="field_invalid_email" z="kWommBnkAeoeIN3pIU9znHKiqko="/> -->
         <field:input field="surename" id="c_freedays_domain_RegularUser_surename" required="true" z="POxYmJd2jSMnWVLRxNMf5qOlO9Y="/>
         <field:input field="firstname" id="c_freedays_domain_RegularUser_firstname" required="true" z="4Vqg8aD08b0xYrGvmRXKQx6R6iY="/>
         <!-- <field:checkbox field="deleted" id="c_freedays_domain_RegularUser_deleted" readonly="true" z="user-managed"/> -->

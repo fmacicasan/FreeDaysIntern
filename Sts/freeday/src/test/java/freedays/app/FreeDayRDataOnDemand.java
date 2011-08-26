@@ -1,10 +1,5 @@
 package freedays.app;
 
-import org.springframework.roo.addon.dod.RooDataOnDemand;
-
-import freedays.domain.ApprovalStrategy;
-import freedays.util.DateUtils;
-
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,6 +8,10 @@ import java.util.Random;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
+import org.springframework.roo.addon.dod.RooDataOnDemand;
+
+import freedays.util.DateUtils;
 
 @RooDataOnDemand(entity = FreeDayR.class)
 public class FreeDayRDataOnDemand {

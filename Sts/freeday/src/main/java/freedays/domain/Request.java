@@ -1,34 +1,24 @@
 package freedays.domain;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 
-import freedays.util.MailUtils;
+import javax.persistence.EntityManager;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.TypedQuery;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.security.access.prepost.PostFilter;
 
-import freedays.domain.ApplicationRegularUser;
-
-import javax.persistence.EntityManager;
-import javax.persistence.ManyToOne;
-import javax.persistence.TypedQuery;
-
-import freedays.app.AppStrategL1;
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
-import freedays.app.FreeDayL;
-
-import javax.validation.constraints.NotNull;
-import javax.persistence.OneToOne;
 import freedays.app.RequestStatus;
 import freedays.app.form.FreeDayRequest;
-
-import javax.persistence.Enumerated;
+import freedays.util.MailUtils;
 
 /**
  * Class describing a request. It is associated with a Application Reuglar user, a Requestable object and

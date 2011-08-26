@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.roo.addon.dod.RooDataOnDemand;
 
 @RooDataOnDemand(entity = FreeDayVacation.class)

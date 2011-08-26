@@ -1,7 +1,5 @@
 package freedays.controller;
 
-import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -15,16 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.util.UriUtils;
-import org.springframework.web.util.WebUtils;
 
 import freedays.app.FDUser;
 import freedays.domain.RegularUser;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.UpdateWrapper;
-import freedays.schedule.FreeDayScheduleServiceImpl;
 import freedays.security.UserContextService;
-import freedays.util.MailUtils;
 
 /**
  * Controller used to intercept account related requests
@@ -56,7 +50,7 @@ public class AccountController {
 			RegularUser regularUser = RegularUser.findRegularUsersByUsername(
 					httpServletRequest.getUserPrincipal().getName()).getSingleResult();
 			UpdateWrapper uw =new UpdateWrapper();
-			uw.setEmail(regularUser.getEmail());
+			//uw.setEmail(regularUser.getEmail());
 			uw.setFirstname(regularUser.getFirstname());
 			uw.setSurename(regularUser.getSurename());
 			uw.setUsername(regularUser.getUsername());

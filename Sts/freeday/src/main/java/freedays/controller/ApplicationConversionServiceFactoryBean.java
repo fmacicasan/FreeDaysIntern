@@ -1,20 +1,19 @@
 package freedays.controller;
 
-import org.springframework.format.FormatterRegistry;
+import java.util.Set;
+
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.RooConversionService;
-    
+
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
-import freedays.app.FreeDayL;
 import freedays.app.FreeDaysRCMatch;
 import freedays.app.form.FreeDayRequest;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
-
-import java.util.Set;
 /**
  * A central place to register application Converters and Formatters.
  * INFO: default location where spring retrieves conversion and formatting strategies for view exposion.

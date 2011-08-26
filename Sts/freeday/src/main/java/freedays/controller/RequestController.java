@@ -2,33 +2,15 @@ package freedays.controller;
 
 import java.security.Principal;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
-import freedays.app.FDUser;
-import freedays.app.FreeDay;
-import freedays.app.FreeDayC;
-import freedays.app.FreeDayR;
-import freedays.app.FreeDayVacation.ConfidenceLevel;
-import freedays.app.form.FreeDayRequest;
-import freedays.app.form.FreeDayRequestVacation;
-import freedays.app.form.FreeDayRequest.RequestType;
-import freedays.domain.ApplicationRegularUser;
-import freedays.domain.Request;
-import freedays.domain.ApplicationRegularUser.JobRole;
-import freedays.security.UserContextService;
 
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,7 +20,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import freedays.app.FreeDayC;
+import freedays.app.FreeDayR;
+import freedays.app.FreeDayVacation.ConfidenceLevel;
+import freedays.app.form.FreeDayRequest;
+import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequestVacation;
+import freedays.domain.Request;
+import freedays.security.UserContextService;
 
 /**
  * Controller used to intercept free day requests

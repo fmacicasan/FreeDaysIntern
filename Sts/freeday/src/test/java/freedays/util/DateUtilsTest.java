@@ -2,9 +2,6 @@ package freedays.util;
 
 import java.util.Calendar;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Future;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -12,9 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import freedays.validation.annotation.BusinessDay;
-import freedays.validation.annotation.Weekend;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml")

@@ -1,6 +1,5 @@
 package freedays.security;
 
-import java.security.Principal;
 import java.util.Collection;
 
 import org.springframework.security.core.Authentication;

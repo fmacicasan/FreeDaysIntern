@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
-import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.form.FreeDayRequest;
 import freedays.util.DateUtils;
 

@@ -1,7 +1,6 @@
 package freedays.app;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,11 +17,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.security.access.prepost.PostFilter;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
-import freedays.domain.Request;
 import freedays.validation.annotation.BusinessDay;
 
 /**

@@ -10,7 +10,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 import freedays.validation.CheckChangePassValidator;
-import freedays.validation.CheckSamePassValidator;
 
 /**
  * Validator for the change pass form. It verifies weather

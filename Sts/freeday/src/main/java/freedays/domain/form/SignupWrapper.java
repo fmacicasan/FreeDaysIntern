@@ -24,6 +24,8 @@ public class SignupWrapper {
 	@Column(unique = true)
 	// TODO check what's going on
 	@Length(min = 3, max = 45, message = "#{messages['field_invalid_length']}")
+	@Email(message = "#{messages['field_invalid_email']}")
+	@UniqueEmail
 	private String username;
 
 	@NotNull
@@ -34,10 +36,10 @@ public class SignupWrapper {
 	@Length(min = 6, max = 45)
 	private String repeatpassword;
 
-	@NotNull
-	@Email(message = "#{messages['field_invalid_email']}")
-	@UniqueEmail
-	private String email;
+//	@NotNull
+//	@Email(message = "#{messages['field_invalid_email']}")
+//	@UniqueEmail
+//	private String email;
 
 	@NotNull
 	private String surename;

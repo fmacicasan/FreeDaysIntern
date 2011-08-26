@@ -1,12 +1,11 @@
 package freedays.domain;
 
 
-import freedays.domain.form.Search;
-import freedays.util.MailUtils;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.test.RooIntegrationTest;
+
+import freedays.domain.form.Search;
 
 
 @RooIntegrationTest(entity = RegularUser.class)

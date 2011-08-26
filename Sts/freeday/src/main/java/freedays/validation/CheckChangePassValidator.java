@@ -1,7 +1,5 @@
 package freedays.validation;
 
-import java.util.Calendar;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -11,8 +9,6 @@ import org.springframework.security.authentication.encoding.MessageDigestPasswor
 import freedays.domain.RegularUser;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.security.UserContextService;
-import freedays.validation.annotation.BusinessDay;
-import freedays.validation.annotation.SamePass;
 import freedays.validation.annotation.ValidChangePass;
 
 /**

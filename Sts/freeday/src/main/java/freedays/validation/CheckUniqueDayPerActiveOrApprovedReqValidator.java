@@ -12,7 +12,6 @@ import freedays.app.FreeDay;
 import freedays.app.form.FreeDayRequest;
 import freedays.security.UserContextService;
 import freedays.validation.annotation.UniqueDayPerActiveOrApprovedReq;
-import freedays.validation.annotation.UniqueEmail;
 
 /**
  * 
