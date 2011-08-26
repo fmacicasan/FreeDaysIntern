@@ -31,7 +31,8 @@ public class MailUtils {
 	private static final String SOURCE = "internlwtest@sdl.com";
 	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT = "Freedays - Request curtesy notification";
 	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT = "Hello %s,\n your subordinate %s has a new request to approve!\n %s \n\n";
-    
+    private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
+    private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT="Hello %s,\n the following request was canceled!\n %s \n\n ";
 	@Autowired
     private JavaMailSenderImpl mailSender;
 	
@@ -211,6 +212,16 @@ public class MailUtils {
 	
 	public static void sendUpperRequestNotification(final String email, final String superapprover, final String approver, final String request){
 		final String content = String.format(MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT,superapprover,approver,request);
+		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
+	}
+	
+	public static void sendUpperRequestDenyNotification(final String email, final String superapprover, final String approver, final String request){
+		final String content = String.format(MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT,superapprover,approver,request);
+		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
+	}
+	
+	public static void sendUpperRequestCancelNotification(final String email, final String superapprover, final String request){
+		final String content = String.format(MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT,superapprover,request);
 		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
 	}
 	

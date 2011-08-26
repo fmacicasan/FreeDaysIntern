@@ -67,7 +67,7 @@ public class Request   implements Serializable{
     			requestApproval();
     			
     			//inform superior of pending approval at subordinate
-    			informSuperior();
+    			informSuperiorInit();
     		} else {
     			setApproveStatus();
         		informApproveRequest();
@@ -188,11 +188,28 @@ public class Request   implements Serializable{
     	}
     }
     
-    private void informSuperior(){
+    private void informSuperiorInit(){
     	if(!Request.DEBUG){
-    		RegularUser superapprover = this.getRequestable().getNextApprover(this.getAppreguser()).getRegularUser();
+    		RegularUser superapprover = getSuperiorRegularUser();
     		MailUtils.sendUpperRequestNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
     	}
+    }
+    
+    private void informSuperiorDeny(){
+    	if(!Request.DEBUG){
+    		RegularUser superapprover = getSuperiorRegularUser();
+    		MailUtils.sendUpperRequestDenyNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
+    	}
+    }
+    private void informSuperiorCancel(){
+    	if(!Request.DEBUG){
+    		RegularUser superapprover = getSuperiorRegularUser();
+    		MailUtils.sendUpperRequestCancelNotification(superapprover.getEmail(), superapprover.getFullName(), this.toString());
+    	}
+    }
+    
+    private RegularUser getSuperiorRegularUser(){
+    	return this.getRequestable().getNextApprover(this.getAppreguser()).getRegularUser();
     }
     
     private String prepareContent(String top, String bottom){
@@ -218,6 +235,7 @@ public class Request   implements Serializable{
     private void informDenyRequest(){
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_DENY);
+    		this.informSuperiorDeny();
     	}	
     }
     
@@ -236,6 +254,7 @@ public class Request   implements Serializable{
     private void informCancelRequest(){
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_CANCEL);
+    		this.informSuperiorCancel();
     	}
     }
     
