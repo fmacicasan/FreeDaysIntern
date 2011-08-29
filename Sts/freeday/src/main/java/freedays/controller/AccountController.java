@@ -3,6 +3,8 @@ package freedays.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -34,6 +36,8 @@ public class AccountController {
 	private UserContextService userContextService;
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
+	
+	private final Log log = LogFactory.getLog(this.getClass());
 
 	
 	/**
@@ -58,6 +62,7 @@ public class AccountController {
 		
 		}catch(EmptyResultDataAccessException e){
 		}
+		log.info("pupulated change account info");
 		return "account";
 	}
 

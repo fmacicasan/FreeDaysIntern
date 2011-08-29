@@ -193,6 +193,7 @@ public class RegularUserController {
         uiModel.asMap().clear();
         Principal p = httpServletRequest.getUserPrincipal();
         regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
+        regularUser.setPassword(regularUser.getPassword());
         regularUser.merge();
         return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
     }

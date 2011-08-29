@@ -22,7 +22,7 @@
     
     <page:show id="ps_freedays_domain_RegularUser" object="${regularuser}" path="/regularusers" z="IA1hpYmY/P0g3tMN3rBd1ya+W8g="  create="${var_create}" delete="${var_delete}" update="${var_update}" list="${var_list}" >
         <field:display field="username" id="s_freedays_domain_RegularUser_username" object="${regularuser}" z="8s0x9rGURalvc7HBqJdMocub/f4="/>
-        <field:display field="password" id="s_freedays_domain_RegularUser_password" object="${regularuser}" z="3nKjMs36sSBPU06k/bXpEdF1Apw="/>
+        <field:display render="false" field="password" id="s_freedays_domain_RegularUser_password" object="${regularuser}" z="3nKjMs36sSBPU06k/bXpEdF1Apw="/>
         <!--  <field:display field="email" id="s_freedays_domain_RegularUser_email" object="${regularuser}" z="ElePEpP0SmwF32dBDoeNXmWbD+c="/>-->
         <field:display field="surename" id="s_freedays_domain_RegularUser_surename" object="${regularuser}" z="eZCoUMTmYwhFzYx64YPqN7U+4Io="/>
         <field:display field="firstname" id="s_freedays_domain_RegularUser_firstname" object="${regularuser}" z="pUOr7h12giEHMWBm4zj373Hqn7I="/>

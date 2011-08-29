@@ -87,13 +87,13 @@ TODO:
 			- to verbose logging
 			- improve logging on application specific topics
 		- DONE login possible with lowercase/uppercase username
-		- V2 add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
-		- V2 integrate with LDAP service (exchange)
-		- V2 concedii medicale
-		- V2 concedii neplatite
-		- V2 scurtcircuitare team leader
-		- V2 request more than one day / request
-		- V2 ?? Ofer posibility for reason input on request denial
+		- V2 - add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
+		- V2 - integrate with LDAP service (exchange)
+		- V2 - concedii medicale
+		- V2 - concedii neplatite
+		- V2 - scurtcircuitare team leader
+		- V2 - request more than one day / request
+		- V2 - ?? Ofer posibility for reason input on request denial
 	Florina:
 		- DONE change page displayed after register with some info
 		- DONE send mail to admn after register for account processing
@@ -110,7 +110,7 @@ TODO:
 	Bogdan:
 		1)	DONE Calendar – see attached – the Month and the days of the week, would be best to be described in words (August or Aug and Mon or M)
 		2)	(no api found yet) Calendar – If possible – if you can color code the weekends in a different shade or color I think it would improve the efficiency
-		3)	V2 Once you figure out how to modify the form dynamically, I believe all 4 type of request links can be merged into one, and based on the Type of the request… to modify the input fields. It will create less confusion.
+		3)	- V2 Once you figure out how to modify the form dynamically, I believe all 4 type of request links can be merged into one, and based on the Type of the request… to modify the input fields. It will create less confusion.
 		4)	DONE The approved email has no formatting
 		
 	Dan:

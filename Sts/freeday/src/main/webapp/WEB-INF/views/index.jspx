@@ -8,10 +8,10 @@
       
       <spring:message code="welcome_h3" arguments="${app_name}" />
       <br />
-      <sec:authorize ifAllGranted="ROLE_USER">
+      <!--  <sec:authorize ifAllGranted="ROLE_USER">
         <sec:authentication property="principal.username" var="username" />
       	<spring:message code="welcome_user" arguments="${username}" />
-      </sec:authorize>
+      </sec:authorize>-->
     </h3>
     <p>
     </p>

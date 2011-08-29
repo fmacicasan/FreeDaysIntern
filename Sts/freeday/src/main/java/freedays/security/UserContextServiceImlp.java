@@ -45,5 +45,6 @@ public class UserContextServiceImlp implements UserContextService{
 	public boolean isOwn(RegularUser regularUser) {
 		return regularUser.getUsername().equals(this.getCurrentUser());
 	}
+	
 
 }

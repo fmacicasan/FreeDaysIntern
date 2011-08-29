@@ -32,7 +32,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
                 //return Joiner.on(",").join(properties.toArray());
             	StringBuilder sb = new StringBuilder();
             	for(ApplicationRegularUser aru:set){
-            		sb.append(aru.toString());
+            		sb.append(aru.toString()).append(" ");
             	}
                 return sb.toString();// 1
             }
@@ -49,7 +49,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
                 //return Joiner.on(",").join(properties.toArray());
             	StringBuilder sb = new StringBuilder();
             	for(AdvancedUserRole aru:set){
-            		sb.append(aru.toString());
+            		sb.append(aru.toString()).append(" ");
             	}
                 return sb.toString();// 1
             }

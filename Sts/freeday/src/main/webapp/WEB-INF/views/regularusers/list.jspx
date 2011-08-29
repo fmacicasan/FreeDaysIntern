@@ -5,7 +5,7 @@
     <page:list id="pl_freedays_domain_RegularUser" items="${regularusers}" z="HYU6ZpOer09+VMedGUJG2GVBsLo=">
         <table:table data="${regularusers}" fd_conditionalRenderColumnName="deleted" id="l_freedays_domain_RegularUser" path="/regularusers" z="user-managed">
             <table:column maxLength="-1" id="c_freedays_domain_RegularUser_username" property="username" z="zsEf2Sxo5GwCs/VOBUA6GYJm8JE="/>
-            <table:column id="c_freedays_domain_RegularUser_password" property="password" z="eFI4SYezX5FdzmZTSbDr22KBjKI="/>
+            <table:column render="false" id="c_freedays_domain_RegularUser_password" property="password" z="eFI4SYezX5FdzmZTSbDr22KBjKI="/>
             <!-- <table:column maxLength="-1" id="c_freedays_domain_RegularUser_email" property="email" z="qyG0fpGjnyAjNEijzHsSX8m9BYg="/> -->
             <table:column maxLength="-1" id="c_freedays_domain_RegularUser_surename" property="surename" z="ccjjcKG658BF457vBWDS/78vxik="/>
             <table:column maxLength="-1" id="c_freedays_domain_RegularUser_firstname" property="firstname" z="VSC2sQYH91s/dMoZvF6Bv03NTZ8="/>
