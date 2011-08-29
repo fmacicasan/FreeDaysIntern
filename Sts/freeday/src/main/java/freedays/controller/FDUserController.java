@@ -188,6 +188,8 @@ public class FDUserController {
         FDUser back = FDUser.findFDUser(fdu.getId());
         RegularUser ru = back.getRegularUser();
         fdu.setRegularUser(ru);
+        //TODO: change also the requests for the ex approver to the new one
+        //should i send mail to the involved parties ?
         fdu.merge();
        
         return "redirect:/fdusers/" + encodeUrlPathSegment(fdu.getId().toString(), httpServletRequest);

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 @Aspect
 @Component
-public class LoggerA {
+public class LoggerA {                                                       
 	private final Log log = LogFactory.getLog(this.getClass());
 
 	@Around("execution(* freedays..*.*(..))")
@@ -39,13 +39,14 @@ public class LoggerA {
 				}
 	
 				logMessage.append(")");
+				logMessage.append(" execution time: ");
+				logMessage.append(stopWatch.getTotalTimeMillis());
+				logMessage.append(" ms");
+				log.error(logMessage.toString());
 			}catch(NullPointerException e){
-				logMessage.append("nothing");
+				//logMessage.append("nothing");
 			}
-			logMessage.append(" execution time: ");
-			logMessage.append(stopWatch.getTotalTimeMillis());
-			logMessage.append(" ms");
-			log.error(logMessage.toString());
+			
 			return retVal;
 	}
 }

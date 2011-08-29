@@ -425,3 +425,6 @@ perform tests
 backup
 // [failed] backup
 perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 20:53:16
+perform tests
+perform tests
