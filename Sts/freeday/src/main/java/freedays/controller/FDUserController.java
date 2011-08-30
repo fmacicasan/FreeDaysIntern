@@ -24,6 +24,7 @@ import freedays.app.FDUser;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApplicationRegularUser.JobRole;
 import freedays.domain.RegularUser;
+import freedays.domain.Request;
 import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 
@@ -185,12 +186,9 @@ public class FDUserController {
             return "fdusers/update";
         }
         uiModel.asMap().clear();
-        FDUser back = FDUser.findFDUser(fdu.getId());
-        RegularUser ru = back.getRegularUser();
-        fdu.setRegularUser(ru);
-        //TODO: change also the requests for the ex approver to the new one
-        //should i send mail to the involved parties ?
-        fdu.merge();
+        
+        FDUser.updateFDUser(fdu);
+
        
         return "redirect:/fdusers/" + encodeUrlPathSegment(fdu.getId().toString(), httpServletRequest);
     }

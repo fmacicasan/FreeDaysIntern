@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -46,7 +47,7 @@ public abstract class ApplicationRegularUser  implements Serializable {
     @JoinTable(name = "AppRegUser_AdvRole", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<AdvancedUserRole> roles = new HashSet<AdvancedUserRole>();
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private ApplicationRegularUser granter;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "appreguser")
