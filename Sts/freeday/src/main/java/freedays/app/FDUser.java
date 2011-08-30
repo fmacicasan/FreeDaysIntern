@@ -206,19 +206,21 @@ public class FDUser extends ApplicationRegularUser {
 //      fdu.setRegularUser(ru);
       //TODO: change also the requests for the ex approver to the new one
       //should i send mail to the involved parties ?
-      if((back.getGranter().getId() != fdu.getGranter().getId())){//the granter changed in UI => persistence context marked the change
-      	System.out.println("Testing");
-      	fdu.updateActiveRequests(back);
-
+      if(back.getGranter() != null){
+	      if((back.getGranter().getId() != fdu.getGranter().getId())){//the granter changed in UI => persistence context marked the change
+	      	System.out.println("Testing");
+	      	fdu.updateActiveRequests(back.getGranter());
+	
+	      }
       }
       fdu.merge();
 		
 	}
 
-	private void updateActiveRequests(FDUser back) {
-		if(back==null){throw new IllegalArgumentException("The baclward argument is required");}
+	private void updateActiveRequests(ApplicationRegularUser oldGranter) {
+		if(oldGranter==null){throw new IllegalArgumentException("The oldGranter argument is required");}
 		TypedQuery<Request> q = entityManager().createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username and o.approver = :granter and o.status NOT IN :finishstates  ", Request.class);
-        q.setParameter("granter", back.getGranter());
+        q.setParameter("granter", oldGranter);
         q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
         q.setParameter("username", this.getRegularUser().getUsername());
         List<Request> results = q.getResultList();

@@ -3,6 +3,7 @@
 
 package freedays.schedule;
 
+import freedays.security.UserContextService;
 import java.lang.String;
 
 privileged aspect FreeDayScheduleServiceImpl_Roo_JavaBean {
@@ -13,6 +14,14 @@ privileged aspect FreeDayScheduleServiceImpl_Roo_JavaBean {
     
     public void FreeDayScheduleServiceImpl.setReportDestinationAddress(String reportDestinationAddress) {
         this.reportDestinationAddress = reportDestinationAddress;
+    }
+    
+    public UserContextService FreeDayScheduleServiceImpl.getUserContextService() {
+        return this.userContextService;
+    }
+    
+    public void FreeDayScheduleServiceImpl.setUserContextService(UserContextService userContextService) {
+        this.userContextService = userContextService;
     }
     
 }

@@ -77,13 +77,13 @@
                     <menu:item id="i_request_new_c" messageCode="global_menu_new" url="/requests?form=c" z="user-managed"/>
                     <menu:item id="i_request_new_r" messageCode="global_menu_new" url="/requests?form=r" z="user-managed"/>
                     <menu:item id="i_request_new_v" messageCode="global_menu_new" url="/requests?form=v" z="user-managed"/>
-                    <menu:item id="i_request_list_own" messageCode="global_menu_list" url="/requests?own" z="user-managed"/>
+                    <menu:item id="i_request_list_own" url="/requests?own" z="user-managed"/>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_REQUESTGRANTER">
-                    <menu:item id="i_request_list_approve" messageCode="global_menu_list" url="/requests?approve" z="user-managed"/>
+                    <menu:item id="i_request_list_approve" url="/requests?approve" z="user-managed"/>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_FDADMIN">
-                    <menu:item id="i_request_list" messageCode="global_menu_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="zR+uAsU8p+xT+34YNGm0eI2d/Dk="/>
+                    <menu:item id="i_request_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="zR+uAsU8p+xT+34YNGm0eI2d/Dk="/>
                 </sec:authorize>
             </menu:category>
         </sec:authorize>

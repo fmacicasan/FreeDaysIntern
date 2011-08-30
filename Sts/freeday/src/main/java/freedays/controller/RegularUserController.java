@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.domain.RegularUser;
+import freedays.domain.form.AdminRegUserUpdate;
 import freedays.domain.form.Search;
 import freedays.security.UserContextService;
 import freedays.validation.RegularUserValidator;
@@ -183,7 +184,7 @@ public class RegularUserController {
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasPermission(#regularUser,'own')")
 	@RequestMapping(method = RequestMethod.PUT)
-    public String update(@Valid RegularUser regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String update(@Valid AdminRegUserUpdate regularUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("regularUser", regularUser);
             addDateTimeFormatPatterns(uiModel);
@@ -191,11 +192,9 @@ public class RegularUserController {
         }
         //TODO: should also check the validity of the RegularUser
         uiModel.asMap().clear();
-        Principal p = httpServletRequest.getUserPrincipal();
-        regularUser.setUsermodifier((p==null)?regularUser.getUsername():p.getName());
-        regularUser.setPassword(regularUser.getPassword());
-        regularUser.merge();
-        return "redirect:/regularusers/" + encodeUrlPathSegment(regularUser.getId().toString(), httpServletRequest);
+        RegularUser regu = RegularUser.updateRegUser(regularUser);
+       
+        return "redirect:/regularusers/" + encodeUrlPathSegment(regu.getId().toString(), httpServletRequest);
     }
 
 
