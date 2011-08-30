@@ -113,6 +113,12 @@
     <bean class="java.lang.String" id="reportDestinationAddress">
     	<constructor-arg value="icondor@sdl.com" />
     </bean>
+    
+    <bean class="java.lang.String" id="applicationHome">
+    	<constructor-arg value="http://cluj-fdays-db01:8085/freedays" />
+    </bean>
+    
+
     	
     
     

@@ -136,6 +136,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     	return new Converter<ApplicationRegularUser, String>(){
 			@Override
 			public String convert(ApplicationRegularUser source) {
+				
 				return source.toString();
 			}
     	

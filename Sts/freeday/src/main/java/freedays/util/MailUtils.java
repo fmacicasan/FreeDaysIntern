@@ -1,5 +1,6 @@
 package freedays.util;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +34,13 @@ public class MailUtils {
 	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT = "Hello %s,\n your subordinate %s has a new request to approve!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT="Hello %s,\n the following request was canceled!\n %s \n\n ";
+	private static final String DEFAULT_APPLICATION_LINK="Find us at {0}!";
+    
 	@Autowired
     private JavaMailSenderImpl mailSender;
+    
+    @Autowired
+    private String applicationHome;
 	
 	/**
 	 * Sends the simple mail message via the corresponding MailSender
@@ -66,12 +72,12 @@ public class MailUtils {
 	protected void sendMsg(final List<String> tol, final String subject, final String content, final boolean isHtml){
 		MimeMessage mm = mailSender.createMimeMessage();
     	MimeMessageHelper helper = new MimeMessageHelper(mm);
-    	tol.add("fmacicasan@sdl.com");
+    	finalizeTo(tol);
     	String[] to = (String[])tol.toArray(new String[0]);
     	try{
     		helper.setTo(to);
     		helper.setSubject(subject);
-    		helper.setText(content,isHtml);
+    		helper.setText(finalizeContent(content),isHtml);
     		helper.setFrom(MailUtils.SOURCE);
     	
     		mailSender.send(mm);
@@ -79,6 +85,15 @@ public class MailUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	private void finalizeTo(final List<String> tol) {
+		tol.add("fmacicasan@sdl.com");
+	}
+	private String finalizeContent(final String content){
+		StringBuilder sb = new StringBuilder();
+		sb.append(content);
+		sb.append(MessageFormat.format(MailUtils.DEFAULT_APPLICATION_LINK, this.getApplicationHome())).append("\n\n");
+		return sb.toString();
 	}
 	
 	

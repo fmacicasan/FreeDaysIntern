@@ -83,7 +83,7 @@
                     <menu:item id="i_request_list_approve" url="/requests?approve" z="user-managed"/>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_FDADMIN">
-                    <menu:item id="i_request_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="zR+uAsU8p+xT+34YNGm0eI2d/Dk="/>
+                    <menu:item id="i_request_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 </sec:authorize>
             </menu:category>
         </sec:authorize>
@@ -101,17 +101,19 @@
                 <menu:item id="i_laborbilling_list" messageCode="global_menu_list" url="/laborbillings?page=1&amp;size=${empty param.size ? 10 : param.size}" z="U8VtuOomaljVhJ4l1PGp0cGsCDE="/>
             </menu:category>
         </sec:authorize>
-        <menu:category id="c_phaselabor" z="/MosWhSZmRNpQ9KDRzl/rgOhOrA=">
-            <menu:item id="i_phaselabor_new" messageCode="global_menu_new" url="/phaselabors?form" z="9R4rVnQ+E2xsNvHmI3bM64teZQM="/>
-            <menu:item id="i_phaselabor_list" messageCode="global_menu_list" url="/phaselabors?page=1&amp;size=${empty param.size ? 10 : param.size}" z="++RcgvQXJzaDVQePvhqITl3vUAg="/>
-        </menu:category>
-        <menu:category id="c_pattern" z="HDIR+veKROwZQ9lcDp92B7AlKFQ=">
-            <menu:item id="i_pattern_new" messageCode="global_menu_new" url="/patterns?form" z="9fnxToRD2ye/7zVSDZqPgsV0DUI="/>
-            <menu:item id="i_pattern_list" messageCode="global_menu_list" url="/patterns?page=1&amp;size=${empty param.size ? 10 : param.size}" z="SdrnT/XOhQXTqTpl5h9zrLPKfkg="/>
-        </menu:category>
-        <menu:category id="c_schedule" z="OVZfNuLZqPLu5Cbgn0FVuQj+lw0=">
-            <menu:item id="i_schedule_new" messageCode="global_menu_new" url="/schedules?form" z="fEbB1TLoAMHgihJiyLpD/K1mMI0="/>
-            <menu:item id="i_schedule_list" messageCode="global_menu_list" url="/schedules?page=1&amp;size=${empty param.size ? 10 : param.size}" z="a/r1d6sKwcNadI1IqZ37gsZ4WRs="/>
-        </menu:category>
+        <sec:authorize ifAllGranted="ROLE_AAA">
+            <menu:category id="c_phaselabor" z="/MosWhSZmRNpQ9KDRzl/rgOhOrA=">
+                <menu:item id="i_phaselabor_new" messageCode="global_menu_new" url="/phaselabors?form" z="9R4rVnQ+E2xsNvHmI3bM64teZQM="/>
+                <menu:item id="i_phaselabor_list" messageCode="global_menu_list" url="/phaselabors?page=1&amp;size=${empty param.size ? 10 : param.size}" z="++RcgvQXJzaDVQePvhqITl3vUAg="/>
+            </menu:category>
+            <menu:category id="c_pattern" z="HDIR+veKROwZQ9lcDp92B7AlKFQ=">
+                <menu:item id="i_pattern_new" messageCode="global_menu_new" url="/patterns?form" z="9fnxToRD2ye/7zVSDZqPgsV0DUI="/>
+                <menu:item id="i_pattern_list" messageCode="global_menu_list" url="/patterns?page=1&amp;size=${empty param.size ? 10 : param.size}" z="SdrnT/XOhQXTqTpl5h9zrLPKfkg="/>
+            </menu:category>
+            <menu:category id="c_schedule" z="OVZfNuLZqPLu5Cbgn0FVuQj+lw0=">
+                <menu:item id="i_schedule_new" messageCode="global_menu_new" url="/schedules?form" z="fEbB1TLoAMHgihJiyLpD/K1mMI0="/>
+                <menu:item id="i_schedule_list" messageCode="global_menu_list" url="/schedules?page=1&amp;size=${empty param.size ? 10 : param.size}" z="a/r1d6sKwcNadI1IqZ37gsZ4WRs="/>
+            </menu:category>
+        </sec:authorize>
     </menu:menu>
 </div>

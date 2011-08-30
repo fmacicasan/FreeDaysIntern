@@ -57,6 +57,13 @@ public class FDUserController {
 			addDateTimeFormatPatterns(uiModel);
 			return "fdusers/create";
 		}
+//		System.out.println(fDUser.getGranter());
+//		if(fDUser.getGranter() == null || this.defaultGranter.equals(fDUser.getGranter())){
+//			System.out.println("is equal");
+//			fDUser.setGranter(null);
+//		}
+//		System.out.println(fDUser);
+//		fDUser.persist();
 		uiModel.asMap().clear();
 		FDUser.persist();
 		RegularUser ru = FDUser.getRegularUser();
@@ -65,6 +72,10 @@ public class FDUserController {
 				+ encodeUrlPathSegment(FDUser.getId().toString(),
 						httpServletRequest);
 	}
+
+
+
+
 	
 	/**
 	 * Handler for the display of a FDUSer based on his identifier
@@ -80,6 +91,7 @@ public class FDUserController {
 		uiModel.addAttribute("fduser", fdu);
 		uiModel.addAttribute("fduser_col", fdu.getRoles());
 		uiModel.addAttribute("itemId", id);
+		uiModel.addAttribute("noGranter",false);
 		return "fdusers/show";
 	}
 

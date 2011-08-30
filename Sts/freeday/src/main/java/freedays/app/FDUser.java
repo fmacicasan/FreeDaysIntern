@@ -72,7 +72,12 @@ public class FDUser extends ApplicationRegularUser {
 //        sb.append("InitDays: ").append(getInitDays()).append(", ");
 //        sb.append("MaxFreeDays: ").append(getMaxFreeDays()).append(", ");
 //        sb.append("RegularUser: ")
-        sb.append(getRegularUser()).append(" ");
+        RegularUser ru = this.getRegularUser();
+        if(ru==null){
+        	sb.append("No approver!");
+        } else {
+        	sb.append(getRegularUser());
+        }
 //        sb.append("Roles: ").append(getRoles() == null ? "null" : getRoles().size()).append(", ");
 //        sb.append("Version: ").append(getVersion());
         return sb.toString();

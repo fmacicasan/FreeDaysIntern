@@ -29,4 +29,14 @@ public class Project {
     public void addPhase(Phase newPhase) {
     	phaseLst.add(newPhase);
 	}
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Code: ").append(getCode()).append(", ");
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("Name: ").append(getName()).append(", ");
+        sb.append("PhaseLst: ").append(getPhaseLst() == null ? "null" : getPhaseLst().size()).append(", ");
+        sb.append("Version: ").append(getVersion());
+        return sb.toString();
+    }
 }
