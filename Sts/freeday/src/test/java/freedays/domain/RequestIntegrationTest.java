@@ -1,17 +1,6 @@
 package freedays.domain;
 
-import junit.framework.Assert;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.springframework.roo.addon.test.RooIntegrationTest;
-
-import freedays.app.FDUserDataOnDemand;
-import freedays.app.FreeDayL;
-import freedays.app.FreeDayLDataOnDemand;
-import freedays.app.RequestStatus;
-import freedays.domain.Request;
 
 @RooIntegrationTest(entity = Request.class)
 public class RequestIntegrationTest {

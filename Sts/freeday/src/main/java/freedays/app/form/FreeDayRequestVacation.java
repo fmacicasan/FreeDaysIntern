@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
-import freedays.app.FreeDayVacation;
 import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.validation.annotation.BusinessDay;
 import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;

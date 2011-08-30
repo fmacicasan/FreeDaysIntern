@@ -6,13 +6,9 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
-import freedays.app.form.FreeDayRequest;
 import freedays.domain.RegularUser;
-import freedays.domain.form.SignupWrapper;
 import freedays.security.UserContextService;
-import freedays.validation.annotation.UniqueDayPerActiveOrApprovedReq;
 import freedays.validation.annotation.UniqueEmail;
-import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
 
 /**
  * 

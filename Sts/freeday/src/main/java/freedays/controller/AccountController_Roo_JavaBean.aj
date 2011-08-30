@@ -4,6 +4,7 @@
 package freedays.controller;
 
 import freedays.security.UserContextService;
+import org.apache.commons.logging.Log;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 
 privileged aspect AccountController_Roo_JavaBean {
@@ -22,6 +23,10 @@ privileged aspect AccountController_Roo_JavaBean {
     
     public void AccountController.setMessageDigestPasswordEncoder(MessageDigestPasswordEncoder messageDigestPasswordEncoder) {
         this.messageDigestPasswordEncoder = messageDigestPasswordEncoder;
+    }
+    
+    public Log AccountController.getLog() {
+        return this.log;
     }
     
 }

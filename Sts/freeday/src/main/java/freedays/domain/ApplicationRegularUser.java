@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -22,7 +21,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.transaction.annotation.Transactional;
 
 

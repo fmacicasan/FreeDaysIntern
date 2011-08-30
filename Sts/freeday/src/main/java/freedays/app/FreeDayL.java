@@ -1,25 +1,19 @@
 package freedays.app;
 
-import org.springframework.roo.addon.entity.RooEntity;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.util.StringUtils;
-
 import java.util.Calendar;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Future;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
-import freedays.domain.ApplicationRegularUser;
-import freedays.domain.ApprovalStrategy;
 import freedays.validation.annotation.BusinessDay;
-
-import javax.persistence.ManyToOne;
 
 /**
  * Class representing a TypeL free day request. Such a 

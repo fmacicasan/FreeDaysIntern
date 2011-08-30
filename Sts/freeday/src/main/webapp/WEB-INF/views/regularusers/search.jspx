@@ -14,8 +14,8 @@
     <page:list id="pl_freedays_domain_RegularUser" items="${regularusers}" z="HYU6ZpOer09+VMedGUJG2GVBsLo=">
         <table:table data="${regularusers}"  id="l_freedays_domain_RegularUser" path="/regularusers" z="qMrIW6AcsfL3GgNOM4N6mQflrgo=">
             <table:column id="c_freedays_domain_RegularUser_username" maxLength="-1" property="username" z="zsEf2Sxo5GwCs/VOBUA6GYJm8JE="/>
-            <table:column id="c_freedays_domain_RegularUser_password" property="password" z="eFI4SYezX5FdzmZTSbDr22KBjKI="/>
-            <table:column id="c_freedays_domain_RegularUser_email" maxLength="-1" property="email" z="qyG0fpGjnyAjNEijzHsSX8m9BYg="/>
+            <table:column render="false" id="c_freedays_domain_RegularUser_password" property="password" z="eFI4SYezX5FdzmZTSbDr22KBjKI="/>
+            <!-- <table:column id="c_freedays_domain_RegularUser_email" maxLength="-1" property="email" z="qyG0fpGjnyAjNEijzHsSX8m9BYg="/> -->
             <table:column id="c_freedays_domain_RegularUser_surename" maxLength="-1" property="surename" z="ccjjcKG658BF457vBWDS/78vxik="/>
             <table:column id="c_freedays_domain_RegularUser_firstname" maxLength="-1" property="firstname" z="VSC2sQYH91s/dMoZvF6Bv03NTZ8="/>
             <table:column id="c_freedays_domain_RegularUser_deleted" maxLength="-1"  property="deleted" z="r3Rb12SHqSNkiZO2lNBKHu6MHA8="/>

@@ -10,7 +10,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 import freedays.validation.CheckSamePassValidator;
-import freedays.validation.CheckUniqueEmailValidator;
 
 /**
  * Custom validation for the Signum backing object. It restricts

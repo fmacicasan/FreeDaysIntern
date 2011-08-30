@@ -3,19 +3,15 @@ package freedays.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.ManyToMany;
+
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import freedays.domain.ApplicationRegularUser;
-
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Inheritance;
-import javax.persistence.ManyToMany;
 
 /**
  * Describes an special user role.

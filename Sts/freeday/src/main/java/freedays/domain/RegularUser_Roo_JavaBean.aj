@@ -25,14 +25,6 @@ privileged aspect RegularUser_Roo_JavaBean {
         this.password = password;
     }
     
-    public String RegularUser.getEmail() {
-        return this.email;
-    }
-    
-    public void RegularUser.setEmail(String email) {
-        this.email = email;
-    }
-    
     public String RegularUser.getSurename() {
         return this.surename;
     }

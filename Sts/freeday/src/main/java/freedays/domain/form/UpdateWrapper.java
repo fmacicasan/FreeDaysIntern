@@ -20,12 +20,14 @@ public class UpdateWrapper {
 	@Column(unique = true)
 	// TODO check what's going on
 	@Length(min = 3, max = 45, message = "#{messages['field_invalid_length']}")
-	private String username;
-
-	@NotNull
 	@Email(message = "#{messages['field_invalid_email']}")
 	@UniqueEmail
-	private String email;
+	private String username;
+
+//	@NotNull
+//	@Email(message = "#{messages['field_invalid_email']}")
+//	@UniqueEmail
+//	private String email;
 
 	@NotNull
 	private String surename;

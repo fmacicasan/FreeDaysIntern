@@ -6,7 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import freedays.domain.RegularUser;
 import freedays.domain.form.SignupWrapper;
 import freedays.validation.annotation.SamePass;
-import freedays.validation.annotation.UniqueDayPerActiveOrApprovedReq;
 
 /**
  * 

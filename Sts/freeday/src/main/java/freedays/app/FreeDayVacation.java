@@ -5,27 +5,22 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
-import org.springframework.roo.addon.entity.RooEntity;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
-
-import freedays.app.FreeDay.FreeDayStatus;
-import freedays.app.form.FreeDayRequest;
-import freedays.app.form.FreeDayRequestVacation;
-import freedays.app.form.FreeDayRequest.RequestType;
-import freedays.domain.RegularUser;
-import freedays.util.DateUtils;
-import freedays.util.ValidationUtils;
-import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Future;
 import javax.persistence.EntityManager;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.tostring.RooToString;
+
+import freedays.app.form.FreeDayRequest;
+import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequestVacation;
+import freedays.util.DateUtils;
+import freedays.util.ValidationUtils;
 
 /**
  * Class representing a TypeV request. Such a request

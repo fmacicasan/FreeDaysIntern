@@ -1,10 +1,10 @@
 package freedays.controller;
 
-import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -15,16 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.util.UriUtils;
-import org.springframework.web.util.WebUtils;
 
 import freedays.app.FDUser;
 import freedays.domain.RegularUser;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.UpdateWrapper;
-import freedays.schedule.FreeDayScheduleServiceImpl;
 import freedays.security.UserContextService;
-import freedays.util.MailUtils;
 
 /**
  * Controller used to intercept account related requests
@@ -40,6 +36,8 @@ public class AccountController {
 	private UserContextService userContextService;
 	@Autowired
 	private MessageDigestPasswordEncoder messageDigestPasswordEncoder;
+	
+	private final Log log = LogFactory.getLog(this.getClass());
 
 	
 	/**
@@ -56,7 +54,7 @@ public class AccountController {
 			RegularUser regularUser = RegularUser.findRegularUsersByUsername(
 					httpServletRequest.getUserPrincipal().getName()).getSingleResult();
 			UpdateWrapper uw =new UpdateWrapper();
-			uw.setEmail(regularUser.getEmail());
+			//uw.setEmail(regularUser.getEmail());
 			uw.setFirstname(regularUser.getFirstname());
 			uw.setSurename(regularUser.getSurename());
 			uw.setUsername(regularUser.getUsername());
@@ -64,6 +62,7 @@ public class AccountController {
 		
 		}catch(EmptyResultDataAccessException e){
 		}
+		log.info("pupulated change account info");
 		return "account";
 	}
 

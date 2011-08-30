@@ -48,7 +48,7 @@ public class FreeDayUserList {
 	 */
 	public static FreeDayUserList generateFreeDaysList(FDUser fdu){
 		FreeDayUserList fdul = new FreeDayUserList();
-		fdul.setUser(fdu.getRegularUser().getFullName());
+		fdul.setUser(fdu.getRegularUser().getReportName());
 		fdul.setJobrole(fdu.getJobrole().toString());
 		fdul.setRemainingdays(fdu.computeAvailableFreeDays());
 		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());
@@ -88,7 +88,7 @@ public class FreeDayUserList {
 	 */
 	public static FreeDayUserList generateVacationList(FDUser fdu,Calendar start, Calendar end) {
 		FreeDayUserList fdul = new FreeDayUserList();
-		fdul.setUser(fdu.getRegularUser().getFullName());
+		fdul.setUser(fdu.getRegularUser().getReportName());
 		fdul.setJobrole(fdu.getJobrole().toString());
 		fdul.setRemainingdays(fdu.computeAvailableFreeDays());
 		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());
@@ -156,7 +156,7 @@ public class FreeDayUserList {
 	 */
 	public static FreeDayUserList generateAllFreeDays(FDUser fdu,int month){
 		FreeDayUserList fdul = new FreeDayUserList();
-		fdul.setUser(fdu.getRegularUser().getFullName());
+		fdul.setUser(fdu.getRegularUser().getReportName());
 		fdul.setJobrole(fdu.getJobrole().toString());
 		
 		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());

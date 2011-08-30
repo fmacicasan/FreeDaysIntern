@@ -3,6 +3,7 @@ package freedays.domain;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 

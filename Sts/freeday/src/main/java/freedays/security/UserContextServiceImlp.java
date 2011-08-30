@@ -1,6 +1,5 @@
 package freedays.security;
 
-import java.security.Principal;
 import java.util.Collection;
 
 import org.springframework.security.core.Authentication;
@@ -46,5 +45,6 @@ public class UserContextServiceImlp implements UserContextService{
 	public boolean isOwn(RegularUser regularUser) {
 		return regularUser.getUsername().equals(this.getCurrentUser());
 	}
+	
 
 }

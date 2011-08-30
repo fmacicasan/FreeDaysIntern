@@ -2,13 +2,8 @@ package freedays.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import javax.mail.Message;
+
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +13,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 
@@ -35,7 +29,10 @@ public class MailUtils {
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_SUBJECT = "FreeDays - Account activation";
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_CONTENT = "Hello %s,\n your account has been processed.\n";
 	private static final String SOURCE = "internlwtest@sdl.com";
-    
+	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT = "Freedays - Request curtesy notification";
+	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT = "Hello %s,\n your subordinate %s has a new request to approve!\n %s \n\n";
+    private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
+    private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT="Hello %s,\n the following request was canceled!\n %s \n\n ";
 	@Autowired
     private JavaMailSenderImpl mailSender;
 	
@@ -205,28 +202,45 @@ public class MailUtils {
 
 	public static void sendAfterRegisterNotification(final String fullname, final List<String> adminemails) {
 		final String content = String.format(MailUtils.DEFAULT_REGISTERNOTIFICATION_CONTENT, fullname);
-		Thread th = new Thread(){
-			@Override
-			public void run(){
-				MailUtils mu = new MailUtils();
-				mu.sendPlainMsg(adminemails, MailUtils.DEFAULT_REGISTERNOTIFICATION_SUBJECT, content);
-			}
-		};
-		th.start();
-		
+		MailUtils.sendAsyncMail(adminemails,  MailUtils.DEFAULT_REGISTERNOTIFICATION_SUBJECT, content);
 	}
 
 	public static void sendPostRegisterProcessing(final String fullname, final String email) {
 		final String content = String.format(MailUtils.DEFAULT_POSTPROCESSINGNOTIF_CONTENT,fullname);
+		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_POSTPROCESSINGNOTIF_SUBJECT, content);
+	}
+	
+	public static void sendUpperRequestNotification(final String email, final String superapprover, final String approver, final String request){
+		final String content = String.format(MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT,superapprover,approver,request);
+		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
+	}
+	
+	public static void sendUpperRequestDenyNotification(final String email, final String superapprover, final String approver, final String request){
+		final String content = String.format(MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT,superapprover,approver,request);
+		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
+	}
+	
+	public static void sendUpperRequestCancelNotification(final String email, final String superapprover, final String request){
+		final String content = String.format(MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT,superapprover,request);
+		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
+	}
+	
+	
+	
+	public static void sendAsyncMail(final String email, final String subject, final String content){
+		List<String> lst = new ArrayList<String>();
+		lst.add(email);
+		MailUtils.sendAsyncMail(lst, subject, content);
+	}
+	public static void sendAsyncMail(final List<String> email, final String subject, final String content){
 		Thread th = new Thread(){
 			@Override
 			public void run(){
 				MailUtils mu = new MailUtils();
-				mu.sendPlainMsg(email, MailUtils.DEFAULT_POSTPROCESSINGNOTIF_SUBJECT, content);
+				mu.sendPlainMsg(email, subject, content);
 			}
 		};
 		th.start();
-		
 	}
     
 }

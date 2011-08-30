@@ -11,8 +11,8 @@ import org.springframework.roo.addon.test.RooIntegrationTest;
 
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayVacation.ConfidenceLevel;
-import freedays.app.form.FreeDayRequestVacation;
 import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayRequestVacation;
 import freedays.domain.Request;
 import freedays.util.DateUtils;
 

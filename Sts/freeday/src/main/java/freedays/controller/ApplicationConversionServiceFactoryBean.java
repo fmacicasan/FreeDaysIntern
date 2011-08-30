@@ -1,13 +1,14 @@
 package freedays.controller;
 
-import org.springframework.format.FormatterRegistry;
+import java.util.Set;
+
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.RooConversionService;
-    
+
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
-import freedays.app.FreeDayL;
 import freedays.app.FreeDaysRCMatch;
 import freedays.app.form.FreeDayRequest;
 import freedays.domain.AdvancedUserRole;
@@ -37,7 +38,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
                 //return Joiner.on(",").join(properties.toArray());
             	StringBuilder sb = new StringBuilder();
             	for(ApplicationRegularUser aru:set){
-            		sb.append(aru.toString());
+            		sb.append(aru.toString()).append(" ");
             	}
                 return sb.toString();// 1
             }
@@ -120,6 +121,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             	StringBuilder sb = new StringBuilder();
             	for(Schedule aru:set){
             		sb.append(aru.toString());
+            		sb.append(aru.toString()).append(" ");
             	}
                 return sb.toString();// 1
             }

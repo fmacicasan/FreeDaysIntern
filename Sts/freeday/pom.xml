@@ -502,16 +502,18 @@
                     </execution>
                 </executions>
                 <configuration>
+                	<verbose>true</verbose>
+                	<XnoInline>true</XnoInline>
                     <outxml>true</outxml>
                     <aspectLibraries>
                         <aspectLibrary>
                             <groupId>org.springframework</groupId>
                             <artifactId>spring-aspects</artifactId>
                         </aspectLibrary>
-                       
                     </aspectLibraries>
                     <source>1.6</source>
                     <target>1.6</target>
+                   
                 </configuration>
             </plugin>
             <plugin>

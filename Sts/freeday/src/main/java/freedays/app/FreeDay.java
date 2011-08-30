@@ -12,9 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -22,8 +19,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.util.StringUtils;
 
 import freedays.app.form.FreeDayRequest;
-import freedays.app.form.FreeDayUserList;
 import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.app.form.FreeDayUserList;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
 import freedays.domain.RegularUser;
@@ -56,6 +53,9 @@ public abstract class FreeDay {
     	return this.approval.getApprover(user);
     }
     
+    public ApplicationRegularUser getNextApprover(ApplicationRegularUser user){
+    	return this.approval.getNextApprover(user);
+    }
     /**
      * Describes the states in which a FreeDay object can be.
      * These states will mark the status of a FreeDay. Such a status

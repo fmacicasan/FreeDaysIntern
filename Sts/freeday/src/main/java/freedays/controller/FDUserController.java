@@ -8,14 +8,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import freedays.app.FDUser;
-import freedays.app.RequestStatus;
-import freedays.domain.ApplicationRegularUser;
-import freedays.domain.ApplicationRegularUser.JobRole;
-import freedays.domain.RegularUser;
-import freedays.security.UserContextService;
-import freedays.util.MailUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,6 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import freedays.app.FDUser;
+import freedays.domain.ApplicationRegularUser;
+import freedays.domain.ApplicationRegularUser.JobRole;
+import freedays.domain.RegularUser;
+import freedays.security.UserContextService;
+import freedays.util.MailUtils;
 
 /**
  * Controller used to handle FDUser related requests.
@@ -189,6 +188,8 @@ public class FDUserController {
         FDUser back = FDUser.findFDUser(fdu.getId());
         RegularUser ru = back.getRegularUser();
         fdu.setRegularUser(ru);
+        //TODO: change also the requests for the ex approver to the new one
+        //should i send mail to the involved parties ?
         fdu.merge();
        
         return "redirect:/fdusers/" + encodeUrlPathSegment(fdu.getId().toString(), httpServletRequest);

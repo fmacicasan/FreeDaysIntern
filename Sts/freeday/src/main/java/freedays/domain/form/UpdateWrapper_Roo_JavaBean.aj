@@ -15,14 +15,6 @@ privileged aspect UpdateWrapper_Roo_JavaBean {
         this.username = username;
     }
     
-    public String UpdateWrapper.getEmail() {
-        return this.email;
-    }
-    
-    public void UpdateWrapper.setEmail(String email) {
-        this.email = email;
-    }
-    
     public String UpdateWrapper.getSurename() {
         return this.surename;
     }

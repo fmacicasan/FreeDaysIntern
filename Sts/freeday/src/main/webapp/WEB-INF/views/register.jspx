@@ -9,7 +9,7 @@
         <field:input field="username" id="c_freedays_domain_Register_username" min="3" required="true" z="user-managed"/>
         <field:input type="password" field="password" id="c_freedays_domain_Register_password" required="true" z="user-managed"/>
         <field:input type="password" field="repeatpassword" id="c_freedays_domain_Register_repeatpassword"  required="true" z="user-managed"/>
-        <field:input field="email" id="c_freedays_domain_Register_email" required="true" validationMessageCode="field_invalid_email"  z="user-managed"/>
+        <!--  <field:input field="email" id="c_freedays_domain_Register_email" required="true" validationMessageCode="field_invalid_email"  z="user-managed"/>-->
         <field:input field="surename" id="c_freedays_domain_Register_surename" required="true" z="user-managed"/>
         <field:input field="firstname" id="c_freedays_domain_Register_firstname" required="true" z="user-managed"/>
     </form:create>

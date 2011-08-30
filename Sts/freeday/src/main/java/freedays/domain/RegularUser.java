@@ -24,15 +24,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import freedays.security.UserContextService;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.Search;
 import freedays.domain.form.SignupWrapper;
 import freedays.domain.form.UpdateWrapper;
+import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 import freedays.util.PhraseUtils;
 
@@ -49,22 +48,23 @@ public class RegularUser implements Serializable {
 	/**
 	 * 0 - username 1 - email 2 - surename 3 - firstname 4 - usermodifier
 	 */
-	public static final String[] SEARCH_FILTERS = { "username", "email",
+	public static final String[] SEARCH_FILTERS = { "username",
 			"surename", "firstname", "usermodifier" };
 
 	@NotNull
 	@Column(unique = true)
 	// TODO check what's going on
 	@Length(min = 3, max = 45, message = "#{messages['field_invalid_length']}")
+	@Email(message = "#{messages['field_invalid_email']}")
 	private String username;
 
 	@NotNull
 	@Length(min = 6)
 	private String password;
 
-	@NotNull
-	@Email(message = "#{messages['field_invalid_email']}")
-	private String email;
+//	@NotNull
+//	@Email(message = "#{messages['field_invalid_email']}")
+//	private String email;
 
 	@NotNull
 	private String surename;
@@ -287,8 +287,9 @@ public class RegularUser implements Serializable {
 		if (email == null || email.length() == 0)
 			throw new IllegalArgumentException("The email argument is required");
 		EntityManager em = RegularUser.entityManager();
+		//changed o.email with o.username for email login
 		TypedQuery<RegularUser> q = em.createQuery(
-				"SELECT o FROM RegularUser AS o WHERE o.email = :email ",
+				"SELECT o FROM RegularUser AS o WHERE o.username = :email ",
 				RegularUser.class);
 		q.setParameter("email", email);
 
@@ -306,6 +307,13 @@ public class RegularUser implements Serializable {
 		sb.append(this.surename);
 		return sb.toString();
 	}
+	
+	public String getReportName(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getFullName());
+		sb.append(" (").append(this.getEmail()).append(") ");
+		return sb.toString();
+	}
 
 	/**
 	 * Counts the apparitions of an email in the regular user database.
@@ -318,9 +326,10 @@ public class RegularUser implements Serializable {
 		if (email == null || email.length() == 0)
 			throw new IllegalArgumentException("The email argument is required");
 		EntityManager em = RegularUser.entityManager();
+		//changed o.email with o.username for email login
 		TypedQuery<Long> q = em
 				.createQuery(
-						"SELECT COUNT(o) FROM RegularUser AS o WHERE o.email = :email and o.deleted = 0",
+						"SELECT COUNT(o) FROM RegularUser AS o WHERE o.username = :email and o.deleted = 0",
 						Long.class);
 		q.setParameter("email", email);
 		Long res;
@@ -352,6 +361,7 @@ public class RegularUser implements Serializable {
 		// "null" : getSearchCriteria().size()).append(", ");
 		// sb.append("Surename: ").
 		sb.append(getSurename());
+		sb.append(" (").append(this.getEmail()).append(") ");
 		// sb.append("Usermodifier: ").append(getUsermodifier()).append(", ");
 		// sb.append("Username: ").append(getUsername()).append(", ");
 		// sb.append("Version: ").append(getVersion());
@@ -413,7 +423,7 @@ public class RegularUser implements Serializable {
 		result = prime * result
 				+ ((creationdate == null) ? 0 : creationdate.hashCode());
 		result = prime * result + ((deleted == null) ? 0 : deleted.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
+//		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((firstname == null) ? 0 : firstname.hashCode());
 		result = prime * result
@@ -456,11 +466,11 @@ public class RegularUser implements Serializable {
 				return false;
 		} else if (!deleted.equals(other.deleted))
 			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
+//		if (email == null) {
+//			if (other.email != null)
+//				return false;
+//		} else if (!email.equals(other.email))
+//			return false;
 		if (firstname == null) {
 			if (other.firstname != null)
 				return false;
@@ -522,7 +532,7 @@ public class RegularUser implements Serializable {
 	public static RegularUser signupnew(SignupWrapper sw) {
 		RegularUser ru = new RegularUser();
 		ru.setUsername(sw.getUsername());
-		ru.setEmail(sw.getEmail());
+		//ru.setEmail(sw.getEmail());
 		ru.setSurename(sw.getSurename());
 		ru.setFirstname(sw.getFirstname());
 		ru.setPassword(sw.getPassword());
@@ -536,7 +546,7 @@ public class RegularUser implements Serializable {
 	 * @param uw
 	 */
 	public void update(UpdateWrapper uw) {
-		this.setEmail(uw.getEmail());
+		//this.setEmail(uw.getEmail());
 		this.setFirstname(uw.getFirstname());
 		this.setSurename(uw.getSurename());
 		this.merge();
@@ -583,4 +593,12 @@ public class RegularUser implements Serializable {
 		return res;
 	}
 	
+
+	public String getEmail() {
+        return this.username;
+    }
+
+	public void setEmail(String email) {
+        this.username = email;
+    }
 }

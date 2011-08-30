@@ -1,3 +1,4 @@
+
 package freedays.timesheet;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -33,3 +34,4 @@ public class Schedule {
     @ManyToOne
     private freedays.timesheet.TimesheetUser employee;
 }
+

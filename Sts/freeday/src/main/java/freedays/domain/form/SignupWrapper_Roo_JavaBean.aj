@@ -31,14 +31,6 @@ privileged aspect SignupWrapper_Roo_JavaBean {
         this.repeatpassword = repeatpassword;
     }
     
-    public String SignupWrapper.getEmail() {
-        return this.email;
-    }
-    
-    public void SignupWrapper.setEmail(String email) {
-        this.email = email;
-    }
-    
     public String SignupWrapper.getSurename() {
         return this.surename;
     }

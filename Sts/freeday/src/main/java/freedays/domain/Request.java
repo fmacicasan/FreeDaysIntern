@@ -1,34 +1,24 @@
 package freedays.domain;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 
-import freedays.util.MailUtils;
+import javax.persistence.EntityManager;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.TypedQuery;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.security.access.prepost.PostFilter;
 
-import freedays.domain.ApplicationRegularUser;
-
-import javax.persistence.EntityManager;
-import javax.persistence.ManyToOne;
-import javax.persistence.TypedQuery;
-
-import freedays.app.AppStrategL1;
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
-import freedays.app.FreeDayL;
-
-import javax.validation.constraints.NotNull;
-import javax.persistence.OneToOne;
 import freedays.app.RequestStatus;
 import freedays.app.form.FreeDayRequest;
-
-import javax.persistence.Enumerated;
+import freedays.util.MailUtils;
 
 /**
  * Class describing a request. It is associated with a Application Reuglar user, a Requestable object and
@@ -75,6 +65,9 @@ public class Request   implements Serializable{
     		advanceApprover();
     		if(this.approver != null){// && !this.approver.isSame(oldApprover)){
     			requestApproval();
+    			
+    			//inform superior of pending approval at subordinate
+    			informSuperiorInit();
     		} else {
     			setApproveStatus();
         		informApproveRequest();
@@ -195,6 +188,30 @@ public class Request   implements Serializable{
     	}
     }
     
+    private void informSuperiorInit(){
+    	if(!Request.DEBUG){
+    		RegularUser superapprover = getSuperiorRegularUser();
+    		MailUtils.sendUpperRequestNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
+    	}
+    }
+    
+    private void informSuperiorDeny(){
+    	if(!Request.DEBUG){
+    		RegularUser superapprover = getSuperiorRegularUser();
+    		MailUtils.sendUpperRequestDenyNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
+    	}
+    }
+    private void informSuperiorCancel(){
+    	if(!Request.DEBUG){
+    		RegularUser superapprover = getSuperiorRegularUser();
+    		MailUtils.sendUpperRequestCancelNotification(superapprover.getEmail(), superapprover.getFullName(), this.toString());
+    	}
+    }
+    
+    private RegularUser getSuperiorRegularUser(){
+    	return this.getRequestable().getNextApprover(this.getAppreguser()).getRegularUser();
+    }
+    
     private String prepareContent(String top, String bottom){
     	StringBuilder sb = new StringBuilder();
     	sb.append(top).append("\n");
@@ -218,6 +235,7 @@ public class Request   implements Serializable{
     private void informDenyRequest(){
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_DENY);
+    		this.informSuperiorDeny();
     	}	
     }
     
@@ -236,6 +254,7 @@ public class Request   implements Serializable{
     private void informCancelRequest(){
     	if(!Request.DEBUG){
     		this.informRequest(Request.FD_INFORM_CONTENT_CANCEL);
+    		this.informSuperiorCancel();
     	}
     }
     

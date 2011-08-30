@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import freedays.validation.CheckSpecialWeekdayValidator;
 import freedays.validation.CheckUniqueDayPerActiveOrApprovedReqValidator;
 
 /**

@@ -2,7 +2,6 @@ package freedays.app;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,15 +14,14 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.security.access.prepost.PostFilter;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
-import freedays.domain.Request;
 import freedays.validation.annotation.BusinessDay;
 
 /**
@@ -50,15 +48,18 @@ public class FDUser extends ApplicationRegularUser {
     private Calendar hireDate;
 
     @NotNull
-    @Min(2L)
+    @Min(0L)
     @Max(7L)
+    @Value("0")
     private Integer initDays;
 
     @NotNull
     @Min(21L)
+    @Value("21")
     private Integer maxFreeDays;
     
     @NotNull
+    @Value("6")
     private Integer maxDerogation;
 
     @Override

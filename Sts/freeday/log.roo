@@ -402,6 +402,13 @@ perform tests
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 10:05:10
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-25 11:15:19
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-24 18:12:07
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 17:59:53
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-25 18:01:23
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 11:02:34
+perform tests
+perform tests
+perform tests
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 15:48:21
 hint
 // [failed] backup
@@ -506,4 +513,21 @@ backup
 backup
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 17:06:46
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-30 13:40:28
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 12:53:32
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 12:53:45
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 18:17:26
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 09:42:13
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 18:53:22
+// [failed] backup
+backup
+// [failed] backup
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 20:53:16
+perform tests
 perform tests
