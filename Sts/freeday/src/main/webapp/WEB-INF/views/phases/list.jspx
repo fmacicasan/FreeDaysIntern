@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_freedays_timesheet_Phase" items="${phases}" z="k9YQf/6wJku5gepXl3e5ggvZ9jE=">
+        <table:table data="${phases}" id="l_freedays_timesheet_Phase" path="/phases" z="IDLuFjUZJOubYU03/kwE2yDt/IM=">
+            <table:column id="c_freedays_timesheet_Phase_code" property="code" z="+J+WfCJX6OIsiStKTZaPyVwGxSE="/>
+            <table:column id="c_freedays_timesheet_Phase_name" property="name" z="nwwuBYroOgv4n2+919Xdd1m1Fjg="/>
+            <table:column id="c_freedays_timesheet_Phase_projectLst" property="projectLst" z="kI/7WCGF5ZY9fjAEEn9dW5PEGvk="/>
+        </table:table>
+    </page:list>
+</div>

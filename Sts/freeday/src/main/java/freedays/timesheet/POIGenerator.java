@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -19,13 +20,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.WorkbookUtil;
 public class POIGenerator implements TimesheetGenerator{
-	Employee pEmp;
+	TimesheetUser pEmp;
 	Workbook wb;
 	
 	Pattern sablon;
 	private int month;
 	private int year;
-	ArrayList<Schedule> schedEmp;
+	List<Schedule> schedEmp;
 	FileOutputStream fileOut;
 	Sheet sheet1;
 	
@@ -40,9 +41,9 @@ public class POIGenerator implements TimesheetGenerator{
 	ArrayList<PhaseLabor> PhLArray;
 	
 	
-	public POIGenerator(Employee pEmp) {
+	public POIGenerator(TimesheetUser pEmp) {
 		this.pEmp = pEmp;
-		schedEmp = pEmp.getSchedList();
+		schedEmp = pEmp.getScheduleLst();
 	}
 	private Calendar getNextMonday(Calendar now) {
 		Integer x = now.get(Calendar.DAY_OF_WEEK);
@@ -64,13 +65,13 @@ public class POIGenerator implements TimesheetGenerator{
 	private ArrayList<PhaseLabor> getListOfDistinctPhaseLabor(ArrayList<Pattern> pList) {
 		ArrayList<PhaseLabor> PhLArr = new ArrayList<PhaseLabor>();
 		for(int i = 0; i < pList.size(); i++) {
-			for(int j = 0; j < pList.get(i).getArrayPhaseLabor().size(); j++) {
-				PhaseLabor currentPhL = pList.get(i).getArrayPhaseLabor().get(j);
+			for(int j = 0; j < pList.get(i).getPhaseLaborLst().size(); j++) {
+				PhaseLabor currentPhL = pList.get(i).getPhaseLaborLst().get(j);
 				Integer ok = 1;
 				for(int k = 0; k < PhLArr.size(); k++) {
-					if (PhLArr.get(k).getLaborBilling().getId().equals(currentPhL.getLaborBilling().getId()))
-					 if (PhLArr.get(k).getPhase().getID().equals(currentPhL.getPhase().getID()))
-					   if (PhLArr.get(k).getPhase().getProject().getID().equals(currentPhL.getPhase().getProject().getID()))  {
+					if (PhLArr.get(k).getLaborbilling().getId().equals(currentPhL.getLaborbilling().getId()))
+					 if (PhLArr.get(k).getPhase().getId().equals(currentPhL.getPhase().getId()))
+					   if (PhLArr.get(k).getProject().getId().equals(currentPhL.getProject().getId()))  {
 						   ok  = 0;					   
 				 	   }
 			     }
@@ -130,7 +131,7 @@ public class POIGenerator implements TimesheetGenerator{
 		firstCol.setCellStyle(tablestyle);
 		
 		Cell secondCol = z.createCell(1);
-		secondCol.setCellValue(PhLArray.get(i-1).getPhase().getProject().getName());
+		secondCol.setCellValue(PhLArray.get(i-1).getProject().getName());
 		secondCol.setCellStyle(tablestyle);
 		
 		Cell thirdCol = z.createCell(2);
@@ -138,7 +139,7 @@ public class POIGenerator implements TimesheetGenerator{
 		thirdCol.setCellStyle(tablestyle);
 		
 		Cell fourCol = z.createCell(3);
-		fourCol.setCellValue(PhLArray.get(i-1).getLaborBilling().getName());
+		fourCol.setCellValue(PhLArray.get(i-1).getLaborbilling().getName());
 		fourCol.setCellStyle(tablestyle);
 		
 		for(int j = 0; j < startingDay - 1; j++) {
@@ -152,7 +153,7 @@ public class POIGenerator implements TimesheetGenerator{
 			Calendar mDay = getDateFrom(j, weekEnd);
 			
 			Pattern mPattern = getPatternForDay(mDay);
-			PhaseLabor phLX = mPattern.getPhaseLabor(PhLArray.get(i-1).getLaborBilling(), PhLArray.get(i-1).getPhase());
+			PhaseLabor phLX = mPattern.getPhaseLabor(PhLArray.get(i-1).getLaborbilling(), PhLArray.get(i-1).getPhase(), PhLArray.get(i-1).getProject());
 			
 			
 			Float perc = null;
@@ -313,14 +314,14 @@ public class POIGenerator implements TimesheetGenerator{
 	    Cell cellNameLabel = row.createCell(7);
 	    cellNameLabel.setCellValue("EMPLOYEE NAME");
 	    Cell cellName = row.createCell(10);
-	    cellName.setCellValue(pEmp.getName());
+	    cellName.setCellValue(pEmp.getRegularUser().getFullName());
 	    sheet1.addMergedRegion(regionEmp);
 	    sheet1.addMergedRegion(regionPosition);
 	    row = sheet1.createRow((short)1);
 	    Cell cellPositionLabel = row.createCell(7);
 	    cellPositionLabel.setCellValue("POSITION");
 	    Cell cellPosition = row.createCell(10);
-	    cellPosition.setCellValue(pEmp.getPosition());
+	    cellPosition.setCellValue(pEmp.getJobrole().toString());
 	}
 	public void generateDoc(String workbookname, int genmonth, int genyear) {
 		wb = new HSSFWorkbook();

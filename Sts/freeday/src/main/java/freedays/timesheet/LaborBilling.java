@@ -1,15 +1,20 @@
 package freedays.timesheet;
+
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.tostring.RooToString;
+import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+
+@RooJavaBean
+@RooToString
+@RooEntity
 public class LaborBilling {
-	private String id;
-	private String name;
-	public LaborBilling(String id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-	public String getName() {
-		return name;
-	}
-	public String getId() {
-		return id;
-	}
+
+    @NotNull
+    //@Column(unique = true)
+    private String code;
+
+    @NotNull
+    private String name;
 }

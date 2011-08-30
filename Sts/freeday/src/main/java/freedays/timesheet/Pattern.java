@@ -1,36 +1,55 @@
 package freedays.timesheet;
-import java.util.ArrayList;
 
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.tostring.RooToString;
+import javax.validation.constraints.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import freedays.timesheet.PhaseLabor;
+import java.util.HashSet;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import freedays.timesheet.Schedule;
+import javax.persistence.OneToOne;
+
+@RooJavaBean
+@RooEntity
+@RooToString
 public class Pattern {
-	private ArrayList<PhaseLabor> plArray;
-	private Integer noOfHours;
-	public Pattern(int noh) {
-		plArray = new ArrayList<PhaseLabor>();
-		noOfHours = noh;
+
+    @NotNull
+    private Integer noOfHours;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pattern")
+    private List<PhaseLabor> phaseLaborLst = new ArrayList<PhaseLabor>();
+
+    @OneToMany(mappedBy = "pattern")
+    private Set<Schedule> scheduleLst = new HashSet<Schedule>();
+    
+    public void addPhL(PhaseLabor x) {
+    	phaseLaborLst.add(x);
 	}
-	public void addPhL(PhaseLabor x) {
-		plArray.add(x);
-	}
-	public PhaseLabor getPhL(int ind) {
-		return plArray.get(ind);
-	}
-	public ArrayList<PhaseLabor> getArrayPhaseLabor() {
-		return plArray;
-	}
-	public Integer getNoOfHours() {
-		return noOfHours;
-	}
-	public void setNoOfHours(Integer noh) {
-		noOfHours = noh;
-	}
-	public PhaseLabor getPhaseLabor(LaborBilling lbS, Phase phS) {
-		for(int i = 0; i < plArray.size(); i++) {
-			if (plArray.get(i).getLaborBilling().getId().equals(lbS.getId())) 
-			 if (plArray.get(i).getPhase().getID().equals(phS.getID())) {
-				 return plArray.get(i);
+    
+    public PhaseLabor getPhaseLabor(LaborBilling lbS, Phase phS, Project phProject) {
+		for(int i = 0; i < phaseLaborLst.size(); i++) {
+			if (phaseLaborLst.get(i).getLaborbilling().getId().equals(lbS.getId())) 
+			 if (phaseLaborLst.get(i).getPhase().getId().equals(phS.getId()))
+				 if (phaseLaborLst.get(i).getProject().getId().equals(phProject.getId())) {
+				 return phaseLaborLst.get(i);
 			}
 		}
 		return null;
 		
+	}
+
+	public String toString() {
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("NoOfHours: ").append(getNoOfHours()).append(", ");
+	    sb.append("PhaseLaborLst: ").append(getPhaseLaborLst() == null ? "null" : getPhaseLaborLst().size()).append(", ");
+	    //sb.append("Schedule: ").append(getSchedule());
+	    return sb.toString();
 	}
 }

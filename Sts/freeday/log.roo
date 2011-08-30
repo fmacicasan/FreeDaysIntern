@@ -410,6 +410,109 @@ perform tests
 perform tests
 perform tests
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 15:48:21
+hint
+// [failed] backup
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-25 15:59:31
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 15:59:43
+// [failed] backup
+backup
+// [failed] entity --class freedays.timesheet.Project --testAutomatically 
+focus --class freedays.timesheet.Project
+focus --class freedays.timesheet.Project
+entity --class freedays.timesheet.Project --testAutomatically 
+perform tests
+focus --class freedays.timesheet.Project
+field string --fieldName code --notNull --unique
+field string --fieldName name --notNull
+entity --class freedays.timesheet.LaborBilling --testAutomatically
+field string --fieldName code --notNull --unique
+field string --fieldName name --notNull
+entity --class freedays.timesheet.Phase --testAutomatically
+field string --fieldName code --unique --notNull
+field string --fieldName name --notNull 
+focus --class freedays.timesheet.Project
+field set --fieldName phaseList --type freedays.timesheet.Phase --cardinality MANY_TO_MANY
+focus --class freedays.timesheet.Phase
+field set --fieldName projectLst --type freedays.timesheet.Project --cardinality MANY_TO_MANY 
+entity --class freedays.timesheet.PhaseLabor --testAutomatically
+field string --fieldName code --unique --notNull
+field number --fieldName percentage --type java.lang.Float --notNull 
+field reference --fieldName project --type freedays.timesheet.Project --cardinality MANY_TO_ONE 
+field reference --fieldName phase --type freedays.timesheet.Phase --cardinality MANY_TO_ONE 
+field reference --fieldName laborbilling --type freedays.timesheet.LaborBilling --cardinality MANY_TO_ONE 
+entity --class freedays.timesheet.Pattern --testAutomatically 
+field number --fieldName noOfHours --type java.lang.Integer --notNull
+field set --fieldName phaseLaborLst --type freedays.timesheet.PhaseLabor --cardinality ONE_TO_MANY 
+focus --class freedays.timesheet.PhaseLabor
+field reference --fieldName pattern --type freedays.timesheet.Pattern --cardinality MANY_TO_ONE 
+entity --class freedays.timesheet.Schedule --testAutomatically
+field date --fieldName startDate --type java.util.Calendar --dateFormat SHORT --notNull 
+field date --fieldName endDate --type java.util.Calendar --dateFormat SHORT --notNull 
+field reference --fieldName pattern --type freedays.timesheet.Pattern --cardinality ONE_TO_ONE
+focus --class freedays.timesheet.Pattern
+field reference --fieldName schedule --type freedays.timesheet.Schedule --cardinality ONE_TO_ONE 
+focus --class freedays.timesheet.Schedule
+entity --class freedays.timesheet.TimesheetUser --extends freedays.app.FDUser --testAutomatically 
+perform tests
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-25 17:58:11
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 09:54:51
+entity --class freedays.timesheet.TimesheetAdmin --testAutomatically --extends freedays.domain.AdvancedUserRole
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 13:31:34
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 13:32:37
+perform tests
+perform tests
+perform tests
+perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 15:06:19
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 15:06:43
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 15:14:43
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 15:23:37
+perform tests
+perform tests
+perform tests
+focus --class freedays.timesheet.TimesheetUser
+field reference --fieldName fduser --type freedays.app.FDUser --cardinality ONE_TO_ONE --notNull
+perform tests
+perform tests
+perform tests
+perform tests
+  perform tests
+  backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 18:30:21
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 09:17:19
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+backup
+controller scaffold --class freedays.timesheet.Project --entity freedays.timesheet.Project
+controller scaffold --class freedays.controller.ProjectController --entity freedays.timesheet.Project
+controller scaffold --class freedays.controller.PhaseController --entity freedays.timesheet.Phase
+controller scaffold --class freedays.controller.LaborBillingController --entity freedays.timesheet.LaborBilling
+controller scaffold --class freedays.controller.PhaseLaborController --entity freedays.timesheet.PhaseLabor
+controller scaffold --class freedays.controller.PatternController --entity freedays.timesheet.Pattern
+controller scaffold --class freedays.controller.ScheduleController --entity freedays.timesheet.Schedule
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 13:27:56
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 14:44:50
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 14:45:59
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 14:47:44
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 16:39:00
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 17:03:47
+backup
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 17:06:46
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-30 13:40:28
 perform tests
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 12:53:32
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 12:53:45

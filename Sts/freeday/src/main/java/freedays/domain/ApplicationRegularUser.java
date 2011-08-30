@@ -32,13 +32,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RooJavaBean
 @RooEntity(inheritanceType = "TABLE_PER_CLASS")
-public abstract class ApplicationRegularUser  implements Serializable {
+public abstract class ApplicationRegularUser   implements Serializable {
 
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 
 	@ManyToOne
     private RegularUser regularUser;

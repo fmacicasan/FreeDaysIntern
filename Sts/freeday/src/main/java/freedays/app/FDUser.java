@@ -1,5 +1,6 @@
 package freedays.app;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -35,6 +36,11 @@ import freedays.validation.annotation.BusinessDay;
 @RooEntity
 public class FDUser extends ApplicationRegularUser {
 
+	/**
+	 * 
+	 */
+	protected static final long serialVersionUID = 1L;
+	
 	@NotNull
     @Past
     @Temporal(TemporalType.DATE)

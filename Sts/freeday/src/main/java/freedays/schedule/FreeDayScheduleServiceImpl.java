@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import freedays.app.form.FreeDayUserList;
 import freedays.domain.Request;
+import freedays.security.UserContextService;
 import freedays.timesheet.MainClass;
+import freedays.timesheet.TimesheetUser;
 import freedays.util.DateUtils;
 import freedays.util.MailUtils;
 
@@ -111,10 +113,13 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 		
 	}
 	
+	@Autowired
+	private UserContextService userContextService;
 	@Override
 	public void generateTimesheets() {
 		MainClass mc = new MainClass();
-		mc.doMain();		
+		TimesheetUser us = TimesheetUser.findTimesheetUserByUsername("test");
+		mc.doMain(us);		
 	}
 
 }

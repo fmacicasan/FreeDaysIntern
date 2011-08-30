@@ -1,22 +1,34 @@
 package freedays.timesheet;
+
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.tostring.RooToString;
+import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import freedays.timesheet.Project;
+import javax.persistence.ManyToOne;
+import freedays.timesheet.Phase;
+import freedays.timesheet.LaborBilling;
+import freedays.timesheet.Pattern;
+
+@RooJavaBean
+@RooToString
+@RooEntity
 public class PhaseLabor {
-	private String id;
-	private LaborBilling lb;
-	private Phase ph;
-	private Float percentage;
-	public PhaseLabor(String id, LaborBilling l, Phase p, Float perc) {
-		this.id = id;
-		this.lb = l;
-		this.ph = p;
-		this.percentage = perc;
-	}
-	public Phase getPhase() {
-		return ph;
-	}
-	public LaborBilling getLaborBilling() {
-		return lb;
-	}
-	public Float getPercentage() {
-		return percentage;
-	}
+
+
+    @NotNull
+    private Float percentage;
+
+    @ManyToOne
+    private Project project;
+
+    @ManyToOne
+    private Phase phase;
+
+    @ManyToOne
+    private LaborBilling laborbilling;
+
+    @ManyToOne
+    private Pattern pattern;
 }

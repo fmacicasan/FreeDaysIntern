@@ -14,6 +14,12 @@ import freedays.app.form.FreeDayRequest;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
+import freedays.timesheet.Pattern;
+import freedays.timesheet.Phase;
+import freedays.timesheet.Project;
+import freedays.timesheet.Schedule;
+
+import java.util.Set;
 /**
  * A central place to register application Converters and Formatters.
  * INFO: default location where spring retrieves conversion and formatting strategies for view exposion.
@@ -40,6 +46,54 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     }
 	
 	/**
+	 * strategy for converting a set of patterns to string
+	 * @return
+	 */
+	Converter<Set<Pattern>, String> getPatternSetConverter() {
+        return new Converter<Set<Pattern>, String>() {
+            public String convert(Set<Pattern> set) {
+                //return Joiner.on(",").join(properties.toArray());
+            	StringBuilder sb = new StringBuilder();
+            	for(Pattern aru:set){
+            		sb.append(aru.toString());
+            	}
+                return sb.toString();// 1
+            }
+        };
+    }
+	
+	/**
+	  Strategy for converting a set of Phases to string
+	 * @return
+	 */
+	Converter<Set<Phase>, String> getPhaseSetConverter() {
+        return new Converter<Set<Phase>, String>() {
+            public String convert(Set<Phase> set) {
+                //return Joiner.on(",").join(properties.toArray());
+            	StringBuilder sb = new StringBuilder();
+            	for(Phase aru:set){
+            		sb.append(aru.toString());
+            	}
+                return sb.toString();// 1
+            }
+        };
+    }
+	
+	/**
+	  Strategy for converting a Phase to string
+	 * @return
+	 */
+	Converter<Phase, String> getPhaseConverter() {
+    	return new Converter<Phase, String>(){
+			@Override
+			public  String convert(Phase source) {
+				return source.toString();
+			}
+    	
+    	};
+    }
+	
+	/**
 	 * Strategy for converting a set of Advance user roles to string
 	 * @return
 	 */
@@ -49,6 +103,24 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
                 //return Joiner.on(",").join(properties.toArray());
             	StringBuilder sb = new StringBuilder();
             	for(AdvancedUserRole aru:set){
+            		sb.append(aru.toString());
+            	}
+                return sb.toString();// 1
+            }
+        };
+    }
+	
+	/**
+	 * Strategy for converting a set of Schedules to string
+	 * @return
+	 */
+	Converter<Set<Schedule>, String> getScheduleSetConverter() {
+        return new Converter<Set<Schedule>, String>() {
+            public String convert(Set<Schedule> set) {
+                //return Joiner.on(",").join(properties.toArray());
+            	StringBuilder sb = new StringBuilder();
+            	for(Schedule aru:set){
+            		sb.append(aru.toString());
             		sb.append(aru.toString()).append(" ");
             	}
                 return sb.toString();// 1
@@ -69,6 +141,68 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     	
     	};
     }
+    /**
+	 * Strategy for converting an Object to string
+	 * @return
+	 */
+    Converter<Object, String> getObjectConverter(){
+    	return new Converter<Object, String>(){
+			@Override
+			public String convert(Object source) {
+				return source.toString();
+			}
+    	
+    	};
+    }
+    
+    /**
+	 * Strategy for converting a set of Objects to string
+	 * @return
+	 */
+    Converter<Set<Object>, String> getObjectSetConverter() {
+        return new Converter<Set<Object>, String>() {
+            public String convert(Set<Object> set) {
+                //return Joiner.on(",").join(properties.toArray());
+            	StringBuilder sb = new StringBuilder();
+            	for(Object aru:set){
+            		sb.append(aru.toString());
+            	}
+                return sb.toString();// 1
+            }
+        };
+    }
+    
+    
+    /**
+	 * Strategy for converting a set of Projects to string
+	 * @return
+	 */
+    Converter<Set<Project>, String> getProjectSetConverter() {
+        return new Converter<Set<Project>, String>() {
+            public String convert(Set<Project> set) {
+                //return Joiner.on(",").join(properties.toArray());
+            	StringBuilder sb = new StringBuilder();
+            	for(Project aru:set){
+            		sb.append(aru.toString());
+            	}
+                return sb.toString();// 1
+            }
+        };
+    }
+    /**
+	  Strategy for converting a Project to string
+	 * @return
+	 */
+	Converter<Project, String> getProjectConverter() {
+  	return new Converter<Project, String>(){
+			@Override
+			public  String convert(Project source) {
+				return source.toString();
+			}
+  	
+  	};
+  }
+    
     /**
 	 * Strategy for converting a Advanced User Role to string
 	 * @return
@@ -125,6 +259,16 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getApplicationRegularUserConverter());
         registry.addConverter(getAdvancedUserRoleConverter());
         registry.addConverter(getFreeDayConverter());
+        registry.addConverter(getObjectSetConverter());
+        /*registry.addConverter(getPatternSetConverter());
+        registry.addConverter(getProjectConverter());*/
+        registry.addConverter(getObjectConverter());
+        /*registry.addConverter(getPhaseConverter());
+        registry.addConverter(getProjectConverter());
+        registry.addConverter(getPhaseSetConverter());
+        registry.addConverter(getProjectSetConverter());
+        */
+        
 	}
 	
 

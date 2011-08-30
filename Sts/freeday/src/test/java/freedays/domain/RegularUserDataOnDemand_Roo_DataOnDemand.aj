@@ -20,8 +20,9 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
     declare @type: RegularUserDataOnDemand: @Component;
     
     private Random RegularUserDataOnDemand.rnd = new SecureRandom();
-    
     private List<RegularUser> RegularUserDataOnDemand.data;
+    
+    
     
     public RegularUser RegularUserDataOnDemand.getNewTransientRegularUser(int index) {
         RegularUser obj = new RegularUser();
@@ -97,7 +98,7 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
         return false;
     }
     
-    public void RegularUserDataOnDemand.init() {
+	public void RegularUserDataOnDemand.init() {
         data = RegularUser.findRegularUserEntries(0, 10);
         if (data == null) throw new IllegalStateException("Find entries implementation for 'RegularUser' illegally returned null");
         if (!data.isEmpty()) {
@@ -122,4 +123,5 @@ privileged aspect RegularUserDataOnDemand_Roo_DataOnDemand {
         }
     }
     
+        
 }
