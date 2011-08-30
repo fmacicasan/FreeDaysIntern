@@ -1,23 +1,28 @@
 package freedays.timesheet;
+
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.tostring.RooToString;
+import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import java.util.Set;
+import freedays.timesheet.Project;
+import java.util.HashSet;
+import javax.persistence.ManyToMany;
+import javax.persistence.CascadeType;
+
+@RooJavaBean
+@RooToString
+@RooEntity
 public class Phase {
-	private String name;
-	private String id;
-	private Project p;
-	public Phase(String name, String ID, Project p) {
-		this.name = name;
-		this.id = ID;
-		this.p = p;
-	}
-	public Project getProject() {
-		return p;
-	}
-	public void setProject(Project proj) {
-		p = proj;
-	}
-	public String getName() {
-		return name;
-	}
-	public String getID() {
-		return id;
-	}
+
+    @NotNull
+    @Column(unique = true)
+    private String code;
+
+    @NotNull
+    private String name;
+
+    @ManyToMany(cascade = CascadeType.ALL)    
+    private Set<Project> projectLst = new HashSet<Project>();
 }

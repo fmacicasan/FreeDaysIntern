@@ -1,35 +1,35 @@
 package freedays.timesheet;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.tostring.RooToString;
+import java.util.Calendar;
+import javax.validation.constraints.NotNull;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
+import freedays.timesheet.Pattern;
+import javax.persistence.ManyToOne;
+
+@RooJavaBean
+@RooToString
+@RooEntity
 public class Schedule {
-	private Integer id;
-	private java.util.Date start_date;
-	private java.util.Date end_date;
-	private Pattern p;
-	private Employee e;
-	public Schedule(Date a, Date b, Pattern sablon, Employee k) {
-		// TODO Auto-generated constructor stub
-		start_date = a;
-		end_date = b;
-		p = sablon;
-		e = k;
-	}
-	public Calendar getStartDate() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(start_date);
-		return cal;
-	}
-	public Calendar getEndDate() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(end_date);
-		return cal;
-	}
-	public Pattern getPattern() {
-		return p;
-	}
-	public Employee getEmployee() {
-		return e;
-	}
+
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "S-")
+    private Calendar startDate;
+
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "S-")
+    private Calendar endDate;
+
+    @ManyToOne
+    private Pattern pattern;
+    
+    @ManyToOne
+    private freedays.timesheet.TimesheetUser employee;
 }

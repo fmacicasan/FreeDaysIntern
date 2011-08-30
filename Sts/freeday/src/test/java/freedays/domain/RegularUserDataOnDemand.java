@@ -1,5 +1,11 @@
 package freedays.domain;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.springframework.roo.addon.dod.RooDataOnDemand;
 
 @RooDataOnDemand(entity = RegularUser.class)
@@ -14,4 +20,8 @@ public class RegularUserDataOnDemand {
 		RegularUserDataOnDemand rudod = new RegularUserDataOnDemand();
 		return rudod.getRandomRegularUser();
 	}
+
+	
+	
+
 }

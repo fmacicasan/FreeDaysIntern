@@ -4,6 +4,7 @@ INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("Admin",0)
 INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("RequestGranter",0)
 INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("FDAdmin",0)
 INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("HRManagement",0)
+INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("TimesheetAdmin",0)
 
 delete from `approval_strategy`
 INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("LevelTop",12,0,null);
@@ -44,5 +45,46 @@ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,1);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,2);
 INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,3);
 
+delete from `project`
+INSERT INTO `project`(`code`,`name`) VALUES("0001","DummyProj1")
+INSERT INTO `project`(`code`,`name`) VALUES("0002","DummyProj2")
+INSERT INTO `project`(`code`,`name`) VALUES("0003","DummyProj3")
+INSERT INTO `project`(`code`,`name`) VALUES("0004","DummyProj4")
+INSERT INTO `project`(`code`,`name`) VALUES("0005","DummyProj5")
 
+delete from `phase`
+INSERT INTO `phase`(`code`,`name`) VALUES("0001","DummyPhase1")
+INSERT INTO `phase`(`code`,`name`) VALUES("0002","DummyPhase2")
+INSERT INTO `phase`(`code`,`name`) VALUES("0003","DummyPhase3")
+INSERT INTO `phase`(`code`,`name`) VALUES("0004","DummyPhase4")
+INSERT INTO `phase`(`code`,`name`) VALUES("0005","DummyPhase5")
 
+delete from `phase_project_lst`
+INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(1,1)
+INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(2,1)
+INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(3,1)
+INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(4,1)
+INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(1,2)
+INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(2,2)
+INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(3,2)
+
+delete from `labor_billing`
+INSERT INTO `labor_billing`(`code`,`name`) VALUES("01","DummyLaborBilling1")
+INSERT INTO `labor_billing`(`code`,`name`) VALUES("02","DummyLaborBilling2")
+INSERT INTO `labor_billing`(`code`,`name`) VALUES("03","DummyLaborBilling3")
+
+delete from `pattern`
+INSERT INTO `pattern`(`no_of_hours`) VALUES(8)
+
+delete from `phase_labor`
+INSERT INTO `phase_labor`(`percentage`,`laborbilling`,`pattern`,`phase`,`project`) VALUES(20,1,1,1,1)
+INSERT INTO `phase_labor`(`percentage`,`laborbilling`,`pattern`,`phase`,`project`) VALUES(20,1,1,2,1)
+INSERT INTO `phase_labor`(`percentage`,`laborbilling`,`pattern`,`phase`,`project`) VALUES(20,2,1,3,1)
+INSERT INTO `phase_labor`(`percentage`,`laborbilling`,`pattern`,`phase`,`project`) VALUES(40,2,1,4,1)
+
+delete from `timesheet_user`
+INSERT INTO `timesheet_user`(`id`,`fduser`) VALUES(100,111);
+
+delete from `schedule`
+INSERT INTO `schedule`(`start_date`,`end_date`,`employee`,`pattern`) VALUES("2011-07-20", "2011-12-20", 100, 1)
+delete from `schedule`
