@@ -57,7 +57,7 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 	 * merging took place.
 	 */
 	protected void setMergedStatus(){
-		super.setStatus(FreeDayStatus.COMPLETED_SUCCESS);
+		super.setStatus(FreeDayStatus.FINALIZE_SUCCESS);
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 			return FreeDayStatus.WAITING;
 		}
 		if(this.match(this.getMatch())){
-			return FreeDayStatus.COMPLETED_SUCCESS;
+			return FreeDayStatus.FINALIZE_SUCCESS;
 		} else {
 			//if it gets here then the matching cannot take place => the current match was already
 			//matched so the request goes back in waiting state.

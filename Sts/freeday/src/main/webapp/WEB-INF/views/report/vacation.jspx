@@ -70,7 +70,27 @@
   							<c:set var="colid" value="colb" />
   							<c:set var="outStatus" value=""/>
   						</c:if>
-       					<td title="${daysDateList[i]}"  class="${colid}" align="center" ><c:out value="${outStatus}"/> </td>
+       					<td title="${daysDateList[i]}"  class="${colid}" align="center" >
+       						 <c:set value="F" var="ca" />
+       						 <c:set value="W" var="wa"/>
+       						 <c:set value="I" var="ia" />
+       						<c:choose>
+       							<c:when test="${outStatus==ca}">
+       								<IMG alt="F" src="/freedays/resources/images/check_mark7575.png"  />
+       							</c:when>
+       							<c:when test="${outStatus==wa }">
+       								<IMG alt="W" src="/freedays/resources/images/waiting_mark_rescaled_14x10.png"  />
+       							</c:when>
+       							<c:when test="${outStatus==ia }">
+       								<IMG alt="I" src="/freedays/resources/images/work_marko.png"  />
+       							</c:when>
+       							<c:otherwise> 
+       								<c:out value="${outStatus}"/>
+       							 </c:otherwise>
+       						</c:choose> 
+       						
+       						
+       					</td>
        			</c:forEach>
        		</tr>
        	</c:forEach>

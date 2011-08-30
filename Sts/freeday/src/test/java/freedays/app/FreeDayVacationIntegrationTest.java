@@ -69,7 +69,7 @@ public class FreeDayVacationIntegrationTest {
 		Assert.assertEquals("request day approve - fail @ free day status before approve 2",FreeDayStatus.IN_PROGRESS, reqC.getRequestable().getStatus());
 		reqC.approve();
 		Assert.assertEquals("request day approve - fail @ req status after full approve",RequestStatus.GRANTED, reqC.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.COMPLETED_SUCCESS, reqC.getRequestable().getStatus());
+		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.FINALIZE_SUCCESS, reqC.getRequestable().getStatus());
     }
     
     @Test

@@ -65,7 +65,7 @@ public class FreeDayVacation extends FreeDay {
 
     @Override
     protected FreeDayStatus getApproveStatus() {
-        return FreeDayStatus.COMPLETED_SUCCESS;
+        return FreeDayStatus.FINALIZE_SUCCESS;
     }
     
     @Override

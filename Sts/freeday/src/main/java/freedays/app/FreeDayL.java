@@ -60,7 +60,7 @@ public class FreeDayL extends FreeDay {
 
 	@Override
 	public FreeDayStatus getApproveStatus() {
-		return FreeDayStatus.COMPLETED_SUCCESS;
+		return FreeDayStatus.FINALIZE_SUCCESS;
 	}
 
 	@Override

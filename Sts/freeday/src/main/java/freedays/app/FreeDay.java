@@ -80,7 +80,7 @@ public abstract class FreeDay {
     	 * The FreeDays is associated with an request that was approved
     	 * and, if it is the case, its associated with a complementary request.
     	 */
-    	COMPLETED_SUCCESS, 
+    	FINALIZE_SUCCESS, 
     	/**
     	 * The FreeDay is associated with a request that terminated with failure.
     	 * It was either denied or canceled.
@@ -122,7 +122,7 @@ public abstract class FreeDay {
     public boolean isReportable(){
     	return this.getDate().before(Calendar.getInstance()) && //in past
     			(this.getStatus() == FreeDayStatus.WAITING		//status waiting
-    				|| this.getStatus() == FreeDayStatus.COMPLETED_SUCCESS); //status completed sucessfull
+    				|| this.getStatus() == FreeDayStatus.FINALIZE_SUCCESS); //status completed sucessfull
     }
     
     @Override
@@ -260,7 +260,7 @@ public abstract class FreeDay {
 	 */
 	public static List<FreeDayStatus> getAllGrantedStatus(){
 		List<FreeDayStatus> lfds = new ArrayList<FreeDayStatus>();
-		lfds.add(FreeDayStatus.COMPLETED_SUCCESS);
+		lfds.add(FreeDayStatus.FINALIZE_SUCCESS);
 		lfds.add(FreeDayStatus.WAITING);
 		return lfds;
 	}

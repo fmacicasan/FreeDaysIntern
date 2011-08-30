@@ -3,6 +3,7 @@
 
 package freedays.domain.form;
 
+import java.lang.String;
 
 privileged aspect ChangePassWrapper_Roo_JavaBean {
     

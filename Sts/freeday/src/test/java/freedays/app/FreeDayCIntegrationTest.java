@@ -98,7 +98,7 @@ public class FreeDayCIntegrationTest {
 		Assert.assertNull("normal level merge requests - not null merge object",fdr.getMatch());
 		fdc.setMatch(fdr);
 		Assert.assertTrue("normal level merge request - problem at match",fdc.match(fdr));
-		fdc.setStatus(FreeDayStatus.COMPLETED_SUCCESS);
+		fdc.setStatus(FreeDayStatus.FINALIZE_SUCCESS);
 		fdc.persist();
 		fdr.persist();
 		Assert.assertNotNull("normal level check match - remained null fdc",fdc.getMatch());
@@ -106,8 +106,8 @@ public class FreeDayCIntegrationTest {
 		Assert.assertSame("normal level check match - matching failed fdr",  fdc,fdr.getMatch());
 		Assert.assertSame("normal level check match - matching failed fdc",  fdr,fdc.getMatch());
 		Assert.assertTrue("normal level merge request - duplicate match possible check cond failed",!fdr.match(fdc));
-		Assert.assertEquals("normal level check match - matching status on complete fdr", FreeDayStatus.COMPLETED_SUCCESS,fdr.getStatus());
-		Assert.assertEquals("normal level check match - matching status on complete fdc", FreeDayStatus.COMPLETED_SUCCESS,fdc.getStatus());
+		Assert.assertEquals("normal level check match - matching status on complete fdr", FreeDayStatus.FINALIZE_SUCCESS,fdr.getStatus());
+		Assert.assertEquals("normal level check match - matching status on complete fdc", FreeDayStatus.FINALIZE_SUCCESS,fdc.getStatus());
 		
 		FreeDayR testfdr = FreeDayR.findFreeDayR(fdr.getId());
 		Assert.assertNotNull("normal level check find - persist failed for free day", testfdr);
@@ -189,9 +189,9 @@ public class FreeDayCIntegrationTest {
 		Request reqR3 = Request.createPersistentReq(fdr, username);
 		reqR3.approve();
 		reqR3.approve();
-		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.COMPLETED_SUCCESS, freedc.getStatus());
+		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.FINALIZE_SUCCESS, freedc.getStatus());
 		Assert.assertEquals("request day approve - fail @ req status after full approve",RequestStatus.GRANTED, reqR3.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.COMPLETED_SUCCESS, reqR3.getRequestable().getStatus());
+		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.FINALIZE_SUCCESS, reqR3.getRequestable().getStatus());
 
 	}
 	
