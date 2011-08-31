@@ -19,7 +19,7 @@ body {
 	margin: 0.5%;
 }
 .colr,.legr{
-	background-color: red;
+	background-color: RGB(255,150,150);
 }
 .coly,.legy{
 	background-color: yellow;

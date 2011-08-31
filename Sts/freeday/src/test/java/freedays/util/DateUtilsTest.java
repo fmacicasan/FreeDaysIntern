@@ -136,7 +136,7 @@ public class DateUtilsTest {
 	@Test
 	public void testGetShortDaysList(){
 		int month = new java.util.Random().nextInt(Calendar.DECEMBER)+Calendar.JANUARY;
-		Assert.assertEquals(DateUtils.getDaysInMonth(month), DateUtils.getShortDateList(month).size());
+		Assert.assertEquals(String.format("error for the month %d", month),DateUtils.getDaysInMonth(month), DateUtils.getShortDateList(month).size());
 	}
 	
 	@Test
@@ -148,7 +148,7 @@ public class DateUtilsTest {
 	@Test
 	public void testGetWeekdayInitList(){
 		int month = new java.util.Random().nextInt(Calendar.DECEMBER)+Calendar.JANUARY;
-		Assert.assertEquals(DateUtils.getDaysInMonth(month), DateUtils.getWeekdayInitialsList(month).size());
+		Assert.assertEquals(String.format("error for the month %d", month),DateUtils.getDaysInMonth(month), DateUtils.getWeekdayInitialsList(month).size());
 	}
 	
 	@Test

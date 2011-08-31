@@ -6,7 +6,7 @@ public aspect DeletableEntityAspect {
 	
 	declare parents : freedays.domain.RegularUser implements DeletableEntity;
 	declare parents : freedays.app.FDUser implements DeletableEntity;
-	declare parents : freedays.timesheet.* implements DeletableEntity;
+	//declare parents : freedays.timesheet.* implements DeletableEntity;
 
 
 

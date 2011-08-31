@@ -5,6 +5,13 @@
     <spring:message code="freedaysreport_title" arguments="${fullMonthNames[param.m-1]}" var="titleMsg" />
     <page:list id="pl_freedays_app_Freedaysreport"  title_msg="${titleMsg}" items="${vacations}" z="user-managed">
        <c:set var="colCounter" value="${length}" />
+       
+       <c:set var="img_check" value="/freedays/resources/images/check_mark7575.png" />
+       <c:set var="img_wait" value="/freedays/resources/images/waiting_mark_rescaled_14x10.png" />
+       <c:set var="img_work" value="/freedays/resources/images/work_marko.png" />
+       <c:set value="F" var="ca" />
+       <c:set value="W" var="wa"/>
+       <c:set value="I" var="ia" />
        <spring:eval var="colCounter" expression="colCounter+4" />
        <table>
        <!-- maximum 20 days per screen => add pages for more!! -->
@@ -71,18 +78,16 @@
   							<c:set var="outStatus" value=""/>
   						</c:if>
        					<td title="${daysDateList[i]}"  class="${colid}" align="center" >
-       						 <c:set value="F" var="ca" />
-       						 <c:set value="W" var="wa"/>
-       						 <c:set value="I" var="ia" />
+       						 
        						<c:choose>
        							<c:when test="${outStatus==ca}">
-       								<IMG alt="F" src="/freedays/resources/images/check_mark7575.png"  />
+       								<IMG alt="${ca}" src="${img_check}"/>
        							</c:when>
        							<c:when test="${outStatus==wa }">
-       								<IMG alt="W" src="/freedays/resources/images/waiting_mark_rescaled_14x10.png"  />
+       								<IMG alt="${wa}" src="${img_wait}"  />
        							</c:when>
        							<c:when test="${outStatus==ia }">
-       								<IMG alt="I" src="/freedays/resources/images/work_marko.png"  />
+       								<IMG alt="${ia}" src="${img_work}"  />
        							</c:when>
        							<c:otherwise> 
        								<c:out value="${outStatus}"/>
@@ -116,11 +121,14 @@
        		<td colspan="${colCounter}">
        			<i><b><spring:message code="freedaysreport_legend_title" />:</b></i> 
        			<spring:message code="freedaysreport_legend_matchings_c" var="matchc" />
-       			<spring:message code="freedaysreport_legend_matchings" argumentSeparator="," arguments="${matchc}" />
+       			<IMG alt="${ca}" src="${img_check}"/>
+       			<spring:message code="freedaysreport_legend_matchings" arguments="${matchc}" />
        			<spring:message code="freedaysreport_legend_matchings_w" var="matchw" />
-       			<spring:message code="freedaysreport_legend_matchings" argumentSeparator="," arguments="${matchw}" />
+       			<IMG alt="${wa}" src="${img_wait}"  />
+       			<spring:message code="freedaysreport_legend_matchings" arguments="${matchw}" />
        			<spring:message code="freedaysreport_legend_matchings_i" var="matchi" />
-       			<spring:message code="freedaysreport_legend_matchings" argumentSeparator="," arguments="${matchi}" />
+       			<IMG alt="${ia}" src="${img_work}"  />
+       			<spring:message code="freedaysreport_legend_matchings" arguments="${matchi}" />
        			
        			<spring:message code="freedaysreport_legend_typev" var="legend_typev" />
        			<spring:message code="freedaysreport_legend_typel" var="legend_typel" />

@@ -12,6 +12,8 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import junit.framework.Assert;
+
 import org.springframework.context.i18n.LocaleContextHolder;
 
 /**
@@ -193,9 +195,10 @@ public class DateUtils {
 	public static int getDaysInMonth(int month) {
 		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December");
 		Calendar now = Calendar.getInstance();
+		now.set(Calendar.DAY_OF_MONTH, 1);//needed for instances with DAY_OF_MONTH 30/31 that will increment months with 28/29/30 days
 		now.set(Calendar.MONTH, month);
 		int days = now.getActualMaximum(Calendar.DAY_OF_MONTH);
-		//System.out.println(days);
+		//System.out.println(days+" "+month);
 		return days;
 	}
 //	public static void main(String[] args){
