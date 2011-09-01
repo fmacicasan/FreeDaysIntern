@@ -53,9 +53,12 @@ public class FreeDayLIntegrationTest {
 		leveltop = fdudod.getRandomLevelTopUser();
 		level1 = fdudod.getRandomFDUser();
 		while(level1.equals(leveltop))level1 = fdudod.getRandomFDUser();
+		Assert.assertNotSame(level1, leveltop);
 		level1.setGranter(leveltop);
 		appreguser = fdudod.getRandomFDUser();
 		while(level1.equals(appreguser)||leveltop.equals(appreguser))appreguser = fdudod.getRandomFDUser();
+		Assert.assertNotSame(leveltop, appreguser);
+		Assert.assertNotSame(level1, appreguser);
 		appreguser.setGranter(level1);
 		
 	}
