@@ -51,7 +51,7 @@ public class RecoverPassController {
 			uiModel.addAttribute("reason", false);
 			return "recoverpass";
 		}
-		System.out.println("i received email:"+resetpass.getEmail().toString());
+		//System.out.println("i received email:"+resetpass.getEmail().toString());
 		boolean result = RegularUser.resetPassword(resetpass.getEmail());
 		//dont send differentiated message on success/failure
 		uiModel.addAttribute("reason", true);

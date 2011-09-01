@@ -194,7 +194,7 @@ public class FreeDayUserList {
 				Calendar end = DateUtils.dateAddBusinessDay(start, fdv.getSpan());
 				//replaced before by compareTo to test equality
 				for(Calendar c = (Calendar)start.clone();c.compareTo(end)<=0;c.add(Calendar.DAY_OF_YEAR, 1)){
-					if(DateUtils.isSameMonth(c, month)){
+					if(DateUtils.isSameMonth(c, month) && DateUtils.isCurrentYear(fd.getDate())){
 						FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
 						fdrw.setType(fd.getType().ordinal()+1);
 						fdrw.setStatus(fd.getStatus().toString().substring(0,1));
@@ -202,7 +202,7 @@ public class FreeDayUserList {
 					}
 				}
 			} else {
-				if(DateUtils.isSameMonth(fd.getDate(),month)){//remove this if you get the freedays already filtered by month
+				if(DateUtils.isSameMonth(fd.getDate(),month) && DateUtils.isCurrentYear(fd.getDate())){//remove this if you get the freedays already filtered by month
 					FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
 					fdrw.setType(fd.getType().ordinal()+1);
 					fdrw.setStatus(fd.getStatus().toString().substring(0,1));

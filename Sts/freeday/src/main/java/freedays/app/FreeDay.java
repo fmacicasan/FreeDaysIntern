@@ -329,21 +329,7 @@ public abstract class FreeDay {
         return q.getResultList(); 
 	}
 	
-	/**
-	 * Counts all the free days that are under approval or already approved
-	 * that are associated with requests made by a FDUser associated with a 
-	 * RegularUser identified by the provided username.
-	 * @param username
-	 * @return
-	 */
-	public static Long countAllNotFailedRequestsByUsername(String username){
-		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
-		EntityManager em = FreeDay.entityManager();
-		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDay o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
-        q.setParameter("username", username);
-        q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
-        return q.getSingleResult(); 
-	}
+
 	
 	/**
 	 * Decides weather or not the provided date can be a date corresponding to a

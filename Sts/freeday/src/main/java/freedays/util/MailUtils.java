@@ -34,7 +34,7 @@ public class MailUtils {
 	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT = "Hello %s,\n your subordinate %s has a new request to approve!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT="Hello %s,\n the following request was canceled!\n %s \n\n ";
-	private static final String DEFAULT_APPLICATION_LINK="Find us at {0}!";
+	private static final String DEFAULT_APPLICATION_LINK="\nFind us at {0}!";
     
 	@Autowired
     private JavaMailSenderImpl mailSender;
@@ -91,7 +91,7 @@ public class MailUtils {
 	}
 	private String finalizeContent(final String content){
 		StringBuilder sb = new StringBuilder();
-		sb.append(content);
+		sb.append(content).append("\n");
 		sb.append(MessageFormat.format(MailUtils.DEFAULT_APPLICATION_LINK, this.getApplicationHome())).append("\n\n");
 		return sb.toString();
 	}

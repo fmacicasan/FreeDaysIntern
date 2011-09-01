@@ -16,6 +16,7 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.app.form.FreeDayRequestVacation;
@@ -161,6 +162,22 @@ public class FreeDayVacation extends FreeDay {
 	 */
 	public Calendar getEnd(){
 		return DateUtils.dateAddBusinessDay(this.getBeginning(), this.getSpan());
+	}
+	
+	/**
+	 * Counts all the free days that are under approval or already approved
+	 * that are associated with requests made by a FDUser associated with a 
+	 * RegularUser identified by the provided username.
+	 * @param username
+	 * @return
+	 */
+	public static Long countAllNotFailedRequestsByUsername(String username){
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		EntityManager em = FreeDay.entityManager();
+		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDayVacation o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
+        q.setParameter("username", username);
+        q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        return q.getSingleResult(); 
 	}
 
 }

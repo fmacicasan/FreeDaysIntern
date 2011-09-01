@@ -12,7 +12,6 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import junit.framework.Assert;
 
 import org.springframework.context.i18n.LocaleContextHolder;
 
@@ -313,6 +312,11 @@ public class DateUtils {
 		}
 		date.add(Calendar.DAY_OF_MONTH, days.intValue()+full.intValue());
 		return date;
+	}
+
+	public static boolean isCurrentYear(Calendar date) {
+		Calendar c = Calendar.getInstance();
+		return date.get(Calendar.YEAR)==c.get(Calendar.YEAR);
 	}
 
 	

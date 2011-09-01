@@ -3,14 +3,17 @@ package freedays.app;
 import java.util.Calendar;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.EntityManager;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
+import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.validation.annotation.BusinessDay;
@@ -82,5 +85,21 @@ public class FreeDayL extends FreeDay {
 	@Override
 	public RequestType getType() {
 		return RequestType.L;
+	}
+	
+	/**
+	 * Counts all the free days that are under approval or already approved
+	 * that are associated with requests made by a FDUser associated with a 
+	 * RegularUser identified by the provided username.
+	 * @param username
+	 * @return
+	 */
+	public static Long countAllNotFailedRequestsByUsername(String username){
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		EntityManager em = FreeDay.entityManager();
+		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDayL o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
+        q.setParameter("username", username);
+        q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        return q.getSingleResult(); 
 	}
 }

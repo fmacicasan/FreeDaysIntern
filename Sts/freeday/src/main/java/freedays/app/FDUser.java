@@ -49,8 +49,6 @@ public class FDUser extends ApplicationRegularUser {
     private Calendar hireDate;
 
     @NotNull
-    @Min(0L)
-    @Max(7L)
     @Value("0")
     private Integer initDays;
 
@@ -112,7 +110,8 @@ public class FDUser extends ApplicationRegularUser {
 //		remainingDays -= Request.countRequests(this, RequestStatus.GRANTED);
 		
 		String username = this.getRegularUser().getUsername();
-		remainingDays -= FreeDay.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username);
 		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username);
 		return remainingDays;		
 	}
@@ -125,7 +124,8 @@ public class FDUser extends ApplicationRegularUser {
 	public Long computeteAvailableFreeDaysTotal(){
 		long remainingDays = this.getMaxFreeDays();
 		String username = this.getRegularUser().getUsername();
-		remainingDays -= FreeDay.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username); 
 		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username);
 		return remainingDays;
 	}

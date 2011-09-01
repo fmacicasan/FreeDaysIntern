@@ -1,49 +1,119 @@
 delete from `advanced_user_role`
-INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("Admin",0)
--- INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("ApplicationAdmin",0)
-INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("RequestGranter",0)
-INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("FDAdmin",0)
-INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("HRManagement",0)
-INSERT INTO `advanced_user_role`(`role_type`,`version`)VALUES("TimesheetAdmin",0)
+INSERT INTO `advanced_user_role`(`role_type`,`version`) VALUES("Admin",0);
+INSERT INTO `advanced_user_role`(`role_type`,`version`) VALUES("RequestGranter",0);
+INSERT INTO `advanced_user_role`(`role_type`,`version`) VALUES("FDAdmin",0);
+INSERT INTO `advanced_user_role`(`role_type`,`version`) VALUES("HRManagement",0)
+INSERT INTO `advanced_user_role`(`role_type`,`version`) VALUES("TimesheetAdmin",0)
 
 delete from `approval_strategy`
-INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("LevelTop",12,0,null);
-INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`)VALUES("Level1",13,0,12);
+INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`) VALUES ("LevelTop",12,0,null)
+INSERT INTO `approval_strategy`(`strategy_type`,`id`,`version`,`succesor`) VALUES ("Level1",13,0,12)
 
 
 delete from `regular_user`
-INSERT INTO `regular_user`(`id`,`activ`,`creationdate`,`deleted`,`firstname`,`lastmodified`,`password`,`surename`,`usermodifier`,`username`,`version`)VALUES(111,1,"2011-07-20 01:21:09",0,"nechifor","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","bibeanu",NULL,"flo.macicasan@gmail.com",0)
-INSERT INTO `regular_user`(`id`,`activ`,`creationdate`,`deleted`,`firstname`,`lastmodified`,`password`,`surename`,`usermodifier`,`username`,`version`)VALUES(112,1,"2011-07-20 01:21:09",0,"gigel","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","curmean",NULL,"fmacicasan1@sdl.com",0)
-INSERT INTO `regular_user`(`id`,`activ`,`creationdate`,`deleted`,`firstname`,`lastmodified`,`password`,`surename`,`usermodifier`,`username`,`version`)VALUES(113,1,"2011-05-20 01:21:09",0,"hector","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","furgea",NULL,"fmacicasan@sdl.com",0)
-INSERT INTO `regular_user`(`id`,`activ`,`creationdate`,`deleted`,`firstname`,`lastmodified`,`password`,`surename`,`usermodifier`,`username`,`version`)VALUES(114,1,"2010-07-20 01:21:09",0,"poppiliu","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","juratu",NULL,"fmacicasan2@sdl.com",0)
-INSERT INTO `regular_user`(`id`,`activ`,`creationdate`,`deleted`,`firstname`,`lastmodified`,`password`,`surename`,`usermodifier`,`username`,`version`)VALUES(115,1,"2001-07-20 01:21:09",0,"oldie","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","goldie",NULL,"burtoflex89@yahoo.com",0)
-INSERT INTO `regular_user`(`id`,`activ`,`creationdate`,`deleted`,`firstname`,`lastmodified`,`password`,`surename`,`usermodifier`,`username`,`version`)VALUES(116,1,"2006-07-20 01:21:09",0,"husman","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","jigu",NULL,"fmacicasan3@sdl.com",0)
-INSERT INTO `regular_user`(`id`,`activ`,`creationdate`,`deleted`,`firstname`,`lastmodified`,`password`,`surename`,`usermodifier`,`username`,`version`)VALUES(117,1,"2009-07-20 01:21:09",0,"george","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","sudica",NULL,"fmacicasan4@sdl.com",0)
-INSERT INTO `regular_user`(`id`,`activ`,`creationdate`,`deleted`,`firstname`,`lastmodified`,`password`,`surename`,`usermodifier`,`username`,`version`)VALUES(118,1,"2009-07-20 01:21:09",0,"ionel","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","condor",NULL,"icondor@sdl.com",0)
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (111,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Ionel","Condor","icondor@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (112,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Gabriela","Visinari","gvisinari@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (113,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Paula","Silaghi","psilaghi@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (114,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Bogdan","Faraga","bfaraga@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (115,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Raul","Chiorean","rchiorean@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (116,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Andrei","Chis","achis@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (117,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Marius","Zubac","mzubac@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (118,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Vlad","Nicula","vnicula@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (119,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Florina","Paduraru","fpaduraru@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (120,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Bogdan","Giurgiu","bgiurgiu@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (121,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Alexandru","Gabor","agabor@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (122,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Cristian","Calugaru","ccalugaru@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (123,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Radu","Bordea","rbordea@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (124,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Dan","Tarba","dtarba@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (125,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Sorin","Suciu","ssuciu@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (126,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Ovidiu","Petridean","opetridean@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (127,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Peter","Bodocz","pbodocz@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (128,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Adela","Pop","apop@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (129,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Nicolae","Matei","nmatei@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (130,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Ana-Maria","Totea","atotea@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (131,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Dan","Oprita","doprita@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (132,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Cristina","Nistor","cnistor@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (133,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Daniel","Sarbe","dsarbe@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (134,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Emil","Tamas","etamas@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (135,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Mihai","Plesa","mplesa@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (136,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","George","Bara","gbara@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (137,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Dan","Chiorean","dchiorean@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (138,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Radu","Moldovan","rmoldovan@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (139,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Emil","Stetco","estetco@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (140,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Angela","Mironescu","amironescu@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (141,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Flavius","Matis","fmatis@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (142,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Florin","Macicasan","fmacicasan@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (143,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Andreea","Hazi","ahazi@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (144,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Claudia-Alteia","Pavel","apavel@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (145,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Gabriel-Adrian","Ferician","gferician@sdl.com")
+INSERT INTO `regular_user`(`id`,`version`,`activ`,`deleted`,`usermodifier`,`creationdate`,`lastmodified`,`password`,`firstname`,`surename`,`username`) VALUES (146,0,1,0,NULL,"2011-08-31 14:40:09","2011-07-20 01:21:09","5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8","Ciprian-Anton","Catana","ccatana@sdl.com")
 
 delete from `fduser`
-INSERT INTO `fduser`(`id`,`jobrole`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`)VALUES(111,0,0,113,111,"2011-07-20 01:21:09",4,5,26);
-INSERT INTO `fduser`(`id`,`jobrole`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`)VALUES(112,0,0,null,112,"2011-07-11 01:21:09",2,5,23);
-INSERT INTO `fduser`(`id`,`jobrole`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`)VALUES(113,0,0,null,113,"2011-07-11 01:21:09",5,5,25);
-INSERT INTO `fduser`(`id`,`jobrole`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`)VALUES(114,0,0,null,114,"2010-07-20 01:21:09",3,5,26);
-INSERT INTO `fduser`(`id`,`jobrole`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`)VALUES(115,0,0,111,115,"2009-07-20 01:21:09",4,5,22);
-INSERT INTO `fduser`(`id`,`jobrole`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`)VALUES(116,0,0,null,116,"2009-07-20 01:21:09",3,5,27);
-INSERT INTO `fduser`(`id`,`jobrole`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`)VALUES(117,0,0,null,117,"2009-07-20 01:21:09",4,5,23);
-INSERT INTO `fduser`(`id`,`jobrole`,`version`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`)VALUES(118,3,0,null,118,"2009-07-20 01:21:09",4,5,23);
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(111,0,5,null,111,"2009-03-02",0,6,30)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(112,0,1,null,112,"2011-08-01",0,6,11)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(113,0,1,null,113,"2011-07-25",0,6,9)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(114,0,1,null,114,"2009-07-01",0,6,27)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(115,0,2,null,115,"2010-07-07",0,6,19)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(116,0,1,null,116,"2010-09-08",0,6,22)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(117,0,2,null,117,"2008-01-08",0,6,29)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(118,0,0,null,118,"2011-04-01",0,6,16)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(119,0,1,null,119,"2011-01-01",0,6,21)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(120,0,3,null,120,"2009-10-19",0,6,34)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(121,0,4,null,121,"2010-01-20",0,6,25)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(122,0,0,null,122,"2009-09-01",0,6,28)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(123,0,0,null,123,"2009-09-03",0,6,25)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(124,0,0,null,124,"2011-05-18",0,6,13)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(125,0,0,null,125,"2009-09-01",0,6,34)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(126,0,0,null,126,"2010-08-18",0,6,21)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(127,0,0,null,127,"2008-04-08",0,6,24)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(128,0,1,null,128,"2009-11-09",0,6,21)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(129,0,0,null,129,"2010-03-29",0,6,27)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(130,0,0,null,130,"2009-12-01",0,6,24)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(131,0,0,null,131,"2009-00-01",0,6,27)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(132,0,0,null,132,"2009-11-11",0,6,25)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(133,0,0,null,133,"2010-03-01",0,6,28)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(134,0,6,null,134,"2011-01-01",0,6,21)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(135,0,2,null,135,"2011-03-01",0,6,18)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(136,0,7,null,136,"2011-02-21",0,6,18)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(137,0,8,null,137,"2011-05-04",0,6,16)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(138,0,0,null,138,"2011-06-06",0,6,12)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(139,0,6,null,139,"2011-06-13",0,6,11)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(140,0,1,null,140,"2011-07-01",0,6,11)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(141,0,0,null,141,"2011-07-25",0,6,9)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(142,0,0,null,142,"2011-07-05",0,6,10)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(143,0,0,null,143,"2011-05-01",0,6,14)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(144,0,0,null,144,"2011-09-01",0,6,7)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(145,0,1,null,145,"2011-09-01",0,6,7)
+INSERT INTO `fduser`(`id`,`version`,`jobrole`,`granter`,`regular_user`,`hire_date`,`init_days`,`max_derogation`,`max_free_days`) VALUES(146,0,1,null,116,"2011-09-01",0,6,7)
+delete from `app_reg_user_adv_role`;
+INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(111,1)
+INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(111,2)
+INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(111,3)
 
-delete from `app_reg_user_adv_role`
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(111,1);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(111,2);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(113,1);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(113,2);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(113,3);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(114,2);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(115,1);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(116,3);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(117,4);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,1);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,2);
-INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 delete from `project`
 INSERT INTO `project`(`code`,`name`) VALUES("0001","DummyProj1")
