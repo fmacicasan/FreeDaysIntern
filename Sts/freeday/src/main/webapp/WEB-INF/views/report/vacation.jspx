@@ -45,7 +45,12 @@
      		</sec:authorize>
      		<spring:eval expression="item['totaldaysleft']" var="totaldaysleft" />
      		<spring:eval expression="item['combined']" var="combined" />
-       		<tr>
+     		<c:set value="" var="rowClass" />
+     		<sec:authentication property="principal.username" var="principalusername" />
+     		<c:if test="${fn:contains(user,principalusername)}">
+     			<c:set var="rowClass" value="yourself" />
+     		</c:if>
+       		<tr id="${rowClass}">
        			<td><c:out value="${user}" /></td>
        			<td><c:out value="${jobrole}" /></td>
        			<sec:authorize access="!hasRole('ROLE_HRMANAGEMENT')">
