@@ -53,9 +53,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     
     public void FDUserDataOnDemand.setMaxFreeDays(FDUser obj, int index) {
         Integer maxFreeDays = new Integer(index);
-        if (maxFreeDays < 21) {
-            maxFreeDays = 21;
-        }
         obj.setMaxFreeDays(maxFreeDays);
     }
     

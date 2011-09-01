@@ -50,17 +50,27 @@ public class FDUserDataOnDemand {
     
     public FDUser getRandomNormalUser(){
     	FDUser fdu = this.getRandomFDUser();
-		while(fdu.getGranter() == null ||
-				(fdu.getGranter() != null && fdu.getGranter().getGranter() == null)){
+    	int tries = 50;
+		while((fdu.getGranter() == null ||
+				(fdu.getGranter() != null && fdu.getGranter().getGranter() == null))&&tries > 0){
 			fdu = this.getRandomFDUser();
+			tries--;
+		}
+		if(tries == 0){
+			return null;
 		}
 		return fdu;
     }
     
     public FDUser getRandomLevel1User(){
     	FDUser fdu = this.getRandomFDUser();
-		while(fdu.getGranter() == null){
+    	int tries = 50;
+		while(fdu.getGranter() == null && tries > 0){
 			fdu = this.getRandomFDUser();
+			tries--;
+		}
+		if(tries == 0){
+			return null;
 		}
 		return fdu;
     }

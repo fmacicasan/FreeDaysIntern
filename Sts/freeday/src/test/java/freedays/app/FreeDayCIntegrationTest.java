@@ -126,73 +126,74 @@ public class FreeDayCIntegrationTest {
 	public void testRequestDayMechanismHighLevel(){
 		
 		FDUser fdu = new FDUserDataOnDemand().getRandomNormalUser();
-		String username =  fdu.getRegularUser().getUsername();
-		
-		
-		FreeDayRequest fdc = new FreeDayRequest();
-		fdc.setReqtype(RequestType.C);
-		fdc.setMatch(null);
-		fdc.setReason(null);
-		fdc.setReqdate(DateUtils.generateFutureBusinessDay());
-		
-		
-		long beforeC = Request.countActiveRequests(username);
-		Request reqC = Request.createPersistentReq(fdc,username);
-		long afterC = Request.countActiveRequests(username);
-		Assert.assertEquals("request day approve - not persist",beforeC+1, afterC);
-		
-		Assert.assertEquals("request day approve - fail @ req status before approve 1",RequestStatus.PENDING, reqC.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day status before approve 1",FreeDayStatus.IN_PROGRESS, reqC.getRequestable().getStatus());
-		reqC.approve();
-		Assert.assertEquals("request day approve - fail @ req status before approve 2",RequestStatus.INTERMEDIATE, reqC.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day status before approve 2",FreeDayStatus.IN_PROGRESS, reqC.getRequestable().getStatus());
-		reqC.approve();
-		Assert.assertEquals("request day approve - fail @ req status after full approve",RequestStatus.GRANTED, reqC.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.WAITING, reqC.getRequestable().getStatus());
-		
-		Assert.assertTrue("request day - check free day generated", reqC.getRequestable() instanceof FreeDayC);
-		FreeDayC freedc = (FreeDayC)reqC.getRequestable();
-		
-		FreeDayRequest fdr = new FreeDayRequest();
-		fdr.setReqtype(RequestType.R);
-		fdr.setMatch(freedc);
-		fdr.setReason(null);
-		fdr.setReqdate(DateUtils.generateFutureWeekendDay());
-		
-		Assert.assertEquals("request day approve - fail @ free day status after full approval",FreeDayStatus.WAITING, freedc.getStatus());
-		
-		beforeC = Request.countActiveRequests(username);
-		Request reqR = Request.createPersistentReq(fdr, username);
-		afterC = Request.countActiveRequests(username);
-		Assert.assertEquals("request day - not persist",beforeC+1, afterC);
-		
-		Assert.assertEquals("request day approve - fail @ free day status before approve 1",FreeDayStatus.IN_PROGRESS, freedc.getStatus());
-		Assert.assertEquals("request day approve - fail @ req status before approve 1",RequestStatus.PENDING, reqR.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day match status before approve 1",FreeDayStatus.IN_PROGRESS, reqR.getRequestable().getStatus());
-		
-		reqR.approve();
-		Assert.assertEquals("request day approve - fail @ free day status after approve 1",FreeDayStatus.IN_PROGRESS, freedc.getStatus());
-		Assert.assertEquals("request day approve - fail @ req status after approve 1",RequestStatus.INTERMEDIATE, reqR.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day match status after approve 1",FreeDayStatus.IN_PROGRESS, reqR.getRequestable().getStatus());
-		
-		reqR.deny();
-		Assert.assertEquals("request day approve - fail @ free day status after deny",FreeDayStatus.WAITING, freedc.getStatus());
-		Assert.assertEquals("request day approve - fail @ req status after deny",RequestStatus.REJECTED, reqR.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day status after deny",FreeDayStatus.COMPLETED_FAILURE, reqR.getRequestable().getStatus());
-		
-		Request reqR2 = Request.createPersistentReq(fdr, username);
-		reqR2.cancel();
-		Assert.assertEquals("request day approve - fail @ free day status after cancel",FreeDayStatus.WAITING, freedc.getStatus());
-		Assert.assertEquals("request day approve - fail @ req status after cancel",RequestStatus.CANCELED, reqR2.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day status after cancel",FreeDayStatus.COMPLETED_FAILURE, reqR2.getRequestable().getStatus());
-		
-		Request reqR3 = Request.createPersistentReq(fdr, username);
-		reqR3.approve();
-		reqR3.approve();
-		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.FINALIZE_SUCCESS, freedc.getStatus());
-		Assert.assertEquals("request day approve - fail @ req status after full approve",RequestStatus.GRANTED, reqR3.getStatus());
-		Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.FINALIZE_SUCCESS, reqR3.getRequestable().getStatus());
-
+		if(fdu != null){
+			String username =  fdu.getRegularUser().getUsername();
+			
+			
+			FreeDayRequest fdc = new FreeDayRequest();
+			fdc.setReqtype(RequestType.C);
+			fdc.setMatch(null);
+			fdc.setReason(null);
+			fdc.setReqdate(DateUtils.generateFutureBusinessDay());
+			
+			
+			long beforeC = Request.countActiveRequests(username);
+			Request reqC = Request.createPersistentReq(fdc,username);
+			long afterC = Request.countActiveRequests(username);
+			Assert.assertEquals("request day approve - not persist",beforeC+1, afterC);
+			
+			Assert.assertEquals("request day approve - fail @ req status before approve 1",RequestStatus.PENDING, reqC.getStatus());
+			Assert.assertEquals("request day approve - fail @ free day status before approve 1",FreeDayStatus.IN_PROGRESS, reqC.getRequestable().getStatus());
+			reqC.approve();
+			Assert.assertEquals("request day approve - fail @ req status before approve 2",RequestStatus.INTERMEDIATE, reqC.getStatus());
+			Assert.assertEquals("request day approve - fail @ free day status before approve 2",FreeDayStatus.IN_PROGRESS, reqC.getRequestable().getStatus());
+			reqC.approve();
+			Assert.assertEquals("request day approve - fail @ req status after full approve",RequestStatus.GRANTED, reqC.getStatus());
+			Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.WAITING, reqC.getRequestable().getStatus());
+			
+			Assert.assertTrue("request day - check free day generated", reqC.getRequestable() instanceof FreeDayC);
+			FreeDayC freedc = (FreeDayC)reqC.getRequestable();
+			
+			FreeDayRequest fdr = new FreeDayRequest();
+			fdr.setReqtype(RequestType.R);
+			fdr.setMatch(freedc);
+			fdr.setReason(null);
+			fdr.setReqdate(DateUtils.generateFutureWeekendDay());
+			
+			Assert.assertEquals("request day approve - fail @ free day status after full approval",FreeDayStatus.WAITING, freedc.getStatus());
+			
+			beforeC = Request.countActiveRequests(username);
+			Request reqR = Request.createPersistentReq(fdr, username);
+			afterC = Request.countActiveRequests(username);
+			Assert.assertEquals("request day - not persist",beforeC+1, afterC);
+			
+			Assert.assertEquals("request day approve - fail @ free day status before approve 1",FreeDayStatus.IN_PROGRESS, freedc.getStatus());
+			Assert.assertEquals("request day approve - fail @ req status before approve 1",RequestStatus.PENDING, reqR.getStatus());
+			Assert.assertEquals("request day approve - fail @ free day match status before approve 1",FreeDayStatus.IN_PROGRESS, reqR.getRequestable().getStatus());
+			
+			reqR.approve();
+			Assert.assertEquals("request day approve - fail @ free day status after approve 1",FreeDayStatus.IN_PROGRESS, freedc.getStatus());
+			Assert.assertEquals("request day approve - fail @ req status after approve 1",RequestStatus.INTERMEDIATE, reqR.getStatus());
+			Assert.assertEquals("request day approve - fail @ free day match status after approve 1",FreeDayStatus.IN_PROGRESS, reqR.getRequestable().getStatus());
+			
+			reqR.deny();
+			Assert.assertEquals("request day approve - fail @ free day status after deny",FreeDayStatus.WAITING, freedc.getStatus());
+			Assert.assertEquals("request day approve - fail @ req status after deny",RequestStatus.REJECTED, reqR.getStatus());
+			Assert.assertEquals("request day approve - fail @ free day status after deny",FreeDayStatus.COMPLETED_FAILURE, reqR.getRequestable().getStatus());
+			
+			Request reqR2 = Request.createPersistentReq(fdr, username);
+			reqR2.cancel();
+			Assert.assertEquals("request day approve - fail @ free day status after cancel",FreeDayStatus.WAITING, freedc.getStatus());
+			Assert.assertEquals("request day approve - fail @ req status after cancel",RequestStatus.CANCELED, reqR2.getStatus());
+			Assert.assertEquals("request day approve - fail @ free day status after cancel",FreeDayStatus.COMPLETED_FAILURE, reqR2.getRequestable().getStatus());
+			
+			Request reqR3 = Request.createPersistentReq(fdr, username);
+			reqR3.approve();
+			reqR3.approve();
+			Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.FINALIZE_SUCCESS, freedc.getStatus());
+			Assert.assertEquals("request day approve - fail @ req status after full approve",RequestStatus.GRANTED, reqR3.getStatus());
+			Assert.assertEquals("request day approve - fail @ free day status after full approve",FreeDayStatus.FINALIZE_SUCCESS, reqR3.getRequestable().getStatus());
+		}
 	}
 	
 

@@ -53,7 +53,7 @@ public class FDUser extends ApplicationRegularUser {
     private Integer initDays;
 
     @NotNull
-    @Min(21L)
+   // @Min(21L)
     @Value("21")
     private Integer maxFreeDays;
     
