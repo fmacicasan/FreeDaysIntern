@@ -180,4 +180,9 @@ public class FreeDayVacation extends FreeDay {
         return q.getSingleResult(); 
 	}
 
+	@Override
+	protected String getReportType() {
+		return "Vacation";
+	}
+
 }

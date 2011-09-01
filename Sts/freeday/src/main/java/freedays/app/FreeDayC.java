@@ -136,6 +136,11 @@ public class FreeDayC extends FreeDaysRCMatch {
 		return RequestType.C;
 	}
 
+	@Override
+	protected String getReportType() {
+		return "OnDemand";
+	}
+
 //	@Override
 //	protected void initialize(FreeDayRequest fdr) {
 //		this.setMatch(fdr.getMatch());

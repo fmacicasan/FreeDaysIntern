@@ -98,6 +98,7 @@ privileged aspect FreeDay_Roo_Entity {
             protected void initialize(freedays.app.form.FreeDayRequest fdr) { throw new UnsupportedOperationException(); }
             protected void finalizeFail() { throw new UnsupportedOperationException(); }
             public freedays.app.form.FreeDayRequest.RequestType getType() { throw new UnsupportedOperationException(); }
+            protected java.lang.String getReportType() { throw new UnsupportedOperationException(); }
         }.entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;

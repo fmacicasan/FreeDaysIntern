@@ -102,4 +102,9 @@ public class FreeDayL extends FreeDay {
         q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
         return q.getSingleResult(); 
 	}
+
+	@Override
+	protected String getReportType() {
+		return "Legal";
+	}
 }

@@ -135,5 +135,10 @@ public class FreeDayR extends FreeDaysRCMatch {
 		return RequestType.R;
 	}
 
+	@Override
+	protected String getReportType() {
+		return "Recover";
+	}
+
 	
 }

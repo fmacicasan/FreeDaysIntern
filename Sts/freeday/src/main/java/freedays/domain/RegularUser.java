@@ -258,7 +258,7 @@ public class RegularUser implements Serializable {
 	}
 
 	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
-	private static final String RESET_PASS_MESSAGE = "Your new password is:";
+	private static final String RESET_PASS_MESSAGE = "Your new password is:\n\t\t\t";
 
 	/**
 	 * Reset's a regular's user password based on his email address.
