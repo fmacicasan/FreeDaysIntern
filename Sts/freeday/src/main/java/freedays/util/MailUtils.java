@@ -82,7 +82,7 @@ public class MailUtils {
     	
     		mailSender.send(mm);
     	} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -174,7 +174,7 @@ public class MailUtils {
 //    	            message.setSubject(subject);
 //    	            message.setText(content);
 //    	            
-//    	            //TODO: solve problem with disabled gmail account
+//    	            //: solve problem with disabled gmail account
 //    	            Transport.send(message);
 //
 //    	        } catch (MessagingException e) {

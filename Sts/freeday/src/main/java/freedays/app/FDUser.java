@@ -209,7 +209,7 @@ public class FDUser extends ApplicationRegularUser {
         FDUser back = FDUser.findFDUser(fdu.getId()); 
 //      RegularUser ru = back.getRegularUser(); //no more need for this the context gets updated
 //      fdu.setRegularUser(ru);
-      //TODO: change also the requests for the ex approver to the new one
+      //: change also the requests for the ex approver to the new one
       //should i send mail to the involved parties ?
       if(back.getGranter() != null){
 	      if((back.getGranter().getId() != fdu.getGranter().getId())){//the granter changed in UI => persistence context marked the change

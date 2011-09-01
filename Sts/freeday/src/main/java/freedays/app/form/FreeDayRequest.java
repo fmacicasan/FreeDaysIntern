@@ -79,7 +79,7 @@ public class FreeDayRequest {
     
 //    @SuppressWarnings("unchecked")
 //	public static <T extends FreeDay> List<T> getMatchings(String username, RequestType rt){
-//	    		//TODO: catch the ClassCastException if any.
+//	    		//: catch the ClassCastException if any.
 //	    		switch(rt){
 //		    		case R:
 //		    			return FreeDayR.getAllUnmatchedRequestsByUsername(username);

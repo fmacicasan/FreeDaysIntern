@@ -45,7 +45,7 @@ public class AuthentificationController extends
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override
