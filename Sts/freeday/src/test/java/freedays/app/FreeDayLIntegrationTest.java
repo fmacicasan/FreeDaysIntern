@@ -27,7 +27,7 @@ public class FreeDayLIntegrationTest {
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDay' failed to initialize correctly", obj);
         java.lang.Long id = obj.getId();
         org.junit.Assert.assertNotNull("Data on demand for 'FreeDay' failed to provide an identifier", id);
-        obj = freedays.app.FreeDayL.findFreeDayL(id);
+        //obj = freedays.app.FreeDayL.findFreeDayL(id);
         //obj.remove();
         //obj.flush();
         //org.junit.Assert.assertNull("Failed to remove 'FreeDay' with identifier '" + id + "'", freedays.app.FreeDay.findFreeDay(id));
@@ -51,11 +51,11 @@ public class FreeDayLIntegrationTest {
 		FDUserDataOnDemand fdudod = new FDUserDataOnDemand();
 		
 		leveltop = fdudod.getRandomLevelTopUser();
-		level1 = fdudod.getRandomLevelTopUser();
-		while(level1.equals(leveltop))level1 = fdudod.getRandomLevelTopUser();
+		level1 = fdudod.getRandomFDUser();
+		while(level1.equals(leveltop))level1 = fdudod.getRandomFDUser();
 		level1.setGranter(leveltop);
-		appreguser = fdudod.getRandomLevelTopUser();
-		while(level1.equals(appreguser)||leveltop.equals(appreguser))appreguser = fdudod.getRandomLevelTopUser();
+		appreguser = fdudod.getRandomFDUser();
+		while(level1.equals(appreguser)||leveltop.equals(appreguser))appreguser = fdudod.getRandomFDUser();
 		appreguser.setGranter(level1);
 		
 	}
@@ -168,5 +168,16 @@ public class FreeDayLIntegrationTest {
     	request.init();
     	request.deny();
     	Assert.assertEquals("normal level - failed to deny", RequestStatus.REJECTED,request.getStatus());
+    }
+
+	@Test
+    public void testPersist() {
+        org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", dod.getRandomFreeDayL());
+        freedays.app.FreeDayL obj = dod.getNewTransientFreeDayL(Integer.MAX_VALUE);
+        org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to provide a new transient entity", obj);
+        org.junit.Assert.assertNull("Expected 'FreeDayL' identifier to be null", obj.getId());
+        //obj.persist();
+        //obj.flush();
+        //org.junit.Assert.assertNotNull("Expected 'FreeDayL' identifier to no longer be null", obj.getId());
     }
 }

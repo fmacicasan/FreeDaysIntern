@@ -6,9 +6,9 @@
     <page:list id="pl_freedays_app_Freedaysreport"  title_msg="${titleMsg}" items="${vacations}" z="user-managed">
        <c:set var="colCounter" value="${length}" />
        
-       <c:set var="img_check" value="/freedays/resources/images/check_mark7575.png" />
-       <c:set var="img_wait" value="/freedays/resources/images/waiting_mark_rescaled_14x10.png" />
-       <c:set var="img_work" value="/freedays/resources/images/work_marko.png" />
+       <c:set var="img_check" value="/hrapp/resources/images/check_mark7575.png" />
+       <c:set var="img_wait" value="/hrapp/resources/images/waiting_mark_rescaled_14x10.png" />
+       <c:set var="img_work" value="/hrapp/resources/images/work_marko.png" />
        <c:set value="F" var="ca" />
        <c:set value="W" var="wa"/>
        <c:set value="I" var="ia" />

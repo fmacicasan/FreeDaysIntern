@@ -84,15 +84,4 @@ privileged aspect FreeDayLIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertTrue("Version for 'FreeDayL' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
-    @Test
-    public void FreeDayLIntegrationTest.testPersist() {
-        org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to initialize correctly", dod.getRandomFreeDayL());
-        freedays.app.FreeDayL obj = dod.getNewTransientFreeDayL(Integer.MAX_VALUE);
-        org.junit.Assert.assertNotNull("Data on demand for 'FreeDayL' failed to provide a new transient entity", obj);
-        org.junit.Assert.assertNull("Expected 'FreeDayL' identifier to be null", obj.getId());
-        obj.persist();
-        obj.flush();
-        org.junit.Assert.assertNotNull("Expected 'FreeDayL' identifier to no longer be null", obj.getId());
-    }
-    
 }

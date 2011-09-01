@@ -86,11 +86,11 @@ public class FDUserDataOnDemand {
 
     private List<FDUser> data;
 	public void init() {
-        data = FDUser.findFDUserEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'FDUser' illegally returned null");
-        if (!data.isEmpty()) {
-            return;
-        }
+//        data = FDUser.findFDUserEntries(0, 10);
+//        if (data == null) throw new IllegalStateException("Find entries implementation for 'FDUser' illegally returned null");
+//        if (!data.isEmpty()) {
+//            return;
+//        }
         
         data = new ArrayList<freedays.app.FDUser>();
         for (int i = 0; i < 10; i++) {
@@ -112,7 +112,7 @@ public class FDUserDataOnDemand {
 
 	public void setRegularUser(FDUser obj, int index) {
 		RegularUserDataOnDemand rudod = new RegularUserDataOnDemand();
-        RegularUser regularUser = rudod.getRandomRegularUser();
+        RegularUser regularUser = rudod.getSpecificRegularUser(index);
         obj.setRegularUser(regularUser);
     }
 }
