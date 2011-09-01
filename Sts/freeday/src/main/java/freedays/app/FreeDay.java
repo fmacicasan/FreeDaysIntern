@@ -128,11 +128,10 @@ public abstract class FreeDay {
     @Override
     public String toString(){
     	StringBuilder sb = new StringBuilder();
-    	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate()));
-    	sb.append("\tReason: ");
-    	sb.append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
-    	sb.append("\tType:").append(this.getReportType());
-    	sb.append("\t(").append(this.getStatus()).append(")");
+    	sb.append("\nDay:\t").append(String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate()));
+    	sb.append("\nReason:\t").append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
+    	sb.append("\nType:\t").append(this.getReportType());
+    	sb.append(" (").append(this.getStatus()).append(")");
     	//sb.append(String.format("%1$te.%1$tb", this.getDate()));
     	return sb.toString();
     }

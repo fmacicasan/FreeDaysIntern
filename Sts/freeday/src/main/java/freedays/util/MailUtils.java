@@ -25,12 +25,12 @@ import org.springframework.stereotype.Component;
 @RooJavaBean
 @Configurable
 public class MailUtils {
-	private static final String DEFAULT_REGISTERNOTIFICATION_SUBJECT = "FreeDays - New User Notification";
+	private static final String DEFAULT_REGISTERNOTIFICATION_SUBJECT = "HRApp - New User Notification";
 	private static final String DEFAULT_REGISTERNOTIFICATION_CONTENT = "New user registration!\nPlease process the account of %s.\n";
-	private static final String DEFAULT_POSTPROCESSINGNOTIF_SUBJECT = "FreeDays - Account activation";
+	private static final String DEFAULT_POSTPROCESSINGNOTIF_SUBJECT = "HRApp - Account activation";
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_CONTENT = "Hello %s,\n your account has been processed.\n";
-	private static final String SOURCE = "internlwtest@sdl.com";
-	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT = "Freedays - Request curtesy notification";
+	private static final String SOURCE = "hrapp@sdl.com";
+	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT = "HRApp - Request curtesy notification";
 	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT = "Hello %s,\n your subordinate %s has a new request to approve!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT="Hello %s,\n the following request was canceled!\n %s \n\n ";

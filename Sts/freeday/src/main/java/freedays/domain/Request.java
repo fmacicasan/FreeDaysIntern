@@ -32,12 +32,12 @@ import freedays.util.MailUtils;
 public class Request   implements Serializable{
 
 	
-	private static final String FD_APPROVAL_REQ_SUBJECT = "FreeDays - Approval Request";
-	private static final String FD_INFORM_SUBJECT = "FreeDays - Status Information";
+	private static final String FD_APPROVAL_REQ_SUBJECT = "HRApp - Approval Request";
+	private static final String FD_INFORM_SUBJECT = "HRApp - Status Information";
 	
 	private static final String FD_APPROVAL_REQ_CONTENT = "Hello! you have new Request to approve!!";
 	private static final String FD_INFORM_CONTENT_DENY = "Your Request was denied!";
-	private static final String FD_INFORM_CONTENT_APPROVE = "Your Request approved!";
+	private static final String FD_INFORM_CONTENT_APPROVE = "Your Request was approved!";
 	private static final String FD_INFORM_CONTENT_CANCEL = "Request canceled!";
 	private static final String FD_INFORM_CONTENT_AUTODENY="Your Request was automatically denied!";
 	
@@ -191,20 +191,26 @@ public class Request   implements Serializable{
     private void informSuperiorInit(){
     	if(!Request.DEBUG){
     		RegularUser superapprover = getSuperiorRegularUser();
-    		MailUtils.sendUpperRequestNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
+    		if(!this.getApprover().getRegularUser().equals(superapprover)){
+    			MailUtils.sendUpperRequestNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
+    		}
     	}
     }
     
     private void informSuperiorDeny(){
     	if(!Request.DEBUG){
     		RegularUser superapprover = getSuperiorRegularUser();
-    		MailUtils.sendUpperRequestDenyNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
+    		if(!this.getApprover().getRegularUser().equals(superapprover)){
+    			MailUtils.sendUpperRequestDenyNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName() , this.toString());
+    		}
     	}
     }
     private void informSuperiorCancel(){
     	if(!Request.DEBUG){
     		RegularUser superapprover = getSuperiorRegularUser();
-    		MailUtils.sendUpperRequestCancelNotification(superapprover.getEmail(), superapprover.getFullName(), this.toString());
+    		if(!this.getApprover().getRegularUser().equals(superapprover)){
+    			MailUtils.sendUpperRequestCancelNotification(superapprover.getEmail(), superapprover.getFullName(), this.toString());
+    		}
     	}
     }
     
@@ -274,11 +280,9 @@ public class Request   implements Serializable{
     @Override
     public String toString(){
     	StringBuilder sb = new StringBuilder();
-    	sb.append(this.appreguser.getRegularUser());
-    	sb.append("->");
-    	sb.append(this.requestable);
-    	sb.append(" with status ");
-    	sb.append(this.status);
+    	sb.append("Requester: ").append(this.appreguser.getRegularUser()).append("->");
+    	sb.append(this.requestable).append("\n");
+    	sb.append(" with status ").append(this.status).append("\n");
     	return sb.toString().toUpperCase();
     }
 
