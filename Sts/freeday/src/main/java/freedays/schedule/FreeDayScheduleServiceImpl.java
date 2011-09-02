@@ -8,6 +8,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.stereotype.Service;
 
 import freedays.app.form.FreeDayUserList;
+import freedays.controller.TimesheetController;
 import freedays.domain.Request;
 import freedays.security.UserContextService;
 import freedays.timesheet.MainClass;
@@ -117,9 +118,7 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 	private UserContextService userContextService;
 	@Override
 	public void generateTimesheets() {
-		MainClass mc = new MainClass();
-		TimesheetUser us = TimesheetUser.findTimesheetUserByUsername("test");
-		mc.doMain(us);		
+		TimesheetController.initTimesheetGeneration("fmacicasan@sdl.com");	
 	}
 
 }

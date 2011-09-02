@@ -9,6 +9,7 @@
             <table:column id="c_freedays_timesheet_PhaseLabor_phase" property="phase" z="hruUCxVcwX9FGinjAfajl1c1ZJo="/>
             <table:column id="c_freedays_timesheet_PhaseLabor_laborbilling" property="laborbilling" z="AmNVew2FEtEtvvWuFg9Dio/HHF4="/>
             <table:column id="c_freedays_timesheet_PhaseLabor_pattern" property="pattern" z="r1nTPJ3EkRxAaH9vi9smvWCyt7k="/>
+            <table:column id="c_freedays_timesheet_PhaseLabor_deletable" property="deletable" z="5pnKCU6946m/+ghIqLV2EWcmpm4="/>
         </table:table>
     </page:list>
 </div>

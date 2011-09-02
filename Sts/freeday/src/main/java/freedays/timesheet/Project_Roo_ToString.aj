@@ -5,12 +5,13 @@ package freedays.timesheet;
 
 import java.lang.String;
 
-privileged aspect LaborBilling_Roo_ToString {
+privileged aspect Project_Roo_ToString {
     
-    public String LaborBilling.toString() {
+    public String Project.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Code: ").append(getCode()).append(", ");
-        sb.append("Name: ").append(getName());
+        sb.append("Name: ").append(getName()).append(", ");
+        sb.append("PhaseLst: ").append(getPhaseLst() == null ? "null" : getPhaseLst().size());
         return sb.toString();
     }
     

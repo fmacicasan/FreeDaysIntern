@@ -8,5 +8,6 @@
         <field:select field="phase" id="c_freedays_timesheet_PhaseLabor_phase" itemValue="id" items="${phases}" path="/phases" z="Pnf1yVHqNnk+HV6fy69qfDN39AU="/>
         <field:select field="laborbilling" id="c_freedays_timesheet_PhaseLabor_laborbilling" itemValue="id" items="${laborbillings}" path="/laborbillings" z="I4qpoW2ppbD7zqsHR+v7B6n2XCI="/>
         <field:select field="pattern" id="c_freedays_timesheet_PhaseLabor_pattern" itemValue="id" items="${patterns}" path="/patterns" z="4ObNpSQEwQzgZ94+x+xsqzxGNkY="/>
+        <field:checkbox field="deletable" id="c_freedays_timesheet_PhaseLabor_deletable" z="6w8pk9BdZHCWI+tbcCMFHt458m4="/>
     </form:update>
 </div>

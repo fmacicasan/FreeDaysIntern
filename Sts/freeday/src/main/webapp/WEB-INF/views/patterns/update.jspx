@@ -6,5 +6,6 @@
         <field:input field="noOfHours" id="c_freedays_timesheet_Pattern_noOfHours" required="true" validationMessageCode="field_invalid_integer" z="ONUn05dZaVj5hRkhggZ6iGFBzRA="/>
         <field:simple field="phaseLaborLst" id="c_freedays_timesheet_Pattern_phaseLaborLst" messageCode="entity_reference_not_managed" messageCodeAttribute="Phase Labor" z="NidjHe073kP/dtH9D0AFjUzmTXQ="/>
         <field:simple field="scheduleLst" id="c_freedays_timesheet_Pattern_scheduleLst" messageCode="entity_reference_not_managed" messageCodeAttribute="Schedule" z="GbhidTNZkUkhLZk2QQ+BGWiyn+w="/>
+        <field:checkbox field="deletable" id="c_freedays_timesheet_Pattern_deletable" z="wh77HOTl4zOyuRToWAt2NsfXkqs="/>
     </form:update>
 </div>

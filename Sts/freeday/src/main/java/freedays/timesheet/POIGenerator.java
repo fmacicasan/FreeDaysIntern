@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -19,31 +20,42 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.WorkbookUtil;
+
+import freedays.app.FreeDayVacation;
 public class POIGenerator implements TimesheetGenerator{
 	TimesheetUser pEmp;
 	Workbook wb;
 	
-	Pattern sablon;
-	private int month;
-	private int year;
+	//Pattern sablon;
+	//private int month;
+	//private int year;
+	/**
+	 *  Employee's schedules
+	 */
 	List<Schedule> schedEmp;
 	FileOutputStream fileOut;
 	Sheet sheet1;
 	
+	private int noOfRows;
+	
 	CreationHelper createHelper;
 	
 	Font underFont;
+	CellStyle underlinedStyle;
 	CellStyle style;
 	CellStyle tablestyle;
 	CellStyle tableheadstyle;
 	CellStyle tableweekendstyle;
 	CellStyle datestyle;
+	/**
+	 *   Array of PhaseLabors specific to a certain week(these constitute the table header
+	 */
 	ArrayList<PhaseLabor> PhLArray;
 	
 	
 	public POIGenerator(TimesheetUser pEmp) {
 		this.pEmp = pEmp;
-		schedEmp = pEmp.getScheduleLst();
+		schedEmp = pEmp.getScheduleLst();		
 	}
 	private Calendar getNextMonday(Calendar now) {
 		Integer x = now.get(Calendar.DAY_OF_WEEK);
@@ -75,7 +87,7 @@ public class POIGenerator implements TimesheetGenerator{
 						   ok  = 0;					   
 				 	   }
 			     }
-				if (ok == 1) 
+				if (ok == 1)
 					PhLArr.add(currentPhL);			
 	
 			}
@@ -95,9 +107,13 @@ public class POIGenerator implements TimesheetGenerator{
 		}
 		return pw;
 	}
+	/**
+	 * The table's header.
+	 * @param startingRow
+	 */
 	private void generateHeader(Integer startingRow) {
 		Row z = sheet1.createRow(startingRow);
-		for(int j = 0; j < 4; j++) { //12
+		for(int j = 0; j < 4; j++) {
 			 Cell mn = z.createCell(j);
 			 mn.setCellValue(WeekConstants.columnStrings[j]);
 			 mn.setCellStyle(tableheadstyle);
@@ -124,102 +140,17 @@ public class POIGenerator implements TimesheetGenerator{
 		return m;
 		
 	}
-	private Float generateTableRow(Integer startingRow, int i, Integer startingDay, Integer endingDay, Calendar weekEnd) {
-		Row z = sheet1.createRow(startingRow + i);
-		Cell firstCol = z.createCell(0);
-		firstCol.setCellValue(i);
-		firstCol.setCellStyle(tablestyle);
-		
-		Cell secondCol = z.createCell(1);
-		secondCol.setCellValue(PhLArray.get(i-1).getProject().getName());
-		secondCol.setCellStyle(tablestyle);
-		
-		Cell thirdCol = z.createCell(2);
-		thirdCol.setCellValue(PhLArray.get(i-1).getPhase().getName());
-		thirdCol.setCellStyle(tablestyle);
-		
-		Cell fourCol = z.createCell(3);
-		fourCol.setCellValue(PhLArray.get(i-1).getLaborbilling().getName());
-		fourCol.setCellStyle(tablestyle);
-		
-		for(int j = 0; j < startingDay - 1; j++) {
-			Cell k = z.createCell(j + 4);
-			k.setCellValue("-");
-			k.setCellStyle(tablestyle);
-		}
-
-		Float suma = (float) 0;
-		for(int j = startingDay - 1; j < endingDay; j++) {  				
-			Calendar mDay = getDateFrom(j, weekEnd);
-			
-			Pattern mPattern = getPatternForDay(mDay);
-			PhaseLabor phLX = mPattern.getPhaseLabor(PhLArray.get(i-1).getLaborbilling(), PhLArray.get(i-1).getPhase(), PhLArray.get(i-1).getProject());
-			
-			
-			Float perc = null;
-			if (phLX != null)
-				perc= phLX.getPercentage();
-			else
-				perc = (float) 0.0; 
-			Float numberOfHours1= perc * mPattern.getNoOfHours() / 100;
-			suma +=  numberOfHours1;
-			Cell k = z.createCell(j + 4);
-			k.setCellValue(numberOfHours1);
-			k.setCellStyle(tablestyle);
-		}
-		for(int j = endingDay; j < 5; j++) {
-			Cell k = z.createCell(j + 4);
-			k.setCellValue("-");
-			k.setCellStyle(tablestyle);
-		}
-		for(int j = 0; j < 2; j++) {
-			Cell k = z.createCell(j + 9);
-			k.setCellValue("-");
-			k.setCellStyle(tableweekendstyle);
-		}
-		
-		Cell ts = z.createCell(11);
-		ts.setCellValue(suma);
-		ts.setCellStyle(tablestyle);
-		return suma;
-	}
-	private void generateWeek(Integer startingRow, Integer startingDay, Integer endingDay, Calendar weekEnd) {
-		ArrayList<Pattern> PList = new ArrayList<Pattern>();
-		PList = getListOfPatterns(weekEnd, startingDay, endingDay);
-		PhLArray = getListOfDistinctPhaseLabor(PList);
-		Float bigSum = (float) 0;
-	    Row WE = sheet1.createRow(startingRow);
-		Cell cWELabel = WE.createCell(9);
-		cWELabel.setCellValue("W/E:");
-		cWELabel.setCellStyle(style);
-		Cell WEValue = WE.createCell(10);
-		WEValue.setCellStyle(datestyle);
-		
-		Calendar cloneCurrent = (Calendar) weekEnd.clone();
-		cloneCurrent.add(Calendar.DAY_OF_MONTH, -6);
-		Integer daysInMonth = 0;
-		if ((cloneCurrent.get(Calendar.MONTH) != weekEnd.get(Calendar.MONTH))) {
-			if ((endingDay != 5) || ((endingDay == 5) && (((weekEnd.get(Calendar.DAY_OF_MONTH)) == 1) || ((weekEnd.get(Calendar.DAY_OF_MONTH)) == 2)))) {				
-			daysInMonth = cloneCurrent.getActualMaximum(Calendar.DAY_OF_MONTH);
-			Integer currentDay = cloneCurrent.get(Calendar.DAY_OF_MONTH);
-			cloneCurrent.add(Calendar.DAY_OF_MONTH, daysInMonth - currentDay);
-			}
-			else
-			  cloneCurrent = weekEnd;
-		}
-		else
-			cloneCurrent = weekEnd;
-		WEValue.setCellValue((java.util.Date) cloneCurrent.getTime());
-		startingRow += 2;
-	    for(int i = 0; i <= PhLArray.size(); i++) {
-	    	if (i == 0) {
-    			generateHeader(startingRow);
-	    	}
-	    	else {
-	    		bigSum += generateTableRow(startingRow, i, startingDay, endingDay, weekEnd);    		
-	    	}	   
-	    }
-    	Row z = sheet1.createRow(startingRow + PhLArray.size() + 1);
+	
+	/**
+	 * the actual footer of the table
+	 * @param startingRow
+	 * @param startingDay
+	 * @param endingDay
+	 * @param weekEnd
+	 * @param bigSum
+	 */
+	private void generateTableFooter(int startingRow, int startingDay, int endingDay, Calendar weekEnd, float bigSum) {
+		Row z = sheet1.createRow(startingRow + PhLArray.size() + 1);
     	CellRangeAddress region = new CellRangeAddress(startingRow + PhLArray.size() + 1,startingRow + PhLArray.size() + 1, 0, 3);
     	Cell kFirst = z.createCell(0);
 		sheet1.addMergedRegion(region);
@@ -258,16 +189,143 @@ public class POIGenerator implements TimesheetGenerator{
 	    k.setCellValue(bigSum);
 	    k.setCellStyle(tableheadstyle);
 	}
+	public Schedule getScheduleFromFreeDayItem(FreeDayVacation x) {
+		Schedule b = new Schedule();
+		b.setStartDate(x.getBeginning());
+		b.setEndDate(x.getEnd());
+		b.setPattern(Pattern.getPatternForVacation());
+		b.setEmployee(pEmp);
+		return b;
+		
+	}
+	private Float generateTableRow(Integer startingRow, int i, Integer startingDay, Integer endingDay, Calendar weekEnd) {		
+		Row z = sheet1.createRow(startingRow + i);
+		Cell firstCol = z.createCell(0);
+		firstCol.setCellValue(i);
+		firstCol.setCellStyle(tablestyle);
+		
+		Cell secondCol = z.createCell(1);
+		secondCol.setCellValue(PhLArray.get(i-1).getProject().getCode());
+		secondCol.setCellStyle(tablestyle);
+		
+		Cell thirdCol = z.createCell(2);
+		thirdCol.setCellValue(PhLArray.get(i-1).getPhase().getCode());
+		thirdCol.setCellStyle(tablestyle);
+		
+		Cell fourCol = z.createCell(3);
+		fourCol.setCellValue(PhLArray.get(i-1).getLaborbilling().getCode());
+		fourCol.setCellStyle(tablestyle);
+		
+		for(int j = 0; j < startingDay - 1; j++) {
+			Cell k = z.createCell(j + 4);
+			k.setCellValue("-");
+			k.setCellStyle(tablestyle);
+		}
+
+		//legatura intre phase labour si zi calendaristica
+		Float suma = (float) 0;
+		for(int j = startingDay - 1; j < endingDay; j++) {  				
+			Calendar mDay = getDateFrom(j, weekEnd);
+			
+			Pattern mPattern = getPatternForDay(mDay);
+			PhaseLabor phLX = mPattern.getPhaseLabor(PhLArray.get(i-1).getLaborbilling(), PhLArray.get(i-1).getPhase(), PhLArray.get(i-1).getProject());
+			
+			
+			Float perc = null;
+			if (phLX != null)
+				perc= phLX.getPercentage();
+			else
+				perc = (float) 0.0; 
+			Float numberOfHours1= perc * mPattern.getNoOfHours() / 100;
+			suma +=  numberOfHours1;
+			Cell k = z.createCell(j + 4);
+			k.setCellValue(numberOfHours1);
+			k.setCellStyle(tablestyle);
+		}
+		//end here
+		for(int j = endingDay; j < 5; j++) {
+			Cell k = z.createCell(j + 4);
+			k.setCellValue("-");
+			k.setCellStyle(tablestyle);
+		}
+		for(int j = 0; j < 2; j++) {
+			Cell k = z.createCell(j + 9);
+			k.setCellValue("-");
+			k.setCellStyle(tableweekendstyle);
+		}
+		
+		Cell ts = z.createCell(11);
+		ts.setCellValue(suma);
+		ts.setCellStyle(tablestyle);
+		return suma;
+	}
+	
+	/**
+	 * Asta trebe sa o inteleg!
+	 * @param startingRow
+	 * @param startingDay 1-5 as Monday-Friday
+	 * @param endingDay 1-5 as Monday-Friday
+	 * @param weekEnd last day of week
+	 */
+	private void generateWeek(Integer startingRow, Integer startingDay, Integer endingDay, Calendar weekEnd) {
+		ArrayList<Pattern> PList = new ArrayList<Pattern>();
+		PList = getListOfPatterns(weekEnd, startingDay, endingDay);
+		PhLArray = getListOfDistinctPhaseLabor(PList);
+		Float bigSum = (float) 0;
+	    Row WE = sheet1.createRow(startingRow);
+		Cell cWELabel = WE.createCell(9);
+		cWELabel.setCellValue("W/E:");
+		cWELabel.setCellStyle(style);
+		Cell WEValue = WE.createCell(10);
+		WEValue.setCellStyle(datestyle);
+		
+		Calendar cloneCurrent = (Calendar) weekEnd.clone();
+		cloneCurrent.add(Calendar.DAY_OF_MONTH, -6);
+		Integer daysInMonth = 0;
+		//start part that decide what to do with weekEnd
+		if ((cloneCurrent.get(Calendar.MONTH) != weekEnd.get(Calendar.MONTH))) {
+			if ((endingDay != 5) || ((endingDay == 5) && (((weekEnd.get(Calendar.DAY_OF_MONTH)) == 1) || ((weekEnd.get(Calendar.DAY_OF_MONTH)) == 2)))) {				
+			daysInMonth = cloneCurrent.getActualMaximum(Calendar.DAY_OF_MONTH);
+			Integer currentDay = cloneCurrent.get(Calendar.DAY_OF_MONTH);
+			cloneCurrent.add(Calendar.DAY_OF_MONTH, daysInMonth - currentDay);
+			}
+			else
+			  cloneCurrent = weekEnd;
+		}
+		else
+			cloneCurrent = weekEnd;
+		WEValue.setCellValue((java.util.Date) cloneCurrent.getTime());
+		//end part ...
+		startingRow += 2;
+		//generate rows
+	    for(int i = 0; i <= PhLArray.size(); i++) {
+	    	if (i == 0) {
+    			generateHeader(startingRow);
+	    	}
+	    	else {
+	    		bigSum += generateTableRow(startingRow, i, startingDay, endingDay, weekEnd);    		
+	    	}	   
+	    }
+	    generateTableFooter(startingRow, startingDay, endingDay ,weekEnd, bigSum);
+    	
+	}
 	private int howManyDays(Calendar t) {
 			int K = t.getActualMaximum(Calendar.DAY_OF_MONTH) - t.get(Calendar.DAY_OF_MONTH);
 			return Math.min(K + 1, 5);
 	}
+	
+	/**
+	 * Create style for every1
+	 */
 	private void styleMe() {
 		style = wb.createCellStyle();
 	    style.setAlignment(style.ALIGN_CENTER);
 	    createHelper = wb.getCreationHelper();
 	    Font f1 = wb.createFont();
 	    f1.setUnderline((byte) 12);
+	    
+	    underlinedStyle = wb.createCellStyle();
+	    underlinedStyle.setFont(f1);
 	    
 	    datestyle = wb.createCellStyle();
 	    datestyle.setAlignment(style.ALIGN_CENTER);
@@ -300,7 +358,11 @@ public class POIGenerator implements TimesheetGenerator{
 	    tableweekendstyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
 	    
 	}
-	private void generateDocHeader() {
+	
+	/**
+	 * Heder creation
+	 */
+	private void generateDocHeader()  {
 		CellRangeAddress region = CellRangeAddress.valueOf("A1:C1");
 		CellRangeAddress regionComp = CellRangeAddress.valueOf("H1:J1");
 		CellRangeAddress regionEmp = CellRangeAddress.valueOf("K1:M1");
@@ -323,27 +385,140 @@ public class POIGenerator implements TimesheetGenerator{
 	    Cell cellPosition = row.createCell(10);
 	    cellPosition.setCellValue(pEmp.getJobrole().toString());
 	}
-	public void generateDoc(String workbookname, int genmonth, int genyear) {
-		wb = new HSSFWorkbook();
-		styleMe();	    
-		//PhLArray = xPattern.getArrayPhaseLabor();	
-	    fileOut = null;
-		try {
-			fileOut = new FileOutputStream(new File(workbookname));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+	
+	/**
+	 * transforms default schedules based on the vacation requests (DB)
+	 */
+	private void unionScheduleVacation() {	
+		List<Schedule> lsnew = new ArrayList<Schedule>();		
+		List<FreeDayVacation> lFreeDays = FreeDayVacation.getAllGrantedVacationsByUsername(pEmp.getRegularUser().getUsername());
+		for(int i = 0; i < lFreeDays.size(); i++) {
+			Schedule freeSched = getScheduleFromFreeDayItem(lFreeDays.get(i));
+			Calendar start =  lFreeDays.get(i).getBeginning();
+			Calendar end =  lFreeDays.get(i).getEnd();
+			lsnew.clear();
+			lsnew.add(freeSched);
+			for(int j = 0; j < schedEmp.size(); j++)  {
+				/*
+				 *		schedEmpSegment                      |-------------------|
+				 *		overriding Segment             |-------------------------------| 
+				 */
+				if (schedEmp.get(j).getStartDate().after(start) && schedEmp.get(j).getEndDate().before(end)) {					
+					continue;
+				}
+				else
+					/*
+					 *		schedEmpSegment                          |-------------------|
+					 *		overriding Segment               |-----------------| 
+					 */
+				if (((schedEmp.get(j).getStartDate().after(start) || (schedEmp.get(j).getStartDate().equals(start))) && (end.after(schedEmp.get(j).getStartDate())))) {
+					Schedule p = new Schedule();
+					p.setEndDate(schedEmp.get(j).getEndDate());
+					Calendar px = (Calendar) end.clone();
+					px.add(Calendar.DAY_OF_MONTH, 1);
+					p.setStartDate(px);
+					p.setEmployee(schedEmp.get(j).getEmployee());
+					p.setPattern(schedEmp.get(j).getPattern());
+					lsnew.add(p);					
+				}
+				else 
+					/*
+					 *		schedEmpSegment                       |-------------------|
+					 *		overriding Segment                           |-------| 
+					 */
+				 if (start.after(schedEmp.get(j).getStartDate()) && (end.before(schedEmp.get(j).getEndDate()))) { 
+					  Calendar clona = (Calendar) end.clone();
+					  clona.add(Calendar.DAY_OF_MONTH, 1);
+					  Schedule caz3 = new Schedule();
+					  caz3.setStartDate(clona);
+					  caz3.setEndDate(schedEmp.get(j).getEndDate());
+					  caz3.setPattern(schedEmp.get(j).getPattern());
+					  caz3.setEmployee(schedEmp.get(j).getEmployee());
+					  lsnew.add(caz3);
+					  Calendar clone = (Calendar) start.clone();
+					  clone.add(Calendar.DAY_OF_MONTH, -1);
+					  caz3 = new Schedule();
+					  caz3.setEndDate(clone);
+					  caz3.setStartDate(schedEmp.get(j).getStartDate());
+					  caz3.setPattern(schedEmp.get(j).getPattern());
+					  caz3.setEmployee(schedEmp.get(j).getEmployee());
+					  lsnew.add(caz3);
+				 }
+				  else
+					     /*
+						 *		schedEmpSegment                       |-------------------|
+						 *		overriding Segment                                 |--------------| 
+						 */ 
+					if ((start.before(schedEmp.get(j).getEndDate()) && (end.after(schedEmp.get(j).getEndDate()))) || end.equals(schedEmp.get(j).getEndDate()))  {
+						  Calendar clona = (Calendar) start.clone();
+						  clona.add(Calendar.DAY_OF_MONTH, -1);
+						  Schedule caz4 = new Schedule();
+						  caz4.setEndDate(clona);
+						  caz4.setStartDate(schedEmp.get(j).getStartDate());
+						  caz4.setPattern(schedEmp.get(j).getPattern());
+						  caz4.setEmployee(schedEmp.get(j).getEmployee());
+						  lsnew.add(caz4);
+				  }
+					else {
+						/*
+						 *		schedEmpSegment                       |-------------------|
+						 *		overriding Segment                                             |--------------| 
+						 */
+						 lsnew.add(schedEmp.get(j));
+					}
+						
+			}
+				schedEmp.clear();
+				for(int it = 0; it < lsnew.size(); it++)
+					schedEmp.add(lsnew.get(it));
 		}
-	    String safeName = WorkbookUtil.createSafeSheetName("TimeSheet");
-	    CreationHelper createHelper = wb.getCreationHelper();
-	    sheet1 = wb.createSheet(safeName);
-		generateDocHeader();
-	    year = genyear;
-	    month = genmonth;
-	    Calendar TimeSheetCalendar = new GregorianCalendar(year, month, 1);
+	}
+
+	public void generateDocFooter(int genMonth, int genYear) {
+		String blankSpaces = "                                                     ";
+		String blankSpacesSmall = "              ";
+		CellRangeAddress regionFooterSignature = new CellRangeAddress(noOfRows, noOfRows, 0, 1);
+		CellRangeAddress regionFooterApprovedBy = new CellRangeAddress(noOfRows + 1, noOfRows + 1, 0, 1);
+		CellRangeAddress regionFooterSignatureEmp = new CellRangeAddress(noOfRows, noOfRows, 2, 3);
+		CellRangeAddress regionFooterSignatureAppBy = new CellRangeAddress(noOfRows + 1, noOfRows + 1, 2, 3);
+		sheet1.addMergedRegion(regionFooterSignature);
+		sheet1.addMergedRegion(regionFooterApprovedBy);
+		sheet1.addMergedRegion(regionFooterSignatureEmp);
+		sheet1.addMergedRegion(regionFooterSignatureAppBy);
+		Row empSign = sheet1.createRow(noOfRows);
+		Row appBy = sheet1.createRow(noOfRows + 1);
+		
+		Cell labelSignature = empSign.createCell(0);
+		Cell signature1 = empSign.createCell(2);
+		Cell dateCell = empSign.createCell(9);
+		Cell dateCellV = empSign.createCell(10);
+		Calendar x = Calendar.getInstance();
+		x.set(Calendar.YEAR, genYear);
+		x.set(Calendar.MONTH, genMonth);
+		x.set(Calendar.DAY_OF_MONTH, x.getActualMaximum(Calendar.DAY_OF_MONTH));
+		dateCellV.setCellStyle(datestyle);
+		dateCellV.setCellValue(x);
+		dateCell.setCellValue("Date:");
+		signature1.setCellValue(blankSpaces);
+		signature1.setCellStyle(underlinedStyle);
+		Cell labelApprovedBy = appBy.createCell(0);
+		Cell dateAppCell = appBy.createCell(9);
+		Cell dateCellApprov = appBy.createCell(10);
+		dateCellApprov.setCellStyle(underlinedStyle);
+		dateCellApprov.setCellValue(blankSpacesSmall);
+		dateAppCell.setCellValue("Date:");
+		Cell signatureApproved1 = appBy.createCell(2);
+		signatureApproved1.setCellStyle(underlinedStyle);	
+		signatureApproved1.setCellValue(blankSpaces);
+		labelSignature.setCellValue("Employee signature:");
+		labelApprovedBy.setCellValue("Approved by:");
+		
+	}
+	public Calendar handleFirstWeeksOfMonth(int year, int month) {
+		Calendar TimeSheetCalendar = new GregorianCalendar(year, month, 1);
 	    Integer dayOfWeek = TimeSheetCalendar.get(Calendar.DAY_OF_WEEK);
-	    Integer noOfRows = 5;
-	    if ((dayOfWeek > 1) && (dayOfWeek < 7)) { //zi saptamanala
-	    	//2-Luni,3-Marti,4-Miercuri,5-Joi,6-Vineri
+	    
+	    if ((dayOfWeek > 1) && (dayOfWeek < 7)) {
 	    	Calendar auxWE = (Calendar) TimeSheetCalendar.clone();
 	    	auxWE.add(Calendar.DAY_OF_MONTH, 8 - dayOfWeek);
 	    	generateWeek(noOfRows, dayOfWeek - 1, 5, auxWE);
@@ -361,15 +536,40 @@ public class POIGenerator implements TimesheetGenerator{
 	    	generateWeek(noOfRows, 1, 5,auxWE);
 	    	noOfRows += PhLArray.size() + WeekConstants.rowsBetweenTables;
 	    }
+	    return TimeSheetCalendar;
+	}
+	/**
+	 * where the magic happens
+	 */
+	public void generateDoc(String workbookname, int genmonth, int genyear) {
+		unionScheduleVacation();
+		wb = new HSSFWorkbook();
+		styleMe();	
+	    fileOut = null;
+		try {
+			fileOut = new FileOutputStream(new File(workbookname));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	    String safeName = WorkbookUtil.createSafeSheetName("TimeSheet");
+	    //CreationHelper createHelper = wb.getCreationHelper();
+	    sheet1 = wb.createSheet(safeName);
+		generateDocHeader();
+	    noOfRows = 5;
+	    Calendar TimeSheetCalendar = handleFirstWeeksOfMonth(genyear,genmonth);
 	    Integer noOfDays = TimeSheetCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-	    
 	    while(TimeSheetCalendar.get(Calendar.DAY_OF_MONTH) + 7 <= noOfDays) { 
 	    	TimeSheetCalendar.add(Calendar.DAY_OF_MONTH, 7);
 	    	Calendar auxWE = (Calendar) TimeSheetCalendar.clone();
+	    	/*
+	    	 *  Because TimesheetCalendar is always set on monday I add 6 DAY_OF_MONTH to get the next sunday
+	    	 */
 	    	auxWE.add(Calendar.DAY_OF_MONTH, 6);
 	    	generateWeek(noOfRows, 1, howManyDays(TimeSheetCalendar),auxWE);
 	    	noOfRows += PhLArray.size() + WeekConstants.rowsBetweenTables;
 	    }
+	    noOfRows += 2;
+	    generateDocFooter(genmonth, genyear);
 	    for(short i = 0; i <= 20; i++) {
 	    	sheet1.autoSizeColumn(i);
 	    }

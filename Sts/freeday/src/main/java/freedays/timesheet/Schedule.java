@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import freedays.timesheet.Pattern;
 import javax.persistence.ManyToOne;
@@ -33,5 +35,7 @@ public class Schedule {
     
     @ManyToOne
     private freedays.timesheet.TimesheetUser employee;
+    
+	private transient boolean deletable = true;
 }
 

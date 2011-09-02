@@ -9,7 +9,6 @@ public aspect DeletableEntityAspect {
 	//declare parents : freedays.timesheet.* implements DeletableEntity;
 
 
-
 	@Transient
 	private transient boolean DeletableEntity.deletable = false;
 	
@@ -20,6 +19,4 @@ public aspect DeletableEntityAspect {
 	public void DeletableEntity.setDeletable(boolean deletable){
 		this.deletable = deletable;
 	}
-
-
 }

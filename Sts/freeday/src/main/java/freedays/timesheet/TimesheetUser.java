@@ -15,6 +15,7 @@ import freedays.timesheet.Schedule;
 import java.util.HashSet;
 
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
@@ -26,7 +27,7 @@ import javax.persistence.OneToOne;
 @RooEntity
 public class TimesheetUser{
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.EAGER)
     private List<Schedule> scheduleLst = new ArrayList<Schedule>();
 
     @NotNull
@@ -56,5 +57,8 @@ public class TimesheetUser{
            return  results.get(0);
         else
            return null;
+	}
+	public String toString() {
+		return fduser.getRegularUser().getFullName();
 	}
 }

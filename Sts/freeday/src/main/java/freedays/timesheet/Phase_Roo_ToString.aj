@@ -10,10 +10,8 @@ privileged aspect Phase_Roo_ToString {
     public String Phase.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Code: ").append(getCode()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
         sb.append("Name: ").append(getName()).append(", ");
-        sb.append("ProjectLst: ").append(getProjectLst() == null ? "null" : getProjectLst().size()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("ProjectLst: ").append(getProjectLst() == null ? "null" : getProjectLst().size());
         return sb.toString();
     }
     

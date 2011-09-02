@@ -11,10 +11,8 @@ privileged aspect Schedule_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("Employee: ").append(getEmployee()).append(", ");
         sb.append("EndDate: ").append(getEndDate() == null ? "null" : getEndDate().getTime()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
         sb.append("Pattern: ").append(getPattern()).append(", ");
-        sb.append("StartDate: ").append(getStartDate() == null ? "null" : getStartDate().getTime()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("StartDate: ").append(getStartDate() == null ? "null" : getStartDate().getTime());
         return sb.toString();
     }
     
