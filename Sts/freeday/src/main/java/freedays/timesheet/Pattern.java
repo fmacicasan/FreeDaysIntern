@@ -62,14 +62,19 @@ public class Pattern {
 	    //sb.append("Schedule: ").append(getSchedule());
 	    return sb.toString();
 	}
-	
+
+	/**
+	 * @return the deletable
+	 */
 	public boolean isDeletable() {
 		return deletable;
 	}
 
+	/**
+	 * @param deletable the deletable to set
+	 */
 	public void setDeletable(boolean deletable) {
 		this.deletable = deletable;
 	}
-
-	private transient boolean deletable=true;
+	private transient boolean deletable = true;
 }

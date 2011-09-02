@@ -19,7 +19,7 @@ body {
 	margin: 0.5%;
 }
 .colr,.legr{
-	background-color: red;
+	background-color: RGB(255,150,150);
 }
 .coly,.legy{
 	background-color: yellow;
@@ -31,7 +31,7 @@ body {
 	background-color: orange;
 }
 .colb{
-	background-color: RGB(189,227,211);
+	background-color: RGB(213,235,213);
 }
 .report{
 	text-align: center;
@@ -248,7 +248,11 @@ tr:nth-child(odd) {
 }
 
 tr:nth-child(even) {
-	background-color: #EFEFEF;
+	background-color: #F2F2F2;
+}
+
+#yourself {
+	background-color: RGB(213,232,213);
 }
 
 a:link {

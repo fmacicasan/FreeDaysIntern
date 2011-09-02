@@ -50,17 +50,27 @@ public class FDUserDataOnDemand {
     
     public FDUser getRandomNormalUser(){
     	FDUser fdu = this.getRandomFDUser();
-		while(fdu.getGranter() == null ||
-				(fdu.getGranter() != null && fdu.getGranter().getGranter() == null)){
+    	int tries = 5;
+		while((fdu.getGranter() == null ||
+				(fdu.getGranter() != null && fdu.getGranter().getGranter() == null))&&tries > 0){
 			fdu = this.getRandomFDUser();
+			tries--;
+		}
+		if(tries == 0){
+			return null;
 		}
 		return fdu;
     }
     
     public FDUser getRandomLevel1User(){
     	FDUser fdu = this.getRandomFDUser();
-		while(fdu.getGranter() == null){
+    	int tries = 5;
+		while(fdu.getGranter() == null && tries > 0){
 			fdu = this.getRandomFDUser();
+			tries--;
+		}
+		if(tries == 0){
+			return null;
 		}
 		return fdu;
     }
@@ -76,11 +86,11 @@ public class FDUserDataOnDemand {
 
     private List<FDUser> data;
 	public void init() {
-        data = FDUser.findFDUserEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'FDUser' illegally returned null");
-        if (!data.isEmpty()) {
-            return;
-        }
+//        data = FDUser.findFDUserEntries(0, 10);
+//        if (data == null) throw new IllegalStateException("Find entries implementation for 'FDUser' illegally returned null");
+//        if (!data.isEmpty()) {
+//            return;
+//        }
         
         data = new ArrayList<freedays.app.FDUser>();
         for (int i = 0; i < 10; i++) {
@@ -102,7 +112,7 @@ public class FDUserDataOnDemand {
 
 	public void setRegularUser(FDUser obj, int index) {
 		RegularUserDataOnDemand rudod = new RegularUserDataOnDemand();
-        RegularUser regularUser = rudod.getRandomRegularUser();
+        RegularUser regularUser = rudod.getSpecificRegularUser(index);
         obj.setRegularUser(regularUser);
     }
 }

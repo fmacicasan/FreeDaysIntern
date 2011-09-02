@@ -3,6 +3,7 @@
 
 package freedays.util;
 
+import java.lang.String;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 privileged aspect MailUtils_Roo_JavaBean {
@@ -13,6 +14,14 @@ privileged aspect MailUtils_Roo_JavaBean {
     
     public void MailUtils.setMailSender(JavaMailSenderImpl mailSender) {
         this.mailSender = mailSender;
+    }
+    
+    public String MailUtils.getApplicationHome() {
+        return this.applicationHome;
+    }
+    
+    public void MailUtils.setApplicationHome(String applicationHome) {
+        this.applicationHome = applicationHome;
     }
     
 }

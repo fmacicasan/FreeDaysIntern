@@ -48,7 +48,6 @@ public class TimesheetUser{
         scheduleLst.add(sch);
     }
 	public static TimesheetUser findTimesheetUserByUsername(String currentUser) {
-		// TODO Auto-generated method stub
 		if (currentUser == null || currentUser.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
         TypedQuery<TimesheetUser> q = em.createQuery("SELECT t FROM TimesheetUser AS t WHERE t.fduser.regularUser.username = :username ", TimesheetUser.class);

@@ -1,6 +1,7 @@
 package freedays.domain;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
@@ -27,6 +28,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+import freedays.domain.form.AdminRegUserUpdate;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.Search;
 import freedays.domain.form.SignupWrapper;
@@ -256,7 +258,7 @@ public class RegularUser implements Serializable {
 	}
 
 	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
-	private static final String RESET_PASS_MESSAGE = "Your new password is:";
+	private static final String RESET_PASS_MESSAGE = "Your new password is:\n\t\t\t";
 
 	/**
 	 * Reset's a regular's user password based on his email address.
@@ -601,4 +603,24 @@ public class RegularUser implements Serializable {
 	public void setEmail(String email) {
         this.username = email;
     }
+
+
+	public static RegularUser updateRegUser(AdminRegUserUpdate regularUser) {
+		RegularUser regu = RegularUser.findRegularUsersByUsername(regularUser.getUsername()).getSingleResult();
+		regu.updateAdmin(regularUser);
+        return regu;
+	}
+
+
+	private void updateAdmin(AdminRegUserUpdate ru) {
+		this.setActiv(ru.getActiv());
+		this.setCreationdate(ru.getCreationdate());
+		this.setDeleted(ru.getDeleted());
+		this.setFirstname(ru.getFirstname());
+		this.setSurename(ru.getSurename());
+		this.setUsername(ru.getUsername());
+		this.setPassword(this.getPassword());
+        this.merge();
+		
+	}
 }

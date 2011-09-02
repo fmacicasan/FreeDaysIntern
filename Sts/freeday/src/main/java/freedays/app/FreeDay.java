@@ -80,7 +80,7 @@ public abstract class FreeDay {
     	 * The FreeDays is associated with an request that was approved
     	 * and, if it is the case, its associated with a complementary request.
     	 */
-    	COMPLETED_SUCCESS, 
+    	FINALIZE_SUCCESS, 
     	/**
     	 * The FreeDay is associated with a request that terminated with failure.
     	 * It was either denied or canceled.
@@ -122,16 +122,15 @@ public abstract class FreeDay {
     public boolean isReportable(){
     	return this.getDate().before(Calendar.getInstance()) && //in past
     			(this.getStatus() == FreeDayStatus.WAITING		//status waiting
-    				|| this.getStatus() == FreeDayStatus.COMPLETED_SUCCESS); //status completed sucessfull
+    				|| this.getStatus() == FreeDayStatus.FINALIZE_SUCCESS); //status completed sucessfull
     }
     
     @Override
     public String toString(){
     	StringBuilder sb = new StringBuilder();
-    	sb.append(String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate()));
-    	sb.append(" reason: ");
-    	sb.append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
-    	sb.append(" type").append(this.getType());
+    	sb.append("\nDay:\t").append(String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate()));
+    	sb.append("\nReason:\t").append((StringUtils.hasText(this.getReason()))?this.getReason():"none");
+    	sb.append("\nType:\t").append(this.getReportType());
     	sb.append(" (").append(this.getStatus()).append(")");
     	//sb.append(String.format("%1$te.%1$tb", this.getDate()));
     	return sb.toString();
@@ -179,6 +178,8 @@ public abstract class FreeDay {
 	 * @see RequestType
 	 */
 	public abstract RequestType getType();
+	
+	protected abstract String getReportType();
 
 	/**
 	 * Sets the initial status. Common for all FreeDays.
@@ -260,7 +261,7 @@ public abstract class FreeDay {
 	 */
 	public static List<FreeDayStatus> getAllGrantedStatus(){
 		List<FreeDayStatus> lfds = new ArrayList<FreeDayStatus>();
-		lfds.add(FreeDayStatus.COMPLETED_SUCCESS);
+		lfds.add(FreeDayStatus.FINALIZE_SUCCESS);
 		lfds.add(FreeDayStatus.WAITING);
 		return lfds;
 	}
@@ -329,21 +330,7 @@ public abstract class FreeDay {
         return q.getResultList(); 
 	}
 	
-	/**
-	 * Counts all the free days that are under approval or already approved
-	 * that are associated with requests made by a FDUser associated with a 
-	 * RegularUser identified by the provided username.
-	 * @param username
-	 * @return
-	 */
-	public static Long countAllNotFailedRequestsByUsername(String username){
-		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
-		EntityManager em = FreeDay.entityManager();
-		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDay o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
-        q.setParameter("username", username);
-        q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
-        return q.getSingleResult(); 
-	}
+
 	
 	/**
 	 * Decides weather or not the provided date can be a date corresponding to a

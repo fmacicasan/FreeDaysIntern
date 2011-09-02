@@ -22,6 +22,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
+import freedays.domain.Request;
 import freedays.validation.annotation.BusinessDay;
 
 /**
@@ -48,13 +49,11 @@ public class FDUser extends ApplicationRegularUser {
     private Calendar hireDate;
 
     @NotNull
-    @Min(0L)
-    @Max(7L)
     @Value("0")
     private Integer initDays;
 
     @NotNull
-    @Min(21L)
+   // @Min(21L)
     @Value("21")
     private Integer maxFreeDays;
     
@@ -71,7 +70,12 @@ public class FDUser extends ApplicationRegularUser {
 //        sb.append("InitDays: ").append(getInitDays()).append(", ");
 //        sb.append("MaxFreeDays: ").append(getMaxFreeDays()).append(", ");
 //        sb.append("RegularUser: ")
-        sb.append(getRegularUser()).append(" ");
+        RegularUser ru = this.getRegularUser();
+        if(ru==null){
+        	sb.append("No approver!");
+        } else {
+        	sb.append(getRegularUser());
+        }
 //        sb.append("Roles: ").append(getRoles() == null ? "null" : getRoles().size()).append(", ");
 //        sb.append("Version: ").append(getVersion());
         return sb.toString();
@@ -106,7 +110,8 @@ public class FDUser extends ApplicationRegularUser {
 //		remainingDays -= Request.countRequests(this, RequestStatus.GRANTED);
 		
 		String username = this.getRegularUser().getUsername();
-		remainingDays -= FreeDay.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username);
 		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username);
 		return remainingDays;		
 	}
@@ -119,7 +124,8 @@ public class FDUser extends ApplicationRegularUser {
 	public Long computeteAvailableFreeDaysTotal(){
 		long remainingDays = this.getMaxFreeDays();
 		String username = this.getRegularUser().getUsername();
-		remainingDays -= FreeDay.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username);
+		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username); 
 		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username);
 		return remainingDays;
 	}
@@ -197,6 +203,36 @@ public class FDUser extends ApplicationRegularUser {
 	public long computeAvailableDerogations() {
 		long derog = this.getMaxDerogation();
 		return derog - FreeDay.countAllNotFailedTypeCRequestsByFDUser(this);
+	}
+
+	public static void updateFDUser(FDUser fdu) {
+        FDUser back = FDUser.findFDUser(fdu.getId()); 
+//      RegularUser ru = back.getRegularUser(); //no more need for this the context gets updated
+//      fdu.setRegularUser(ru);
+      //: change also the requests for the ex approver to the new one
+      //should i send mail to the involved parties ?
+      if(back.getGranter() != null){
+	      if((back.getGranter().getId() != fdu.getGranter().getId())){//the granter changed in UI => persistence context marked the change
+	      	System.out.println("Testing");
+	      	fdu.updateActiveRequests(back.getGranter());
+	
+	      }
+      }
+      fdu.merge();
+		
+	}
+
+	private void updateActiveRequests(ApplicationRegularUser oldGranter) {
+		if(oldGranter==null){throw new IllegalArgumentException("The oldGranter argument is required");}
+		TypedQuery<Request> q = entityManager().createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username and o.approver = :granter and o.status NOT IN :finishstates  ", Request.class);
+        q.setParameter("granter", oldGranter);
+        q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
+        q.setParameter("username", this.getRegularUser().getUsername());
+        List<Request> results = q.getResultList();
+        for (Request request : results) {
+			request.setApprover(this.getGranter());
+			request.merge();
+		}
 	}
 	
 	

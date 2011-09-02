@@ -2,9 +2,9 @@
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
     
-    <display-name>freedays</display-name>
+    <display-name>hrapp</display-name>
     
-    <description>Roo generated freedays application</description>
+    <description>Roo generated hrapp application</description>
 
     
     <!-- Enable escaping of form submission contents -->
@@ -80,7 +80,7 @@
     
     <!-- Handles Spring requests -->
     <servlet>
-        <servlet-name>freedays</servlet-name>
+        <servlet-name>hrapp</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -90,7 +90,7 @@
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>freedays</servlet-name>
+        <servlet-name>hrapp</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     

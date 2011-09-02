@@ -32,11 +32,7 @@ privileged aspect PatternController_Roo_Controller {
             return "patterns/create";
         }
         uiModel.asMap().clear();
-        pattern.getPhaseLaborLst();
         pattern.persist();
-        int a;
-        a=5;
-        a=10;
         return "redirect:/patterns/" + encodeUrlPathSegment(pattern.getId().toString(), httpServletRequest);
     }
     

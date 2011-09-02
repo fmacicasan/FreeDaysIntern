@@ -24,6 +24,7 @@ import freedays.app.FDUser;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApplicationRegularUser.JobRole;
 import freedays.domain.RegularUser;
+import freedays.domain.Request;
 import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 
@@ -56,6 +57,13 @@ public class FDUserController {
 			addDateTimeFormatPatterns(uiModel);
 			return "fdusers/create";
 		}
+//		System.out.println(fDUser.getGranter());
+//		if(fDUser.getGranter() == null || this.defaultGranter.equals(fDUser.getGranter())){
+//			System.out.println("is equal");
+//			fDUser.setGranter(null);
+//		}
+//		System.out.println(fDUser);
+//		fDUser.persist();
 		uiModel.asMap().clear();
 		FDUser.persist();
 		RegularUser ru = FDUser.getRegularUser();
@@ -64,6 +72,10 @@ public class FDUserController {
 				+ encodeUrlPathSegment(FDUser.getId().toString(),
 						httpServletRequest);
 	}
+
+
+
+
 	
 	/**
 	 * Handler for the display of a FDUSer based on his identifier
@@ -79,6 +91,7 @@ public class FDUserController {
 		uiModel.addAttribute("fduser", fdu);
 		uiModel.addAttribute("fduser_col", fdu.getRoles());
 		uiModel.addAttribute("itemId", id);
+		uiModel.addAttribute("noGranter",false);
 		return "fdusers/show";
 	}
 
@@ -185,12 +198,9 @@ public class FDUserController {
             return "fdusers/update";
         }
         uiModel.asMap().clear();
-        FDUser back = FDUser.findFDUser(fdu.getId());
-        RegularUser ru = back.getRegularUser();
-        fdu.setRegularUser(ru);
-        //TODO: change also the requests for the ex approver to the new one
-        //should i send mail to the involved parties ?
-        fdu.merge();
+        
+        FDUser.updateFDUser(fdu);
+
        
         return "redirect:/fdusers/" + encodeUrlPathSegment(fdu.getId().toString(), httpServletRequest);
     }

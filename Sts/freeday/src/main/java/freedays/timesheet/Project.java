@@ -38,6 +38,7 @@ public class Project {
     	phaseLst.add(newPhase);
 	}
 
+
 	public static Project getVacationProject() {
 		// TODO Auto-generated method stub
 		EntityManager em = Project.entityManager();
@@ -49,4 +50,5 @@ public class Project {
         else
            return null;  
 	}
+
 }

@@ -24,15 +24,14 @@
 				<spring:message code="recoverpass_error" />
 			</c:otherwise>
 		</c:choose>
-
-		<spring:url value="/recoverpass" var="form_resetpassword" />
-			
-		
-		<form:form modelAttribute="${resetpass}" action="${fn:escapeXml(form_resetpassword)}" method="POST" >
-			<input type="text" name="email" />
-			<spring:message code="button_resetpass" var="reset_label" htmlEscape="false" />
-			<input id="reset" type="submit" value="${fn:escapeXml(reset_label)}" />
-		</form:form>
+		<c:if test="${reason ne true}">
+			<spring:url value="/recoverpass" var="form_resetpassword" />
+			<form:form modelAttribute="${resetpass}" action="${fn:escapeXml(form_resetpassword)}" method="POST" >
+				<input type="text" name="email" />
+				<spring:message code="button_resetpass" var="reset_label" htmlEscape="false" />
+				<input id="reset" type="submit" value="${fn:escapeXml(reset_label)}" />
+			</form:form>
+		</c:if>
 		
 	</util:panel>
 </div>

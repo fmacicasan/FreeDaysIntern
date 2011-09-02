@@ -1,5 +1,6 @@
 package freedays.util;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,17 +25,22 @@ import org.springframework.stereotype.Component;
 @RooJavaBean
 @Configurable
 public class MailUtils {
-	private static final String DEFAULT_REGISTERNOTIFICATION_SUBJECT = "FreeDays - New User Notification";
+	private static final String DEFAULT_REGISTERNOTIFICATION_SUBJECT = "HRApp - New User Notification";
 	private static final String DEFAULT_REGISTERNOTIFICATION_CONTENT = "New user registration!\nPlease process the account of %s.\n";
-	private static final String DEFAULT_POSTPROCESSINGNOTIF_SUBJECT = "FreeDays - Account activation";
+	private static final String DEFAULT_POSTPROCESSINGNOTIF_SUBJECT = "HRApp - Account activation";
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_CONTENT = "Hello %s,\n your account has been processed.\n";
-	private static final String SOURCE = "internlwtest@sdl.com";
-	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT = "Freedays - Request curtesy notification";
+	private static final String SOURCE = "hrapp@sdl.com";
+	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT = "HRApp - Request curtesy notification";
 	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT = "Hello %s,\n your subordinate %s has a new request to approve!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT="Hello %s,\n the following request was canceled!\n %s \n\n ";
+	private static final String DEFAULT_APPLICATION_LINK="\nFind us at {0}!";
+    
 	@Autowired
     private JavaMailSenderImpl mailSender;
+    
+    @Autowired
+    private String applicationHome;
 	
 	/**
 	 * Sends the simple mail message via the corresponding MailSender
@@ -66,19 +72,28 @@ public class MailUtils {
 	protected void sendMsg(final List<String> tol, final String subject, final String content, final boolean isHtml){
 		MimeMessage mm = mailSender.createMimeMessage();
     	MimeMessageHelper helper = new MimeMessageHelper(mm);
-    	tol.add("fmacicasan@sdl.com");
+    	finalizeTo(tol);
     	String[] to = (String[])tol.toArray(new String[0]);
     	try{
     		helper.setTo(to);
     		helper.setSubject(subject);
-    		helper.setText(content,isHtml);
+    		helper.setText(finalizeContent(content),isHtml);
     		helper.setFrom(MailUtils.SOURCE);
     	
     		mailSender.send(mm);
     	} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
+	}
+	private void finalizeTo(final List<String> tol) {
+		tol.add("fmacicasan@sdl.com");
+	}
+	private String finalizeContent(final String content){
+		StringBuilder sb = new StringBuilder();
+		sb.append(content).append("\n");
+		sb.append(MessageFormat.format(MailUtils.DEFAULT_APPLICATION_LINK, this.getApplicationHome())).append("\n\n");
+		return sb.toString();
 	}
 	
 	
@@ -159,7 +174,7 @@ public class MailUtils {
 //    	            message.setSubject(subject);
 //    	            message.setText(content);
 //    	            
-//    	            //TODO: solve problem with disabled gmail account
+//    	            //: solve problem with disabled gmail account
 //    	            Transport.send(message);
 //
 //    	        } catch (MessagingException e) {
