@@ -51,6 +51,7 @@ INSERT INTO `project`(`code`,`name`) VALUES("0002","DummyProj2")
 INSERT INTO `project`(`code`,`name`) VALUES("0003","DummyProj3")
 INSERT INTO `project`(`code`,`name`) VALUES("0004","DummyProj4")
 INSERT INTO `project`(`code`,`name`) VALUES("0005","DummyProj5")
+INSERT INTO `project`(`code`,`name`) VALUES("9999","Vacation")
 
 delete from `phase`
 INSERT INTO `phase`(`code`,`name`) VALUES("0001","DummyPhase1")
@@ -58,6 +59,7 @@ INSERT INTO `phase`(`code`,`name`) VALUES("0002","DummyPhase2")
 INSERT INTO `phase`(`code`,`name`) VALUES("0003","DummyPhase3")
 INSERT INTO `phase`(`code`,`name`) VALUES("0004","DummyPhase4")
 INSERT INTO `phase`(`code`,`name`) VALUES("0005","DummyPhase5")
+INSERT INTO `phase`(`code`,`name`) VALUES("9999","Not applicable")
 
 delete from `phase_project_lst`
 INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(1,1)
@@ -67,11 +69,13 @@ INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(4,1)
 INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(1,2)
 INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(2,2)
 INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(3,2)
+INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(6,6)
 
 delete from `labor_billing`
 INSERT INTO `labor_billing`(`code`,`name`) VALUES("01","DummyLaborBilling1")
 INSERT INTO `labor_billing`(`code`,`name`) VALUES("02","DummyLaborBilling2")
 INSERT INTO `labor_billing`(`code`,`name`) VALUES("03","DummyLaborBilling3")
+INSERT INTO `labor_billing`(`code`,`name`) VALUES("9999","Not applicable")
 
 delete from `pattern`
 INSERT INTO `pattern`(`no_of_hours`) VALUES(8)
@@ -84,6 +88,7 @@ INSERT INTO `phase_labor`(`percentage`,`laborbilling`,`pattern`,`phase`,`project
 
 delete from `timesheet_user`
 INSERT INTO `timesheet_user`(`id`,`fduser`) VALUES(100,111);
+INSERT INTO `timesheet_user`(`id`,`fduser`) VALUES(113,113);
 
 delete from `schedule`
 INSERT INTO `schedule`(`start_date`,`end_date`,`employee`,`pattern`) VALUES("2011-07-20", "2011-12-20", 100, 1)

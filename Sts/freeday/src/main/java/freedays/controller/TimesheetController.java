@@ -16,7 +16,14 @@ public class TimesheetController {
 
 	@Autowired
 	private UserContextService userContextService;
-	
+	public static void initTimesheetGeneration(String username) {
+		
+		TimesheetUser us = TimesheetUser.findTimesheetUserByUsername(username);
+		TimesheetGenerator x = new POIGenerator(us);
+		for (int i = 0; i < 12; i++) {
+			x.generateDoc("..\\..\\..\\timesheets\\Timesheet" + " " + us.getRegularUser().getFullName() + " " + WeekConstants.monthStrings[i] + ".xls", i, 2011);
+		}
+	}
 	@RequestMapping(method=RequestMethod.GET)
 	public String asd(Model uiModel){
 		MainClass mc = new MainClass();
