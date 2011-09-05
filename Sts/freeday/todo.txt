@@ -27,13 +27,13 @@ TODO:
 	- V2PLAN solve the @BusinessDay and @weekend @duplicate error display
 	
 	- DONE verify the active & deleted flag on login
-		- consider using the User class
-	- @Searchable annotation
-	- ???FDUser creation, add NULL FDUser for top granter
+		- V2PLAN consider using the User class
+	- V2PLAN @Searchable annotation
+	- V2PLAN ???FDUser creation, add NULL FDUser for top granter
 		- prototype & replace with null
 	- Type R/C day creation add NULL for no match
 	- CRITICAL!! Add YEAR Support
-	- ?? Ofer posibility for reason input on request denial
+	- V2PLAN ? Ofer posibility for reason input on request denial
 	
 	- DONE eu si HR raport pe zile la toata lumea
 	- DONE cate au ramas la fiecare din maxim
@@ -65,7 +65,7 @@ TODO:
 	- DONE FDUser update will fail due to invalid regular user
 	
 	- DONE change register redirect to some page stating that the account is under processing and he will receive some mail confirmation when he can start using the service
-    - V2PLAN add javadoc generation
+    - DONE add javadoc generation
 	- DONE with push in - problem at securing the controller handlers in the aspects
 	- DONE provide some info for the approver
 	- V2PLAN add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)

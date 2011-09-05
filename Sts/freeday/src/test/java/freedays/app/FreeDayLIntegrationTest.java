@@ -52,11 +52,11 @@ public class FreeDayLIntegrationTest {
 		
 		leveltop = fdudod.getRandomLevelTopUser();
 		level1 = fdudod.getRandomFDUser();
-		while(level1.equals(leveltop))level1 = fdudod.getRandomFDUser();
+		while(level1.getRegularUser().equals(leveltop.getRegularUser()))level1 = fdudod.getRandomFDUser();
 		Assert.assertNotSame(level1, leveltop);
 		level1.setGranter(leveltop);
 		appreguser = fdudod.getRandomFDUser();
-		while(level1.equals(appreguser)||leveltop.equals(appreguser))appreguser = fdudod.getRandomFDUser();
+		while(level1.getRegularUser().equals(appreguser.getRegularUser())||leveltop.getRegularUser().equals(appreguser.getRegularUser()))appreguser = fdudod.getRandomFDUser();
 		Assert.assertNotSame(leveltop, appreguser);
 		Assert.assertNotSame(level1, appreguser);
 		appreguser.setGranter(level1);
@@ -85,9 +85,9 @@ public class FreeDayLIntegrationTest {
     	//ApplicationRegularUser appreguser = FDUserDataOnDemand.generateFDUser(3,level1);
     	appreguser.getRegularUser().setEmail("fmacicasanz@sdl.com");
     	
-    	Assert.assertNotSame("distinct users expected top & 1", leveltop.getRegularUser(), level1.getRegularUser());
-    	Assert.assertNotSame("distinct users expected top @ reg", leveltop.getRegularUser(), appreguser.getRegularUser());
-    	Assert.assertNotSame("distinct users expected 1 @ reg", level1.getRegularUser(), appreguser.getRegularUser());
+    	Assert.assertNotSame(String.format("distinct users expected top & 1 %s and %s",leveltop.getRegularUser(),level1.getRegularUser()), leveltop.getRegularUser(), level1.getRegularUser());
+    	Assert.assertNotSame(String.format("distinct users expected top @ reg %s and %s",leveltop.getRegularUser(),level1.getRegularUser()), leveltop.getRegularUser(), appreguser.getRegularUser());
+    	Assert.assertNotSame(String.format("distinct users expected 1 @ reg %s and %s",leveltop.getRegularUser(),level1.getRegularUser()), level1.getRegularUser(), appreguser.getRegularUser());
     	
     	Assert.assertEquals("error @ level top email","fmacicasanx@sdl.com",leveltop.getRegularUser().getEmail());
     	Assert.assertEquals("error @ level 1 email", "fmacicasany@sdl.com",level1.getRegularUser().getEmail());

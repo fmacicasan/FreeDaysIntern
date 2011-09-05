@@ -38,9 +38,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     
     public void FDUserDataOnDemand.setInitDays(FDUser obj, int index) {
         Integer initDays = new Integer(index);
-        if (initDays < 0 || initDays > 7) {
-            initDays = 7;
-        }
         obj.setInitDays(initDays);
     }
     
@@ -56,9 +53,6 @@ privileged aspect FDUserDataOnDemand_Roo_DataOnDemand {
     
     public void FDUserDataOnDemand.setMaxFreeDays(FDUser obj, int index) {
         Integer maxFreeDays = new Integer(index);
-        if (maxFreeDays < 21) {
-            maxFreeDays = 21;
-        }
         obj.setMaxFreeDays(maxFreeDays);
     }
     
