@@ -1,8 +1,11 @@
 package freedays.timesheet;
 import java.io.File;
+
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,9 +23,21 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.WorkbookUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 import freedays.app.FreeDayVacation;
+
+@Configurable
 public class POIGenerator implements TimesheetGenerator{
+
+	
+	
+	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_DEPARTMENT = "Department";
+	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_POSITION = "POSITION";
+	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_EMPLOYEE = "EMPLOYEE NAME";
+	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_COMPANY = "LANGUAGEWEAVER, INC.";
+	
 	TimesheetUser pEmp;
 	Workbook wb;
 	
@@ -52,6 +67,9 @@ public class POIGenerator implements TimesheetGenerator{
 	 */
 	ArrayList<PhaseLabor> PhLArray;
 	
+	@Autowired
+	DecimalFormat decimalFormat;
+	
 	
 	public POIGenerator(TimesheetUser pEmp) {
 		this.pEmp = pEmp;
@@ -74,6 +92,12 @@ public class POIGenerator implements TimesheetGenerator{
 		return null;
 		
 	}
+	
+	/**
+	 * "I think" it gets the week's table header list of labour codes
+	 * @param pList
+	 * @return
+	 */
 	private ArrayList<PhaseLabor> getListOfDistinctPhaseLabor(ArrayList<Pattern> pList) {
 		ArrayList<PhaseLabor> PhLArr = new ArrayList<PhaseLabor>();
 		for(int i = 0; i < pList.size(); i++) {
@@ -236,10 +260,11 @@ public class POIGenerator implements TimesheetGenerator{
 				perc= phLX.getPercentage();
 			else
 				perc = (float) 0.0; 
+			
 			Float numberOfHours1= perc * mPattern.getNoOfHours() / 100;
 			suma +=  numberOfHours1;
 			Cell k = z.createCell(j + 4);
-			k.setCellValue(numberOfHours1);
+			k.setCellValue(decimalFormat.format(numberOfHours1));
 			k.setCellStyle(tablestyle);
 		}
 		//end here
@@ -363,27 +388,48 @@ public class POIGenerator implements TimesheetGenerator{
 	 * Heder creation
 	 */
 	private void generateDocHeader()  {
+		
 		CellRangeAddress region = CellRangeAddress.valueOf("A1:C1");
 		CellRangeAddress regionComp = CellRangeAddress.valueOf("H1:J1");
 		CellRangeAddress regionEmp = CellRangeAddress.valueOf("K1:M1");
 		CellRangeAddress regionPosition = CellRangeAddress.valueOf("K2:M2");
+		CellRangeAddress regionDepartment = CellRangeAddress.valueOf("K2:M2");
+		
 		sheet1.addMergedRegion( region );
-	    sheet1.setDisplayGridlines(false);
-	    Row row = sheet1.createRow((short)0);	 
-	    Cell cellCompany = row.createCell(0);
 		sheet1.addMergedRegion(regionComp);
-	    cellCompany.setCellValue("LANGUAGEWEAVER, INC.");
+		sheet1.addMergedRegion(regionEmp);
+	    sheet1.addMergedRegion(regionPosition);
+	    sheet1.addMergedRegion(regionDepartment);
+	    
+	    sheet1.setDisplayGridlines(false);
+	    
+	    
+	    Row row = sheet1.createRow((short)0);	
+	    
+	    Cell cellCompany = row.createCell(0);
+	    cellCompany.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_COMPANY);
+	    
 	    Cell cellNameLabel = row.createCell(7);
-	    cellNameLabel.setCellValue("EMPLOYEE NAME");
+	    cellNameLabel.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_EMPLOYEE);
+	    
 	    Cell cellName = row.createCell(10);
 	    cellName.setCellValue(pEmp.getRegularUser().getFullName());
-	    sheet1.addMergedRegion(regionEmp);
-	    sheet1.addMergedRegion(regionPosition);
+	    
+	    
 	    row = sheet1.createRow((short)1);
 	    Cell cellPositionLabel = row.createCell(7);
-	    cellPositionLabel.setCellValue("POSITION");
+	    cellPositionLabel.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_POSITION);
+	    
 	    Cell cellPosition = row.createCell(10);
 	    cellPosition.setCellValue(pEmp.getJobrole().toString());
+	    
+	    row = sheet1.createRow(2);
+	    Cell cellDepartmentLabel = row.createCell(7);
+	    cellDepartmentLabel.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_DEPARTMENT);
+	    
+	    Cell cellDepartment = row.createCell(10);
+	    cellDepartment.setCellValue(pEmp.getDepartment().toString());
+	    
 	}
 	
 	/**
@@ -489,29 +535,41 @@ public class POIGenerator implements TimesheetGenerator{
 		Row appBy = sheet1.createRow(noOfRows + 1);
 		
 		Cell labelSignature = empSign.createCell(0);
+		labelSignature.setCellValue("Employee signature:");
+		
 		Cell signature1 = empSign.createCell(2);
+		signature1.setCellValue(blankSpaces);
+		signature1.setCellStyle(underlinedStyle);
+		
+		
 		Cell dateCell = empSign.createCell(9);
+		dateCell.setCellValue("Date:");
+		
 		Cell dateCellV = empSign.createCell(10);
+		dateCellV.setCellStyle(datestyle);
 		Calendar x = Calendar.getInstance();
 		x.set(Calendar.YEAR, genYear);
 		x.set(Calendar.MONTH, genMonth);
 		x.set(Calendar.DAY_OF_MONTH, x.getActualMaximum(Calendar.DAY_OF_MONTH));
-		dateCellV.setCellStyle(datestyle);
 		dateCellV.setCellValue(x);
-		dateCell.setCellValue("Date:");
-		signature1.setCellValue(blankSpaces);
-		signature1.setCellStyle(underlinedStyle);
+		
+		
 		Cell labelApprovedBy = appBy.createCell(0);
-		Cell dateAppCell = appBy.createCell(9);
-		Cell dateCellApprov = appBy.createCell(10);
-		dateCellApprov.setCellStyle(underlinedStyle);
-		dateCellApprov.setCellValue(blankSpacesSmall);
-		dateAppCell.setCellValue("Date:");
+		labelApprovedBy.setCellValue("Approved by:");
+		
 		Cell signatureApproved1 = appBy.createCell(2);
 		signatureApproved1.setCellStyle(underlinedStyle);	
 		signatureApproved1.setCellValue(blankSpaces);
-		labelSignature.setCellValue("Employee signature:");
-		labelApprovedBy.setCellValue("Approved by:");
+		
+		Cell dateAppCell = appBy.createCell(9);
+		dateAppCell.setCellValue("Date:");
+		Cell dateCellApprov = appBy.createCell(10);
+		dateCellApprov.setCellStyle(datestyle);
+		dateCellApprov.setCellValue(x);
+		
+		
+		
+		
 		
 	}
 	public Calendar handleFirstWeeksOfMonth(int year, int month) {
@@ -522,19 +580,19 @@ public class POIGenerator implements TimesheetGenerator{
 	    	Calendar auxWE = (Calendar) TimeSheetCalendar.clone();
 	    	auxWE.add(Calendar.DAY_OF_MONTH, 8 - dayOfWeek);
 	    	generateWeek(noOfRows, dayOfWeek - 1, 5, auxWE);
-	    	noOfRows += PhLArray.size() + WeekConstants.rowsBetweenTables;
+	    	noOfRows += PhLArray.size() + WeekConstants.ROWS_BETWEEN_TABLES;
 	    	TimeSheetCalendar = getNextMonday(TimeSheetCalendar);
 	    	auxWE = (Calendar) TimeSheetCalendar.clone();
 	    	auxWE.add(Calendar.DAY_OF_MONTH, 6);
 	    	generateWeek(noOfRows, 1, 5, auxWE);
-	    	noOfRows += PhLArray.size() + WeekConstants.rowsBetweenTables;
+	    	noOfRows += PhLArray.size() + WeekConstants.ROWS_BETWEEN_TABLES;
 	    }
 	    else {
 	    	TimeSheetCalendar = getNextMonday(TimeSheetCalendar);
 	    	Calendar auxWE = (Calendar) TimeSheetCalendar.clone();
 	    	auxWE.add(Calendar.DAY_OF_MONTH, 6);
 	    	generateWeek(noOfRows, 1, 5,auxWE);
-	    	noOfRows += PhLArray.size() + WeekConstants.rowsBetweenTables;
+	    	noOfRows += PhLArray.size() + WeekConstants.ROWS_BETWEEN_TABLES;
 	    }
 	    return TimeSheetCalendar;
 	}
@@ -566,7 +624,7 @@ public class POIGenerator implements TimesheetGenerator{
 	    	 */
 	    	auxWE.add(Calendar.DAY_OF_MONTH, 6);
 	    	generateWeek(noOfRows, 1, howManyDays(TimeSheetCalendar),auxWE);
-	    	noOfRows += PhLArray.size() + WeekConstants.rowsBetweenTables;
+	    	noOfRows += PhLArray.size() + WeekConstants.ROWS_BETWEEN_TABLES;
 	    }
 	    noOfRows += 2;
 	    generateDocFooter(genmonth, genyear);

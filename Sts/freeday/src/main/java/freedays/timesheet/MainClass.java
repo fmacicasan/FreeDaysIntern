@@ -23,7 +23,7 @@ public class MainClass {
 	public void doMain(TimesheetUser k) {
 		for (int i = 0; i < 12; i++) {
 			TimesheetGenerator x = new POIGenerator(k);
-			x.generateDoc("..\\..\\..\\timesheets\\Timesheet" + " " + k.getRegularUser().getFullName() + " " + WeekConstants.monthStrings[i] + ".xls", i, 2011);
+			x.generateDoc("..\\..\\timesheets\\Timesheet" + " " + k.getRegularUser().getFullName() + " " + WeekConstants.monthStrings[i] + ".xls", i, 2011);
 		}
 	}
 }

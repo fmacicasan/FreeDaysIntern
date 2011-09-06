@@ -61,4 +61,9 @@ public class TimesheetUser{
 	public String toString() {
 		return fduser.getRegularUser().getFullName();
 	}
+	
+	
+	public String getDepartment(){
+		return "default department";
+	}
 }

@@ -26,7 +26,7 @@ import freedays.validation.annotation.UniqueDayPerActiveOrApprovedReq;
 public class FreeDayRequest {
 
     @NotNull
-    @Future(message="date must be in future!")
+    //@Future(message="date must be in future!")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
     private Calendar reqdate;

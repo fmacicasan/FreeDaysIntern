@@ -257,8 +257,7 @@ public class RegularUser implements Serializable {
 //		regularU.persist();
 	}
 
-	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
-	private static final String RESET_PASS_MESSAGE = "Your new password is:\n\t\t\t";
+
 
 	/**
 	 * Reset's a regular's user password based on his email address.
@@ -274,8 +273,7 @@ public class RegularUser implements Serializable {
 		String newPass = PhraseUtils.getRandomPhrase();
 		String encodednewpass = ru.getMessageDigestPasswordEncoder().encodePassword(newPass, null);
 		ru.setPassword(encodednewpass);
-		MailUtils.send(ru.getEmail(), RESET_PASS_TITLE, RESET_PASS_MESSAGE
-				+ newPass);
+		MailUtils.sendResetPasswordNotification(ru.getEmail(),newPass);
 		ru.persist();
 		return true;
 	}

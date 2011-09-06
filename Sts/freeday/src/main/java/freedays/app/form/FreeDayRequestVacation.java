@@ -26,7 +26,7 @@ import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
 public class FreeDayRequestVacation extends FreeDayRequest {
 
 	@NotNull
-    @Future(message="date must be in future!")
+   // @Future(message="date must be in future!")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
 	@BusinessDay

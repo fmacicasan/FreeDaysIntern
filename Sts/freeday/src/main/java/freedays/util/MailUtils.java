@@ -35,6 +35,9 @@ public class MailUtils {
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT="Hello %s,\n the following request was canceled!\n %s \n\n ";
 	private static final String DEFAULT_APPLICATION_LINK="\nFind us at {0}!";
+	
+	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
+	private static final String RESET_PASS_MESSAGE = "Your new password is:\n\t\t\t {0}";
     
 	@Autowired
     private JavaMailSenderImpl mailSender;
@@ -240,6 +243,11 @@ public class MailUtils {
 		MailUtils.sendAsyncMail(email,  MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
 	}
 	
+	public static void sendResetPasswordNotification(final String email, final String newPass){
+		final String content = MessageFormat.format(MailUtils.RESET_PASS_MESSAGE, newPass);
+		MailUtils.sendAsyncMail(email, MailUtils.RESET_PASS_TITLE, content);
+	}
+	
 	
 	
 	public static void sendAsyncMail(final String email, final String subject, final String content){
@@ -247,6 +255,7 @@ public class MailUtils {
 		lst.add(email);
 		MailUtils.sendAsyncMail(lst, subject, content);
 	}
+	
 	public static void sendAsyncMail(final List<String> email, final String subject, final String content){
 		Thread th = new Thread(){
 			@Override
