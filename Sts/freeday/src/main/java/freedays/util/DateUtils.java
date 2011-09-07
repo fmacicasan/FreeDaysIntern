@@ -35,9 +35,9 @@ public class DateUtils {
 	/**
 	 * Generates an  calendar instance representing a BusinessDay in the future
 	 * @return calendar instance of a future business day
-	 * @deprecated As of release 1.3, replaced by {@link DateUtils#generateBusinessDay()}
+	 * z@deprecated As of release 1.3, replaced by {@link DateUtils#generateBusinessDay()}
 	 */
-	@Deprecated
+	//@Deprecated
 	public static Calendar generateFutureBusinessDay(){
 		//return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
 		Calendar instance = Calendar.getInstance();
@@ -59,9 +59,9 @@ public class DateUtils {
 	/**
 	 * Generates an  calendar instance representing a BusinessDay in the past
 	 * @return calendar instance of a past business day
-	 * @deprecated As of release 1.3, replaced by {@link DateUtils#generateBusinessDay()}
+	 * z@deprecated As of release 1.3, replaced by {@link DateUtils#generateBusinessDay()}
 	 */
-	@Deprecated
+	//@Deprecated
 	public static Calendar generatePastBusinessDay(){
 		//return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) - 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
 		Calendar instance = Calendar.getInstance();

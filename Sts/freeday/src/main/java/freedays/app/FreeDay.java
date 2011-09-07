@@ -39,7 +39,7 @@ import freedays.util.DateUtils;
 @DiscriminatorValue("AbstractFreeDay")
 public abstract class FreeDay {
 	
-    private static final int DEFAULT_MAXIMUM_CANCELATION_HOUR = 22;
+    public static final int DEFAULT_MAXIMUM_CANCELATION_HOUR = 22;
 
 	@ManyToOne
     private ApprovalStrategy approval;

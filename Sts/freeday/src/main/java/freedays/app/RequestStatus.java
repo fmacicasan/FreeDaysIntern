@@ -95,5 +95,14 @@ public enum RequestStatus {
 		 lst.add(RequestStatus.getGranted());
 		 return lst;
 	 }
+	 
+	 public static List<RequestStatus> getPossibleActiveStatusList(){
+		 List<RequestStatus> lst = new ArrayList<RequestStatus>();
+		 RequestStatus[] all = RequestStatus.values();
+		 for(int i=0;i<all.length-RequestStatus.SPECIAL_FINAL_STATES_COUNT;i++){
+			 lst.add(all[i]);
+		 }
+		 return lst;
+	 }
     
 }
