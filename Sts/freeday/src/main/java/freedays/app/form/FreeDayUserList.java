@@ -291,7 +291,7 @@ public class FreeDayUserList {
 	   					}
 	   					sb.append("<td align='center' class='")
 	   					.append(dispclass).append("'>")
-	   					.append(fdrw.getStatus())
+	   					.append(getImage(fdrw.getStatus())) //modify here based on status to use the image
 	   					.append("</td>");
 					} else {
 						sb.append("<td></td>");
@@ -324,13 +324,32 @@ public class FreeDayUserList {
 	   		sb.append("</tr>");
 			sb.append("<tr class='footer' >");
 				sb.append("<td colspan='").append(daysinmonth+4).append("'>");
-					sb.append("<i><b>Legend:</b></i> C=completed W=waiting I=inProgress Red=Vacation Blue=Legal Yellow=Cerere Orange=Recover");
+					sb.append("<i><b>Legend:</b></i> F=finalized W=waiting I=inProgress Red=Vacation Blue=Legal Yellow=Cerere Orange=Recover");
 				sb.append("</td>");
 	   		sb.append("</tr>");
 		sb.append("</table>");
 		
 		
 		return sb.toString();
+	}
+
+	private static final String DEFAULT_REPLACE_FINALIZED = "F";
+	private static final String DEFAULT_REPLACE_WAITING = "W";
+	private static final String DEFAULT_REPLACE_INPROGRESS = "I";
+	private static final String DEFAULT_REPORT_TEMPLATE_IMAGE = "<img alt='{0}' src='{1}'";
+	
+	private static String getImage(String status) {
+		if (status == null || status.length() == 0) throw new IllegalArgumentException("The status argument is required");
+		if(status.equals(DEFAULT_REPLACE_FINALIZED)){
+			return null;
+		}
+		if(status.equals(DEFAULT_REPLACE_WAITING)){
+			return null;
+		}
+		if(status.equals(DEFAULT_REPLACE_INPROGRESS)){
+			return null;
+		}
+		throw new UnsupportedOperationException("no image for such status"); 
 	}
 	
 	

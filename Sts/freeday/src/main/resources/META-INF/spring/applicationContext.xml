@@ -118,8 +118,12 @@
     	<constructor-arg value="http://cluj-fdays-db01:8085/hrapp" />
     </bean>
     
+    <bean id="applicationProperties" class="freedays.util.PropertiesUtil">
+    	<property name="location" value="classpath:fdays.properties" /> 
+    </bean>
+    
 
-    	
+    
     
     
 </beans>

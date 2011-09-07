@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import freedays.app.FreeDay;
 import freedays.app.form.FreeDayUserList;
 import freedays.util.DateUtils;
+import freedays.util.PropertiesUtil;
 
 /**
  * Controler used to intercept report related requests.
@@ -75,7 +76,7 @@ public class ReportController {
 		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
 		
 		LogFactory.getLog(this.getClass()).info("Finish report creation!");
-		
+		PropertiesUtil.getProperty("testing");
 		return "report/vacation";
 	}
 
