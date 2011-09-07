@@ -35,7 +35,9 @@ public class DateUtils {
 	/**
 	 * Generates an  calendar instance representing a BusinessDay in the future
 	 * @return calendar instance of a future business day
+	 * @deprecated As of release 1.3, replaced by {@link DateUtils#generateBusinessDay()}
 	 */
+	@Deprecated
 	public static Calendar generateFutureBusinessDay(){
 		//return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
 		Calendar instance = Calendar.getInstance();
@@ -45,9 +47,21 @@ public class DateUtils {
 	}
 	
 	/**
+	 * Generates a calendar instance representing a BusinessDay
+	 * @return calendar instance of a business day
+	 */
+	public static Calendar generateBusinessDay(){
+		Calendar instance = Calendar.getInstance();
+		instance.set(Calendar.DAY_OF_WEEK, DateUtils.generateRandomBusinessDayOfWeek());
+		return instance;
+	}
+	
+	/**
 	 * Generates an  calendar instance representing a BusinessDay in the past
 	 * @return calendar instance of a past business day
+	 * @deprecated As of release 1.3, replaced by {@link DateUtils#generateBusinessDay()}
 	 */
+	@Deprecated
 	public static Calendar generatePastBusinessDay(){
 		//return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) - 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomBusinessDayOfWeek());
 		Calendar instance = Calendar.getInstance();
@@ -59,11 +73,23 @@ public class DateUtils {
 	/**
 	 * Generates an  calendar instance representing a WeekendDay in the future
 	 * @return calendar instance of a future weekend day
+	 * @deprecated As of release 1.3, replaced by {@link DateUtils#generateWeekendDay()}
 	 */
+	@Deprecated
 	public static Calendar generateFutureWeekendDay(){
 		//return new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR) + 1, Calendar.getInstance().get(Calendar.MONTH), DateUtils.generateRandomWeekendDayOfWeek());
 		Calendar instance = Calendar.getInstance();
 		instance.set(Calendar.YEAR, instance.get(Calendar.YEAR)+1);
+		instance.set(Calendar.DAY_OF_WEEK, DateUtils.generateRandomWeekendDayOfWeek());
+		return instance;
+	}
+	
+	/**
+	 * Generates an calendar instance representing a WeekendDay in the future
+	 * @return calendar instance of a weekend day
+	 */
+	public static Calendar generateWeekendDay(){
+		Calendar instance = Calendar.getInstance();
 		instance.set(Calendar.DAY_OF_WEEK, DateUtils.generateRandomWeekendDayOfWeek());
 		return instance;
 	}

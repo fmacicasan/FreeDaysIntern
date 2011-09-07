@@ -6,13 +6,9 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import javax.validation.constraints.NotNull;
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import freedays.app.FDUser;
-import freedays.domain.RegularUser;
-import freedays.domain.Request;
 import freedays.timesheet.Project;
 import javax.persistence.ManyToOne;
 import freedays.timesheet.Phase;

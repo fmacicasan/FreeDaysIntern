@@ -21,13 +21,15 @@ public class FreeDayRDataOnDemand {
     private List<FreeDayR> data;
 
 	public void setRecoverdate(FreeDayR obj, int index) {
-        obj.setRecoverdate(DateUtils.generateFutureWeekendDay());
+//        obj.setRecoverdate(DateUtils.generateFutureWeekendDay());
+		obj.setRecoverdate(DateUtils.generateWeekendDay());
     }
 
 	public static FreeDayR getenrateFreeDayR() {
 		FreeDayR fdr = new FreeDayR();
 		fdr.setApproval(AppStrategL1.getDefaultInitialStrateg());
-		fdr.setRecoverdate(DateUtils.generateFutureWeekendDay());
+//		fdr.setRecoverdate(DateUtils.generateFutureWeekendDay());
+		fdr.setRecoverdate(DateUtils.generateWeekendDay());
 		return fdr;
 	}
 

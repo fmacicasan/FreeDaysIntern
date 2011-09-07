@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import freedays.timesheet.Pattern;
 import freedays.timesheet.PhaseLabor;
-import freedays.timesheet.Schedule;
 
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;

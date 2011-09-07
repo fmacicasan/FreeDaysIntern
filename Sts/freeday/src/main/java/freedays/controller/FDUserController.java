@@ -24,7 +24,6 @@ import freedays.app.FDUser;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApplicationRegularUser.JobRole;
 import freedays.domain.RegularUser;
-import freedays.domain.Request;
 import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 

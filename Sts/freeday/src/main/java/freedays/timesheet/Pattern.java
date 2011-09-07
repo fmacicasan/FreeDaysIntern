@@ -8,14 +8,12 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import freedays.timesheet.PhaseLabor;
 import java.util.HashSet;
 
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import freedays.timesheet.Schedule;
-import javax.persistence.OneToOne;
 
 @RooJavaBean
 @RooEntity

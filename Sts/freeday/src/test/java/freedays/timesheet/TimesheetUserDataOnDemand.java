@@ -1,7 +1,5 @@
 package freedays.timesheet;
 
-import freedays.domain.RegularUser;
-import freedays.domain.RegularUserDataOnDemand;
 
 import java.util.ArrayList;
 import java.util.Iterator;

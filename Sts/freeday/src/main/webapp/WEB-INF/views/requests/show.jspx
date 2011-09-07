@@ -62,4 +62,6 @@
     	<spring:message var="back_title" code="back_title" />
     	<INPUT type="button" title="${back_title}" value="${back_but}" onClick="history.go(-1);" />
     </form>
+    <c:out value="isPersonal:${isPersonal}"/>
+    <c:out value="isCancelable:${isCancelable}"/>
 </div>

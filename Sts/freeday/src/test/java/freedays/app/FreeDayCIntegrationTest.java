@@ -134,8 +134,8 @@ public class FreeDayCIntegrationTest {
 			fdc.setReqtype(RequestType.C);
 			fdc.setMatch(null);
 			fdc.setReason(null);
-			fdc.setReqdate(DateUtils.generateFutureBusinessDay());
-			
+//			fdc.setReqdate(DateUtils.generateFutureBusinessDay());
+			fdc.setReqdate(DateUtils.generateBusinessDay());
 			
 			long beforeC = Request.countActiveRequests(username);
 			Request reqC = Request.createPersistentReq(fdc,username);
@@ -158,7 +158,8 @@ public class FreeDayCIntegrationTest {
 			fdr.setReqtype(RequestType.R);
 			fdr.setMatch(freedc);
 			fdr.setReason(null);
-			fdr.setReqdate(DateUtils.generateFutureWeekendDay());
+//			fdr.setReqdate(DateUtils.generateFutureWeekendDay());
+			fdr.setReqdate(DateUtils.generateWeekendDay());
 			
 			Assert.assertEquals("request day approve - fail @ free day status after full approval",FreeDayStatus.WAITING, freedc.getStatus());
 			

@@ -3,10 +3,12 @@
 	<jsp:directive.page import="freedays.app.form.FreeDayRequest"/>
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <c:if test="${hasError}">
-    	<spring:message code="default_form_error_msg" arguments="workaround until IN-63 solved -> error (date should be in Future and a ${daytypeerror} or you already have an active/approved request on the selected day)" />
-    </c:if>
+   
     <form:create id="fc_freedays_domain_Request" modelAttribute="reqbean" path="/requests" render="${empty dependencies}" z="user-managed">
+         <c:if test="${hasError}">
+    		<spring:message code="default_form_request_error_msg" arguments="${daytypeerror}" var="form_error_msg" />
+    		<div class="errors"><spring:message code="default_form_error_msg" arguments="${form_error_msg }" /></div>
+    	</c:if>
         <field:select field="appreguser" render="false" id="c_freedays_domain_Request_appreguser" itemValue="id" items="${applicationregularusers}" path="/applicationregularusers" z="user-managed"/>
         <field:select field="requestable" render="false" id="c_freedays_domain_Request_requestable" itemValue="id" items="${freedays}" path="/freedays" z="user-managed"/>
         <field:select field="status" render="false" id="c_freedays_domain_Request_status" items="${requeststatuses}" path="requeststatuses" z="user-managed"/>

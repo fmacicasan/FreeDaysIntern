@@ -10,6 +10,8 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.dod.RooDataOnDemand;
 
+import freedays.timesheet.PhaseLabor;
+
 @RooDataOnDemand(entity = PhaseLabor.class)
 public class PhaseLaborDataOnDemand {
 	

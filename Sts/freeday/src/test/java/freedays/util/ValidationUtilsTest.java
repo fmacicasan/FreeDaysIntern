@@ -17,25 +17,29 @@ public class ValidationUtilsTest {
 	
 	@Test
 	public void testCheckBusinessDayFail(){
-		Calendar date = DateUtils.generateFutureWeekendDay();
+		//Calendar date = DateUtils.generateFutureWeekendDay();
+		Calendar date = DateUtils.generateWeekendDay();
 		Assert.assertFalse("validation util - business day fail problem", ValidationUtils.checkBusinessDay(date));
 	}
 	
 	@Test
 	public void testCheckBusinessDayPass(){
-		Calendar date = DateUtils.generateFutureBusinessDay();
+//		Calendar date = DateUtils.generateFutureBusinessDay();
+		Calendar date = DateUtils.generateBusinessDay();
 		Assert.assertTrue("validation util - business day ok problem", ValidationUtils.checkBusinessDay(date));
 	}
 	
 	@Test
 	public void testCheckWeekendFail(){
-		Calendar date = DateUtils.generateFutureBusinessDay();
+		//Calendar date = DateUtils.generateFutureBusinessDay();
+		Calendar date = DateUtils.generateBusinessDay();
 		Assert.assertFalse("validation util - weekend day fail problem", ValidationUtils.checkWeekend(date));
 	}
 	
 	@Test
 	public void testCheckWeekendPass(){
-		Calendar date = DateUtils.generateFutureWeekendDay();
+//		Calendar date = DateUtils.generateFutureWeekendDay();
+		Calendar date = DateUtils.generateWeekendDay();
 		Assert.assertTrue("validation util - weekend day pass problem", ValidationUtils.checkWeekend(date));
 	}
 	

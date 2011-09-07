@@ -35,7 +35,8 @@ public class FreeDayVacationIntegrationTest {
 		}
 		
     	fdrv = new FreeDayRequestVacation();
-    	Calendar c = DateUtils.generateFutureBusinessDay();
+//    	Calendar c = DateUtils.generateFutureBusinessDay();
+    	Calendar c = DateUtils.generateBusinessDay();
     	fdrv.setReqdate(c);
     	Calendar end = DateUtils.dateAddBusinessDay(c, 9L);
     	fdrv.setFinish(end);

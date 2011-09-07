@@ -6,26 +6,23 @@ import freedays.domain.RegularUser;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import freedays.timesheet.Schedule;
-import java.util.HashSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
-import javax.persistence.ManyToOne;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.persistence.OneToOne;
 
 @RooJavaBean
 @RooEntity
-public class TimesheetUser{
+public class TimesheetUser implements Serializable{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.EAGER)
     private List<Schedule> scheduleLst = new ArrayList<Schedule>();

@@ -44,7 +44,8 @@ public class FDUserDataOnDemand {
 	 * @param index
 	 */
     public void setHireDate(FDUser obj, int index) {
-        Calendar hireDate = DateUtils.generatePastBusinessDay();
+//        Calendar hireDate = DateUtils.generatePastBusinessDay();
+    	Calendar hireDate = DateUtils.generateBusinessDay();
         obj.setHireDate(hireDate);
     }
     

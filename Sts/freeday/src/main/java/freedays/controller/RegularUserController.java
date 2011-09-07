@@ -1,6 +1,5 @@
 package freedays.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;

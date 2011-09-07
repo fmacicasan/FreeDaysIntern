@@ -6,11 +6,9 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import java.util.Calendar;
 import javax.validation.constraints.NotNull;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import freedays.timesheet.Pattern;
 import javax.persistence.ManyToOne;

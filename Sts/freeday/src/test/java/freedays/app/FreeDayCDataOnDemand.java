@@ -23,12 +23,14 @@ public class FreeDayCDataOnDemand {
 	public static FreeDayC generateFreeDayC() {
 		FreeDayC fdc = new FreeDayC();
 		fdc.setApproval(AppStrategL1.getDefaultInitialStrateg());
-		fdc.setRequestdate(DateUtils.generateFutureBusinessDay());
+		//fdc.setRequestdate(DateUtils.generateFutureBusinessDay());
+		fdc.setRequestdate(DateUtils.generateBusinessDay());
 		return fdc;
 	}
 
 	public void setRequestdate(FreeDayC obj, int index) {
-        obj.setRequestdate(DateUtils.generateFutureBusinessDay());
+//        obj.setRequestdate(DateUtils.generateFutureBusinessDay());
+		obj.setRequestdate(DateUtils.generateBusinessDay());
     }
 
 	public void setApproval(FreeDayC obj, int index) {

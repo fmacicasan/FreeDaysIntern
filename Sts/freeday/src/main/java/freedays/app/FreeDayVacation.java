@@ -16,7 +16,6 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.app.form.FreeDayRequestVacation;

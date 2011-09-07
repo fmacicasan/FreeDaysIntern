@@ -52,7 +52,7 @@ public class RecoverPassController {
 			return "recoverpass";
 		}
 		//System.out.println("i received email:"+resetpass.getEmail().toString());
-		boolean result = RegularUser.resetPassword(resetpass.getEmail());
+		RegularUser.resetPassword(resetpass.getEmail());
 		//dont send differentiated message on success/failure
 		uiModel.addAttribute("reason", true);
 		return "recoverpass";

@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import java.util.List;
 import java.util.Set;
 
-import freedays.domain.RegularUser;
 import freedays.timesheet.Phase;
 import java.util.HashSet;
 

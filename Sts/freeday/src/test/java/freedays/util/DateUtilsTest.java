@@ -32,13 +32,15 @@ public class DateUtilsTest {
 	
 	@Test
 	public void testBusinessDay(){
-		Calendar businessDay = DateUtils.generateFutureBusinessDay();
+		//Calendar businessDay = DateUtils.generateFutureBusinessDay();
+		Calendar businessDay = DateUtils.generateBusinessDay();
 		Assert.assertTrue("invalid business day generation",ValidationUtils.checkBusinessDay(businessDay));
 	}
 	
 	@Test
 	public void testWeekendDay(){
-		Calendar weekendDay = DateUtils.generateFutureWeekendDay();
+		//Calendar weekendDay = DateUtils.generateFutureWeekendDay();
+		Calendar weekendDay = DateUtils.generateWeekendDay();
 		Assert.assertTrue("invalid weekend day generation",ValidationUtils.checkWeekend(weekendDay));
 	}
 	
@@ -100,7 +102,7 @@ public class DateUtilsTest {
 		
 		for(Integer i=0;i<7;i++){
 			
-			Integer limit = new java.util.Random().nextInt(100)+7;
+			//Integer limit = new java.util.Random().nextInt(100)+7;
 			Integer test=Calendar.MONDAY + i;
 			for(Integer j=0;j<2;j++){
 				 if(test >= Calendar.SATURDAY)test = Calendar.MONDAY;

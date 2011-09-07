@@ -11,8 +11,6 @@ import freedays.app.form.FreeDayUserList;
 import freedays.controller.TimesheetController;
 import freedays.domain.Request;
 import freedays.security.UserContextService;
-import freedays.timesheet.MainClass;
-import freedays.timesheet.TimesheetUser;
 import freedays.util.DateUtils;
 import freedays.util.MailUtils;
 

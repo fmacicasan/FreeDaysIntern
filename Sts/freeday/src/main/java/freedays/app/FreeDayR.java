@@ -55,16 +55,6 @@ public class FreeDayR extends FreeDaysRCMatch {
 
 	@Override
 	public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("Approval: ").append(getApproval()).append(", ");
-//        sb.append("Date: ").append(getDate() == null ? "null" : getDate().getTime()).append(", ");
-//        sb.append("Id: ").append(getId()).append(", ");
-//        sb.append("Reason: ").append(getReason()).append(", ");
-//        sb.append("Recoverdate: ").append(getRecoverdate() == null ? "null" : getRecoverdate().getTime()).append(", ");
-//        sb.append("Request: ").append(getRequest()).append(", ");
-//        sb.append("Version: ").append(getVersion()).append(", ");
-//        sb.append("Cancelable: ").append(isCancelable());
-//        return sb.toString();
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		if(this.getMatch()!=null){
@@ -74,20 +64,6 @@ public class FreeDayR extends FreeDaysRCMatch {
 		return sb.toString();
     }
 
-	
-
-//	@Override
-//	public boolean match(FreeDayRCMatchable match) {
-//		if(match == null)throw new IllegalArgumentException("The username argument is required");
-//		if(match.canMatch())return false;
-//		//this.setMatch(match);
-//		match.setMatch(this);
-//		//this.setMergedStatus();
-//		match.setMergedStatus();
-//		//this.persist();
-//		match.persist();
-//		return true;
-//	}
 
 	@Override
 	public void setMatch(FreeDaysRCMatch match) {
@@ -102,11 +78,6 @@ public class FreeDayR extends FreeDaysRCMatch {
 	public FreeDaysRCMatch getMatch() {
 		return this.request;
 	}
-
-//	@Override
-//	public boolean canMatch() {
-//		return this.getMatch() != null;
-//	}
 	
 	/**
 	 * Retrieves all the type R unmatchet requests.

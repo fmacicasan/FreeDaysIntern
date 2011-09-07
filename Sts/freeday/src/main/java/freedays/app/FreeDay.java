@@ -39,7 +39,9 @@ import freedays.util.DateUtils;
 @DiscriminatorValue("AbstractFreeDay")
 public abstract class FreeDay {
 	
-    @ManyToOne
+    private static final int DEFAULT_MAXIMUM_CANCELATION_HOUR = 22;
+
+	@ManyToOne
     private ApprovalStrategy approval;
     
     private String reason;
@@ -112,7 +114,14 @@ public abstract class FreeDay {
     public boolean isCancelable() {
     	//can be canceled if represents a date in the future
     	//or today
-		return this.getDate().compareTo(Calendar.getInstance()) >= 0; //in future
+    	//NOTE: the comparison won't return 0 because the H/M/S won't match
+    	Calendar now = Calendar.getInstance();
+    	Calendar date = this.getDate();
+    	date.set(Calendar.HOUR_OF_DAY, DEFAULT_MAXIMUM_CANCELATION_HOUR);
+    	//DateUtils.synchronizeHMS(date, now);
+    	
+    	return date.compareTo(now) >= 0; //in future
+		 
 	}
     
     /**

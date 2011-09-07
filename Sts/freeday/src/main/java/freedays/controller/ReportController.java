@@ -1,7 +1,6 @@
 package freedays.controller;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -19,7 +19,6 @@ import freedays.timesheet.Phase;
 import freedays.timesheet.Project;
 import freedays.timesheet.Schedule;
 
-import java.util.Set;
 /**
  * A central place to register application Converters and Formatters.
  * INFO: default location where spring retrieves conversion and formatting strategies for view exposion.

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -344,7 +343,7 @@ public class POIGenerator implements TimesheetGenerator{
 	 */
 	private void styleMe() {
 		style = wb.createCellStyle();
-	    style.setAlignment(style.ALIGN_CENTER);
+	    style.setAlignment(CellStyle.ALIGN_CENTER);
 	    createHelper = wb.getCreationHelper();
 	    Font f1 = wb.createFont();
 	    f1.setUnderline((byte) 12);
@@ -353,19 +352,19 @@ public class POIGenerator implements TimesheetGenerator{
 	    underlinedStyle.setFont(f1);
 	    
 	    datestyle = wb.createCellStyle();
-	    datestyle.setAlignment(style.ALIGN_CENTER);
+	    datestyle.setAlignment(CellStyle.ALIGN_CENTER);
 	    datestyle.setDataFormat(createHelper.createDataFormat().getFormat("mm/dd/yy"));
 	    datestyle.setFont(f1);
 	    
 	    tablestyle = wb.createCellStyle();
-	    tablestyle.setAlignment(style.ALIGN_CENTER);
+	    tablestyle.setAlignment(CellStyle.ALIGN_CENTER);
 	    tablestyle.setBorderBottom((short)1);
 	    tablestyle.setBorderLeft((short)1);
 	    tablestyle.setBorderRight((short)1);
 	    tablestyle.setBorderTop((short)1);
 	    
 	    tableheadstyle = wb.createCellStyle();
-	    tableheadstyle.setAlignment(style.ALIGN_CENTER);
+	    tableheadstyle.setAlignment(CellStyle.ALIGN_CENTER);
 	    tableheadstyle.setBorderBottom((short)1);
 	    tableheadstyle.setBorderLeft((short)1);
 	    tableheadstyle.setBorderRight((short)1);
@@ -374,7 +373,7 @@ public class POIGenerator implements TimesheetGenerator{
 	    tableheadstyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
 	    
 	    tableweekendstyle = wb.createCellStyle();
-	    tableweekendstyle.setAlignment(style.ALIGN_CENTER);
+	    tableweekendstyle.setAlignment(CellStyle.ALIGN_CENTER);
 	    tableweekendstyle.setBorderBottom((short)1);
 	    tableweekendstyle.setBorderLeft((short)1);
 	    tableweekendstyle.setBorderRight((short)1);
@@ -522,7 +521,7 @@ public class POIGenerator implements TimesheetGenerator{
 
 	public void generateDocFooter(int genMonth, int genYear) {
 		String blankSpaces = "                                                     ";
-		String blankSpacesSmall = "              ";
+		//String blankSpacesSmall = "              ";
 		CellRangeAddress regionFooterSignature = new CellRangeAddress(noOfRows, noOfRows, 0, 1);
 		CellRangeAddress regionFooterApprovedBy = new CellRangeAddress(noOfRows + 1, noOfRows + 1, 0, 1);
 		CellRangeAddress regionFooterSignatureEmp = new CellRangeAddress(noOfRows, noOfRows, 2, 3);

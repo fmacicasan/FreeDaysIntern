@@ -9,8 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -34,7 +32,7 @@ import freedays.validation.annotation.BusinessDay;
 @RooJavaBean
 @RooToString
 @RooEntity
-public class FDUser extends ApplicationRegularUser {
+public class FDUser extends ApplicationRegularUser implements Serializable {
 
 	/**
 	 * 
@@ -42,7 +40,7 @@ public class FDUser extends ApplicationRegularUser {
 	protected static final long serialVersionUID = 1L;
 	
 	@NotNull
-    @Past
+    //@Past //chose to remove this constraint due to business
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "S-")
 	@BusinessDay
