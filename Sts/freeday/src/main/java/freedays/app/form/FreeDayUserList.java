@@ -1,5 +1,6 @@
 package freedays.app.form;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,6 +15,7 @@ import freedays.app.FreeDay;
 import freedays.app.FreeDayVacation;
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
+import freedays.util.PropertiesUtil;
 
 /**
  * Wrapper class for report generation.
@@ -247,16 +249,16 @@ public class FreeDayUserList {
 		sb.append("<table class='report'>");
 			sb.append("<thead>");
 				sb.append("<tr>");
-					sb.append("<th rowspan='2'>Name</th>");
-					sb.append("<th rowspan='2'>Role</th>");
-					sb.append("<th colspan='2'>Remaining Days</th>");
+					sb.append("<th rowspan='2'>").append(PropertiesUtil.getProperty("freedaysreport_name")).append("</th>");
+					sb.append("<th rowspan='2'>").append(PropertiesUtil.getProperty("freedaysreport_role")).append("</th>");
+					sb.append("<th colspan='2'>").append(PropertiesUtil.getProperty("freedaysreport_remainingdays")).append("</th>");
 					for(int i=0;i<daysinmonth;i++){
 						sb.append("<th>").append(weekdayinitials.get(i)).append("</th>");
 					}
 	   			sb.append("</tr>");
 	   			sb.append("<tr>");
-	   				sb.append("<th>Covered Days</th>");
-	   				sb.append("<th>Remaining Legal</th>");
+	   				sb.append("<th>").append(PropertiesUtil.getProperty("freedaysreport_remainingdayscovered")).append("</th>");
+	   				sb.append("<th>").append(PropertiesUtil.getProperty("freedaysreport_remainingdayslegal")).append("</th>");
 	   				for(int i=0;i<daysinmonth;i++){
 	   					//consider also split('.') rather than substring
 	   					sb.append("<th>").append(shortDateList.get(i).substring(0, 2)).append("</th>");
@@ -324,7 +326,15 @@ public class FreeDayUserList {
 	   		sb.append("</tr>");
 			sb.append("<tr class='footer' >");
 				sb.append("<td colspan='").append(daysinmonth+4).append("'>");
-					sb.append("<i><b>Legend:</b></i> F=finalized W=waiting I=inProgress Red=Vacation Blue=Legal Yellow=Cerere Orange=Recover");
+				String reportLegendMatcher=PropertiesUtil.getProperty("freedaysreport_legend_matchings");
+					sb.append("<i><b>").append(PropertiesUtil.getProperty("freedaysreport_legend_title")).append(":</b></i> ")
+					.append(PropertiesUtil.getProperty("freedays.report.img.alt.check")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_matchings_c"))).append(" ")
+					.append(PropertiesUtil.getProperty("freedays.report.img.alt.wait")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_matchings_w"))).append(" ")
+					.append(PropertiesUtil.getProperty("freedays.report.img.alt.work")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_matchings_i"))).append(" ")
+					.append(PropertiesUtil.getProperty("freedays_report_legend_typev_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typev"))).append(" ")
+					.append(PropertiesUtil.getProperty("freedays_report_legend_typel_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typel"))).append(" ")
+					.append(PropertiesUtil.getProperty("freedays_report_legend_typec_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typec"))).append(" ")
+					.append(PropertiesUtil.getProperty("freedays_report_legend_typer_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typer")));
 				sb.append("</td>");
 	   		sb.append("</tr>");
 		sb.append("</table>");
@@ -333,23 +343,31 @@ public class FreeDayUserList {
 		return sb.toString();
 	}
 
-	private static final String DEFAULT_REPLACE_FINALIZED = "F";
-	private static final String DEFAULT_REPLACE_WAITING = "W";
-	private static final String DEFAULT_REPLACE_INPROGRESS = "I";
-	private static final String DEFAULT_REPORT_TEMPLATE_IMAGE = "<img alt='{0}' src='{1}'";
+	private static final String DEFAULT_REPORT_TEMPLATE_IMAGE = "<img alt='%s' src='%s' />";
 	
 	private static String getImage(String status) {
 		if (status == null || status.length() == 0) throw new IllegalArgumentException("The status argument is required");
-		if(status.equals(DEFAULT_REPLACE_FINALIZED)){
-			return null;
+		if(status.equals(PropertiesUtil.getProperty("freedays.report.img.alt.check"))){
+			return populateImageTemplate(PropertiesUtil.getProperty("freedays.report.img.alt.check"), PropertiesUtil.getProperty("freedays.report.img.link.check.daily"));
 		}
-		if(status.equals(DEFAULT_REPLACE_WAITING)){
-			return null;
+		if(status.equals(PropertiesUtil.getProperty("freedays.report.img.alt.wait"))){
+			return populateImageTemplate(PropertiesUtil.getProperty("freedays.report.img.alt.wait"), PropertiesUtil.getProperty("freedays.report.img.link.wait.daily"));
 		}
-		if(status.equals(DEFAULT_REPLACE_INPROGRESS)){
-			return null;
+		if(status.equals(PropertiesUtil.getProperty("freedays.report.img.alt.work"))){
+			return populateImageTemplate(PropertiesUtil.getProperty("freedays.report.img.alt.work"), PropertiesUtil.getProperty("freedays.report.img.link.work.daily"));
 		}
 		throw new UnsupportedOperationException("no image for such status"); 
+	}
+	
+	private static String populateImageTemplate(String alt, String src){
+		Object[] arguments = new Object[2];
+		arguments[0] = alt;
+		System.out.println(alt);
+		System.out.println(src);
+		arguments[1]=src;
+		String formatted = String.format(DEFAULT_REPORT_TEMPLATE_IMAGE,alt,src);
+		System.out.println(formatted);
+		return formatted;
 	}
 	
 	

@@ -13,9 +13,5 @@
       	<spring:message code="welcome_user" arguments="${username}" />
       </sec:authorize>-->
     </h3>
-    <p>
-   <spring:message code="testing" />
-    asd
-    </p>
   </util:panel>
 </div>

@@ -114,12 +114,13 @@
     	<constructor-arg value="icondor@sdl.com" />
     </bean>
     
-    <bean class="java.lang.String" id="applicationHome">
-    	<constructor-arg value="http://cluj-fdays-db01:8085/hrapp" />
-    </bean>
-    
     <bean id="applicationProperties" class="freedays.util.PropertiesUtil">
-    	<property name="location" value="classpath:fdays.properties" /> 
+    	<property name="locations">
+    		<list>
+    			<value>classpath:fdays.properties</value>
+    			<value>classpath:fdays_report.properties</value>
+    		</list>
+    	 </property> 
     </bean>
     
 

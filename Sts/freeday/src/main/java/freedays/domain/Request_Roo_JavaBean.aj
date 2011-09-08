@@ -6,6 +6,7 @@ package freedays.domain;
 import freedays.app.FreeDay;
 import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
+import java.lang.String;
 
 privileged aspect Request_Roo_JavaBean {
     
@@ -39,6 +40,14 @@ privileged aspect Request_Roo_JavaBean {
     
     public void Request.setApprover(ApplicationRegularUser approver) {
         this.approver = approver;
+    }
+    
+    public String Request.getFeedback() {
+        return this.feedback;
+    }
+    
+    public void Request.setFeedback(String feedback) {
+        this.feedback = feedback;
     }
     
 }

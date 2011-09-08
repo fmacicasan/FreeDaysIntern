@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.app.FreeDayC;
 import freedays.app.FreeDayR;
@@ -173,11 +174,10 @@ public class RequestController {
 	 */
 	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve')")
 	@RequestMapping(value = "/{id}", params = {"eval","approve"}, method = RequestMethod.POST)
-	public String evalRequestApprove(@PathVariable("id") Long id, Model uiModel){
-			
+	public String evalRequestApprove(@RequestParam("feedback") String feedback,@PathVariable("id") Long id, Model uiModel){
+		System.out.println(feedback);
 		Request.approve(id);
-		System.out.println("Approved!");
-		
+		Request.handleFeedback(id,feedback);
 		uiModel.asMap().clear();
 		return "redirect:/requests?approve";
 	}
@@ -190,11 +190,10 @@ public class RequestController {
 	 */
 	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve')")
 	@RequestMapping(value = "/{id}", params = {"eval","deny"}, method = RequestMethod.POST)
-	public String evalRequestDeny(@PathVariable("id") Long id, Model uiModel){
-		
+	public String evalRequestDeny(@RequestParam("feedback") String feedback, @PathVariable("id") Long id, Model uiModel){
+		System.out.println(feedback);
 		Request.deny(id);
-		System.out.println("Eroriuy!");
-		
+		Request.handleFeedback(id,feedback);
 		uiModel.asMap().clear();
 		return "redirect:/requests?approve";
 	}
@@ -279,7 +278,8 @@ public class RequestController {
         uiModel.addAttribute("request", req);
         uiModel.addAttribute("itemId", id);
         //TODO: added req.isCancelable() to isApprover & isPersonal so that we can't approve/deny if the date passed
-        boolean isApprover = req.isApprover(p.getName());
+        boolean isApprover = req.isApprover(p.getName()) && req.isApprovalble();
+        System.out.println(isApprover);
         uiModel.addAttribute("isApprover",isApprover);
         if(isApprover){
         	String username = req.getAppreguser().getRegularUser().getUsername();
@@ -292,7 +292,7 @@ public class RequestController {
         uiModel.addAttribute("isCancelable",req.isCancelable());
         return "requests/show";
     }
-	
+
     /**
 	 * Model attribute exposed to the view containing the number of active requests of the authenticated user.
 	 * @return

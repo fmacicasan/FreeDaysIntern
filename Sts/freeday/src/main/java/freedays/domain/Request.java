@@ -19,6 +19,7 @@ import freedays.app.FreeDay;
 import freedays.app.RequestStatus;
 import freedays.app.form.FreeDayRequest;
 import freedays.util.MailUtils;
+import freedays.util.PropertiesUtil;
 
 /**
  * Class describing a request. It is associated with a Application Reuglar user, a Requestable object and
@@ -54,6 +55,8 @@ public class Request   implements Serializable{
     
     @ManyToOne
     private ApplicationRegularUser approver;
+    
+    private String feedback;
 
     /**
      * Initialization of a newly created request. It represents
@@ -466,7 +469,14 @@ public class Request   implements Serializable{
 		return this.status != RequestStatus.CANCELED
 				&& this.status != RequestStatus.REJECTED
 				&& this.requestable.isCancelable(); //this.status != RequestStatus.GRANTED&& 
-		
+	}
+	
+	/**
+	 * Verifies weather or not the request can be approved
+	 * @return
+	 */
+	public boolean isApprovalble(){
+		return RequestStatus.getPossibleActiveStatusList().contains(this.getStatus());
 	}
 	
 	/**
@@ -513,6 +523,19 @@ public class Request   implements Serializable{
 	public static long computeTotalAvailableFreeDays(String username) {
 		FDUser aru = FDUser.findFDUserByUsername(username);
 		return aru.computeteAvailableFreeDaysTotal();
+	}
+
+	public static void handleFeedback(Long id2, String feedback2) {
+		if (id2 == null) throw new IllegalArgumentException("The id argument is required");
+		if (feedback2 == null || feedback2.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		if(!feedback2.equals(PropertiesUtil.getProperty("fdays.request.feedback.default")))
+		{
+			Request req = Request.findRequest(id2);
+			req.setFeedback(feedback2);
+			req.persist();
+		}
+		
+		
 	}
 
 

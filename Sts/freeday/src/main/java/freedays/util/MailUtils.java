@@ -41,9 +41,6 @@ public class MailUtils {
     
 	@Autowired
     private JavaMailSenderImpl mailSender;
-    
-    @Autowired
-    private String applicationHome;
 	
 	/**
 	 * Sends the simple mail message via the corresponding MailSender
@@ -95,7 +92,7 @@ public class MailUtils {
 	private String finalizeContent(final String content){
 		StringBuilder sb = new StringBuilder();
 		sb.append(content).append("\n");
-		sb.append(MessageFormat.format(MailUtils.DEFAULT_APPLICATION_LINK, this.getApplicationHome())).append("\n\n");
+		sb.append(MessageFormat.format(MailUtils.DEFAULT_APPLICATION_LINK,PropertiesUtil.getProperty("applicationHome"))).append("\n\n");
 		return sb.toString();
 	}
 	

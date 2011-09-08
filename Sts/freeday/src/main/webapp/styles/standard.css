@@ -392,6 +392,10 @@ fieldset th {
 	text-transform:uppercase;
 	font-weight:bold;
 	height:24px;
+	
+	border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
 }
 
 .updated {

@@ -8,6 +8,7 @@ import freedays.app.FreeDayDataOnDemand;
 import freedays.app.RequestStatus;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.Request;
+import java.lang.String;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,6 +34,7 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
         Request obj = new Request();
         setAppreguser(obj, index);
         setApprover(obj, index);
+        setFeedback(obj, index);
         setRequestable(obj, index);
         setStatus(obj, index);
         return obj;
@@ -46,6 +48,11 @@ privileged aspect RequestDataOnDemand_Roo_DataOnDemand {
     public void RequestDataOnDemand.setApprover(Request obj, int index) {
         ApplicationRegularUser approver = null;
         obj.setApprover(approver);
+    }
+    
+    public void RequestDataOnDemand.setFeedback(Request obj, int index) {
+        String feedback = "feedback_" + index;
+        obj.setFeedback(feedback);
     }
     
     public void RequestDataOnDemand.setRequestable(Request obj, int index) {

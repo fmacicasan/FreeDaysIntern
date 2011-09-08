@@ -24,9 +24,7 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 	}
 	
 	public static String getProperty(String name){
-		System.out.println(name);
 		String result =  propertiesMap.get(name);
-		System.out.println(result);
 		return result;
 	}
 
