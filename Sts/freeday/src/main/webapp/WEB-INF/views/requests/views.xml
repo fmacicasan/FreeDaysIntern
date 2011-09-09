@@ -10,9 +10,9 @@
 	<definition extends="default" name="requests/create">
         <put-attribute name="body" value="/WEB-INF/views/requests/create.jspx"/>
     </definition>
-	<definition extends="default" name="requests/update">
+	<!-- <definition extends="default" name="requests/update">
         <put-attribute name="body" value="/WEB-INF/views/requests/update.jspx"/>
-    </definition>
+    </definition> -->
 	<definition extends="default" name="requests/request">
         <put-attribute name="body" value="/WEB-INF/views/requests/request.jspx"/>
     </definition>

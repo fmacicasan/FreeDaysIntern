@@ -91,8 +91,7 @@ public class FreeDayGeneralIntegrationTest {
 	@Test
 	public void testCancelOnRequestableNowBeforeDeadline(){
 		Calendar date = Calendar.getInstance();
-		if(ValidationUtils.checkBusinessDay(date)){
-			date.set(Calendar.HOUR_OF_DAY, FreeDay.DEFAULT_MAXIMUM_CANCELATION_HOUR -1 );
+		if(ValidationUtils.checkBusinessDay(date) && date.get(Calendar.HOUR_OF_DAY) < FreeDay.DEFAULT_MAXIMUM_CANCELATION_HOUR){
 			fd.setDate(date);
 			Assert.assertTrue("free day cancelation if now before deadline",fd.isCancelable());
 		}
@@ -101,8 +100,7 @@ public class FreeDayGeneralIntegrationTest {
 	@Test
 	public void testCancelOnRequestNowBeforeDeadline(){
 		Calendar date = Calendar.getInstance();
-		if(ValidationUtils.checkBusinessDay(date)){
-			date.set(Calendar.HOUR_OF_DAY, FreeDay.DEFAULT_MAXIMUM_CANCELATION_HOUR - 1);
+		if(ValidationUtils.checkBusinessDay(date) && date.get(Calendar.HOUR_OF_DAY) < FreeDay.DEFAULT_MAXIMUM_CANCELATION_HOUR){
 			fd.setDate(date);
 			request.setRequestable(fd);
 			request.setStatus(currReqStat);

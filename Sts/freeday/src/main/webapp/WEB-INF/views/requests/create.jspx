@@ -28,7 +28,7 @@
                 </c:if>
             </c:otherwise>
         </c:choose>
-        <field:input field="feedback" id="c_freedays_domain_Request_feedback" z="WSPOAWN8xvrTgYrOTPMU4ZOJck8="/>
+        <field:input render="false" field="feedback" id="c_freedays_domain_Request_feedback" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_domain_Request" render="${not empty dependencies}" z="bZ9tHsEoBzWYMaxtKi3t7PaNRxo="/>
     <spring:message arguments="${remainingDaysCount}" code="request_remainingdays"/>

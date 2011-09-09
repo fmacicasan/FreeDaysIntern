@@ -36,7 +36,7 @@ import freedays.security.UserContextService;
  * @author fmacicasan
  *
  */
-@RooWebScaffold(path = "requests", formBackingObject = Request.class)
+@RooWebScaffold(path = "requests", formBackingObject = Request.class,update=false,delete=false)
 @RequestMapping("/requests")
 @Controller
 @RooJavaBean
