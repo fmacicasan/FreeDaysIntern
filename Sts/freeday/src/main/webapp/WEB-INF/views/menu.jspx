@@ -16,12 +16,11 @@
                 <sec:authorize ifAllGranted="ROLE_AAA">
                     <menu:item id="i_hrmanagement_new" messageCode="global_menu_new" url="/hrmanagements?form" z="gh9MLkRfGMg1hyfIdmD30xS0S38="/>
                     <menu:item id="i_hrmanagement_list" messageCode="global_menu_list" url="/hrmanagements?page=1&amp;size=${empty param.size ? 10 : param.size}" z="rK2fdLVRaF6oqHWiKvL8M6q1aso="/>
-                	<menu:item id="i_hrmanagement_list_freedays" url="/report?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+                    <menu:item id="i_hrmanagement_list_freedays" url="/report?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_HRMANAGEMENT">
                     <menu:item id="i_fduser_new" messageCode="global_menu_new" url="/fdusers?form" z="user-managed"/>
                     <menu:item id="i_hrmanagement_list_fd_users" messageCode="global_menu" url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z=""/>
-                    
                 </sec:authorize>
             </menu:category>
         </sec:authorize>

@@ -237,6 +237,32 @@ http://www.clerkendweller.com/2011/4/5/Website-Vulnerability-Statistics-Spring-2
 	#git
 	http://www.ericsink.com/vcbe/html/index.html
 	
+	#AJAX
+	http://blog.springsource.com/2010/01/25/ajax-simplifications-in-spring-3-0/
+	http://dojotoolkit.org/reference-guide/dojox/grid/EnhancedGrid/plugins/Filter.html
+	http://dojotoolkit.org/reference-guide/dojox/grid/EnhancedGrid.html#dojox-grid-enhancedgrid
+	http://dojotoolkit.org/reference-guide/dojox/grid/DataGrid.html#dojox-grid-datagrid
+	http://forum.springsource.org/showthread.php?103331-Best-practices-with-Spring-Roo-JSON-and-Ajax
+	https://jira.springsource.org/browse/ROO-208
+	https://github.com/SpringSource/spring-flex-roo
+	http://blog.springsource.com/2010/01/25/ajax-simplifications-in-spring-3-0/
+	http://ro.wikipedia.org/wiki/Calculul_datei_de_Pa%C8%99te
+	.http://download.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html
+	http://ro.wikipedia.org/wiki/S%C4%83rb%C4%83tori_publice_%C3%AEn_Rom%C3%A2nia
+	.http://files.extremeoverclocking.com/file.php?f=36
+	http://www.marketonline.ro/notebook-laptop/notebook-hp-probook-4530s-sandy-bridge-core-i5-2410m-500gb-2048mb
+	
+	#resources
+	http://forum.springsource.org/showthread.php?47182-Initializing-Resource-Bundle-Message-Source-other-than-classes-folder
+	http://forum.springsource.org/showthread.php?60880-MessageSource-Configuration-Troubleshooting
+	http://stackoverflow.com/questions/2072101/accessing-spring-mvc-di-beans-from-jsp/2072285#2072285
+	http://j2eecookbook.blogspot.com/2007/07/accessing-properties-loaded-via-spring.html
+	http://stackoverflow.com/questions/3920088/jsp-servlet-read-parameters-from-properties-file
+	http://www.coderanch.com/t/494949/Spring/getting-property-value-jsp-page
+	http://codingbone.wordpress.com/2010/02/28/how-to-load-properties-files-into-spring-and-expose-to-the-java-classes/
+	http://www.javaworld.com/javaworld/javaqa/2003-06/01-qa-0606-load.html
+	http://www.javaworld.com/javaworld/javaqa/2003-08/01-qa-0808-property.html?page=3
+	
 	
 	
 	

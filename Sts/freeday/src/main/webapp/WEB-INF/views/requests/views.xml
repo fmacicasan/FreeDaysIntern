@@ -19,4 +19,7 @@
     <definition extends="default" name="requests/vacation">
         <put-attribute name="body" value="/WEB-INF/views/requests/vacation.jspx"/>
     </definition>
+<definition extends="default" name="requests/findRequestsByStatus">
+        <put-attribute name="body" value="/WEB-INF/views/requests/findRequestsByStatus.jspx"/>
+    </definition>
 </tiles-definitions>
