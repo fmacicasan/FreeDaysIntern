@@ -69,7 +69,7 @@ public abstract class ApplicationRegularUser   implements Serializable {
 	public static Set<AdvancedUserRole> getAllRolesByUsername(String username) {
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		Set<AdvancedUserRole> set=new HashSet<AdvancedUserRole>();
-			EntityManager em = RegularUser.entityManager();
+			EntityManager em = ApplicationRegularUser.entityManager();
 	        TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o JOIN FETCH o.roles WHERE o.regularUser.username = :username", ApplicationRegularUser.class);
 	        q.setParameter("username", username);
 	        ApplicationRegularUser aru;
@@ -80,6 +80,16 @@ public abstract class ApplicationRegularUser   implements Serializable {
 			}
 	        set = aru.getRoles();
 	    return set;
+	}
+	
+	public static ApplicationRegularUser findByUsername(String username){
+		if(username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		EntityManager em = ApplicationRegularUser.entityManager();
+		TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o WHERE o.regularUser.username = :username",ApplicationRegularUser.class);
+		q.setParameter("username",username);
+		ApplicationRegularUser aru = q.getSingleResult();
+		System.out.println(aru);
+		return aru;
 	}
 
 	/**

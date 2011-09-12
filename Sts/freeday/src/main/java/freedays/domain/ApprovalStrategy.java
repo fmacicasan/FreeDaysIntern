@@ -73,4 +73,20 @@ public abstract class ApprovalStrategy {
 		if(this.succesor == null) return null;
 		return this.succesor.getApprover(user);
 	}
+	
+	/**
+	 * Retrieves the ultimate approver based on the approval chain. 
+	 * Will return null for if top of approval chain.
+	 * @param user
+	 * @return
+	 */
+	public ApplicationRegularUser getUltimateApprover(ApplicationRegularUser user){
+		ApprovalStrategy current = this;
+		if(current.getSuccesor() == null) return null;
+		while(current.getSuccesor() != null){
+			current = current.getSuccesor();
+		}
+		ApplicationRegularUser aru = current.getApprover(user);
+		return aru;
+	}
 }

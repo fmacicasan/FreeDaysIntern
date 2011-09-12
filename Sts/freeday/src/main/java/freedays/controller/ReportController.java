@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.app.FreeDay;
 import freedays.app.form.FreeDayUserList;
+import freedays.domain.Request;
 import freedays.schedule.FreeDayScheduleServiceImpl;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
@@ -77,10 +78,11 @@ public class ReportController {
 		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
 		
 		LogFactory.getLog(this.getClass()).info("Finish report creation!");
-		PropertiesUtil.getProperty("testing");
 		
-		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
-		fdusil.reportFreeDays();
+//		PropertiesUtil.getProperty("testing");
+		Request.superApprove(5L);
+//		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
+//		fdusil.reportFreeDays();
 		return "report/vacation";
 	}
 

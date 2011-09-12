@@ -58,6 +58,11 @@ public abstract class FreeDay {
     public ApplicationRegularUser getNextApprover(ApplicationRegularUser user){
     	return this.approval.getNextApprover(user);
     }
+    
+    public ApplicationRegularUser getUltimateApprover(ApplicationRegularUser user){
+    	return this.approval.getUltimateApprover(user);
+    }
+    
     /**
      * Describes the states in which a FreeDay object can be.
      * These states will mark the status of a FreeDay. Such a status
@@ -87,7 +92,18 @@ public abstract class FreeDay {
     	 * The FreeDay is associated with a request that terminated with failure.
     	 * It was either denied or canceled.
     	 */
-    	COMPLETED_FAILURE
+    	COMPLETED_FAILURE;
+    	
+    	/**
+    	 * List with all the free day status representing a granted request.
+    	 * @return
+    	 */
+    	public static List<FreeDayStatus> getAllGrantedStatus(){
+    		List<FreeDayStatus> lfds = new ArrayList<FreeDayStatus>();
+    		lfds.add(FreeDayStatus.FINALIZE_SUCCESS);
+    		lfds.add(FreeDayStatus.WAITING);
+    		return lfds;
+    	}
     };
     @Enumerated
     private FreeDayStatus status;
@@ -260,20 +276,11 @@ public abstract class FreeDay {
         EntityManager em = RegularUser.entityManager();
         TypedQuery<FreeDay> q = em.createQuery("SELECT o FROM FreeDay o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status IN :approveList ", FreeDay.class);
         q.setParameter("username", username);
-        q.setParameter("approveList",FreeDay.getAllGrantedStatus());
+        q.setParameter("approveList",FreeDayStatus.getAllGrantedStatus());
         return q.getResultList();
 	}
 	
-	/**
-	 * List with all the free day status representing a granted request.
-	 * @return
-	 */
-	public static List<FreeDayStatus> getAllGrantedStatus(){
-		List<FreeDayStatus> lfds = new ArrayList<FreeDayStatus>();
-		lfds.add(FreeDayStatus.FINALIZE_SUCCESS);
-		lfds.add(FreeDayStatus.WAITING);
-		return lfds;
-	}
+
 
 	/**
 	 * Offers a specialized textual representation for reporting.

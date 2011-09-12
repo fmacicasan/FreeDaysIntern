@@ -104,6 +104,11 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 					if(ru==null)return false;
 					return ru.isApprover(authentication.getName());
 				}
+				
+				if(permission.equals("superapprove")){
+					if(ru==null)return false;
+					return ru.isUltimateApprover(authentication.getName());
+				}
 			}
 		}
 		

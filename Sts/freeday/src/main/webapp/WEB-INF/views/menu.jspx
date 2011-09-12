@@ -81,6 +81,9 @@
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_REQUESTGRANTER">
                     <menu:item id="i_request_list_approve" url="/requests?approve" z="user-managed"/>
+                    <sec:authorize url="/requests?superapprove" >
+                    	<menu:item id="i_request_list_superapprove" url="/requests?superapprove" z="user-managed" />
+                    </sec:authorize>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_FDADMIN">
                     <menu:item id="i_request_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>

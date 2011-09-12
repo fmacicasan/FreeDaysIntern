@@ -14,7 +14,7 @@
             <table:column id="c_freedays_domain_Request_requestable" label="FreeDay" maxLength="-1" property="requestable" z="user-managed"/>
             <table:column id="c_freedays_domain_Request_status" maxLength="-1" property="status" z="user-managed"/>
             <table:column id="c_freedays_domain_Request_approver" maxLength="-1" property="approver" z="user-managed"/>
-            <table:column render="false" id="c_freedays_domain_Request_feedback" property="feedback" z="i9XiabIwaoA2Ya5Z0mpXBnZlu8w="/>
+            <table:column  id="c_freedays_domain_Request_feedback" property="feedback" render="false" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

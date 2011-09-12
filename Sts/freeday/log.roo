@@ -608,3 +608,7 @@ finder list --class freedays.domain.Request
 finder add --finderName findRequestsByStatus
 perform tests
 backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-09 18:17:07
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-12 17:47:42
+perform tests
+backup

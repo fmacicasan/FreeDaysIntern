@@ -7,14 +7,19 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.TypedQuery;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
 import freedays.app.RequestStatus;
 import freedays.app.form.FreeDayRequest;
+import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 import freedays.util.PropertiesUtil;
 
@@ -58,6 +63,9 @@ public class Request implements Serializable {
     private ApplicationRegularUser approver;
 
     private String feedback;
+    
+    @Autowired
+	private transient UserContextService userContextService;
 
     /**
      * Initialization of a newly created request. It represents
@@ -87,6 +95,20 @@ public class Request implements Serializable {
             setApproveStatus();
             informApproveRequest();
         }
+    }
+    
+    public void superApprove(){
+    	setApproveStatus();
+    	informApproveRequest();
+    	informSuperApproved();
+    	captureApprover();
+    }
+    
+    public void superDeny(){
+    	setDenyStatus();
+    	informDenyRequest();
+    	informSuperDenied();
+    	captureApprover();
     }
 
     /**
@@ -175,6 +197,13 @@ public class Request implements Serializable {
     private void advanceApprover() {
         this.approver = this.requestable.getApprover(this.appreguser);
     }
+    
+    /**
+     * Sets the approver that initiated an action that brought the request in a final state.
+     */
+    private void captureApprover(){
+    	this.approver = ApplicationRegularUser.findByUsername(this.userContextService.getCurrentUser());
+    }
 
     /**
      * Request approval via e-mail 
@@ -213,9 +242,30 @@ public class Request implements Serializable {
             }
         }
     }
+    
+    private void informSuperApproved(){
+    	this.informOnSuperAction("approved");
+    }
+    private void informSuperDenied(){
+    	this.informOnSuperAction("denied");
+    }
+    
+    private void informOnSuperAction(String outcome){
+    	if(!Request.DEBUG){
+    		RegularUser actualapprover = this.approver.getRegularUser();
+    		RegularUser superapprover = this.getUltimateRegularUser();
+    		MailUtils.send2LowerOnSuperApproveNotification(actualapprover.getEmail(), actualapprover.toString(), superapprover.toString(), outcome, this.toString());
+    	}
+    }
 
     private RegularUser getSuperiorRegularUser() {
         return this.getRequestable().getNextApprover(this.getAppreguser()).getRegularUser();
+    }
+    
+    private RegularUser getUltimateRegularUser(){
+    	RegularUser ru = this.getRequestable().getUltimateApprover(this.getAppreguser()).getRegularUser();
+    	System.out.println(ru);
+    	return ru;
     }
 
     private String prepareContent(String top, String bottom) {
@@ -309,6 +359,28 @@ public class Request implements Serializable {
         } catch (NullPointerException e) {
             return false;
         }
+    }
+    
+    public boolean isUltimateApprover(String name) {
+    	 try {
+             if (name == null || name.length() == 0) throw new IllegalArgumentException("The username argument is required");
+             //will return true for the actual ultimate approver
+             String username =  this.getUltimateRegularUser().getUsername();
+             return username.equals(name);
+         } catch (NullPointerException e) {
+             return false;
+         }
+	}
+    
+    public boolean isSuperiorApprover(String name){
+    	try{
+    		if(name==null || name.length() == 0) throw new IllegalArgumentException("The username argument is mandatory");
+    		String username = this.getSuperiorRegularUser().getUsername();
+    		//will return true for the actual superior approver
+    		return username.equals(name);// && !this.getAppreguser().getRegularUser().getUsername().equals(username);
+    	} catch (NullPointerException e){
+    		return false;
+    	}
     }
 
     /**
@@ -413,6 +485,8 @@ public class Request implements Serializable {
         q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
         return q.getResultList();
     }
+    
+
 
     /**
 	 * Counts all the requests of a regular user identified by its username
@@ -439,6 +513,22 @@ public class Request implements Serializable {
         Request req = Request.findRequest(id2);
         req.approve();
         req.persist();
+    }
+    
+    /**
+     * The Top approver approves a request itendified based on its identifier
+     * @param id
+     */
+    public static void superApprove(Long id){
+    	Request req = Request.findRequest(id);
+    	req.superApprove();
+    	req.persist();
+    }
+    
+    public static void superDeny(Long id){
+    	Request req = Request.findRequest(id);
+    	req.superDeny();
+    	req.persist();
     }
 
     /**
@@ -519,4 +609,13 @@ public class Request implements Serializable {
             req.persist();
         }
     }
+    
+	public static List<Request> findAllPendingSuperApprovalsByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
 }

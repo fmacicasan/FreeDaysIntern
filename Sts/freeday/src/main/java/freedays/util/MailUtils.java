@@ -35,6 +35,7 @@ public class MailUtils {
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT="Hello %s,\n the following request was canceled!\n %s \n\n ";
 	private static final String DEFAULT_APPLICATION_LINK="\nFind us at {0}!";
+	private static final String DEFAULT_LOWER_REQUESTNOTIFICATION_ONUPPEREVENT = "Hello %s,\n your boss %s already %s the request!\n %s \n\n";
 	
 	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
 	private static final String RESET_PASS_MESSAGE = "Your new password is:\n\t\t\t {0}";
@@ -245,6 +246,10 @@ public class MailUtils {
 		MailUtils.sendAsyncMail(email, MailUtils.RESET_PASS_TITLE, content);
 	}
 	
+	public static void send2LowerOnSuperApproveNotification(final String email, final String actualapprover, final String superapprover,final String outcome, final String request){
+		final String content = String.format(MailUtils.DEFAULT_LOWER_REQUESTNOTIFICATION_ONUPPEREVENT,actualapprover, superapprover,outcome,request);
+		MailUtils.sendAsyncMail(email, MailUtils.DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT, content);
+	}
 	
 	
 	public static void sendAsyncMail(final String email, final String subject, final String content){

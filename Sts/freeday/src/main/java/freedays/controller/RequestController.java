@@ -175,9 +175,18 @@ public class RequestController {
 	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve')")
 	@RequestMapping(value = "/{id}", params = {"eval","approve"}, method = RequestMethod.POST)
 	public String evalRequestApprove(@RequestParam("feedback") String feedback,@PathVariable("id") Long id, Model uiModel){
-		System.out.println(feedback);
+		//System.out.println(feedback);
 		Request.approve(id);
 		Request.handleFeedback(id,feedback);
+		uiModel.asMap().clear();
+		return "redirect:/requests?approve";
+	}
+	
+	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'superapprove')")
+	@RequestMapping(value = "/{id}", params = {"eval","superapprove"}, method = RequestMethod.POST)
+	public String evalRequestSuperApprove(@RequestParam("feedback") String feedback, @PathVariable("id") Long id, Model uiModel){
+		Request.superApprove(id);
+		Request.handleFeedback(id, feedback);
 		uiModel.asMap().clear();
 		return "redirect:/requests?approve";
 	}
@@ -191,11 +200,20 @@ public class RequestController {
 	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve')")
 	@RequestMapping(value = "/{id}", params = {"eval","deny"}, method = RequestMethod.POST)
 	public String evalRequestDeny(@RequestParam("feedback") String feedback, @PathVariable("id") Long id, Model uiModel){
-		System.out.println(feedback);
+		//System.out.println(feedback);
 		Request.deny(id);
 		Request.handleFeedback(id,feedback);
 		uiModel.asMap().clear();
 		return "redirect:/requests?approve";
+	}
+	
+	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id,'Request','superapprove')")
+	@RequestMapping(value = "/{id}", params = {"eval","superdeny"}, method = RequestMethod.POST)
+	public String evalRequestSuperDeny(@RequestParam("feedback") String feedback, @PathVariable("id") Long id, Model uiModel){
+		Request.superDeny(id);
+		Request.handleFeedback(id, feedback);
+		uiModel.asMap().clear();
+		return "redirect:/request?approve";
 	}
 	
 	/**
@@ -259,6 +277,13 @@ public class RequestController {
     	uiModel.addAttribute("requests",Request.findAllPendingApprovalsByUsername(p.getName()));
     	return "requests/list";
     }
+    
+    @PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
+    @RequestMapping(params="superapprove", method = RequestMethod.GET)
+    public String listSuperApprove(Model uiModel){
+    	uiModel.addAttribute("requests",Request.findAllPendingSuperApprovalsByUsername(this.userContextService.getCurrentUser()));
+    	return "requests/list";
+    }
 	
 	
     /**
@@ -271,17 +296,23 @@ public class RequestController {
      */
     @PreAuthorize("hasRole('ROLE_FDADMIN')" +
     		" or hasPermission(#id, 'Request', 'own')" +
-    		" or (hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve'))")
+    		" or (hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'approve'))" +
+    		" or (hasRole('ROLE_REQUESTGRANTER') and hasPermission(#id, 'Request', 'superapprove'))")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model uiModel, Principal p) {
 		Request req = Request.findRequest(id);
         uiModel.addAttribute("request", req);
         uiModel.addAttribute("itemId", id);
-        //TODO: added req.isCancelable() to isApprover & isPersonal so that we can't approve/deny if the date passed
-        boolean isApprover = req.isApprover(p.getName()) && req.isApprovalble();
-        System.out.println(isApprover);
+        //:(modifed to check if the request is approvable) added req.isCancelable() to isApprover & isPersonal so that we can't approve/deny if the date passed
+        boolean isApprover = req.isApprover(p.getName());
+        boolean isApprovable = req.isApprovalble();
+        boolean isSuperApprover = req.isUltimateApprover(p.getName());
+        //System.out.println(isApprover);
         uiModel.addAttribute("isApprover",isApprover);
-        if(isApprover){
+        uiModel.addAttribute("isApprovable",isApprovable);
+        uiModel.addAttribute("isSuperApprover",isSuperApprover);
+        uiModel.addAttribute("isGreaterApprover",req.isSuperiorApprover(p.getName()));
+        if((isApprover || isSuperApprover) && isApprovable){
         	String username = req.getAppreguser().getRegularUser().getUsername();
         	uiModel.addAttribute("activeRequestCount", Request.countActiveRequests(username));
         	uiModel.addAttribute("remainingDaysCount", Request.computeAvailableFreeDays(username));
