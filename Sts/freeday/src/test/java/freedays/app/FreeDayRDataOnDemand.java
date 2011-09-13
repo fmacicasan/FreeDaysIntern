@@ -20,16 +20,16 @@ public class FreeDayRDataOnDemand {
     
     private List<FreeDayR> data;
 
-	public void setRecoverdate(FreeDayR obj, int index) {
+	public void setDate(FreeDayR obj, int index) {
 //        obj.setRecoverdate(DateUtils.generateFutureWeekendDay());
-		obj.setRecoverdate(DateUtils.generateWeekendDay());
+		obj.setDate(DateUtils.generateWeekendDay());
     }
 
 	public static FreeDayR getenrateFreeDayR() {
 		FreeDayR fdr = new FreeDayR();
 		fdr.setApproval(AppStrategL1.getDefaultInitialStrateg());
 //		fdr.setRecoverdate(DateUtils.generateFutureWeekendDay());
-		fdr.setRecoverdate(DateUtils.generateWeekendDay());
+		fdr.setDate(DateUtils.generateWeekendDay());
 		return fdr;
 	}
 
@@ -65,5 +65,15 @@ public class FreeDayRDataOnDemand {
             obj.flush();
             data.add(obj);
         }
+    }
+
+	public FreeDayR getNewTransientFreeDayR(int index) {
+        FreeDayR obj = new FreeDayR();
+        setApproval(obj, index);
+        setDate(obj,index);
+        setReason(obj, index);
+        setRequest(obj, index);
+        setStatus(obj, index);
+        return obj;
     }
 }

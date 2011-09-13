@@ -15,6 +15,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.util.ValidationUtils;
 import freedays.validation.annotation.BusinessDay;
 
 /**
@@ -29,30 +30,30 @@ import freedays.validation.annotation.BusinessDay;
 @DiscriminatorValue("typeL")
 public class FreeDayL extends FreeDay {
 
-    @NotNull
+   // @NotNull
   //@Future removed to solve IN-105 request creation is still restricted from the wrapper but in the backend
     //such entities should be processed (autoDeny) if the date they represent becomes past
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "S-")
-    @BusinessDay
-    private Calendar legalday;
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(style = "S-")
+//    @BusinessDay
+//    private Calendar legalday;
     
 
 
-	@Override
-	public Calendar getDate() {
-		return this.getLegalday();
-	}
+//	@Override
+//	public Calendar getDate() {
+//		return this.getLegalday();
+//	}
 
 	@Override
 	public FreeDayStatus getApproveStatus() {
 		return FreeDayStatus.FINALIZE_SUCCESS;
 	}
 
-	@Override
-	protected void setDate(Calendar date) {
-		this.setLegalday(date);	
-	}
+//	@Override
+//	protected void setDate(Calendar date) {
+//		this.setLegalday(date);	
+//	}
 
 	@Override
 	protected void initialize(FreeDayRequest fdr) {
@@ -90,4 +91,9 @@ public class FreeDayL extends FreeDay {
 	protected String getReportType() {
 		return "Legal";
 	}
+
+//	@Override
+//	public boolean customValidationPolicy() {
+//		return ValidationUtils.checkBusinessDay(this.getDate());
+//	}
 }

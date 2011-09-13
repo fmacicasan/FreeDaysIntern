@@ -17,6 +17,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.util.DateUtils;
+import freedays.util.ValidationUtils;
 import freedays.validation.annotation.BusinessDay;
 
 /**
@@ -34,22 +35,22 @@ import freedays.validation.annotation.BusinessDay;
 @DiscriminatorValue("typeC")
 public class FreeDayC extends FreeDaysRCMatch {
 
-    @NotNull
+    //@NotNull
   //@Future removed to solve IN-105 request creation is still restricted from the wrapper but in the backend
     //such entities should be matched so they will be processed some time in the future with an already specified
     //date
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "S-")
-    @BusinessDay
-    private Calendar requestdate;
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(style = "S-")
+//    @BusinessDay
+//    private Calendar requestdate;
 
     @OneToOne
     private FreeDayR recover;
 
-	@Override
-	public Calendar getDate() {
-		return this.getRequestdate();
-	}
+//	@Override
+//	public Calendar getDate() {
+//		return this.getRequestdate();
+//	}
 
 	@Override
 	public String toString() {
@@ -92,11 +93,11 @@ public class FreeDayC extends FreeDaysRCMatch {
 		//TOOD: think at avoid duplicates at request
 	}
 
-	@Override
-	protected void setDate(Calendar date) {
-		this.setRequestdate(date);
-		
-	}
+//	@Override
+//	protected void setDate(Calendar date) {
+//		this.setRequestdate(date);
+//		
+//	}
 
 	@Override
 	public RequestType getType() {
@@ -107,5 +108,10 @@ public class FreeDayC extends FreeDaysRCMatch {
 	protected String getReportType() {
 		return "OnDemand";
 	}
+
+//	@Override
+//	public boolean customValidationPolicy() {
+//		return ValidationUtils.checkBusinessDay(this.getDate());
+//	}
 
 }

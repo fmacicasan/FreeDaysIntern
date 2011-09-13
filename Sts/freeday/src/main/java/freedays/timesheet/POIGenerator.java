@@ -214,7 +214,7 @@ public class POIGenerator implements TimesheetGenerator{
 	}
 	public Schedule getScheduleFromFreeDayItem(FreeDayVacation x) {
 		Schedule b = new Schedule();
-		b.setStartDate(x.getBeginning());
+		b.setStartDate(x.getDate());
 		b.setEndDate(x.getEnd());
 		b.setPattern(Pattern.getPatternForVacation());
 		b.setEmployee(pEmp);
@@ -439,7 +439,7 @@ public class POIGenerator implements TimesheetGenerator{
 		List<FreeDayVacation> lFreeDays = FreeDayVacation.getAllGrantedVacationsByUsername(pEmp.getRegularUser().getUsername());
 		for(int i = 0; i < lFreeDays.size(); i++) {
 			Schedule freeSched = getScheduleFromFreeDayItem(lFreeDays.get(i));
-			Calendar start =  lFreeDays.get(i).getBeginning();
+			Calendar start =  lFreeDays.get(i).getDate();
 			Calendar end =  lFreeDays.get(i).getEnd();
 			lsnew.clear();
 			lsnew.add(freeSched);

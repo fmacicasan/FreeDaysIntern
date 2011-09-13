@@ -9,8 +9,6 @@ import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.domain.ApprovalStrategy;
 import java.lang.String;
 import java.security.SecureRandom;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Random;
 import org.springframework.stereotype.Component;
 
@@ -20,25 +18,9 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
     
     private Random FreeDayVacationDataOnDemand.rnd = new SecureRandom();
     
-    public FreeDayVacation FreeDayVacationDataOnDemand.getNewTransientFreeDayVacation(int index) {
-        FreeDayVacation obj = new FreeDayVacation();
-        setApproval(obj, index);
-        setBeginning(obj, index);
-        setConfidence(obj, index);
-        setReason(obj, index);
-        setSpan(obj, index);
-        setStatus(obj, index);
-        return obj;
-    }
-    
     public void FreeDayVacationDataOnDemand.setApproval(FreeDayVacation obj, int index) {
         ApprovalStrategy approval = null;
         obj.setApproval(approval);
-    }
-    
-    public void FreeDayVacationDataOnDemand.setBeginning(FreeDayVacation obj, int index) {
-        Calendar beginning = Calendar.getInstance();
-        obj.setBeginning(beginning);
     }
     
     public void FreeDayVacationDataOnDemand.setConfidence(FreeDayVacation obj, int index) {

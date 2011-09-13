@@ -4,17 +4,8 @@
 package freedays.app;
 
 import freedays.app.FreeDayR;
-import java.util.Calendar;
 
 privileged aspect FreeDayC_Roo_JavaBean {
-    
-    public Calendar FreeDayC.getRequestdate() {
-        return this.requestdate;
-    }
-    
-    public void FreeDayC.setRequestdate(Calendar requestdate) {
-        this.requestdate = requestdate;
-    }
     
     public FreeDayR FreeDayC.getRecover() {
         return this.recover;

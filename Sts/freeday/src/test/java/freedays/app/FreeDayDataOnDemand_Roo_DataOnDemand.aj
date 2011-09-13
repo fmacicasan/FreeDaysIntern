@@ -7,22 +7,11 @@ import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayL;
 import freedays.domain.ApprovalStrategy;
 import java.lang.String;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayDataOnDemand: @Component;
-    
-    public FreeDayL FreeDayDataOnDemand.getNewTransientFreeDayL(int index) {
-        FreeDayL obj = new FreeDayL();
-        setApproval(obj, index);
-        setLegalday(obj, index);
-        setReason(obj, index);
-        setStatus(obj, index);
-        return obj;
-    }
     
     public void FreeDayDataOnDemand.setApproval(FreeDayL obj, int index) {
         ApprovalStrategy approval = null;

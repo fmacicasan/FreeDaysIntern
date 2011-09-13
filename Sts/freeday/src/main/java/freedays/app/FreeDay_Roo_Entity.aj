@@ -92,8 +92,6 @@ privileged aspect FreeDay_Roo_Entity {
     
     public static final EntityManager FreeDay.entityManager() {
         EntityManager em = new FreeDay() {
-            public java.util.Calendar getDate() { throw new UnsupportedOperationException(); }
-            protected void setDate(java.util.Calendar date) { throw new UnsupportedOperationException(); }
             protected freedays.app.FreeDay.FreeDayStatus getApproveStatus() { throw new UnsupportedOperationException(); }
             protected void initialize(freedays.app.form.FreeDayRequest fdr) { throw new UnsupportedOperationException(); }
             protected void finalizeFail() { throw new UnsupportedOperationException(); }

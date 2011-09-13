@@ -3,17 +3,8 @@
 
 package freedays.app;
 
-import java.util.Calendar;
 
 privileged aspect FreeDayVacation_Roo_JavaBean {
-    
-    public Calendar FreeDayVacation.getBeginning() {
-        return this.beginning;
-    }
-    
-    public void FreeDayVacation.setBeginning(Calendar beginning) {
-        this.beginning = beginning;
-    }
     
     public long FreeDayVacation.getSpan() {
         return this.span;

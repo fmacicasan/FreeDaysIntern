@@ -25,7 +25,7 @@ public class FreeDayDataOnDemand {
 		
 //		Calendar requestdate = DateUtils.generateFutureBusinessDay();
 		Calendar requestdate = DateUtils.generateBusinessDay();
-		fd.setLegalday(requestdate);
+		fd.setDate(requestdate);
 		
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-FreeDaysApprovalStrategy.xml");
 //		ApprovalStrategy app = (ApprovalStrategy) ac.getBean("level1");
@@ -41,16 +41,12 @@ public class FreeDayDataOnDemand {
 		
 	}
 
-	public void setRequestdate(FreeDayL obj, int index) {
-//        obj.setLegalday(DateUtils.generateFutureBusinessDay());
-		obj.setLegalday(DateUtils.generateBusinessDay());
-    }
 
 
-	public void setLegalday(FreeDayL obj, int index) {
+	public void setDate(FreeDayL obj, int index) {
         //Calendar legalday = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1);
 //        obj.setLegalday(DateUtils.generateFutureBusinessDay());
-		obj.setLegalday(DateUtils.generateBusinessDay());
+		obj.setDate(DateUtils.generateBusinessDay());
     }
 
 	public void init() {
@@ -76,5 +72,14 @@ public class FreeDayDataOnDemand {
             obj.flush();
             data.add(obj);
         }
+    }
+
+	public FreeDayL getNewTransientFreeDayL(int index) {
+        FreeDayL obj = new FreeDayL();
+        setApproval(obj, index);
+        setDate(obj,index);
+        setReason(obj, index);
+        setStatus(obj, index);
+        return obj;
     }
 }

@@ -16,8 +16,10 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.util.DateUtils;
+import freedays.util.ValidationUtils;
 import freedays.validation.annotation.Weekend;
 
 /**
@@ -36,22 +38,22 @@ import freedays.validation.annotation.Weekend;
 @DiscriminatorValue("typeR")
 public class FreeDayR extends FreeDaysRCMatch {
 
-    @NotNull
+    //@NotNull
     //@Future removed to solve IN-105 request creation is still restricted from the wrapper but in the backend
     //such entities should be matched so they will be processed some time in the future with an already specified
     //date
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "S-")
-    @Weekend
-    private Calendar recoverdate;
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(style = "S-")
+//    @Weekend
+//    private Calendar recoverdate;
 
     @OneToOne
     private FreeDayC request;
     
-	@Override
-	public Calendar getDate() {
-		return this.getRecoverdate();
-	}
+//	@Override
+//	public Calendar getDate() {
+//		return this.getRecoverdate();
+//	}
 
 	@Override
 	public String toString() {
@@ -79,6 +81,7 @@ public class FreeDayR extends FreeDaysRCMatch {
 		return this.request;
 	}
 	
+	
 	/**
 	 * Retrieves all the type R unmatchet requests.
 	 * @param username
@@ -93,11 +96,11 @@ public class FreeDayR extends FreeDaysRCMatch {
 		return q.getResultList();
 	}
 
-	@Override
-	protected void setDate(Calendar date) {
-		this.setRecoverdate(date);
-		
-	}
+//	@Override
+//	protected void setDate(Calendar date) {
+//		this.setRecoverdate(date);
+//		
+//	}
 	
 
 
@@ -111,5 +114,10 @@ public class FreeDayR extends FreeDaysRCMatch {
 		return "Recover";
 	}
 
+
+	@Override
+	public boolean customValidationPolicy() {
+		return ValidationUtils.checkWeekend(this.getDate());
+	}
 	
 }

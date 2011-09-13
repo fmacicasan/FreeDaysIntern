@@ -192,7 +192,7 @@ public class FreeDayUserList {
 		for (FreeDay fd : freedays) {
 			if(fd instanceof FreeDayVacation){
 				FreeDayVacation fdv = (FreeDayVacation)fd;
-				Calendar start = fdv.getBeginning();
+				Calendar start = fdv.getDate();
 				Calendar end = DateUtils.dateAddBusinessDay(start, fdv.getSpan());
 				//replaced before by compareTo to test equality
 				for(Calendar c = (Calendar)start.clone();c.compareTo(end)<=0;c.add(Calendar.DAY_OF_YEAR, 1)){

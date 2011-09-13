@@ -34,13 +34,13 @@ import freedays.util.ValidationUtils;
 @DiscriminatorValue("typeV")
 public class FreeDayVacation extends FreeDay {
 
-    @NotNull
+    //@NotNull
   //@Future removed to solve IN-105 request creation is still restricted from the wrapper but in the backend
     //such entities should be matched so they will be processed some time in the future with an already specified
     //date
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "S-")
-    private Calendar beginning;
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(style = "S-")
+//    private Calendar beginning;
 
     @NotNull
     private long span;
@@ -53,15 +53,15 @@ public class FreeDayVacation extends FreeDay {
     public enum ConfidenceLevel{LOW, MEDIUM, HIGH};
     private ConfidenceLevel confidence;
 
-    @Override
-    public Calendar getDate() {
-        return this.getBeginning();
-    }
-
-    @Override
-    protected void setDate(Calendar date) {
-    	this.setBeginning(date);
-    }
+//    @Override
+//    public Calendar getDate() {
+//        return this.getBeginning();
+//    }
+//
+//    @Override
+//    protected void setDate(Calendar date) {
+//    	this.setBeginning(date);
+//    }
 
     @Override
     protected FreeDayStatus getApproveStatus() {
@@ -160,7 +160,7 @@ public class FreeDayVacation extends FreeDay {
 	 * @return
 	 */
 	public Calendar getEnd(){
-		return DateUtils.dateAddBusinessDay(this.getBeginning(), this.getSpan());
+		return DateUtils.dateAddBusinessDay(this.getDate(), this.getSpan());
 	}
 	
 	/**
@@ -183,5 +183,10 @@ public class FreeDayVacation extends FreeDay {
 	protected String getReportType() {
 		return "Vacation";
 	}
+
+//	@Override
+//	public boolean customValidationPolicy() {
+//		return ValidationUtils.checkBusinessDay(this.getDate());
+//	}
 
 }

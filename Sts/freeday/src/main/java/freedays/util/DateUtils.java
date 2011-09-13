@@ -324,6 +324,7 @@ public class DateUtils {
 	 */
 	public static Calendar dateAddBusinessDay(Calendar start, Long span) {
 		Calendar date = (Calendar) start.clone();
+		System.out.println(DateUtils.printShortDate(date));
 		if(ValidationUtils.checkWeekend(date)){
 			if(date.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
 				date.add(Calendar.DAY_OF_YEAR, 1);
@@ -337,6 +338,7 @@ public class DateUtils {
 			days+=2;
 		}
 		date.add(Calendar.DAY_OF_MONTH, days.intValue()+full.intValue());
+		System.out.println(DateUtils.printShortDate(date));
 		return date;
 	}
 

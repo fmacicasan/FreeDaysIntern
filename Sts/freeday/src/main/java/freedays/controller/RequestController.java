@@ -135,7 +135,7 @@ public class RequestController {
             }
             return "requests/create";
         }
-        System.out.println("cacenflitz");
+        System.out.println("cacenflitzzzz");
         
         //uiModel.asMap().clear();
         //request.persist();
@@ -225,7 +225,7 @@ public class RequestController {
 	@PreAuthorize("hasRole('ROLE_FDADMIN') or hasPermission(#id, 'Request', 'own')")
 	@RequestMapping(value = "/{id}", params = {"eval","cancel"}, method = RequestMethod.POST)
 	public String evalRequestCancel(@PathVariable("id") Long id, Model uiModel){
-		
+		System.out.println("Before cancel");
 		Request.cancel(id);
 		System.out.println("Eroriuy!");
 		

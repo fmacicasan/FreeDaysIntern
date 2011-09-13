@@ -6,23 +6,11 @@ package freedays.app;
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayR;
 import java.lang.String;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayRDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayRDataOnDemand: @Component;
-    
-    public FreeDayR FreeDayRDataOnDemand.getNewTransientFreeDayR(int index) {
-        FreeDayR obj = new FreeDayR();
-        setApproval(obj, index);
-        setReason(obj, index);
-        setRecoverdate(obj, index);
-        setRequest(obj, index);
-        setStatus(obj, index);
-        return obj;
-    }
     
     public void FreeDayRDataOnDemand.setReason(FreeDayR obj, int index) {
         String reason = "reason_" + index;

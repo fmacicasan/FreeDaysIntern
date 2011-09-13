@@ -68,11 +68,11 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 		return this.getMatch() != null;
 	}
 
-	@Override
-	public abstract Calendar getDate();
-
-	@Override
-	protected abstract void setDate(Calendar date);
+//	@Override
+//	public abstract Calendar getDate();
+//
+//	@Override
+//	protected abstract void setDate(Calendar date);
 
 	@Override
 	public FreeDayStatus getApproveStatus() {
@@ -98,10 +98,12 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 			match.setInitStatus();
 			match.merge();
 		}
+		
 	}
 	
 	@Override
 	protected void finalizeFail(){
+		System.out.println("i will finalize fail now");
 		FreeDaysRCMatch match = this.getMatch();
 		if(match != null){
 			match.setFinalApproveStatus();

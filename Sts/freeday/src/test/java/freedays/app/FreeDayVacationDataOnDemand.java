@@ -1,6 +1,7 @@
 package freedays.app;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.roo.addon.dod.RooDataOnDemand;
+
+import freedays.util.DateUtils;
 
 @RooDataOnDemand(entity = FreeDayVacation.class)
 public class FreeDayVacationDataOnDemand {
@@ -37,5 +40,21 @@ public class FreeDayVacationDataOnDemand {
             obj.flush();
             data.add(obj);
         }
+    }
+	
+	public void setDate(FreeDayVacation obj, int index){
+		Calendar date = DateUtils.generateBusinessDay();
+		obj.setDate(date);
+	}
+
+	public FreeDayVacation getNewTransientFreeDayVacation(int index) {
+        FreeDayVacation obj = new FreeDayVacation();
+        setApproval(obj, index);
+        setDate(obj,index);
+        setConfidence(obj, index);
+        setReason(obj, index);
+        setSpan(obj, index);
+        setStatus(obj, index);
+        return obj;
     }
 }

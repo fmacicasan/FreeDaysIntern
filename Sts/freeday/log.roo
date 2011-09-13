@@ -617,3 +617,12 @@ backup
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-13 09:51:56
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-13 14:26:53
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-13 15:12:04
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-13 15:59:58
+backup
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-13 16:50:07
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-13 16:54:16
+focus --class freedays.app.FreeDay
+// [failed] field date --fieldName date --type java.util.Calendar --notNull --dateFormat SHORT
+field date --fieldName datee --type java.util.Calendar --notNull --dateFormat SHORT
+backup
