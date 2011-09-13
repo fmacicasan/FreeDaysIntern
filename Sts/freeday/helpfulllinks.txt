@@ -264,6 +264,8 @@ http://www.clerkendweller.com/2011/4/5/Website-Vulnerability-Statistics-Spring-2
 	http://www.javaworld.com/javaworld/javaqa/2003-08/01-qa-0808-property.html?page=3
 	
 	
+	http://www.mkyong.com/spring-mvc/spring-mvc-handler-interceptors-example/
+	
 	
 	
 

@@ -22,4 +22,9 @@ public class RequestGranter extends AdvancedUserRole {
 	protected String getRole() {
 		return RequestGranter.DISCRIM;
 	}
+	
+	@Override
+	public boolean isRequestGranter(){
+		return true;
+	}
 }

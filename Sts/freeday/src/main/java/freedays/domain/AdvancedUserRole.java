@@ -47,4 +47,8 @@ public abstract class AdvancedUserRole {
         sb.append(this.getRole());
         return sb.toString().toUpperCase();
     }
+	
+	public boolean isRequestGranter(){
+		return false;
+	}
 }

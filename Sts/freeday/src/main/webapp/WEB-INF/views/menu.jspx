@@ -70,7 +70,7 @@
                 <menu:item id="i_account_changepass" url="/account/changepass" z="user-managed"/>
             </menu:category>
         </sec:authorize>
-        <sec:authorize ifAnyGranted="ROLE_USER, ROLE_FDADMIN, ROLE_REQUESTGRANTER">
+        <sec:authorize ifAnyGranted="ROLE_USER, ROLE_FDADMIN, ROLE_REQUESTGRANTER, ROLE_SUPERAPPROVER">
             <menu:category id="c_request" z="K3H2XFvnqlPuvp7YsYXLCJyWwHQ=">
                 <sec:authorize ifAllGranted="ROLE_USER">
                     <menu:item id="i_request_new" messageCode="global_menu_new" url="/requests?form=l" z="user-managed"/>
@@ -81,9 +81,10 @@
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_REQUESTGRANTER">
                     <menu:item id="i_request_list_approve" url="/requests?approve" z="user-managed"/>
-                    <sec:authorize url="/requests?superapprove" >
-                    	<menu:item id="i_request_list_superapprove" url="/requests?superapprove" z="user-managed" />
-                    </sec:authorize>
+                </sec:authorize>
+                <!--  not working with url and method url="/requests/superapprove" method="GET" -->
+                <sec:authorize ifAllGranted="ROLE_SUPERAPPROVER"  >
+                	<menu:item id="i_request_list_superapprove" url="/requests?superapprove" z="user-managed" />
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_FDADMIN">
                     <menu:item id="i_request_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>

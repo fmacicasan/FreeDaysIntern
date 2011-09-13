@@ -1,7 +1,10 @@
 package freedays.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
@@ -13,7 +16,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
@@ -479,7 +481,7 @@ public class Request implements Serializable {
 	 */
     public static List<Request> findAllPendingApprovalsByUsername(String username) {
         if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
-        EntityManager em = RegularUser.entityManager();
+        EntityManager em = Request.entityManager();
         TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username and o.status NOT IN :finishstates ", Request.class);
         q.setParameter("username", username);
         q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
@@ -508,12 +510,12 @@ public class Request implements Serializable {
 	 * Approves a requests identified based on its identifier.
 	 * @param id2
 	 */
-    public static void approve(Long id2) {
-        if (id2 == null) throw new IllegalArgumentException("The id argument is required");
-        Request req = Request.findRequest(id2);
-        req.approve();
-        req.persist();
-    }
+	public static void approve(Long id2) {
+		if (id2 == null) throw new IllegalArgumentException("The id argument is required");
+		Request req = Request.findRequest(id2);
+		req.approve();
+		req.persist();
+	}
     
     /**
      * The Top approver approves a request itendified based on its identifier
@@ -584,7 +586,7 @@ public class Request implements Serializable {
 	 * @return
 	 */
     public static List<Request> findAllPendingApprovals() {
-        EntityManager em = RegularUser.entityManager();
+        EntityManager em = Request.entityManager();
         TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.status NOT IN :finishstates ", Request.class);
         q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
         return q.getResultList();
@@ -611,9 +613,25 @@ public class Request implements Serializable {
     }
     
 	public static List<Request> findAllPendingSuperApprovalsByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		if(username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		ApplicationRegularUser aru = ApplicationRegularUser.findByUsername(username);
+		if(aru.isSuperUser()){
+			//retrieve its granters and their requests
+			//should see the requests off all his subordinates
+			Set<ApplicationRegularUser> saru = ApplicationRegularUser.findAllSubordinatesTree(aru);
+			Set<String> sarustring = ApplicationRegularUser.findAllSubordinatesTreeUsernameString(saru);
+			if(!sarustring.isEmpty()){
+				TypedQuery<Request> q = entityManager().createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username IN :username and o.status IN :finishstates ", Request.class);
+				q.setParameter("username", sarustring);
+				q.setParameter("finishstates", RequestStatus.getPossibleActiveStatusList());
+				return q.getResultList();
+			}
+			return null;
+		}
+		throw new IllegalArgumentException("The username is not applicable!");
 	}
+	
+
 
 
 

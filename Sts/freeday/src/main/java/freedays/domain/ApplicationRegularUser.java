@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -120,9 +123,9 @@ public abstract class ApplicationRegularUser   implements Serializable {
 		for (ApplicationRegularUser aru : ruc) {
 			//TODO: ugly workarrownd - keep only the sql emails
 			String email = aru.getRegularUser().getEmail();
-			if(email.contains("@sdl.com")){
+			//if(email.contains("@sdl.com")){
 				ls.add(email);
-			}
+			//}
 		}
 		return ls;
 		
@@ -146,12 +149,106 @@ public abstract class ApplicationRegularUser   implements Serializable {
 	@Transactional
     public void remove() {
 		this.getRegularUser().remove();
-//        if (this.entityManager == null) this.entityManager = entityManager();
-//        if (this.entityManager.contains(this)) {
-//            this.entityManager.remove(this);
-//        } else {
-//            ApplicationRegularUser attached = ApplicationRegularUser.findApplicationRegularUser(this.id);
-//            this.entityManager.remove(attached);
-//        }
     }
+
+	public boolean isRequestGranter() {
+		for(AdvancedUserRole aur : this.getRoles()){
+			if(aur.isRequestGranter()){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean hasApprover() {
+		return this.getGranter() != null;
+	}
+
+	public boolean isSuperUser() {
+		return this.isRequestGranter() && !this.hasApprover();
+	}
+	
+	public boolean isSuperApproverOf(ApplicationRegularUser aru){
+		if(aru == null) throw new IllegalArgumentException("The ApplicationRegularUser argument is required");
+		return this.equals(aru.retrieveTopARU());
+				
+	}
+	
+	public boolean isSuperApprovedBy(ApplicationRegularUser aru){
+		if(aru == null) throw new IllegalArgumentException("The ApplicationRegularUser argument is required");
+		return this.retrieveTopARU().equals(aru);
+	}
+	
+	public ApplicationRegularUser retrieveTopARU(){
+		ApplicationRegularUser aru = this;
+		while(aru.getGranter() != null){
+			aru = aru.getGranter();
+		}
+		return aru;
+	}
+	
+	public static Set<ApplicationRegularUser> findAllSubordinatesRequestGranters(ApplicationRegularUser boss){
+		if(boss == null) throw new IllegalArgumentException("The boss argument is required");
+		TypedQuery<ApplicationRegularUser> q = entityManager().createQuery("SELECT o FROM ApplicationRegularUser o WHERE o.granter = :boss ",ApplicationRegularUser.class);
+		q.setParameter("boss", boss);
+		List<ApplicationRegularUser> laru = q.getResultList();
+		System.out.println(laru.size());
+		for(ApplicationRegularUser aru : laru){
+			System.out.println(aru.toString()+aru.isRequestGranter());
+			
+		}
+		Iterator<ApplicationRegularUser> iaru = laru.iterator();
+		while(iaru.hasNext()){
+			ApplicationRegularUser aru = iaru.next();
+			if(!aru.isRequestGranter()){
+				iaru.remove();
+			}
+		}
+		System.out.println(laru.size());
+		for(ApplicationRegularUser aru : laru){
+			System.out.println(aru.toString()+aru.isRequestGranter());
+			
+		}
+		return new HashSet<ApplicationRegularUser>(laru);
+	}
+	
+	public static Set<ApplicationRegularUser> findAllSubordinatesTree(ApplicationRegularUser boss){
+		Set<ApplicationRegularUser> fullSubordinateTree = new HashSet<ApplicationRegularUser>();	
+		Queue<ApplicationRegularUser> qaru = new LinkedList<ApplicationRegularUser>();
+		qaru.add(boss);
+		System.out.println("initial size"+qaru.size());
+		while(!qaru.isEmpty()){
+			ApplicationRegularUser aru = qaru.poll();
+			System.out.println("size after pool"+qaru.size());
+			Set<ApplicationRegularUser> saru = ApplicationRegularUser.findAllSubordinatesRequestGranters(aru);
+			for(ApplicationRegularUser maru:saru){
+				qaru.add(maru);
+			}
+			System.out.println("size after retrieve"+qaru.size());
+			fullSubordinateTree.add(aru);
+			System.out.println("size full tree"+fullSubordinateTree.size());
+		}
+		fullSubordinateTree.remove(boss);
+		return fullSubordinateTree;
+		
+		
+	}
+
+	public static ApplicationRegularUser findByUsernameWithRoles(String username) {
+		if(username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		EntityManager em = ApplicationRegularUser.entityManager();
+		TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o JOIN FETCH o.roles WHERE o.regularUser.username = :username",ApplicationRegularUser.class);
+		q.setParameter("username",username);
+		ApplicationRegularUser aru = q.getSingleResult();
+		System.out.println(aru);
+		return aru;
+	}
+	
+	public static Set<String> findAllSubordinatesTreeUsernameString(Set<ApplicationRegularUser> saru){
+		Set<String> sarustring = new HashSet<String>();
+		for(ApplicationRegularUser appru : saru){
+			sarustring.add(appru.getRegularUser().getUsername());
+		}
+		return sarustring;
+	}
 }

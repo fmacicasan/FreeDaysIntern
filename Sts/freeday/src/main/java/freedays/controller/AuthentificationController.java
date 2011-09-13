@@ -73,6 +73,10 @@ public class AuthentificationController extends
 			for (AdvancedUserRole aur : set) {
 				authorities.add(new GrantedAuthorityImpl(aur.toString()));
 			}
+			ApplicationRegularUser aru = ApplicationRegularUser.findByUsernameWithRoles(username);
+			if(aru.isSuperUser()){
+				authorities.add(new GrantedAuthorityImpl("ROLE_SUPERAPPROVER"));
+			}
 		}catch (EmptyResultDataAccessException e){
 			throw new BadCredentialsException("Invalid username or password");
 		} catch (EntityNotFoundException e) {

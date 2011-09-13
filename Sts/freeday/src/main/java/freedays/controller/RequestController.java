@@ -278,7 +278,7 @@ public class RequestController {
     	return "requests/list";
     }
     
-    @PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
+    @PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(0,'ApplicationRegularUser','superapprover')")
     @RequestMapping(params="superapprove", method = RequestMethod.GET)
     public String listSuperApprove(Model uiModel){
     	uiModel.addAttribute("requests",Request.findAllPendingSuperApprovalsByUsername(this.userContextService.getCurrentUser()));

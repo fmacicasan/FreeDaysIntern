@@ -3,6 +3,7 @@ package freedays.controller;
 import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import freedays.app.FreeDay;
 import freedays.app.form.FreeDayUserList;
 import freedays.domain.Request;
 import freedays.schedule.FreeDayScheduleServiceImpl;
+import freedays.security.UserContextService;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
 
@@ -25,6 +27,10 @@ import freedays.util.PropertiesUtil;
 @RequestMapping("/report")
 @Controller
 public class ReportController {
+	
+	
+	@Autowired
+	private UserContextService userContextService;
 	
 	/**
 	 * Handler for retrieving the free days report in the day-by-day representation
@@ -80,7 +86,7 @@ public class ReportController {
 		LogFactory.getLog(this.getClass()).info("Finish report creation!");
 		
 //		PropertiesUtil.getProperty("testing");
-		Request.superApprove(5L);
+		Request.findAllPendingSuperApprovalsByUsername(userContextService.getCurrentUser());
 //		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
 //		fdusil.reportFreeDays();
 		return "report/vacation";

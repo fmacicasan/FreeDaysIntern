@@ -6,6 +6,7 @@ import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 
 import freedays.app.FDUser;
+import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
 import freedays.domain.Request;
 
@@ -48,6 +49,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				return r.isOwner(authentication.getName());
 			}
 		}
+		
 		
 //		if(targetDomainObject instanceof FDUser){
 //			FDUser fdu = (FDUser) targetDomainObject;
@@ -109,6 +111,17 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 					if(ru==null)return false;
 					return ru.isUltimateApprover(authentication.getName());
 				}
+			}
+			
+		}
+		if(ApplicationRegularUser.class.getSimpleName().equals(targetType)){
+			ApplicationRegularUser aru = ApplicationRegularUser.findByUsername(authentication.getName());
+			
+			if(permission.equals("superapprover")){
+				if(aru==null)return false;
+				System.out.println("auth"+authentication+"is super"+aru.isSuperUser());
+				return aru.isSuperUser();
+				
 			}
 		}
 		
