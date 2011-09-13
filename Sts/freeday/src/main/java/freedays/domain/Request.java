@@ -518,7 +518,7 @@ public class Request implements Serializable {
 	}
     
     /**
-     * The Top approver approves a request itendified based on its identifier
+     * The Top approver approves a request itentified based on its identifier
      * @param id
      */
     public static void superApprove(Long id){
@@ -527,6 +527,10 @@ public class Request implements Serializable {
     	req.persist();
     }
     
+    /**
+     * The Top approver denies a request identified based on its identifier
+     * @param id
+     */
     public static void superDeny(Long id){
     	Request req = Request.findRequest(id);
     	req.superDeny();

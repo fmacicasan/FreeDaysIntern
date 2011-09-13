@@ -188,7 +188,7 @@ public class RequestController {
 		Request.superApprove(id);
 		Request.handleFeedback(id, feedback);
 		uiModel.asMap().clear();
-		return "redirect:/requests?approve";
+		return "redirect:/requests?superapprove";
 	}
 	
 	/**
@@ -213,7 +213,7 @@ public class RequestController {
 		Request.superDeny(id);
 		Request.handleFeedback(id, feedback);
 		uiModel.asMap().clear();
-		return "redirect:/request?approve";
+		return "redirect:/request?superapprove";
 	}
 	
 	/**

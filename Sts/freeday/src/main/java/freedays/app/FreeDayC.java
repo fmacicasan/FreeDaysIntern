@@ -53,41 +53,13 @@ public class FreeDayC extends FreeDaysRCMatch {
 
 	@Override
 	public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("Approval: ").append(getApproval()).append(", ");
-//        sb.append("Date: ").append(getDate() == null ? "null" : getDate().getTime()).append(", ");
-//        sb.append("Id: ").append(getId()).append(", ");
-//        sb.append("Reason: ").append(getReason()).append(", ");
-//        sb.append("Recover: ").append(getRecover()).append(", ");
-//        sb.append("Requestdate: ").append(getRequestdate() == null ? "null" : getRequestdate().getTime()).append(", ");
-//        sb.append("Version: ").append(getVersion()).append(", ");
-//        sb.append("Cancelable: ").append(isCancelable());
-//        return sb.toString();
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
-//		sb.append(" C");
 		if(this.getMatch()!=null){
 			sb.append("/").append(DateUtils.printShortDate(this.getMatch().getDate()));
 		}
 		return sb.toString();
     }
-
-//	@Override
-//	public FreeDayStatus getApproveStatus() {
-//		return FreeDayStatus.WAITING;
-//	}
-
-//	@Override
-//	public boolean match(FreeDayRCMatchable match) {
-//		if(this.canMatch() &&  match.canMatch())return false;
-//		this.setMatch(match);
-//		match.setMatch(this);
-//		this.setMergedStatus();
-//		match.setMergedStatus();
-//		//this.persist();
-//		//match.persist();
-//		return true;
-//	}
 
 	@Override
 	public void setMatch(FreeDaysRCMatch match) {
@@ -103,11 +75,6 @@ public class FreeDayC extends FreeDaysRCMatch {
 	public FreeDaysRCMatch getMatch() {
 		return this.recover;
 	}
-
-//	@Override
-//	public boolean canMatch() {
-//		return this.getMatch() != null;
-//	}
 
 	/**
 	 * Retrueves all type C unmatched requests of FDUsers associated with
@@ -141,16 +108,4 @@ public class FreeDayC extends FreeDaysRCMatch {
 		return "OnDemand";
 	}
 
-//	@Override
-//	protected void initialize(FreeDayRequest fdr) {
-//		this.setMatch(fdr.getMatch());
-//		
-//	}
-
-//	public static List<FreeDayC> findFreeDayCEntries(int firstResult, int maxResults) {
-//        TypedQuery<FreeDayC> tqfdc = entityManager().createQuery("SELECT o FROM FreeDayC o WHERE o.id >= :firstResult AND o.id <= :maxResults", FreeDayC.class);
-//        tqfdc.setParameter("firstResult",(long)firstResult);
-//        tqfdc.setParameter("maxResults",(long)maxResults);
-//        return tqfdc.getResultList();
-//    }
 }
