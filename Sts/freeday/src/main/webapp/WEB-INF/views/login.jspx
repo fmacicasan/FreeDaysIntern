@@ -42,45 +42,24 @@
 				<label for="j_password"> <spring:message
 						code="security_login_form_password" /> </label> <input id="j_password"
 					type='password' name='j_password' style="width: 150px" />
-				<spring:message code="security_login_form_password_message"
-					var="pwd_msg" htmlEscape="false" />
+				<spring:message code="security_login_form_password_message" var="pwd_msg" htmlEscape="false" />
 				<script type="text/javascript">
-          <c:set var="sec_pwd_msg">
-            <spring:escapeBody javaScriptEscape="true">${pwd_msg}</spring:escapeBody>
-          </c:set>
-          Spring.addDecoration(new Spring.ElementDecoration({elementId : "j_password", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${sec_pwd_msg}", required : true}})); 
-        </script>
+		          <c:set var="sec_pwd_msg">
+		            <spring:escapeBody javaScriptEscape="true">${pwd_msg}</spring:escapeBody>
+		          </c:set>
+		          Spring.addDecoration(new Spring.ElementDecoration({elementId : "j_password", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${sec_pwd_msg}", required : true}})); 
+		        </script>
 			</div>
-			<br />
 			<div class="submit">
 				<script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-				<spring:message code="button_login" var="submit_label"
-					htmlEscape="false" />
-				<input id="proceed" type="submit"
-					value="${fn:escapeXml(submit_label)}" />
-				<spring:message code="button_reset" var="reset_label"
-					htmlEscape="false" />
-				<input id="reset" type="reset" value="${fn:escapeXml(reset_label)}" />
-			</div>
-		</form>
-		
-		
-		
-		
-		
-		<spring:url value="/register" var="form_register" />
-		<form name="r" action="${fn:escapeXml(form_register)}" method="GET">
-			<div class="submit">
-				<spring:message code="button_register" var="register_label" htmlEscape="false" />
-				<input id="register" type="submit" value="${fn:escapeXml(register_label)}"  />
-			</div>
-		</form>
-		
-		<spring:url value="/recoverpass" var="form_recover" />
-		<form name="rp" action="${fn:escapeXml(form_recover)}" method="GET">
-			<div id= "recover" class="submit">
-				<spring:message code="button_recover" var="recover_label" htmlEscape="false" />
-				<input id="recover" type="submit" value="${fn:escapeXml(recover_label)}" />
+				<spring:message code="button_login" var="login_var" />
+				<input id="proceed" type="submit" value="${login_var}" />
+				
+				<spring:url value="/register" var="reg_ref"/>
+				<a class="input-button" href='${reg_ref}'><spring:message code="button_register"/></a>
+				<spring:url value="/recoverpass" var="pass_ref"/>
+				<a class="input-button" href='${pass_ref}'><spring:message code="button_recover" /></a>
+				
 			</div>
 		</form>
 		

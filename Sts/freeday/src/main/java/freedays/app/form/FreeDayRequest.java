@@ -39,11 +39,12 @@ public class FreeDayRequest {
      * 		<li>TypeC -> Compensation free day received on request or for a previous TypeR day</li>
      * 		<li>TypeR -> Recovery day for a TypeC free day</li>
      * 		<li>TypeV -> Vacation request</li>
+     * 		<li>TypeM -> Medical request</li>
      *  </ul>
      * @author fmacicasan
      *
      */
-    public enum RequestType {L,C,R,V};
+    public enum RequestType {L,C,R,V,M,NP};
     @NotNull
     @Enumerated
     private RequestType reqtype;
@@ -64,6 +65,8 @@ public class FreeDayRequest {
 	    	case L:
 	    	case C:
 	    	case R:
+	    	case M:
+	    	case NP:
 	    		fdr = new FreeDayRequest();
 	    		break;
 	    	case V:
@@ -73,6 +76,7 @@ public class FreeDayRequest {
 	    		throw new IllegalArgumentException("The request type is not supported!");	
     	}
     	fdr.setReqtype(rt);
+    	System.out.println(rt);
     	return fdr;
     }
     

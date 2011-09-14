@@ -27,6 +27,12 @@ public class FreeDayFactory {
 			case R:
 				ret = new FreeDayR();
 				break;
+			case M:
+				ret = new FreeDayM();
+				break;
+			case NP:
+				ret = new FreeDayNP();
+				break;
 			case V:
 				ret = new FreeDayVacation();
 				break;

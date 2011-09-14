@@ -17,6 +17,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.util.DateUtils;
+import freedays.util.PropertiesUtil;
 import freedays.util.ValidationUtils;
 import freedays.validation.annotation.BusinessDay;
 
@@ -106,7 +107,8 @@ public class FreeDayC extends FreeDaysRCMatch {
 
 	@Override
 	protected String getReportType() {
-		return "OnDemand";
+		//return "OnDemand";
+		return PropertiesUtil.getProperty("freedaysreport_legend_typec");
 	}
 
 //	@Override

@@ -110,7 +110,7 @@
         <!-- min : '${minnn}', max : '${maxxx}', for restricting based on future/past values 29072011_testing failed --> 
         Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${sec_field_validation}',onChange : function(newValue) {dijit.byId('_${sec_field_to}_id').constraints.min = newValue; }, invalidMessage: '${sec_field_invalid}', required: ${required}, constraints: {datePattern : '${sec_dateTimePattern}',required : ${required}}, datePattern : '${sec_dateTimePattern}'}})); </script>
     </div>
-    
+    <br/>
     
      <script type="text/javascript">dojo.require('dijit.form.DateTextBox')</script>
     <div id="_${sec_id_to}_id">

@@ -55,7 +55,6 @@ public class RequestController {
     public String createForm(Model uiModel) {
         uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.L));
         uiModel.addAttribute("typeLMarker",true);
-        System.out.println("testing");
         return "requests/create";
     }
 	
@@ -99,6 +98,22 @@ public class RequestController {
 		return "requests/vacation";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(params = "form=m", method = RequestMethod.GET)
+	public String createFormReqM(Model uiModel){
+		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.M));
+		uiModel.addAttribute("typeLMarker",true);
+		return "requests/create";
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(params = "form=np", method = RequestMethod.GET)
+	public String createFormReqNP(Model uiModel){
+		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.NP));
+		uiModel.addAttribute("typeLMarker",true);
+		return "requests/create";
+	}
+	
 	/**
 	 * Handler for free day request creation
 	 * @param request
@@ -112,7 +127,7 @@ public class RequestController {
     public String create(@Valid FreeDayRequest request, BindingResult bindingResult, Model uiModel, Principal p) {
         if (bindingResult.hasErrors()) {
         	
-        	System.out.println("ciuyciulete");
+        	//System.out.println("ciuyciulete");
         	
         	uiModel.addAttribute("hasError",true);
             uiModel.addAttribute("reqbean", request);
@@ -126,6 +141,8 @@ public class RequestController {
 	            	uiModel.addAttribute("matchings",FreeDayC.getAllUnmatchedRequestsByUsername(p.getName()));
 	            	uiModel.addAttribute("daytypeerror","Weekend");
 	            	break;
+	            case M:
+	            case NP:
 	            case L:
 	            	uiModel.addAttribute("typeLMarker", true);
 	            	uiModel.addAttribute("daytypeerror","BusinessDay");
@@ -135,7 +152,7 @@ public class RequestController {
             }
             return "requests/create";
         }
-        System.out.println("cacenflitzzzz");
+//        System.out.println("cacenflitzzzz");
         
         //uiModel.asMap().clear();
         //request.persist();

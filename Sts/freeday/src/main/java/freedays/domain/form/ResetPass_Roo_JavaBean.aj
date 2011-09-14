@@ -3,6 +3,7 @@
 
 package freedays.domain.form;
 
+import java.lang.String;
 
 privileged aspect ResetPass_Roo_JavaBean {
     

@@ -77,6 +77,8 @@
                     <menu:item id="i_request_new_c" messageCode="global_menu_new" url="/requests?form=c" z="user-managed"/>
                     <menu:item id="i_request_new_r" messageCode="global_menu_new" url="/requests?form=r" z="user-managed"/>
                     <menu:item id="i_request_new_v" messageCode="global_menu_new" url="/requests?form=v" z="user-managed"/>
+                    <menu:item id="i_request_new_m" messageCode="global_menu_new" url="/requests?form=m" z="user-managed" />
+                    <menu:item id="i_request_new_np" messageCode="global_menu_new" url="/requests?form=np" z="user-managed" />
                     <menu:item id="i_request_list_own" url="/requests?own" z="user-managed"/>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_REQUESTGRANTER">

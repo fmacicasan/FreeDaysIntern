@@ -334,7 +334,9 @@ public class FreeDayUserList {
 					.append(PropertiesUtil.getProperty("freedays_report_legend_typev_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typev"))).append(" ")
 					.append(PropertiesUtil.getProperty("freedays_report_legend_typel_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typel"))).append(" ")
 					.append(PropertiesUtil.getProperty("freedays_report_legend_typec_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typec"))).append(" ")
-					.append(PropertiesUtil.getProperty("freedays_report_legend_typer_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typer")));
+					.append(PropertiesUtil.getProperty("freedays_report_legend_typer_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typer")))
+					.append(PropertiesUtil.getProperty("freedays_report_legend_typem_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typem")))
+					.append(PropertiesUtil.getProperty("freedays_report_legend_typenp_sub")).append(MessageFormat.format(reportLegendMatcher , PropertiesUtil.getProperty("freedaysreport_legend_typenp")));
 				sb.append("</td>");
 	   		sb.append("</tr>");
 		sb.append("</table>");

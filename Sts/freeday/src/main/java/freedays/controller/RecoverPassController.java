@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,10 +49,10 @@ public class RecoverPassController {
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		if(bindingResult.hasErrors()){
 			uiModel.addAttribute("resetpass",resetpass);
-			uiModel.addAttribute("reason", false);
+			uiModel.addAttribute("reason", true);
 			return "recoverpass";
 		}
-		//System.out.println("i received email:"+resetpass.getEmail().toString());
+		System.out.println("i received email:"+resetpass.getEmail().toString());
 		RegularUser.resetPassword(resetpass.getEmail());
 		//dont send differentiated message on success/failure
 		uiModel.addAttribute("reason", true);

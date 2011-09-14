@@ -20,6 +20,7 @@ import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.app.form.FreeDayRequestVacation;
 import freedays.util.DateUtils;
+import freedays.util.PropertiesUtil;
 import freedays.util.ValidationUtils;
 
 /**
@@ -181,7 +182,8 @@ public class FreeDayVacation extends FreeDay {
 
 	@Override
 	protected String getReportType() {
-		return "Vacation";
+		//return "Vacation";
+		return PropertiesUtil.getProperty("freedaysreport_legend_typev");
 	}
 
 //	@Override

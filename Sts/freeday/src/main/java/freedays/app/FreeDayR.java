@@ -19,6 +19,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.util.DateUtils;
+import freedays.util.PropertiesUtil;
 import freedays.util.ValidationUtils;
 import freedays.validation.annotation.Weekend;
 
@@ -111,7 +112,8 @@ public class FreeDayR extends FreeDaysRCMatch {
 
 	@Override
 	protected String getReportType() {
-		return "Recover";
+		//return "Recover";
+		return PropertiesUtil.getProperty("freedaysreport_legend_typer");
 	}
 
 

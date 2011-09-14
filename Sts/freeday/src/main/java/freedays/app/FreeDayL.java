@@ -15,6 +15,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.util.PropertiesUtil;
 import freedays.util.ValidationUtils;
 import freedays.validation.annotation.BusinessDay;
 
@@ -89,7 +90,8 @@ public class FreeDayL extends FreeDay {
 
 	@Override
 	protected String getReportType() {
-		return "Legal";
+		//return "Legal";
+		return PropertiesUtil.getProperty("freedaysreport_legend_typel");
 	}
 
 //	@Override

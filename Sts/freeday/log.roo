@@ -626,3 +626,8 @@ focus --class freedays.app.FreeDay
 // [failed] field date --fieldName date --type java.util.Calendar --notNull --dateFormat SHORT
 field date --fieldName datee --type java.util.Calendar --notNull --dateFormat SHORT
 backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-13 18:36:51
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-14 09:27:24
+entity --class freedays.app.FreeDayM --testAutomatically --extends freedays.app.FreeDay
+entity --class freedays.app.FreeDayNP --testAutomatically --extends freedays.app.FreeDay
+backup
