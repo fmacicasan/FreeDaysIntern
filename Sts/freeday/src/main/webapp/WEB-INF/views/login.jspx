@@ -56,9 +56,11 @@
 				<input id="proceed" type="submit" value="${login_var}" />
 				
 				<spring:url value="/register" var="reg_ref"/>
-				<a class="input-button" href='${reg_ref}'><spring:message code="button_register"/></a>
+				<button type="button" onclick="window.location='${reg_ref}'"><spring:message code='button_register'/></button>
+				<!-- TODO: <a class="input-button" href='${reg_ref}'><spring:message code="button_register"/></a> -->
 				<spring:url value="/recoverpass" var="pass_ref"/>
-				<a class="input-button" href='${pass_ref}'><spring:message code="button_recover" /></a>
+				<button type="button" onclick="window.location='${pass_ref}'"><spring:message code='button_recover' /></button>
+				<!-- TODO: <a class="input-button" href='${pass_ref}'><spring:message code="button_recover" /></a> -->
 				
 			</div>
 		</form>

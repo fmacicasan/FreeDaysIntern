@@ -17,6 +17,8 @@
     <c:out value="a${isApprovable} isApprovable " />
     <c:out value="a${isSuperApprover} isSuperApprover " />
     <c:out value="a${isGreaterApprover} isGreaterApprover"/>
+    <c:out value="a${isPersonal} isPersonal"  />
+    <c:out value="a${isCancelable} isCancelable"  />
     
     <c:if test="${((isApprover  or isSuperApprover) and isApprovable) or isCancelable}">
         <br/>

@@ -145,10 +145,12 @@ table.navigation {
 }
 
 label {
-	width:100px;
+	width:110px;
 	float:left;
 	margin-left: 5px;
 	margin-top: 0px;
+	padding-right: 5px;
+	text-align: right;
 }
 
 input {
@@ -403,7 +405,7 @@ fieldset th {
 	margin-top: 5px;
 }
 /* TODO: fix register and forget pass buttons size */
-.submit input, .submit .input-button {
+.submit button, .submit input, .submit .input-button {
 	border: 1px solid #BBBBBB;
 	color:#777777;
 	padding:2px 7px;
