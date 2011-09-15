@@ -117,6 +117,10 @@ public abstract class FreeDay {
             lfds.add(FreeDayStatus.WAITING);
             return lfds;
         }
+        
+        public static FreeDayStatus getSuccessStatus(){
+        	return FreeDayStatus.FINALIZE_SUCCESS;
+        }
     }
 
     ;
@@ -274,6 +278,7 @@ public abstract class FreeDay {
      * @see FDUser
      * @see FreeDayUserList
      */
+    @Deprecated
     public static List<FreeDayUserList> getAllUserFreeDays() {
         List<FreeDayUserList> fdrl = new ArrayList<FreeDayUserList>();
         List<FDUser> fdul = FDUser.findAllFDUsers();

@@ -92,11 +92,12 @@ public class FreeDayVacation extends FreeDay {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Vacation Request:");
 		sb.append(" from ").append(DateUtils.printShortDate(this.getDate()));
-		sb.append(" to ").append(DateUtils.printShortDate(DateUtils.dateAddBusinessDay(this.getDate(), this.getSpan())));
+		sb.append(" to ").append(DateUtils.printShortDate(DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan())));
 		return sb.toString();
 	}
 	
 	@Override
+	@Deprecated
 	public List<String> reportPrint() {
 		List<String> ls = new ArrayList<String>();
 		long spn = this.getSpan();
@@ -161,7 +162,7 @@ public class FreeDayVacation extends FreeDay {
 	 * @return
 	 */
 	public Calendar getEnd(){
-		return DateUtils.dateAddBusinessDay(this.getDate(), this.getSpan());
+		return DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan());
 	}
 	
 	/**

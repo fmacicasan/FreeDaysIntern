@@ -1,11 +1,13 @@
 package freedays.util;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.Repeat;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -160,6 +162,47 @@ public class DateUtilsTest {
 		Assert.assertTrue(DateUtils.isValidMonth(cm));
 		Assert.assertFalse(DateUtils.isSameMonth(c, cm));
 		Assert.assertTrue(DateUtils.isSameMonth(c, DateUtils.transformMonth(cm)));
+	}
+	
+	@Test
+	public void testRomanianBusinessDayDifference(){
+		Calendar c = new GregorianCalendar(2011,Calendar.AUGUST,1);
+		Calendar cc = new GregorianCalendar(2011,Calendar.AUGUST,DateUtils.getDaysInMonth(Calendar.AUGUST));
+		//15 august is a holiday
+		Assert.assertEquals("not ok romanian date diference"+DateUtils.printShortDate(c)+" "+DateUtils.printShortDate(cc),DateUtils.dateDifferenceInWorkingDays(c, cc)+1, DateUtils.dateDifferenceInBusinessDays(c, cc));	
+	}
+	
+	@Test
+	public void testRomanianBusinessDayAdd(){
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		Calendar c = new GregorianCalendar(year,Calendar.AUGUST,1);
+		Calendar cc = new GregorianCalendar(year,Calendar.AUGUST,DateUtils.getDaysInMonth(Calendar.AUGUST));
+		long dd = DateUtils.dateDifferenceInWorkingDays(c, cc);
+		Assert.assertEquals("not ok romanian date add",cc,DateUtils.dateAddRomanianBusinessDay(c,dd) );
+	}
+	
+	@Test
+	@Repeat(10)
+	public void testRomanianBusinessDayAddRandom(){
+		System.out.println("ceruachi");
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		Calendar start = generateRandomRomanianLegal(15,Calendar.AUGUST,year,10,true);
+		Calendar end = generateRandomRomanianLegal(15,Calendar.AUGUST,year,10,false);
+		Assert.assertEquals("not ok romanian date diference"+DateUtils.printShortDate(start)+" "+DateUtils.printShortDate(end),DateUtils.dateDifferenceInWorkingDays(start, end)+1, DateUtils.dateDifferenceInBusinessDays(start, end));
+		long dd = DateUtils.dateDifferenceInWorkingDays(start, end);
+		Assert.assertEquals("not ok romanian date add"+DateUtils.printShortDate(start)+" "+DateUtils.printShortDate(end),end,DateUtils.dateAddRomanianBusinessDay(start,dd) );
+	}
+	
+	private Calendar generateRandomRomanianLegal(int day, int month, int year,int ss, boolean down){
+		int nr = new java.util.Random().nextInt(ss)+1;
+		if(down)nr=nr*(-1);
+		Calendar c = new GregorianCalendar(year,month,day+nr);
+		while(!ValidationUtils.checkBusinessDay(c)){
+			nr = new java.util.Random().nextInt(ss)+1;
+			if(down)nr=nr*(-1);
+			c = new GregorianCalendar(year,month,day+nr);
+		}
+		return c;
 	}
 	
 }

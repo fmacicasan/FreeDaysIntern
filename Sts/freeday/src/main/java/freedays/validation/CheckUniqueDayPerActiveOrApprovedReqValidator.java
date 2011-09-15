@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDay;
+import freedays.app.FreeDayRL;
 import freedays.app.form.FreeDayRequest;
 import freedays.security.UserContextService;
+import freedays.util.ValidationUtils;
 import freedays.validation.annotation.UniqueDayPerActiveOrApprovedReq;
 
 /**
@@ -34,7 +36,13 @@ public class CheckUniqueDayPerActiveOrApprovedReqValidator implements Constraint
 	public boolean isValid(FreeDayRequest fdr, ConstraintValidatorContext arg1) {
 		List<FreeDay> lfd = FreeDay.getAllNotFailedRequestsByUsername(userContextService.getCurrentUser());
 		for (FreeDay freeDay : lfd) {
-				if(freeDay.verifyUniqueness(fdr.getReqdate())) return false;
+				if(freeDay.verifyUniqueness(fdr.getReqdate())) {
+					return false;
+				}
+		}
+		if(ValidationUtils.checkRomanianLegalHoliday(fdr.getReqdate())){
+			System.out.println("i am the master of my faith i am the keeper of soul");
+			return false;
 		}
 		return true;
 	}

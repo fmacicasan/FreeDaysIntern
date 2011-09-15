@@ -78,6 +78,9 @@
 	       					<c:when test="${combined[i].type == 6 }"><!-- NP -->
 	       						<c:set var="colid" value="colnp" />
 	       					</c:when>
+	       					<c:when test="${combined[i].type == 7 }"><!-- Romanian Legislation -->
+	       						<c:set var="colid" value="colrl" />
+	       					</c:when>
 	       					<c:otherwise>
 	       						<c:set var="colid" value="" />
 	       					</c:otherwise>
@@ -128,7 +131,7 @@
 	       		<!-- </c:forEach> -->
        		</td>
        	</tr>
-       	<tr class="footer" >
+       	<tr class="footer legend" >
        		<td colspan="${colCounter}">
        			<i><b><spring:message code="freedaysreport_legend_title" />: </b></i> 
        			<spring:message code="freedaysreport_legend_matchings_c" var="matchc" />
@@ -147,12 +150,14 @@
        			<spring:message code="freedaysreport_legend_typer" var="legend_typer" />
        			<spring:message code="freedaysreport_legend_typem" var="legend_typem"/>
        			<spring:message code="freedaysreport_legend_typenp" var="legend_typenp"/>
-       			<div class="legr"><c:out value="${legend_typev}" /></div> 
-       			<div class="legg"><c:out value="${legend_typel}" /></div> 
-       			<div class="legy"><c:out value="${legend_typec}" /></div> 
-       			<div class="lego"><c:out value="${legend_typer}" /></div>
-       			<div class="legm"><c:out value="${legend_typem}" /></div>
-       			<div class="legnp"><c:out value="${legend_typenp}" /></div>
+       			<spring:message code="freedaysreport_legend_typerl" var="legend_typerl" />
+       			<span class="legr"><c:out value="${legend_typev}" /></span> 
+       			<span class="legg"><c:out value="${legend_typel}" /></span> 
+       			<span class="legy"><c:out value="${legend_typec}" /></span> 
+       			<span class="lego"><c:out value="${legend_typer}" /></span>
+       			<span class="legm"><c:out value="${legend_typem}" /></span>
+       			<span class="legnp"><c:out value="${legend_typenp}" /></span>
+       			<span class="legrl"><c:out value="${legend_typerl}" /> </span>
        			<br/>
        			<spring:message code="freedaysreport_legend_explanation_title" var="paneltitle" />
        			<util:panel title="${paneltitle}" id="vacationreport_legend_panel_id" openPane="false">
@@ -205,6 +210,19 @@
        						<strong><c:out value="${legend_typer}" /></strong>:
        						<spring:message code="freedays_report_legend_typer_exp" arguments="${legend_typec}"/>
        					</li>
+       					<li>
+       						<strong><c:out value="${legend_typem}" /></strong>:
+       						<spring:message code="freedays_report_legend_typem_exp"/>
+       					</li>
+       					<li>
+       						<strong><c:out value="${legend_typenp}" /></strong>:
+       						<spring:message code="freedays_report_legend_typenp_exp"/>
+       					</li>
+       					<li>
+       						<strong><c:out value="${legend_typerl}" /></strong>:
+       						<spring:message code="freedays_report_legend_typerl_exp"/>
+       					</li>
+       					
        				</ul>
        			</util:panel>
        		</td>

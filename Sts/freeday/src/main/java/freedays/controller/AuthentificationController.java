@@ -53,6 +53,7 @@ public class AuthentificationController extends
 			UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
 		String password = (String) authentication.getCredentials();
+		
 		if (!StringUtils.hasText(password)) {
 			throw new BadCredentialsException("Please enter the password!");
 		}
@@ -82,8 +83,7 @@ public class AuthentificationController extends
 		} catch (EntityNotFoundException e) {
 			throw new BadCredentialsException("Invalid user");
 		} catch (NonUniqueResultException e) {
-			throw new BadCredentialsException(
-					"Non-unique user, contact administrator");
+			throw new BadCredentialsException("Non-unique user, contact administrator");
 		}
 		return new User(username, password, true, true, true, true, authorities);
 	}

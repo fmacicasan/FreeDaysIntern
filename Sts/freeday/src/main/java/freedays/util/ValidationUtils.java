@@ -2,6 +2,9 @@ package freedays.util;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import freedays.app.FreeDayRL;
 
 /**
  * Utility class used by the validators to check the consistency of 
@@ -31,6 +34,18 @@ public class ValidationUtils {
 		int dayOfWeek = day.get(Calendar.DAY_OF_WEEK);
 		return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
 		//TODO: change to !checkBusinessDay
+	}
+	
+	/**
+	 * Verifies weather or not a calendar instance represents a romanian
+	 * legal holiday
+	 * @param reqdate
+	 * @return
+	 */
+	public static boolean checkRomanianLegalHoliday(Calendar reqdate) {
+		List<Calendar> lc = FreeDayRL.getAllHolidays();
+		boolean test = lc.contains(reqdate);
+		return test;
 	}
 	
 //	public static <T> T getSingleResult(TypedQuery<T> q) {

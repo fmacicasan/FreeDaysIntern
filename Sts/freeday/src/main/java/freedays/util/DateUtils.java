@@ -131,7 +131,29 @@ public class DateUtils {
 		return TimeUnit.MILLISECONDS.toDays(time);
 	}
 	
+	/**
+	 * Computes the difference in working days between the provided dates 
+	 * considering the Romanian legislation legal days for the current year.
+	 * A work day is represented by a normal business day except the ones
+	 * that are free based on the romanian legislation.
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	public static long dateDifferenceInWorkingDays(Calendar start, Calendar end) {
+		if(start == null)throw new IllegalArgumentException("The start argument is required");
+		if(end == null)throw new IllegalArgumentException("The end argument is required");
+		if(start.compareTo(end)>0) throw new IllegalArgumentException("start must be before end"); 
+		Long span = 0L;
+		for(Calendar c = (Calendar) start.clone();c.compareTo(end)<0;c.add(Calendar.DAY_OF_YEAR, 1)){
+			if(ValidationUtils.checkBusinessDay(c) && !ValidationUtils.checkRomanianLegalHoliday(c)){
+				span ++;
+			}
+		}
+		return span;
+	}
+	
+	public static long dateDifferenceInBusinessDays(Calendar start, Calendar end) {
 		if(start == null)throw new IllegalArgumentException("The start argument is required");
 		if(end == null)throw new IllegalArgumentException("The end argument is required");
 		if(start.compareTo(end)>0) throw new IllegalArgumentException("start must be before end"); 
@@ -324,7 +346,7 @@ public class DateUtils {
 	 */
 	public static Calendar dateAddBusinessDay(Calendar start, Long span) {
 		Calendar date = (Calendar) start.clone();
-		System.out.println(DateUtils.printShortDate(date));
+//		System.out.println(DateUtils.printShortDate(date));
 		if(ValidationUtils.checkWeekend(date)){
 			if(date.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
 				date.add(Calendar.DAY_OF_YEAR, 1);
@@ -338,10 +360,40 @@ public class DateUtils {
 			days+=2;
 		}
 		date.add(Calendar.DAY_OF_MONTH, days.intValue()+full.intValue());
-		System.out.println(DateUtils.printShortDate(date));
+//		System.out.println(DateUtils.printShortDate(date));
 		return date;
 	}
 
+	/**
+	 * Adds to the privided date the number of working days offered by span considering
+	 * both the weekends and the romanian legislation days
+	 * @param start
+	 * @param span
+	 * @return
+	 */
+	public static Calendar dateAddRomanianBusinessDay(Calendar start, Long span){
+		//start day wont be holiday
+		//end date wont be holiday
+		//=> holiday will be in between
+		//store the start date + the rest of working days untill the end
+		//if
+		//no solution like this because there can be any number of remaining stuff
+		//
+		Integer init = 0;
+		Calendar date = (Calendar)start.clone();
+		while(span > 0){
+			date.add(Calendar.DAY_OF_YEAR, 1);
+//			System.out.println(DateUtils.printShortDate(date));
+			if(!ValidationUtils.checkWeekend(date)){
+				if(!ValidationUtils.checkRomanianLegalHoliday(date)){
+					span--;
+				}
+				init++;
+			}
+		}
+		return DateUtils.dateAddBusinessDay(start, init.longValue());
+	}
+	
 	public static boolean isCurrentYear(Calendar date) {
 		Calendar c = Calendar.getInstance();
 		return date.get(Calendar.YEAR)==c.get(Calendar.YEAR);

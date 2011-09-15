@@ -14,9 +14,14 @@ body {
 #header {
 	margin-bottom: 1em;
 }
-.legr,.legy,.legg,.lego,.legm,.legnp{
-	display: inline;
-	margin: 0.5%;
+
+.legend span{
+	display: inline-block;
+	margin: 3px;
+	padding: 2px;
+	border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
 }
 .colr,.legr{
 	background-color: RGB(255,150,150);
@@ -35,6 +40,9 @@ body {
 }
 .colnp,.legnp{
 	background-color: lime;
+}
+.colrl,.legrl{
+	background-color: #FFCB73;
 }
 .colb{
 	background-color: RGB(213,235,213);
@@ -394,6 +402,7 @@ fieldset th {
 .submit {
 	margin-top: 5px;
 }
+/* TODO: fix register and forget pass buttons size */
 .submit input, .submit .input-button {
 	border: 1px solid #BBBBBB;
 	color:#777777;

@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDay;
+import freedays.app.FreeDayRL;
 import freedays.app.form.FreeDayRequestVacation;
 import freedays.security.UserContextService;
+import freedays.util.ValidationUtils;
 import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
 /**
  * 
@@ -40,6 +42,9 @@ public class CheckUniqueVacationPerActiveOrApprovedReqValidator implements Const
 				if(freeDay.verifyUniqueness(finish)) return false;
 				Calendar date = freeDay.getDate();
 				if(start.before(date) && finish.after(date)) return false;
+		}
+		if(ValidationUtils.checkRomanianLegalHoliday(fdr.getReqdate()) || ValidationUtils.checkRomanianLegalHoliday(fdr.getFinish())){
+			return false;
 		}
 		return true;
 	}

@@ -11,30 +11,17 @@
                 </sec:authorize>
             </sec:authorize>
         </menu:category>
-        <sec:authorize ifAnyGranted="ROLE_AAA,ROLE_HRMANAGEMENT">
+        <sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT">
             <menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
-                <sec:authorize ifAllGranted="ROLE_AAA">
-                    <menu:item id="i_hrmanagement_new" messageCode="global_menu_new" url="/hrmanagements?form" z="gh9MLkRfGMg1hyfIdmD30xS0S38="/>
-                    <menu:item id="i_hrmanagement_list" messageCode="global_menu_list" url="/hrmanagements?page=1&amp;size=${empty param.size ? 10 : param.size}" z="rK2fdLVRaF6oqHWiKvL8M6q1aso="/>
-                    <menu:item id="i_hrmanagement_list_freedays" url="/report?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
-                </sec:authorize>
-                <sec:authorize ifAllGranted="ROLE_HRMANAGEMENT">
                     <menu:item id="i_fduser_new" messageCode="global_menu_new" url="/fdusers?form" z="user-managed"/>
                     <menu:item id="i_hrmanagement_list_fd_users" messageCode="global_menu" url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z=""/>
-                </sec:authorize>
             </menu:category>
         </sec:authorize>
-        <sec:authorize ifAllGranted="ROLE_AAA">
-            <menu:category id="c_requestgranter" z="qIRPS1WXPxXt+NR0tZV12KCGyNQ=">
-                <menu:item id="i_requestgranter_new" messageCode="global_menu_new" url="/requestgranters?form" z="+XhU9I7K3Vfd760t4dz28PtbDTI="/>
-                <menu:item id="i_requestgranter_list" messageCode="global_menu_list" url="/requestgranters?page=1&amp;size=${empty param.size ? 10 : param.size}" z="EwwdvD61VT2WIInKk+Kbc696EYk="/>
-            </menu:category>
-        </sec:authorize>
-        <sec:authorize ifAllGranted="ROLE_AAA">
-            <menu:category id="c_admin" z="yJekxb7XuSQP9KBD9S6wbwLaHZY=">
-                <menu:item id="i_admin_new" messageCode="global_menu_new" url="/admins?form" z="TPmBX+1lfAP8gYU/pX/jcYwsTfM="/>
-                <menu:item id="i_admin_list" messageCode="global_menu_list" url="/admins?page=1&amp;size=${empty param.size ? 10 : param.size}" z="JRwUq6a+WGX2NnSSZCd4lcreuMk="/>
-            </menu:category>
+        <sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN" >
+        	<menu:category id="c_freedayrl" z="lj8g1YJzQfr5XdIE2cT1Vyiv0Kc=">
+            	<menu:item id="i_freedayrl_new" messageCode="global_menu_new" url="/roleg?form" z="5+LZ+lt+6mW+57oD1oZ4YUFuhCw="/>
+            	<menu:item id="i_freedayrl_list" messageCode="global_menu_list" url="/roleg?page=1&amp;size=${empty param.size ? 10 : param.size}" z="4A2sbthw8nfd/hiTM8jQPEoPTro="/>
+        	</menu:category>
         </sec:authorize>
         <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_FDADMIN">
             <menu:category id="c_regularuser" z="f0656ccKE9tZTK8IgpHTnLvK31o=">
@@ -51,18 +38,6 @@
                 <menu:item id="i_fduser_list" messageCode="global_menu_list" url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="pkNWU4h6kpXe7wSaynWgJxFsvqE="/>
             </menu:category>
         </sec:authorize>
-        <sec:authorize ifAllGranted="ROLE_AAA">
-            <menu:category id="c_fdadmin" z="AulS1dtJIr8ICL3kM4HL5nx9TT4=">
-                <menu:item id="i_fdadmin_new" messageCode="global_menu_new" url="/fdadmins?form" z="Xrs016jQViqY9Ef6+bMllnlzMjg="/>
-                <menu:item id="i_fdadmin_list" messageCode="global_menu_list" url="/fdadmins?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qGMWtTuiSPvEBVAO/4gA3z4P+gM="/>
-            </menu:category>
-        </sec:authorize>
-        <!--  <sec:authorize ifAllGranted="ROLE_ADMIN">
-            <menu:category id="c_admin_regular_user" z="">
-                <menu:item id="i_admin_regular_user_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z=""/>
-                <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z=""/>
-            </menu:category>
-        </sec:authorize>-->
         <sec:authorize ifAllGranted="ROLE_USER">
             <menu:category id="c_account" z="">
                 <menu:item id="i_regular_user_update" messageCode="global_menu" url="/account" z="user-managed"/>
@@ -77,16 +52,16 @@
                     <menu:item id="i_request_new_c" messageCode="global_menu_new" url="/requests?form=c" z="user-managed"/>
                     <menu:item id="i_request_new_r" messageCode="global_menu_new" url="/requests?form=r" z="user-managed"/>
                     <menu:item id="i_request_new_v" messageCode="global_menu_new" url="/requests?form=v" z="user-managed"/>
-                    <menu:item id="i_request_new_m" messageCode="global_menu_new" url="/requests?form=m" z="user-managed" />
-                    <menu:item id="i_request_new_np" messageCode="global_menu_new" url="/requests?form=np" z="user-managed" />
+                    <menu:item id="i_request_new_m" messageCode="global_menu_new" url="/requests?form=m" z="user-managed"/>
+                    <menu:item id="i_request_new_np" messageCode="global_menu_new" url="/requests?form=np" z="user-managed"/>
                     <menu:item id="i_request_list_own" url="/requests?own" z="user-managed"/>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_REQUESTGRANTER">
                     <menu:item id="i_request_list_approve" url="/requests?approve" z="user-managed"/>
                 </sec:authorize>
                 <!--  not working with url and method url="/requests/superapprove" method="GET" -->
-                <sec:authorize ifAllGranted="ROLE_SUPERAPPROVER"  >
-                	<menu:item id="i_request_list_superapprove" url="/requests?superapprove" z="user-managed" />
+                <sec:authorize ifAllGranted="ROLE_SUPERAPPROVER">
+                    <menu:item id="i_request_list_superapprove" url="/requests?superapprove" z="user-managed"/>
                 </sec:authorize>
                 <sec:authorize ifAllGranted="ROLE_FDADMIN">
                     <menu:item id="i_request_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
@@ -121,5 +96,6 @@
                 <menu:item id="i_schedule_list" messageCode="global_menu_list" url="/schedules?page=1&amp;size=${empty param.size ? 10 : param.size}" z="a/r1d6sKwcNadI1IqZ37gsZ4WRs="/>
             </menu:category>
         </sec:authorize>
+        
     </menu:menu>
 </div>

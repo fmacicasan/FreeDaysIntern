@@ -631,3 +631,10 @@ backup
 entity --class freedays.app.FreeDayM --testAutomatically --extends freedays.app.FreeDay
 entity --class freedays.app.FreeDayNP --testAutomatically --extends freedays.app.FreeDay
 backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-14 17:26:50
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-15 09:26:20
+entity --class freedays.app.FreeDayRL --testAutomatically
+field date --fieldName romanianHoliday --type java.util.Calendar --dateFormat SHORT
+field string --fieldName description
+controller scaffold --class freedays.controller.RomanianLegislationController --entity freedays.app.FreeDayRL --path roleg
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-15 18:55:08

@@ -12,10 +12,15 @@ import org.springframework.stereotype.Component;
 
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
+import freedays.app.FreeDay.FreeDayStatus;
+import freedays.app.FreeDayRL;
 import freedays.app.FreeDayVacation;
+import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.domain.Request;
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
+import freedays.util.ValidationUtils;
 
 /**
  * Wrapper class for report generation.
@@ -40,6 +45,7 @@ public class FreeDayUserList {
 	/**
 	 * Generates a list of granted FreeDays requests based on the provided username
 	 */
+	@Deprecated
 	public static FreeDayUserList generateFreeDaysList(String username){
 		FDUser fdu = FDUser.findFDUserByUsername(username);
 		return FreeDayUserList.generateFreeDaysList(fdu);
@@ -48,6 +54,7 @@ public class FreeDayUserList {
 	/**
 	 * Generates a list of granted FreeDays requests for the provided FDUser
 	 */
+	@Deprecated
 	public static FreeDayUserList generateFreeDaysList(FDUser fdu){
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getReportName());
@@ -61,6 +68,7 @@ public class FreeDayUserList {
 	/**
 	 * Prepares the list of generated FreeDay-s for report printing
 	 */
+	@Deprecated
 	private static List<String> transformFreeDay2String4Report(List<FreeDay> allGrantedFreeDayByUsername) {
 		List<String> ls = new ArrayList<String>();
 		for (FreeDay fd : allGrantedFreeDayByUsername) {
@@ -76,6 +84,7 @@ public class FreeDayUserList {
 	 * Computes the maximum width of the free day report based on the maximum
 	 * number of freedays associated with fduser from the report.
 	 */
+	@Deprecated
 	public static Long computeTableWidth(List<FreeDayUserList> lfd) {
 		long max = -1;
 		for (FreeDayUserList fdul : lfd) {
@@ -128,6 +137,7 @@ public class FreeDayUserList {
 	 * @param j
 	 * @return
 	 */
+	@Deprecated
 	public static List<FreeDayUserList> subListFreedays(List<FreeDayUserList> lfd, int i, int j) {
 		if(i>=j) throw new IllegalArgumentException("The i parameter should be smaller than j");
 		
@@ -193,27 +203,45 @@ public class FreeDayUserList {
 			if(fd instanceof FreeDayVacation){
 				FreeDayVacation fdv = (FreeDayVacation)fd;
 				Calendar start = fdv.getDate();
-				Calendar end = DateUtils.dateAddBusinessDay(start, fdv.getSpan());
+				Calendar end = DateUtils.dateAddRomanianBusinessDay(start, fdv.getSpan());
 				//replaced before by compareTo to test equality
 				for(Calendar c = (Calendar)start.clone();c.compareTo(end)<=0;c.add(Calendar.DAY_OF_YEAR, 1)){
-					if(DateUtils.isSameMonth(c, month) && DateUtils.isCurrentYear(fd.getDate())){
+					if(DateUtils.isSameMonth(c, month) 
+							&& DateUtils.isCurrentYear(c) 
+							&& !ValidationUtils.checkRomanianLegalHoliday(c)){
 						FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
 						fdrw.setType(fd.getType().ordinal()+1);
-						fdrw.setStatus(fd.getStatus().toString().substring(0,1));
+						fdrw.setStatus(evaluateReportWrapperStatus(fd.getStatus()));
 						list.set(DateUtils.getDay(c)-1,fdrw );
 					}
 				}
 			} else {
-				if(DateUtils.isSameMonth(fd.getDate(),month) && DateUtils.isCurrentYear(fd.getDate())){//remove this if you get the freedays already filtered by month
+				if(DateUtils.isSameMonth(fd.getDate(),month) 
+						&& DateUtils.isCurrentYear(fd.getDate())
+						&& !ValidationUtils.checkRomanianLegalHoliday(fd.getDate())){//remove this if you get the freedays already filtered by month
 					FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
 					fdrw.setType(fd.getType().ordinal()+1);
-					fdrw.setStatus(fd.getStatus().toString().substring(0,1));
+					fdrw.setStatus(evaluateReportWrapperStatus(fd.getStatus()));
 					list.set(DateUtils.getDay(fd.getDate())-1,fdrw );
 				}
 			}
 		}
+		List<FreeDayRL> lfdrl = FreeDayRL.findAllFreeDayRLs();
+		for(FreeDayRL fdrl : lfdrl){
+			Calendar holidayDay = fdrl.getRomanianHoliday();
+			if(DateUtils.isSameMonth(holidayDay, month) && DateUtils.isCurrentYear(holidayDay)){
+				FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
+				fdrw.setType(RequestType.values().length+1);//this will be the last of the free day status in any case
+				fdrw.setStatus(evaluateReportWrapperStatus(FreeDayStatus.getSuccessStatus()));
+				list.set(DateUtils.getDay(holidayDay)-1, fdrw);
+			}
+		}
 		
 		return list;
+	}
+	
+	private static String evaluateReportWrapperStatus(FreeDayStatus fds){
+		return fds.toString().substring(0, 1);
 	}
 	
 	/**

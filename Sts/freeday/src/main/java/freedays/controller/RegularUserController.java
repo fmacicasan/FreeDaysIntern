@@ -62,8 +62,8 @@ public class RegularUserController {
 	
 	private void evaluateDeletable(List<RegularUser> lru){
 		for (RegularUser ru : lru) {
-			if(!ru.getUsername().equals(this.userContextService.getCurrentUser())){
-				ru.setDeletable(true);
+			if(ru.getUsername().equals(this.userContextService.getCurrentUser())){
+				ru.setDeletable(false);
 			}
 		}
 	}

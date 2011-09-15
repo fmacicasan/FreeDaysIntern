@@ -166,8 +166,8 @@ public class FDUserController {
 	
 	private void evaluateDeletable(List<FDUser> lfu){
 		for (FDUser fu : lfu) {
-			if(!fu.getRegularUser().getUsername().equals(this.userContextService.getCurrentUser())){
-				fu.setDeletable(true);
+			if(fu.getRegularUser().getUsername().equals(this.userContextService.getCurrentUser())){
+				fu.setDeletable(false);
 			}
 		}
 	}
