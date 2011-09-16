@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_freedays_timesheet_PhaseLabor" items="${phaselabors}" z="gHZr4lLU7kOYOz/T/aB6cqaQlbg=">
+        <table:table data="${phaselabors}" id="l_freedays_timesheet_PhaseLabor" path="/phaselabors" z="U69Ma6U9mjE5D88ZFEJFFJXQy1Y=">
+            <table:column id="c_freedays_timesheet_PhaseLabor_percentage" property="percentage" z="rN6jGFImVtNr2E4f61nT29fXvwE="/>
+            <table:column id="c_freedays_timesheet_PhaseLabor_project" property="project" z="91CHdMBcvl+ZJBN4DfGKvfZIzRs="/>
+            <table:column id="c_freedays_timesheet_PhaseLabor_phase" property="phase" z="hruUCxVcwX9FGinjAfajl1c1ZJo="/>
+            <table:column id="c_freedays_timesheet_PhaseLabor_laborbilling" property="laborbilling" z="AmNVew2FEtEtvvWuFg9Dio/HHF4="/>
+            <table:column id="c_freedays_timesheet_PhaseLabor_pattern" property="pattern" z="r1nTPJ3EkRxAaH9vi9smvWCyt7k="/>
+            <table:column id="c_freedays_timesheet_PhaseLabor_deletable" property="deletable" z="5pnKCU6946m/+ghIqLV2EWcmpm4="/>
+        </table:table>
+    </page:list>
+</div>

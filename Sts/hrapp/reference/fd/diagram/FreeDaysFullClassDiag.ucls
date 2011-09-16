@@ -1,0 +1,468 @@
+<class-diagram version="1.0.4" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDaysRCMatch" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FreeDaysRCMatch.java" binary="false">    
+    <position height="-1" width="-1" x="1912" y="1170"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FDUser" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FDUser.java" binary="false">    
+    <position height="-1" width="-1" x="958" y="660"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="freedays.domain.ApprovalStrategy" project="freedays" 
+    file="/freedays/src/main/java/freedays/domain/ApprovalStrategy.java" binary="false">    
+    <position height="-1" width="-1" x="2360" y="200"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="freedays.app.AppStrategL1" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/AppStrategL1.java" binary="false">    
+    <position height="-1" width="-1" x="2441" y="553"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FDAdmin" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FDAdmin.java" binary="false">    
+    <position height="-1" width="-1" x="389" y="1004"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="6" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDay.FreeDayStatus" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FreeDay.java" binary="false">    
+    <position height="-1" width="-1" x="2066" y="923"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="freedays.app.HRManagement" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/HRManagement.java" binary="false">    
+    <position height="-1" width="-1" x="512" y="1002"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="9" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDayVacation" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FreeDayVacation.java" binary="false">    
+    <position height="-1" width="-1" x="2434" y="949"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="10" corner="BOTTOM_RIGHT" language="java" name="freedays.domain.Request" project="freedays" 
+    file="/freedays/src/main/java/freedays/domain/Request.java" binary="false">    
+    <position height="-1" width="-1" x="1317" y="375"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="11" corner="BOTTOM_RIGHT" language="java" name="freedays.domain.RequestGranter" project="freedays" 
+    file="/freedays/src/main/java/freedays/domain/RequestGranter.java" binary="false">    
+    <position height="-1" width="-1" x="787" y="929"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="12" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDayC" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FreeDayC.java" binary="false">    
+    <position height="-1" width="-1" x="1641" y="1403"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="13" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDayVacation.ConfidenceLevel" 
+    project="freedays" file="/freedays/src/main/java/freedays/app/FreeDayVacation.java" binary="false">    
+    <position height="-1" width="-1" x="2493" y="1262"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="14" corner="BOTTOM_RIGHT" language="java" name="freedays.domain.Admin" project="freedays" 
+    file="/freedays/src/main/java/freedays/domain/Admin.java" binary="false">    
+    <position height="-1" width="-1" x="634" y="998"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="15" corner="BOTTOM_RIGHT" language="java" name="freedays.domain.ApplicationRegularUser.JobRole" 
+    project="freedays" file="/freedays/src/main/java/freedays/domain/ApplicationRegularUser.java" binary="false">    
+    <position height="-1" width="-1" x="562" y="129"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="16" corner="BOTTOM_RIGHT" language="java" name="freedays.domain.ApplicationRegularUser" project="freedays" 
+    file="/freedays/src/main/java/freedays/domain/ApplicationRegularUser.java" binary="false">    
+    <position height="-1" width="-1" x="852" y="181"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="17" corner="BOTTOM_RIGHT" language="java" name="freedays.app.RequestStatus" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/RequestStatus.java" binary="false">    
+    <position height="-1" width="-1" x="1237" y="879"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="18" corner="BOTTOM_RIGHT" language="java" name="freedays.domain.AdvancedUserRole" project="freedays" 
+    file="/freedays/src/main/java/freedays/domain/AdvancedUserRole.java" binary="false">    
+    <position height="-1" width="-1" x="635" y="753"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="19" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDayR" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FreeDayR.java" binary="false">    
+    <position height="-1" width="-1" x="2174" y="1407"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="20" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDayFactory" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FreeDayFactory.java" binary="false">    
+    <position height="-1" width="-1" x="1579" y="1142"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="21" corner="BOTTOM_RIGHT" language="java" name="freedays.app.AppStrategLTop" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/AppStrategLTop.java" binary="false">    
+    <position height="-1" width="-1" x="2594" y="433"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="22" corner="BOTTOM_RIGHT" language="java" name="freedays.domain.RegularUser" project="freedays" 
+    file="/freedays/src/main/java/freedays/domain/RegularUser.java" binary="false">    
+    <position height="-1" width="-1" x="247" y="466"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="23" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDay" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FreeDay.java" binary="false">    
+    <position height="-1" width="-1" x="1983" y="578"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="24" corner="BOTTOM_RIGHT" language="java" name="freedays.app.FreeDayL" project="freedays" 
+    file="/freedays/src/main/java/freedays/app/FreeDayL.java" binary="false">    
+    <position height="-1" width="-1" x="1618" y="890"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <generalization>    
+    <end type="SOURCE" nodeId="19"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </generalization>  
+  <association>    
+    <end type="SOURCE" nodeId="12" navigable="false">      
+      <attribute name="recover"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="10" navigable="false">      
+      <attribute name="requestable">        
+        <position height="14" width="61" x="1732" y="515"/>      
+      </attribute>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="10"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="16" navigable="false">      
+      <attribute name="requests">        
+        <position height="14" width="47" x="1087" y="294"/>      
+      </attribute>      
+      <multiplicity minimum="0" maximum="2147483647">        
+        <position height="14" width="16" x="1136" y="286"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" nodeId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="23" navigable="false">      
+      <attribute name="status"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="18" navigable="false">      
+      <attribute name="appRegUsers"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" nodeId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="16" navigable="false">      
+      <attribute name="roles"/>      
+      <multiplicity minimum="0" maximum="2147483647">        
+        <position height="14" width="16" x="662" y="680"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" nodeId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="23"/>    
+    <end type="TARGET" nodeId="16"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="16"/>  
+  </dependency>  
+  <generalization>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="23"/>  
+  </generalization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="6"/>  
+  </dependency>  
+  <generalization>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="16"/>  
+  </generalization>  
+  <association>    
+    <end type="SOURCE" nodeId="10" navigable="false">      
+      <attribute name="appreguser">        
+        <position height="14" width="60" x="1014" y="154"/>      
+      </attribute>      
+      <multiplicity minimum="0" maximum="1">        
+        <position height="14" width="18" x="926" y="277"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" nodeId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="23" navigable="false">      
+      <attribute name="approval"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="22"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="20"/>    
+    <end type="TARGET" nodeId="12"/>  
+  </dependency>  
+  <generalization>    
+    <end type="SOURCE" nodeId="11"/>    
+    <end type="TARGET" nodeId="18"/>  
+  </generalization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="20"/>    
+    <end type="TARGET" nodeId="19"/>  
+  </dependency>  
+  <generalization>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="18"/>  
+  </generalization>  
+  <association>    
+    <end type="SOURCE" nodeId="3" navigable="false">      
+      <attribute name="succesor"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="1121" y="140"/>    
+    <end type="SOURCE" nodeId="10" navigable="false">      
+      <attribute name="approver">        
+        <position height="14" width="48" x="1002" y="271"/>      
+      </attribute>      
+      <multiplicity minimum="0" maximum="1">        
+        <position height="14" width="18" x="1020" y="135"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" nodeId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="9"/>    
+    <end type="TARGET" nodeId="6"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="16" navigable="false">      
+      <attribute name="jobrole"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="16"/>    
+    <end type="TARGET" nodeId="11"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="20"/>    
+    <end type="TARGET" nodeId="9"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="9" navigable="false">      
+      <attribute name="confidence"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <end type="SOURCE" nodeId="4"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </generalization>  
+  <nesting>    
+    <end type="SOURCE" nodeId="9"/>    
+    <end type="TARGET" nodeId="13"/>  
+  </nesting>  
+  <nesting>    
+    <end type="SOURCE" nodeId="16"/>    
+    <end type="TARGET" nodeId="15"/>  
+  </nesting>  
+  <association>    
+    <end type="SOURCE" nodeId="10" navigable="false">      
+      <attribute name="status"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <end type="SOURCE" nodeId="9"/>    
+    <end type="TARGET" nodeId="23"/>  
+  </generalization>  
+  <generalization>    
+    <end type="SOURCE" nodeId="21"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </generalization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="24"/>    
+    <end type="TARGET" nodeId="6"/>  
+  </dependency>  
+  <generalization>    
+    <end type="SOURCE" nodeId="14"/>    
+    <end type="TARGET" nodeId="18"/>  
+  </generalization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="23"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="20"/>    
+    <end type="TARGET" nodeId="24"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="21"/>    
+    <end type="TARGET" nodeId="16"/>  
+  </dependency>  
+  <nesting>    
+    <end type="SOURCE" nodeId="23"/>    
+    <end type="TARGET" nodeId="6"/>  
+  </nesting>  
+  <generalization>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="18"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="910" y="276"/>    
+    <bendpoint x="921" y="277"/>    
+    <bendpoint x="940" y="278"/>    
+    <end type="SOURCE" nodeId="16" navigable="false">      
+      <attribute name="granter">        
+        <position height="14" width="39" x="932" y="262"/>      
+      </attribute>      
+      <multiplicity minimum="0" maximum="1">        
+        <position height="14" width="18" x="982" y="267"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" nodeId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="19" navigable="false">      
+      <attribute name="request"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <end type="SOURCE" nodeId="24"/>    
+    <end type="TARGET" nodeId="23"/>  
+  </generalization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="4"/>    
+    <end type="TARGET" nodeId="16"/>  
+  </dependency>  
+  <generalization>    
+    <end type="SOURCE" nodeId="12"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </generalization>  
+  <association>    
+    <end type="SOURCE" nodeId="16" navigable="false">      
+      <attribute name="regularUser"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="20"/>    
+    <end type="TARGET" nodeId="23"/>  
+  </dependency>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

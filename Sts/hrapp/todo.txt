@@ -1,0 +1,128 @@
+TODO in STS -
+	- DONE permit approval/deny only if the request is : cancelable freeday, not approved/denied/canceled
+	- add a choice probability for the characters at password generation
+	- @reportfreedays controller get jst the active users
+	- @find all pending approvals by username, search only the ones that need approval
+	- DONE - maintained validation! @check weekend validation - verify only with !businessday
+	- ???report all users or just active ones?
+	- DONE per month get vacations only between the two provided dates
+		- DONE months!!!add pages to reports
+	- change all catch clauses @ throw exception, catch only when is needed
+	
+TODO:
+	- V2PLAN add Service layer instead of static method calls
+	- V2PLAN put security annotations on the services instead of the controllers
+	
+	- DONE via the UpdateAccount wrapper!! on update should also check the validity of the RegularUser
+	- V2PLAN ??update a request by the FDUser???
+	- DONE ??what if not approved and the date already passed ?? CANCEL IT!
+	- V2PLAN visitor for permissions instead of instanceof
+	
+	- DONE change register/recoverpass/change pass change info/ login process and password encryption
+		- DONE update regular user info problem with redirect to /regularusers
+	- DONE improve validity restricting request to one for a calendar date
+		- DONE verify also if vacation intersects some day already approved!
+			- DONE consider annotation for validity of RegularUser
+	- V2PLAN request more than one day / request
+	- V2PLAN solve the @BusinessDay and @weekend @duplicate error display
+	
+	- DONE verify the active & deleted flag on login
+		- V2PLAN consider using the User class
+	- V2PLAN @Searchable annotation
+	- V2PLAN ???FDUser creation, add NULL FDUser for top granter
+		- prototype & replace with null
+	- Type R/C day creation add NULL for no match
+	- CRITICAL!! Add YEAR Support
+	- V2PLAN ? Ofer posibility for reason input on request denial
+	
+	- DONE eu si HR raport pe zile la toata lumea
+	- DONE cate au ramas la fiecare din maxim
+	- DONE HR vede approved si numarul real
+	- DONE restu vede si pending si real time number of days
+	- V2PLAN concedii medicale
+	- V2PLAN scurtcircuitare team leader
+	- DONE normal user canceling his request will get access denied for requests?approve
+	- DONE navigare raport pe luni: ian/feb/sept ->....
+	- DONE CRITICAL!! Validation still server side!! Client Side Date!!!
+	- DONE CRITICAL!! dont's consider the weekend days for the Vacation request when counting available/remaining days
+	
+	
+	
+	
+	- DONE add page for personal FDUser visualization of the registered user
+	- DONE Solve problem at FDUser update with RegularUser transformation
+	- DONE restrict the login untill a FDADMIN/HRMANAGER associated the FDUser to the RegularUser
+	- DONE - migrated to SDL account - disabled gmail accout
+	
+	- V2PLAN integrate with LDAP service (exchange)
+    - DONE add mail send for user creation to FDADMIN/HRMANAGEMENT
+	- DONE mail raport doar ziua curenta
+	- DONE la sfarsitul zilei sa verific zilele under approval ce inca nu au fost aprobate
+	
+	- DONE transaction fails if the date to be matched is in the Past
+		- DONE removed annotation(L&V) - same with any update to a @Future column that are made when that date represents past
+		- DONE removed annotation - typeL solve this somehow!!
+	- DONE FDUser update will fail due to invalid regular user
+	
+	- DONE change register redirect to some page stating that the account is under processing and he will receive some mail confirmation when he can start using the service
+    - DONE add javadoc generation
+	- DONE with push in - problem at securing the controller handlers in the aspects
+	- DONE provide some info for the approver
+	- V2PLAN add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
+	
+	RELEASE TODO:
+	- DONE solve the minor bugs discovered that will enter in this realease
+	- DONE add new DB users & schemas for release & marcel
+	- DONE configure the release machine (tomcat)
+	- DONE create "empty" db import.sql
+	- DONE create the git TAG
+	- DONE write some user guidelines
+	- DONE mail I+B+Some1Elese with info Florina&Dan
+	
+	IMPROVEMENTS:
+	Discovered:
+		- DONE to string for printing the vacation weekday 
+		- DONE user creation form from admin console
+		- DONE - to verbose!!!!!logging server side
+			- to verbose logging
+			- improve logging on application specific topics
+		- DONE login possible with lowercase/uppercase username
+		- V2 - add discriminator field describing the typeC request origin (EMPLOYER Or EMPLOYEE)
+		- V2 - integrate with LDAP service (exchange)
+		- V2 - concedii medicale
+		- V2 - concedii neplatite
+		- V2 - scurtcircuitare team leader
+		- V2 - request more than one day / request
+		- V2 - ?? Ofer posibility for reason input on request denial
+	Florina:
+		- DONE change page displayed after register with some info
+		- DONE send mail to admn after register for account processing
+			-- ugly workarrownd extracting sdl accounts
+		- DONE send mail to user after account is processed
+		- DONE change submit name for the button with SignIn
+		- DONE ??vacation view choice problem
+			DONE - due to login possible with other characters
+		- DONE add back button
+		-	DONE Mark weekend days with a different color (e.g. like in xsl calendar template: http://office.microsoft.com/en-us/templates/results.aspx?qu=%22Templates%20for%20Excel%22&ck=1&av=ZXL140#ai:TC010278636| )
+		-	DONE Unmark the weekend days in case the vacation in taken starting in one week and ending in the second one
+
+	
+	Bogdan:
+		1)	DONE Calendar – see attached – the Month and the days of the week, would be best to be described in words (August or Aug and Mon or M)
+		2)	(no api found yet) Calendar – If possible – if you can color code the weekends in a different shade or color I think it would improve the efficiency
+		3)	- V2 Once you figure out how to modify the form dynamically, I believe all 4 type of request links can be merged into one, and based on the Type of the request… to modify the input fields. It will create less confusion.
+		4)	DONE The approved email has no formatting
+		
+	Dan:
+		- DONE show selected month more visible
+		- (not discussed) dont see reason for R/C
+		- (not discussed) all months in one year on a single page
+		- (not discussed) double click see detail like in personal thingy
+		
+		
+		V2
+		- spring security update to 3.1.0.RC2 (still having some problem with the security:authorize tags)
+		
+
+	
+	

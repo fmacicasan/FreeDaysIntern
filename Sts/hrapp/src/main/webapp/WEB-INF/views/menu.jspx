@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:sec="http://www.springframework.org/security/tags" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_general" z="user-managed">
+            <sec:authorize ifAnyGranted="ROLE_USER">
+                <menu:item id="c_general_reportvacation" url="/report/vacation" z="user-managed"/>
+                <sec:authorize ifAllGranted="ROLE_USER">
+                    <menu:item id="c_general_timesheet" url="/timesheet" z="user-managed"/>
+                </sec:authorize>
+            </sec:authorize>
+        </menu:category>
+        <sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT">
+            <menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
+                    <menu:item id="i_fduser_new" messageCode="global_menu_new" url="/fdusers?form" z="user-managed"/>
+                    <menu:item id="i_hrmanagement_list_fd_users" messageCode="global_menu" url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z=""/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN" >
+        	<menu:category id="c_freedayrl" z="lj8g1YJzQfr5XdIE2cT1Vyiv0Kc=">
+            	<menu:item id="i_freedayrl_new" messageCode="global_menu_new" url="/roleg?form" z="5+LZ+lt+6mW+57oD1oZ4YUFuhCw="/>
+            	<menu:item id="i_freedayrl_list" messageCode="global_menu_list" url="/roleg?page=1&amp;size=${empty param.size ? 10 : param.size}" z="4A2sbthw8nfd/hiTM8jQPEoPTro="/>
+        	</menu:category>
+        </sec:authorize>
+        <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_FDADMIN">
+            <menu:category id="c_regularuser" z="f0656ccKE9tZTK8IgpHTnLvK31o=">
+                <sec:authorize ifAllGranted="ROLE_ADMIN">
+                    <menu:item id="i_regularuser_new" messageCode="global_menu_new" url="/regularusers?form" z="mJnN9ca8ulLAQ68LRQlrBZlmV1k="/>
+                    <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z=""/>
+                </sec:authorize>
+                <menu:item id="i_regularuser_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="zvHfaaOX/ix7VJtd901LqD/gAg4="/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAllGranted="ROLE_FDADMIN">
+            <menu:category id="c_fduser" z="oTLNSHRQ4yDI1lQjPTS1rrrrduY=">
+                <menu:item id="i_fduser_new" messageCode="global_menu_new" url="/fdusers?form" z="Qdsa6WGJlB3M2+gN+qG6Cb7AWZQ="/>
+                <menu:item id="i_fduser_list" messageCode="global_menu_list" url="/fdusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="pkNWU4h6kpXe7wSaynWgJxFsvqE="/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAllGranted="ROLE_USER">
+            <menu:category id="c_account" z="">
+                <menu:item id="i_regular_user_update" messageCode="global_menu" url="/account" z="user-managed"/>
+                <menu:item id="i_account_fduser_view" messageCode="global_menu_view" url="/account/fduser" z="user-managed"/>
+                <menu:item id="i_account_changepass" url="/account/changepass" z="user-managed"/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAnyGranted="ROLE_USER, ROLE_FDADMIN, ROLE_REQUESTGRANTER, ROLE_SUPERAPPROVER">
+            <menu:category id="c_request" z="K3H2XFvnqlPuvp7YsYXLCJyWwHQ=">
+                <sec:authorize ifAllGranted="ROLE_USER">
+                    <menu:item id="i_request_new" messageCode="global_menu_new" url="/requests?form=l" z="user-managed"/>
+                    <menu:item id="i_request_new_c" messageCode="global_menu_new" url="/requests?form=c" z="user-managed"/>
+                    <menu:item id="i_request_new_r" messageCode="global_menu_new" url="/requests?form=r" z="user-managed"/>
+                    <menu:item id="i_request_new_v" messageCode="global_menu_new" url="/requests?form=v" z="user-managed"/>
+                    <menu:item id="i_request_new_m" messageCode="global_menu_new" url="/requests?form=m" z="user-managed"/>
+                    <menu:item id="i_request_new_np" messageCode="global_menu_new" url="/requests?form=np" z="user-managed"/>
+                    <menu:item id="i_request_list_own" url="/requests?own" z="user-managed"/>
+                </sec:authorize>
+                <sec:authorize ifAllGranted="ROLE_REQUESTGRANTER">
+                    <menu:item id="i_request_list_approve" url="/requests?approve" z="user-managed"/>
+                </sec:authorize>
+                <!--  not working with url and method url="/requests/superapprove" method="GET" -->
+                <sec:authorize ifAllGranted="ROLE_SUPERAPPROVER">
+                    <menu:item id="i_request_list_superapprove" url="/requests?superapprove" z="user-managed"/>
+                </sec:authorize>
+                <sec:authorize ifAllGranted="ROLE_FDADMIN">
+                    <menu:item id="i_request_list" url="/requests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+                </sec:authorize>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAnyGranted="ROLE_TIMESHEETADMIN">
+            <menu:category id="c_project" z="u0PzRIwMDmEv/J6b8vbKakXGIdQ=">
+                <menu:item id="i_project_new" messageCode="global_menu_new" url="/projects?form" z="1BazRC1rLnod0a+MpP1flWTvehA="/>
+                <menu:item id="i_project_list" messageCode="global_menu_list" url="/projects?page=1&amp;size=${empty param.size ? 10 : param.size}" z="GHL05c3Rvr+eKDgRCk3Ttak0W+g="/>
+            </menu:category>
+            <menu:category id="c_phase" z="9fjQE6nTFVP5IYRnDQfKv2Xy97o=">
+                <menu:item id="i_phase_new" messageCode="global_menu_new" url="/phases?form" z="pl21lez+zvOx+9QNzUtk6Gs6pvQ="/>
+                <menu:item id="i_phase_list" messageCode="global_menu_list" url="/phases?page=1&amp;size=${empty param.size ? 10 : param.size}" z="KUfQD8stsm//WTpE/EkmdEoeFB8="/>
+            </menu:category>
+            <menu:category id="c_laborbilling" z="lstGOozecTLYftHK3ENohwBhcbc=">
+                <menu:item id="i_laborbilling_new" messageCode="global_menu_new" url="/laborbillings?form" z="dgmz1RGqXeEpe5HfxT6kF93UCuc="/>
+                <menu:item id="i_laborbilling_list" messageCode="global_menu_list" url="/laborbillings?page=1&amp;size=${empty param.size ? 10 : param.size}" z="U8VtuOomaljVhJ4l1PGp0cGsCDE="/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAllGranted="ROLE_AAA">
+            <menu:category id="c_phaselabor" z="/MosWhSZmRNpQ9KDRzl/rgOhOrA=">
+                <menu:item id="i_phaselabor_new" messageCode="global_menu_new" url="/phaselabors?form" z="9R4rVnQ+E2xsNvHmI3bM64teZQM="/>
+                <menu:item id="i_phaselabor_list" messageCode="global_menu_list" url="/phaselabors?page=1&amp;size=${empty param.size ? 10 : param.size}" z="++RcgvQXJzaDVQePvhqITl3vUAg="/>
+            </menu:category>
+            <menu:category id="c_pattern" z="HDIR+veKROwZQ9lcDp92B7AlKFQ=">
+                <menu:item id="i_pattern_new" messageCode="global_menu_new" url="/patterns?form" z="9fnxToRD2ye/7zVSDZqPgsV0DUI="/>
+                <menu:item id="i_pattern_list" messageCode="global_menu_list" url="/patterns?page=1&amp;size=${empty param.size ? 10 : param.size}" z="SdrnT/XOhQXTqTpl5h9zrLPKfkg="/>
+            </menu:category>
+            <menu:category id="c_schedule" z="OVZfNuLZqPLu5Cbgn0FVuQj+lw0=">
+                <menu:item id="i_schedule_new" messageCode="global_menu_new" url="/schedules?form" z="fEbB1TLoAMHgihJiyLpD/K1mMI0="/>
+                <menu:item id="i_schedule_list" messageCode="global_menu_list" url="/schedules?page=1&amp;size=${empty param.size ? 10 : param.size}" z="a/r1d6sKwcNadI1IqZ37gsZ4WRs="/>
+            </menu:category>
+        </sec:authorize>
+        
+    </menu:menu>
+</div>
