@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_freedays_timesheet_LaborBilling" object="${laborbilling}" path="/laborbillings" z="0rFJ4w0bsMjUBwdoH4RXgZdFHMA=">
-        <field:display field="code" id="s_freedays_timesheet_LaborBilling_code" object="${laborbilling}" z="cPG8fArpvqLmjTby8CU5Il60GQY="/>
-        <field:display field="name" id="s_freedays_timesheet_LaborBilling_name" object="${laborbilling}" z="be2cjwL0xT3TYm3oYZAc/JoJ+Qo="/>
-    </page:show>
-</div>
