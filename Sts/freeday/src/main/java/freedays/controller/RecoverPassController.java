@@ -10,9 +10,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.domain.RegularUser;
 import freedays.domain.form.ResetPass;
+import freedays.security.InfoChanger;
 
 /**
  * Controller used to intercept requests related to the password recovery process.
@@ -33,6 +35,16 @@ public class RecoverPassController {
 	public String createRecoverPass(Model uiModel){
 		uiModel.addAttribute("resetpass", new ResetPass());
 		return "recoverpass";
+	}
+	
+	@PreAuthorize("!isAuthenticated()")
+	@RequestMapping(method = RequestMethod.GET,params="token")
+	public String changePassword(@RequestParam("token") String token, Model uiModel){
+		System.out.println("opoloniu");
+		if(InfoChanger.verifyToken(token)){
+			return "changepass";
+		}
+		return "registerty";
 	}
 	
 	/**

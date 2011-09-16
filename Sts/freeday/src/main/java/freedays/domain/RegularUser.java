@@ -33,6 +33,7 @@ import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.Search;
 import freedays.domain.form.SignupWrapper;
 import freedays.domain.form.UpdateWrapper;
+import freedays.security.InfoChanger;
 import freedays.security.UserContextService;
 import freedays.util.MailUtils;
 import freedays.util.PhraseUtils;
@@ -275,6 +276,13 @@ public class RegularUser implements Serializable {
 		ru.setPassword(encodednewpass);
 		MailUtils.sendResetPasswordNotification(ru.getEmail(),newPass);
 		ru.persist();
+		
+		//custom change password
+		
+		String token = InfoChanger.generateToken(ru);
+		MailUtils.sendResetPasswordTokenNotification(ru.getEmail(),token);
+		
+		
 		return true;
 	}
 

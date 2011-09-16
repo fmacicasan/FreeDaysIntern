@@ -10,7 +10,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -39,6 +39,7 @@ public class MailUtils {
 	
 	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
 	private static final String RESET_PASS_MESSAGE = "Your new password is:\n\t\t\t {0}";
+	private static final String RESET_PASS_MESSAGE_TOKEN = "Change password at %s/changepass?token=%s";
     
 	@Autowired
     private JavaMailSenderImpl mailSender;
@@ -267,6 +268,11 @@ public class MailUtils {
 			}
 		};
 		th.start();
+	}
+	public static void sendResetPasswordTokenNotification(String email, String token) {
+		final String content = String.format(MailUtils.RESET_PASS_MESSAGE_TOKEN,PropertiesUtil.getProperty("applicationHome"), token);
+		MailUtils.sendAsyncMail(email, RESET_PASS_TITLE, content);
+		
 	}
     
 }
