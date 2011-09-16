@@ -3,6 +3,7 @@ package freedays.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -28,6 +29,7 @@ import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.app.form.FreeDayRequestVacation;
+import freedays.app.form.FriendlyRequest;
 import freedays.domain.Request;
 import freedays.security.UserContextService;
 
@@ -230,7 +232,7 @@ public class RequestController {
 		Request.superDeny(id);
 		Request.handleFeedback(id, feedback);
 		uiModel.asMap().clear();
-		return "redirect:/request?superapprove";
+		return "redirect:/requests?superapprove";
 	}
 	
 	/**
@@ -278,7 +280,8 @@ public class RequestController {
 	@PreAuthorize("isAuthenticated()")
     @RequestMapping(params= "own", method = RequestMethod.GET)
     public String listOwn(Model uiModel, Principal p){
-    	uiModel.addAttribute("requests",Request.findAllRequestsByUsername(p.getName()));
+    	uiModel.addAttribute("requests",processRequest(Request.findAllRequestsByUsername(p.getName())));
+    	System.out.println("crazy");
     	return "requests/list";
     }
     
@@ -291,15 +294,19 @@ public class RequestController {
     @PreAuthorize("hasRole('ROLE_REQUESTGRANTER')")
     @RequestMapping(params= "approve", method = RequestMethod.GET)
     public String listApprove(Model uiModel, Principal p){
-    	uiModel.addAttribute("requests",Request.findAllPendingApprovalsByUsername(p.getName()));
+    	uiModel.addAttribute("requests",processRequest(Request.findAllPendingApprovalsByUsername(p.getName())));
     	return "requests/list";
     }
     
     @PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(0,'ApplicationRegularUser','superapprover')")
     @RequestMapping(params="superapprove", method = RequestMethod.GET)
     public String listSuperApprove(Model uiModel){
-    	uiModel.addAttribute("requests",Request.findAllPendingSuperApprovalsByUsername(this.userContextService.getCurrentUser()));
+    	uiModel.addAttribute("requests",processRequest(Request.findAllPendingSuperApprovalsByUsername(this.userContextService.getCurrentUser())));
     	return "requests/list";
+    }
+    
+    private List<FriendlyRequest> processRequest(List<Request> reqlst){
+    	return FriendlyRequest.processRequestList(reqlst);
     }
 	
 	
@@ -407,4 +414,17 @@ public class RequestController {
     
     
 
+
+	@RequestMapping(method = RequestMethod.GET)
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            uiModel.addAttribute("requests", processRequest(Request.findRequestEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo)));
+            float nrOfPages = (float) Request.countRequests() / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            uiModel.addAttribute("requests", processRequest(Request.findAllRequests()));
+        }
+        return "requests/list";
+    }
 }

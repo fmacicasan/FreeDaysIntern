@@ -224,7 +224,7 @@ public abstract class FreeDay {
 	 */
     public abstract RequestType getType();
 
-    protected abstract String getReportType();
+    public abstract String getReportType();
 
     /**
 	 * Sets the initial status. Common for all FreeDays.
@@ -393,5 +393,9 @@ public abstract class FreeDay {
 
 	public  boolean customValidationPolicy(){
 		return ValidationUtils.checkBusinessDay(this.getDate());
+	}
+
+	public String getDateReport() {
+		return String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate());
 	}
 }

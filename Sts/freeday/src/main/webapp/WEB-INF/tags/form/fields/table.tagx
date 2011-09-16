@@ -21,7 +21,7 @@
     <c:set var="columnMaxLengths" scope="request" />
     <c:set var="columnTypes" scope="request" />
     <c:set var="columnDatePatterns" scope="request" />
-
+	<c:set var="sortablekey" scope="request" />
     <jsp:doBody />
 
     <c:if test="${empty typeIdFieldName}">
@@ -51,7 +51,7 @@
 	
     <spring:eval var="colCounter" expression="1" />
     
-    <table>
+    <table class="sortable">
       <thead>
         <tr>
           <c:forTokens items="${columnLabels}" delims="," var="columnHeading">
@@ -83,7 +83,14 @@
 	            <c:set var="columnMaxLength" value="${lengths[num.count-1]}" />
 	            <c:set var="columnType" value="${types[num.count-1]}" />
 	            <c:set var="columnDatePattern" value="${patterns[num.count-1]}" />
-	            <td>
+	            <!-- Added for sorting -->
+	            <c:set var="skey" value="" />
+	            <c:if test="${sortablekeyreq==column }">
+	            	<c:set var="sortkeyvar" value="sortkey" />
+	            	<c:set var="skey" value="${item[sortkeyvar]}" />
+	            </c:if>
+	            <td sorttable_customkey="${skey}">
+	            <!-- End Added for sorting -->
 	              <c:choose>
 	                <c:when test="${columnType eq 'date'}">
 	                  <spring:escapeBody>
@@ -154,7 +161,7 @@
 	        </tr>
 	     </c:if>
       </c:forEach>
-      <tr class="footer">
+      <tfoot class="footer">
         <td colspan="${colCounter}">
           <c:if test="${empty create or create}">
             <span class="new">
@@ -173,7 +180,7 @@
             <util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
           </c:if>
         </td>
-      </tr>
+      </tfoot>
     </table>
 
   </c:if>

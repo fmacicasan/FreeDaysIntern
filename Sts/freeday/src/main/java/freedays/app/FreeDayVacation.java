@@ -182,7 +182,7 @@ public class FreeDayVacation extends FreeDay {
 	}
 
 	@Override
-	protected String getReportType() {
+	public String getReportType() {
 		//return "Vacation";
 		return PropertiesUtil.getProperty("freedaysreport_legend_typev");
 	}
@@ -191,5 +191,12 @@ public class FreeDayVacation extends FreeDay {
 //	public boolean customValidationPolicy() {
 //		return ValidationUtils.checkBusinessDay(this.getDate());
 //	}
+	
+	public String getDateReport() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("From ").append(DateUtils.printShortDate(this.getDate()));
+		sb.append(" To ").append(DateUtils.printShortDate(DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan())));
+		return sb.toString();
+	}
 
 }

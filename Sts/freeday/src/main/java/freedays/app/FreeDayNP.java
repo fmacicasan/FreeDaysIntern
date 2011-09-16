@@ -37,7 +37,7 @@ public class FreeDayNP extends FreeDay {
 	}
 
 	@Override
-	protected String getReportType() {
+	public String getReportType() {
 		return PropertiesUtil.getProperty("freedaysreport_legend_typenp");
 	}
 }

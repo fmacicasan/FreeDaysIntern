@@ -10,6 +10,7 @@
   <jsp:directive.attribute name="dateTimePattern" type="java.lang.String" required="false" rtexprvalue="true" description="The date / time pattern to use if the field is a date or calendar type" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
+  <jsp:directive.attribute name="sortablekey" rtexprvalue="true" type="java.lang.String" required="false" description="used for custom sortable ( like the date)"/>	
 
   <c:if test="${empty render or render}">
     <c:if test="${empty label}">
@@ -19,7 +20,19 @@
     <c:if test="${empty dateTimePattern}">
       <c:set value="MM/dd/yyyy" var="dateTimePattern" />
     </c:if>
-      
+    <!-- Added for sorting -->
+    <c:choose>
+	     <c:when test="${not empty sortablekey }">
+	     	<c:set value="${sortablekey}" var="sortablekeyreq" scope="request" />
+	     </c:when>
+	     <c:otherwise>
+	     	<c:if test="${empty sortablekeyreq}">
+	     		<c:set value="1023" var="sortablekeyreq" scope="request" />
+	     	</c:if>
+	     </c:otherwise>
+	 </c:choose>
+	 <!-- end Added for sorting -->
+	 
     <c:choose>
       <c:when test="${date and empty columnTypes}">
         <c:set var="columnTypes" value="date" scope="request" />

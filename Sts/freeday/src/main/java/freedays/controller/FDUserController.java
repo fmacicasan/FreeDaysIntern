@@ -197,7 +197,9 @@ public class FDUserController {
             return "fdusers/update";
         }
         uiModel.asMap().clear();
-        
+        System.out.println("will update");
+        FDUser actual = FDUser.findFDUser(fdu.getId());
+        fdu.setRegularUser(actual.getRegularUser());
         FDUser.updateFDUser(fdu);
 
        

@@ -11,7 +11,9 @@ privileged aspect FreeDayRL_Roo_ToString {
         StringBuilder sb = new StringBuilder();
         sb.append("AllHolidays: ").append(getAllHolidays() == null ? "null" : getAllHolidays().size()).append(", ");
         sb.append("Description: ").append(getDescription()).append(", ");
-        sb.append("RomanianHoliday: ").append(getRomanianHoliday() == null ? "null" : getRomanianHoliday().getTime());
+        sb.append("Id: ").append(getId()).append(", ");
+        sb.append("RomanianHoliday: ").append(getRomanianHoliday() == null ? "null" : getRomanianHoliday().getTime()).append(", ");
+        sb.append("Version: ").append(getVersion());
         return sb.toString();
     }
     

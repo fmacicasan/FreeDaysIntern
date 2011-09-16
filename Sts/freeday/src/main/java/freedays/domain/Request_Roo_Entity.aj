@@ -6,7 +6,6 @@ package freedays.domain;
 import freedays.domain.Request;
 import java.lang.Integer;
 import java.lang.Long;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -96,17 +95,9 @@ privileged aspect Request_Roo_Entity {
         return entityManager().createQuery("SELECT COUNT(o) FROM Request o", Long.class).getSingleResult();
     }
     
-    public static List<Request> Request.findAllRequests() {
-        return entityManager().createQuery("SELECT o FROM Request o", Request.class).getResultList();
-    }
-    
     public static Request Request.findRequest(Long id) {
         if (id == null) return null;
         return entityManager().find(Request.class, id);
-    }
-    
-    public static List<Request> Request.findRequestEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Request o", Request.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
 }

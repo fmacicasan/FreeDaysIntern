@@ -13,26 +13,26 @@
        <spring:message code="freedays.report.img.alt.wait" var="wa"/>
        <spring:message code="freedays.report.img.alt.work" var="ia" />
        <spring:eval var="colCounter" expression="colCounter+4" />
-       <table>
+       <table class="sortable">
        <!-- maximum 20 days per screen => add pages for more!! -->
        <thead >
-       		<tr>
+			<tr>
        			<th rowspan="2"><spring:message code="freedaysreport_name" /> </th>
        			<th rowspan="2"><spring:message code="freedaysreport_role" /></th>
-       			<th colspan="2"><spring:message code="freedaysreport_remainingdays" /></th>
+       			<th colspan="2" class="sorttable_nosort"><spring:message code="freedaysreport_remainingdays" /></th>
        			<c:forEach var="i" begin="0" end="${length-1}">
-       				<th  title="${daysDateList[i]}" >${daysWeekdayList[i]}</th>
+       				<th class="sorttable_nosort"  title="${daysDateList[i]}" >${daysWeekdayList[i]}</th>
        			</c:forEach>
        		</tr>
        		<tr>
        			<sec:authorize access="!hasRole('ROLE_HRMANAGEMENT')">
-       				<th><spring:message code="freedaysreport_remainingdayscovered" /></th>
+       				<th class="sorttable_nosort" ><spring:message code="freedaysreport_remainingdayscovered" /></th>
        				<c:set value="1" var="managspan" />
        			</sec:authorize>
        			<c:if test="${empty managspan}"> <c:set var="managspan" value="2" /></c:if>
-       			<th colspan="${managspan}"><spring:message code="freedaysreport_remainingdayslegal" /></th>
+       			<th class="sorttable_nosort" colspan="${managspan}"><spring:message code="freedaysreport_remainingdayslegal" /></th>
        			<c:forEach var="i" begin="0" end="${length-1}">
-       				<th title="${daysDateList[i]}" >${fn:substringBefore(daysDateList[i],'.')}</th>
+       				<th class="sorttable_nosort" title="${daysDateList[i]}" >${fn:substringBefore(daysDateList[i],'.')}</th>
        			</c:forEach>
        		</tr>
        	</thead>
@@ -113,7 +113,8 @@
        			</c:forEach>
        		</tr>
        	</c:forEach>
-       	<tr class="footer">
+       	<tfoot class="footer legend">
+       		<tr>
        		<td  colspan="${colCounter}">
 	       		<!--  <c:forEach  items="${fullMonthNames}" var="month">--> 
 	       		<c:forEach var="i" begin="0" end="11">
@@ -130,8 +131,8 @@
 	       		</c:forEach>
 	       		<!-- </c:forEach> -->
        		</td>
-       	</tr>
-       	<tr class="footer legend" >
+       		</tr>
+       		<tr>
        		<td colspan="${colCounter}">
        			<i><b><spring:message code="freedaysreport_legend_title" />: </b></i> 
        			<spring:message code="freedaysreport_legend_matchings_c" var="matchc" />
@@ -226,7 +227,8 @@
        				</ul>
        			</util:panel>
        		</td>
-       	</tr>
+       		</tr>
+       	</tfoot >
        </table>
     </page:list>
 </div>

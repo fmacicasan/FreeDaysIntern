@@ -111,7 +111,7 @@ public class FreeDayR extends FreeDaysRCMatch {
 	}
 
 	@Override
-	protected String getReportType() {
+	public String getReportType() {
 		//return "Recover";
 		return PropertiesUtil.getProperty("freedaysreport_legend_typer");
 	}

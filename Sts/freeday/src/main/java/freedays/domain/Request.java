@@ -487,9 +487,10 @@ public class Request implements Serializable {
 	 * @return
 	 */
     public static List<Request> findAllRequestsByUsername(String username) {
+    	System.out.println("ternubatirs");
         if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
-        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username ", Request.class);
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username ORDER BY o.status ASC, o.requestable.date DESC ", Request.class);
         q.setParameter("username", username);
         return q.getResultList();
     }
@@ -503,7 +504,7 @@ public class Request implements Serializable {
     public static List<Request> findAllPendingApprovalsByUsername(String username) {
         if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = Request.entityManager();
-        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username and o.status NOT IN :finishstates ", Request.class);
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username = :username and o.status NOT IN :finishstates ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class);
         q.setParameter("username", username);
         q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
         return q.getResultList();
@@ -649,7 +650,7 @@ public class Request implements Serializable {
 			Set<ApplicationRegularUser> saru = ApplicationRegularUser.findAllSubordinatesTree(aru);
 			Set<String> sarustring = ApplicationRegularUser.findAllSubordinatesTreeUsernameString(saru);
 			if(!sarustring.isEmpty()){
-				TypedQuery<Request> q = entityManager().createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username IN :username and o.status IN :finishstates ", Request.class);
+				TypedQuery<Request> q = entityManager().createQuery("SELECT o FROM Request AS o WHERE o.approver.regularUser.username IN :username and o.status IN :finishstates ORDER BY o.status ASC, o.requestable.date DESC ", Request.class);
 				q.setParameter("username", sarustring);
 				q.setParameter("finishstates", RequestStatus.getPossibleActiveStatusList());
 				return q.getResultList();
@@ -664,4 +665,12 @@ public class Request implements Serializable {
 
 
 	
+
+	public static List<Request> findAllRequests() {
+        return entityManager().createQuery("SELECT o FROM Request o ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class).getResultList();
+    }
+
+	public static List<Request> findRequestEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM Request o ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
 }

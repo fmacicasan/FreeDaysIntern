@@ -89,7 +89,7 @@ public class FreeDayL extends FreeDay {
 	}
 
 	@Override
-	protected String getReportType() {
+	public String getReportType() {
 		//return "Legal";
 		return PropertiesUtil.getProperty("freedaysreport_legend_typel");
 	}

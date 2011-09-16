@@ -106,7 +106,7 @@ public class FreeDayC extends FreeDaysRCMatch {
 	}
 
 	@Override
-	protected String getReportType() {
+	public String getReportType() {
 		//return "OnDemand";
 		return PropertiesUtil.getProperty("freedaysreport_legend_typec");
 	}
