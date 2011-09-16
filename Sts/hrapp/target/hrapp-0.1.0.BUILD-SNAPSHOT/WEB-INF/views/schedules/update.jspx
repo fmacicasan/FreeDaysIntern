@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_freedays_timesheet_Schedule" modelAttribute="schedule" path="/schedules" versionField="Version" z="+8AQDqo/w/84ZhIjGGS/ofcor1Y=">
+        <field:datetime dateTimePattern="${schedule_startdate_date_format}" field="startDate" id="c_freedays_timesheet_Schedule_startDate" required="true" z="yt3D7g5Rkb4QlxOu1fVirCORdrU="/>
+        <field:datetime dateTimePattern="${schedule_enddate_date_format}" field="endDate" id="c_freedays_timesheet_Schedule_endDate" required="true" z="h4aWi+Kw+NawDHF/Kd4auH5bdxU="/>
+        <field:select field="pattern" id="c_freedays_timesheet_Schedule_pattern" itemValue="id" items="${patterns}" path="/patterns" z="YDTrumLGpfq6Uqa24ZxCLpTPkBo="/>
+        <field:select field="employee" id="c_freedays_timesheet_Schedule_employee" itemValue="id" items="${timesheetusers}" path="/timesheetusers" z="zGwt4myJXj3Un6Q19cFi6QccJZc="/>
+    </form:update>
+</div>

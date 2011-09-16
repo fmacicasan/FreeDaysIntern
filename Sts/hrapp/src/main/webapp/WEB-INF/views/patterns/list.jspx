@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_freedays_timesheet_Pattern" items="${patterns}" z="G5AqSonj1QSICqRFrfUfNl5f2ts=">
+        <table:table data="${patterns}" id="l_freedays_timesheet_Pattern" path="/patterns" z="f51CK1xUW39OJvAG4ptv2W9+OvE=">
+            <table:column id="c_freedays_timesheet_Pattern_noOfHours" property="noOfHours" z="/eyYs1+Fx5ElCy3k6bY9MlltLhU="/>
+            <table:column id="c_freedays_timesheet_Pattern_phaseLaborLst" property="phaseLaborLst" z="TsG5bSHpkyMpxQz7VVrOod+kENw="/>
+            <table:column id="c_freedays_timesheet_Pattern_scheduleLst" property="scheduleLst" z="n0zOR+esUBJN9R7HUwj6Iw1Mfh0="/>
+            <table:column id="c_freedays_timesheet_Pattern_deletable" property="deletable" z="EbO6j+iz2RjbRCz3k9bMwtilqNU="/>
+        </table:table>
+    </page:list>
+</div>

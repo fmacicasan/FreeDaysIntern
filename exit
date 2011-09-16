@@ -1,0 +1,53 @@
+[33mtag v1.0.0.1[m
+Tagger: fmacicasan <flo.macicasan@gmail.com>
+Date:   Thu Aug 18 14:48:26 2011 +0300
+
+version 1.0.0.1
+
+[33mcommit baaf2e1faab3ccbc6172d933bfffce09e7157070[m
+Author: fmacicasan <flo.macicasan@gmail.com>
+Date:   Thu Aug 18 12:10:27 2011 +0300
+
+    updated small stuff
+
+[1mdiff --git a/Sts/freeday/log.roo b/Sts/freeday/log.roo[m
+[1mindex c9a300c..3e93acb 100644[m
+[1m--- a/Sts/freeday/log.roo[m
+[1m+++ b/Sts/freeday/log.roo[m
+[36m@@ -384,3 +384,6 @@[m [mperform tests[m
+ // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-18 03:01:33[m
+ // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-18 06:47:45[m
+ perform tests[m
+[32m+[m[32m// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-18 09:16:58[m
+[32m+[m[32mperform tests[m
+[32m+[m[32mperform tests[m
+[1mdiff --git a/Sts/freeday/src/main/java/freedays/controller/RegularUserController_Roo_Controller.aj b/Sts/freeday/src/main/java/freedays/controller/RegularUserController_Roo_Controller.aj[m
+[1mindex 42186cf..f9942a1 100644[m
+[1m--- a/Sts/freeday/src/main/java/freedays/controller/RegularUserController_Roo_Controller.aj[m
+[1m+++ b/Sts/freeday/src/main/java/freedays/controller/RegularUserController_Roo_Controller.aj[m
+[36m@@ -34,7 +34,7 @@[m [mprivileged aspect RegularUserController_Roo_Controller {[m
+ 	[m
+ 	[m
+ 	    [m
+[31m-    @PreAuthorize("hasRole('ROLE_ADMIN')")[m
+[32m+[m[32m    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FDADMIN')")[m
+     @RequestMapping(method = RequestMethod.GET)[m
+     public String RegularUserController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {[m
+         if (page != null || size != null) {[m
+[1mdiff --git a/Sts/freeday/src/main/resources/import.sql b/Sts/freeday/src/main/resources/import.sql[m
+[1mindex 5b7cfea..2791c58 100644[m
+[1m--- a/Sts/freeday/src/main/resources/import.sql[m
+[1m+++ b/Sts/freeday/src/main/resources/import.sql[m
+[36m@@ -44,49 +44,5 @@[m [mINSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,1);[m
+ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,2);[m
+ INSERT INTO `app_reg_user_adv_role`(`user_id`,`role_id`)VALUES(118,3);[m
+ [m
+[31m-delete from `free_day`[m
+[31m-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`legalday`,`version`,`approval`)VALUES("typeL",31,"Test1",0,"2011-08-08",0,13);[m
+[31m-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`legalday`,`version`,`approval`)VALUES("typeL",32,"Test2",2,"2011-08-09",0,12);[m
+[31m---in progress[m
+[31m-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",15,"TestCc",0,0,"2011-08-01",13,null);[m
+[31m---waiting[m
+[31m-INSERT INTO `free_day`(`free_day_type`,`id`,`reason`,`status`,`version`,`requestdate`,`approval`,`recover`)VALUES("typeC",11,"TestCc",1,0,"2011-08-02",12,null);[m
+[31m---failure reject[m
+[3

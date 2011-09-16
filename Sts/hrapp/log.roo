@@ -1,0 +1,661 @@
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 23:33:18
+project --topLevelPackage freedays
+hint
+persistence setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY 
+database properties list
+entity --class ~.domain.RegularUser --testAutomatically 
+hint
+field string --fieldName username --unique --notNull --sizeMin 3
+field string --fieldName password --notNull --sizeMin 6
+field string --fieldName email --notNull --comment AddRegex
+entity --class ~.domain.ApplicationRegularUser --abstract --inheritanceType TABLE_PER_CLASS 
+field reference --fieldName regularUser --type ~.domain.RegularUser
+entity --class AdvancedUserRole --abstract --inheritanceType TABLE_PER_CLASS 
+field reference --fieldName appRegUser --type ~.domain.ApplicationRegularUser
+entity --class ~.domain.RequestGranter --extends ~.domain.AdvancedUserRole --testAutomatically 
+focus --class ~.Domain.ApplicationRegularUser
+field set --fieldName roles --type ~.domain.AdvancedUserRole
+field reference --fieldName granter --type ~.domain.RequestGranter
+entity --class ~.domain.Admin --testAutomatically --extends ~.domain.AdvancedUserRole
+entity --class ~.domain.ApplicationAdmin --abstract --extends ~.domain.AdvancedUserRole --inheritanceType TABLE_PER_CLASS
+entity --class ~.app.FDAdmin --extends ~.domain.ApplicationAdmin --testAutomatically 
+entity --class ~.app.HRManagement --extends ~.domain.AdvancedUserRole --testAutomatically 
+entity --class ~.app.FDUser --extends ~.domain.ApplicationRegularUser --testAutomatically 
+field date --fieldName hireDate --type java.util.Calendar --dateFormat SHORT --notNull --past 
+field number --fieldName initDays --type java.lang.Integer --notNull --min 2 --max 7
+field number --fieldName maxFreeDays --type java.lang.Integer --notNull --min 21
+perform tests
+// script --file ..\log.roo
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-11 23:42:38
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-11 23:46:04
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-11 23:54:32
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 09:45:23
+controller all --package freedays.controller
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 14:27:30
+focus --class ~.domain.RegularUser
+field string --fieldName surename --notNull
+field string --fieldName firstname --notNull 
+field boolean --fieldName deleted --notNull
+field boolean --fieldName activ --notNull
+field date --fieldName lastmodified --type java.util.Calendar --dateTimeFormatPattern "yyyy-MM-dd hh:mm:ss" --notNull 
+field date --fieldName creationdate --type java.util.Calendar --notNull --dateTimeFormatPattern "yyyy-MM-dd hh:mm:ss"
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-12 14:52:54
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 15:18:23
+perform tests
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-12 15:20:10
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-12 17:42:09
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-12 18:25:03
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-13 09:41:26
+focus --class ~.domain.RegularUser
+field string --fieldName usermodify
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-13 10:04:11
+security setup
+logging setup --level DEBUG 
+perform tests
+focus --class ~.domain.RegularUser
+field string --fieldName usermodify
+perform tests
+perform tests
+field string --fieldName usermodify
+perform tests
+focus --class ~.domain.RegularUser
+field string --fieldName usermodify
+perform tests
+focus --class ~.domain.RegularUser
+field string --fieldName usermodifier
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo UNKNOWN VERSION log opened at 2011-07-13 21:22:30
+exit
+// Spring Roo UNKNOWN VERSION log closed at 2011-07-13 21:22:46
+// Spring Roo UNKNOWN VERSION log opened at 2011-07-13 21:23:21
+help
+exit
+// Spring Roo UNKNOWN VERSION log closed at 2011-07-13 21:24:19
+// Spring Roo UNKNOWN VERSION log opened at 2011-07-13 21:24:34
+version
+quit
+// Spring Roo UNKNOWN VERSION log closed at 2011-07-13 21:25:48
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-14 09:39:58
+perform tests
+perform tests
+perform tests
+perform test
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-14 16:08:38
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-15 12:56:31
+perform tests
+perform tests// [failed] perform tests
+exit
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-15 17:16:51
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-15 17:17:04
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-15 17:22:34
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-18 09:13:36
+perform tests
+perform tests
+perform tests
+// [failed] test integration --entity freedays.util.PhraseUtils
+test mock --entity freedays.util.PhraseUtils
+test stub
+help test stub
+test stub --class freedays.util.PhraseUtils
+test mock --entity freedays.util.PhraseUtils
+perform tests
+// [failed] perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-18 13:30:51
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-18 14:06:24
+perform tests
+// [failed] perform tests
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-18 17:06:02
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-18 19:11:14
+backup 
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-19 13:19:14
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 00:26:23
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 09:33:50
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-20 09:40:34
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 10:08:37
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 11:08:42
+focus --class freedays.domain.ApplicationRegularUser
+entity --class freedays.domain.Request --testAutomatically 
+focus --class freedays.domain.ApplicationRegularUser
+field set --fieldName requests --type freedays.domain.Request --cardinality ONE_TO_MANY --mappedBy appreguser
+focus --class freedays.domain.Request
+field reference --fieldName appreguser --type freedays.domain.ApplicationRegularUser --cardinality MANY_TO_ONE
+entity --class freedays.app.FreeDay --testAutomatically 
+// [failed] field date --fieldName date --type java.util.Calendar --dateFormat SHORT --future --notNull
+field date --fieldName requestdate --type java.util.Calendar --dateFormat SHORT --future --notNull
+focus --class freedays.domain.Request
+field reference --fieldName requestable --type freedays.app.FreeDay --notNull --cardinality ONE_TO_ONE
+// [failed] entity --class freedays.domain.ApprovalStrategy --abstract --testAutomatically --inheritanceType SINGLE_TABLE --identifierColumn strategy_type --identifierType java.lang.String
+entity --class freedays.domain.ApprovalStrategy --abstract --inheritanceType SINGLE_TABLE --identifierColumn strategy_type --identifierType java.lang.String
+field reference --fieldName succesor --type freedays.domain.ApprovalStrategy --cardinality ONE_TO_ONE 
+focus --class freedays.app.FreeDay
+field reference --fieldName aproval --type freedays.domain.ApprovalStrategy
+
+enum type --class freedays.app.RequestStatus
+enum constant --name PENDING
+enum constant --name INTERMEDIATE
+enum constant --name GRANTED
+enum constant --name REJECTED
+focus --class freedays.domain.Request
+field enum --fieldName status --type freedays.app.RequestStatus --notNull
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 16:50:55
+backup
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-20 20:31:52
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-21 09:38:08
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-21 10:36:45
+controller scaffold --class freedays.controller.RequestController --entity freedays.domain.Request
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-22 10:52:25
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-22 10:53:26
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-21 18:19:03
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-21 18:29:11
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-21 18:34:57
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-22 09:30:37
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-22 12:18:34
+perform tests
+perform tests
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-22 21:01:23
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-22 21:08:45
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-22 21:09:35
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-22 22:01:12
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-25 09:48:06
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-25 17:25:52
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-27 10:40:45
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-28 09:39:10
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log opened at 2011-07-28 11:56:28
+// Spring Roo 1.1.4.RELEASE [rev f787ce7] log closed at 2011-07-28 12:16:17
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-28 12:17:39
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-28 12:44:21
+class --class freedays.app.FreeDayRequest
+field date --fieldName reqdate --type java.util.Calendar --future --dateFormat SHORT --notNull 
+field string --fieldName reason --notNull 
+controller scaffold --class freedays.app.FreeDayRequest --disallowedOperations delete
+controller scaffold --class freedays.controller.FreeDayRequestController --disallowedOperations delete
+perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-28 14:32:35
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-28 14:46:36
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-28 16:30:33
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-28 23:29:05
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-29 00:24:52
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-29 09:23:38
+perform tests
+perform tests
+perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-29 12:21:31
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-29 12:21:42
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-29 11:18:47
+hint
+hint logging
+logging setup --level DEBUG 
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-29 12:38:55
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-29 12:39:05
+perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-07-29 17:35:37
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-07-29 17:35:53
+perform tests
+perform test
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-01 09:23:42
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+entity --class freedays.app.FreeDayC --extends freedays.app.FreeDay --testAutomatically 
+field date --fieldName requestdate --type java.util.Calendar --future --notNull --dateFormat SHORT
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-01 10:13:44
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-01 10:13:52
+entity --class freedays.app.FreeDayR --extends freedays.app.FreeDay --testAutomatically 
+field date --fieldName recoverdate --type java.util.Calendar --future --notNull --dateFormat SHORT
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-01 17:50:34
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-02 12:54:22
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-02 17:44:36
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-02 20:36:15
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-03 01:25:29
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-03 07:15:22
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-03 09:22:46
+perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-03 09:54:20
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-03 09:54:30
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-03 09:56:01
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-03 09:57:01
+perform tests
+perform tests
+perform tests
+perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-03 17:32:31
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-03 17:32:43
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-03 17:58:21
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-04 13:22:14
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-04 18:38:55
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-05 09:10:14
+perform tests
+perform tests
+entity --class freedays.app.FreeDayVacation --extends freedays.app.FreeDay --testAutomatically 
+// [failed] field date --type java.util.Calendar --fieldName start --dateFormat SHORT --future --notNull
+field date --type java.util.Calendar --fieldName beginning --dateFormat SHORT --future --notNull
+// [failed] field date --type java.util.Calendar --fieldName end --dateFormat SHORT --future --notNull
+// [failed] field date --type java.util.Calendar --fieldName final --dateFormat SHORT --future --notNull
+field date --type java.util.Calendar --fieldName finish --dateFormat SHORT --future --notNull
+// [failed] field number --fieldName confidence --type int
+field number --fieldName confidence --type int
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-06 17:46:47
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-06 20:49:54
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-07 18:32:52
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-08 00:42:11
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-08 08:01:24
+// [failed] perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-08 09:16:19
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-08 17:06:34
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-08 22:53:13
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-09 02:28:02
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-09 10:12:52
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-09 22:31:48
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-10 00:00:17
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-11 07:12:51
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-11 09:27:28
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-08 12:19:55
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-08 12:22:32
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-11 19:21:08
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-12 16:47:12
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-13 06:24:04
+// [failed] perform tests
+// [failed] perform tests
+// [failed] perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-13 06:38:25
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-13 06:38:34
+// [failed] perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-13 06:46:06
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-13 06:49:15
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-13 07:00:05
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-13 07:27:34
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-13 07:48:36
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-13 08:13:56
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-13 09:42:27
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-13 10:05:26
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-13 23:39:53
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-14 00:04:00
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-14 19:42:51
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-15 00:27:16
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-15 11:42:37
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-15 13:54:42
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-15 21:07:26
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-15 22:07:36
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-15 22:40:05
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-15 22:56:59
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-16 01:01:46
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-16 08:06:50
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-16 08:09:12
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-16 09:55:18
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-16 18:22:29
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-17 09:32:33
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-17 13:06:43
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-17 14:50:27
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-17 20:07:57
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-18 03:01:33
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-18 06:47:45
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-18 09:16:58
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-18 18:37:54
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-19 18:01:32
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-19 18:38:08
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-22 09:16:58
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-22 19:36:46
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-23 16:55:57
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-24 12:56:58
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-24 17:33:21
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 10:05:10
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-25 11:15:19
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-24 18:12:07
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 17:59:53
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-25 18:01:23
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 11:02:34
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 15:48:21
+hint
+// [failed] backup
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-25 15:59:31
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-25 15:59:43
+// [failed] backup
+backup
+// [failed] entity --class freedays.timesheet.Project --testAutomatically 
+focus --class freedays.timesheet.Project
+focus --class freedays.timesheet.Project
+entity --class freedays.timesheet.Project --testAutomatically 
+perform tests
+focus --class freedays.timesheet.Project
+field string --fieldName code --notNull --unique
+field string --fieldName name --notNull
+entity --class freedays.timesheet.LaborBilling --testAutomatically
+field string --fieldName code --notNull --unique
+field string --fieldName name --notNull
+entity --class freedays.timesheet.Phase --testAutomatically
+field string --fieldName code --unique --notNull
+field string --fieldName name --notNull 
+focus --class freedays.timesheet.Project
+field set --fieldName phaseList --type freedays.timesheet.Phase --cardinality MANY_TO_MANY
+focus --class freedays.timesheet.Phase
+field set --fieldName projectLst --type freedays.timesheet.Project --cardinality MANY_TO_MANY 
+entity --class freedays.timesheet.PhaseLabor --testAutomatically
+field string --fieldName code --unique --notNull
+field number --fieldName percentage --type java.lang.Float --notNull 
+field reference --fieldName project --type freedays.timesheet.Project --cardinality MANY_TO_ONE 
+field reference --fieldName phase --type freedays.timesheet.Phase --cardinality MANY_TO_ONE 
+field reference --fieldName laborbilling --type freedays.timesheet.LaborBilling --cardinality MANY_TO_ONE 
+entity --class freedays.timesheet.Pattern --testAutomatically 
+field number --fieldName noOfHours --type java.lang.Integer --notNull
+field set --fieldName phaseLaborLst --type freedays.timesheet.PhaseLabor --cardinality ONE_TO_MANY 
+focus --class freedays.timesheet.PhaseLabor
+field reference --fieldName pattern --type freedays.timesheet.Pattern --cardinality MANY_TO_ONE 
+entity --class freedays.timesheet.Schedule --testAutomatically
+field date --fieldName startDate --type java.util.Calendar --dateFormat SHORT --notNull 
+field date --fieldName endDate --type java.util.Calendar --dateFormat SHORT --notNull 
+field reference --fieldName pattern --type freedays.timesheet.Pattern --cardinality ONE_TO_ONE
+focus --class freedays.timesheet.Pattern
+field reference --fieldName schedule --type freedays.timesheet.Schedule --cardinality ONE_TO_ONE 
+focus --class freedays.timesheet.Schedule
+entity --class freedays.timesheet.TimesheetUser --extends freedays.app.FDUser --testAutomatically 
+perform tests
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-25 17:58:11
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 09:54:51
+entity --class freedays.timesheet.TimesheetAdmin --testAutomatically --extends freedays.domain.AdvancedUserRole
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 13:31:34
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 13:32:37
+perform tests
+perform tests
+perform tests
+perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 15:06:19
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 15:06:43
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 15:14:43
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 15:23:37
+perform tests
+perform tests
+perform tests
+focus --class freedays.timesheet.TimesheetUser
+field reference --fieldName fduser --type freedays.app.FDUser --cardinality ONE_TO_ONE --notNull
+perform tests
+perform tests
+perform tests
+perform tests
+  perform tests
+  backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 18:30:21
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 09:17:19
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+backup
+controller scaffold --class freedays.timesheet.Project --entity freedays.timesheet.Project
+controller scaffold --class freedays.controller.ProjectController --entity freedays.timesheet.Project
+controller scaffold --class freedays.controller.PhaseController --entity freedays.timesheet.Phase
+controller scaffold --class freedays.controller.LaborBillingController --entity freedays.timesheet.LaborBilling
+controller scaffold --class freedays.controller.PhaseLaborController --entity freedays.timesheet.PhaseLabor
+controller scaffold --class freedays.controller.PatternController --entity freedays.timesheet.Pattern
+controller scaffold --class freedays.controller.ScheduleController --entity freedays.timesheet.Schedule
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 13:27:56
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 14:44:50
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 14:45:59
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 14:47:44
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 16:39:00
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 17:03:47
+backup
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-29 17:06:46
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-30 13:40:28
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 12:53:32
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-26 12:53:45
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-26 18:17:26
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 09:42:13
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 18:53:22
+// [failed] backup
+backup
+// [failed] backup
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-29 20:53:16
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-30 14:53:27
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-31 17:45:44
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-31 17:54:56
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-02 15:34:20
+backup
+
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-30 15:15:03
+perform tests
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-30 17:04:10
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-30 17:04:17
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-08-30 17:05:25
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-30 17:05:53
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-30 19:36:53
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-08-31 09:23:14
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-01-01 19:28:14
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-01 09:22:37
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-01 10:20:06
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-01 10:20:52
+perform tests
+perform tests
+perform tests
+backup
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-01 19:20:12
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-02 16:54:27
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-02 17:09:19
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-05 19:06:06
+// [failed] perform tests
+perform tests
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-05 19:25:47
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-06 09:22:30
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-06 18:10:33
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-07 13:19:15
+perform tests
+perform tests
+perform tests
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-07 15:42:40
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-07 18:18:28
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-07 18:24:13
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-08 09:08:02
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-08 10:55:52
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-08 13:16:23
+backup
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-08 18:14:56
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-09 12:06:18
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-09 10:07:48
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-09 10:08:01
+finder list --class freedays.domain.Request
+finder add --finderName findRequestsByStatus
+perform tests
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-09 18:17:07
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-12 17:47:42
+perform tests
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-12 18:03:17
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-13 09:35:19
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-13 09:51:56
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-13 14:26:53
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-13 15:12:04
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-13 15:59:58
+backup
+perform tests
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-13 16:50:07
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-13 16:54:16
+focus --class freedays.app.FreeDay
+// [failed] field date --fieldName date --type java.util.Calendar --notNull --dateFormat SHORT
+field date --fieldName datee --type java.util.Calendar --notNull --dateFormat SHORT
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-13 18:36:51
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-14 09:27:24
+entity --class freedays.app.FreeDayM --testAutomatically --extends freedays.app.FreeDay
+entity --class freedays.app.FreeDayNP --testAutomatically --extends freedays.app.FreeDay
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-14 17:26:50
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-15 09:26:20
+entity --class freedays.app.FreeDayRL --testAutomatically
+field date --fieldName romanianHoliday --type java.util.Calendar --dateFormat SHORT
+field string --fieldName description
+controller scaffold --class freedays.controller.RomanianLegislationController --entity freedays.app.FreeDayRL --path roleg
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-15 18:55:08
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-16 14:56:00
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-16 14:58:05
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-16 15:15:42
+entity --class freedays.security.InfoChanger --testAutomatically
+field string --fieldName expcode --notNull
+field date --fieldName expdate --type java.util.Calendar --notNull --dateTimeFormatPattern "yyyy-MM-dd hh:mm:ss"
+// [failed] field reference --fieldName user --type freedays.domain.RegularUser --notNull 
+// [failed] field reference --fieldName user --type freedays.domain.RegularUser --notNull 
+// [failed] field reference --fieldName user --type freedays.domain.RegularUser --notNull --cardinality 
+// [failed] field reference --fieldName user --type freedays.domain.RegularUser --notNull --cardinality MANY_TO_ONE
+// [failed] field reference --fieldName user --type freedays.domain.RegularUser --notNull --cardinality MANY_TO_ONE
+// [failed] field reference --fieldName userref --type freedays.domain.RegularUser --notNull --cardinality MANY_TO_ONE
+// [failed] field reference --fieldName userref --type freedays.domain.RegularUser
+// [failed] field reference --fieldName userref --type freedays.domain.RegularUser
+field string --fieldName test --unique 
+focus --class freedays.security.InfoChanger
+// [failed] field reference --fieldName refuser --type freedays.domain.RegularUser --notNull --cardinality MANY_TO_ONE 
+// [failed] field reference --fieldName refuser --type freedays.domain.RegularUser --notNull
+// [failed] field reference --fieldName refuser --type freedays.domain.RegularUser
+backup
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-16 19:00:05

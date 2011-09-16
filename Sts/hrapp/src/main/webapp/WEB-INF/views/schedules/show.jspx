@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_freedays_timesheet_Schedule" object="${schedule}" path="/schedules" z="RkfkVEOrGoFfhZAmF6tSC5xTHtw=">
+        <field:display calendar="true" dateTimePattern="${schedule_startdate_date_format}" field="startDate" id="s_freedays_timesheet_Schedule_startDate" object="${schedule}" z="3T4svl1rUN+OV4wW+lJsUOwojUQ="/>
+        <field:display calendar="true" dateTimePattern="${schedule_enddate_date_format}" field="endDate" id="s_freedays_timesheet_Schedule_endDate" object="${schedule}" z="v7ITIhXHNTW9ihZRNEj87/1XYnA="/>
+        <field:display field="pattern" id="s_freedays_timesheet_Schedule_pattern" object="${schedule}" z="bLp6xJtz+cTwSt3+pyjiKd/ywcA="/>
+        <field:display field="employee" id="s_freedays_timesheet_Schedule_employee" object="${schedule}" z="tqrVBN2lxLjx8uDug7Hh94BxNcY="/>
+    </page:show>
+</div>

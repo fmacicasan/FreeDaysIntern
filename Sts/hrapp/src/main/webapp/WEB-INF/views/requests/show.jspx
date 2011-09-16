@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:sec="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <c:set value="false" var="var_delete"/>
+    <c:set value="false" var="var_create"/>
+    <c:set value="false" var="var_update"/>
+    <c:set value="false" var="var_list"/>
+    <page:show create="${var_create}" delete="${var_delete}" id="ps_freedays_domain_Request" list="${var_list}" object="${request}" path="/requests" update="${var_update}" z="user-managed">
+        <field:display field="appreguser" id="s_freedays_domain_Request_appreguser" object="${request}" z="Jwc8eOPnLFW2VfY96+B+cmsHVIk="/>
+        <field:display field="requestable" id="s_freedays_domain_Request_requestable" object="${request}" z="4hi+FrjKAeXIEsimQWu8AHfWV1Q="/>
+        <field:display field="status" id="s_freedays_domain_Request_status" object="${request}" z="RPStuM82/ATqK5kqJkOft1kjRyo="/>
+        <field:display field="approver" id="s_freedays_domain_Request_approver" object="${request}" z="iDwR2kruP7sD5+6o0ZLaLJxkakY="/>
+        <field:display render="false" field="feedback" id="s_freedays_domain_Request_feedback" object="${request}" z="user-managed"/>
+    </page:show>
+    <c:out value="a${isApprover} isApprover " />
+    <c:out value="a${isApprovable} isApprovable " />
+    <c:out value="a${isSuperApprover} isSuperApprover " />
+    <c:out value="a${isGreaterApprover} isGreaterApprover"/>
+    <c:out value="a${isPersonal} isPersonal"  />
+    <c:out value="a${isCancelable} isCancelable"  />
+    
+    <c:if test="${((isApprover  or isSuperApprover) and isApprovable) or isCancelable}">
+        <br/>
+        <spring:message code="request_action_panel" var="action_panel"/>
+        <util:panel id="" title="${action_panel}" z="user-managed">
+            <c:if test="${(isApprover or isSuperApprover) and isApprovable}">
+                <spring:url value="/requests/${itemId}?eval" var="form_request"/>
+                <form action="${fn:escapeXml(form_request)}" method="POST" name="input_req">
+                    <div class="submit">
+                        <!--  <field:input z="user-managed" disableFormBinding="true" field="" id="s_freedays_domain_Request_feedback" type="text" />-->
+                        <spring:message code="fdays.request.feedback.default" var="defaultFeedback"/>
+                        <TEXTAREA cols="25" name="feedback" onblur="if(this.value=='')this.value='${defaultFeedback}'" onfocus="if(this.value=='${defaultFeedback}')this.value='';" rows="5">
+                            <c:out value="${defaultFeedback}"/>
+                        </TEXTAREA>
+                        <div>
+                            <script type="text/javascript">dojo.require("dijit.Editor");</script>
+                            <div id="test"/>
+	                        <script type="text/javascript">
+					           Spring.addDecoration(new Spring.ElementDecoration({elementId : 'test', widgetType : 'dijit.Editor', widgetAttrs : {disabled: false}}));
+					           dojo.addOnLoad(function () {
+					        	  var src = dojo.byId('test');
+					              var rte = dijit.byId('test');
+					              rte.disabled = ${disabled};
+					              rte.onLoadDeferred.addCallback(function(){
+					                rte.setValue(src.value);
+					                dojo.connect(rte, 'onBlur', function(){src.value = rte.getValue();});
+					              });
+					            });
+					        </script>
+                        </div>
+                        <br/>
+                        <spring:message arguments="${remainingDaysCount}" code="request_remainingdays"/>
+                        <br/>
+                        <spring:message arguments="${remainingTotalDaysCount}" code="request_remainingtotaldays"/>
+                        <br/>
+                        <spring:message arguments="${activeRequestCount}" code="request_activerequests"/>
+                        <br/>
+                        <spring:message arguments="${remainingDerogationCount}" code="request_derogation"/>
+                        <br/>
+                        <br/>
+                        <c:choose>
+                        	<c:when test="${isApprover}">
+                        		<spring:message code="request_approve_button" htmlEscape="false" var="request_approve_label"/>
+                        		<input name="approve" type="submit" value="${fn:escapeXml(request_approve_label)}"/>
+                        		<spring:message code="request_deny_button" htmlEscape="false" var="request_deny_label"/>
+                        		<input name="deny" type="submit" value="${fn:escapeXml(request_deny_label)}"/>
+                        	</c:when>
+                        	<c:when test="${isSuperApprover}">
+                        		<spring:message code="request_superapprove_button" htmlEscape="false" var="request_superapprove_label" />
+            					<input name="superapprove" type="submit" value="${fn:escapeXml(request_superapprove_label)}" />
+            					<spring:message code="request_superdeny_button" htmlEscape="false" var="request_superdeny_label" />
+            					<input name="superdeny" type="submit" value="${fn:escapeXml(request_superdeny_label)}" />
+                        	</c:when>
+                        	<c:otherwise>
+                        		<spring:message code="error_resourcenotfound_title" />
+                        	</c:otherwise>
+                        </c:choose>
+                    
+                    </div>
+                </form>
+            </c:if>
+            
+            <c:if test="${isCancelable}">
+                <!-- TODO: after addition of spring security 3.1.0.RC2 no need for choose but add isPersonal in authorize access -->
+                <c:choose>
+                    <c:when test="${isPersonal}">
+                        <spring:url value="/requests/${itemId}?eval" var="form_request"/>
+                        <form action="${fn:escapeXml(form_request)}" method="POST" name="input_req">
+                            <div class="submit">
+                                <spring:message code="request_cancel_button" htmlEscape="false" var="request_cancel_label"/>
+                                <input name="cancel" type="submit" value="${fn:escapeXml(request_cancel_label)}"/>
+                            </div>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <sec:authorize access="hasRole('ROLE_FDADMIN')">
+                            <spring:url value="/requests/${itemId}?eval" var="form_request"/>
+                            <form action="${fn:escapeXml(form_request)}" method="POST" name="input_req">
+                                <div class="submit">
+                                    <spring:message code="request_cancel_button" htmlEscape="false" var="request_cancel_label"/>
+                                    <input name="cancel" type="submit" value="${fn:escapeXml(request_cancel_label)}"/>
+                                </div>
+                            </form>
+                        </sec:authorize>
+                    </c:otherwise>
+                </c:choose>
+            </c:if>
+        </util:panel>
+    </c:if>
+    
+    
+    <form class="submit">
+        <br/>
+        <spring:message code="button_back" var="back_but"/>
+        <spring:message code="back_title" var="back_title"/>
+        <INPUT onClick="history.go(-1);" title="${back_title}" type="button" value="${back_but}"/>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="requests/list">
+        <put-attribute name="body" value="/WEB-INF/views/requests/list.jspx"/>
+    </definition>
+	<definition extends="default" name="requests/show">
+        <put-attribute name="body" value="/WEB-INF/views/requests/show.jspx"/>
+    </definition>
+	<definition extends="default" name="requests/create">
+        <put-attribute name="body" value="/WEB-INF/views/requests/create.jspx"/>
+    </definition>
+	<!-- <definition extends="default" name="requests/update">
+        <put-attribute name="body" value="/WEB-INF/views/requests/update.jspx"/>
+    </definition> -->
+	<definition extends="default" name="requests/request">
+        <put-attribute name="body" value="/WEB-INF/views/requests/request.jspx"/>
+    </definition>
+    <definition extends="default" name="requests/vacation">
+        <put-attribute name="body" value="/WEB-INF/views/requests/vacation.jspx"/>
+    </definition>
+<definition extends="default" name="requests/findRequestsByStatus">
+        <put-attribute name="body" value="/WEB-INF/views/requests/findRequestsByStatus.jspx"/>
+    </definition>
+</tiles-definitions>

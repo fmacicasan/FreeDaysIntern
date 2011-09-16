@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_freedays_timesheet_LaborBilling" modelAttribute="laborBilling" path="/laborbillings" versionField="Version" z="Qau3l1IsFLhaKQZz2t9zCQjJiRY=">
+        <field:input field="code" id="c_freedays_timesheet_LaborBilling_code" required="true" z="eH5rRuNRiYNs69oQRzDO81gcWmA="/>
+        <field:input field="name" id="c_freedays_timesheet_LaborBilling_name" required="true" z="x819z+TNLNmPvSfOMziMaI6bjIg="/>
+    </form:update>
+</div>
