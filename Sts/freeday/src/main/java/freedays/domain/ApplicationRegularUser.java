@@ -239,8 +239,14 @@ public abstract class ApplicationRegularUser   implements Serializable {
 		EntityManager em = ApplicationRegularUser.entityManager();
 		TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o JOIN FETCH o.roles WHERE o.regularUser.username = :username",ApplicationRegularUser.class);
 		q.setParameter("username",username);
-		ApplicationRegularUser aru = q.getSingleResult();
-		System.out.println(aru);
+		ApplicationRegularUser aru;
+		try{
+			 aru = q.getSingleResult();
+			System.out.println(aru);
+		}catch(EmptyResultDataAccessException e){
+			System.out.println(e);
+			return null;
+		}
 		return aru;
 	}
 	
