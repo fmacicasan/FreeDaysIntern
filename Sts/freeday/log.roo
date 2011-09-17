@@ -657,3 +657,8 @@ focus --class freedays.security.InfoChanger
 // [failed] field reference --fieldName refuser --type freedays.domain.RegularUser --notNull --cardinality MANY_TO_ONE 
 // [failed] field reference --fieldName refuser --type freedays.domain.RegularUser --notNull
 // [failed] field reference --fieldName refuser --type freedays.domain.RegularUser
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-17 12:20:26
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-17 14:13:51
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-17 14:58:42
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-09-17 19:04:27
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-09-17 19:27:43

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDay;
-import freedays.app.FreeDayRL;
 import freedays.app.form.FreeDayRequest;
 import freedays.security.UserContextService;
 import freedays.util.ValidationUtils;

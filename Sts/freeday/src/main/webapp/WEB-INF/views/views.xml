@@ -42,6 +42,15 @@
   
   <definition extends="default" name="registerty">
      <put-attribute name="body" value="/WEB-INF/views/registerty.jspx"/>
+  </definition>
+  <definition extends="default" name="changepasstoken">
+     <put-attribute name="body" value="/WEB-INF/views/changepasstoken.jspx"/>
   </definition>	
+  <definition extends="default" name="changepasstokenok">
+     <put-attribute name="body" value="/WEB-INF/views/changepasstokenok.jspx"/>
+  </definition>	
+  <definition extends="default" name="expiredtoken">
+     <put-attribute name="body" value="/WEB-INF/views/expiredtoken.jspx"/>
+  </definition>		
    
 </tiles-definitions>

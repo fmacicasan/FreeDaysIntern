@@ -3,11 +3,11 @@ package freedays.security;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.ManyToOne;
@@ -22,6 +22,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import freedays.domain.RegularUser;
+import freedays.util.DateUtils;
 
 import javax.persistence.Column;
 
@@ -52,6 +53,47 @@ public class InfoChanger {
 	@Autowired
 	private transient MessageDigestPasswordEncoder messageDigestPasswordEncoder;
 
+
+
+	public String genToken() {
+		String hash = generateHash();
+		String token = messageDigestPasswordEncoder.encodePassword(hash, this.getSeed());
+		return  token;
+	}
+
+	private String generateHash() {
+		RegularUser ru = this.getRegularUser();
+		StringBuilder sb = new StringBuilder();
+		sb.append(ru.getUsername());
+		sb.append(DateUtils.printLong(ru.getCreationdate()));
+		return sb.toString();
+	}
+	
+	private String getSeed(){
+		return DateUtils.printLong(this.getExpdate());
+	}
+
+	private boolean verifToken(String enchash) {
+		String rawhash = generateHash();
+		System.out.println(rawhash);
+		System.out.println(enchash);
+		System.out.println(messageDigestPasswordEncoder.encodePassword(rawhash, this.getSeed()));
+		return messageDigestPasswordEncoder.isPasswordValid(enchash, rawhash, this.getSeed());
+	}
+
+	public boolean isExpired() {
+		return this.getExpired();
+	}
+
+	public boolean isJustExpired() {
+		return this.getExpdate().compareTo(Calendar.getInstance()) <= 0;
+	}
+	
+
+	public boolean isUsed() {
+		return this.getUsed();
+	}
+
 	public static Calendar computeExpireDate() {
 		Calendar now = Calendar.getInstance();
 		now.add(Calendar.HOUR_OF_DAY, InfoChanger.DEFAULT_EXPIRE_INTERVAL_IN_HOURS);
@@ -60,52 +102,36 @@ public class InfoChanger {
 
 	public static String generateToken(RegularUser ru) {
 		Calendar exp = InfoChanger.computeExpireDate();
-
 		InfoChanger ic = new InfoChanger();
-
-		String token = ic.genToken(ru, exp);
 		ic.setRegularUser(ru);
-		ic.setExpcode(token);
 		ic.setExpdate(exp);
+		ic.setExpcode(ic.genToken());
+		System.out.println("generated hash:"+ic.getExpcode());
 		ic.persist();
-		return token;
+		return ic.getExpcode();
 	}
-
-	private String genToken(RegularUser ru, Calendar exp) {
-		String hash = generateHash(ru);
-		return messageDigestPasswordEncoder.encodePassword(hash, exp);
-	}
-
-	private String generateHash(RegularUser ru) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(ru.getUsername());
-		sb.append(ru.getCreationdate());
-		return sb.toString();
-	}
-
-	private boolean verifToken(String enchash) {
-		String rawhash = generateHash(this.getRegularUser());
-		System.out.println(rawhash);
-		System.out.println(enchash);
-		System.out.println(messageDigestPasswordEncoder.encodePassword(rawhash, this.getExpdate()));
-		return messageDigestPasswordEncoder.isPasswordValid(enchash, rawhash, this.getExpdate());
-	}
+	
 
 	public static boolean verifyToken(String enchash) {
-		System.out.println("cucurigzzzz");
+		System.out.println("cucurigzzzz"+enchash);
 		try {
 			InfoChanger ic = InfoChanger.findByHash(enchash).getSingleResult();
 			if (!ic.verifToken(enchash)) {
 				System.out.println("not1");
 				return false;
 			}
-			if (ic.isExpired() || ic.isUsed() || ic.isJustExpired()) {
+			if (ic.isExpired() || ic.isUsed()) {
 				System.out.println("not2");
 				return false;
 			}
+			if(ic.isJustExpired()){
+				System.out.println("not 4");
+				ic.setExpired(true);
+				ic.merge();
+				return false;
+			}
 			System.out.println("not3");
-			ic.setUsed(true);
-			ic.merge();
+			
 			return true;
 		} catch (EmptyResultDataAccessException e) {
 			return false;
@@ -115,25 +141,24 @@ public class InfoChanger {
 			return false;
 		}
 	}
-
-	public boolean isExpired() {
-		return this.getExpired();
-	}
-
-	public boolean isJustExpired() {
-		return this.getExpdate().compareTo(Calendar.getInstance()) > 0;
-	}
-
-	public boolean isUsed() {
-		return this.getUsed();
-	}
-
+	
 	public static TypedQuery<InfoChanger> findByHash(String hash) {
-		if (hash == null)
-			throw new IllegalArgumentException("the hash argument is required");
+		if (hash == null) throw new IllegalArgumentException("the hash argument is required");
 		TypedQuery<InfoChanger> q = entityManager().createQuery("SELECT o FROM InfoChanger o JOIN FETCH o.regularUser WHERE o.expcode = :expcode", InfoChanger.class);
 		q.setParameter("expcode", hash);
 		return q;
+	}
+
+	public static RegularUser finalizePassReset(String token) {
+		InfoChanger ic = InfoChanger.findByHash(token).getSingleResult();
+		ic.setUsed(true);
+		ic.merge();
+		return ic.getRegularUser();
+	}
+	
+	public static List<InfoChanger> findAllActiveChangePasswordRequests(){
+		TypedQuery<InfoChanger> q = entityManager().createQuery("SELECT o FROM InfoChanger o WHERE o.expired = false AND o.used = false",InfoChanger.class);
+		return q.getResultList();
 	}
 
 }

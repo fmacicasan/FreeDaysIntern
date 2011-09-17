@@ -16,7 +16,6 @@ import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayRL;
 import freedays.app.FreeDayVacation;
 import freedays.app.form.FreeDayRequest.RequestType;
-import freedays.domain.Request;
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;

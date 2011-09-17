@@ -3,63 +3,14 @@
 
 package freedays.security;
 
-import freedays.domain.RegularUser;
 import freedays.security.InfoChanger;
-import java.lang.Boolean;
-import java.lang.String;
-import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect InfoChangerDataOnDemand_Roo_DataOnDemand {
     
     declare @type: InfoChangerDataOnDemand: @Component;
-    
-    private Random InfoChangerDataOnDemand.rnd = new SecureRandom();
-    
-    private List<InfoChanger> InfoChangerDataOnDemand.data;
-    
-    public InfoChanger InfoChangerDataOnDemand.getNewTransientInfoChanger(int index) {
-        InfoChanger obj = new InfoChanger();
-        setExpcode(obj, index);
-        setExpdate(obj, index);
-        setExpired(obj, index);
-        setRegularUser(obj, index);
-        setUsed(obj, index);
-        return obj;
-    }
-    
-    public void InfoChangerDataOnDemand.setExpcode(InfoChanger obj, int index) {
-        String expcode = "expcode_" + index;
-        obj.setExpcode(expcode);
-    }
-    
-    public void InfoChangerDataOnDemand.setExpdate(InfoChanger obj, int index) {
-        Calendar expdate = Calendar.getInstance();
-        obj.setExpdate(expdate);
-    }
-    
-    public void InfoChangerDataOnDemand.setExpired(InfoChanger obj, int index) {
-        Boolean expired = Boolean.TRUE;
-        obj.setExpired(expired);
-    }
-    
-    public void InfoChangerDataOnDemand.setRegularUser(InfoChanger obj, int index) {
-        RegularUser regularUser = null;
-        obj.setRegularUser(regularUser);
-    }
-    
-    public void InfoChangerDataOnDemand.setUsed(InfoChanger obj, int index) {
-        Boolean used = Boolean.TRUE;
-        obj.setUsed(used);
-    }
     
     public InfoChanger InfoChangerDataOnDemand.getSpecificInfoChanger(int index) {
         init();
@@ -77,31 +28,6 @@ privileged aspect InfoChangerDataOnDemand_Roo_DataOnDemand {
     
     public boolean InfoChangerDataOnDemand.modifyInfoChanger(InfoChanger obj) {
         return false;
-    }
-    
-    public void InfoChangerDataOnDemand.init() {
-        data = InfoChanger.findInfoChangerEntries(0, 10);
-        if (data == null) throw new IllegalStateException("Find entries implementation for 'InfoChanger' illegally returned null");
-        if (!data.isEmpty()) {
-            return;
-        }
-        
-        data = new ArrayList<freedays.security.InfoChanger>();
-        for (int i = 0; i < 10; i++) {
-            InfoChanger obj = getNewTransientInfoChanger(i);
-            try {
-                obj.persist();
-            } catch (ConstraintViolationException e) {
-                StringBuilder msg = new StringBuilder();
-                for (Iterator<ConstraintViolation<?>> it = e.getConstraintViolations().iterator(); it.hasNext();) {
-                    ConstraintViolation<?> cv = it.next();
-                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
-                }
-                throw new RuntimeException(msg.toString(), e);
-            }
-            obj.flush();
-            data.add(obj);
-        }
     }
     
 }

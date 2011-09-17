@@ -1,7 +1,6 @@
 package freedays.domain;
 
 import java.io.Serializable;
-import java.security.Principal;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
@@ -265,17 +264,17 @@ public class RegularUser implements Serializable {
 	 * @param email2
 	 * @return
 	 */
-	public static boolean resetPassword(String email2) {
+	public static boolean resetPasswordInit(String email2) {
 		List<RegularUser> list = RegularUser.findRegularUserByEmail(email2);
 		if (list.size() != 1) {
 			return false;
 		}
 		RegularUser ru = list.get(0);
-		String newPass = PhraseUtils.getRandomPhrase();
-		String encodednewpass = ru.getMessageDigestPasswordEncoder().encodePassword(newPass, null);
-		ru.setPassword(encodednewpass);
-		MailUtils.sendResetPasswordNotification(ru.getEmail(),newPass);
-		ru.persist();
+//		String newPass = PhraseUtils.getRandomPhrase();
+//		String encodednewpass = ru.getMessageDigestPasswordEncoder().encodePassword(newPass, null);
+//		ru.setPassword(encodednewpass);
+//		MailUtils.sendResetPasswordNotification(ru.getEmail(),newPass);
+//		ru.persist();
 		
 		//custom change password
 		
@@ -283,6 +282,18 @@ public class RegularUser implements Serializable {
 		MailUtils.sendResetPasswordTokenNotification(ru.getEmail(),token);
 		
 		
+		return true;
+	}
+	
+	public static boolean resetPasswordFinal(String email,String newPass){
+		List<RegularUser> list = RegularUser.findRegularUserByEmail(email);
+		if (list.size() != 1) {
+			return false;
+		}
+		RegularUser ru = list.get(0);
+		String encodednewpass = ru.getMessageDigestPasswordEncoder().encodePassword(newPass, null);
+		ru.setPassword(encodednewpass);
+		ru.persist();
 		return true;
 	}
 

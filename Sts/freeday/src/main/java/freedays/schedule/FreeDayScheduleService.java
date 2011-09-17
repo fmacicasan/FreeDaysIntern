@@ -18,4 +18,6 @@ public interface FreeDayScheduleService {
 	public void denyLateRequestsStillUnderApproval();
 	
 	public void generateTimesheets();
+	
+	public void verifyExpiredPasswordRequests();
 }

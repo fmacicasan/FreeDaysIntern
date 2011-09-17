@@ -6,13 +6,14 @@ import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.domain.RegularUser;
+import freedays.domain.form.ChangePassTokenWrapper;
+import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.ResetPass;
 import freedays.security.InfoChanger;
 
@@ -40,11 +41,28 @@ public class RecoverPassController {
 	@PreAuthorize("!isAuthenticated()")
 	@RequestMapping(method = RequestMethod.GET,params="token")
 	public String changePassword(@RequestParam("token") String token, Model uiModel){
-		System.out.println("opoloniu");
 		if(InfoChanger.verifyToken(token)){
-			return "changepass";
+			uiModel.addAttribute("newpass",new ChangePassTokenWrapper() );
+			return "changepasstoken";
 		}
-		return "registerty";
+		return "expiredtoken";
+	}
+	
+	
+	@PreAuthorize("!isAuthenticated()")
+	@RequestMapping(value = "/change", params="token", method = RequestMethod.POST)
+	public String updatePassToken( @RequestParam("token") String token, @Valid ChangePassTokenWrapper newpass, BindingResult bindingResult, Model uiModel){
+		if(bindingResult.hasErrors()){
+			uiModel.addAttribute("newpass", newpass);
+			return "changepasstoken";
+		}
+		if(!InfoChanger.verifyToken(token)){
+			return "expiredtoken";
+		}
+		RegularUser ru = InfoChanger.finalizePassReset(token);
+		RegularUser.resetPasswordFinal(ru.getEmail(), newpass.getPassword());
+		return "changepasstokenok";
+		
 	}
 	
 	/**
@@ -64,8 +82,7 @@ public class RecoverPassController {
 			uiModel.addAttribute("reason", true);
 			return "recoverpass";
 		}
-		System.out.println("i received email:"+resetpass.getEmail().toString());
-		RegularUser.resetPassword(resetpass.getEmail());
+		RegularUser.resetPasswordInit(resetpass.getEmail());
 		//dont send differentiated message on success/failure
 		uiModel.addAttribute("reason", true);
 		return "recoverpass";

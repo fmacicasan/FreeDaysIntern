@@ -12,7 +12,6 @@ import javax.validation.ConstraintViolationException;
 
 import org.springframework.roo.addon.dod.RooDataOnDemand;
 
-import freedays.domain.ApprovalStrategy;
 import freedays.util.DateUtils;
 
 @RooDataOnDemand(entity = FreeDayL.class)

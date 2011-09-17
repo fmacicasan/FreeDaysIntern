@@ -16,6 +16,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.stereotype.Component;
 
+import freedays.security.InfoChanger;
+
 
 /**
  * Mail Utilities
@@ -37,9 +39,9 @@ public class MailUtils {
 	private static final String DEFAULT_APPLICATION_LINK="\nFind us at {0}!";
 	private static final String DEFAULT_LOWER_REQUESTNOTIFICATION_ONUPPEREVENT = "Hello %s,\n your boss %s already %s the request!\n %s \n\n";
 	
-	private static final String RESET_PASS_TITLE = "FreeDays-PasswordReset";
+	private static final String RESET_PASS_TITLE = "HRApp-PasswordReset";
 	private static final String RESET_PASS_MESSAGE = "Your new password is:\n\t\t\t {0}";
-	private static final String RESET_PASS_MESSAGE_TOKEN = "Change password at %s/changepass?token=%s";
+	private static final String RESET_PASS_MESSAGE_TOKEN = "To start the password reset process for your %s HRApp account click on the link bellow:\n\n %s/recoverpass?token=%s\n\nFor security reasons this link will expire in %d hours!";
     
 	@Autowired
     private JavaMailSenderImpl mailSender;
@@ -270,7 +272,8 @@ public class MailUtils {
 		th.start();
 	}
 	public static void sendResetPasswordTokenNotification(String email, String token) {
-		final String content = String.format(MailUtils.RESET_PASS_MESSAGE_TOKEN,PropertiesUtil.getProperty("applicationHome"), token);
+		final String content = String.format(MailUtils.RESET_PASS_MESSAGE_TOKEN,email,PropertiesUtil.getProperty("applicationHome"), token,InfoChanger.DEFAULT_EXPIRE_INTERVAL_IN_HOURS);
+		System.out.println("reset pass token content:"+content);
 		MailUtils.sendAsyncMail(email, RESET_PASS_TITLE, content);
 		
 	}

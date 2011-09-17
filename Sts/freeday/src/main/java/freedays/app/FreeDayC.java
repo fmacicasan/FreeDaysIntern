@@ -1,25 +1,18 @@
 package freedays.app;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityManager;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
-import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
-import freedays.util.ValidationUtils;
-import freedays.validation.annotation.BusinessDay;
 
 /**
  * Class that represents a TypeC free day request. Such a request

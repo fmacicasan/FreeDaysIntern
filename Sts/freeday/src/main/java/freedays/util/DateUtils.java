@@ -398,6 +398,10 @@ public class DateUtils {
 		Calendar c = Calendar.getInstance();
 		return date.get(Calendar.YEAR)==c.get(Calendar.YEAR);
 	}
+	
+	public static String printLong(Calendar c){
+		return String.format("%1$tA, %1$te %1$tB %1$tY %tT", c);
+	}
 
 	
 }

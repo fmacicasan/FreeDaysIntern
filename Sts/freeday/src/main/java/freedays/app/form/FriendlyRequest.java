@@ -5,12 +5,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.RequestStatus;
-import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.domain.Request;
 
 @RooJavaBean
