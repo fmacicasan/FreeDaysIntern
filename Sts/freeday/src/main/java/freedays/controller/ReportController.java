@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import freedays.app.FreeDay;
 import freedays.app.form.FreeDayUserList;
 import freedays.domain.Request;
+import freedays.mongo.MongoDBApp;
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
 import freedays.util.ResourceDemo;
@@ -32,8 +33,8 @@ public class ReportController {
 	@Autowired
 	private UserContextService userContextService;
 	
-	@Autowired
-	private ResourceDemo resourceService;
+//	@Autowired
+//	private ResourceDemo resourceService;
 	
 	/**
 	 * Handler for retrieving the free days report in the day-by-day representation
@@ -87,14 +88,30 @@ public class ReportController {
 		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
 		
 		LogFactory.getLog(this.getClass()).info("Finish report creation!");
-		
+	
+		//test properties finder
 //		PropertiesUtil.getProperty("testing");
+		
+		//test super aproval computation
 		Request.findAllPendingSuperApprovalsByUsername(userContextService.getCurrentUser());
+		
+		//test daily report
 //		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
 //		fdusil.reportFreeDays();
-		System.out.println("will open");
-		resourceService.openResource();
-		System.out.println("will close");
+		
+		//test resource opener
+//		System.out.println("will open");
+//		resourceService.openResource();
+//		System.out.println("will close");
+
+		
+		//test mongo
+		System.out.println("mongo");
+		MongoDBApp mdba = new MongoDBApp();
+		mdba.execute();
+		System.out.println("mongoend");
+		
+		
 		return "report/vacation";
 	}
 
