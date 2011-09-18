@@ -16,6 +16,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.util.StringUtils;
 
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
@@ -351,6 +352,9 @@ public class Request implements Serializable {
         sb.append("Requester: ").append(this.appreguser.getRegularUser()).append("->");
         sb.append(this.requestable).append("\n");
         sb.append(" with status ").append(this.status).append("\n");
+        if(StringUtils.hasText(this.getFeedback())){
+        	sb.append("Feedback: ").append(this.getFeedback()).append("\n");
+        }
         return sb.toString().toUpperCase();
     }
     
