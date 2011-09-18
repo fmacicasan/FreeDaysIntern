@@ -16,6 +16,11 @@ import freedays.app.FreeDayVacation;
 @RooJavaBean
 public class FreeDayAbstraction {
 
+	private static final String DEFAULT_PROJECT_CODE_ROMANIANHOLIDAY = "99992";
+	private static final String DEFAULT_PROJECT_CODE_MEDICAL = "99993";
+	private static final String DEFAULT_PROJECT_CODE_VACATION = "99991";
+	private static final String DEFAULT_LABORBILLING_CODE_NOTAPPLICABLE = "1001";
+	private static final String DEFAULT_PHASE_CODE_NOTAPPLICABLE = "999";
 	private Calendar start;
 	private Calendar end;
 	
@@ -53,7 +58,7 @@ public class FreeDayAbstraction {
 			FreeDayAbstraction fda = new FreeDayAbstraction();
 			fda.setStart(fdv.getDate());
 			fda.setEnd(fdv.getEnd());
-			fda.setPattern(Pattern.getSpecialPattern("999","99991","1001"));
+			fda.setPattern(Pattern.getSpecialPattern(DEFAULT_PHASE_CODE_NOTAPPLICABLE,DEFAULT_PROJECT_CODE_VACATION,DEFAULT_LABORBILLING_CODE_NOTAPPLICABLE));
 			fda.setUsername(username);
 			lfda.add(fda);
 		}
@@ -67,7 +72,7 @@ public class FreeDayAbstraction {
 			FreeDayAbstraction fda = new FreeDayAbstraction();
 			fda.setStart(fd.getDate());
 			fda.setEnd(fd.getDate());
-			fda.setPattern(Pattern.getSpecialPattern("999","99991","1001"));
+			fda.setPattern(Pattern.getSpecialPattern(DEFAULT_PHASE_CODE_NOTAPPLICABLE,DEFAULT_PROJECT_CODE_VACATION,DEFAULT_LABORBILLING_CODE_NOTAPPLICABLE));
 			fda.setUsername(username);
 			lfda.add(fda);
 		}
@@ -81,7 +86,7 @@ public class FreeDayAbstraction {
 			FreeDayAbstraction fda = new FreeDayAbstraction();
 			fda.setStart(fd.getDate());
 			fda.setEnd(fd.getDate());
-			fda.setPattern(Pattern.getSpecialPattern("999","99993","1001"));
+			fda.setPattern(Pattern.getSpecialPattern(DEFAULT_PHASE_CODE_NOTAPPLICABLE,DEFAULT_PROJECT_CODE_MEDICAL,DEFAULT_LABORBILLING_CODE_NOTAPPLICABLE));
 			fda.setUsername(username);
 			lfda.add(fda);
 		}
@@ -95,7 +100,7 @@ public class FreeDayAbstraction {
 			FreeDayAbstraction fda = new FreeDayAbstraction();
 			fda.setStart(fd);
 			fda.setEnd(fd);
-			fda.setPattern(Pattern.getSpecialPattern("999","99992","1001"));
+			fda.setPattern(Pattern.getSpecialPattern(DEFAULT_PHASE_CODE_NOTAPPLICABLE,DEFAULT_PROJECT_CODE_ROMANIANHOLIDAY,DEFAULT_LABORBILLING_CODE_NOTAPPLICABLE));
 			fda.setUsername(username);
 			lfda.add(fda);
 		}
