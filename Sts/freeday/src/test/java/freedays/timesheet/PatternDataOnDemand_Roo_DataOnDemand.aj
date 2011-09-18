@@ -17,14 +17,8 @@ privileged aspect PatternDataOnDemand_Roo_DataOnDemand {
     
     public Pattern PatternDataOnDemand.getNewTransientPattern(int index) {
         Pattern obj = new Pattern();
-        setDeletable(obj, index);
         setNoOfHours(obj, index);
         return obj;
-    }
-    
-    public void PatternDataOnDemand.setDeletable(Pattern obj, int index) {
-        Boolean deletable = true;
-        obj.setDeletable(deletable);
     }
     
     public void PatternDataOnDemand.setNoOfHours(Pattern obj, int index) {

@@ -8,6 +8,5 @@
         <field:display field="phase" id="s_freedays_timesheet_PhaseLabor_phase" object="${phaselabor}" z="MSbbAdntFcy/yJKeLZOORzgvQf0="/>
         <field:display field="laborbilling" id="s_freedays_timesheet_PhaseLabor_laborbilling" object="${phaselabor}" z="+XQz98592eJPJncjke6w4eUbweg="/>
         <field:display field="pattern" id="s_freedays_timesheet_PhaseLabor_pattern" object="${phaselabor}" z="UdIuH6JfmTKJrhgzCC7K1UqLtko="/>
-        <field:display field="deletable" id="s_freedays_timesheet_PhaseLabor_deletable" object="${phaselabor}" z="X8HHxR1T88HLDEATB/fn6gms270="/>
     </page:show>
 </div>

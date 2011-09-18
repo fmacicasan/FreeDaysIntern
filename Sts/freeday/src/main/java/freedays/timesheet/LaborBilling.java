@@ -24,10 +24,10 @@ public class LaborBilling {
     @NotNull
     private String name;
     
-    public static LaborBilling getVacationLaborBilling() {
+    public static LaborBilling getSpecialLaborBilling(String code) {
     	EntityManager em = RegularUser.entityManager();
         TypedQuery<LaborBilling> q = em.createQuery("SELECT o FROM LaborBilling AS o WHERE o.code = :code ", LaborBilling.class);
-        q.setParameter("code", "9999");        
+        q.setParameter("code", code);        
         List<LaborBilling> results = q.getResultList();
         if (!results.isEmpty())
            return  results.get(0);

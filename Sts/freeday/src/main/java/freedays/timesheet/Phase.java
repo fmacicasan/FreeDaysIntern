@@ -20,7 +20,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.TypedQuery;
 
 @RooJavaBean
-@RooToString
 @RooEntity
 public class Phase {
 
@@ -34,15 +33,23 @@ public class Phase {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)    
     private Set<Project> projectLst = new HashSet<Project>();
     
-    public static Phase getVacationPhase() {
+    public static Phase getSpecialPhase(String code) {
     	EntityManager em = RegularUser.entityManager();
         TypedQuery<Phase> q = em.createQuery("SELECT o FROM Phase AS o WHERE o.code = :code ", Phase.class);
-        q.setParameter("code", "9999");        
+        q.setParameter("code", code);        
         List<Phase> results = q.getResultList();
         if (!results.isEmpty())
            return  results.get(0);
         else
            return null;
 
+    }
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Code: ").append(getCode()).append(", ");
+        sb.append("Name: ").append(getName()).append(", ");
+        //sb.append("ProjectLst: ").append(getProjectLst() == null ? "null" : getProjectLst().size());
+        return sb.toString();
     }
 }

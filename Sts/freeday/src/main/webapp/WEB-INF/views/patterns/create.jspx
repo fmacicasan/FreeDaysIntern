@@ -7,7 +7,6 @@
         <field:simple field="phaseLaborLst" id="c_freedays_timesheet_Pattern_phaseLaborLst" messageCode="entity_reference_not_managed" messageCodeAttribute="Phase Labor" render="false" z="user-managed"/>
         <field:select field="phaseLaborLst" id="c_freedays_timesheet_Pattern_phaseLaborLst" itemValue="id" items="${phaselabors}" multiple="true" path="/phaselabor" z="user-managed"/>
         <field:simple field="scheduleLst" id="c_freedays_timesheet_Pattern_scheduleLst" messageCode="entity_reference_not_managed" messageCodeAttribute="Schedule" render="false" z="user-managed"/>
-        <field:checkbox field="deletable" id="c_freedays_timesheet_Pattern_deletable" z="wh77HOTl4zOyuRToWAt2NsfXkqs="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_timesheet_Pattern" render="${not empty dependencies}" z="Q7A08IALUrzRgxjZ2t703Nst+Iw="/>
 </div>

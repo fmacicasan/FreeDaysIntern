@@ -16,6 +16,7 @@ import freedays.app.FreeDay;
 import freedays.app.form.FreeDayUserList;
 import freedays.domain.Request;
 import freedays.mongo.MongoDBApp;
+import freedays.schedule.FreeDayScheduleServiceImpl;
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
 import freedays.util.ResourceDemo;
@@ -106,11 +107,14 @@ public class ReportController {
 
 		
 		//test mongo
-		System.out.println("mongo");
-		MongoDBApp mdba = new MongoDBApp();
-		mdba.execute();
-		System.out.println("mongoend");
+//		System.out.println("mongo");
+//		MongoDBApp mdba = new MongoDBApp();
+//		mdba.execute();
+//		System.out.println("mongoend");
 		
+		//test timesheets
+//		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
+//		fdusil.generateTimesheets();
 		
 		return "report/vacation";
 	}

@@ -32,13 +32,13 @@ public class Pattern {
     public void addPhL(PhaseLabor x) {
     	phaseLaborLst.add(x);
 	}
-    public static Pattern getPatternForVacation() {
+    public static Pattern getSpecialPattern(String phase, String project, String laborbilling ) {
     	ArrayList<PhaseLabor> phlList = new ArrayList<PhaseLabor>();
-    	phlList.add(PhaseLabor.getVacationPhaseLabor());
-		Pattern V = new Pattern();
-		V.setNoOfHours(8);
-		V.setPhaseLaborLst(phlList);
-		return V;
+    	phlList.add(PhaseLabor.getSpecialPhaseLabor(phase,project,laborbilling));
+		Pattern patt = new Pattern();
+		patt.setNoOfHours(8);
+		patt.setPhaseLaborLst(phlList);
+		return patt;
     	
     }
     public PhaseLabor getPhaseLabor(LaborBilling lbS, Phase phS, Project phProject) {
@@ -61,18 +61,18 @@ public class Pattern {
 	    return sb.toString();
 	}
 
-	/**
-	 * @return the deletable
-	 */
-	public boolean isDeletable() {
-		return deletable;
-	}
-
-	/**
-	 * @param deletable the deletable to set
-	 */
-	public void setDeletable(boolean deletable) {
-		this.deletable = deletable;
-	}
-	private transient boolean deletable = true;
+//	/**
+//	 * @return the deletable
+//	 */
+//	public boolean isDeletable() {
+//		return deletable;
+//	}
+//
+//	/**
+//	 * @param deletable the deletable to set
+//	 */
+//	public void setDeletable(boolean deletable) {
+//		this.deletable = deletable;
+//	}
+//	private transient boolean deletable = true;
 }

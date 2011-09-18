@@ -34,6 +34,6 @@ public class Schedule {
     @ManyToOne
     private freedays.timesheet.TimesheetUser employee;
     
-	private transient boolean deletable = true;
+//	private transient boolean deletable = true;
 }
 

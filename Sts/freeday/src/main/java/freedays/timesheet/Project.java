@@ -19,7 +19,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.TypedQuery;
 
 @RooJavaBean
-@RooToString
 @RooEntity
 public class Project {
 
@@ -38,11 +37,11 @@ public class Project {
 	}
 
 
-	public static Project getVacationProject() {
+	public static Project getSpecialProject(String code) {
 		// TODO Auto-generated method stub
 		EntityManager em = Project.entityManager();
         TypedQuery<Project> q = em.createQuery("SELECT o FROM Project AS o WHERE o.code = :code ", Project.class);
-        q.setParameter("code", "9999");        
+        q.setParameter("code", code);        
         List<Project> results = q.getResultList();
         if (!results.isEmpty())
            return  results.get(0);
@@ -50,4 +49,12 @@ public class Project {
            return null;  
 	}
 
+
+	public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Code: ").append(getCode()).append(", ");
+        sb.append("Name: ").append(getName()).append(", ");
+        sb.append("PhaseLst: ").append(getPhaseLst() == null ? "null" : getPhaseLst().size());
+        return sb.toString();
+    }
 }

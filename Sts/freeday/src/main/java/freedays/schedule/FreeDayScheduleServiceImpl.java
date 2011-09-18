@@ -47,6 +47,7 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 		
 		String content = sb.toString();
 		String email = PropertiesUtil.getProperty("reportDestinationAddress");
+		
 		dailyReportRepository.insertDailyReport(email, FreeDayScheduleServiceImpl.SUBJECT, content);
 		MailUtils.sendHtml(email, FreeDayScheduleServiceImpl.SUBJECT, content);
 	}

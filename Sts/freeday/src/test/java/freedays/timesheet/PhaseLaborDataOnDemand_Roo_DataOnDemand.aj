@@ -17,18 +17,12 @@ privileged aspect PhaseLaborDataOnDemand_Roo_DataOnDemand {
     
     public PhaseLabor PhaseLaborDataOnDemand.getNewTransientPhaseLabor(int index) {
         PhaseLabor obj = new PhaseLabor();
-        setDeletable(obj, index);
         setLaborbilling(obj, index);
         setPattern(obj, index);
         setPercentage(obj, index);
         setPhase(obj, index);
         setProject(obj, index);
         return obj;
-    }
-    
-    public void PhaseLaborDataOnDemand.setDeletable(PhaseLabor obj, int index) {
-        Boolean deletable = true;
-        obj.setDeletable(deletable);
     }
     
     public void PhaseLaborDataOnDemand.setPercentage(PhaseLabor obj, int index) {

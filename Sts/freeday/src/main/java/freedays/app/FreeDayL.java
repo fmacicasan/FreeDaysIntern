@@ -1,6 +1,8 @@
 package freedays.app;
 
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -8,8 +10,10 @@ import javax.persistence.TypedQuery;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
+import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.domain.RegularUser;
 import freedays.util.PropertiesUtil;
 
 /**
@@ -91,4 +95,13 @@ public class FreeDayL extends FreeDay {
 //	public boolean customValidationPolicy() {
 //		return ValidationUtils.checkBusinessDay(this.getDate());
 //	}
+	
+    public static List<FreeDayL> getAllGrantedFreeDayLByUsername(String username) {
+        if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<FreeDayL> q = em.createQuery("SELECT o FROM FreeDayL o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status IN :approveList ", FreeDayL.class);
+        q.setParameter("username", username);
+        q.setParameter("approveList", FreeDayStatus.getAllGrantedStatus());
+        return q.getResultList();
+    }
 }

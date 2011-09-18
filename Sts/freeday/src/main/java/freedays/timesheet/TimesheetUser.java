@@ -24,6 +24,9 @@ import javax.persistence.OneToOne;
 @RooEntity
 public class TimesheetUser implements Serializable{
 
+	
+	private static final String DEFAULT_DEPARTMENT = "Engineering";
+	
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", fetch = FetchType.EAGER)
     private List<Schedule> scheduleLst = new ArrayList<Schedule>();
 
@@ -61,6 +64,6 @@ public class TimesheetUser implements Serializable{
 	
 	
 	public String getDepartment(){
-		return "default department";
+		return DEFAULT_DEPARTMENT;
 	}
 }

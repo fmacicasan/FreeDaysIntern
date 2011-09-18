@@ -32,10 +32,13 @@ public class POIGenerator implements TimesheetGenerator{
 
 	
 	
+	private static final String DEFAULT_TIMESHEET_WEEKLY_TOTAL_HOURS_WORK = "TOTAL HOURS WORKED";
 	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_DEPARTMENT = "Department";
 	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_POSITION = "POSITION";
 	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_EMPLOYEE = "EMPLOYEE NAME";
 	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_COMPANY = "LANGUAGEWEAVER, INC.";
+	
+
 	
 	TimesheetUser pEmp;
 	Workbook wb;
@@ -177,7 +180,7 @@ public class POIGenerator implements TimesheetGenerator{
     	CellRangeAddress region = new CellRangeAddress(startingRow + PhLArray.size() + 1,startingRow + PhLArray.size() + 1, 0, 3);
     	Cell kFirst = z.createCell(0);
 		sheet1.addMergedRegion(region);
-    	kFirst.setCellValue("TOTAL HOURS WORKED");
+    	kFirst.setCellValue(DEFAULT_TIMESHEET_WEEKLY_TOTAL_HOURS_WORK);
     	kFirst.setCellStyle(tableheadstyle);
     	for(int j = 1; j < 4; j++) {
     		 Cell k = z.createCell(j);
@@ -195,7 +198,7 @@ public class POIGenerator implements TimesheetGenerator{
 	    	Float sum = (float) 0;
 			Pattern mPattern = getPatternForDay(mDay);
 			sum +=  mPattern.getNoOfHours();
-	    	k.setCellValue(sum);
+	    	k.setCellValue(decimalFormat.format(sum));
 	    	k.setCellStyle(tableheadstyle);
 	    }
 	    for(int j = 3 + endingDay + 1; j < 9; j++) {
@@ -209,18 +212,18 @@ public class POIGenerator implements TimesheetGenerator{
 	    	k.setCellStyle(tableheadstyle);
 	    }
 	    Cell k = z.createCell(11);
-	    k.setCellValue(bigSum);
+	    k.setCellValue(decimalFormat.format(bigSum));
 	    k.setCellStyle(tableheadstyle);
 	}
-	public Schedule getScheduleFromFreeDayItem(FreeDayVacation x) {
-		Schedule b = new Schedule();
-		b.setStartDate(x.getDate());
-		b.setEndDate(x.getEnd());
-		b.setPattern(Pattern.getPatternForVacation());
-		b.setEmployee(pEmp);
-		return b;
-		
-	}
+//	public Schedule getScheduleFromFreeDayItem(FreeDayVacation x) {
+//		Schedule b = new Schedule();
+//		b.setStartDate(x.getDate());
+//		b.setEndDate(x.getEnd());
+//		b.setPattern(Pattern.getPatternForVacation());
+//		b.setEmployee(pEmp);
+//		return b;
+//		
+//	}
 	private Float generateTableRow(Integer startingRow, int i, Integer startingDay, Integer endingDay, Calendar weekEnd) {		
 		Row z = sheet1.createRow(startingRow + i);
 		Cell firstCol = z.createCell(0);
@@ -279,7 +282,7 @@ public class POIGenerator implements TimesheetGenerator{
 		}
 		
 		Cell ts = z.createCell(11);
-		ts.setCellValue(suma);
+		ts.setCellValue(decimalFormat.format(suma));
 		ts.setCellStyle(tablestyle);
 		return suma;
 	}
@@ -436,10 +439,10 @@ public class POIGenerator implements TimesheetGenerator{
 	 */
 	private void unionScheduleVacation() {	
 		List<Schedule> lsnew = new ArrayList<Schedule>();		
-		List<FreeDayVacation> lFreeDays = FreeDayVacation.getAllGrantedVacationsByUsername(pEmp.getRegularUser().getUsername());
+		List<FreeDayAbstraction> lFreeDays = FreeDayAbstraction.getAllGrantedFreeDayAbstractions(pEmp.getRegularUser().getUsername());
 		for(int i = 0; i < lFreeDays.size(); i++) {
-			Schedule freeSched = getScheduleFromFreeDayItem(lFreeDays.get(i));
-			Calendar start =  lFreeDays.get(i).getDate();
+			Schedule freeSched = lFreeDays.get(i).getSchedule();
+			Calendar start =  lFreeDays.get(i).getStart();
 			Calendar end =  lFreeDays.get(i).getEnd();
 			lsnew.clear();
 			lsnew.add(freeSched);
