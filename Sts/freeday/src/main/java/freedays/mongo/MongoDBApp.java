@@ -17,7 +17,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
  */
 @RooJavaBean
 @Configurable
-public class MongoDBApp implements ApplicationContextAware {
+public class MongoDBApp {
 
     static final Logger logger = LoggerFactory.getLogger(MongoDBApp.class);
 
