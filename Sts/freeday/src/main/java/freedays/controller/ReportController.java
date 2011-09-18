@@ -93,7 +93,7 @@ public class ReportController {
 //		PropertiesUtil.getProperty("testing");
 		
 		//test super aproval computation
-		Request.findAllPendingSuperApprovalsByUsername(userContextService.getCurrentUser());
+		//Request.findAllPendingSuperApprovalsByUsername(userContextService.getCurrentUser());
 		
 		//test daily report
 //		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();

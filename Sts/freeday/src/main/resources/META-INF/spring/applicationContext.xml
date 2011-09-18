@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task" xmlns:security="http://www.springframework.org/schema/security" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd         http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd ">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd         
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd         
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd         
+	http://www.springframework.org/schema/tx  
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+	http://www.springframework.org/schema/security 
+	http://www.springframework.org/schema/security/spring-security-3.0.xsd 
+	http://www.springframework.org/schema/data/mongo 
+	http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd 
+	http://www.springframework.org/schema/task 
+	http://www.springframework.org/schema/task/spring-task-3.0.xsd ">
     <!--
         This will automatically locate any and all property files you have
         within your classpath, provided they fall under the META-INF/spring
@@ -97,6 +117,10 @@
         </property>
     </bean>
     
+    
+    
+    <!-- Scheduling mechanism -->
+    
     <task:scheduler id="myScheduler" pool-size="10" />
     <!-- Scheduled task implementation not yet with annotations UPDATE: tried annotations but hets discovered
     	twice and repeats the execution from both the web context and the app context  -->
@@ -108,9 +132,9 @@
     </task:scheduled-tasks> 
     
     <!--  <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
-    
     <task:executor id="myExecutor" pool-size="5"/>-->
     
+    <!-- Custom properties files -->
     <bean id="applicationProperties" class="freedays.util.PropertiesUtil">
     	<property name="locations">
     		<list>
@@ -119,6 +143,23 @@
     		</list>
     	 </property> 
     </bean>
+    <!-- End Custom properties files -->
+    
+	<!--  MongoDB configuration -->
+   	<mongo:mongo host="${mongo.host}" id="mongo"/> 
+   
+   	<!--     <mongo:repositories base-package="freedays.mongo"/> -->
+    
+    <!-- To translate any MongoExceptions thrown in @Repository annotated classes -->
+	<!--      <context:annotation-config/> -->
+
+    <bean class="org.springframework.data.document.mongodb.MongoTemplate" id="mongoTemplate">
+        <constructor-arg ref="mongo"/>
+        <constructor-arg name="databaseName" value="${mongo.name}" />
+    </bean>
+    <!-- End MongoDB configuration -->
+    
+    
     
 
     

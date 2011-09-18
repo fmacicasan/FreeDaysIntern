@@ -139,7 +139,7 @@ public class AccountController {
 		ru.update(newpass);
 		
 		uiModel.asMap().clear();
-		return "redirect:/regularusers/"+ru.getId();
+		return "changepasstokenok";
 	}
 	
 
