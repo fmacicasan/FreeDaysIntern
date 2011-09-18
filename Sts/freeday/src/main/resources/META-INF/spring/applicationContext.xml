@@ -128,7 +128,7 @@
     	<task:scheduled ref="scheduleService" method="reportFreeDays"  cron="0 0 17 * * MON-FRI"/>																		<!-- should be at 23 -->
     	<!-- <task:scheduled ref="scheduleService" method="denyLateRequestsStillUnderApproval" cron="0 0 23 * * MON-FRI"/> -->
     	<task:scheduled ref="scheduleService" method="generateTimesheets"  cron="25 05 13 * * *"/>
-    	<task:scheduled ref="scheduleService" method="verifyExpiredPasswordRequests" cron="1 0 * * * *"/>
+    	<task:scheduled ref="scheduleService" method="verifyExpiredPasswordRequests" cron="0 15 0/6 * * *"/>
     </task:scheduled-tasks> 
     
     <!--  <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>

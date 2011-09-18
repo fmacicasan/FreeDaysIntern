@@ -106,10 +106,10 @@ public class ReportController {
 
 		
 		//test mongo
-		System.out.println("mongo");
-		MongoDBApp mdba = new MongoDBApp();
-		mdba.execute();
-		System.out.println("mongoend");
+//		System.out.println("mongo");
+//		MongoDBApp mdba = new MongoDBApp();
+//		mdba.execute();
+//		System.out.println("mongoend");
 		
 		
 		return "report/vacation";

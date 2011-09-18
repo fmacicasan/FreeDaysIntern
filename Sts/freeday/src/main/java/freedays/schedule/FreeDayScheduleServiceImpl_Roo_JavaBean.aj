@@ -3,6 +3,7 @@
 
 package freedays.schedule;
 
+import freedays.mongo.DailyReportRepository;
 import freedays.security.UserContextService;
 
 privileged aspect FreeDayScheduleServiceImpl_Roo_JavaBean {
@@ -13,6 +14,14 @@ privileged aspect FreeDayScheduleServiceImpl_Roo_JavaBean {
     
     public void FreeDayScheduleServiceImpl.setUserContextService(UserContextService userContextService) {
         this.userContextService = userContextService;
+    }
+    
+    public DailyReportRepository FreeDayScheduleServiceImpl.getDailyReportRepository() {
+        return this.dailyReportRepository;
+    }
+    
+    public void FreeDayScheduleServiceImpl.setDailyReportRepository(DailyReportRepository dailyReportRepository) {
+        this.dailyReportRepository = dailyReportRepository;
     }
     
 }

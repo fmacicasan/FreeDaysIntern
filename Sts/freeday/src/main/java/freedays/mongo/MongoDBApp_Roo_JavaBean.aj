@@ -3,7 +3,9 @@
 
 package freedays.mongo;
 
+import freedays.mongo.DailyReportRepository;
 import freedays.mongo.PersonRepository;
+import freedays.schedule.FreeDayScheduleServiceImpl;
 import org.springframework.context.ApplicationContext;
 
 privileged aspect MongoDBApp_Roo_JavaBean {
@@ -22,6 +24,22 @@ privileged aspect MongoDBApp_Roo_JavaBean {
     
     public void MongoDBApp.setPersonRepository(PersonRepository personRepository) {
         this.personRepository = personRepository;
+    }
+    
+    public DailyReportRepository MongoDBApp.getDailyReportRepository() {
+        return this.dailyReportRepository;
+    }
+    
+    public void MongoDBApp.setDailyReportRepository(DailyReportRepository dailyReportRepository) {
+        this.dailyReportRepository = dailyReportRepository;
+    }
+    
+    public FreeDayScheduleServiceImpl MongoDBApp.getScheduleService() {
+        return this.scheduleService;
+    }
+    
+    public void MongoDBApp.setScheduleService(FreeDayScheduleServiceImpl scheduleService) {
+        this.scheduleService = scheduleService;
     }
     
 }

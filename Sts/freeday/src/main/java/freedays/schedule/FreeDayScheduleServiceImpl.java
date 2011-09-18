@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import freedays.app.form.FreeDayUserList;
 import freedays.controller.TimesheetController;
 import freedays.domain.Request;
+import freedays.mongo.DailyReportRepository;
 import freedays.security.InfoChanger;
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
@@ -28,6 +29,9 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 	@Autowired
 	private UserContextService userContextService;
 	
+	@Autowired
+	private DailyReportRepository dailyReportRepository;
+	
 	
 	//don't use annotation due to double discovery by both the web and the app context
 	//@Scheduled(cron="0 * * * * MON-FRI")
@@ -35,25 +39,31 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 	public void reportFreeDays() {
 		
 		int m = DateUtils.getCurrentMonth();
-		String month1 = FreeDayUserList.generateHtmlReport(m);
-		String month2 = FreeDayUserList.generateHtmlReport(m+1);
-
-		MailUtils.sendHtml(PropertiesUtil.getProperty("reportDestinationAddress"), FreeDayScheduleServiceImpl.SUBJECT, month1+"<br/>"+month2);
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(FreeDayUserList.generateHtmlReport(m))
+			.append("<br/>")
+			.append(FreeDayUserList.generateHtmlReport((m==12)?1:m+1));
+		
+		String content = sb.toString();
+		String email = PropertiesUtil.getProperty("reportDestinationAddress");
+		dailyReportRepository.insertDailyReport(email, FreeDayScheduleServiceImpl.SUBJECT, content);
+		MailUtils.sendHtml(email, FreeDayScheduleServiceImpl.SUBJECT, content);
 	}
 
-	@Override
-	public void denyLateRequestsStillUnderApproval() {
-		//Request.DEBUG=true;
-		List<Request> lr = Request.findAllPendingApprovals();
-		for (Request request : lr) {
-			if(!request.getRequestable().isCancelable()){
-				request.autoDeny();
-				request.getRequestable().merge();
-				request.merge();
-			}
-		}	
-		//Request.DEBUG=false;
-	}
+//	@Override
+//	public void denyLateRequestsStillUnderApproval() {
+//		//Request.DEBUG=true;
+//		List<Request> lr = Request.findAllPendingApprovals();
+//		for (Request request : lr) {
+//			if(!request.getRequestable().isCancelable()){
+//				request.autoDeny();
+//				request.getRequestable().merge();
+//				request.merge();
+//			}
+//		}	
+//		//Request.DEBUG=false;
+//	}
 	
 
 	
