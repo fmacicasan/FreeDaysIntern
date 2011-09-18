@@ -15,10 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.app.FDUser;
+import freedays.app.FreeDayC;
+import freedays.app.FreeDayR;
 import freedays.domain.RegularUser;
+import freedays.domain.Request;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.UpdateWrapper;
 import freedays.security.UserContextService;
@@ -97,11 +99,16 @@ public class AccountController {
 	@RequestMapping(value="fduser", method = RequestMethod.GET)
 	public String viewFDuser(Model uiModel) {	
 		
-		FDUser fdu = FDUser.findFDUserByUsername(userContextService.getCurrentUser());
+		String username = userContextService.getCurrentUser();
+		FDUser fdu = FDUser.findFDUserByUsername(username);
 		uiModel.addAttribute("fduser", fdu);
 		uiModel.addAttribute("fduser_col", fdu.getRoles());
 		uiModel.addAttribute("itemId", fdu.getId());
 		
+		uiModel.addAttribute("activeRequestCount", Request.countActiveRequests(username));
+    	uiModel.addAttribute("remainingDaysCount", Request.computeAvailableFreeDays(username));
+    	uiModel.addAttribute("remainingTotalDaysCount",Request.computeTotalAvailableFreeDays(username));
+    	uiModel.addAttribute("request_currentlwspecificdays", FreeDayC.countAllUnmatchedRequestsByUsername(username) - FreeDayR.countAllUnmatchedRequestsByUsername(username));
 		
 		return "fdusers/show";
 	}

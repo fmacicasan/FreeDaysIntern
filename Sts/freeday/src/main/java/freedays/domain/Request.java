@@ -19,6 +19,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
+import freedays.app.FreeDayC;
+import freedays.app.FreeDayR;
 import freedays.app.RequestStatus;
 import freedays.app.form.FreeDayRequest;
 import freedays.security.UserContextService;
@@ -672,4 +674,5 @@ public class Request implements Serializable {
 	public static List<Request> findRequestEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("SELECT o FROM Request o ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
+
 }

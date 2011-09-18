@@ -13,12 +13,12 @@
         <field:display field="approver" id="s_freedays_domain_Request_approver" object="${request}" z="iDwR2kruP7sD5+6o0ZLaLJxkakY="/>
         <field:display render="false" field="feedback" id="s_freedays_domain_Request_feedback" object="${request}" z="user-managed"/>
     </page:show>
-    <c:out value="a${isApprover} isApprover " />
+    <!--  <c:out value="a${isApprover} isApprover " />
     <c:out value="a${isApprovable} isApprovable " />
     <c:out value="a${isSuperApprover} isSuperApprover " />
     <c:out value="a${isGreaterApprover} isGreaterApprover"/>
     <c:out value="a${isPersonal} isPersonal"  />
-    <c:out value="a${isCancelable} isCancelable"  />
+    <c:out value="a${isCancelable} isCancelable"  />-->
     
     <c:if test="${((isApprover  or isSuperApprover) and isApprovable) or isCancelable}">
         <br/>

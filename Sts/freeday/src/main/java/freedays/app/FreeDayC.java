@@ -87,6 +87,16 @@ public class FreeDayC extends FreeDaysRCMatch {
 		//TOOD: think at avoid duplicates at request
 	}
 
+	public static Long countAllUnmatchedRequestsByUsername(String username) {
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+		EntityManager em = FreeDayR.entityManager();
+		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDayC o, Request r WHERE r.requestable = o and r.appreguser.regularUser.username = :username and o.status=:status", Long.class);
+		q.setParameter("username",username);
+		q.setParameter("status", FreeDayStatus.WAITING);
+		return q.getSingleResult();
+		//TOOD: think at avoid duplicates at request
+	}
+	
 //	@Override
 //	protected void setDate(Calendar date) {
 //		this.setRequestdate(date);
