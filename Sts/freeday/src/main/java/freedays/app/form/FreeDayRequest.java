@@ -76,7 +76,7 @@ public class FreeDayRequest {
 	    		throw new IllegalArgumentException("The request type is not supported!");	
     	}
     	fdr.setReqtype(rt);
-    	System.out.println(rt);
+    	//System.out.println(rt);
     	return fdr;
     }
     

@@ -392,11 +392,8 @@ public class FreeDayUserList {
 	private static String populateImageTemplate(String alt, String src){
 		Object[] arguments = new Object[2];
 		arguments[0] = alt;
-		System.out.println(alt);
-		System.out.println(src);
 		arguments[1]=src;
 		String formatted = String.format(DEFAULT_REPORT_TEMPLATE_IMAGE,alt,src);
-		System.out.println(formatted);
 		return formatted;
 	}
 	

@@ -91,7 +91,6 @@ public abstract class ApplicationRegularUser   implements Serializable {
 		TypedQuery<ApplicationRegularUser> q = em.createQuery("SELECT o FROM ApplicationRegularUser AS o WHERE o.regularUser.username = :username",ApplicationRegularUser.class);
 		q.setParameter("username",username);
 		ApplicationRegularUser aru = q.getSingleResult();
-		System.out.println(aru);
 		return aru;
 	}
 
@@ -192,11 +191,11 @@ public abstract class ApplicationRegularUser   implements Serializable {
 		TypedQuery<ApplicationRegularUser> q = entityManager().createQuery("SELECT o FROM ApplicationRegularUser o WHERE o.granter = :boss ",ApplicationRegularUser.class);
 		q.setParameter("boss", boss);
 		List<ApplicationRegularUser> laru = q.getResultList();
-		System.out.println(laru.size());
-		for(ApplicationRegularUser aru : laru){
-			System.out.println(aru.toString()+aru.isRequestGranter());
-			
-		}
+		//System.out.println(laru.size());
+//		for(ApplicationRegularUser aru : laru){
+//			System.out.println(aru.toString()+aru.isRequestGranter());
+//			
+//		}
 		Iterator<ApplicationRegularUser> iaru = laru.iterator();
 		while(iaru.hasNext()){
 			ApplicationRegularUser aru = iaru.next();
@@ -204,11 +203,11 @@ public abstract class ApplicationRegularUser   implements Serializable {
 				iaru.remove();
 			}
 		}
-		System.out.println(laru.size());
-		for(ApplicationRegularUser aru : laru){
-			System.out.println(aru.toString()+aru.isRequestGranter());
-			
-		}
+//		System.out.println(laru.size());
+//		for(ApplicationRegularUser aru : laru){
+//			System.out.println(aru.toString()+aru.isRequestGranter());
+//			
+//		}
 		return new HashSet<ApplicationRegularUser>(laru);
 	}
 	
@@ -216,17 +215,17 @@ public abstract class ApplicationRegularUser   implements Serializable {
 		Set<ApplicationRegularUser> fullSubordinateTree = new HashSet<ApplicationRegularUser>();	
 		Queue<ApplicationRegularUser> qaru = new LinkedList<ApplicationRegularUser>();
 		qaru.add(boss);
-		System.out.println("initial size"+qaru.size());
+		//System.out.println("initial size"+qaru.size());
 		while(!qaru.isEmpty()){
 			ApplicationRegularUser aru = qaru.poll();
-			System.out.println("size after pool"+qaru.size());
+			//System.out.println("size after pool"+qaru.size());
 			Set<ApplicationRegularUser> saru = ApplicationRegularUser.findAllSubordinatesRequestGranters(aru);
 			for(ApplicationRegularUser maru:saru){
 				qaru.add(maru);
 			}
-			System.out.println("size after retrieve"+qaru.size());
+			//System.out.println("size after retrieve"+qaru.size());
 			fullSubordinateTree.add(aru);
-			System.out.println("size full tree"+fullSubordinateTree.size());
+			//System.out.println("size full tree"+fullSubordinateTree.size());
 		}
 		fullSubordinateTree.remove(boss);
 		return fullSubordinateTree;
@@ -242,9 +241,9 @@ public abstract class ApplicationRegularUser   implements Serializable {
 		ApplicationRegularUser aru;
 		try{
 			 aru = q.getSingleResult();
-			System.out.println(aru);
+			//System.out.println(aru);
 		}catch(EmptyResultDataAccessException e){
-			System.out.println(e);
+			//System.out.println(e);
 			return null;
 		}
 		return aru;

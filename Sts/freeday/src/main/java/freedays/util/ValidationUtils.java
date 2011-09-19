@@ -50,10 +50,8 @@ public class ValidationUtils {
 	public static boolean checkRomanianLegalHoliday(Calendar reqdate) {
 		List<Calendar> lc = FreeDayRL.getAllHolidays();
 		boolean test = lc.contains(reqdate);
-		logger.info(String.format("is holiday %s?%s", DateUtils.printShortDate(reqdate),test));
 		if(!test){
 			for(Calendar c: lc){
-				logger.info(String.format("is %s the %s", DateUtils.printShortDate(reqdate),DateUtils.printShortDate(c)));
 				if(DateUtils.printShortDate(c).equals(DateUtils.printShortDate(reqdate))){
 					return true;
 				}

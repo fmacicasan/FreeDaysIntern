@@ -204,18 +204,13 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 
 	public static void updateFDUser(FDUser fdu) {
         FDUser back = FDUser.findFDUserById(fdu.getId()); 
-        System.out.println("id"+fdu.getId());
 //      RegularUser ru = back.getRegularUser(); //no more need for this the context gets updated
 //      fdu.setRegularUser(ru);
       //: change also the requests for the ex approver to the new one
       //should i send mail to the involved parties ?
-        System.out.println("will do check of back");
       if(back.getGranter() != null){
-    	  System.out.println("is not null");
 	      if((back.getGranter().getId() != fdu.getGranter().getId())){//the granter changed in UI => persistence context marked the change
-	      	System.out.println("Testing");
 	      	fdu.updateActiveRequests(back.getGranter());
-	      	System.out.println("done testing");
 	      }
       }
       fdu.merge();
@@ -224,23 +219,16 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 
 	private void updateActiveRequests(ApplicationRegularUser oldGranter) {
 		if(oldGranter==null){throw new IllegalArgumentException("The oldGranter argument is required");}
-		System.out.println("cucurigu");
 		TypedQuery<Request> q = entityManager().createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username and o.approver = :granter and o.status NOT IN :finishstates  ", Request.class);
         q.setParameter("granter", oldGranter);
         q.setParameter("finishstates", RequestStatus.getPossibleFinalStatusList());
-        System.out.println("ciungus pius"+this.getRegularUser());
         RegularUser ru = this.getRegularUser();
-        System.out.println("terminus"+ru);
         q.setParameter("username", ru.getUsername());
-        System.out.println("pre cucurigen");
         List<Request> results = q.getResultList();
-        System.out.println("opst cucurigen");
         for (Request request : results) {
-        	System.out.println("cucuriging");
 			request.setApprover(this.getGranter());
 			request.merge();
 		}
-        System.out.println("don cucuring");
 	}
 	
 	public static FDUser findFDUserById(Long id){

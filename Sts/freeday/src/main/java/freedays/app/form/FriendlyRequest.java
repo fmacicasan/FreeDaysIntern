@@ -45,7 +45,6 @@ public class FriendlyRequest {
 	private String processDate2SortString(Calendar date2) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("%1$tY%1$tm%1$td", date2));
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 

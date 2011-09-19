@@ -94,9 +94,7 @@ public class RegularUserController {
 		uiModel.addAttribute("regularusers",lru);
 		uiModel.addAttribute("searchOptions", RegularUser.getSearchCriteria());
 		addDateTimeFormatPatterns(uiModel);
-		//System.out.println("will start");
 		//new MailUtils().send("flo.macicasan@gmail.com", "sa nu ana are mere", "Te rog sa nu te duci dupa paine.Sper sa nu ajungem tarziu.Florin");
-		//System.out.println("will finish");
 		return "regularusers/search";
 	}
 

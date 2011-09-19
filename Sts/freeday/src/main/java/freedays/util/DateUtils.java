@@ -133,7 +133,7 @@ public class DateUtils {
 		
 		long time = end.getTimeInMillis();
 		time -= start.getTimeInMillis();
-		System.out.println(time);
+		//System.out.println(time);
 		return TimeUnit.MILLISECONDS.toDays(time);
 	}
 	
@@ -378,7 +378,6 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Calendar dateAddRomanianBusinessDay(Calendar start, Long span){
-		logger.info(String.format("Starting %s and %d",DateUtils.printShortDate(start),span));
 		//start day wont be holiday
 		//end date wont be holiday
 		//=> holiday will be in between
@@ -394,14 +393,10 @@ public class DateUtils {
 			if(!ValidationUtils.checkWeekend(date)){
 				if(!ValidationUtils.checkRomanianLegalHoliday(date)){
 					span--;
-					
-				} else {
-					logger.info(String.format("found holiday %s",DateUtils.printShortDate(date)));
-				}
+				} 
 				init++;
 			}
 		}
-		logger.info(String.format("Ending %s and %d",DateUtils.printShortDate(start),init));
 		return DateUtils.dateAddBusinessDay(start, init.longValue());
 	}
 	

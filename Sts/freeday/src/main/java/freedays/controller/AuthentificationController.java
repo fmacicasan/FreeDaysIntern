@@ -62,11 +62,8 @@ public class AuthentificationController extends
 		try {
 			RegularUser regularUser =RegularUser
 					.findRegularUsersByUsername(username).getSingleResult();
-			System.out.println("not empty");
 			if(!regularUser.getUsername().equals(username)) throw new BadCredentialsException("Invalid username or password");
-			System.out.println("equals");
 			if(!regularUser.getPassword().equals(encryptedPassword)) throw new BadCredentialsException("Invalid username or password");
-			System.out.println("pass sux");
 			if(!regularUser.getActiv()) throw new BadCredentialsException("Your account has been disabled!");
 			if(regularUser.getDeleted()) throw new BadCredentialsException("Your accout has been deleted!");
 			if(FDUser.isUnassociated(regularUser)) throw new BadCredentialsException("Your account has not been processed yet! - (4Test) needs FDUser creation!");
@@ -76,13 +73,10 @@ public class AuthentificationController extends
 			for (AdvancedUserRole aur : set) {
 				authorities.add(new GrantedAuthorityImpl(aur.toString()));
 			}
-			System.out.println("roles problem");
 			ApplicationRegularUser aru = ApplicationRegularUser.findByUsernameWithRoles(username);
 			if(aru != null && aru.isSuperUser()){
 				authorities.add(new GrantedAuthorityImpl("ROLE_SUPERAPPROVER"));
 			}
-			System.out.println("no roles");
-			System.out.println("all ok");
 		}catch (EmptyResultDataAccessException e){
 			throw new BadCredentialsException("Invalid username or password");
 		} catch (EntityNotFoundException e) {

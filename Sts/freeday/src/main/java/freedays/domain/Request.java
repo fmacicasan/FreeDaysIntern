@@ -137,14 +137,8 @@ public class Request implements Serializable {
      * Cancels the current request.
      */
     public void cancel() {
-    	System.out.println("befoeere cancel");
-    	System.out.println("before cancel statu"+requestable);
         setCancelStatus();
-        System.out.println("after cancel status"+requestable);
-        System.out.println("passed cancel");
         informCancelRequest();
-        System.out.println("after cancel"+requestable);
-        System.out.println("ended cancel");
     }
 
     /**
@@ -252,9 +246,7 @@ public class Request implements Serializable {
     private void informSuperiorCancel() {
         if (!Request.DEBUG) {
         	if(this.hasApprover()){
-	        	System.out.println("debigo");
 	            RegularUser superapprover = getSuperiorRegularUser();
-	            System.out.println("superapprover"+superapprover);
 	            if (!this.getApprover().getRegularUser().equals(superapprover)) {
 	                MailUtils.sendUpperRequestCancelNotification(superapprover.getEmail(), superapprover.getFullName(), this.toString());
 	            }
@@ -283,7 +275,6 @@ public class Request implements Serializable {
     
     private RegularUser getUltimateRegularUser(){
     	RegularUser ru = this.getRequestable().getUltimateApprover(this.getAppreguser()).getRegularUser();
-    	System.out.println(ru);
     	return ru;
     }
 
@@ -328,7 +319,6 @@ public class Request implements Serializable {
     private void informCancelRequest() {
         if (!Request.DEBUG) {
             this.informRequest(Request.FD_INFORM_CONTENT_CANCEL);
-            System.out.println("informing");
             this.informSuperiorCancel();
         }
     }
@@ -474,15 +464,13 @@ public class Request implements Serializable {
 	 * @return
 	 */
     public static Request createPersistentReq(FreeDayRequest fdr, String username) {
-    	System.out.println("crazy");
         Request req = new Request();
         req.setStatus(RequestStatus.getInit());
         req.setAppreguser(FDUser.findFDUserByUsername(username));
         req.setRequestable(FreeDay.createPersistentFreeDay(fdr));
-        System.out.println(req);
+        //System.out.println(req);
         req.init();
         req.persist();
-        System.out.println("cistelecan");
         return req;
     }
 
@@ -492,7 +480,6 @@ public class Request implements Serializable {
 	 * @return
 	 */
     public static List<Request> findAllRequestsByUsername(String username) {
-    	System.out.println("ternubatirs");
         if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
         EntityManager em = RegularUser.entityManager();
         TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username ORDER BY o.status ASC, o.requestable.date DESC ", Request.class);
@@ -584,7 +571,7 @@ public class Request implements Serializable {
         
         LogFactory.getLog(Request.class.getClass()).info("Cancelation attempt!");
         Request req = Request.findRequest(id2);
-        System.out.println(req);
+        //System.out.println(req);
         req.cancel();
         req.persist();
     }

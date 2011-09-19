@@ -75,9 +75,6 @@ public class InfoChanger {
 
 	private boolean verifToken(String enchash) {
 		String rawhash = generateHash();
-		System.out.println(rawhash);
-		System.out.println(enchash);
-		System.out.println(messageDigestPasswordEncoder.encodePassword(rawhash, this.getSeed()));
 		return messageDigestPasswordEncoder.isPasswordValid(enchash, rawhash, this.getSeed());
 	}
 
@@ -106,31 +103,25 @@ public class InfoChanger {
 		ic.setRegularUser(ru);
 		ic.setExpdate(exp);
 		ic.setExpcode(ic.genToken());
-		System.out.println("generated hash:"+ic.getExpcode());
 		ic.persist();
 		return ic.getExpcode();
 	}
 	
 
 	public static boolean verifyToken(String enchash) {
-		System.out.println("cucurigzzzz"+enchash);
 		try {
 			InfoChanger ic = InfoChanger.findByHash(enchash).getSingleResult();
 			if (!ic.verifToken(enchash)) {
-				System.out.println("not1");
 				return false;
 			}
 			if (ic.isExpired() || ic.isUsed()) {
-				System.out.println("not2");
 				return false;
 			}
 			if(ic.isJustExpired()){
-				System.out.println("not 4");
 				ic.setExpired(true);
 				ic.merge();
 				return false;
 			}
-			System.out.println("not3");
 			
 			return true;
 		} catch (EmptyResultDataAccessException e) {

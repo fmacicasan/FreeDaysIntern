@@ -129,7 +129,6 @@ public class RequestController {
     public String create(@Valid FreeDayRequest request, BindingResult bindingResult, Model uiModel, Principal p) {
         if (bindingResult.hasErrors()) {
         	
-        	//System.out.println("ciuyciulete");
         	
         	uiModel.addAttribute("hasError",true);
             uiModel.addAttribute("reqbean", request);
@@ -154,7 +153,6 @@ public class RequestController {
             }
             return "requests/create";
         }
-//        System.out.println("cacenflitzzzz");
         
         //uiModel.asMap().clear();
         //request.persist();
@@ -244,9 +242,7 @@ public class RequestController {
 	@PreAuthorize("hasRole('ROLE_FDADMIN') or hasPermission(#id, 'Request', 'own')")
 	@RequestMapping(value = "/{id}", params = {"eval","cancel"}, method = RequestMethod.POST)
 	public String evalRequestCancel(@PathVariable("id") Long id, Model uiModel){
-		System.out.println("Before cancel");
 		Request.cancel(id);
-		System.out.println("Eroriuy!");
 		
 		uiModel.asMap().clear();
 		if(this.userContextService.isOwn(Request.findRequest(id).getAppreguser().getRegularUser())){
@@ -281,7 +277,6 @@ public class RequestController {
     @RequestMapping(params= "own", method = RequestMethod.GET)
     public String listOwn(Model uiModel, Principal p){
     	uiModel.addAttribute("requests",processRequest(Request.findAllRequestsByUsername(p.getName())));
-    	System.out.println("crazy");
     	return "requests/list";
     }
     

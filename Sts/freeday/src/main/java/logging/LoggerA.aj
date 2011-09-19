@@ -12,7 +12,7 @@ import org.springframework.util.StopWatch;
 public class LoggerA {                                                       
 	private final Log log = LogFactory.getLog(this.getClass());
 
-	//@Around("execution(* freedays..*.*(..)) && !execution(* get*()) && !execution(* set*()) && !execution(* toString*())")
+	@Around("execution(* freedays..*.*(..)) && !execution(* get*()) && !execution(* set*()) && !execution(* toString*())")
 	public Object logTimeMethod(ProceedingJoinPoint joinPoint) throws Throwable {
 
 			StopWatch stopWatch = new StopWatch();
@@ -32,7 +32,11 @@ public class LoggerA {
 				// append args
 				Object[] args = joinPoint.getArgs();
 				for (int i = 0; i < args.length; i++) {
-					logMessage.append(args[i]).append(",");
+					if(args[i].toString().length() < 50){
+						logMessage.append(args[i]).append(",");
+					} else {
+						logMessage.append("too long").append(",");
+					}
 				}
 				if (args.length > 0) {
 					logMessage.deleteCharAt(logMessage.length() - 1);

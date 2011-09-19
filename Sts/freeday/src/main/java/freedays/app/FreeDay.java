@@ -246,7 +246,6 @@ public abstract class FreeDay {
 	 */
     public void setFinalFailStatus() {
         this.status = FreeDayStatus.COMPLETED_FAILURE;
-        System.out.println("i finalized fial");
         this.finalizeFail();
     }
 
@@ -258,15 +257,12 @@ public abstract class FreeDay {
 	 */
     public static FreeDay createPersistentFreeDay(FreeDayRequest fdr) {
         if (fdr == null) throw new IllegalArgumentException("The FreeDayRequest argument is required");
-        System.out.println("babustaq");
         FreeDay fd = FreeDayFactory.create(fdr);
         fd.initialize(fdr);
         fd.setInitStatus();
         fd.setDate(fdr.getReqdate());
         fd.setReason(fdr.getReason());
         fd.setApproval(AppStrategL1.getDefaultInitialStrateg());
-        System.out.println("terminator");
-        System.out.println(DateUtils.printShortDate(fd.getDate()));
         fd.persist();
         return fd;
     }

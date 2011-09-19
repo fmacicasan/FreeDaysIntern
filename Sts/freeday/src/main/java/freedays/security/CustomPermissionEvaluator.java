@@ -119,7 +119,6 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 			
 			if(permission.equals("superapprover")){
 				if(aru==null)return false;
-				System.out.println("auth"+authentication+"is super"+aru.isSuperUser());
 				return aru.isSuperUser();
 				
 			}

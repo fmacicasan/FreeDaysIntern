@@ -273,7 +273,7 @@ public class MailUtils {
 	}
 	public static void sendResetPasswordTokenNotification(String email, String token) {
 		final String content = String.format(MailUtils.RESET_PASS_MESSAGE_TOKEN,email,PropertiesUtil.getProperty("applicationHome"), token,InfoChanger.DEFAULT_EXPIRE_INTERVAL_IN_HOURS);
-		System.out.println("reset pass token content:"+content);
+		//System.out.println("reset pass token content:"+content);
 		MailUtils.sendAsyncMail(email, RESET_PASS_TITLE, content);
 		
 	}

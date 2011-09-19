@@ -102,7 +102,6 @@ public abstract class  FreeDaysRCMatch extends FreeDay{
 	
 	@Override
 	protected void finalizeFail(){
-		System.out.println("i will finalize fail now");
 		FreeDaysRCMatch match = this.getMatch();
 		if(match != null){
 			match.setFinalApproveStatus();

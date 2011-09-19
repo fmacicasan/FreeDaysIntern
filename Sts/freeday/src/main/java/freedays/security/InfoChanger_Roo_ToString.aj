@@ -12,10 +12,8 @@ privileged aspect InfoChanger_Roo_ToString {
         sb.append("Expcode: ").append(getExpcode()).append(", ");
         sb.append("Expdate: ").append(getExpdate() == null ? "null" : getExpdate().getTime()).append(", ");
         sb.append("Expired: ").append(getExpired()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
         sb.append("RegularUser: ").append(getRegularUser()).append(", ");
         sb.append("Used: ").append(getUsed()).append(", ");
-        sb.append("Version: ").append(getVersion()).append(", ");
         sb.append("JustExpired: ").append(isJustExpired());
         return sb.toString();
     }

@@ -78,11 +78,8 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 		List<InfoChanger> lic = InfoChanger.findAllActiveChangePasswordRequests();
 		for(InfoChanger ic : lic){
 			if(ic.isJustExpired()){
-				System.out.println(DateUtils.printLong(ic.getExpdate()));
 				ic.setExpired(true);
 				ic.merge();
-			} else {
-				System.out.println("not"+DateUtils.printLong(ic.getExpdate()));
 			}
 		}
 	}

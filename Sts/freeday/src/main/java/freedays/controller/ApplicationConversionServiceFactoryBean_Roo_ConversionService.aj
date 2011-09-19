@@ -3,6 +3,8 @@
 
 package freedays.controller;
 
+import freedays.app.FreeDayRL;
+import freedays.domain.Request;
 import freedays.timesheet.LaborBilling;
 import freedays.timesheet.Pattern;
 import freedays.timesheet.Phase;
@@ -13,6 +15,20 @@ import java.lang.String;
 import org.springframework.core.convert.converter.Converter;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
+    
+    static class freedays.controller.ApplicationConversionServiceFactoryBean.FreeDayRLConverter implements Converter<FreeDayRL, String> {
+        public String convert(FreeDayRL freeDayRL) {
+            return new StringBuilder().append(freeDayRL.getRomanianHoliday()).append(" ").append(freeDayRL.getDescription()).toString();
+        }
+        
+    }
+    
+    static class freedays.controller.ApplicationConversionServiceFactoryBean.RequestConverter implements Converter<Request, String> {
+        public String convert(Request request) {
+            return new StringBuilder().append(request.getFeedback()).toString();
+        }
+        
+    }
     
     static class freedays.controller.ApplicationConversionServiceFactoryBean.LaborBillingConverter implements Converter<LaborBilling, String> {
         public String convert(LaborBilling laborBilling) {
