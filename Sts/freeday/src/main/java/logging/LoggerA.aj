@@ -12,7 +12,7 @@ import org.springframework.util.StopWatch;
 public class LoggerA {                                                       
 	private final Log log = LogFactory.getLog(this.getClass());
 
-	//@Around("execution(* freedays..*.*(..)) && !execution(* get*()) && !execution(* set*(..)) && !execution(* toString*()))")
+	@Around("execution(* freedays..*.*(..)) && !execution(* get*()) && !execution(* set*(..)) && !execution(* toString*())")
 	public Object logTimeMethod(ProceedingJoinPoint joinPoint) throws Throwable {
 
 			StopWatch stopWatch = new StopWatch();
