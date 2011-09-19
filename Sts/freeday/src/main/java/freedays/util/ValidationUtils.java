@@ -49,6 +49,7 @@ public class ValidationUtils {
 	 */
 	public static boolean checkRomanianLegalHoliday(Calendar reqdate) {
 		List<Calendar> lc = FreeDayRL.getAllHolidays();
+		System.out.println("cancer");
 		boolean test = lc.contains(reqdate);
 		if(!test){
 			for(Calendar c: lc){

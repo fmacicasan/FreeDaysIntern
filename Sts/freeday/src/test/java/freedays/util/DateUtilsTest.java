@@ -118,7 +118,7 @@ public class DateUtilsTest {
 	@Test
 	public void testDateDifferenceInWorkingDays(){
 		Calendar date = Calendar.getInstance();
-		Integer i = new java.util.Random().nextInt(100);
+		Integer i = new java.util.Random().nextInt(10);
 		Calendar then = DateUtils.dateAddBusinessDay(date,i.longValue());
 		Assert.assertEquals(i.longValue(), DateUtils.dateDifferenceInWorkingDays(date, then));
 	}
@@ -184,7 +184,6 @@ public class DateUtilsTest {
 	@Test
 	@Repeat(10)
 	public void testRomanianBusinessDayAddRandom(){
-		System.out.println("ceruachi");
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		Calendar start = generateRandomRomanianLegal(15,Calendar.AUGUST,year,10,true);
 		Calendar end = generateRandomRomanianLegal(15,Calendar.AUGUST,year,10,false);

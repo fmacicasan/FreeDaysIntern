@@ -1,9 +1,11 @@
 package freedays.app;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -16,7 +18,7 @@ import freedays.util.DateUtils;
 public class FreeDayVacationDataOnDemand {
 
 	private List<FreeDayVacation> data;
-	 
+	private Random rnd = new SecureRandom();
 	public void init() {
 //        data = FreeDayVacation.findFreeDayVacationEntries(0, 10);
 //        if (data == null) throw new IllegalStateException("Find entries implementation for 'FreeDayVacation' illegally returned null");
@@ -56,5 +58,10 @@ public class FreeDayVacationDataOnDemand {
         setSpan(obj, index);
         setStatus(obj, index);
         return obj;
+    }
+
+	public void setSpan(FreeDayVacation obj, int index) {
+        Long span = new Integer(rnd.nextInt(10)+1).longValue();
+        obj.setSpan(span);
     }
 }

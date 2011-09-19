@@ -16,7 +16,7 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayVacationDataOnDemand: @Component;
     
-    private Random FreeDayVacationDataOnDemand.rnd = new SecureRandom();
+    
     
     public void FreeDayVacationDataOnDemand.setApproval(FreeDayVacation obj, int index) {
         ApprovalStrategy approval = null;
@@ -33,11 +33,7 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
         obj.setReason(reason);
     }
     
-    public void FreeDayVacationDataOnDemand.setSpan(FreeDayVacation obj, int index) {
-        Long span = new Integer(index).longValue();
-        obj.setSpan(span);
-    }
-    
+        
     public void FreeDayVacationDataOnDemand.setStatus(FreeDayVacation obj, int index) {
         FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
         obj.setStatus(status);

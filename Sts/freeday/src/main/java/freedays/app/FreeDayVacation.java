@@ -165,7 +165,7 @@ public class FreeDayVacation extends FreeDay {
 	 * @return
 	 */
 	public Calendar getEnd(){
-		logger.info(String.format("The current date for %s and span %d -> %s",DateUtils.printShortDate(this.getDate()),this.getSpan(),DateUtils.printShortDate(DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan()))));
+		//logger.info(String.format("The current date for %s and span %d -> %s",DateUtils.printShortDate(this.getDate()),this.getSpan(),DateUtils.printShortDate(DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan()))));
 		return DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan());
 	}
 	
@@ -199,7 +199,7 @@ public class FreeDayVacation extends FreeDay {
 	public String getDateReport() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("From ").append(DateUtils.printShortDate(this.getDate()));
-		logger.info(String.format("The ending date for %s is:%s",DateUtils.printShortDate(this.getDate()),DateUtils.printShortDate(this.getEnd())));
+		//logger.info(String.format("The ending date for %s is:%s",DateUtils.printShortDate(this.getDate()),DateUtils.printShortDate(this.getEnd())));
 		sb.append(" To ").append(DateUtils.printShortDate(this.getEnd()));
 		//DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan()))
 		return sb.toString();
