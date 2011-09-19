@@ -170,27 +170,27 @@ INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(2,2)
 INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(3,2)
 INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(6,6)
 
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(11,11)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(12,12)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(13,13)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(14,14)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(15,15)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(16,16)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(17,17)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(18,18)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(19,19)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(19,20)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(11,11)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(12,12)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(13,13)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(14,14)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(15,15)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(16,16)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(17,17)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(18,18)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(19,19)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(19,20)
 
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(20,11)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(20,12)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(20,13)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(20,14)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(20,15)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(21,21)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(22,21)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(23,21)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(24,21)
-INSERT INTO `phase_project_lst`(`phase_lst`,`project_lst`) VALUES(25,21)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(20,11)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(20,12)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(20,13)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(20,14)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(20,15)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(21,21)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(22,21)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(23,21)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(24,21)
+INSERT INTO `phase_project_lst`(`project_lst`,`phase_lst`) VALUES(25,21)
 
 
 delete from `labor_billing`
@@ -223,3 +223,16 @@ INSERT INTO `timesheet_user`(`id`,`fduser`) VALUES(113,113);
 delete from `schedule`
 INSERT INTO `schedule`(`start_date`,`end_date`,`employee`,`pattern`) VALUES("2011-07-20", "2011-12-20", 100, 1)
 delete from `schedule`
+
+delete from `free_dayrl`
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES (1,0,'Anul Nou day 1','2011-01-01 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(2,0,'Anul Nou day 2','2011-01-02 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(3,0,'Pastele day 1','2011-04-24 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(4,0,'Pastele day 2','2011-04-25 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(5,0,'Ziua internationala a Muncii','2011-05-01 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(6,0,'Rusalii day 1','2011-06-12 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(7,0,'Rusalii day 2','2011-06-13 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(8,0,'Adormirea Maicii Domnului','2011-08-15 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(9,0,'Ziua nationala a romaniei','2011-12-01 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(10,1,'Craciun Day 1','2011-12-25 00:00:00');
+INSERT INTO `free_dayrl`(`id`,`version`,`description`,`romanian_holiday`) VALUES(11,0,'Craciun Day 2','2011-12-26 00:00:00');

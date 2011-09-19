@@ -35,17 +35,18 @@
     
     <sec:authentication property="principal.username" var="username" />
     <c:if test="${username eq fduser.regularUser.username}">
-    	<br />
-    	<spring:message code="fduser_personal_request_status" var="title" />
-    	<util:panel title="${title}" id="personal_info" z="user-managed" >
-    		<spring:message arguments="${remainingDaysCount}" code="request_remainingdays"/>
-            <br/>
-            <spring:message arguments="${remainingTotalDaysCount}" code="request_remainingtotaldays"/>
-            <br/>
-            <spring:message arguments="${request_currentlwspecificdays}" code="request_currentlwspecificdays" />
-            <br/>
-            <spring:message arguments="${activeRequestCount}" code="request_activerequests"/>
-    	</util:panel>
-    	
+    	<c:if test="${not empty remainingDaysCount }">
+	    	<br />
+	    	<spring:message code="fduser_personal_request_status" var="title" />
+	    	<util:panel title="${title}" id="personal_info" z="user-managed" >
+	    		<spring:message arguments="${remainingDaysCount}" code="request_remainingdays"/>
+	            <br/>
+	            <spring:message arguments="${remainingTotalDaysCount}" code="request_remainingtotaldays"/>
+	            <br/>
+	            <spring:message arguments="${request_currentlwspecificdays}" code="request_currentlwspecificdays" />
+	            <br/>
+	            <spring:message arguments="${activeRequestCount}" code="request_activerequests"/>
+	    	</util:panel>
+    	</c:if>
     </c:if>
 </div>

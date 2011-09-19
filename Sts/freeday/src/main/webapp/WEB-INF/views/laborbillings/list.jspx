@@ -4,8 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_freedays_timesheet_LaborBilling" items="${laborbillings}" z="JDCMv8mgGYtWWr3IKSMssFjvHuE=">
         <table:table data="${laborbillings}" id="l_freedays_timesheet_LaborBilling" path="/laborbillings" z="Jbjgoi0LJMB0efKkcMkVPghtZ0c=">
-            <table:column id="c_freedays_timesheet_LaborBilling_code" property="code" z="2Bpqsms8ut2FCrhugBsyZooqiJY="/>
-            <table:column id="c_freedays_timesheet_LaborBilling_name" property="name" z="bRugXW+hT21itpLd47Y1E7/M/pI="/>
+            <table:column maxLength="-1" id="c_freedays_timesheet_LaborBilling_code" property="code" z="2Bpqsms8ut2FCrhugBsyZooqiJY="/>
+            <table:column maxLength="-1" id="c_freedays_timesheet_LaborBilling_name" property="name" z="bRugXW+hT21itpLd47Y1E7/M/pI="/>
         </table:table>
     </page:list>
 </div>
