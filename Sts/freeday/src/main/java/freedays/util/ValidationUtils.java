@@ -4,6 +4,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import freedays.app.FreeDayRL;
 
 /**
@@ -13,7 +16,9 @@ import freedays.app.FreeDayRL;
  *
  */
 public class ValidationUtils {
-
+	
+	static final Logger logger = LoggerFactory.getLogger(ValidationUtils.class);
+	
 	/**
 	 * Checks weather or not a Calendar instance represents a business day
 	 * @param day the Calendar instance to be verified
@@ -45,6 +50,15 @@ public class ValidationUtils {
 	public static boolean checkRomanianLegalHoliday(Calendar reqdate) {
 		List<Calendar> lc = FreeDayRL.getAllHolidays();
 		boolean test = lc.contains(reqdate);
+		logger.info(String.format("is holiday %s?%s", DateUtils.printShortDate(reqdate),test));
+		if(!test){
+			for(Calendar c: lc){
+				logger.info(String.format("is %s the %s", DateUtils.printShortDate(reqdate),DateUtils.printShortDate(c)));
+				if(DateUtils.printShortDate(c).equals(DateUtils.printShortDate(reqdate))){
+					return true;
+				}
+			}
+		}
 		return test;
 	}
 	

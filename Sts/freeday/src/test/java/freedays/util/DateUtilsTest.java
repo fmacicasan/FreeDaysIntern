@@ -205,4 +205,20 @@ public class DateUtilsTest {
 		return c;
 	}
 	
+	@Test
+	public void testCrazyAdd(){
+		Calendar start = new GregorianCalendar(2011,Calendar.AUGUST,8);
+		Calendar end = new GregorianCalendar(2011, Calendar.AUGUST,19);
+		Assert.assertEquals(8, DateUtils.dateDifferenceInWorkingDays(start, end));
+		Assert.assertEquals(end, DateUtils.dateAddRomanianBusinessDay(start, 8l));
+	}
+	
+	@Test
+	public void testCrazyAdd2(){
+		Calendar start = new GregorianCalendar(2011,Calendar.AUGUST,8);
+		Calendar end = new GregorianCalendar(2011, Calendar.AUGUST,18);
+		Assert.assertEquals(7, DateUtils.dateDifferenceInWorkingDays(start, end));
+		Assert.assertEquals(end, DateUtils.dateAddRomanianBusinessDay(start, 7l));
+	}
+	
 }

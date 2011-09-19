@@ -6,7 +6,7 @@
         <menu:category id="c_general" z="user-managed">
             <sec:authorize ifAnyGranted="ROLE_USER">
                 <menu:item id="c_general_reportvacation" url="/report/vacation" z="user-managed"/>
-                <sec:authorize ifAllGranted="ROLE_USER">
+                <sec:authorize ifAllGranted="ROLE_AAA">
                     <menu:item id="c_general_timesheet" url="/timesheet" z="user-managed"/>
                 </sec:authorize>
             </sec:authorize>
@@ -68,7 +68,7 @@
                 </sec:authorize>
             </menu:category>
         </sec:authorize>
-        <sec:authorize ifAnyGranted="ROLE_TIMESHEETADMIN">
+        <sec:authorize ifAnyGranted="ROLE_AAA">
             <menu:category id="c_project" z="u0PzRIwMDmEv/J6b8vbKakXGIdQ=">
                 <menu:item id="i_project_new" messageCode="global_menu_new" url="/projects?form" z="1BazRC1rLnod0a+MpP1flWTvehA="/>
                 <menu:item id="i_project_list" messageCode="global_menu_list" url="/projects?page=1&amp;size=${empty param.size ? 10 : param.size}" z="GHL05c3Rvr+eKDgRCk3Ttak0W+g="/>

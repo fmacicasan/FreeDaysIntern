@@ -13,7 +13,11 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.i18n.LocaleContextHolder;
+
+import freedays.app.FreeDayVacation;
 
 /**
  * Utility class used for date generation & manipulation.'
@@ -23,6 +27,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
  *
  */
 public class DateUtils {
+	
+	static final Logger logger = LoggerFactory.getLogger(DateUtils.class);
 
 	/**
 	 * Generates a random day of week between Calendar.MONDAY and Calendar.FRIDAY
@@ -372,6 +378,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static Calendar dateAddRomanianBusinessDay(Calendar start, Long span){
+		logger.info(String.format("Starting %s and %d",DateUtils.printShortDate(start),span));
 		//start day wont be holiday
 		//end date wont be holiday
 		//=> holiday will be in between
@@ -387,10 +394,14 @@ public class DateUtils {
 			if(!ValidationUtils.checkWeekend(date)){
 				if(!ValidationUtils.checkRomanianLegalHoliday(date)){
 					span--;
+					
+				} else {
+					logger.info(String.format("found holiday %s",DateUtils.printShortDate(date)));
 				}
 				init++;
 			}
 		}
+		logger.info(String.format("Ending %s and %d",DateUtils.printShortDate(start),init));
 		return DateUtils.dateAddBusinessDay(start, init.longValue());
 	}
 	

@@ -202,7 +202,8 @@ public class FreeDayUserList {
 			if(fd instanceof FreeDayVacation){
 				FreeDayVacation fdv = (FreeDayVacation)fd;
 				Calendar start = fdv.getDate();
-				Calendar end = DateUtils.dateAddRomanianBusinessDay(start, fdv.getSpan());
+				//Calendar end = DateUtils.dateAddRomanianBusinessDay(start, fdv.getSpan());
+				Calendar end = fdv.getEnd();
 				//replaced before by compareTo to test equality
 				for(Calendar c = (Calendar)start.clone();c.compareTo(end)<=0;c.add(Calendar.DAY_OF_YEAR, 1)){
 					if(DateUtils.isSameMonth(c, month) 

@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -16,6 +18,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.app.form.FreeDayRequestVacation;
+import freedays.mongo.PersonRepository;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
 import freedays.util.ValidationUtils;
@@ -31,7 +34,8 @@ import freedays.util.ValidationUtils;
 @RooEntity
 @DiscriminatorValue("typeV")
 public class FreeDayVacation extends FreeDay {
-
+	static final Logger logger = LoggerFactory.getLogger(FreeDayVacation.class);
+	
     //@NotNull
   //@Future removed to solve IN-105 request creation is still restricted from the wrapper but in the backend
     //such entities should be matched so they will be processed some time in the future with an already specified
@@ -88,8 +92,10 @@ public class FreeDayVacation extends FreeDay {
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Vacation Request:");
-		sb.append(" from ").append(DateUtils.printShortDate(this.getDate()));
-		sb.append(" to ").append(DateUtils.printShortDate(DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan())));
+//		sb.append(" from ").append(DateUtils.printShortDate(this.getDate()));
+//		sb.append(" to ").append(DateUtils.printShortDate(this.getEnd()));
+		sb.append(this.getDateReport());
+		//DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan())
 		return sb.toString();
 	}
 	
@@ -159,6 +165,7 @@ public class FreeDayVacation extends FreeDay {
 	 * @return
 	 */
 	public Calendar getEnd(){
+		logger.info(String.format("The current date for %s and span %d -> %s",DateUtils.printShortDate(this.getDate()),this.getSpan(),DateUtils.printShortDate(DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan()))));
 		return DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan());
 	}
 	
@@ -192,7 +199,9 @@ public class FreeDayVacation extends FreeDay {
 	public String getDateReport() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("From ").append(DateUtils.printShortDate(this.getDate()));
-		sb.append(" To ").append(DateUtils.printShortDate(DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan())));
+		logger.info(String.format("The ending date for %s is:%s",DateUtils.printShortDate(this.getDate()),DateUtils.printShortDate(this.getEnd())));
+		sb.append(" To ").append(DateUtils.printShortDate(this.getEnd()));
+		//DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan()))
 		return sb.toString();
 	}
 
