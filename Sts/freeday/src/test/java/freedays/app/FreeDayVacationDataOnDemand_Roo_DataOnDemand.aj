@@ -8,15 +8,11 @@ import freedays.app.FreeDayVacation;
 import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.domain.ApprovalStrategy;
 import java.lang.String;
-import java.security.SecureRandom;
-import java.util.Random;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayVacationDataOnDemand: @Component;
-    
-    
     
     public void FreeDayVacationDataOnDemand.setApproval(FreeDayVacation obj, int index) {
         ApprovalStrategy approval = null;
@@ -33,7 +29,6 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
         obj.setReason(reason);
     }
     
-        
     public void FreeDayVacationDataOnDemand.setStatus(FreeDayVacation obj, int index) {
         FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
         obj.setStatus(status);

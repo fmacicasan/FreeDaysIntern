@@ -2,11 +2,11 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_freedays_timesheet_Phase" items="${phases}" z="k9YQf/6wJku5gepXl3e5ggvZ9jE=">
-        <table:table data="${phases}" id="l_freedays_timesheet_Phase" path="/phases" z="IDLuFjUZJOubYU03/kwE2yDt/IM=">
-            <table:column maxLength="-1" id="c_freedays_timesheet_Phase_code" property="code" z="+J+WfCJX6OIsiStKTZaPyVwGxSE="/>
-            <table:column maxLength="-1" id="c_freedays_timesheet_Phase_name" property="name" z="nwwuBYroOgv4n2+919Xdd1m1Fjg="/>
-            <table:column render="false" maxLength="-1" id="c_freedays_timesheet_Phase_projectLst" property="projectLst" z="kI/7WCGF5ZY9fjAEEn9dW5PEGvk="/>
+    <page:list id="pl_freedays_timesheet_Phase" items="${phases}" z="user-managed">
+        <table:table data="${phases}" id="l_freedays_timesheet_Phase" path="/phases" z="user-managed">
+            <table:column id="c_freedays_timesheet_Phase_code" maxLength="-1" property="code" z="user-managed"/>
+            <table:column id="c_freedays_timesheet_Phase_name" maxLength="-1" property="name" z="user-managed"/>
+            <table:column id="c_freedays_timesheet_Phase_projectLst" maxLength="-1" property="projectLst" render="false" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

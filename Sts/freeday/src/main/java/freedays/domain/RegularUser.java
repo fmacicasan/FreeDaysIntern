@@ -321,9 +321,9 @@ public class RegularUser implements Serializable {
 	 */
 	public String getFullName(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.firstname);
-		sb.append(" ");
 		sb.append(this.surename);
+		sb.append(" ");
+		sb.append(this.firstname);
 		return sb.toString();
 	}
 	
