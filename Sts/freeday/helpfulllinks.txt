@@ -275,6 +275,35 @@ http://www.clerkendweller.com/2011/4/5/Website-Vulnerability-Statistics-Spring-2
 	https://github.com/jreijn/spring-mongo-demo
 	http://java.dzone.com/articles/plain-simple-mongodb-spring?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+javalobby%2Ffrontpage+(Javalobby+%2F+Java+Zone)
 	
+	http://static.springsource.org/spring/docs/2.5.x/reference/beans.html
+	http://forum.springsource.org/showthread.php?107952-Opening-file-via-spring
+	http://stackoverflow.com/questions/5146570/load-a-static-file-in-a-spring-controller
+	http://static.springsource.org/spring-security/site/docs/3.0.x/reference/el-access.html
+	http://arstechnica.com/open-source/news/2008/11/gitting-going-with-git-creating-your-first-repository.ars
+	http://tumblr.intranation.com/post/766290565/how-set-up-your-own-private-git-server-linux
+	http://www.famfamfam.com/lab/icons/flags/
+	http://www.iconfinder.com/free_icons
+	http://superdit.com/2010/07/23/mini-icons-sets-for-extjs-application/
+	http://www.java2s.com/Code/Java/Spring/SpringLoadResourcefromfileclasspathandURL.htm
+	http://ro.wikipedia.org/wiki/S%C4%83rb%C4%83tori_publice_%C3%AEn_Rom%C3%A2nia
+	http://www.ziare.com/articole/sarbatori+legale+2011
+	http://colorschemedesigner.com/
+	http://www.allmyscripts.com/Table_Sort/index.html
+	http://www.kryogenix.org/code/browser/sorttable/
+	 http://yoast.com/articles/sortable-table/
+	http://www.jsptutorial.net/jsp-cheat-sheet.aspx
+	http://docs.jboss.org/hibernate/core/3.3/reference/en/html/queryhql.html#queryhql-ordering
+	http://download.oracle.com/javase/1.5.0/docs/api/java/util/Calendar.html#compareTo%28java.util.Calendar%29
+	http://stackoverflow.com/questions/1261515/git-renaming-a-directory-in-a-branch
+	http://www.commandlinefu.com/commands/view/1246/git-remove-files-which-have-been-deleted
+	http://stackoverflow.com/questions/2125710/how-to-revert-a-git-rm-r
+	http://www.if-not-true-then-false.com/2010/install-mongodb-on-fedora-centos-red-hat-rhel/
+	http://code.google.com/p/rock-php/wiki/rock_mongo#Quick_Install
+	http://www.mongodb.org/display/DOCS/SQL+to+Mongo+Mapping+Chart
+	http://www.mongodb.org/display/DOCS/Overview+-+The+MongoDB+Interactive+Shell
+	http://learn.github.com/p/tagging.html
+
+	
 	
 	
 	
