@@ -58,6 +58,7 @@ public class Pattern {
 	    sb.append("NoOfHours: ").append(getNoOfHours()).append(", ");
 	    sb.append("PhaseLaborLst: ").append(getPhaseLaborLst() == null ? "null" : getPhaseLaborLst().size()).append(", ");
 	    //sb.append("Schedule: ").append(getSchedule());
+	    sb.append("id:").append(getId());
 	    return sb.toString();
 	}
 

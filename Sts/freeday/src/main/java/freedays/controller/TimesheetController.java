@@ -1,5 +1,7 @@
 package freedays.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import freedays.timesheet.*;
 import freedays.security.UserContextService;
 
 import freedays.timesheet.MainClass;
+import freedays.util.DateUtils;
 
 @RequestMapping("/timesheet")
 @Controller
@@ -27,8 +30,18 @@ public class TimesheetController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String asd(Model uiModel){
 		MainClass mc = new MainClass();
-		TimesheetUser us = TimesheetUser.findTimesheetUserByUsername(userContextService.getCurrentUser());
-		mc.doMain(us);
+		//TimesheetUser us = TimesheetUser.findTimesheetUserByUsername(userContextService.getCurrentUser());
+		List<TimesheetUser> lus = TimesheetUser.findAllTimesheetUsers();
+		for(TimesheetUser tu : lus){
+//			try{
+			System.out.println("====================generationg for:"+tu.getRegularUser().getFullName());
+				mc.doMain(tu,DateUtils.getCurrentMonth());
+//			}catch(Exception e){
+//				System.out.println(tu.getFduser().getRegularUser().getFullName());
+//			}
+		}
+//		TimesheetUser tu = TimesheetUser.findTimesheetUser(142L);
+//		mc.doMain(tu,DateUtils.getCurrentMonth());
 		return "registerty";
 	}
 }

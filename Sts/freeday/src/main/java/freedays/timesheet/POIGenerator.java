@@ -25,7 +25,8 @@ import org.apache.poi.ss.util.WorkbookUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import freedays.app.FreeDayVacation;
+import freedays.util.DateUtils;
+
 
 @Configurable
 public class POIGenerator implements TimesheetGenerator{
@@ -33,7 +34,7 @@ public class POIGenerator implements TimesheetGenerator{
 	
 	
 	private static final String DEFAULT_TIMESHEET_WEEKLY_TOTAL_HOURS_WORK = "TOTAL HOURS WORKED";
-	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_DEPARTMENT = "Department";
+	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_DEPARTMENT = "DEPARTMENT";
 	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_POSITION = "POSITION";
 	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_EMPLOYEE = "EMPLOYEE NAME";
 	private static final String DEFAULT_TIMESHEET_HEADER_LABEL_COMPANY = "LANGUAGEWEAVER, INC.";
@@ -101,10 +102,19 @@ public class POIGenerator implements TimesheetGenerator{
 	 * @return
 	 */
 	private ArrayList<PhaseLabor> getListOfDistinctPhaseLabor(ArrayList<Pattern> pList) {
+		////System.out.println("line 104"+pList);
 		ArrayList<PhaseLabor> PhLArr = new ArrayList<PhaseLabor>();
 		for(int i = 0; i < pList.size(); i++) {
-			for(int j = 0; j < pList.get(i).getPhaseLaborLst().size(); j++) {
+			//System.out.println("test");
+			Pattern p = pList.get(i);
+			//System.out.println("el pattern is"+p);
+			List<PhaseLabor> lph = p.getPhaseLaborLst();
+			//System.out.println("it is"+lph);
+			for(int j = 0; j < lph.size(); j++) {
+				//System.out.println("current"+i+"asd"+j);
+				
 				PhaseLabor currentPhL = pList.get(i).getPhaseLaborLst().get(j);
+				//System.out.println("current"+currentPhL);
 				Integer ok = 1;
 				for(int k = 0; k < PhLArr.size(); k++) {
 					if (PhLArr.get(k).getLaborbilling().getId().equals(currentPhL.getLaborbilling().getId()))
@@ -117,10 +127,12 @@ public class POIGenerator implements TimesheetGenerator{
 					PhLArr.add(currentPhL);			
 	
 			}
-		}	
+		}
+		//System.out.println("line done");
 		return PhLArr;
 	}
 	private ArrayList<Pattern> getListOfPatterns(Calendar weekEnd, Integer startingDay, Integer endingDay) {
+		//System.out.println("Entry getListOfPatterns"+DateUtils.printShortDate(weekEnd)+"start"+startingDay+"end"+endingDay);
 		Calendar firstDayOfWeek = (Calendar) weekEnd.clone();
 		Calendar lastDayOfWeek = (Calendar) weekEnd.clone();
 		ArrayList<Pattern> pw = new ArrayList<Pattern>();
@@ -128,9 +140,13 @@ public class POIGenerator implements TimesheetGenerator{
 		lastDayOfWeek.add(Calendar.DAY_OF_MONTH, -7 + endingDay);
 				
 		while(lastDayOfWeek.compareTo(firstDayOfWeek) >= 0) {
-			pw.add(getPatternForDay(firstDayOfWeek));
+			Pattern p = getPatternForDay(firstDayOfWeek);
+			//System.out.println("the retrieved pattenrn"+p+" for "+DateUtils.printShortDate(firstDayOfWeek));
+			pw.add(p);
 			firstDayOfWeek.add(Calendar.DAY_OF_MONTH, 1);
 		}
+		//System.out.println("getListOfPattenrs "+pw);
+		
 		return pw;
 	}
 	/**
@@ -295,9 +311,12 @@ public class POIGenerator implements TimesheetGenerator{
 	 * @param weekEnd last day of week
 	 */
 	private void generateWeek(Integer startingRow, Integer startingDay, Integer endingDay, Calendar weekEnd) {
-		ArrayList<Pattern> PList = new ArrayList<Pattern>();
-		PList = getListOfPatterns(weekEnd, startingDay, endingDay);
-		PhLArray = getListOfDistinctPhaseLabor(PList);
+		ArrayList<Pattern> pList = new ArrayList<Pattern>();
+		//System.out.println("before");
+		pList = getListOfPatterns(weekEnd, startingDay, endingDay);
+		//System.out.println("after"+pList);
+		PhLArray = getListOfDistinctPhaseLabor(pList);
+		//System.out.println("line 303");
 		Float bigSum = (float) 0;
 	    Row WE = sheet1.createRow(startingRow);
 		Cell cWELabel = WE.createCell(9);
@@ -305,7 +324,7 @@ public class POIGenerator implements TimesheetGenerator{
 		cWELabel.setCellStyle(style);
 		Cell WEValue = WE.createCell(10);
 		WEValue.setCellStyle(datestyle);
-		
+		//System.out.println("line 310");
 		Calendar cloneCurrent = (Calendar) weekEnd.clone();
 		cloneCurrent.add(Calendar.DAY_OF_MONTH, -6);
 		Integer daysInMonth = 0;
@@ -324,7 +343,9 @@ public class POIGenerator implements TimesheetGenerator{
 		WEValue.setCellValue((java.util.Date) cloneCurrent.getTime());
 		//end part ...
 		startingRow += 2;
+		//System.out.println("line 329");
 		//generate rows
+		//System.out.println("line 331 generate rows");
 	    for(int i = 0; i <= PhLArray.size(); i++) {
 	    	if (i == 0) {
     			generateHeader(startingRow);
@@ -334,7 +355,7 @@ public class POIGenerator implements TimesheetGenerator{
 	    	}	   
 	    }
 	    generateTableFooter(startingRow, startingDay, endingDay ,weekEnd, bigSum);
-    	
+    	//System.out.println("line 340");
 	}
 	private int howManyDays(Calendar t) {
 			int K = t.getActualMaximum(Calendar.DAY_OF_MONTH) - t.get(Calendar.DAY_OF_MONTH);
@@ -601,7 +622,7 @@ public class POIGenerator implements TimesheetGenerator{
 	/**
 	 * where the magic happens
 	 */
-	public void generateDoc(String workbookname, int genmonth, int genyear) {
+	public File generateDoc(String workbookname, int genmonth, int genyear) {
 		unionScheduleVacation();
 		wb = new HSSFWorkbook();
 		styleMe();	
@@ -644,5 +665,15 @@ public class POIGenerator implements TimesheetGenerator{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    File f =  new File(workbookname);
+//	    if(f!=null){
+//	    	//System.out.println("absolute"+f.getAbsolutePath());
+//	    	//System.out.println("cucurigu"+f.isFile());
+//	    	//System.out.println("terzz"+f.getName());
+//	    } else {
+//	    	//System.out.println("=============is nuklllllllllllllllllllll");
+//	    }
+	    return f;
+	    
 	}
 }

@@ -1,4 +1,7 @@
 package freedays.timesheet;
+
+import java.io.File;
+
 public interface TimesheetGenerator {
-	public void generateDoc(String wbname, int year, int month);
+	public File generateDoc(String wbname, int year, int month);
 }

@@ -1,5 +1,6 @@
 package freedays.util;
 
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.mail.MailSender;
@@ -27,6 +30,9 @@ import freedays.security.InfoChanger;
 @RooJavaBean
 @Configurable
 public class MailUtils {
+	
+	private final Log log = LogFactory.getLog(this.getClass());
+	
 	private static final String DEFAULT_REGISTERNOTIFICATION_SUBJECT = "HRApp - New User Notification";
 	private static final String DEFAULT_REGISTERNOTIFICATION_CONTENT = "New user registration!\nPlease process the account of %s.\n";
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_SUBJECT = "HRApp - Account activation";
@@ -43,6 +49,8 @@ public class MailUtils {
 	private static final String RESET_PASS_MESSAGE = "Your new password is:\n\t\t\t {0}";
 	private static final String RESET_PASS_MESSAGE_TOKEN = "To start the password reset process for your %s HRApp account click on the link bellow:\n\n %s/recoverpass?token=%s\n\nFor security reasons this link will expire in %d hours!";
     
+	private static final String DEFAULT_TIMESHEET_CONTENT = "Hello %s,\n You can find attached your auto-generated timesheet.\n This feature is still under construction so please report any problems.\n\n";
+	private static final String DEFAULT_TIMESHEET_SUBJECT = "HRApp - Timesheets";
 	@Autowired
     private JavaMailSenderImpl mailSender;
 	
@@ -57,37 +65,47 @@ public class MailUtils {
 //	}
 	
 	public void sendHtmlMsg(final List<String> to, final String subject, final String content){
-    	this.sendMsg(to, subject, content, true);
+    	this.sendMsg(to, subject, content, true,null);
     }
 	public void sendPlainMsg(final List<String> to, final String subject, final String content){
-    	this.sendMsg(to, subject, content, false);
+    	this.sendMsg(to, subject, content, false,null);
+    }
+	public void sendPlainMsg(final List<String> to, final String subject, final String content, final File f){
+    	this.sendMsg(to, subject, content, false,f);
     }
 	public void sendHtmlMsg(final String to, final String subject, final String content){
 		List<String> l = new ArrayList<String>();
 		l.add(to);
-    	this.sendMsg(l, subject, content, true);
+    	this.sendHtmlMsg(l, subject, content);
     }
 	public void sendPlainMsg(final String to, final String subject, final String content){
 		List<String> l = new ArrayList<String>();
 		l.add(to);
-    	this.sendMsg(l, subject, content, false);
+    	this.sendPlainMsg(l, subject, content);
     }
 	
-	protected void sendMsg(final List<String> tol, final String subject, final String content, final boolean isHtml){
+	protected void sendMsg(final List<String> tol, final String subject, final String content, final boolean isHtml,final File f){
 		MimeMessage mm = mailSender.createMimeMessage();
-    	MimeMessageHelper helper = new MimeMessageHelper(mm);
+		int multipart = MimeMessageHelper.MULTIPART_MODE_NO;
+		if(f!=null){
+			multipart = MimeMessageHelper.MULTIPART_MODE_RELATED;
+		}
     	finalizeTo(tol);
     	String[] to = (String[])tol.toArray(new String[0]);
     	try{
+    		MimeMessageHelper helper = new MimeMessageHelper(mm,multipart);
     		helper.setTo(to);
     		helper.setSubject(subject);
     		helper.setText(finalizeContent(content),isHtml);
     		helper.setFrom(MailUtils.SOURCE);
-    	
+    		if(f!=null){
+    			
+    			helper.addAttachment(f.getName(), f);
+    		}
     		mailSender.send(mm);
+    		log.info(String.format("Message with subject:\n\t %s\n and content:\n\t %s\n went ok!",subject,content));
     	} catch (MessagingException e) {
-			
-			e.printStackTrace();
+			log.error("Problem at mail sending",e);
 		}
 	}
 	private void finalizeTo(final List<String> tol) {
@@ -256,25 +274,40 @@ public class MailUtils {
 	
 	
 	public static void sendAsyncMail(final String email, final String subject, final String content){
-		List<String> lst = new ArrayList<String>();
-		lst.add(email);
-		MailUtils.sendAsyncMail(lst, subject, content);
+		MailUtils.sendAsyncMail(email, subject, content,null);
 	}
 	
 	public static void sendAsyncMail(final List<String> email, final String subject, final String content){
+		MailUtils.sendAsyncMail(email, subject, content,null);
+	}
+	
+	public static void sendAsyncMail(final String email, final String subject, final String content, final File f){
+		List<String> lst = new ArrayList<String>();
+		lst.add(email);
+		MailUtils.sendAsyncMail(lst, subject, content,f);
+	}
+	
+	public static void sendAsyncMail(final List<String> email, final String subject, final String content, final File f){
 		Thread th = new Thread(){
 			@Override
 			public void run(){
 				MailUtils mu = new MailUtils();
-				mu.sendPlainMsg(email, subject, content);
+				mu.sendPlainMsg(email, subject, content,f);
 			}
 		};
 		th.start();
 	}
+	
 	public static void sendResetPasswordTokenNotification(String email, String token) {
 		final String content = String.format(MailUtils.RESET_PASS_MESSAGE_TOKEN,email,PropertiesUtil.getProperty("applicationHome"), token,InfoChanger.DEFAULT_EXPIRE_INTERVAL_IN_HOURS);
 		//System.out.println("reset pass token content:"+content);
 		MailUtils.sendAsyncMail(email, RESET_PASS_TITLE, content);
+		
+	}
+	public static void sendTimesheet(String email, String person, File f) {
+		final String content = String.format(MailUtils.DEFAULT_TIMESHEET_CONTENT, person);
+		System.out.println("the name in send is:"+f.getName());
+		MailUtils.sendAsyncMail(email, DEFAULT_TIMESHEET_SUBJECT, content,f);
 		
 	}
     
