@@ -119,7 +119,7 @@ public class DateUtilsTest {
 	public void testDateDifferenceInWorkingDays(){
 		Calendar date = Calendar.getInstance();
 		Integer i = new java.util.Random().nextInt(10);
-		Calendar then = DateUtils.dateAddBusinessDay(date,i.longValue());
+		Calendar then = DateUtils.dateAddRomanianBusinessDay(date,i.longValue());
 		Assert.assertEquals(i.longValue(), DateUtils.dateDifferenceInWorkingDays(date, then));
 	}
 	
