@@ -386,6 +386,9 @@ public class DateUtils {
 		//no solution like this because there can be any number of remaining stuff
 		//
 		Integer init = 0;
+		if(ValidationUtils.checkRomanianLegalHoliday(start)){
+			init++;
+		}
 		Calendar date = (Calendar)start.clone();
 		while(span > 0){
 			date.add(Calendar.DAY_OF_YEAR, 1);
@@ -396,6 +399,7 @@ public class DateUtils {
 				} 
 				init++;
 			}
+			
 		}
 		return DateUtils.dateAddBusinessDay(start, init.longValue());
 	}
