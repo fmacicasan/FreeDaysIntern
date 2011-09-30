@@ -40,7 +40,8 @@ public class TimesheetController {
 //				System.out.println(tu.getFduser().getRegularUser().getFullName());
 //			}
 		}
-//		TimesheetUser tu = TimesheetUser.findTimesheetUser(140L);
+//		System.out.println("test");
+//		TimesheetUser tu = TimesheetUser.findTimesheetUser(134L);
 //		mc.doMain(tu,8);//DateUtils.getCurrentMonth()
 		return "registerty";
 	}

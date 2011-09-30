@@ -318,7 +318,7 @@ public class POIGenerator implements TimesheetGenerator{
 		PhLArray = getListOfDistinctPhaseLabor(pList);
 		//System.out.println("line 303");
 		Float bigSum = (float) 0;
-	    Row WE = sheet1.createRow(startingRow);
+	    Row WE = sheet1.createRow(startingRow+1);//TODO:Changed by fmacicasan 12:56 30.09.2011
 		Cell cWELabel = WE.createCell(9);
 		cWELabel.setCellValue("W/E:");
 		cWELabel.setCellStyle(style);
@@ -414,12 +414,16 @@ public class POIGenerator implements TimesheetGenerator{
 		
 		CellRangeAddress region = CellRangeAddress.valueOf("A1:C1");
 		CellRangeAddress regionComp = CellRangeAddress.valueOf("H1:J1");
+		CellRangeAddress regionPosLabel = CellRangeAddress.valueOf("H2:J2");
+		CellRangeAddress regionDepLabel = CellRangeAddress.valueOf("H3:J3");
 		CellRangeAddress regionEmp = CellRangeAddress.valueOf("K1:M1");
 		CellRangeAddress regionPosition = CellRangeAddress.valueOf("K2:M2");
-		CellRangeAddress regionDepartment = CellRangeAddress.valueOf("K2:M2");
+		CellRangeAddress regionDepartment = CellRangeAddress.valueOf("K3:M3");
 		
 		sheet1.addMergedRegion( region );
 		sheet1.addMergedRegion(regionComp);
+		sheet1.addMergedRegion(regionPosLabel);
+		sheet1.addMergedRegion(regionDepLabel);
 		sheet1.addMergedRegion(regionEmp);
 	    sheet1.addMergedRegion(regionPosition);
 	    sheet1.addMergedRegion(regionDepartment);
@@ -625,6 +629,7 @@ public class POIGenerator implements TimesheetGenerator{
 	public File generateDoc(String workbookname, int genmonth, int genyear) {
 		unionScheduleVacation();
 		wb = new HSSFWorkbook();
+		
 		styleMe();	
 	    fileOut = null;
 		try {
@@ -635,6 +640,7 @@ public class POIGenerator implements TimesheetGenerator{
 	    String safeName = WorkbookUtil.createSafeSheetName("TimeSheet");
 	    //CreationHelper createHelper = wb.getCreationHelper();
 	    sheet1 = wb.createSheet(safeName);
+	    sheet1.getPrintSetup().setLandscape(true);//TODO:Changed by fmacicasan 12:56 30.09.2011
 		generateDocHeader();
 	    noOfRows = 5;
 	    Calendar TimeSheetCalendar = handleFirstWeeksOfMonth(genyear,genmonth);
