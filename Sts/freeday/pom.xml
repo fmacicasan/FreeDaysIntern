@@ -114,7 +114,7 @@
             <groupId>org.springframework.roo</groupId>
             <artifactId>org.springframework.roo.annotations</artifactId>
             <version>${roo.version}</version>
-            <scope>provided</scope>
+            <!-- ><scope>provided</scope> -->
         </dependency>
         <!-- Spring dependencies -->
         <dependency>
