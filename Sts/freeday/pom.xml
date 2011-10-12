@@ -37,10 +37,10 @@
             <name>JBoss Repo</name>
         </repository>
         <repository>
-        	<id>s3browse</id>
-        	<name>spring special</name>
-        	<url>http://s3browse.springsource.com/browse/spring-roo-repository.springsource.org/release/</url>
-        </repository>
+<id>spring-roo-repository</id>
+<name>Spring Roo Repository</name>
+<url>http://spring-roo-repository.springsource.org/release</url>
+</repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
