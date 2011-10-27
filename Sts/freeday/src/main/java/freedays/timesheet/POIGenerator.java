@@ -412,10 +412,10 @@ public class POIGenerator implements TimesheetGenerator{
 	 */
 	private void generateDocHeader()  {
 		
-		CellRangeAddress region = CellRangeAddress.valueOf("A1:C1");
-		CellRangeAddress regionComp = CellRangeAddress.valueOf("H1:J1");
-		CellRangeAddress regionPosLabel = CellRangeAddress.valueOf("H2:J2");
-		CellRangeAddress regionDepLabel = CellRangeAddress.valueOf("H3:J3");
+		CellRangeAddress region = CellRangeAddress.valueOf("A1:D1");
+		CellRangeAddress regionComp = CellRangeAddress.valueOf("G1:J1");
+		CellRangeAddress regionPosLabel = CellRangeAddress.valueOf("G2:J2");
+		CellRangeAddress regionDepLabel = CellRangeAddress.valueOf("G3:J3");
 		CellRangeAddress regionEmp = CellRangeAddress.valueOf("K1:M1");
 		CellRangeAddress regionPosition = CellRangeAddress.valueOf("K2:M2");
 		CellRangeAddress regionDepartment = CellRangeAddress.valueOf("K3:M3");
@@ -436,7 +436,7 @@ public class POIGenerator implements TimesheetGenerator{
 	    Cell cellCompany = row.createCell(0);
 	    cellCompany.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_COMPANY);
 	    
-	    Cell cellNameLabel = row.createCell(7);
+	    Cell cellNameLabel = row.createCell(6);
 	    cellNameLabel.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_EMPLOYEE);
 	    
 	    Cell cellName = row.createCell(10);
@@ -444,14 +444,14 @@ public class POIGenerator implements TimesheetGenerator{
 	    
 	    
 	    row = sheet1.createRow((short)1);
-	    Cell cellPositionLabel = row.createCell(7);
+	    Cell cellPositionLabel = row.createCell(6);
 	    cellPositionLabel.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_POSITION);
 	    
 	    Cell cellPosition = row.createCell(10);
 	    cellPosition.setCellValue(pEmp.getJobrole().toString());
 	    
 	    row = sheet1.createRow(2);
-	    Cell cellDepartmentLabel = row.createCell(7);
+	    Cell cellDepartmentLabel = row.createCell(6);
 	    cellDepartmentLabel.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_DEPARTMENT);
 	    
 	    Cell cellDepartment = row.createCell(10);
@@ -550,10 +550,10 @@ public class POIGenerator implements TimesheetGenerator{
 	public void generateDocFooter(int genMonth, int genYear) {
 		String blankSpaces = "                                                     ";
 		//String blankSpacesSmall = "              ";
-		CellRangeAddress regionFooterSignature = new CellRangeAddress(noOfRows, noOfRows, 0, 1);
-		CellRangeAddress regionFooterApprovedBy = new CellRangeAddress(noOfRows + 1, noOfRows + 1, 0, 1);
-		CellRangeAddress regionFooterSignatureEmp = new CellRangeAddress(noOfRows, noOfRows, 2, 3);
-		CellRangeAddress regionFooterSignatureAppBy = new CellRangeAddress(noOfRows + 1, noOfRows + 1, 2, 3);
+		CellRangeAddress regionFooterSignature = new CellRangeAddress(noOfRows, noOfRows, 0, 2);
+		CellRangeAddress regionFooterApprovedBy = new CellRangeAddress(noOfRows + 1, noOfRows + 1, 0, 2	);
+		CellRangeAddress regionFooterSignatureEmp = new CellRangeAddress(noOfRows, noOfRows, 3, 4);
+		CellRangeAddress regionFooterSignatureAppBy = new CellRangeAddress(noOfRows + 1, noOfRows + 1, 3, 4);
 		sheet1.addMergedRegion(regionFooterSignature);
 		sheet1.addMergedRegion(regionFooterApprovedBy);
 		sheet1.addMergedRegion(regionFooterSignatureEmp);
@@ -564,7 +564,7 @@ public class POIGenerator implements TimesheetGenerator{
 		Cell labelSignature = empSign.createCell(0);
 		labelSignature.setCellValue("Employee signature:");
 		
-		Cell signature1 = empSign.createCell(2);
+		Cell signature1 = empSign.createCell(3);
 		signature1.setCellValue(blankSpaces);
 		signature1.setCellStyle(underlinedStyle);
 		
@@ -584,7 +584,7 @@ public class POIGenerator implements TimesheetGenerator{
 		Cell labelApprovedBy = appBy.createCell(0);
 		labelApprovedBy.setCellValue("Approved by:");
 		
-		Cell signatureApproved1 = appBy.createCell(2);
+		Cell signatureApproved1 = appBy.createCell(3);
 		signatureApproved1.setCellStyle(underlinedStyle);	
 		signatureApproved1.setCellValue(blankSpaces);
 		
