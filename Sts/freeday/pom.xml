@@ -36,6 +36,7 @@
             <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
             <name>JBoss Repo</name>
         </repository>
+
     </repositories>
     <pluginRepositories>
         <pluginRepository>
