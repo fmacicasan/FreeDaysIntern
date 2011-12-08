@@ -225,7 +225,7 @@ public class Request implements Serializable {
         if (!Request.DEBUG) {
         	if(this.hasApprover()){
         		RegularUser superapprover = getSuperiorRegularUser();
-        		if (!this.getApprover().getRegularUser().equals(superapprover)) {
+        		if (superapprover != null && !this.getApprover().getRegularUser().equals(superapprover)) {
         			MailUtils.sendUpperRequestNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName(), this.toString());
         		}
         	}
@@ -236,7 +236,7 @@ public class Request implements Serializable {
         if (!Request.DEBUG) {
         	if(this.hasApprover()){
 	            RegularUser superapprover = getSuperiorRegularUser();
-	            if (!this.getApprover().getRegularUser().equals(superapprover)) {
+	            if (superapprover != null && !this.getApprover().getRegularUser().equals(superapprover)) {
 	                MailUtils.sendUpperRequestDenyNotification(superapprover.getEmail(), superapprover.getFullName(), this.getApprover().getRegularUser().getFullName(), this.toString());
 	            }
         	}
@@ -247,7 +247,8 @@ public class Request implements Serializable {
         if (!Request.DEBUG) {
         	if(this.hasApprover()){
 	            RegularUser superapprover = getSuperiorRegularUser();
-	            if (!this.getApprover().getRegularUser().equals(superapprover)) {
+	            System.out.println("nEBUNULE!"+superapprover);
+	            if (superapprover != null && !this.getApprover().getRegularUser().equals(superapprover)) {
 	                MailUtils.sendUpperRequestCancelNotification(superapprover.getEmail(), superapprover.getFullName(), this.toString());
 	            }
         	}
@@ -270,7 +271,13 @@ public class Request implements Serializable {
     }
 
     private RegularUser getSuperiorRegularUser() {
-        return this.getRequestable().getNextApprover(this.getAppreguser()).getRegularUser();
+    	ApplicationRegularUser app = this.getRequestable().getNextApprover(this.getAppreguser());
+    	if(app != null){
+    		 RegularUser r =  app.getRegularUser();
+    		System.out.println("aaaa"+r);
+    		return r;
+    	}
+       return null;
     }
     
     private RegularUser getUltimateRegularUser(){
@@ -569,7 +576,7 @@ public class Request implements Serializable {
     public static void cancel(Long id2) {
         if (id2 == null) throw new IllegalArgumentException("The id argument is required");
         
-        LogFactory.getLog(Request.class.getClass()).info("Cancelation attempt!");
+        LogFactory.getLog(Request.class.getClass()).info("Cancelation attempt!"+id2);
         Request req = Request.findRequest(id2);
         //System.out.println(req);
         req.cancel();
