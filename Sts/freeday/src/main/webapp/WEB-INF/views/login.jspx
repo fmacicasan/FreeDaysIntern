@@ -27,15 +27,18 @@
 		<form name="f" action="${fn:escapeXml(form_url)}" method="POST">
 			<div>
 				<label for="j_username"> <spring:message code="security_login_form_name" /> </label> <input id="j_username"
-					type='text' name='j_username' style="width: 150px" />
+					type='text' name='j_username' style="width: 150px" autocomplete="on" />
 				<spring:message code="security_login_form_name_message"
 					var="name_msg" htmlEscape="false" />
 				<script type="text/javascript">
-          <c:set var="sec_name_msg">
-            <spring:escapeBody javaScriptEscape="true">${name_msg}</spring:escapeBody>
-          </c:set>
-          Spring.addDecoration(new Spring.ElementDecoration({elementId : "j_username", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${sec_name_msg}", required : true}})); 
-        </script>
+	          <c:set var="sec_name_msg">
+	            <spring:escapeBody javaScriptEscape="true">${name_msg}</spring:escapeBody>
+	          </c:set>
+          	Spring.addDecoration(new Spring.ElementDecoration({elementId : "j_username", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${sec_name_msg}", required : true, onFocus : function(){ test(); }}})); 
+          	function test() {
+                document.getElementById('j_username').setAttribute("autocomplete","on");
+                }
+          </script>
 			</div>
 			<br />
 			<div>
