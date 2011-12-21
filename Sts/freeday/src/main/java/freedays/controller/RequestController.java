@@ -242,8 +242,9 @@ public class RequestController {
 	@PreAuthorize("hasRole('ROLE_FDADMIN') or hasPermission(#id, 'Request', 'own')")
 	@RequestMapping(value = "/{id}", params = {"eval","cancel"}, method = RequestMethod.POST)
 	public String evalRequestCancel(@PathVariable("id") Long id, Model uiModel){
+		System.out.println("Canceling gugu");
 		Request.cancel(id);
-		
+		System.out.println("terminator 5");
 		uiModel.asMap().clear();
 		if(this.userContextService.isOwn(Request.findRequest(id).getAppreguser().getRegularUser())){
 			return "redirect:/requests?own";
@@ -409,7 +410,8 @@ public class RequestController {
     
     
 
-
+    
+    @PreAuthorize("hasRole('ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
