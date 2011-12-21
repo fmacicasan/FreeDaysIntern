@@ -24,7 +24,10 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 		<intercept-url pattern="/regularusers" method="POST" access="permitAll()"/> <!--  change this after addition of dedicated register form -->
 		<intercept-url pattern="/**" access="isAuthenticated()" /> <!-- change to isAuthenticated() -->
        	<session-management>
-        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        	<!-- configuration for 1st login restriction -->
+        	<!--  <concurrency-control max-sessions="1" error-if-maximum-exceeded="true"  />-->
+        	<!-- configuration for expire session on 2nd login -->
+        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/login"  />
     	</session-management>
     </http>
     
