@@ -24,6 +24,11 @@
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx"/>
   </definition>
   
+  <definition extends="public" name="accessdenied">
+    <put-attribute name="body" value="/WEB-INF/views/accessdenied.jspx"/>
+  </definition>
+  
+  
 	<definition extends="default" name="recoverpass">
 	       <put-attribute name="body" value="/WEB-INF/views/recoverpass.jspx"/>
 	   </definition>	 
