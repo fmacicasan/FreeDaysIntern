@@ -154,7 +154,7 @@ public class DateUtils {
 	 * @param end
 	 * @return
 	 */
-	public static long dateDifferenceInWorkingDays(Calendar start, Calendar end) {
+	public static Long dateDifferenceInWorkingDays(Calendar start, Calendar end) {
 		if(start == null)throw new IllegalArgumentException("The start argument is required");
 		if(end == null)throw new IllegalArgumentException("The end argument is required");
 		if(start.compareTo(end)>0) throw new IllegalArgumentException("start must be before end"); 
@@ -167,7 +167,7 @@ public class DateUtils {
 		return span;
 	}
 	
-	public static long dateDifferenceInBusinessDays(Calendar start, Calendar end) {
+	public static Long dateDifferenceInBusinessDays(Calendar start, Calendar end) {
 		if(start == null)throw new IllegalArgumentException("The start argument is required");
 		if(end == null)throw new IllegalArgumentException("The end argument is required");
 		if(start.compareTo(end)>0) throw new IllegalArgumentException("start must be before end"); 
