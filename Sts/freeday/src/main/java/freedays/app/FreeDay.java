@@ -14,6 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
+
+import org.apache.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -42,7 +44,8 @@ import freedays.validation.annotation.FreeDaySpecificDateConstraint;
 @DiscriminatorValue("AbstractFreeDay")
 @FreeDaySpecificDateConstraint
 public abstract class FreeDay {
-
+	private static final Logger log = Logger.getLogger(FreeDay.class);
+	
     public static final int DEFAULT_MAXIMUM_CANCELATION_HOUR = 22;
 
     @ManyToOne
@@ -65,7 +68,12 @@ public abstract class FreeDay {
     }
 
     public ApplicationRegularUser getNextApprover(ApplicationRegularUser user) {
+    	try{
         return this.approval.getNextApprover(user);
+    	}catch(Exception e){
+    		log.error("Issue with next approver retrieval",e);
+    		return null;
+    	}
     }
 
     public ApplicationRegularUser getUltimateApprover(ApplicationRegularUser user) {
@@ -338,7 +346,8 @@ public abstract class FreeDay {
 	 */
     public static List<FreeDayUserList> getAllUserFreeDays(int month) {
         List<FreeDayUserList> fdrl = new ArrayList<FreeDayUserList>();
-        List<FDUser> fdul = FDUser.findAllFDUsers();
+        //List<FDUser> fdul = FDUser.findAllFDUsers();
+        List<FDUser> fdul = FDUser.findAllActiveFDUsers();
         for (FDUser fdu : fdul) {
             fdrl.add(FreeDayUserList.generateAllFreeDays(fdu, month));
         }
