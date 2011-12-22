@@ -4,6 +4,7 @@
 package freedays.app;
 
 import freedays.domain.ApprovalStrategy;
+import java.lang.Integer;
 import java.lang.String;
 
 privileged aspect FreeDay_Roo_JavaBean {
@@ -22,6 +23,22 @@ privileged aspect FreeDay_Roo_JavaBean {
     
     public void FreeDay.setReason(String reason) {
         this.reason = reason;
+    }
+    
+    public Integer FreeDay.getYear() {
+        return this.year;
+    }
+    
+    public void FreeDay.setYear(Integer year) {
+        this.year = year;
+    }
+    
+    public Integer FreeDay.getNumber() {
+        return this.number;
+    }
+    
+    public void FreeDay.setNumber(Integer number) {
+        this.number = number;
     }
     
     public FreeDayStatus FreeDay.getStatus() {

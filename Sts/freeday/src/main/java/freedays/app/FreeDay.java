@@ -10,12 +10,14 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -52,6 +54,12 @@ public abstract class FreeDay {
     private ApprovalStrategy approval;
 
     private String reason;
+    
+    @Value(value="2011")
+    private Integer year;
+    
+    @Value(value="0")
+    private Integer number;
 
 //    @NotNull
 //    @Temporal(TemporalType.DATE)
@@ -402,5 +410,25 @@ public abstract class FreeDay {
 
 	public String getDateReport() {
 		return String.format("%1$tA, %1$te %1$tB %1$tY", this.getDate());
+	}
+	
+	@PrePersist
+	public void beforeCreate(){
+		this.year = this.getDate().get(Calendar.YEAR);
+		
+		if(this.getDate().get(Calendar.YEAR)!=this.getEnd().get(Calendar.YEAR)){
+			//this.number = this.getDate().getActualMaximum(Calendar.DAY_OF_YEAR) - this.getDate().get(Calendar.DAY_OF_YEAR);
+			Calendar end = (Calendar)this.getDate().clone();
+			end.set(Calendar.DAY_OF_YEAR, end.getActualMaximum(Calendar.DAY_OF_YEAR));
+			this.number = DateUtils.dateDifferenceInBusinessDays(this.getDate(), end).intValue();
+		} else {
+			this.number = 0;
+		}
+		
+		
+	}
+	
+	public Calendar getEnd(){
+		return this.getDate();
 	}
 }
