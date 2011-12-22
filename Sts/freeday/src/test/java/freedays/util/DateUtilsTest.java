@@ -70,20 +70,21 @@ public class DateUtilsTest {
 	}
 	
 	@Test
+	@Repeat(100)
 	public void testDateDifferenceInDays(){
-		for(int i=100;i>0;i--){
-		int span = new java.util.Random().nextInt(364)+1;
+//		for(int i=100;i>0;i--){
+		int span = new java.util.Random().nextInt(50)+1;
 		Calendar start = Calendar.getInstance();
 		//start.set(Calendar.DAY_OF_YEAR, 1);
 		Calendar end = (Calendar) start.clone();
-		//System.out.println(DateUtils.printShortDate(end));
-		//System.out.println(DateUtils.printShortDate(start));
+		System.out.println(DateUtils.printShortDate(end));
+		System.out.println(DateUtils.printShortDate(start));
 		end.add(Calendar.DAY_OF_YEAR, span);
-		//System.out.println(DateUtils.printShortDate(end));
-		//System.out.println(span);
-		//System.out.println(DateUtils.dateDifferenceInDays(start, end));
+		System.out.println(DateUtils.printShortDate(end));
+		System.out.println(span);
+		System.out.println(DateUtils.dateDifferenceInDays(start, end));
 		Assert.assertEquals("invalid date difference implementation", span, DateUtils.dateDifferenceInDays(start, end));
-		}
+//		}
 	}
 	
 	@Test
