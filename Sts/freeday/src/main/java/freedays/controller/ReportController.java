@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ import freedays.util.ResourceDemo;
 @Controller
 public class ReportController {
 	
+	private static final Logger log = Logger.getLogger(ReportController.class);
 	
 	@Autowired
 	private UserContextService userContextService;
@@ -82,13 +84,16 @@ public class ReportController {
 		}
 		int month = DateUtils.transformMonth(m);
 		List<FreeDayUserList> lfd = FreeDay.getAllUserFreeDays(month);
+		//log.info("AAAAAAAAAAAAAAAAAAAZZZZZZZZZZYYYYYY"+lfd.size());
 		uiModel.addAttribute("vacations",lfd);
 		uiModel.addAttribute("length", DateUtils.getDaysInMonth(month));
 		uiModel.addAttribute("daysDateList",DateUtils.getShortDateList(month));
 		uiModel.addAttribute("daysWeekdayList",DateUtils.getWeekdayInitialsList(month));
-		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
-		
-		LogFactory.getLog(this.getClass()).info("Finish report creation!");
+		//modifyed to accustom january/december of adjacent years
+		//uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
+		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNamesExtended());
+		//log.info("MONTH NAMES!!!!!!!!!!!!!!!!!!!!!!"+DateUtils.getMonthNamesExtended());
+		log.info("Finish report creation!");
 	
 		//test properties finder
 //		PropertiesUtil.getProperty("testing");

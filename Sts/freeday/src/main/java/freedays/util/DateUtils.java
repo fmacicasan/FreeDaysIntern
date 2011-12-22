@@ -28,7 +28,7 @@ import freedays.app.FreeDayVacation;
  */
 public class DateUtils {
 	
-	static final Logger logger = LoggerFactory.getLogger(DateUtils.class);
+	private static final Logger logger  = LoggerFactory.getLogger(DateUtils.class);
 
 	/**
 	 * Generates a random day of week between Calendar.MONDAY and Calendar.FRIDAY
@@ -229,27 +229,57 @@ public class DateUtils {
 	 * @return
 	 */
 	public static List<String> getShortDateList(int month) {
+		int yearAdjuster = preprocessYear(month);
+		month = preprocessMonth(month);
+		
 		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December"); 
 		List<String> ls = new ArrayList<String>();
 		Calendar now =Calendar.getInstance();
 		now.set(Calendar.MONTH, month);
 		now.set(Calendar.DAY_OF_MONTH, 1);
+		now.set(Calendar.YEAR,now.get(Calendar.YEAR)+yearAdjuster);
 		for(Calendar c = (Calendar) now.clone();c.get(Calendar.MONTH)==now.get(Calendar.MONTH);c.add(Calendar.DAY_OF_YEAR, 1)){
 			ls.add(DateUtils.printShortDate(c));
 		}
 		return ls;
 	}
 	
+	private static int preprocessMonth(int month){
+		return (month+12)%12;
+	}
+	
+	private static int preprocessYear(int month){
+		int yearAdjuster = 0;
+		switch(month){
+		case(-1):
+			yearAdjuster = -1;
+			break;
+		case(12):
+			yearAdjuster = 1;
+			break;
+		default:
+			yearAdjuster = 0;
+		break;
+		}
+		return yearAdjuster;
+	}
+	
 	/**
-	 * Returns the number of days in a given month
+	 * Returns the number of days in a given month.
+	 * MOnth -1 is december and 12 is january
 	 * @param month between Calendar.JANUARY and Calendar.DECEMBER
 	 * @return
 	 */
 	public static int getDaysInMonth(int month) {
+		int yearAdjuster = preprocessYear(month);
+		month = preprocessMonth(month);
+		logger.info("computing days in month!!!!!!!!!"+month);
+		
 		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December");
 		Calendar now = Calendar.getInstance();
 		now.set(Calendar.DAY_OF_MONTH, 1);//needed for instances with DAY_OF_MONTH 30/31 that will increment months with 28/29/30 days
 		now.set(Calendar.MONTH, month);
+		now.set(Calendar.YEAR, now.get(Calendar.YEAR)+yearAdjuster);
 		int days = now.getActualMaximum(Calendar.DAY_OF_MONTH);
 		//System.out.println(days+" "+month);
 		return days;
@@ -267,6 +297,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static boolean isSameMonth(Calendar date, int month) {
+		month = preprocessMonth(month);
 		return date.get(Calendar.MONTH) == month;
 	}
 
@@ -285,11 +316,14 @@ public class DateUtils {
 	 * @return
 	 */
 	public static List<String> getWeekdayInitialsList(int month) {
+		int yearAdjuster = preprocessYear(month);
+		month = preprocessMonth(month);
 		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December");
 		List<String> ls = new ArrayList<String>();
 		Calendar now =Calendar.getInstance();
 		now.set(Calendar.MONTH, month);
 		now.set(Calendar.DAY_OF_MONTH, 1);
+		now.set(Calendar.YEAR,now.get(Calendar.YEAR)+yearAdjuster);
 		for(Calendar c = (Calendar) now.clone();c.get(Calendar.MONTH)==now.get(Calendar.MONTH);c.add(Calendar.DAY_OF_YEAR, 1)){
 			ls.add(DateUtils.printWeekdayInitial(c));
 		}
@@ -314,6 +348,20 @@ public class DateUtils {
 		String[] months = new DateFormatSymbols(local).getMonths();
 		return Arrays.asList(months);
 	}
+	
+	public static List<String> getMonthNamesExtended(){
+		List<String> names = getMonthNames();
+		List<String> extendednames = new ArrayList<String>();
+		//list from 0 to size-1
+		extendednames.add(names.get(11));
+		//names will be corrupted with some extra values rather
+		for(int i=0;i<12;i++){
+			extendednames.add(names.get(i));
+		}
+		
+		extendednames.add(names.get(0));
+		return extendednames;
+	}
 
 	/**
 	 * returns current month between 1 and 12
@@ -332,7 +380,7 @@ public class DateUtils {
 	public static boolean isValidMonth(Integer m) {
 		if(m==null) return false;
 		m = DateUtils.transformMonth(m);//bring it between Calendar.January and Calendar.December
-		return Calendar.JANUARY <= m &&  m <= Calendar.DECEMBER;
+		return Calendar.JANUARY -1 <= m &&  m <= Calendar.DECEMBER + 1;
 	}
 
 	/**
@@ -407,6 +455,39 @@ public class DateUtils {
 	public static boolean isCurrentYear(Calendar date) {
 		Calendar c = Calendar.getInstance();
 		return date.get(Calendar.YEAR)==c.get(Calendar.YEAR);
+	}
+	
+	public static boolean isPreviousYear(Calendar date){
+		Calendar c = Calendar.getInstance();
+		return date.get(Calendar.YEAR) == (c.get(Calendar.YEAR) - 1);
+	}
+	
+	public static boolean isNextYear(Calendar date){
+		Calendar c = Calendar.getInstance();
+		return date.get(Calendar.YEAR) == (c.get(Calendar.YEAR) + 1);
+		
+	}
+	
+//	private static boolean isSameYear(Integer year, Calendar date){
+//		return date.get(Calendar.YEAR) == year;
+//	}
+	
+	public static boolean isReportableDate(Integer month, Calendar date){
+		boolean extra = false;
+		
+		switch(month){
+		case -1:
+			extra = DateUtils.isPreviousYear(date);
+			
+			break;
+		case 12:
+			extra =  DateUtils.isNextYear(date);
+			break;
+		default:
+			extra = DateUtils.isCurrentYear(date);
+			
+		}
+		return DateUtils.isSameMonth(date, month) && extra;
 	}
 	
 	public static String printLong(Calendar c){
