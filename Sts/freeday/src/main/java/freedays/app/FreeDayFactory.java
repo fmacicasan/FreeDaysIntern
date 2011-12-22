@@ -19,7 +19,9 @@ public class FreeDayFactory {
 		FreeDay ret;
 		switch(fdr.getReqtype()){
 			case L:
-				ret = new FreeDayL();
+				//ret = new FreeDayL();
+				//changed to accommodate 1 day vacations
+				ret = new FreeDayVacation();
 				break;
 			case C:
 				ret = new FreeDayC();

@@ -119,6 +119,14 @@ public class DateUtils {
 		return String.format("%1$td.%1$tm", date);// %1$tk %1$tm
 	}
 	
+	public static String printShortDateYear(Calendar date){
+		return String.format("%1$td.%1$tm.%1$ty", date);// %1$tk %1$tm
+	}
+	
+	public static String printLongDate(Calendar date){
+		return String.format("%1$tA, %1$te %1$tB %1$tY", date);
+	}
+	
 	/**
 	 * Computes the difference in days between the two provided Calendar instances.
 	 * @param start the starting day of the period

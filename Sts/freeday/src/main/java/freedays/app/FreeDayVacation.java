@@ -80,12 +80,22 @@ public class FreeDayVacation extends FreeDay {
         return RequestType.V;
     }
 
+    /**
+     * Initialize a FreeDayVacation based on the request object
+     */
 	@Override
 	protected void initialize(FreeDayRequest fdr) {
-		if(!(fdr instanceof FreeDayRequestVacation))throw new IllegalArgumentException("The fdr argument must be of type FreeDayRequestVacation");
-		FreeDayRequestVacation fdrv = (FreeDayRequestVacation)fdr;
-		this.setConfidence(fdrv.getConfidence());
-		this.setSpan(DateUtils.dateDifferenceInWorkingDays(fdrv.getReqdate(), fdrv.getFinish()));
+		//if(!(fdr instanceof FreeDayRequestVacation))throw new IllegalArgumentException("The fdr argument must be of type FreeDayRequestVacation");
+		if(fdr instanceof FreeDayRequestVacation){
+			//initialize a multiple days vacation
+			FreeDayRequestVacation fdrv = (FreeDayRequestVacation)fdr;
+			this.setConfidence(fdrv.getConfidence());
+			this.setSpan(DateUtils.dateDifferenceInWorkingDays(fdrv.getReqdate(), fdrv.getFinish()));
+		} else {
+			//initialize a 1 day vacataion
+			this.setSpan(0);
+			this.setConfidence(ConfidenceLevel.HIGH);
+		}
 	}
 	
 	@Override
@@ -198,10 +208,28 @@ public class FreeDayVacation extends FreeDay {
 	
 	public String getDateReport() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("From ").append(DateUtils.printShortDate(this.getDate()));
-		//logger.info(String.format("The ending date for %s is:%s",DateUtils.printShortDate(this.getDate()),DateUtils.printShortDate(this.getEnd())));
-		sb.append(" To ").append(DateUtils.printShortDate(this.getEnd()));
-		//DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan()))
+		if(this.getSpan() == 0){
+			sb.append(DateUtils.printLongDate(this.getDate()));
+		} else {
+			boolean diffYear = false;
+			if(this.getDate().get(Calendar.YEAR)!=this.getEnd().get(Calendar.YEAR)){
+				diffYear = true;
+			}
+			
+			sb.append("From ").append(
+					diffYear?
+							DateUtils.printShortDateYear(this.getDate())
+							:DateUtils.printShortDate(this.getDate())
+							);
+			//logger.info(String.format("The ending date for %s is:%s",DateUtils.printShortDate(this.getDate()),DateUtils.printShortDate(this.getEnd())));
+			sb.append(" To ").append(
+					diffYear?
+							DateUtils.printShortDateYear(this.getEnd())
+							:DateUtils.printShortDate(this.getEnd())
+							);
+			//DateUtils.dateAddRomanianBusinessDay(this.getDate(), this.getSpan()))
+		}
+		
 		return sb.toString();
 	}
 
