@@ -4,7 +4,7 @@
     <groupId>hrapp</groupId>
     <artifactId>hrapp</artifactId>
     <packaging>war</packaging>
-    <version>0.1.0.BUILD-SNAPSHOT</version>
+    <version>1.7</version>
     <name>hrapp</name>
     <properties>
         <roo.version>1.1.5.RELEASE</roo.version>
@@ -15,7 +15,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring-security.version>3.0.5.RELEASE</spring-security.version>
     </properties>
-    <repositories>
+    
+      <repositories>
         <repository>
             <id>spring-maven-release</id>
             <name>Spring Maven Release Repository</name>
@@ -31,14 +32,13 @@
             <name>Spring Roo Repository</name>
             <url>http://spring-roo-repository.springsource.org/release</url>
         </repository>
-    <repository>
-            <id>JBoss Repo</id>
+      <repository> 
+           <id>JBoss Repo</id>
             <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
             <name>JBoss Repo</name>
         </repository>
-
-    </repositories>
-    <pluginRepositories>
+    </repositories> 
+     <!-- <pluginRepositories>
         <pluginRepository>
             <id>spring-maven-release</id>
             <name>Spring Maven Release Repository</name>
@@ -54,7 +54,23 @@
             <name>Spring Roo Repository</name>
             <url>http://spring-roo-repository.springsource.org/release</url>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories>  -->
+
+ 	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>internal releases</name>
+			<url>http://clujci01:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>snapshots</id>
+			<name>internal snapshots</name>
+			<url>http://clujci01:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+    
+    
     <dependencies>
         <!-- General dependencies for standard applications -->
         <dependency>
