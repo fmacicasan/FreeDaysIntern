@@ -5,12 +5,18 @@ package freedays.app;
 
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayL;
+import java.lang.Integer;
 import java.lang.String;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayLDataOnDemand: @Component;
+    
+    public void FreeDayLDataOnDemand.setNumber(FreeDayL obj, int index) {
+        Integer number = new Integer(index);
+        obj.setNumber(number);
+    }
     
     public void FreeDayLDataOnDemand.setReason(FreeDayL obj, int index) {
         String reason = "reason_" + index;
@@ -20,6 +26,11 @@ privileged aspect FreeDayLDataOnDemand_Roo_DataOnDemand {
     public void FreeDayLDataOnDemand.setStatus(FreeDayL obj, int index) {
         FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
         obj.setStatus(status);
+    }
+    
+    public void FreeDayLDataOnDemand.setYear(FreeDayL obj, int index) {
+        Integer year = new Integer(index);
+        obj.setYear(year);
     }
     
     public FreeDayL FreeDayLDataOnDemand.getSpecificFreeDayL(int index) {

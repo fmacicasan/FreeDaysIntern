@@ -121,7 +121,7 @@ public class DateUtilsTest {
 		Calendar date = Calendar.getInstance();
 		Integer i = new java.util.Random().nextInt(10)+1;
 		Calendar then = DateUtils.dateAddRomanianBusinessDay(date,i.longValue());
-		Assert.assertEquals(i.longValue(), DateUtils.dateDifferenceInWorkingDays(date, then));
+		Assert.assertEquals(i.longValue(), DateUtils.dateDifferenceInWorkingDays(date, then).longValue());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -170,7 +170,7 @@ public class DateUtilsTest {
 		Calendar c = new GregorianCalendar(2011,Calendar.AUGUST,1);
 		Calendar cc = new GregorianCalendar(2011,Calendar.AUGUST,DateUtils.getDaysInMonth(Calendar.AUGUST));
 		//15 august is a holiday
-		Assert.assertEquals("not ok romanian date diference"+DateUtils.printShortDate(c)+" "+DateUtils.printShortDate(cc),DateUtils.dateDifferenceInWorkingDays(c, cc)+1, DateUtils.dateDifferenceInBusinessDays(c, cc));	
+		Assert.assertEquals("not ok romanian date diference"+DateUtils.printShortDate(c)+" "+DateUtils.printShortDate(cc),DateUtils.dateDifferenceInWorkingDays(c, cc).longValue()+1, DateUtils.dateDifferenceInBusinessDays(c, cc).longValue());	
 	}
 	
 	@Test
@@ -188,7 +188,7 @@ public class DateUtilsTest {
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		Calendar start = generateRandomRomanianLegal(15,Calendar.AUGUST,year,10,true);
 		Calendar end = generateRandomRomanianLegal(15,Calendar.AUGUST,year,10,false);
-		Assert.assertEquals("not ok romanian date diference"+DateUtils.printShortDate(start)+" "+DateUtils.printShortDate(end),DateUtils.dateDifferenceInWorkingDays(start, end)+1, DateUtils.dateDifferenceInBusinessDays(start, end));
+		Assert.assertEquals("not ok romanian date diference"+DateUtils.printShortDate(start)+" "+DateUtils.printShortDate(end),DateUtils.dateDifferenceInWorkingDays(start, end).longValue()+1, DateUtils.dateDifferenceInBusinessDays(start, end).longValue());
 		long dd = DateUtils.dateDifferenceInWorkingDays(start, end);
 		Assert.assertEquals("not ok romanian date add"+DateUtils.printShortDate(start)+" "+DateUtils.printShortDate(end),end,DateUtils.dateAddRomanianBusinessDay(start,dd) );
 	}
@@ -209,7 +209,7 @@ public class DateUtilsTest {
 	public void testCrazyAdd(){
 		Calendar start = new GregorianCalendar(2011,Calendar.AUGUST,8);
 		Calendar end = new GregorianCalendar(2011, Calendar.AUGUST,19);
-		Assert.assertEquals(8, DateUtils.dateDifferenceInWorkingDays(start, end));
+		Assert.assertEquals(8, DateUtils.dateDifferenceInWorkingDays(start, end).longValue());
 		Assert.assertEquals(end, DateUtils.dateAddRomanianBusinessDay(start, 8l));
 	}
 	
@@ -217,7 +217,7 @@ public class DateUtilsTest {
 	public void testCrazyAdd2(){
 		Calendar start = new GregorianCalendar(2011,Calendar.AUGUST,8);
 		Calendar end = new GregorianCalendar(2011, Calendar.AUGUST,18);
-		Assert.assertEquals(7, DateUtils.dateDifferenceInWorkingDays(start, end));
+		Assert.assertEquals(7, DateUtils.dateDifferenceInWorkingDays(start, end).longValue());
 		Assert.assertEquals(end, DateUtils.dateAddRomanianBusinessDay(start, 7l));
 	}
 	

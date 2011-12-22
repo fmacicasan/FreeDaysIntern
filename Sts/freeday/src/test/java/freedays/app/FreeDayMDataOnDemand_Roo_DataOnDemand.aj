@@ -6,6 +6,7 @@ package freedays.app;
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayM;
 import freedays.domain.ApprovalStrategy;
+import java.lang.Integer;
 import java.lang.String;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,11 @@ privileged aspect FreeDayMDataOnDemand_Roo_DataOnDemand {
         obj.setApproval(approval);
     }
     
+    public void FreeDayMDataOnDemand.setNumber(FreeDayM obj, int index) {
+        Integer number = new Integer(index);
+        obj.setNumber(number);
+    }
+    
     public void FreeDayMDataOnDemand.setReason(FreeDayM obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
@@ -26,6 +32,11 @@ privileged aspect FreeDayMDataOnDemand_Roo_DataOnDemand {
     public void FreeDayMDataOnDemand.setStatus(FreeDayM obj, int index) {
         FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
         obj.setStatus(status);
+    }
+    
+    public void FreeDayMDataOnDemand.setYear(FreeDayM obj, int index) {
+        Integer year = new Integer(index);
+        obj.setYear(year);
     }
     
     public FreeDayM FreeDayMDataOnDemand.getSpecificFreeDayM(int index) {

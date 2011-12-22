@@ -7,6 +7,7 @@ import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayVacation;
 import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.domain.ApprovalStrategy;
+import java.lang.Integer;
 import java.lang.String;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,11 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
         obj.setConfidence(confidence);
     }
     
+    public void FreeDayVacationDataOnDemand.setNumber(FreeDayVacation obj, int index) {
+        Integer number = new Integer(index);
+        obj.setNumber(number);
+    }
+    
     public void FreeDayVacationDataOnDemand.setReason(FreeDayVacation obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
@@ -32,6 +38,11 @@ privileged aspect FreeDayVacationDataOnDemand_Roo_DataOnDemand {
     public void FreeDayVacationDataOnDemand.setStatus(FreeDayVacation obj, int index) {
         FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
         obj.setStatus(status);
+    }
+    
+    public void FreeDayVacationDataOnDemand.setYear(FreeDayVacation obj, int index) {
+        Integer year = new Integer(index);
+        obj.setYear(year);
     }
     
     public FreeDayVacation FreeDayVacationDataOnDemand.getSpecificFreeDayVacation(int index) {

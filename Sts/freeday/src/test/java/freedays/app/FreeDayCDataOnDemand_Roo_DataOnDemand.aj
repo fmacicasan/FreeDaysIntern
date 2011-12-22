@@ -6,6 +6,7 @@ package freedays.app;
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayC;
 import freedays.app.FreeDayRDataOnDemand;
+import java.lang.Integer;
 import java.lang.String;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,11 @@ privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
     @Autowired
     private FreeDayRDataOnDemand FreeDayCDataOnDemand.freeDayRDataOnDemand;
     
+    public void FreeDayCDataOnDemand.setNumber(FreeDayC obj, int index) {
+        Integer number = new Integer(index);
+        obj.setNumber(number);
+    }
+    
     public void FreeDayCDataOnDemand.setReason(FreeDayC obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
@@ -25,6 +31,11 @@ privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
     public void FreeDayCDataOnDemand.setStatus(FreeDayC obj, int index) {
         FreeDayStatus status = FreeDayStatus.class.getEnumConstants()[0];
         obj.setStatus(status);
+    }
+    
+    public void FreeDayCDataOnDemand.setYear(FreeDayC obj, int index) {
+        Integer year = new Integer(index);
+        obj.setYear(year);
     }
     
     public FreeDayC FreeDayCDataOnDemand.getSpecificFreeDayC(int index) {
