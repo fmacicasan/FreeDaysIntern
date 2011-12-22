@@ -108,7 +108,7 @@ public class AccountController {
 		uiModel.addAttribute("activeRequestCount", Request.countActiveRequests(username));
     	uiModel.addAttribute("remainingDaysCount", Request.computeAvailableFreeDays(username));
     	uiModel.addAttribute("remainingTotalDaysCount",Request.computeTotalAvailableFreeDays(username));
-    	uiModel.addAttribute("request_currentlwspecificdays", FreeDayC.countAllUnmatchedRequestsByUsername(username) - FreeDayR.countAllUnmatchedRequestsByUsername(username));
+    	uiModel.addAttribute("request_currentlwspecificdays", FDUser.computeAvailableLWSpecificDays(username));//FreeDayC.countAllUnmatchedRequestsByUsername(username) - FreeDayR.countAllUnmatchedRequestsByUsername(username)
 		
 		return "fdusers/show";
 	}

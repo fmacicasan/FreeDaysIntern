@@ -179,9 +179,11 @@ public class FreeDayUserList {
 		if(ucs.isHR()){
 			lfdu = FreeDay.getAllGrantedFreeDayByUsername(fdu.getRegularUser().getUsername());
 		} else {
-			fdul.setRemainingdays(fdu.computeAvailableFreeDays());
-			lfdu =FreeDay.getAllNotFailedRequestsByUsername(fdu.getRegularUser().getUsername());
-			log.info("found alot of requiests for you!!!"+fdu.getRegularUser().getUsername()+" like alotzzz"+lfdu.size());
+			//fdul.setRemainingdays(fdu.computeAvailableFreeDays());//add covered by work days
+			String username = fdu.getRegularUser().getUsername();
+			fdul.setRemainingdays(FDUser.computeAvailableLWSpecificDays(username));//days, depth to LW
+			lfdu =FreeDay.getAllNotFailedRequestsByUsername(username);
+			log.info("found alot of requiests for you!!!"+username+" like alotzzz"+lfdu.size());
 		}
 		fdul.setCombined(tranformFreeDay2Integer4Report(lfdu,month));
 		return fdul;

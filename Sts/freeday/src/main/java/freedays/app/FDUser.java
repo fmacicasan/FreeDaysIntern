@@ -127,6 +127,10 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 		return remainingDays;
 	}
 	
+	public static Long computeAvailableLWSpecificDays(String username){
+		 return FreeDayC.countAllUnmatchedRequestsByUsername(username) - FreeDayR.countAllUnmatchedRequestsByUsername(username);
+	}
+	
 	/**
 	 * 
 	 * @param username a string representing a RegularUser username
