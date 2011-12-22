@@ -73,15 +73,19 @@ public class FreeDayL extends FreeDay {
 	 * Counts all the free days that are under approval or already approved
 	 * that are associated with requests made by a FDUser associated with a 
 	 * RegularUser identified by the provided username.
+	 * 
 	 * @param username
+	 * @since v1.7
+	 * @param year year of counting the days
 	 * @return
 	 */
-	public static Long countAllNotFailedRequestsByUsername(String username){
+	public static Long countAllNotFailedRequestsByUsername(String username, Integer year){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		EntityManager em = FreeDay.entityManager();
-		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDayL o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
+		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDayL o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure AND o.year = :year", Long.class);
         q.setParameter("username", username);
         q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        q.setParameter("year", year);
         return q.getSingleResult(); 
 	}
 

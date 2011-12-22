@@ -418,9 +418,12 @@ public abstract class FreeDay {
 		
 		if(this.getDate().get(Calendar.YEAR)!=this.getEnd().get(Calendar.YEAR)){
 			//this.number = this.getDate().getActualMaximum(Calendar.DAY_OF_YEAR) - this.getDate().get(Calendar.DAY_OF_YEAR);
-			Calendar end = (Calendar)this.getDate().clone();
-			end.set(Calendar.DAY_OF_YEAR, end.getActualMaximum(Calendar.DAY_OF_YEAR));
-			this.number = DateUtils.dateDifferenceInBusinessDays(this.getDate(), end).intValue();
+//			Calendar end = (Calendar)this.getDate().clone();
+//			end.set(Calendar.DAY_OF_YEAR, end.getActualMaximum(Calendar.DAY_OF_YEAR));
+//			this.number = DateUtils.dateDifferenceInBusinessDays(this.getDate(), end).intValue();
+			Calendar start = (Calendar)this.getEnd().clone();
+			start.set(Calendar.DAY_OF_YEAR, 1);
+			this.number = DateUtils.dateDifferenceInBusinessDays(start, this.getEnd()).intValue();
 		} else {
 			this.number = 0;
 		}

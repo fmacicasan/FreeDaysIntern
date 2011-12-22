@@ -20,6 +20,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
 import freedays.domain.Request;
+import freedays.util.PropertiesUtil;
 import freedays.validation.annotation.BusinessDay;
 
 /**
@@ -107,27 +108,40 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 //		remainingDays -= Request.countRequests(this, RequestStatus.GRANTED);
 		
 		String username = this.getRegularUser().getUsername();
-		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username);
-		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username);
-		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username);
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username,year);
+		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username,year);
+		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username,year);
 		return remainingDays;		
 	}
 	
 	/**
 	 * Remaining days from the total amount available in a year without considering the amount of work until
 	 * the computation point.
+	 * 
+	 * @since V1.7
+	 * Consideres max days + init days and the approved requests from the "current" year
 	 * @return
 	 */
 	public Long computeteAvailableFreeDaysTotal(){
+		
 		long remainingDays = this.getMaxFreeDays();
+		//TODO (fmacicasan13):get the year from an external source
+		int year = Calendar.getInstance().get(Calendar.YEAR);
 		String username = this.getRegularUser().getUsername();
-		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username);
-		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username); 
-		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username);
+		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username,year);
+		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username,year); 
+		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username,year);
 		return remainingDays;
 	}
 	
+	/**
+	 * Computes the debt to LW of a given employee 
+	 * @param username
+	 * @return
+	 */
 	public static Long computeAvailableLWSpecificDays(String username){
+		//no consideration from year11
 		 return FreeDayC.countAllUnmatchedRequestsByUsername(username) - FreeDayR.countAllUnmatchedRequestsByUsername(username);
 	}
 	

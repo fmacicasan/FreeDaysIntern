@@ -27,5 +27,9 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 		String result =  propertiesMap.get(name);
 		return result;
 	}
+	
+	public static Integer getInteger(String name){
+		return Integer.parseInt(getProperty(name));
+	}
 
 }

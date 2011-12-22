@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.stereotype.Service;
 
+import freedays.app.FDUser;
 import freedays.app.form.FreeDayUserList;
 import freedays.controller.TimesheetController;
 import freedays.domain.Request;
@@ -81,6 +82,20 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 				ic.setExpired(true);
 				ic.merge();
 			}
+		}
+	}
+	
+	public void updateNewYearFreeDays(){
+		List<FDUser> fdul = FDUser.findAllReportableFDUsers();
+		int newMaxValue = PropertiesUtil.getInteger("default.newMaxVacation");
+		int derogation = PropertiesUtil.getInteger("default.derogation");
+		
+		for(FDUser fdUser: fdul){
+			int initDays = fdUser.computeteAvailableFreeDaysTotal().intValue();			
+			fdUser.setInitDays(initDays);
+			fdUser.setMaxDerogation(derogation);
+			fdUser.setMaxFreeDays(newMaxValue);
+			fdUser.merge();			
 		}
 	}
 

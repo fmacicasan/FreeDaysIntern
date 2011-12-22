@@ -145,15 +145,18 @@ public class FreeDayVacation extends FreeDay {
 	 * Computes the sum of all the approved/under approval vacation requests
 	 * made by a FDUser associated to a regular user identified by the
 	 * provided username
-	 * @param username
+	 * @param username\
+	 * @since v1.7
+	 * @param year
 	 * @return
 	 */
-	public static Long sumAllVacationSpansByUsername(String username){
+	public static Long sumAllVacationSpansByUsername(String username,Integer year){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		EntityManager em = FreeDayVacation.entityManager();
-		TypedQuery<Long> q = em.createQuery("SELECT SUM(o.span) FROM FreeDayVacation o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
+		TypedQuery<Long> q = em.createQuery("SELECT SUM(o.span - o.number) FROM FreeDayVacation o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure AND o.year = :year", Long.class);
         q.setParameter("username", username);
         q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        q.setParameter("year",year);
         Long sum = q.getSingleResult();
         return sum==null?0:sum;
 	}
@@ -184,14 +187,17 @@ public class FreeDayVacation extends FreeDay {
 	 * that are associated with requests made by a FDUser associated with a 
 	 * RegularUser identified by the provided username.
 	 * @param username
+	 * @since v1.7
+	 * @param year year of computation
 	 * @return
 	 */
-	public static Long countAllNotFailedRequestsByUsername(String username){
+	public static Long countAllNotFailedRequestsByUsername(String username, Integer year){
 		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		EntityManager em = FreeDay.entityManager();
-		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDayVacation o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure", Long.class);
+		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM FreeDayVacation o, Request r WHERE r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure AND o.year = :year", Long.class);
         q.setParameter("username", username);
         q.setParameter("completedfailure",FreeDayStatus.COMPLETED_FAILURE);
+        q.setParameter("year",year);
         return q.getSingleResult(); 
 	}
 

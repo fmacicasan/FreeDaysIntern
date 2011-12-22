@@ -105,6 +105,10 @@ public class ReportController {
 //		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
 //		fdusil.reportFreeDays();
 		
+		//test daily update
+//		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
+//		fdusil.updateNewYearFreeDays();
+		
 		//test resource opener
 //		System.out.println("will open");
 //		resourceService.openResource();

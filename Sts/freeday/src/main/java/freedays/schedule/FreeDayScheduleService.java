@@ -20,4 +20,6 @@ public interface FreeDayScheduleService {
 	public void generateTimesheets();
 	
 	public void verifyExpiredPasswordRequests();
+	
+	public void updateNewYearFreeDays();
 }
