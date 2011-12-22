@@ -156,6 +156,19 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
         List<FDUser> results = q.getResultList();
 		return results;
 	}
+	
+	/**
+	 * Returns the list of all FDUsers that appear in reports.
+	 * @return
+	 */
+	//@PostFilter("hasPermission(filterObject, 'list')")
+	public static List<FDUser> findAllReportableFDUsers() {
+		TypedQuery<FDUser> q = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.regularUser.deleted = :deleted AND o.jobrole != :jobRole", FDUser.class);
+        q.setParameter("deleted", false);
+        q.setParameter("jobRole", JobRole.OBS);
+        List<FDUser> results = q.getResultList();
+		return results;
+	}
 
 	/**
 	 * Returns a sublist of the active FDUsers list. The sublist is

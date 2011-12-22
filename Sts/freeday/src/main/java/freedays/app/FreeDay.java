@@ -347,7 +347,7 @@ public abstract class FreeDay {
     public static List<FreeDayUserList> getAllUserFreeDays(int month) {
         List<FreeDayUserList> fdrl = new ArrayList<FreeDayUserList>();
         //List<FDUser> fdul = FDUser.findAllFDUsers();
-        List<FDUser> fdul = FDUser.findAllActiveFDUsers();
+        List<FDUser> fdul = FDUser.findAllReportableFDUsers();
         for (FDUser fdu : fdul) {
             fdrl.add(FreeDayUserList.generateAllFreeDays(fdu, month));
         }

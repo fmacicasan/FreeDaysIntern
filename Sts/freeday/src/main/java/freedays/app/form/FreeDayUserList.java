@@ -195,7 +195,7 @@ public class FreeDayUserList {
 	 */
 	private static List<FreeDayReportWrapper> tranformFreeDay2Integer4Report(List<FreeDay> freedays,int month){
 		//month can be -1 if previous December, 0-11 if current year, 12 if next January
-		log.info("!!!!!!!!!!!!!!!!transforming with mont"+month);
+//		log.info("!!!!!!!!!!!!!!!!transforming with mont"+month);
 		int days = DateUtils.getDaysInMonth(month);
 		ArrayList<FreeDayReportWrapper> list = new ArrayList<FreeDayReportWrapper>();
 		for(long i=0;i<days;i++){
@@ -209,24 +209,24 @@ public class FreeDayUserList {
 				FreeDayVacation fdv = (FreeDayVacation)fd;
 				
 				Calendar start = fdv.getDate();
-				if(start.get(Calendar.YEAR) == 2012){
-					log.info("@@@@@@@@@@@@@@@@@@@2012"+DateUtils.printShortDate(start));
-				}
+//				if(start.get(Calendar.YEAR) == 2012){
+//					log.info("@@@@@@@@@@@@@@@@@@@2012"+DateUtils.printShortDate(start));
+//				}
 				//Calendar end = DateUtils.dateAddRomanianBusinessDay(start, fdv.getSpan());
 				Calendar end = fdv.getEnd();
 				//replaced before by compareTo to test equality
 				for(Calendar c = (Calendar)start.clone();c.compareTo(end)<=0;c.add(Calendar.DAY_OF_YEAR, 1)){
-					if(start.get(Calendar.YEAR) == 2012){
-						log.info("@@@@@@@@@@@@@@@@@@@ccccccccc2012"+month+"zz"+DateUtils.printShortDate(start));
-					}
+//					if(start.get(Calendar.YEAR) == 2012){
+//						log.info("@@@@@@@@@@@@@@@@@@@ccccccccc2012"+month+"zz"+DateUtils.printShortDate(start));
+//					}
 					if(
 							//DateUtils.isSameMonth(c, month) && DateUtils.isCurrentYear(c)
 							
 							DateUtils.isReportableDate(month, c)
 							&& !ValidationUtils.checkRomanianLegalHoliday(c)){
-						if(start.get(Calendar.YEAR) == 2012){
-							log.info("@@@@@@@@@@@@@@@@@@@zzzzzzzz2012"+DateUtils.printShortDate(start));
-						}
+//						if(start.get(Calendar.YEAR) == 2012){
+//							log.info("@@@@@@@@@@@@@@@@@@@zzzzzzzz2012"+DateUtils.printShortDate(start));
+//						}
 						FreeDayReportWrapper fdrw = new FreeDayReportWrapper();
 						fdrw.setType(fd.getType().ordinal()+1);
 						fdrw.setStatus(evaluateReportWrapperStatus(fd.getStatus()));
@@ -242,9 +242,9 @@ public class FreeDayUserList {
 					fdrw.setType(fd.getType().ordinal()+1);
 					fdrw.setStatus(evaluateReportWrapperStatus(fd.getStatus()));
 					list.set(DateUtils.getDay(fd.getDate())-1,fdrw );
-					if(fd.getDate().get(Calendar.YEAR) == 2012){
-						log.info("||||||||||||||2012");
-					}
+//					if(fd.getDate().get(Calendar.YEAR) == 2012){
+//						log.info("||||||||||||||2012");
+//					}
 				}
 			}
 		}
@@ -289,7 +289,8 @@ public class FreeDayUserList {
 		int daysinmonth = DateUtils.getDaysInMonth(month);
 		List<String> shortDateList = DateUtils.getShortDateList(month);
 		List<String> weekdayinitials = DateUtils.getWeekdayInitialsList(month);
-		List<String> monthnames = DateUtils.getMonthNames();
+		//List<String> monthnames = DateUtils.getMonthNames();
+		List<String> monthnames = DateUtils.getMonthNamesExtended();
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("<style>")
