@@ -77,6 +77,13 @@ public class AuthentificationController extends
 			if(aru != null && aru.isSuperUser()){
 				authorities.add(new GrantedAuthorityImpl("ROLE_SUPERAPPROVER"));
 			}
+			if(aru != null && aru.getGranter() != null){
+				ApplicationRegularUser aruGranter = ApplicationRegularUser.findByUsernameWithRoles(aru.getGranter().getRegularUser().getUsername());
+				if(aru.isRequestGranter() || !aruGranter.isSuperUser()){
+					authorities.add(new GrantedAuthorityImpl("ROLE_TEAMVIEWER"));
+				} 
+			}
+			
 		}catch (EmptyResultDataAccessException e){
 			throw new BadCredentialsException("Invalid username or password");
 		} catch (EntityNotFoundException e) {

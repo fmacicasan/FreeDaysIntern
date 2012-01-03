@@ -361,6 +361,15 @@ public abstract class FreeDay {
         }
         return fdrl;
     }
+    
+    public static List<FreeDayUserList> getAllTeamUserFreeDays(int month, String username){
+    	List<FreeDayUserList> fdrl = new ArrayList<FreeDayUserList>();
+        List<FDUser> fdul = FDUser.findTeamReportableFDUsers(username);
+        for (FDUser fdu : fdul) {
+            fdrl.add(FreeDayUserList.generateAllFreeDays(fdu, month));
+        }
+        return fdrl;
+    }
 
     /**
 	 * Retrieves all the free days that are under approval or already approved

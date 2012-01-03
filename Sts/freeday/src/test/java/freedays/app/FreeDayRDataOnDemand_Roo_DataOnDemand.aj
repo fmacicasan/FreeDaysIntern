@@ -4,14 +4,19 @@
 package freedays.app;
 
 import freedays.app.FreeDay.FreeDayStatus;
+import freedays.app.FreeDayCDataOnDemand;
 import freedays.app.FreeDayR;
 import java.lang.Integer;
 import java.lang.String;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayRDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayRDataOnDemand: @Component;
+    
+    @Autowired
+    private FreeDayCDataOnDemand FreeDayRDataOnDemand.freeDayCDataOnDemand;
     
     public void FreeDayRDataOnDemand.setNumber(FreeDayR obj, int index) {
         Integer number = new Integer(index);

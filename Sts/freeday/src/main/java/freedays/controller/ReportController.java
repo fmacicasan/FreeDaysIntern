@@ -105,7 +105,7 @@ public class ReportController {
 //		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
 //		fdusil.reportFreeDays();
 		
-		//test daily update
+		//test yearly update
 //		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
 //		fdusil.updateNewYearFreeDays();
 		
@@ -124,6 +124,35 @@ public class ReportController {
 		//test timesheets
 //		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
 //		fdusil.generateTimesheets();
+		
+		return "report/vacation";
+	}
+	
+	
+	/**
+	 * Handler for retrieving the updated version of the report organized by months of the team
+	 * @param m
+	 * @param uiModel
+	 * @return
+	 */
+	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') OR hasPermission(5, 'Menu', 'team')")
+	@RequestMapping(value="/vacation/team", method=RequestMethod.GET)
+	public String reportVacationPlansTeam(@RequestParam(value = "m", required = false) Integer m, Model uiModel){
+		if(!DateUtils.isValidMonth(m)){
+			m = DateUtils.getCurrentMonth();
+			return "redirect:/report/vacation/team?m="+m;
+		}
+		int month = DateUtils.transformMonth(m);
+		List<FreeDayUserList> lfd = FreeDay.getAllTeamUserFreeDays(month,userContextService.getCurrentUser());
+		//log.info("AAAAAAAAAAAAAAAAAAAZZZZZZZZZZYYYYYY"+lfd.size());
+		uiModel.addAttribute("vacations",lfd);
+		uiModel.addAttribute("length", DateUtils.getDaysInMonth(month));
+		uiModel.addAttribute("daysDateList",DateUtils.getShortDateList(month));
+		uiModel.addAttribute("daysWeekdayList",DateUtils.getWeekdayInitialsList(month));
+		//modifyed to accustom january/december of adjacent years
+		//uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
+		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNamesExtended());
+		log.info("Finish report creation!");
 		
 		return "report/vacation";
 	}

@@ -123,6 +123,15 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				
 			}
 		}
+		//hasPermission(5, 'Menu', 'team')
+		if(targetType.equals("Menu")){
+			FDUser me = FDUser.findFDUserByUsername(authentication.getName());
+			if(!me.isRequestGranter() && me.getGranter().isSuperUser()){
+				return false;
+			} else{
+				return true;
+			}
+		}
 		
 		throw new UnsupportedOperationException("hasPermission not supported for id, type and permission");
 	}

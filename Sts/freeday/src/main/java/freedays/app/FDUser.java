@@ -2,6 +2,7 @@ package freedays.app;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -126,6 +127,8 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 	public Long computeteAvailableFreeDaysTotal(){
 		
 		long remainingDays = this.getMaxFreeDays();
+		//added after v1.7 to hold also the moved days.
+		remainingDays += this.getInitDays();
 		//TODO (fmacicasan13):get the year from an external source
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		String username = this.getRegularUser().getUsername();
@@ -161,6 +164,31 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
            return  results.get(0);
         else
            return null;
+	}
+	
+	public static List<FDUser> findTeamReportableFDUsers(String username){
+		FDUser me = FDUser.findFDUserByUsername(username);
+		if(me.isRequestGranter()){
+			//is request granter
+			//get his team
+			List<FDUser> team = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.granter = :granter AND o.jobrole != :jobRole AND o.regularUser.deleted = :deleted",FDUser.class).setParameter("granter", me).setParameter("jobRole", JobRole.OBS).setParameter("deleted", false).getResultList();
+			team.add(me);
+			return team;
+		} else {
+			if(!me.getGranter().isSuperUser()){
+				//my granter is a team leadear so show my team
+				List<FDUser> team = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.granter = :granter AND o.jobrole != :jobRole AND o.regularUser.deleted = :deleted",FDUser.class).setParameter("granter", me.getGranter()).setParameter("jobRole", JobRole.OBS).setParameter("deleted", false).getResultList();
+				FDUser leader = FDUser.findFDUserByUsername(me.getGranter().getRegularUser().getUsername());
+				team.add(leader);
+				return team;
+			} else {
+				//my granter is the super user and i have no team so print nothing
+				return new LinkedList<FDUser>();
+			}
+			//is team member
+			//get the team members
+			
+		}
 	}
 	
 	/**
