@@ -22,4 +22,7 @@
 <definition extends="default" name="requests/findRequestsByStatus">
         <put-attribute name="body" value="/WEB-INF/views/requests/findRequestsByStatus.jspx"/>
     </definition>
+    <definition extends="default" name="requests/history">
+        <put-attribute name="body" value="/WEB-INF/views/requests/history.jspx"/>
+    </definition>
 </tiles-definitions>

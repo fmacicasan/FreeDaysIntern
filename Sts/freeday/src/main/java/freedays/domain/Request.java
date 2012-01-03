@@ -493,6 +493,26 @@ public class Request implements Serializable {
         q.setParameter("username", username);
         return q.getResultList();
     }
+    
+    public static List<Request> findAllRequestsByUsernameAndYearLess(String username, Integer year){
+    	if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+        if (year == null) throw new IllegalArgumentException("The year argument is required");
+    	EntityManager em = RegularUser.entityManager();
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username AND o.requestable.year < :year ORDER BY o.status ASC, o.requestable.date DESC ", Request.class);
+        q.setParameter("username", username);
+        q.setParameter("year", year);
+        return q.getResultList();
+    }
+    
+    public static List<Request> findAllRequestsByUsernameAndYearGreaterEqual(String username, Integer year){
+    	if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+        if (year == null) throw new IllegalArgumentException("The year argument is required");
+    	EntityManager em = RegularUser.entityManager();
+        TypedQuery<Request> q = em.createQuery("SELECT o FROM Request AS o WHERE o.appreguser.regularUser.username = :username AND o.requestable.year >= :year ORDER BY o.status ASC, o.requestable.date DESC ", Request.class);
+        q.setParameter("username", username);
+        q.setParameter("year", year);
+        return q.getResultList();
+    }
 
     /**
 	 * Retrieves all the requests of a regular user identified by its username
@@ -671,6 +691,36 @@ public class Request implements Serializable {
 
 	public static List<Request> findRequestEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("SELECT o FROM Request o ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+	
+	public static long countRequestsLower(Integer year) {
+		if(year == null) throw new IllegalArgumentException("The year argument is required!");
+        return entityManager().createQuery("SELECT COUNT(o) FROM Request o WHERE o.requestable.year < :year", Long.class).setParameter("year", year).getSingleResult();
+    }
+	
+	public static List<Request> findAllRequestsLower(Integer year) {
+		if(year == null) throw new IllegalArgumentException("The year argument is required!");
+        return entityManager().createQuery("SELECT o FROM Request o WHERE o.requestable.year < :year ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class).setParameter("year", year).getResultList();
+    }
+
+	public static List<Request> findRequestEntriesLower(int firstResult, int maxResults,Integer year) {
+		if(year == null) throw new IllegalArgumentException("The year argument is required!");
+        return entityManager().createQuery("SELECT o FROM Request o WHERE o.requestable.year < :year ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class).setParameter("year", year).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+	
+	public static long countRequestsGreaterEqual(Integer year) {
+		if(year == null) throw new IllegalArgumentException("The year argument is required!");
+        return entityManager().createQuery("SELECT COUNT(o) FROM Request o WHERE o.requestable.year >= :year", Long.class).setParameter("year", year).getSingleResult();
+    }
+	
+	public static List<Request> findAllRequestsGreaterEqual(Integer year) {
+		if(year == null) throw new IllegalArgumentException("The year argument is required!");
+        return entityManager().createQuery("SELECT o FROM Request o WHERE o.requestable.year >= :year ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class).setParameter("year", year).getResultList();
+    }
+
+	public static List<Request> findRequestEntriesGreaterEqual(int firstResult, int maxResults,Integer year) {
+		if(year == null) throw new IllegalArgumentException("The year argument is required!");
+        return entityManager().createQuery("SELECT o FROM Request o WHERE o.requestable.year >= :year ORDER BY o.status ASC, o.requestable.date DESC  ", Request.class).setParameter("year", year).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 
 }

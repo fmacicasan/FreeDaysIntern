@@ -32,6 +32,7 @@ import freedays.app.form.FreeDayRequestVacation;
 import freedays.app.form.FriendlyRequest;
 import freedays.domain.Request;
 import freedays.security.UserContextService;
+import freedays.util.PropertiesUtil;
 
 /**
  * Controller used to intercept free day requests
@@ -277,8 +278,12 @@ public class RequestController {
 	@PreAuthorize("isAuthenticated()")
     @RequestMapping(params= "own", method = RequestMethod.GET)
     public String listOwn(Model uiModel, Principal p){
-    	uiModel.addAttribute("requests",processRequest(Request.findAllRequestsByUsername(p.getName())));
-    	return "requests/list";
+    	//uiModel.addAttribute("requests",processRequest(Request.findAllRequestsByUsername(p.getName())));
+    	//since v1.7 distiction between older and current year's requests
+		Integer year = PropertiesUtil.getInteger("default.current.year");
+		uiModel.addAttribute("requestsCurrent",processRequest(Request.findAllRequestsByUsernameAndYearGreaterEqual(p.getName(), year)));
+		uiModel.addAttribute("requestsOld",processRequest(Request.findAllRequestsByUsernameAndYearLess(p.getName(),year)));
+		return "requests/history";
     }
     
 	/**
@@ -410,17 +415,25 @@ public class RequestController {
     
     
 
-    
+    /**
+     * Lists the requests from the current year.
+     * @param page
+     * @param size
+     * @param uiModel 
+     * @return 
+     * @since v1.7 lists only current year's requests
+     */
     @PreAuthorize("hasRole('ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
+        Integer year = PropertiesUtil.getInteger("default.current.year");
+    	if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("requests", processRequest(Request.findRequestEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo)));
-            float nrOfPages = (float) Request.countRequests() / sizeNo;
+            uiModel.addAttribute("requests", processRequest(Request.findRequestEntriesGreaterEqual(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo,year)));
+            float nrOfPages = (float) Request.countRequestsGreaterEqual(year) / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("requests", processRequest(Request.findAllRequests()));
+            uiModel.addAttribute("requests", processRequest(Request.findAllRequestsGreaterEqual(year)));
         }
         return "requests/list";
     }
