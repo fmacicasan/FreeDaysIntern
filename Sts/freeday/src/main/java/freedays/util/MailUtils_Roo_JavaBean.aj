@@ -3,9 +3,14 @@
 
 package freedays.util;
 
+import org.apache.commons.logging.Log;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 privileged aspect MailUtils_Roo_JavaBean {
+    
+    public Log MailUtils.getLog() {
+        return this.log;
+    }
     
     public JavaMailSenderImpl MailUtils.getMailSender() {
         return this.mailSender;

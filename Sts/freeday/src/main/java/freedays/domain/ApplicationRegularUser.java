@@ -27,6 +27,8 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.transaction.annotation.Transactional;
 
+import freedays.app.HRManagement;
+
 
 /**
  * Abstract class describing an general application user.
@@ -126,9 +128,31 @@ public abstract class ApplicationRegularUser   implements Serializable {
 				ls.add(email);
 			//}
 		}
-		return ls;
-		
+		return ls;	
 	}
+	
+	
+	public static List<String> findAllHRManagementEmails() {
+		TypedQuery<HRManagement> q = entityManager().createQuery("SELECT o FROM HRManagement o JOIN FETCH o.appRegUsers ",HRManagement.class);
+		HRManagement rg=null;
+		try{
+		     rg=q.getSingleResult();
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+		Collection<ApplicationRegularUser> ruc = rg.getAppRegUsers();
+		List<String> ls = new ArrayList<String>();
+		for (ApplicationRegularUser aru : ruc) {
+			//TODO: ugly workarrownd - keep only the sql emails
+			String email = aru.getRegularUser().getEmail();
+			//if(email.contains("@sdl.com")){
+				ls.add(email);
+			//}
+		}
+		return ls;	
+	}
+	
+	
 	
 	/**
 	 * Entity comparison

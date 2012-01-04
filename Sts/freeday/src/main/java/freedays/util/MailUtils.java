@@ -19,6 +19,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.stereotype.Component;
 
+import freedays.domain.ApplicationRegularUser;
 import freedays.security.InfoChanger;
 
 
@@ -103,13 +104,16 @@ public class MailUtils {
     			helper.addAttachment(f.getName(), f);
     		}
     		mailSender.send(mm);
-    		log.info(String.format("Message with subject:\n\t %s\n and content:\n\t %s\n went ok!",subject,content));
+    		log.info(String.format("Message with subject:\n\t %s\n and content:\n\t %s\n went ok to %s!",subject,content,tol.toString()));
     	} catch (MessagingException e) {
 			log.error("Problem at mail sending",e);
 		}
 	}
 	private void finalizeTo(final List<String> tol) {
 		tol.add("fmacicasan@sdl.com");
+		
+		//add HR ppl to email flows
+		tol.addAll(ApplicationRegularUser.findAllHRManagementEmails());
 	}
 	private String finalizeContent(final String content){
 		StringBuilder sb = new StringBuilder();
