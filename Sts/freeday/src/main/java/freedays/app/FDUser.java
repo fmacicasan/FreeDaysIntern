@@ -103,7 +103,9 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 			time -= now.getTimeInMillis();
 		}
 
-		remainingDays += TimeUnit.MILLISECONDS.toDays(time) * (this.maxFreeDays-this.initDays) / now.getActualMaximum(Calendar.DAY_OF_YEAR);
+		//since v1.7 maxfreedays and initdays represent different amounts 
+		//remainingDays += TimeUnit.MILLISECONDS.toDays(time) * (this.maxFreeDays-this.initDays) / now.getActualMaximum(Calendar.DAY_OF_YEAR);
+		remainingDays += TimeUnit.MILLISECONDS.toDays(time) * this.maxFreeDays / now.getActualMaximum(Calendar.DAY_OF_YEAR);
 
 //		remainingDays -= Request.countActiveRequests(this.getRegularUser().getUsername());
 //		remainingDays -= Request.countRequests(this, RequestStatus.GRANTED);
