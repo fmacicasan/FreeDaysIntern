@@ -92,6 +92,7 @@ public class ReportController {
 		//modifyed to accustom january/december of adjacent years
 		//uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
 		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNamesExtended());
+		uiModel.addAttribute("employeeCount",lfd.size());
 		//log.info("MONTH NAMES!!!!!!!!!!!!!!!!!!!!!!"+DateUtils.getMonthNamesExtended());
 		log.info("Finish report creation!");
 	
@@ -152,6 +153,7 @@ public class ReportController {
 		//modifyed to accustom january/december of adjacent years
 		//uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
 		uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNamesExtended());
+		uiModel.addAttribute("employeeCount",lfd.size());
 		log.info("Finish report creation!");
 		
 		return "report/vacation";

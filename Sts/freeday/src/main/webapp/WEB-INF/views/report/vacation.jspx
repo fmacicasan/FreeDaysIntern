@@ -139,6 +139,7 @@
        		</tr>
        		<tr>
        		<td colspan="${colCounter}">
+       			<i><b><spring:message code="freedaysreport_employeecount" />: ${employeeCount} </b></i>
        			<i><b><spring:message code="freedaysreport_legend_title" />: </b></i> 
        			<spring:message code="freedaysreport_legend_matchings_c" var="matchc" />
        			<IMG alt="${ca}" src="${img_check}"/>
