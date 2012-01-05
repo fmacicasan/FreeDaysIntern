@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import freedays.timesheet.*;
+import freedays.schedule.FreeDayScheduleServiceImpl;
 import freedays.security.UserContextService;
 
 import freedays.timesheet.MainClass;
@@ -28,21 +29,39 @@ public class TimesheetController {
 		}
 	}
 	@RequestMapping(method=RequestMethod.GET)
-	public String asd(Model uiModel){
+	public String timesheetReportGeneration(Model uiModel){
 		MainClass mc = new MainClass();
 		//TimesheetUser us = TimesheetUser.findTimesheetUserByUsername(userContextService.getCurrentUser());
-		List<TimesheetUser> lus = TimesheetUser.findAllTimesheetUsers();
-		for(TimesheetUser tu : lus){
+//		List<TimesheetUser> lus = TimesheetUser.findAllTimesheetUsers();
+//		for(TimesheetUser tu : lus){
 //			try{
-			System.out.println("====================generationg for:"+tu.getRegularUser().getFullName());
-				mc.doMain(tu,DateUtils.getCurrentMonth());
+//			System.out.println("====================generationg for:"+tu.getRegularUser().getFullName());
+//				if(tu.getId() != 188L && tu.getId() != 189L){
+//					mc.doMain(tu,DateUtils.getCurrentMonth()-1);
+//				}
 //			}catch(Exception e){
-//				System.out.println(tu.getFduser().getRegularUser().getFullName());
+//				System.out.println("FAULURE!!!!!!!!!!!!!!!!!!!!"+tu.getFduser().getRegularUser().getFullName());
 //			}
-		}
+//		}
 //		System.out.println("test");
-//		TimesheetUser tu = TimesheetUser.findTimesheetUser(134L);
-//		mc.doMain(tu,8);//DateUtils.getCurrentMonth()
+		
+//		
+//		TimesheetUser tu = TimesheetUser.findTimesheetUser(188L);
+//		mc.doMain(tu,DateUtils.getCurrentMonth()-1);//DateUtils.getCurrentMonth()
+//		 tu = TimesheetUser.findTimesheetUser(189L);
+//		mc.doMain(tu,DateUtils.getCurrentMonth()-1);//DateUtils.getCurrentMonth()
+		
+		
+//		tu = TimesheetUser.findTimesheetUser(138L);
+//		mc.doMain(tu,DateUtils.getCurrentMonth()-1);//DateUtils.getCurrentMonth()
+//		tu = TimesheetUser.findTimesheetUser(143L);
+//		mc.doMain(tu,DateUtils.getCurrentMonth()-1);//DateUtils.getCurrentMonth()
+		
+		//test yearly update
+//		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
+//		fdusil.updateNewYearFreeDays();
+		
+		
 		return "registerty";
 	}
 }
