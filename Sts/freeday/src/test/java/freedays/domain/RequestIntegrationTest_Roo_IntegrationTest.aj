@@ -19,8 +19,7 @@ privileged aspect RequestIntegrationTest_Roo_IntegrationTest {
     
     declare @type: RequestIntegrationTest: @Transactional;
     
-    @Autowired
-    private RequestDataOnDemand RequestIntegrationTest.dod;
+
     
     @Test
     public void RequestIntegrationTest.testCountRequests() {
@@ -40,15 +39,7 @@ privileged aspect RequestIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertEquals("Find method for 'Request' returned the incorrect identifier", id, obj.getId());
     }
     
-    @Test
-    public void RequestIntegrationTest.testFindAllRequests() {
-        org.junit.Assert.assertNotNull("Data on demand for 'Request' failed to initialize correctly", dod.getRandomRequest());
-        long count = freedays.domain.Request.countRequests();
-        org.junit.Assert.assertTrue("Too expensive to perform a find all test for 'Request', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        java.util.List<freedays.domain.Request> result = freedays.domain.Request.findAllRequests();
-        org.junit.Assert.assertNotNull("Find all method for 'Request' illegally returned null", result);
-        org.junit.Assert.assertTrue("Find all method for 'Request' failed to return any data", result.size() > 0);
-    }
+
     
     @Test
     public void RequestIntegrationTest.testFindRequestEntries() {
