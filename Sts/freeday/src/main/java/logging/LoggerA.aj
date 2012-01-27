@@ -51,7 +51,7 @@ public class LoggerA {
 				logMessage.append(" execution time: ");
 				logMessage.append(stopWatch.getTotalTimeMillis());
 				logMessage.append(" ms");
-				log.info(logMessage.toString());
+				log.debug(logMessage.toString());
 			}catch(NullPointerException e){
 				//logMessage.append("nothing");
 			}

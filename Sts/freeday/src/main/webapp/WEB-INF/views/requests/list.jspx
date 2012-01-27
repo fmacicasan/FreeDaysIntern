@@ -9,7 +9,7 @@
         <!--         <c:set value="true" var="var_update"/> -->
     </sec:authorize>
     <page:list id="pl_freedays_domain_Request" items="${requests}" z="user-managed">
-        <table:table create="${var_create}" data="${requests}" delete="${var_delete}" id="l_freedays_domain_Request" path="/requests" update="${var_update}" z="user-managed">
+        <table:table create="${var_create}" data="${requests}" delete="${var_delete}" id="l_freedays_domain_Request" path="/requests" update="${var_update}"  z="user-managed">
             <table:column id="c_freedays_domain_Request_appreguser" label="Requester" maxLength="-1" property="appreguser" z="user-managed"/>
             <!--             <table:column id="c_freedays_domain_Request_requestable" label="FreeDay" maxLength="-1" property="requestable" z="user-managed"/> -->
             <table:column id="c_freedays_domain_request_requestable_type" maxLength="-1" property="type" z="user-managed"/>

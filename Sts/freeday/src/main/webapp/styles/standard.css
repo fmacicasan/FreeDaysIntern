@@ -14,7 +14,9 @@ body {
 #header {
 	margin-bottom: 1em;
 }
-
+.info {
+	color:green;
+}
 .legend span{
 	display: inline-block;
 	margin: 3px;

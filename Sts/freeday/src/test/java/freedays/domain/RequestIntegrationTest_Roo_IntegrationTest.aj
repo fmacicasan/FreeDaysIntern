@@ -3,10 +3,8 @@
 
 package freedays.domain;
 
-import freedays.domain.RequestDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +16,6 @@ privileged aspect RequestIntegrationTest_Roo_IntegrationTest {
     declare @type: RequestIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
     declare @type: RequestIntegrationTest: @Transactional;
-    
-
     
     @Test
     public void RequestIntegrationTest.testCountRequests() {
@@ -38,8 +34,6 @@ privileged aspect RequestIntegrationTest_Roo_IntegrationTest {
         org.junit.Assert.assertNotNull("Find method for 'Request' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'Request' returned the incorrect identifier", id, obj.getId());
     }
-    
-
     
     @Test
     public void RequestIntegrationTest.testFindRequestEntries() {

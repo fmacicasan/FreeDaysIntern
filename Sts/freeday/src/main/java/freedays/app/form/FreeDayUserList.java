@@ -183,7 +183,7 @@ public class FreeDayUserList {
 			String username = fdu.getRegularUser().getUsername();
 			//fdul.setRemainingdays(FDUser.computeAvailableLWSpecificDays(username));//days, depth to LW
 			lfdu =FreeDay.getAllNotFailedRequestsByUsername(username);
-			log.info("found alot of requiests for you!!!"+username+" like alotzzz"+lfdu.size());
+			//log.info("found alot of requiests for you!!!"+username+" like alotzzz"+lfdu.size());
 		}
 		fdul.setCombined(tranformFreeDay2Integer4Report(lfdu,month));
 		return fdul;
@@ -261,18 +261,18 @@ public class FreeDayUserList {
 				fdrw.setType(RequestType.values().length+1);//this will be the last of the free day status in any case
 				fdrw.setStatus(evaluateReportWrapperStatus(FreeDayStatus.getSuccessStatus()));
 				list.set(DateUtils.getDay(holidayDay)-1, fdrw);
-				if(holidayDay.get(Calendar.YEAR) == 2012){
-					log.info("------------2012");
-				}
+//				if(holidayDay.get(Calendar.YEAR) == 2012){
+//					//log.info("------------2012");
+//				}
 			}
 		}
-		log.info("processed alot of info and got"+list.size());
-		for(int i=0;i<list.size();i++){
-			if(list.get(i).getStatus() != null){
-				log.info("alottt status"+list.get(i).getStatus()+"alot type"+list.get(i).getType());
-			}
-			
-		}
+//		log.info("processed alot of info and got"+list.size());
+//		for(int i=0;i<list.size();i++){
+//			if(list.get(i).getStatus() != null){
+//				log.info("alottt status"+list.get(i).getStatus()+"alot type"+list.get(i).getType());
+//			}
+//			
+//		}
 		return list;
 	}
 	

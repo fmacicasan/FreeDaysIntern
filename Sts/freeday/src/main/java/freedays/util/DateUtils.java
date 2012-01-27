@@ -281,7 +281,7 @@ public class DateUtils {
 	public static int getDaysInMonth(int month) {
 		int yearAdjuster = preprocessYear(month);
 		month = preprocessMonth(month);
-		logger.info("computing days in month!!!!!!!!!"+month);
+		//logger.info("computing days in month!!!!!!!!!"+month);
 		
 		if(Calendar.JANUARY > month || month > Calendar.DECEMBER)throw new IllegalArgumentException("month must be between Jan and December");
 		Calendar now = Calendar.getInstance();

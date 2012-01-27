@@ -3,7 +3,13 @@
     <jsp:directive.page import="freedays.app.form.FreeDayRequest"/>
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_freedays_domain_Request" modelAttribute="reqbean" path="/requests" render="${empty dependencies}" z="user-managed">
+    <c:set var="save_msg" value="" />
+    <c:if test="${showInfoMsg}" >
+    	<spring:message code="vacation_extra_msg" var="test" />
+    	<c:set var="save_msg" value="${test}" />
+    </c:if>
+   		 <!-- save_msg="${save_msg}" -->
+      <form:create id="fc_freedays_domain_Request" modelAttribute="reqbean"  path="/requests" render="${empty dependencies}"  z="user-managed">
         <c:if test="${hasError}">
             <spring:message arguments="${daytypeerror}" code="default_form_request_error_msg" var="form_error_msg"/>
             <div class="errors">
@@ -14,8 +20,10 @@
         <field:select field="requestable" id="c_freedays_domain_Request_requestable" itemValue="id" items="${freedays}" path="/freedays" render="false" z="user-managed"/>
         <field:select field="status" id="c_freedays_domain_Request_status" items="${requeststatuses}" path="requeststatuses" render="false" z="user-managed"/>
         <field:select field="approver" id="c_freedays_domain_Request_approver" itemValue="id" items="${applicationregularusers}" path="/applicationregularusers" render="false" z="user-managed"/>
+        
         <!--  <field:fdsimpleselect items="${requesttypes}" field="reqtype" id="c_freedays_domain_Request_reqtypes" /> -->
-        <field:input field="reqtype" id="c_freedays_domain_Request_reqtypes" readonly="true" z="user-managed"/>
+          
+        <field:input field="reqtype" id="c_freedays_domain_Request_reqtypes" readonly="true" z="user-managed" />
         <field:datetime dateTimePattern="${request_date_format}" field="reqdate" future="true" id="fc_freedays_domain_requestbean_date" required="true" z="user-managed"/>
         <field:input field="reason" id="fc_freedays_domain_requestbean_reason"/>
         <c:choose>
@@ -28,6 +36,10 @@
                 </c:if>
             </c:otherwise>
         </c:choose>
+        <br/>
+        <c:if test="${showInfoMsg }">
+        	<div class="info"><spring:message code="vacation_extra_msg"/></div>
+        </c:if>
         <field:input render="false" field="feedback" id="c_freedays_domain_Request_feedback" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_domain_Request" render="${not empty dependencies}" z="bZ9tHsEoBzWYMaxtKi3t7PaNRxo="/>

@@ -8,6 +8,8 @@ import freedays.util.MailUtils;
 
 public class MainClass {
 
+	private static final int TIMESHEET_YEAR = 2012;
+
 	/**
 	 * @param args
 	 */
@@ -27,13 +29,13 @@ public class MainClass {
 	public void doMain(TimesheetUser k) {
 		for (int i = 7; i < 9; i++) {
 			TimesheetGenerator x = new POIGenerator(k);
-			x.generateDoc("..\\timesheets\\Timesheet" + " " + k.getRegularUser().getFullName() + " " + WeekConstants.monthStrings[i] + ".xls", i, 2011);
+			x.generateDoc("..\\timesheets\\Timesheet" + " " + k.getRegularUser().getFullName() + " " + WeekConstants.monthStrings[i] + ".xls", i, TIMESHEET_YEAR);
 		}
 	}
 	
 	public void doMain(TimesheetUser k, Integer month){
 		TimesheetGenerator x = new POIGenerator(k);
-		File f = x.generateDoc("..\\timesheets\\Timesheet" + " " + k.getRegularUser().getFullName() + " " + WeekConstants.monthStrings[month] + ".xls", month, 2011);
+		File f = x.generateDoc("..\\timesheets\\Timesheet" + " " + k.getRegularUser().getFullName() + " " + WeekConstants.monthStrings[month] + ".xls", month, TIMESHEET_YEAR);
 		MailUtils.sendTimesheet(k.getRegularUser().getEmail(),k.getRegularUser().getFullName(),f);		
 	}
 }

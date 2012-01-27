@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -45,6 +46,8 @@ import freedays.util.PropertiesUtil;
 @RooJavaBean
 public class RequestController {
 	
+	private static final Logger log = Logger.getLogger(RequestController.class);
+	
 	@Autowired
 	private UserContextService userContextService;
 	
@@ -58,6 +61,7 @@ public class RequestController {
     public String createForm(Model uiModel) {
         uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.L));
         uiModel.addAttribute("typeLMarker",true);
+        uiModel.addAttribute("showInfoMsg",true);
         return "requests/create";
     }
 	
@@ -98,6 +102,7 @@ public class RequestController {
 	@RequestMapping(params = "form=v", method = RequestMethod.GET)
 	public String createFormReqV(Model uiModel){
 		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.V));
+		uiModel.addAttribute("showInfoMsg",true);
 		return "requests/vacation";
 	}
 	
@@ -159,6 +164,10 @@ public class RequestController {
         //request.persist();
         Request.createPersistentReq(request,p.getName());
         uiModel.asMap().clear();
+        RequestType reqType = request.getReqtype();
+        if(reqType == RequestType.L || reqType == RequestType.V){
+        	uiModel.addAttribute("vacationSpecMsg","doVacationSpecMsg");
+        }
         return "redirect:/requests?own";
     }
 	
