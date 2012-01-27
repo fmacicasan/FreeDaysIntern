@@ -13,7 +13,7 @@ public class LoggerA {
 	private final Log log = LogFactory.getLog(this.getClass());
 
 	//27.09.2011 fmacicasan : excluded CheckFreeDaySpecificDateConstraint logging to solve the vacation creation issue
-	@Around("execution(* freedays..*.*(..)) && !execution(* freedays.validation.CheckFreeDaySpecificDateConstraint.*(..)) && !execution(* get*()) && !execution(* set*(..)) && !execution(* toString*())")
+	//@Around("execution(* freedays..*.*(..)) && !execution(* freedays.validation.CheckFreeDaySpecificDateConstraint.*(..)) && !execution(* get*()) && !execution(* set*(..)) && !execution(* toString*())")
 	public Object logTimeMethod(ProceedingJoinPoint joinPoint) throws Throwable {
 
 			StopWatch stopWatch = new StopWatch();
