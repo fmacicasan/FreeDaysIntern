@@ -286,7 +286,9 @@ public class FreeDayUserList {
 	 * @return
 	 */
 	public static String generateHtmlReport(int m){
+		//log.error("generating report for month "+m);
 		int month = DateUtils.transformMonth(m);
+		//log.error("transformed month "+m);
 		List<FreeDayUserList> lfd = FreeDay.getAllUserFreeDays(month);
 		int daysinmonth = DateUtils.getDaysInMonth(month);
 		List<String> shortDateList = DateUtils.getShortDateList(month);
@@ -386,7 +388,7 @@ public class FreeDayUserList {
 //       		sb.append("</tr>");
 			sb.append("<tr class='footer' >");
 				sb.append("<td align='center' colspan='").append(daysinmonth+4).append("'>");
-					sb.append("<b>").append(monthnames.get(m-1)).append("</b> ");
+					sb.append("<b>").append(monthnames.get(m)).append("</b> ");
 				sb.append("</td>");
 	   		sb.append("</tr>");
 			sb.append("<tr class='footer' >");
