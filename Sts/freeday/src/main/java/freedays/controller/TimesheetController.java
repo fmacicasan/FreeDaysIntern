@@ -36,9 +36,9 @@ public class TimesheetController {
 //		for(TimesheetUser tu : lus){
 //			try{
 //			System.out.println("====================generationg for:"+tu.getRegularUser().getFullName());
-//				if(tu.getId() != 188L && tu.getId() != 189L){
+//				//if(tu.getId() != 188L && tu.getId() != 189L){
 //					mc.doMain(tu,DateUtils.getCurrentMonth()-1);
-//				}
+//				//}
 //			}catch(Exception e){
 //				System.out.println("FAULURE!!!!!!!!!!!!!!!!!!!!"+tu.getFduser().getRegularUser().getFullName());
 //			}

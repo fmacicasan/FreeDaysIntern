@@ -88,10 +88,14 @@ public class POIGenerator implements TimesheetGenerator{
 		return now;
 	}
 	private Pattern getPatternForDay(Calendar x) {
-		for(int i = 0; i < schedEmp.size(); i++)
+		//System.out.println("getPatternForDay "+DateUtils.printShortDateYear(x));
+		for(int i = 0; i < schedEmp.size(); i++){
+			//System.out.println("schedEmp start"+DateUtils.printShortDateYear(schedEmp.get(i).getStartDate()) +" end "+DateUtils.printShortDateYear(schedEmp.get(i).getEndDate()));
+		
 			if ((x.compareTo(schedEmp.get(i).getStartDate()) >= 0) && (x.compareTo(schedEmp.get(i).getEndDate()) <= 0)) { 
 				return schedEmp.get(i).getPattern();
 			}
+		}
 		return null;
 		
 	}
@@ -132,7 +136,7 @@ public class POIGenerator implements TimesheetGenerator{
 		return PhLArr;
 	}
 	private ArrayList<Pattern> getListOfPatterns(Calendar weekEnd, Integer startingDay, Integer endingDay) {
-		//System.out.println("Entry getListOfPatterns"+DateUtils.printShortDate(weekEnd)+"start"+startingDay+"end"+endingDay);
+		//System.out.println("Entry getListOfPatterns"+DateUtils.printShortDateYear(weekEnd)+"start"+startingDay+"end"+endingDay);
 		Calendar firstDayOfWeek = (Calendar) weekEnd.clone();
 		Calendar lastDayOfWeek = (Calendar) weekEnd.clone();
 		ArrayList<Pattern> pw = new ArrayList<Pattern>();
@@ -141,7 +145,7 @@ public class POIGenerator implements TimesheetGenerator{
 				
 		while(lastDayOfWeek.compareTo(firstDayOfWeek) >= 0) {
 			Pattern p = getPatternForDay(firstDayOfWeek);
-			//System.out.println("the retrieved pattenrn"+p+" for "+DateUtils.printShortDate(firstDayOfWeek));
+			//System.out.println("the retrieved pattenrn"+p+" for "+DateUtils.printShortDateYear(firstDayOfWeek));
 			pw.add(p);
 			firstDayOfWeek.add(Calendar.DAY_OF_MONTH, 1);
 		}

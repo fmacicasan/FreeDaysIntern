@@ -2,6 +2,7 @@ package freedays.schedule;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -23,6 +24,7 @@ import freedays.util.PropertiesUtil;
 @RooJavaBean
 public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 
+	public static final Logger log = Logger.getLogger(FreeDayScheduleServiceImpl.class);
 	public static final String SUBJECT = "DailyReport";
 //	@Autowired
 //	ApplicationContext applicationContext;
@@ -40,7 +42,7 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 	public void reportFreeDays() {
 		
 		int m = DateUtils.getCurrentMonth();
-		
+		//log.error("month = "+m);
 		StringBuilder sb = new StringBuilder();
 		sb.append(FreeDayUserList.generateHtmlReport(m))
 			.append("<br/>")

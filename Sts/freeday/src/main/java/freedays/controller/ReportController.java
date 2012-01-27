@@ -126,6 +126,11 @@ public class ReportController {
 //		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
 //		fdusil.generateTimesheets();
 		
+		
+		//test report
+//		FreeDayScheduleServiceImpl fdusil = new FreeDayScheduleServiceImpl();
+//		fdusil.reportFreeDays();
+		
 		return "report/vacation";
 	}
 	
