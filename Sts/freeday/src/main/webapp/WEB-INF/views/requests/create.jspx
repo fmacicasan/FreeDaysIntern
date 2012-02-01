@@ -38,7 +38,7 @@
         </c:choose>
         <br/>
         <c:if test="${showInfoMsg }">
-        	<div class="info"><spring:message code="vacation_extra_msg"/></div>
+        	<div class="info"><spring:message code="vacation_extra_msg" var="msg"/><c:out value="${msg}"/></div>
         </c:if>
         <field:input render="false" field="feedback" id="c_freedays_domain_Request_feedback" z="user-managed"/>
     </form:create>
@@ -50,4 +50,11 @@
     <spring:message arguments="${activeRequestCount}" code="request_activerequests"/>
     <br/>
     <spring:message arguments="${remainingDerogationCount}" code="request_derogation"/>
+    <c:if test="${showInfoMsg }">
+        	<script type="text/javascript">
+        	<![CDATA[
+        		alert("${msg}");
+        		]]>
+        	</script>
+        </c:if>
 </div>
