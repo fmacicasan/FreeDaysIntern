@@ -25,6 +25,7 @@ import org.apache.poi.ss.util.WorkbookUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
+import freedays.app.FDUser;
 import freedays.util.DateUtils;
 
 
@@ -78,6 +79,7 @@ public class POIGenerator implements TimesheetGenerator{
 		this.pEmp = pEmp;
 		schedEmp = pEmp.getScheduleLst();		
 	}
+	
 	private Calendar getNextMonday(Calendar now) {
 		Integer x = now.get(Calendar.DAY_OF_WEEK);
 		if (now.get(Calendar.DAY_OF_WEEK) == 1) {
@@ -87,7 +89,9 @@ public class POIGenerator implements TimesheetGenerator{
 		  now.add(Calendar.DAY_OF_MONTH, 7 - x + 2);
 		return now;
 	}
+	
 	private Pattern getPatternForDay(Calendar x) {
+	    //(fmacicasan) if the day is smaller than the hire date, return null
 		//System.out.println("getPatternForDay "+DateUtils.printShortDateYear(x));
 		for(int i = 0; i < schedEmp.size(); i++){
 			//System.out.println("schedEmp start"+DateUtils.printShortDateYear(schedEmp.get(i).getStartDate()) +" end "+DateUtils.printShortDateYear(schedEmp.get(i).getEndDate()));
@@ -135,6 +139,7 @@ public class POIGenerator implements TimesheetGenerator{
 		//System.out.println("line done");
 		return PhLArr;
 	}
+	
 	private ArrayList<Pattern> getListOfPatterns(Calendar weekEnd, Integer startingDay, Integer endingDay) {
 		//System.out.println("Entry getListOfPatterns"+DateUtils.printShortDateYear(weekEnd)+"start"+startingDay+"end"+endingDay);
 		Calendar firstDayOfWeek = (Calendar) weekEnd.clone();
@@ -153,6 +158,7 @@ public class POIGenerator implements TimesheetGenerator{
 		
 		return pw;
 	}
+	
 	/**
 	 * The table's header.
 	 * @param startingRow
@@ -212,13 +218,18 @@ public class POIGenerator implements TimesheetGenerator{
 	    	k.setCellValue("-");
 	    	k.setCellStyle(tableheadstyle);
     	}
+    	Calendar hireDate = pEmp.getFduser().getHireDate();
 	    for(int j = 3 + startingDay; j <= 3 + endingDay; j++) {
 	    	Cell k = z.createCell(j);
 	    	Calendar mDay = getDateFrom(j - 4, weekEnd);
-	    	Float sum = (float) 0;
-			Pattern mPattern = getPatternForDay(mDay);
-			sum +=  mPattern.getNoOfHours();
-	    	k.setCellValue(decimalFormat.format(sum));
+	    	if(mDay.before(hireDate)){
+	    	    k.setCellValue("-");
+	    	} else {
+	    	    Float sum = (float) 0;
+	            Pattern mPattern = getPatternForDay(mDay);
+	            sum +=  mPattern.getNoOfHours();
+	            k.setCellValue(decimalFormat.format(sum));
+	    	}
 	    	k.setCellStyle(tableheadstyle);
 	    }
 	    for(int j = 3 + endingDay + 1; j < 9; j++) {
@@ -267,27 +278,33 @@ public class POIGenerator implements TimesheetGenerator{
 			k.setCellValue("-");
 			k.setCellStyle(tablestyle);
 		}
-
+		
+		Calendar hireDate = pEmp.getFduser().getHireDate();
 		//legatura intre phase labour si zi calendaristica
 		Float suma = (float) 0;
 		for(int j = startingDay - 1; j < endingDay; j++) {  				
 			Calendar mDay = getDateFrom(j, weekEnd);
+			 Cell k = z.createCell(j + 4);
+			if(mDay.before(hireDate)){
+			    k.setCellValue("-");
+			} else {
+			    Pattern mPattern = getPatternForDay(mDay);
+	            PhaseLabor phLX = mPattern.getPhaseLabor(PhLArray.get(i-1).getLaborbilling(), PhLArray.get(i-1).getPhase(), PhLArray.get(i-1).getProject());
+	            
+	            
+	            Float perc = null;
+	            if (phLX != null)
+	                perc= phLX.getPercentage();
+	            else
+	                perc = (float) 0.0; 
+	            
+	            Float numberOfHours1= perc * mPattern.getNoOfHours() / 100;
+	            suma +=  numberOfHours1;
+	           
+	            k.setCellValue(decimalFormat.format(numberOfHours1));
+			}
+			 k.setCellStyle(tablestyle);
 			
-			Pattern mPattern = getPatternForDay(mDay);
-			PhaseLabor phLX = mPattern.getPhaseLabor(PhLArray.get(i-1).getLaborbilling(), PhLArray.get(i-1).getPhase(), PhLArray.get(i-1).getProject());
-			
-			
-			Float perc = null;
-			if (phLX != null)
-				perc= phLX.getPercentage();
-			else
-				perc = (float) 0.0; 
-			
-			Float numberOfHours1= perc * mPattern.getNoOfHours() / 100;
-			suma +=  numberOfHours1;
-			Cell k = z.createCell(j + 4);
-			k.setCellValue(decimalFormat.format(numberOfHours1));
-			k.setCellStyle(tablestyle);
 		}
 		//end here
 		for(int j = endingDay; j < 5; j++) {
@@ -347,9 +364,7 @@ public class POIGenerator implements TimesheetGenerator{
 		WEValue.setCellValue((java.util.Date) cloneCurrent.getTime());
 		//end part ...
 		startingRow += 2;
-		//System.out.println("line 329");
 		//generate rows
-		//System.out.println("line 331 generate rows");
 	    for(int i = 0; i <= PhLArray.size(); i++) {
 	    	if (i == 0) {
     			generateHeader(startingRow);
@@ -359,7 +374,6 @@ public class POIGenerator implements TimesheetGenerator{
 	    	}	   
 	    }
 	    generateTableFooter(startingRow, startingDay, endingDay ,weekEnd, bigSum);
-    	//System.out.println("line 340");
 	}
 	private int howManyDays(Calendar t) {
 			int K = t.getActualMaximum(Calendar.DAY_OF_MONTH) - t.get(Calendar.DAY_OF_MONTH);
@@ -597,12 +611,8 @@ public class POIGenerator implements TimesheetGenerator{
 		Cell dateCellApprov = appBy.createCell(10);
 		dateCellApprov.setCellStyle(datestyle);
 		dateCellApprov.setCellValue(x);
-		
-		
-		
-		
-		
 	}
+	
 	public Calendar handleFirstWeeksOfMonth(int year, int month) {
 		Calendar TimeSheetCalendar = new GregorianCalendar(year, month, 1);
 	    Integer dayOfWeek = TimeSheetCalendar.get(Calendar.DAY_OF_WEEK);
