@@ -311,7 +311,7 @@ public class MailUtils {
 	public static void sendTimesheet(String email, String person, File f) {
 		final String content = String.format(MailUtils.DEFAULT_TIMESHEET_CONTENT, person);
 		System.out.println("the name in send is:"+f.getName());
-		MailUtils.sendAsyncMail(email, DEFAULT_TIMESHEET_SUBJECT, content,f);
+		MailUtils.sendAsyncMail(email, DEFAULT_TIMESHEET_SUBJECT+"-"+person, content,f);
 		
 	}
     
