@@ -4,7 +4,7 @@
     <groupId>hrapp</groupId>
     <artifactId>hrapp</artifactId>
     <packaging>war</packaging>
-    <version>1.7.1</version>
+    <version>1.7.3</version>
     <name>hrapp</name>
     <properties>
         <roo.version>1.1.5.RELEASE</roo.version>
