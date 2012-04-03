@@ -12,12 +12,9 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.i18n.LocaleContextHolder;
-
-import freedays.app.FreeDayVacation;
 
 /**
  * Utility class used for date generation & manipulation.'

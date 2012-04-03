@@ -257,6 +257,11 @@ public abstract class ApplicationRegularUser   implements Serializable {
 		
 	}
 
+	/**
+	 * Will return null if a username has no roles
+	 * @param username
+	 * @return
+	 */
 	public static ApplicationRegularUser findByUsernameWithRoles(String username) {
 		if(username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
 		EntityManager em = ApplicationRegularUser.entityManager();
@@ -265,7 +270,7 @@ public abstract class ApplicationRegularUser   implements Serializable {
 		ApplicationRegularUser aru;
 		try{
 			 aru = q.getSingleResult();
-			//System.out.println(aru);
+			//System.out.println("username with role is"+aru);
 		}catch(EmptyResultDataAccessException e){
 			//System.out.println(e);
 			return null;

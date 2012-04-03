@@ -73,13 +73,27 @@ public class AuthentificationController extends
 			for (AdvancedUserRole aur : set) {
 				authorities.add(new GrantedAuthorityImpl(aur.toString()));
 			}
+			//find with role returns null if the user has no role
 			ApplicationRegularUser aru = ApplicationRegularUser.findByUsernameWithRoles(username);
 			if(aru != null && aru.isSuperUser()){
 				authorities.add(new GrantedAuthorityImpl("ROLE_SUPERAPPROVER"));
 			}
+			boolean isRequestGranter;
+			if(aru == null){
+			    //if that is the case then i must at least try to find him by username
+			    aru = ApplicationRegularUser.findByUsername(username);
+			    //for sure is not request granter if it has no roles
+			    isRequestGranter = false;
+			} else {
+			    //if it has some roles, it may be request granter
+			   isRequestGranter = aru.isRequestGranter(); 
+			}
+			//if there is a user and it has a granter
 			if(aru != null && aru.getGranter() != null){
+			    //retrieve his granter
 				ApplicationRegularUser aruGranter = ApplicationRegularUser.findByUsernameWithRoles(aru.getGranter().getRegularUser().getUsername());
-				if(aru.isRequestGranter() || !aruGranter.isSuperUser()){
+				//check weather he is a request granter or is not in the super user's team
+				if(isRequestGranter || !aruGranter.isSuperUser()){
 					authorities.add(new GrantedAuthorityImpl("ROLE_TEAMVIEWER"));
 				} 
 			}
