@@ -498,6 +498,15 @@ public class DateUtils {
 	public static String printLong(Calendar c){
 		return String.format("%1$tA, %1$te %1$tB %1$tY %tT", c);
 	}
+	
+	public static boolean isDayEqual(Calendar first, Calendar second){
+	    if(first.get(Calendar.DAY_OF_MONTH) == second.get(Calendar.DAY_OF_MONTH)
+	            && first.get(Calendar.MONTH) == second.get(Calendar.MONTH)
+	            && first.get(Calendar.YEAR) == second.get(Calendar.YEAR)){
+	        return true;
+	    }
+	    return false;
+	}
 
 	
 }

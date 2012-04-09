@@ -91,6 +91,7 @@ public class AuthentificationController extends
 			//if there is a user and it has a granter
 			if(aru != null && aru.getGranter() != null){
 			    //retrieve his granter
+			    //TODO use LEFT JOIN FETCH
 				ApplicationRegularUser aruGranter = ApplicationRegularUser.findByUsernameWithRoles(aru.getGranter().getRegularUser().getUsername());
 				//check weather he is a request granter or is not in the super user's team
 				if(isRequestGranter || !aruGranter.isSuperUser()){

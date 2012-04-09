@@ -224,4 +224,35 @@ public class DateUtilsTest {
 		Assert.assertEquals(end, DateUtils.dateAddRomanianBusinessDay(start, 7l));
 	}
 	
+	@Test
+	public void testDayEquality(){
+	    Calendar start = Calendar.getInstance();
+	    Calendar end = Calendar.getInstance();
+	    Assert.assertTrue(DateUtils.isDayEqual(start, end));
+	}
+	
+	@Test
+	public void testDayNotEqualYear(){
+	    Calendar start = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
+        end.add(Calendar.YEAR, 1);
+        Assert.assertFalse(DateUtils.isDayEqual(start, end));
+	}
+	
+	@Test
+    public void testDayNotEqualMonth(){
+        Calendar start = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
+        end.add(Calendar.MONTH, 1);
+        Assert.assertFalse(DateUtils.isDayEqual(start, end));
+    }
+	
+	@Test
+    public void testDayNotEqualDay(){
+        Calendar start = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
+        end.add(Calendar.DAY_OF_MONTH, 1);
+        Assert.assertFalse(DateUtils.isDayEqual(start, end));
+    }
+	
 }

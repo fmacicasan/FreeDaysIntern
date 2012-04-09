@@ -52,9 +52,12 @@ public class ValidationUtils {
 		boolean test = lc.contains(reqdate);
 		if(!test){
 			for(Calendar c: lc){
-				if(DateUtils.printShortDate(c).equals(DateUtils.printShortDate(reqdate))){
-					return true;
-				}
+			    if(DateUtils.isDayEqual(c, reqdate)){
+			        return true;
+			    }
+//				if(DateUtils.printShortDate(c).equals(DateUtils.printShortDate(reqdate))){
+//					return true;
+//				}
 			}
 		}
 		return test;
