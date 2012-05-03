@@ -188,10 +188,12 @@ public class DateUtilsTest {
 	@Test
 	@Repeat(10)
 	public void testRomanianBusinessDayAddRandom(){
-		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int year = Calendar.getInstance().get(Calendar.YEAR);//restrict test for year 2011, when 15 august was wendesday without other adjacent romanian legal days
 		Calendar start = generateRandomRomanianLegal(15,Calendar.AUGUST,year,10,true);
 		Calendar end = generateRandomRomanianLegal(15,Calendar.AUGUST,year,10,false);
-		Assert.assertEquals("not ok romanian date diference"+DateUtils.printShortDate(start)+" "+DateUtils.printShortDate(end),DateUtils.dateDifferenceInWorkingDays(start, end).longValue()+1, DateUtils.dateDifferenceInBusinessDays(start, end).longValue());
+		Assert.assertEquals("not ok romanian date diference"+DateUtils.printShortDate(start)+" "+DateUtils.printShortDate(end),
+		        DateUtils.dateDifferenceInWorkingDays(start, end).longValue()+1, 
+		        DateUtils.dateDifferenceInBusinessDays(start, end).longValue());
 		long dd = DateUtils.dateDifferenceInWorkingDays(start, end);
 		Assert.assertEquals("not ok romanian date add"+DateUtils.printShortDate(start)+" "+DateUtils.printShortDate(end),end,DateUtils.dateAddRomanianBusinessDay(start,dd) );
 	}
