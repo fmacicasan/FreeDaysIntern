@@ -1,12 +1,10 @@
 package freedays.domain.form;
 
 import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,37 +12,34 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @RooJavaBean
 public class AdminRegUserUpdate {
-	
-	@NotNull
-	@Column(unique = true)
-	// TODO check what's going on
-	@Length(min = 3, max = 45, message = "#{messages['field_invalid_length']}")
-	@Email(message = "#{messages['field_invalid_email']}")
-	private String username;
 
+    @NotNull
+    @Column(unique = true)
+    @Length(min = 3, max = 45, message = "#{messages['field_invalid_length']}")
+    @Email(message = "#{messages['field_invalid_email']}")
+    private String username;
 
-//	@NotNull
-//	@Email(message = "#{messages['field_invalid_email']}")
-//	private String email;
+    @NotNull
+    private String surename;
 
-	@NotNull
-	private String surename;
+    @NotNull
+    private String firstname;
 
-	@NotNull
-	private String firstname;
+    private Boolean deleted;
 
-	private Boolean deleted;
+    @NotNull
+    private Boolean activ;
+    
 
-	@NotNull
-	private Boolean activ;
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
+    private Calendar lastmodified;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
-	private Calendar lastmodified;
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
+    private Calendar creationdate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "hh:mm:ss dd-MM-yyyy")
-	private Calendar creationdate;
+    private String usermodifier;
 
-	private String usermodifier;
+    private transient Long id;
 }

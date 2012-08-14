@@ -31,7 +31,9 @@
                 <sec:authorize ifAllGranted="ROLE_ADMIN">
                     <menu:item id="i_regularuser_new" messageCode="global_menu_new" url="/regularusers?form" z="mJnN9ca8ulLAQ68LRQlrBZlmV1k="/>
                     <menu:item id="i_admin_regular_user_search" messageCode="global_menu_search" url="/regularusers?search" z=""/>
+                    <menu:item id="i_admin_regular_user_history" messageCode="global_menu_history" url="/regularusers?history" z=""/>
                 </sec:authorize>
+                
                 <menu:item id="i_regularuser_list" messageCode="global_menu_list" url="/regularusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="zvHfaaOX/ix7VJtd901LqD/gAg4="/>
             </menu:category>
         </sec:authorize>

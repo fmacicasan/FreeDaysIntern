@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.app.FreeDayC;
 import freedays.app.FreeDayR;
-import freedays.app.FreeDayVacation.ConfidenceLevel;
+import freedays.app.FreeDayInterval.ConfidenceLevel;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
-import freedays.app.form.FreeDayRequestVacation;
+import freedays.app.form.FreeDayRequestInterval;
 import freedays.app.form.FriendlyRequest;
 import freedays.domain.Request;
 import freedays.security.UserContextService;
@@ -103,15 +103,14 @@ public class RequestController {
 	public String createFormReqV(Model uiModel){
 		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.V));
 		uiModel.addAttribute("showInfoMsg",true);
-		return "requests/vacation";
-	}
+		return "requests/vacation";	}
 	
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form=m", method = RequestMethod.GET)
 	public String createFormReqM(Model uiModel){
 		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.M));
 		uiModel.addAttribute("typeLMarker",true);
-		return "requests/create";
+		return "requests/medical";
 	}
 	
 	@PreAuthorize("isAuthenticated()")
@@ -119,7 +118,7 @@ public class RequestController {
 	public String createFormReqNP(Model uiModel){
 		uiModel.addAttribute("reqbean", FreeDayRequest.generateReqFactory(RequestType.NP));
 		uiModel.addAttribute("typeLMarker",true);
-		return "requests/create";
+		return "requests/npinterval";
 	}
 	
 	/**
@@ -181,7 +180,7 @@ public class RequestController {
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="/vacation", method = RequestMethod.POST)
-	public String createVacation(@Valid FreeDayRequestVacation request, BindingResult bindingResult, Model uiModel, Principal p){
+	public String createVacation(@Valid FreeDayRequestInterval request, BindingResult bindingResult, Model uiModel, Principal p){
 		if(bindingResult.hasErrors()){
 			uiModel.addAttribute("hasError", true);
 			uiModel.addAttribute("reqbean", request);
@@ -439,6 +438,7 @@ public class RequestController {
     	if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             uiModel.addAttribute("requests", processRequest(Request.findRequestEntriesGreaterEqual(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo,year)));
+            
             float nrOfPages = (float) Request.countRequestsGreaterEqual(year) / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {

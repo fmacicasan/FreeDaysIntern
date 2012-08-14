@@ -9,6 +9,15 @@ import java.util.Calendar;
 
 privileged aspect AdminRegUserUpdate_Roo_JavaBean {
     
+    public Long AdminRegUserUpdate.getId() {
+        return this.id;
+    }
+    
+    public void AdminRegUserUpdate.setId(Long id) {
+        this.id = id;
+    }
+	
+	
     public String AdminRegUserUpdate.getUsername() {
         return this.username;
     }

@@ -5,13 +5,18 @@ package freedays.app;
 
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayC;
+import freedays.app.FreeDayRDataOnDemand;
 import java.lang.Integer;
 import java.lang.String;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect FreeDayCDataOnDemand_Roo_DataOnDemand {
     
     declare @type: FreeDayCDataOnDemand: @Component;
+    
+    @Autowired
+    private FreeDayRDataOnDemand FreeDayCDataOnDemand.freeDayRDataOnDemand;
     
     public void FreeDayCDataOnDemand.setNumber(FreeDayC obj, int index) {
         Integer number = new Integer(index);

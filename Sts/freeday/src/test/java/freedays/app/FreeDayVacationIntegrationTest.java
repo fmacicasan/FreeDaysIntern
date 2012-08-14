@@ -10,16 +10,16 @@ import org.junit.Test;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 
 import freedays.app.FreeDay.FreeDayStatus;
-import freedays.app.FreeDayVacation.ConfidenceLevel;
+import freedays.app.FreeDayInterval.ConfidenceLevel;
 import freedays.app.form.FreeDayRequest.RequestType;
-import freedays.app.form.FreeDayRequestVacation;
+import freedays.app.form.FreeDayRequestInterval;
 import freedays.domain.Request;
 import freedays.util.DateUtils;
 
 @RooIntegrationTest(entity = FreeDayVacation.class)
 public class FreeDayVacationIntegrationTest {
 
-	FreeDayRequestVacation fdrv;
+	FreeDayRequestInterval fdrv;
 	String username;
 	
 	@Before
@@ -34,7 +34,7 @@ public class FreeDayVacationIntegrationTest {
 			username = null;
 		}
 		
-    	fdrv = new FreeDayRequestVacation();
+    	fdrv = new FreeDayRequestInterval();
 //    	Calendar c = DateUtils.generateFutureBusinessDay();
     	Calendar c = DateUtils.generateBusinessDay();
     	fdrv.setReqdate(c);

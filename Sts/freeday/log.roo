@@ -716,3 +716,33 @@ backup
 perform tests
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-02-23 17:24:01
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-02-23 21:04:41
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-08-02 13:24:32
+entity --class ~.app.FreeDayInterval
+entity --class freedays.app.FreeDayInterval
+hint
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-08-02 13:53:15
+hint
+// [failed] hint topics
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-08-06 18:24:00
+hint
+help
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-08-06 18:35:57
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-08-07 10:12:25
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-08-07 10:13:27
+focus --class freedays.domain.Regularuser
+// [failed] field string --fieldName oldUsername --transient
+focus --class freedays.domain.RegularUser
+field string --fieldName oldUsername --transient
+focus --class freedays.domain.form.AdminRegUserUpdate
+field string --fieldName oldUsername --transient
+focus --class freedays.domain.RegularUser
+field string --fieldName oldUsername --transient
+entity --class freedays.app.Profile
+// [failed] field reference --fieldName regularUser --type freedays.domain.RegularUser
+// [failed] field reference --fieldName regularUser --type freedays.domain.RegularUser
+entity --class freedays.domain.Document
+// [failed] controller class --class freedays.app.Profile
+controller scaffold --class freedays.app.Profile
+controller all --package freedays.app.x
+controller all --package freedays.app.x
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-08-14 10:04:28

@@ -4,6 +4,7 @@
 package freedays.app;
 
 import freedays.app.FreeDay.FreeDayStatus;
+import freedays.app.FreeDayInterval.ConfidenceLevel;
 import freedays.app.FreeDayM;
 import freedays.domain.ApprovalStrategy;
 import java.lang.Integer;
@@ -19,6 +20,11 @@ privileged aspect FreeDayMDataOnDemand_Roo_DataOnDemand {
         obj.setApproval(approval);
     }
     
+    public void FreeDayMDataOnDemand.setConfidence(FreeDayM obj, int index) {
+        ConfidenceLevel confidence = null;
+        obj.setConfidence(confidence);
+    }
+    
     public void FreeDayMDataOnDemand.setNumber(FreeDayM obj, int index) {
         Integer number = new Integer(index);
         obj.setNumber(number);
@@ -27,6 +33,11 @@ privileged aspect FreeDayMDataOnDemand_Roo_DataOnDemand {
     public void FreeDayMDataOnDemand.setReason(FreeDayM obj, int index) {
         String reason = "reason_" + index;
         obj.setReason(reason);
+    }
+    
+    public void FreeDayMDataOnDemand.setSpan(FreeDayM obj, int index) {
+        Long span = new Integer(index).longValue();
+        obj.setSpan(span);
     }
     
     public void FreeDayMDataOnDemand.setStatus(FreeDayM obj, int index) {
