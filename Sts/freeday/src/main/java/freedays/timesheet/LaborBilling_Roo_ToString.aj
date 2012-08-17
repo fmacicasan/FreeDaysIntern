@@ -10,9 +10,7 @@ privileged aspect LaborBilling_Roo_ToString {
     public String LaborBilling.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Code: ").append(getCode()).append(", ");
-        sb.append("Id: ").append(getId()).append(", ");
-        sb.append("Name: ").append(getName()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("Name: ").append(getName());
         return sb.toString();
     }
     

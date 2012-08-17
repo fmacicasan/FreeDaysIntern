@@ -746,3 +746,4 @@ controller scaffold --class freedays.app.Profile
 controller all --package freedays.app.x
 controller all --package freedays.app.x
 // Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2012-08-14 10:04:28
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-08-14 16:41:57
