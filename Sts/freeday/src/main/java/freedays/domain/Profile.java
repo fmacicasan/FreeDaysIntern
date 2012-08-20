@@ -1,12 +1,17 @@
 package freedays.domain;
 
+import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.OneToOne;
 import javax.persistence.TypedQuery;
+import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import antlr.collections.List;
 
 /**
  * 
@@ -24,6 +29,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class Profile {
 
 	@OneToOne
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private Document document;
 
 	@OneToOne
@@ -36,8 +42,15 @@ public class Profile {
 				Profile.class);
 		query.setParameter(1, id);
 
-		return query.getSingleResult();
+		java.util.List<Profile> pl = query.getResultList();
+		return pl.size() == 0 ? null : pl.get(0);
 	}
+
+	/*
+	 * public static Collection<RegularUser> findAllRegularUsersWithProfile(){
+	 * 
+	 * }
+	 */
 
 	/**
 	 * Retrieves the associated entity manager

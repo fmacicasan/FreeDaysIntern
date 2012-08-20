@@ -11,26 +11,17 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
-
 /**
  * 
  * Document that is saved as BLOB in the database
  * 
  * @author osuciu
- *
+ * 
  */
 @RooJavaBean
 @RooToString
 @RooEntity
 public class Document {
-
-	@NotNull
-	@Size(max = 30)
-	private java.lang.String name;
-
-	@NotNull
-	@Size(max = 500)
-	private java.lang.String description;
 
 	private java.lang.String filename;
 
@@ -46,4 +37,11 @@ public class Document {
 	@Transient
 	@Size(max = 100)
 	private String url;
+
+	public String toString() {
+
+		return filename + " Size: " + size/(1024) + "kB";
+
+	}
+
 }

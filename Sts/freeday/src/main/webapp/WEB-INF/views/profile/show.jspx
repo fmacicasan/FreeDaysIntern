@@ -17,10 +17,9 @@
         <c:set value="true" var="var_update"/>
         <c:set value="true" var="var_list"/>
     </sec:authorize>
-
     <sec:authentication property="principal.username" var="username"/>
     <page:show id="ps_freedays_domain_Profile" object="${profile}" path="/profile" z="h/kgPhQVFHSYup+YL1uz/hKwH3g=">
-        <field:display field="document" id="s_freedays_domain_Profile_document" object="${profile}" z="qt92dHm2qbZhyWsPY8WmWy2oZ9I="/>
+        <field:display field="document" id="s_freedays_domain_Profile_document" object="${profile}" render="${hasProfile}" z="user-managed"/>
         <field:display field="regularUser" id="s_freedays_domain_Profile_regularUser" object="${profile}" z="xmSL2IkBVJlV+xXnvOphrCPi0G0="/>
     </page:show>
 </div>

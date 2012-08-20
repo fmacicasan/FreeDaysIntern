@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
-	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
-	<jsp:directive.page contentType="text/html;charset=UTF-8" />
-	<jsp:output omit-xml-declaration="yes" />
-	<page:list id="pl_freedays_domain_Profile" items="${profiles}"
-		z="YPiWqyB2TjVngoYEAQ2R7pYb2a8=">
-		<table:table data="${profiles}" id="l_freedays_domain_Profile"
-			path="/profile" z="DqTHZ6Z3cDsM97pa+2EHnQ9OAeY=">
-			<table:column id="c_freedays_domain_Profile_regularUser"
-				property="regularUser" z="wtawPGLJdaGbDv6hV/ef0SEKH0w=" />
-
-		</table:table>
-	</page:list>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_freedays_domain_Profile" items="${profiles}" z="YPiWqyB2TjVngoYEAQ2R7pYb2a8=">
+        <table:table data="${profiles}" id="l_freedays_domain_Profile" path="/profile" z="DqTHZ6Z3cDsM97pa+2EHnQ9OAeY=">
+            <table:column id="c_freedays_domain_Profile_regularUser" maxLength="-1" property="regularUser" z="user-managed"/>
+            <table:column id="c_freedays_domain_Profile_document" maxLength="-1" property="document" z="user-managed"/>
+        </table:table>
+    </page:list>
 </div>

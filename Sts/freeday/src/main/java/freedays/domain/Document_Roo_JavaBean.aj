@@ -8,22 +8,6 @@ import java.lang.String;
 
 privileged aspect Document_Roo_JavaBean {
     
-    public String Document.getName() {
-        return this.name;
-    }
-    
-    public void Document.setName(String name) {
-        this.name = name;
-    }
-    
-    public String Document.getDescription() {
-        return this.description;
-    }
-    
-    public void Document.setDescription(String description) {
-        this.description = description;
-    }
-    
     public String Document.getFilename() {
         return this.filename;
     }

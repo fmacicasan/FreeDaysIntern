@@ -105,7 +105,9 @@ static {
       out.write("<script type=\"text/javascript\" language=\"JavaScript\">");
       out.write("dojo.require(\"dojo.parser\");");
       out.write("</script>");
-      out.write("<script src=\"/freedays/js/src/sorttable.js\" type=\"text/javascript\">");
+      out.write("<script src=\"/hrapp/js/src/pdfobject.js\" type=\"text/javascript\">");
+      out.write("</script>");
+      out.write("<script src=\"/hrapp/js/src/sorttable.js\" type=\"text/javascript\">");
       out.write("</script>");
     } catch( Throwable t ) {
       if( t instanceof SkipPageException )

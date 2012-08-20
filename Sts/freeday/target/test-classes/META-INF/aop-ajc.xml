@@ -12,8 +12,8 @@
 <aspect name="freedays.security.InfoChangerDataOnDemand_Roo_Configurable"/>
 <aspect name="freedays.timesheet.PhaseDataOnDemand_Roo_DataOnDemand"/>
 <aspect name="freedays.app.FreeDayMDataOnDemand_Roo_Configurable"/>
-<aspect name="freedays.app.FreeDayLDataOnDemand_Roo_DataOnDemand"/>
 <aspect name="freedays.security.InfoChangerIntegrationTest_Roo_Configurable"/>
+<aspect name="freedays.app.FreeDayLDataOnDemand_Roo_DataOnDemand"/>
 <aspect name="freedays.timesheet.PhaseDataOnDemand_Roo_Configurable"/>
 <aspect name="freedays.domain.RegularUserDataOnDemand_Roo_Configurable"/>
 <aspect name="freedays.app.FreeDayRDataOnDemand_Roo_DataOnDemand"/>

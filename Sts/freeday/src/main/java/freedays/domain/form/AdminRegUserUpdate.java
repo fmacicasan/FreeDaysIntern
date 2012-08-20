@@ -4,6 +4,7 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -41,5 +42,6 @@ public class AdminRegUserUpdate {
 
     private String usermodifier;
 
-    private transient Long id;
+    @Transient
+    private  Long id;
 }

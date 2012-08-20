@@ -7,15 +7,11 @@ import freedays.domain.Document;
 import freedays.domain.Profile;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
-import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,23 +37,6 @@ privileged aspect ProfileController_Roo_Controller {
             uiModel.addAttribute("profiles", Profile.findAllProfiles());
         }
         return "profile/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public String ProfileController.update(@Valid Profile profile, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("profile", profile);
-            return "profile/update";
-        }
-        uiModel.asMap().clear();
-        profile.merge();
-        return "redirect:/profile/" + encodeUrlPathSegment(profile.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String ProfileController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("profile", Profile.findProfile(id));
-        return "profile/update";
     }
     
     @ModelAttribute("documents")

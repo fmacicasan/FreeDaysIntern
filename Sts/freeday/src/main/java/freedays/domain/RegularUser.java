@@ -24,6 +24,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+
+import freedays.app.FDUser;
 import freedays.domain.form.AdminRegUserUpdate;
 import freedays.domain.form.ChangePassWrapper;
 import freedays.domain.form.Search;
@@ -209,6 +211,27 @@ public class RegularUser implements Serializable {
 		return entityManager().createQuery("SELECT o FROM RegularUser o WHERE o.deleted='false'", RegularUser.class).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
 	}
+	
+	
+	/**
+	 * 
+	 * @osuciu
+	 * @param username a string representing a RegularUser username
+	 * @return its associated RegularUser
+	 */
+	public static RegularUser findRegularUserByUsername(String username) {
+		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+        EntityManager em = RegularUser.entityManager();
+        TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE username = :username ", RegularUser.class);
+        q.setParameter("username", username);
+        
+        List<RegularUser> results = q.getResultList();
+        if (!results.isEmpty())
+           return  results.get(0);
+        else
+           return null;
+	}
+	
 
 	/**
 	 * Finds a regular user based on his username and password.
