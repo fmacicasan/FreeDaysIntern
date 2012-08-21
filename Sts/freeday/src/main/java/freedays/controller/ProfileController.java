@@ -1,5 +1,6 @@
 package freedays.controller;
 
+import java.awt.image.MultiPixelPackedSampleModel;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -42,6 +43,18 @@ import freedays.util.PropertiesUtil;
 @RooJavaBean
 public class ProfileController {
 
+	
+	/**
+	 * if the file is less than 2MB and is a pdf file, the method returns true
+	 * 
+	 * @param content
+	 * @return
+	 */
+	private boolean isValidFile(MultipartFile content) {
+		return content.getContentType().equals("application/pdf")
+				&& content.getSize() <= 2097152;
+	}
+
 	/**
 	 * Model attribute exposed to the view containing all the regular user that
 	 * have no associated FDUser yet.
@@ -74,7 +87,6 @@ public class ProfileController {
 				new ByteArrayMultipartFileEditor());
 	}
 
-	// TODO de facut verificari pt fisier
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid Profile profile, BindingResult bindingResult,
@@ -82,7 +94,9 @@ public class ProfileController {
 			@RequestParam("document.content") MultipartFile content,
 			HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()
-				|| userHasProfile(profile.getRegularUser().getId())) {
+				|| userHasProfile(profile.getRegularUser().getId())
+				|| !isValidFile(content)) {
+			uiModel.addAttribute("hasErrors", true);
 			uiModel.addAttribute("profile", profile);
 			return "profile/create";
 		}
@@ -105,20 +119,30 @@ public class ProfileController {
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(params = "form", method = RequestMethod.GET)
 	public String createForm(Model uiModel) {
-	    uiModel.addAttribute("profile", new Profile());
-	    return "profile/create";
+		uiModel.addAttribute("profile", new Profile());
+		return "profile/create";
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(params = "update", method = RequestMethod.POST)
-	public String update(Model uiModel,
-			@RequestParam("regularUser") RegularUser regUsr,
+	public String update(
+			// @Valid Profile profile, BindingResult bindingResult,
+			Model uiModel, @RequestParam("regularUser") RegularUser regUsr,
 			@RequestParam("document.content") MultipartFile content,
 			HttpServletRequest httpServletRequest) {
 
 		uiModel.asMap().clear();
 
 		Profile profile = Profile.findProfileByRegularUserId(regUsr.getId());
+
+		if (!isValidFile(content)) {
+			Collection<RegularUser> col = new ArrayList<RegularUser>();
+			col.add(profile.getRegularUser());
+			uiModel.addAttribute("regularuser", col);
+			uiModel.addAttribute("profile", profile);
+			uiModel.addAttribute("hasErrors", true);
+			return "profile/update";
+		}
 
 		profile.setDocumentContent(content);
 
@@ -134,11 +158,12 @@ public class ProfileController {
 	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
 		uiModel.asMap().clear();
 		Profile profile = Profile.findProfile(id);
-		uiModel.addAttribute("profile", profile);
 
+		uiModel.addAttribute("profile", profile);
 		Collection<RegularUser> col = new ArrayList<RegularUser>();
 		col.add(Profile.findProfile(id).getRegularUser());
 		uiModel.addAttribute("regularuser", col);
+
 		return "profile/update";
 	}
 
@@ -200,7 +225,7 @@ public class ProfileController {
 		 */
 
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable("id") Long id,

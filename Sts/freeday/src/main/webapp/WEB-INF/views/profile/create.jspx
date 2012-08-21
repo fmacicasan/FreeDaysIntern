@@ -8,6 +8,12 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<form:multi id="fc_freedays_domain_Profile" modelAttribute="profile"
 		path="/profile" render="${empty dependencies}" z="user-managed">
+		
+		<c:if test="${hasErrors}">
+    		<spring:message code="file_was_not_pdf" arguments="${daytypeerror}" var="form_error_msg" />
+    		<div class="errors"><spring:message code="default_form_error_msg" arguments="${form_error_msg}" /></div>
+    	</c:if>
+		
 		<field:select field="regularUser"
 			id="c_freedays_app_FDUser_regularUser" itemValue="id"
 			items="${regularusers}" path="/uadmin" z="user-managed" />
