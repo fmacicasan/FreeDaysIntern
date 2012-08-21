@@ -20,6 +20,7 @@
 				</sec:authorize>
 			</sec:authorize>
 		</menu:category>
+		<!--
 		<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT">
 			<menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
 				<menu:item id="i_fduser_new" messageCode="global_menu_new"
@@ -30,6 +31,7 @@
 					z="" />
 			</menu:category>
 		</sec:authorize>
+		-->
 		<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
 			<menu:category id="c_freedayrl" z="lj8g1YJzQfr5XdIE2cT1Vyiv0Kc=">
 				<menu:item id="i_freedayrl_new" messageCode="global_menu_new"
@@ -54,7 +56,7 @@
 					z="zvHfaaOX/ix7VJtd901LqD/gAg4=" />
 			</menu:category>
 		</sec:authorize>
-		<sec:authorize ifAllGranted="ROLE_FDADMIN">
+		<sec:authorize ifAllGranted="ROLE_FDADMIN,ROLE_HRMANAGEMENT">
 			<menu:category id="c_fduser" z="oTLNSHRQ4yDI1lQjPTS1rrrrduY=">
 				<menu:item id="i_fduser_new" messageCode="global_menu_new"
 					url="/fdusers?form" z="Qdsa6WGJlB3M2+gN+qG6Cb7AWZQ=" />

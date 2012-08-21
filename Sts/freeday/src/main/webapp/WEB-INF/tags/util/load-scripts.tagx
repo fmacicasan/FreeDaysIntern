@@ -25,9 +25,6 @@
   <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
 
-  
-  
-  	<!-- --> <script type="text/javascript" src="/hrapp/js/src/pdfobject.js"> <!-- required for FF3 and Opera --><!---->  </script>
 	<!-- --> <script type="text/javascript" src="/hrapp/js/src/sorttable.js"> <!-- required for FF3 and Opera --><!---->  </script>
 	<!--  <script type="text/javascript" src="/freedays/js/src/sorttable.js">--><!-- required for FF3 and Opera --><!--  </script>-->
 </jsp:root>

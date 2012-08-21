@@ -205,7 +205,7 @@ public class FDUserController {
         return "redirect:/fdusers/" + encodeUrlPathSegment(fdu.getId().toString(), httpServletRequest);
     }
 
-	//@PreAuthorize("hasRole('ROLE_HRMANAGEMENT') or hasRole('ROLE_FDADMIN')")
+	@PreAuthorize("hasRole('ROLE_HRMANAGEMENT') or hasRole('ROLE_FDADMIN')")
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String createForm(Model uiModel) {
         uiModel.addAttribute("FDUser", new FDUser());
