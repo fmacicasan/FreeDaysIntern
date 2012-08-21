@@ -20,12 +20,7 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect ProfileController_Roo_Controller {
     
-    @RequestMapping(params = "form", method = RequestMethod.GET)
-    public String ProfileController.createForm(Model uiModel) {
-        uiModel.addAttribute("profile", new Profile());
-        return "profile/create";
-    }
-    
+        
     @RequestMapping(method = RequestMethod.GET)
     public String ProfileController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {

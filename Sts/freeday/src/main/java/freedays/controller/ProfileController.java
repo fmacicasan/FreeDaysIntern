@@ -75,6 +75,7 @@ public class ProfileController {
 	}
 
 	// TODO de facut verificari pt fisier
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(@Valid Profile profile, BindingResult bindingResult,
 			Model uiModel,
@@ -88,9 +89,11 @@ public class ProfileController {
 
 		uiModel.asMap().clear();
 
-		profile.getDocument().setContentType(content.getContentType());
-		profile.getDocument().setFilename(content.getOriginalFilename());
-		profile.getDocument().setSize(content.getSize());
+		profile.setDocumentContent(content);
+
+		// profile.getDocument().setContentType(content.getContentType());
+		// profile.getDocument().setFilename(content.getOriginalFilename());
+		// profile.getDocument().setSize(content.getSize());
 
 		profile.getDocument().persist();
 		profile.persist();
@@ -99,35 +102,44 @@ public class ProfileController {
 						httpServletRequest);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
+	@RequestMapping(params = "form", method = RequestMethod.GET)
+	public String createForm(Model uiModel) {
+	    uiModel.addAttribute("profile", new Profile());
+	    return "profile/create";
+	}
+
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(params = "update", method = RequestMethod.POST)
-	public String update(@Valid Profile profile, BindingResult bindingResult,
-			Model uiModel,
+	public String update(Model uiModel,
+			@RequestParam("regularUser") RegularUser regUsr,
 			@RequestParam("document.content") MultipartFile content,
 			HttpServletRequest httpServletRequest) {
-		if (bindingResult.hasErrors()) {
-			uiModel.addAttribute("profile", profile);
-			return "profile/update";
-		}
+
 		uiModel.asMap().clear();
 
-		// Document doc = profile.getDocument();
+		Profile profile = Profile.findProfileByRegularUserId(regUsr.getId());
 
-		try {
-			profile.getDocument().setContent(content.getBytes());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		profile.getDocument().setContentType(content.getContentType());
-		profile.getDocument().setFilename(content.getOriginalFilename());
-		profile.getDocument().setSize(content.getSize());
+		profile.setDocumentContent(content);
 
-		//profile.getDocument().merge();
 		profile.merge();
 
 		return "redirect:/profile/"
 				+ encodeUrlPathSegment(profile.getId().toString(),
 						httpServletRequest);
+	}
+
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
+	@RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
+	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+		uiModel.asMap().clear();
+		Profile profile = Profile.findProfile(id);
+		uiModel.addAttribute("profile", profile);
+
+		Collection<RegularUser> col = new ArrayList<RegularUser>();
+		col.add(Profile.findProfile(id).getRegularUser());
+		uiModel.addAttribute("regularuser", col);
+		return "profile/update";
 	}
 
 	/**
@@ -188,7 +200,8 @@ public class ProfileController {
 		 */
 
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable("id") Long id,
 			@RequestParam(value = "page", required = false) Integer page,
@@ -197,22 +210,12 @@ public class ProfileController {
 
 		Document doc = Profile.findProfile(id).getDocument();
 		Profile.findProfile(id).remove();
-		Document.findDocument(doc.getId()).remove();
+		// Document.findDocument(doc.getId()).remove();
 
 		uiModel.asMap().clear();
 		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
 		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
 		return "redirect:/profile";
-	}
-
-	@RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-		uiModel.addAttribute("profile", Profile.findProfile(id));
-
-		Collection<RegularUser> col = new ArrayList<RegularUser>();
-		col.add(Profile.findProfile(id).getRegularUser());
-		uiModel.addAttribute("regularuser", col);
-		return "profile/update";
 	}
 
 	private boolean userHasProfile(Long regUserId) {

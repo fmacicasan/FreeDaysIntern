@@ -1,5 +1,7 @@
 package freedays.domain;
 
+import java.io.IOException;
+
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.OneToOne;
@@ -10,6 +12,7 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import antlr.collections.List;
 
@@ -63,6 +66,20 @@ public class Profile {
 			throw new IllegalStateException(
 					"Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
 		return em;
+	}
+
+	public void setDocumentContent(MultipartFile content) {
+
+		try {
+			this.getDocument().setContent(content.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.getDocument().setContentType(content.getContentType());
+		this.getDocument().setFilename(content.getOriginalFilename());
+		this.getDocument().setSize(content.getSize());
+
 	}
 
 }
