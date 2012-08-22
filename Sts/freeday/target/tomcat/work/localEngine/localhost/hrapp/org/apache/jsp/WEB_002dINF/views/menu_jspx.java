@@ -225,8 +225,8 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
     org.springframework.security.taglibs.authz.AuthorizeTag _jspx_th_sec_005fauthorize_005f2 = (org.springframework.security.taglibs.authz.AuthorizeTag) _005fjspx_005ftagPool_005fsec_005fauthorize_0026_005fifAllGranted.get(org.springframework.security.taglibs.authz.AuthorizeTag.class);
     _jspx_th_sec_005fauthorize_005f2.setPageContext(_jspx_page_context);
     _jspx_th_sec_005fauthorize_005f2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_sec_005fauthorize_005f0);
-    // /WEB-INF/views/menu.jspx(17,44) name = ifAllGranted type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_sec_005fauthorize_005f2.setIfAllGranted("ROLE_AAA");
+    // /WEB-INF/views/menu.jspx(17,48) name = ifAllGranted type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_sec_005fauthorize_005f2.setIfAllGranted("ROLE_FDADMIN");
     int _jspx_eval_sec_005fauthorize_005f2 = _jspx_th_sec_005fauthorize_005f2.doStartTag();
     if (_jspx_eval_sec_005fauthorize_005f2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
