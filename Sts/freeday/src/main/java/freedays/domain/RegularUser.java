@@ -50,7 +50,8 @@ public class RegularUser implements Serializable {
 	/**
 	 * 0 - username 1 - email 2 - surename 3 - firstname 4 - usermodifier
 	 */
-	public static final String[] SEARCH_FILTERS = { "username", "surename", "firstname", "usermodifier" };
+	public static final String[] SEARCH_FILTERS = { "username", "surename",
+			"firstname", "usermodifier" };
 
 	@NotNull
 	@Column(unique = true)
@@ -70,7 +71,6 @@ public class RegularUser implements Serializable {
 
 	private Boolean deleted;
 
-	@NotNull
 	private Boolean activ;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -98,7 +98,9 @@ public class RegularUser implements Serializable {
 	 */
 	public static List<RegularUser> findAllRegularUsersLike(Search search) {
 		EntityManager emag = RegularUser.entityManager();
-		TypedQuery<RegularUser> query = emag.createQuery("SELECT o FROM RegularUser o WHERE o." + search.getSearchKey() + " LIKE ?1", RegularUser.class);
+		TypedQuery<RegularUser> query = emag.createQuery(
+				"SELECT o FROM RegularUser o WHERE o." + search.getSearchKey()
+						+ " LIKE ?1", RegularUser.class);
 		query.setParameter(1, search.searchValueLike());
 		List<RegularUser> result = query.getResultList();
 		return result;
@@ -116,8 +118,9 @@ public class RegularUser implements Serializable {
 	 */
 	public static List<RegularUser> findAllNotDeletedUsersLike(Search search) {
 		EntityManager emag = RegularUser.entityManager();
-		TypedQuery<RegularUser> query = emag.createQuery("SELECT o FROM RegularUser o WHERE o." + search.getSearchKey() + " LIKE ?1 AND o.deleted='false'",
-				RegularUser.class);
+		TypedQuery<RegularUser> query = emag.createQuery(
+				"SELECT o FROM RegularUser o WHERE o." + search.getSearchKey()
+						+ " LIKE ?1 AND o.deleted='false'", RegularUser.class);
 		query.setParameter(1, search.searchValueLike());
 		List<RegularUser> result = query.getResultList();
 		return result;
@@ -132,7 +135,8 @@ public class RegularUser implements Serializable {
 	 * @return
 	 */
 	public static Long countRegularUsers() {
-		TypedQuery<Long> q = entityManager().createQuery("SELECT COUNT(o) FROM RegularUser o", Long.class);
+		TypedQuery<Long> q = entityManager().createQuery(
+				"SELECT COUNT(o) FROM RegularUser o", Long.class);
 		Long res;
 		try {
 			res = q.getSingleResult();
@@ -146,12 +150,15 @@ public class RegularUser implements Serializable {
 	 * 
 	 * @osuciu
 	 * 
-	 * Counts the number of regular users in the database which were not deleted
+	 *         Counts the number of regular users in the database which were not
+	 *         deleted
 	 * 
 	 * @return
 	 */
 	public static Long countRegularNotDeletedUsers() {
-		TypedQuery<Long> q = entityManager().createQuery("SELECT COUNT(o) FROM RegularUser o WHERE o.deleted='false'", Long.class);
+		TypedQuery<Long> q = entityManager().createQuery(
+				"SELECT COUNT(o) FROM RegularUser o WHERE o.deleted='false'",
+				Long.class);
 		Long res;
 		try {
 			res = q.getSingleResult();
@@ -169,16 +176,20 @@ public class RegularUser implements Serializable {
 	public static final EntityManager entityManager() {
 		EntityManager em = new RegularUser().entityManager;
 		if (em == null)
-			throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+			throw new IllegalStateException(
+					"Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
 		return em;
 	}
 
 	public static List<RegularUser> findAllRegularUsers() {
-		return entityManager().createQuery("SELECT o FROM RegularUser o", RegularUser.class).getResultList();
+		return entityManager().createQuery("SELECT o FROM RegularUser o",
+				RegularUser.class).getResultList();
 	}
 
 	public static List<RegularUser> findAllNotDeletedRegularUsers() {
-		return entityManager().createQuery("SELECT o FROM RegularUser o WHERE o.deleted='false'", RegularUser.class).getResultList();
+		return entityManager().createQuery(
+				"SELECT o FROM RegularUser o WHERE o.deleted='false'",
+				RegularUser.class).getResultList();
 	}
 
 	/**
@@ -193,8 +204,11 @@ public class RegularUser implements Serializable {
 		return entityManager().find(RegularUser.class, id);
 	}
 
-	public static List<RegularUser> findRegularUserEntries(int firstResult, int maxResults) {
-		return entityManager().createQuery("SELECT o FROM RegularUser o", RegularUser.class).setFirstResult(firstResult).setMaxResults(maxResults)
+	public static List<RegularUser> findRegularUserEntries(int firstResult,
+			int maxResults) {
+		return entityManager()
+				.createQuery("SELECT o FROM RegularUser o", RegularUser.class)
+				.setFirstResult(firstResult).setMaxResults(maxResults)
 				.getResultList();
 	}
 
@@ -207,31 +221,38 @@ public class RegularUser implements Serializable {
 	 * @return
 	 */
 
-	public static List<RegularUser> findRegularNotDeletedUserEntries(int firstResult, int maxResults) {
-		return entityManager().createQuery("SELECT o FROM RegularUser o WHERE o.deleted='false'", RegularUser.class).setFirstResult(firstResult)
+	public static List<RegularUser> findRegularNotDeletedUserEntries(
+			int firstResult, int maxResults) {
+		return entityManager()
+				.createQuery(
+						"SELECT o FROM RegularUser o WHERE o.deleted='false'",
+						RegularUser.class).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
 	}
-	
-	
+
 	/**
 	 * 
 	 * @osuciu
-	 * @param username a string representing a RegularUser username
+	 * @param username
+	 *            a string representing a RegularUser username
 	 * @return its associated RegularUser
 	 */
 	public static RegularUser findRegularUserByUsername(String username) {
-		if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
-        EntityManager em = RegularUser.entityManager();
-        TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE username = :username ", RegularUser.class);
-        q.setParameter("username", username);
-        
-        List<RegularUser> results = q.getResultList();
-        if (!results.isEmpty())
-           return  results.get(0);
-        else
-           return null;
+		if (username == null || username.length() == 0)
+			throw new IllegalArgumentException(
+					"The username argument is required");
+		EntityManager em = RegularUser.entityManager();
+		TypedQuery<RegularUser> q = em.createQuery(
+				"SELECT o FROM RegularUser AS o WHERE username = :username ",
+				RegularUser.class);
+		q.setParameter("username", username);
+
+		List<RegularUser> results = q.getResultList();
+		if (!results.isEmpty())
+			return results.get(0);
+		else
+			return null;
 	}
-	
 
 	/**
 	 * Finds a regular user based on his username and password.
@@ -241,13 +262,19 @@ public class RegularUser implements Serializable {
 	 * @return
 	 */
 	@Deprecated
-	public static TypedQuery<RegularUser> findRegularUsersByUsernameAndPasswordEquals(String username, String password) {
+	public static TypedQuery<RegularUser> findRegularUsersByUsernameAndPasswordEquals(
+			String username, String password) {
 		if (username == null || username.length() == 0)
-			throw new IllegalArgumentException("The username argument is required");
+			throw new IllegalArgumentException(
+					"The username argument is required");
 		if (password == null || password.length() == 0)
-			throw new IllegalArgumentException("The password argument is required");
+			throw new IllegalArgumentException(
+					"The password argument is required");
 		EntityManager em = RegularUser.entityManager();
-		TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.username = :username AND o.password = :password", RegularUser.class);
+		TypedQuery<RegularUser> q = em
+				.createQuery(
+						"SELECT o FROM RegularUser AS o WHERE o.username = :username AND o.password = :password",
+						RegularUser.class);
 		q.setParameter("username", username);
 		q.setParameter("password", password);
 		return q;
@@ -319,7 +346,8 @@ public class RegularUser implements Serializable {
 			return false;
 		}
 		RegularUser ru = list.get(0);
-		String encodednewpass = ru.getMessageDigestPasswordEncoder().encodePassword(newPass, null);
+		String encodednewpass = ru.getMessageDigestPasswordEncoder()
+				.encodePassword(newPass, null);
 		ru.setPassword(encodednewpass);
 		ru.persist();
 		return true;
@@ -335,36 +363,21 @@ public class RegularUser implements Serializable {
 		if (email == null || email.length() == 0)
 			throw new IllegalArgumentException("The email argument is required");
 		EntityManager em = RegularUser.entityManager();
-		TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.username = :email ", RegularUser.class);
+		TypedQuery<RegularUser> q = em.createQuery(
+				"SELECT o FROM RegularUser AS o WHERE o.username = :email ",
+				RegularUser.class);
 		q.setParameter("email", email);
 		return q.getResultList();
-	}
-
-	/**
-	 * Provides the complete name of the regular user
-	 * 
-	 * @return
-	 */
-	public String getFullName() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.surename);
-		sb.append(" ");
-		sb.append(this.firstname);
-		return sb.toString();
-	}
-
-	public String getReportName() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.getFullName());
-		sb.append(" (").append(this.getEmail()).append(") ");
-		return sb.toString();
 	}
 
 	public static Long countRegularUserByEmail(String email) {
 		if (email == null || email.length() == 0)
 			throw new IllegalArgumentException("The email argument is required");
 		EntityManager em = RegularUser.entityManager();
-		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM RegularUser AS o WHERE o.username = :email and o.deleted = 0", Long.class);
+		TypedQuery<Long> q = em
+				.createQuery(
+						"SELECT COUNT(o) FROM RegularUser AS o WHERE o.username = :email and o.deleted = 0",
+						Long.class);
 		q.setParameter("email", email);
 		Long res;
 		try {
@@ -376,28 +389,21 @@ public class RegularUser implements Serializable {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(getFirstname()).append(" ");
-		sb.append(getSurename());
-		sb.append(" (").append(this.getEmail()).append(") ");
-		return sb.toString().toUpperCase();
-	}
-
-	/**
 	 * Selects a regular user based on his unique username. NOTICE! : case
 	 * insensitive
 	 * 
 	 * @param username
 	 * @return the typed query representing the selection
 	 */
-	public static TypedQuery<RegularUser> findRegularUsersByUsername(String username) {
+	public static TypedQuery<RegularUser> findRegularUsersByUsername(
+			String username) {
 		if (username == null || username.length() == 0)
-			throw new IllegalArgumentException("The username argument is required");
+			throw new IllegalArgumentException(
+					"The username argument is required");
 		EntityManager em = RegularUser.entityManager();
-		TypedQuery<RegularUser> q = em.createQuery("SELECT o FROM RegularUser AS o WHERE o.username = :username ", RegularUser.class);
+		TypedQuery<RegularUser> q = em.createQuery(
+				"SELECT o FROM RegularUser AS o WHERE o.username = :username ",
+				RegularUser.class);
 		q.setParameter("username", username);
 		return q;
 	}
@@ -410,8 +416,10 @@ public class RegularUser implements Serializable {
 	 *         FDUser.
 	 */
 	public static Collection<RegularUser> findAllRegularUsersUnasociated() {
-		return entityManager().createQuery("SELECT o FROM RegularUser o WHERE o.id NOT IN (SELECT f.regularUser FROM FDUser f) ", RegularUser.class)
-				.getResultList();
+		return entityManager()
+				.createQuery(
+						"SELECT o FROM RegularUser o WHERE o.id NOT IN (SELECT f.regularUser FROM FDUser f) ",
+						RegularUser.class).getResultList();
 	}
 
 	/**
@@ -433,14 +441,21 @@ public class RegularUser implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((activ == null) ? 0 : activ.hashCode());
-		result = prime * result + ((creationdate == null) ? 0 : creationdate.hashCode());
+		result = prime * result
+				+ ((creationdate == null) ? 0 : creationdate.hashCode());
 		result = prime * result + ((deleted == null) ? 0 : deleted.hashCode());
-		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + ((lastmodified == null) ? 0 : lastmodified.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((surename == null) ? 0 : surename.hashCode());
-		result = prime * result + ((usermodifier == null) ? 0 : usermodifier.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result
+				+ ((firstname == null) ? 0 : firstname.hashCode());
+		result = prime * result
+				+ ((lastmodified == null) ? 0 : lastmodified.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((surename == null) ? 0 : surename.hashCode());
+		result = prime * result
+				+ ((usermodifier == null) ? 0 : usermodifier.hashCode());
+		result = prime * result
+				+ ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -528,7 +543,8 @@ public class RegularUser implements Serializable {
 		ru.setFirstname(sw.getFirstname());
 		ru.setPassword(sw.getPassword());
 		ru.persist();
-		MailUtils.sendAfterRegisterNotification(ru.toString(), ApplicationRegularUser.findAllAdminEmails());
+		MailUtils.sendAfterRegisterNotification(ru.toString(),
+				ApplicationRegularUser.findAllAdminEmails());
 		return ru;
 	}
 
@@ -564,7 +580,8 @@ public class RegularUser implements Serializable {
 	 * @param messageDigestPasswordEncoder
 	 *            the messageDigestPasswordEncoder to set
 	 */
-	public void setMessageDigestPasswordEncoder(MessageDigestPasswordEncoder messageDigestPasswordEncoder) {
+	public void setMessageDigestPasswordEncoder(
+			MessageDigestPasswordEncoder messageDigestPasswordEncoder) {
 		this.messageDigestPasswordEncoder = messageDigestPasswordEncoder;
 	}
 
@@ -576,16 +593,16 @@ public class RegularUser implements Serializable {
 	 */
 	public static Long countRegularUserByUsername(String username) {
 		if (username == null || username.length() == 0)
-			throw new IllegalArgumentException("The username2 argument is required");
+			throw new IllegalArgumentException(
+					"The username2 argument is required");
 		EntityManager em = RegularUser.entityManager();
-		TypedQuery<Long> q = em.createQuery("SELECT COUNT(o) FROM RegularUser AS o WHERE o.username = :username and o.deleted = 0", Long.class);
+		TypedQuery<Long> q = em
+				.createQuery(
+						"SELECT COUNT(o) FROM RegularUser AS o WHERE o.username = :username and o.deleted = 0",
+						Long.class);
 		q.setParameter("username", username);
 		Long res = q.getSingleResult();
 		return res;
-	}
-
-	public String getEmail() {
-		return this.username;
 	}
 
 	public void setEmail(String email) {
@@ -615,5 +632,70 @@ public class RegularUser implements Serializable {
 		this.setUsername(ru.getUsername());
 		this.setPassword(this.getPassword());
 		this.merge();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString() {
+		/*
+		 * StringBuilder sb = new StringBuilder();
+		 * sb.append(getFirstname().substring(0, 1).toUpperCase());
+		 * sb.append(getFirstname().substring(1).toLowerCase()).append(" ");
+		 * sb.append(getSurename().substring(0, 1).toUpperCase());
+		 * sb.append(getSurename().substring(1).toLowerCase());
+		 * sb.append(" (").append(this.getEmail().toLowerCase()).append(") ");
+		 * return sb.toString();
+		 */
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(getFirstname()).append(" ");
+		sb.append(getSurename());
+		sb.append(" (").append(this.getEmail()).append(") ");
+		return sb.toString();
+	}
+
+	public String getReportName() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getFullName());
+		sb.append(" (").append(this.getEmail()).append(") ");
+		return sb.toString();
+	}
+
+	public String getEmail() {
+		return this.getUsername();
+	}
+
+	/**
+	 * Provides the complete name of the regular user
+	 * 
+	 * @return
+	 */
+	public String getFullName() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getFirstname());
+		sb.append(" ");
+		sb.append(this.getSurename());
+
+		return sb.toString();
+	}
+
+	public String getUsername() {
+		return this.username == null ? null : this.username.toLowerCase();
+	}
+
+	public String getSurename() {
+		return this.surename == null ? null : this.surename.substring(0, 1)
+				.toUpperCase() + this.surename.substring(1).toLowerCase();
+	}
+
+	public String getFirstname() {
+		return this.firstname == null ? null : this.firstname.substring(0, 1)
+				.toUpperCase() + this.firstname.substring(1).toLowerCase();
+	}
+
+	public String getUsermodifier() {
+		return this.usermodifier == null ? null : this.usermodifier
+				.toLowerCase();
 	}
 }

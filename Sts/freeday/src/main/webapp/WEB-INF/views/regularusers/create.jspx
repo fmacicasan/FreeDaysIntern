@@ -3,13 +3,19 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_freedays_domain_RegularUser" modelAttribute="regularUser" path="/regularusers" render="${empty dependencies}" z="jUvtX5NZvrPz6TsrffkD1rdwQtQ=">
+  
+  		<c:if test="${hasErrors}">
+    		<spring:message code="reg_usr_email_already_taken" arguments="${errorMessage}" var="form_error_msg" />
+    		<div class="errors"><spring:message code="default_form_error_msg" arguments="${form_error_msg}" /></div>
+    	</c:if>
+  
+        <!-- <field:input field="email" id="c_freedays_domain_RegularUser_email" required="true" validationMessageCode="field_invalid_email" z="kWommBnkAeoeIN3pIU9znHKiqko="/> -->
+        <field:input field="firstname" id="c_freedays_domain_RegularUser_firstname" required="true" z="4Vqg8aD08b0xYrGvmRXKQx6R6iY="/>
+        <field:input field="surename" id="c_freedays_domain_RegularUser_surename" required="true" z="POxYmJd2jSMnWVLRxNMf5qOlO9Y="/>
         <field:input field="username" id="c_freedays_domain_RegularUser_username" min="3" required="true" validationMessageCode="field_invalid_email" z="user-managed"/>
         <field:input  type="password" field="password" id="c_freedays_domain_RegularUser_password" required="true" z="ngtuvBXXC/yxg5O7Uev2KG22Ybw="/>
-        <!-- <field:input field="email" id="c_freedays_domain_RegularUser_email" required="true" validationMessageCode="field_invalid_email" z="kWommBnkAeoeIN3pIU9znHKiqko="/> -->
-        <field:input field="surename" id="c_freedays_domain_RegularUser_surename" required="true" z="POxYmJd2jSMnWVLRxNMf5qOlO9Y="/>
-        <field:input field="firstname" id="c_freedays_domain_RegularUser_firstname" required="true" z="4Vqg8aD08b0xYrGvmRXKQx6R6iY="/>
         <!-- <field:checkbox field="deleted" id="c_freedays_domain_RegularUser_deleted" z="2zEl3mE3aVirUZ/9VazluSMPi6U="/> -->
-        <field:checkbox field="activ" id="c_freedays_domain_RegularUser_activ" z="QeIUKdXq2m/qb9su8paehCWoY/o="/>
+        <!--<field:checkbox field="activ" id="c_freedays_domain_RegularUser_activ" z="QeIUKdXq2m/qb9su8paehCWoY/o="/> -->
         <!--  <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" required="false" z="z0VTw4kzCIT0Lv4NUVcFSv8I/nY="/>-->
         <!--  <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" required="false" z="bND23k8ZZ3WhjMI+mhA1lXdHeq8="/>-->
         <!--<field:input field="usermodifier" id="c_freedays_domain_RegularUser_usermodifier" z="cT7HC9uBwajdrNaljGJjD43P94A="/>-->
@@ -20,7 +26,7 @@
         <field:datetime dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="c_freedays_domain_RegularUser_lastmodified" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="c_freedays_domain_RegularUser_creationdate" render="false" z="user-managed"/>
         <field:input field="usermodifier" id="c_freedays_domain_RegularUser_usermodifier"    render="false" z="user-managed"/>
-    ${errorMessage}
+    
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_freedays_domain_RegularUser" render="${not empty dependencies}" z="OG4zIjNW8zaSGDZzxQ/R00+3U3U="/>
 </div>

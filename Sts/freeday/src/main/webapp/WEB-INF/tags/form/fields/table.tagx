@@ -83,14 +83,17 @@
 	            <c:set var="columnMaxLength" value="${lengths[num.count-1]}" />
 	            <c:set var="columnType" value="${types[num.count-1]}" />
 	            <c:set var="columnDatePattern" value="${patterns[num.count-1]}" />
+				
 	            <!-- Added for sorting -->
 	            <c:set var="skey" value="" />
+					            <c:out value="${sortablekeyreq} "/>
 	            <c:if test="${sortablekeyreq==column }">
 	            	<c:set var="sortkeyvar" value="sortkey" />
 	            	<c:set var="skey" value="${item[sortkeyvar]}" />
 	            </c:if>
 	            <td sorttable_customkey="${skey}">
 	            <!-- End Added for sorting -->
+				
 	              <c:choose>
 	                <c:when test="${columnType eq 'date'}">
 	                  <spring:escapeBody>

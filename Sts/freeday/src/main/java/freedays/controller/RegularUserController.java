@@ -237,7 +237,8 @@ public class RegularUserController {
 			uiModel.addAttribute("itemId", regularUser.getId());
 			return "regularusers/show";
 		} else {
-			httpServletRequest.setAttribute("errorMessage", "Email already taken.");
+			httpServletRequest.setAttribute("hasErrors",true);
+			httpServletRequest.setAttribute("errorMessage", regularUser.getUsername());
 			uiModel.addAttribute("regularUser", regularUser);
 			addDateTimeFormatPatterns(uiModel);
 			return "regularusers/create";

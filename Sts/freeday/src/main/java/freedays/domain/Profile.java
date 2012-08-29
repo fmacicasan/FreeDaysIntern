@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.OneToOne;
 import javax.persistence.TypedQuery;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.springframework.roo.addon.entity.RooEntity;
@@ -33,9 +34,11 @@ public class Profile {
 
 	@OneToOne
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@NotNull
 	private Document document;
 
 	@OneToOne
+	@NotNull
 	private RegularUser regularUser;
 
 	public static Profile findProfileByRegularUserId(Long id) {

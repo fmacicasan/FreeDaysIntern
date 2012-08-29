@@ -20,7 +20,6 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect ProfileController_Roo_Controller {
     
-        
     @RequestMapping(method = RequestMethod.GET)
     public String ProfileController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {

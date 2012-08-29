@@ -27,7 +27,7 @@
         <field:display field="surename" id="s_freedays_domain_RegularUser_surename" object="${regularuser}" z="eZCoUMTmYwhFzYx64YPqN7U+4Io="/>
         <field:display field="firstname" id="s_freedays_domain_RegularUser_firstname" object="${regularuser}" z="pUOr7h12giEHMWBm4zj373Hqn7I="/>
         <field:display field="deleted" id="s_freedays_domain_RegularUser_deleted" object="${regularuser}" z="4j6io+5DWDc7qMgFDOceYcReI9w="/>
-        <field:display field="activ" id="s_freedays_domain_RegularUser_activ" object="${regularuser}" z="s5T/rvKu8DXdOxEWHuLBUnZEaF8="/>
+        <!-- <field:display field="activ" id="s_freedays_domain_RegularUser_activ" object="${regularuser}" z="s5T/rvKu8DXdOxEWHuLBUnZEaF8="/> -->
         <field:display calendar="true" dateTimePattern="${regularUser_lastmodified_date_format}" field="lastmodified" id="s_freedays_domain_RegularUser_lastmodified" object="${regularuser}" z="G7rbu6vPn4chrZCrFloBHJdbkj0="/>
         <field:display calendar="true" dateTimePattern="${regularUser_creationdate_date_format}" field="creationdate" id="s_freedays_domain_RegularUser_creationdate" object="${regularuser}" z="tXWfysUGZfEXUnpedxCGPPueSdw="/>
         <field:display field="usermodifier" id="s_freedays_domain_RegularUser_usermodifier" object="${regularuser}" z="l8kQI8TYrw3f4AxEWxv/zsm2lUw="/>
