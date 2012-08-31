@@ -103,7 +103,7 @@ public class MailUtils {
     			
     			helper.addAttachment(f.getName(), f);
     		}
-    		//mailSender.send(mm);
+    		mailSender.send(mm);
     		log.info(String.format("Message with subject:\n\t %s\n and content:\n\t %s\n went ok to %s!",subject,content,tol.toString()));
     	} catch (MessagingException e) {
 			log.error("Problem at mail sending",e);
@@ -113,7 +113,7 @@ public class MailUtils {
 		tol.add("osuciu@sdl.com");
 		tol.add("fmacicasan@sdl.com");		
 		//add HR ppl to email flows
-		//tol.addAll(ApplicationRegularUser.findAllHRManagementEmails());
+		tol.addAll(ApplicationRegularUser.findAllHRManagementEmails());
 	}
 	private String finalizeContent(final String content){
 		StringBuilder sb = new StringBuilder();
