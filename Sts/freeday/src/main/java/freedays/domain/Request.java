@@ -274,7 +274,7 @@ public class Request implements Serializable {
     	ApplicationRegularUser app = this.getRequestable().getNextApprover(this.getAppreguser());
     	if(app != null){
     		 RegularUser r =  app.getRegularUser();
-    		System.out.println("aaaa"+r);
+    		System.out.println(r);
     		return r;
     	}
        return null;

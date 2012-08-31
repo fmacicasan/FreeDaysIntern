@@ -86,7 +86,7 @@
 				
 	            <!-- Added for sorting -->
 	            <c:set var="skey" value="" />
-					            <c:out value="${sortablekeyreq} "/>
+					         <!--   <c:out value="${sortablekeyreq} "/> -->
 	            <c:if test="${sortablekeyreq==column }">
 	            	<c:set var="sortkeyvar" value="sortkey" />
 	            	<c:set var="skey" value="${item[sortkeyvar]}" />

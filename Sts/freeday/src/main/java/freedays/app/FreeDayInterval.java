@@ -85,10 +85,7 @@ public abstract class FreeDayInterval extends FreeDay {
 		// nothing special here
 	}
 
-	@Override
-	public RequestType getType() {
-		return RequestType.V;
-	}
+	public abstract RequestType getType();
 
 
 	/**

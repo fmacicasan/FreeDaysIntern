@@ -48,6 +48,9 @@ public class FreeDayVacation extends FreeDayInterval {
 		return sb.toString();
 	}
 
-
+	@Override
+	public RequestType getType() {
+		return RequestType.V;
+	}
 
 }

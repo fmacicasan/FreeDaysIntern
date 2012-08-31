@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import freedays.app.FDUser;
 import freedays.app.FreeDay;
+import freedays.app.FreeDayInterval;
 import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayRL;
 import freedays.app.FreeDayVacation;
@@ -195,6 +196,7 @@ public class FreeDayUserList {
 	 * @param month
 	 * @return
 	 */
+	//TODO modificare functionalitate pt clasa abstracta
 	private static List<FreeDayReportWrapper> tranformFreeDay2Integer4Report(List<FreeDay> freedays,int month){
 		//month can be -1 if previous December, 0-11 if current year, 12 if next January
 //		log.info("!!!!!!!!!!!!!!!!transforming with mont"+month);
@@ -206,9 +208,9 @@ public class FreeDayUserList {
 			list.add(fdrw);
 		}
 		for (FreeDay fd : freedays) {
-			if(fd instanceof FreeDayVacation){
+			if(fd instanceof FreeDayInterval){
 				
-				FreeDayVacation fdv = (FreeDayVacation)fd;
+				FreeDayInterval fdv = (FreeDayInterval)fd;
 				
 				Calendar start = fdv.getDate();
 //				if(start.get(Calendar.YEAR) == 2012){
