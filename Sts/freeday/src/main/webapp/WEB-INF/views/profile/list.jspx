@@ -11,7 +11,7 @@
         <c:set value="true" var="var_update"/>
     </sec:authorize>
     <page:list id="pl_freedays_domain_Profile" items="${profiles}" z="YPiWqyB2TjVngoYEAQ2R7pYb2a8=">
-        <table:table create="${var_create}" data="${profiles}" delete="${var_delete}" id="l_freedays_domain_Profile" path="/profile" update="${var_update}" z="user-managed">
+        <table:table create="${var_create}" data="${profiles}" delete="${var_delete}" id="l_freedays_domain_Profile" path="/profile" update="${var_update}" z="user-managed" linkFromRows="profile/">
             <table:column id="c_freedays_domain_Profile_regularUser" maxLength="-1" property="regularUser" z="user-managed"/>
             <sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
                 <table:column id="c_freedays_domain_Profile_document" maxLength="-1" property="document" z="user-managed"/>

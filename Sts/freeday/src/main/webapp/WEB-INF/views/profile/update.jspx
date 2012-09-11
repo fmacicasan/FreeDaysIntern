@@ -16,8 +16,4 @@
         <field:input field="document.size" id="c_org_pragmatikroo_roodocman_domain_Document_size" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
         <field:textarea field="document.url" id="c_org_pragmatikroo_roodocman_domain_Document_url" render="false" z="user-managed"/>
     </form:multi>
-    <form:update id="fu_freedays_domain_Profile" modelAttribute="profile" path="/profile" versionField="Version" z="EFekkmp+7Q/6xtBvGj0VqauF4NU=">
-        <field:select field="document" id="c_freedays_domain_Profile_document" itemValue="id" items="${documents}" path="/documents" required="true" z="9/k3IoMhVcFEEpXtBFJeo6jZ3uw="/>
-        <field:input field="regularUser" id="c_freedays_domain_Profile_regularUser" required="true" z="Sp1OlSY1gCSbrZwr8dlqrLJROFA="/>
-    </form:update>
 </div>

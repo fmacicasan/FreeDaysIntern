@@ -25,6 +25,8 @@ import freedays.domain.RegularUser;
 import freedays.domain.form.AdminRegUserUpdate;
 import freedays.domain.form.Search;
 import freedays.security.UserContextService;
+import freedays.util.RegularUserUtils;
+import freedays.util.RegularUserUtils.RegularUserUtilsDiscriminators;
 import freedays.validation.RegularUserValidator;
 
 /**
@@ -334,7 +336,7 @@ public class RegularUserController {
 
 		evaluateDeletable(lru);
 
-		uiModel.addAttribute("regularusers", lru);
+		uiModel.addAttribute("regularusers", RegularUserUtils.sortAscending(lru, RegularUserUtilsDiscriminators.FIRSTNAME));
 		addDateTimeFormatPatterns(uiModel);
 
 		return "regularusers/list";

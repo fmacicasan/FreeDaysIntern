@@ -18,6 +18,7 @@ import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.FreeDayRL;
 import freedays.app.FreeDayVacation;
 import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.domain.Profile;
 import freedays.security.UserContextService;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
@@ -33,6 +34,7 @@ import freedays.util.ValidationUtils;
 public class FreeDayUserList {
 	private static final Logger log = Logger.getLogger(FreeDayUserList.class);
 	private String user;
+	private Long profileId;
 	private String jobrole;
 	private Long remainingdays;
 	private Long totaldaysleft;
@@ -102,6 +104,8 @@ public class FreeDayUserList {
 	public static FreeDayUserList generateVacationList(FDUser fdu,Calendar start, Calendar end) {
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getReportName());
+		Profile p = Profile.findProfileByRegularUserId(fdu.getRegularUser().getId());
+		fdul.setProfileId(p==null ? 0 : p.getId());
 		fdul.setJobrole(fdu.getJobrole().toString());
 		fdul.setRemainingdays(fdu.computeAvailableFreeDays());
 		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());
@@ -172,6 +176,9 @@ public class FreeDayUserList {
 		FreeDayUserList fdul = new FreeDayUserList();
 		fdul.setUser(fdu.getRegularUser().getReportName());
 		fdul.setJobrole(fdu.getJobrole().toString());
+		
+		Profile p = Profile.findProfileByRegularUserId(fdu.getRegularUser().getId());
+		fdul.setProfileId(p==null ? 0 : p.getId());
 		
 		fdul.setTotaldaysleft(fdu.computeteAvailableFreeDaysTotal());
 		//TODO: get only between the two values not all vacations
@@ -437,6 +444,16 @@ public class FreeDayUserList {
 		String formatted = String.format(DEFAULT_REPORT_TEMPLATE_IMAGE,alt,src);
 		return formatted;
 	}
+
+	public Long getProfileId() {
+		return profileId;
+	}
+
+	public void setProfileId(Long profileId) {
+		this.profileId = profileId;
+	}
+
+	
 	
 	
 	

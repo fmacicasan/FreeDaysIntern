@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:sec="http://www.springframework.org/security/tags" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	xmlns:sec="http://www.springframework.org/security/tags" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <spring:message code="freedaysreport_title" arguments="${fullMonthNames[param.m]}" var="titleMsg" />
@@ -40,6 +47,9 @@
        	<c:set var="ok" value="ok" />
        	<c:forEach items="${vacations}" var="item">
        		<spring:eval expression="item['user']" var="user" />
+       		<spring:eval expression="item['profileId']" var="profileId" />			
+			<spring:url value="profile/${profileId}" var="linkUrl" />							
+			
      		<spring:eval expression="item['jobrole']" var="jobrole" />
      		<sec:authorize ifNotGranted="ROLE_HRMANAGEMENT">
      			<spring:eval expression="item['remainingdays']" var="remainingdays" />
@@ -52,7 +62,18 @@
      			<c:set var="rowClass" value="yourself" />
      		</c:if>
        		<tr id="${rowClass}">
-       			<td><c:out value="${user}" /></td>
+       			<td>
+				
+				<c:if test="${profileId gt 0}">
+				<a href="${fn:escapeXml(linkUrl)}" title="View Profile">
+					<c:out value="${user}" />
+				</a>
+				</c:if>
+				<c:if test="${profileId eq 0}">
+					<c:out value="${user}" />
+				</c:if>
+
+				</td>
        			<td><c:out value="${jobrole}" /></td>
        			<sec:authorize access="!hasRole('ROLE_HRMANAGEMENT')">
        				<td><c:out value="${remainingdays}" /> </td>

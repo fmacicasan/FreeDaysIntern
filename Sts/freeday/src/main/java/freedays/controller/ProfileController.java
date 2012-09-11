@@ -43,7 +43,6 @@ import freedays.util.PropertiesUtil;
 @RooJavaBean
 public class ProfileController {
 
-	
 	/**
 	 * if the file is less than 2MB and is a pdf file, the method returns true
 	 * 
@@ -188,6 +187,29 @@ public class ProfileController {
 		} else {
 			return "redirect:/profile/" + profile.getId();
 		}
+	}
+
+	@RequestMapping(value = "/fromregularuser/{id}", method = RequestMethod.GET)
+	public String getFromRegularUser(@PathVariable("id") Long id,
+			HttpServletResponse response, Model uiModel) {
+
+		if (Profile.findProfileByRegularUserId(id) == null) {
+			uiModel.addAttribute("hasProfile", false);
+			return "profile/show";
+		} else {
+			return "redirect:/profile/"
+					+ Profile.findProfileByRegularUserId(id).getId();
+		}
+		// return show(Profile.findProfileByRegularUserId(id).getId(), response,
+		// uiModel);
+	}
+	
+	
+	@RequestMapping(value = "/fromfduser/{id}", method = RequestMethod.GET)
+	public String getFromFDUser(@PathVariable("id") Long id,
+			HttpServletResponse response, Model uiModel){
+		
+		return "redirect:/profile/fromregularuser/"+FDUser.findFDUser(id).getRegularUser().getId();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
