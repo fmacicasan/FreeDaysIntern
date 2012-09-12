@@ -16,13 +16,26 @@
 					<menu:item id="c_general_reportvacationteam"
 						url="/report/vacation/team" z="user-managed" />
 				</sec:authorize>
+				<!--
 				<sec:authorize ifAllGranted="ROLE_FDADMIN">
 					<menu:item id="c_general_timesheet" url="/timesheet"
 						z="user-managed" />
 				</sec:authorize>
-
+				-->
 			</menu:category>
 		</sec:authorize>
+		
+		<sec:authorize ifAllGranted="ROLE_USER">
+		<menu:category id="c_timesheet" z="user-managed">
+
+			<menu:item id="c_timesheet_all" url="/timesheet?all"
+				z="user-managed" />
+			<menu:item id="c_timesheet_own" url="/timesheet?own"
+				z="user-managed" />
+
+		</menu:category>
+		</sec:authorize>
+		
 		<!--
 		<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT">
 			<menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">

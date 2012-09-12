@@ -33,5 +33,5 @@
         	<![CDATA[
         		alert("${msg}");
         		]]>
-        	</script>
+     </script>
 </div>

@@ -32,19 +32,21 @@ body {
 	background-color: yellow;
 }
 .colg,.legg{
-	background-color: aqua;
+	background-color: RGB(160,250,80);
+
 }
 .colo,.lego{
 	background-color: orange;
 }
 .colm,.legm{
-	background-color: RGB(160,250,80);
+	background-color: aqua;
 }
 .colnp,.legnp{
-	background-color: lime;
+	background-color: #FFCB73;
+
 }
 .colrl,.legrl{
-	background-color: #FFCB73;
+	background-color: lime;
 }
 .colb{
 	background-color: RGB(213,235,213);

@@ -105,7 +105,7 @@ public class MailUtils {
     			
     			helper.addAttachment(f.getName(), f);
     		}
-    		mailSender.send(mm);
+    		//mailSender.send(mm);
     		log.info(String.format("Message with subject:\n\t %s\n and content:\n\t %s\n went ok to %s!",subject,content,tol.toString()));
     	} catch (MessagingException e) {
 			log.error("Problem at mail sending",e);

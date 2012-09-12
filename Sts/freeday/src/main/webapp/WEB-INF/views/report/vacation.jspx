@@ -180,7 +180,7 @@
        			<spring:message code="freedaysreport_legend_typenp" var="legend_typenp"/>
        			<spring:message code="freedaysreport_legend_typerl" var="legend_typerl" />
        			<span class="legr"><c:out value="${legend_typev}" /></span> 
-       			<span class="legg"><c:out value="${legend_typel}" /></span> 
+       			<!--<span class="legg"><c:out value="${legend_typel}" /></span> -->
        			<span class="legy"><c:out value="${legend_typec}" /></span> 
        			<span class="lego"><c:out value="${legend_typer}" /></span>
        			<span class="legm"><c:out value="${legend_typem}" /></span>

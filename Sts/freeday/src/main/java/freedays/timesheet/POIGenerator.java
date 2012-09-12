@@ -647,7 +647,9 @@ public class POIGenerator implements TimesheetGenerator{
 		styleMe();	
 	    fileOut = null;
 		try {
-			fileOut = new FileOutputStream(new File(workbookname));
+			File f = new File(workbookname);
+			f.mkdirs();
+			fileOut = new FileOutputStream(f);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

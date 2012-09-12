@@ -78,8 +78,6 @@ public class FreeDayRequest {
 			fdr = new FreeDayRequest();
 		case M:
 		case NP:
-			// fdr = new FreeDayRequest();
-			// break;
 		case V:
 			fdr = new FreeDayRequestInterval();
 			break;
