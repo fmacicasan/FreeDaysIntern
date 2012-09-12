@@ -3,6 +3,7 @@ package freedays.util;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -52,6 +53,7 @@ public class MailUtils {
     
 	private static final String DEFAULT_TIMESHEET_CONTENT = "Hello %s,\n You can find attached your auto-generated timesheet.\n This feature is still under construction so please report any problems.\n\n";
 	private static final String DEFAULT_TIMESHEET_SUBJECT = "HRApp - Timesheets";
+	
 	@Autowired
     private JavaMailSenderImpl mailSender;
 	
@@ -113,7 +115,7 @@ public class MailUtils {
 		tol.add("osuciu@sdl.com");
 		tol.add("fmacicasan@sdl.com");		
 		//add HR ppl to email flows
-		tol.addAll(ApplicationRegularUser.findAllHRManagementEmails());
+//		tol.addAll(ApplicationRegularUser.findAllHRManagementEmails());
 	}
 	private String finalizeContent(final String content){
 		StringBuilder sb = new StringBuilder();
@@ -308,10 +310,12 @@ public class MailUtils {
 		MailUtils.sendAsyncMail(email, RESET_PASS_TITLE, content);
 		
 	}
+	
 	public static void sendTimesheet(String email, String person, File f) {
 		final String content = String.format(MailUtils.DEFAULT_TIMESHEET_CONTENT, person);
 		System.out.println("the name in send is:"+f.getName());
-		MailUtils.sendAsyncMail(email, DEFAULT_TIMESHEET_SUBJECT+"-"+person, content,f);
+		List<String> emails = Arrays.asList(email, PropertiesUtil.getProperty("timesheetHRDestinationAddress"));
+		MailUtils.sendAsyncMail(emails, DEFAULT_TIMESHEET_SUBJECT+"-"+person, content,f);
 		
 	}
     

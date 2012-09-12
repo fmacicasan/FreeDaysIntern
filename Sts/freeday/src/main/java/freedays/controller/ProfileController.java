@@ -189,6 +189,7 @@ public class ProfileController {
 		}
 	}
 
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/fromregularuser/{id}", method = RequestMethod.GET)
 	public String getFromRegularUser(@PathVariable("id") Long id,
 			HttpServletResponse response, Model uiModel) {
@@ -205,6 +206,7 @@ public class ProfileController {
 	}
 	
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/fromfduser/{id}", method = RequestMethod.GET)
 	public String getFromFDUser(@PathVariable("id") Long id,
 			HttpServletResponse response, Model uiModel){
@@ -276,4 +278,17 @@ public class ProfileController {
 		return false;
 
 	}
+
+	@RequestMapping(method = RequestMethod.GET)
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            uiModel.addAttribute("profiles", Profile.findProfileEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
+            float nrOfPages = (float) Profile.countProfiles() / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            uiModel.addAttribute("profiles", Profile.findAllProfiles());
+        }
+        return "profile/list";
+    }
 }

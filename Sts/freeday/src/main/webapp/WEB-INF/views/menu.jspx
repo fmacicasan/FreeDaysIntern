@@ -6,8 +6,10 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-		<menu:category id="c_general" z="user-managed">
-			<sec:authorize ifAnyGranted="ROLE_USER">
+		<sec:authorize ifAnyGranted="ROLE_USER">
+			<menu:category id="c_general" z="user-managed">
+
+				
 				<menu:item id="c_general_reportvacation" url="/report/vacation"
 					z="user-managed" />
 				<sec:authorize ifAnyGranted="ROLE_REQUESTGRANTER, ROLE_TEAMVIEWER">
@@ -18,8 +20,9 @@
 					<menu:item id="c_general_timesheet" url="/timesheet"
 						z="user-managed" />
 				</sec:authorize>
-			</sec:authorize>
-		</menu:category>
+
+			</menu:category>
+		</sec:authorize>
 		<!--
 		<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT">
 			<menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
@@ -75,19 +78,25 @@
 					z="user-managed" />
 			</menu:category>
 		</sec:authorize>
-		<sec:authorize ifAllGranted="ROLE_USER">
+
 			<menu:category id="c_profile" z="">
+			<sec:authorize ifAllGranted="ROLE_USER">
+			
 				<menu:item id="i_profile_view" messageCode="global_menu_view"
 					url="/profile?own" z="user-managed" />
+	
 				<sec:authorize ifAllGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
 					<menu:item id="i_profile_new" messageCode="global_menu_new"
 						url="/profile?form" z="jJdoNgHzi2j40KmZhRZdIERjx2o=" />
 				</sec:authorize>
+			
+			</sec:authorize>
+					
 				<menu:item id="i_profile_list" messageCode="global_menu_list"
 					url="/profile?page=1&amp;size=${empty param.size ? 10 : param.size}"
 					z="t1CrNa+uENOxLCDiOT+tIq8WzUw=" />
 			</menu:category>
-		</sec:authorize>
+
 		<sec:authorize
 			ifAnyGranted="ROLE_USER, ROLE_FDADMIN, ROLE_REQUESTGRANTER, ROLE_SUPERAPPROVER">
 			<menu:category id="c_request" z="K3H2XFvnqlPuvp7YsYXLCJyWwHQ=">
