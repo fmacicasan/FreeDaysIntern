@@ -39,7 +39,8 @@ public class TimesheetController {
 		TimesheetUser us = TimesheetUser.findTimesheetUserByUsername(username);
 		TimesheetGenerator x = new POIGenerator(us);
 		for (int i = 0; i < 12; i++) {
-			x.generateDoc("..\\timesheets\\Timesheet" + " "
+			
+			x.generateDoc("Timesheet" + " "
 					+ us.getRegularUser().getFullName() + " "
 					+ WeekConstants.monthStrings[i] + ".xls", i, 2011);
 		}
