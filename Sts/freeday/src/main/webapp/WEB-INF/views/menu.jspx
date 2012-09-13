@@ -9,7 +9,7 @@
 		<sec:authorize ifAnyGranted="ROLE_USER">
 			<menu:category id="c_general" z="user-managed">
 
-				
+
 				<menu:item id="c_general_reportvacation" url="/report/vacation"
 					z="user-managed" />
 				<sec:authorize ifAnyGranted="ROLE_REQUESTGRANTER, ROLE_TEAMVIEWER">
@@ -24,20 +24,20 @@
 				-->
 			</menu:category>
 		</sec:authorize>
-		
-		<sec:authorize ifAllGranted="ROLE_USER">
-		<menu:category id="c_timesheet" z="user-managed">
-		
-		<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
-			<menu:item id="c_timesheet_all" url="/timesheet?all"
-				z="user-managed" />
-		</sec:authorize>
-			<menu:item id="c_timesheet_own" url="/timesheet?own"
-				z="user-managed" />
 
-		</menu:category>
+		<sec:authorize ifAllGranted="ROLE_USER">
+			<menu:category id="c_timesheet" z="user-managed">
+
+				<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
+					<menu:item id="c_timesheet_all" url="/timesheet?all"
+						z="user-managed" />
+				</sec:authorize>
+				<menu:item id="c_timesheet_own" url="/timesheet?own"
+					z="user-managed" />
+
+			</menu:category>
 		</sec:authorize>
-		
+
 		<!--
 		<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT">
 			<menu:category id="c_hrmanagement" z="metG9fhpv7elnF1sRhi1eoCN3Ik=">
@@ -59,9 +59,9 @@
 					z="4A2sbthw8nfd/hiTM8jQPEoPTro=" />
 			</menu:category>
 		</sec:authorize>
+
 		<sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_FDADMIN">
 			<menu:category id="c_regularuser" z="f0656ccKE9tZTK8IgpHTnLvK31o=">
-				<!--  <sec:authorize ifAllGranted="ROLE_ADMIN">-->
 				<menu:item id="i_regularuser_new" messageCode="global_menu_new"
 					url="/regularusers?form" z="mJnN9ca8ulLAQ68LRQlrBZlmV1k=" />
 				<menu:item id="i_regularuser_list" messageCode="global_menu_list"
@@ -71,10 +71,12 @@
 					messageCode="global_menu_search" url="/regularusers?search" z="" />
 				<menu:item id="i_admin_regular_user_history"
 					messageCode="global_menu_history" url="/regularusers?history" z="" />
-				<!--</sec:authorize>-->
+
 			</menu:category>
 		</sec:authorize>
-		<sec:authorize ifAllGranted="ROLE_FDADMIN,ROLE_HRMANAGEMENT">
+
+
+		<sec:authorize ifAnyGranted="ROLE_FDADMIN,ROLE_HRMANAGEMENT">
 			<menu:category id="c_fduser" z="oTLNSHRQ4yDI1lQjPTS1rrrrduY=">
 				<menu:item id="i_fduser_new" messageCode="global_menu_new"
 					url="/fdusers?form" z="Qdsa6WGJlB3M2+gN+qG6Cb7AWZQ=" />
@@ -83,6 +85,8 @@
 					z="pkNWU4h6kpXe7wSaynWgJxFsvqE=" />
 			</menu:category>
 		</sec:authorize>
+
+
 		<sec:authorize ifAllGranted="ROLE_USER">
 			<menu:category id="c_account" z="">
 				<menu:item id="i_regular_user_update" messageCode="global_menu"
@@ -94,23 +98,23 @@
 			</menu:category>
 		</sec:authorize>
 
-			<menu:category id="c_profile" z="">
+		<menu:category id="c_profile" z="">
 			<sec:authorize ifAllGranted="ROLE_USER">
-			
+
 				<menu:item id="i_profile_view" messageCode="global_menu_view"
 					url="/profile?own" z="user-managed" />
-	
-				<sec:authorize ifAllGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
+
+				<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
 					<menu:item id="i_profile_new" messageCode="global_menu_new"
 						url="/profile?form" z="jJdoNgHzi2j40KmZhRZdIERjx2o=" />
 				</sec:authorize>
-			
+
 			</sec:authorize>
-					
-				<menu:item id="i_profile_list" messageCode="global_menu_list"
-					url="/profile?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="t1CrNa+uENOxLCDiOT+tIq8WzUw=" />
-			</menu:category>
+
+			<menu:item id="i_profile_list" messageCode="global_menu_list"
+				url="/profile?page=1&amp;size=${empty param.size ? 10 : param.size}"
+				z="t1CrNa+uENOxLCDiOT+tIq8WzUw=" />
+		</menu:category>
 
 		<sec:authorize
 			ifAnyGranted="ROLE_USER, ROLE_FDADMIN, ROLE_REQUESTGRANTER, ROLE_SUPERAPPROVER">
