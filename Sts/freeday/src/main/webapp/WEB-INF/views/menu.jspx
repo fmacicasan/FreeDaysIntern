@@ -27,9 +27,11 @@
 		
 		<sec:authorize ifAllGranted="ROLE_USER">
 		<menu:category id="c_timesheet" z="user-managed">
-
+		
+		<sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
 			<menu:item id="c_timesheet_all" url="/timesheet?all"
 				z="user-managed" />
+		</sec:authorize>
 			<menu:item id="c_timesheet_own" url="/timesheet?own"
 				z="user-managed" />
 

@@ -728,7 +728,7 @@ public class POIGenerator implements TimesheetGenerator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		File f = new File(workbookname);
+		File f = new File(location + workbookname);
 		// if(f!=null){
 		// //System.out.println("absolute"+f.getAbsolutePath());
 		// //System.out.println("cucurigu"+f.isFile());

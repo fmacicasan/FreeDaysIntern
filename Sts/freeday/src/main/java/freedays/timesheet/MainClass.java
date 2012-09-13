@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import freedays.util.MailUtils;
+import freedays.util.PropertiesUtil;
 
 public class MainClass {
 
@@ -40,8 +41,7 @@ public class MainClass {
 		TimesheetGenerator x = new POIGenerator(k);
 		String fileName = "Timesheet" + " " + k.getRegularUser().getFullName()
 				+ " " + WeekConstants.monthStrings[month] + ".xls";
-		File f = x.generateDoc(fileName, month,
-				TIMESHEET_YEAR);
+		File f = x.generateDoc(fileName, month, TIMESHEET_YEAR);
 		MailUtils.sendTimesheet(k.getRegularUser().getEmail(), k
 				.getRegularUser().getFullName(), f);
 	}
