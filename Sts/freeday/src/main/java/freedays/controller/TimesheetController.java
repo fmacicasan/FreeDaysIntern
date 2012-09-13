@@ -90,7 +90,10 @@ public class TimesheetController {
 
 		TimesheetUser user = TimesheetUser.findTimesheetUserByUsername(p
 				.getName());
-
+		if(user == null){
+			return "timesheet/notimesheetuser";
+		}
+		
 		ArrayList<String> users = new ArrayList<String>();
 		users.add(user.getRegularUser().getUsername());
 

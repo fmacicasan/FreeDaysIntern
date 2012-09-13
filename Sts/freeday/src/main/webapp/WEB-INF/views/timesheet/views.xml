@@ -7,4 +7,7 @@
 	<definition extends="default" name="timesheet/confirm">
         <put-attribute name="body" value="/WEB-INF/views/timesheet/confirm.jspx"/>
     </definition>
+	<definition extends="default" name="timesheet/notimesheetuser">
+        <put-attribute name="body" value="/WEB-INF/views/timesheet/notimesheetuser.jspx"/>
+    </definition>
 </tiles-definitions>
