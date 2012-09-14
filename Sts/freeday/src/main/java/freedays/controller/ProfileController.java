@@ -56,7 +56,7 @@ public class ProfileController {
 
 	/**
 	 * Model attribute exposed to the view containing all the regular user that
-	 * have no associated FDUser yet.
+	 * have no associated Profile yet.
 	 * 
 	 * @return
 	 */

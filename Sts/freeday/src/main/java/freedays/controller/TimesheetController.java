@@ -23,6 +23,7 @@ import freedays.security.UserContextService;
 
 import freedays.timesheet.MainClass;
 import freedays.util.DateUtils;
+import freedays.util.PropertiesUtil;
 
 @RequestMapping("/timesheet")
 @Controller
@@ -91,6 +92,7 @@ public class TimesheetController {
 		TimesheetUser user = TimesheetUser.findTimesheetUserByUsername(p
 				.getName());
 		if(user == null){
+			uiModel.addAttribute("supportuser",PropertiesUtil.getProperty("timesheet.support.user"));
 			return "timesheet/notimesheetuser";
 		}
 		

@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.Cascade;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -30,7 +31,7 @@ import antlr.collections.List;
 @RooJavaBean
 @RooToString
 @RooEntity
-public class Profile {
+public class Profile {	
 
 	@OneToOne
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
