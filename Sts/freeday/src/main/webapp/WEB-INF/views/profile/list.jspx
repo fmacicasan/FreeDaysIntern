@@ -12,7 +12,7 @@
     <c:set value="false" var="var_delete"/>
     <c:set value="false" var="var_create"/>
     <c:set value="false" var="var_update"/>
-    <sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
+    <sec:authorize ifAllGranted="ROLE_ADMIN">
         <c:set value="true" var="var_delete"/>
         <c:set value="true" var="var_create"/>
         <c:set value="true" var="var_update"/>

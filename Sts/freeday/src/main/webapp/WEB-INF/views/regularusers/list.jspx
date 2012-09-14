@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page"
+<div
+	xmlns:sec="http://www.springframework.org/security/tags" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
 	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
+    <c:set value="false" var="var_delete"/>
+    <c:set value="false" var="var_create"/>
+    <c:set value="false" var="var_update"/>
+    <sec:authorize ifAllGranted="ROLE_ADMIN">
+        <c:set value="true" var="var_delete"/>
+        <c:set value="true" var="var_create"/>
+        <c:set value="true" var="var_update"/>
+    </sec:authorize>
+
 	<page:list id="pl_freedays_domain_RegularUser" items="${regularusers}"
 		z="HYU6ZpOer09+VMedGUJG2GVBsLo=">
 		<table:table data="${regularusers}" id="l_freedays_domain_RegularUser"
-			path="/regularusers" z="user-managed" linkFromRows="profile/fromregularuser">
+			path="/regularusers" z="user-managed" create="${var_create}" delete="${var_delete}" update="${var_update}" linkFromRows="profile/fromregularuser">
 
 			<!--
 

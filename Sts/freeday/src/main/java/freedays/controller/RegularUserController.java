@@ -291,7 +291,7 @@ public class RegularUserController {
 	 * @param uiModel
 	 * @return
 	 */
-	@PostAuthorize("hasRole('ROLE_ADMIN') or hasPermission(#id,'RegularUser', 'own')")
+	@PostAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FDADMIN') or hasPermission(#id,'RegularUser', 'own')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, Model uiModel) {
 		addDateTimeFormatPatterns(uiModel);
