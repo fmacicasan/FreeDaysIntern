@@ -3,20 +3,20 @@
 
 package freedays.controller;
 
+import freedays.app.FDUser;
+import freedays.domain.AdvancedUserRole;
+import freedays.domain.ApplicationRegularUser;
+import freedays.domain.Request;
 import java.io.UnsupportedEncodingException;
+import java.lang.String;
 import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-
-import freedays.domain.AdvancedUserRole;
-import freedays.domain.Request;
 
 privileged aspect FDUserController_Roo_Controller {
     

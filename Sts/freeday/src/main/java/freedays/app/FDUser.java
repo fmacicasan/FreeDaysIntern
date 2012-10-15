@@ -17,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.stereotype.Service;
 
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
@@ -30,6 +31,7 @@ import freedays.validation.annotation.BusinessDay;
  * @author fmacicasan
  *
  */
+
 @RooJavaBean
 @RooToString
 @RooEntity

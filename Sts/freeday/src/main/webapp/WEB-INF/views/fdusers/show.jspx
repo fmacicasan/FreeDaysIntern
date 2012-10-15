@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:sec="http://www.springframework.org/security/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:sec="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    
     <c:set value="false" var="var_delete"/>
     <c:set value="false" var="var_create"/>
     <c:set value="false" var="var_update"/>
     <c:set value="false" var="var_list"/>
-    
-    <sec:authorize access="hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')"  >
-    	<sec:authentication property="principal.username" var="username" />
-    	<!-- <c:out value="${fduser.regularUser.username}" />
+    <sec:authorize access="hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')">
+        <sec:authentication property="principal.username" var="username"/>
+        <!-- <c:out value="${fduser.regularUser.username}" />
     	<c:out value="${username}"/> -->
-    	<c:if test="${username ne fduser.regularUser.username }">
-    		<c:set value="true" var="var_delete"/>
-    	</c:if>
-	    <c:set value="true" var="var_create"/>
-	    <c:set value="true" var="var_update"/>
-	    <c:set value="true" var="var_list"/>
+        <c:if test="${username ne fduser.regularUser.username }">
+            <c:set value="true" var="var_delete"/>
+        </c:if>
+        <c:set value="true" var="var_create"/>
+        <c:set value="true" var="var_update"/>
+        <c:set value="true" var="var_list"/>
     </sec:authorize>
-    
-    
-    <page:show id="ps_freedays_app_FDUser" object="${fduser}"   path="/fdusers" z="zYolE4UwnK5PbSJDxdI3c+XHTgY=" create="${var_create}" delete="${var_delete}" update="${var_update}" list="${var_list}">
+    <page:show create="${var_create}" delete="${var_delete}" id="ps_freedays_app_FDUser" list="${var_list}" object="${fduser}" path="/fdusers" update="${var_update}" z="user-managed">
         <field:display field="regularUser" id="s_freedays_app_FDUser_regularUser" object="${fduser}" z="fI22in9AI8xpg13XJCqqGP7NJik="/>
         <field:display field="jobrole" id="s_freedays_app_FDUser_jobrole" object="${fduser}" z="user-managed"/>
         <field:display field="roles" id="s_freedays_app_FDUser_roles" object="${fduser}" z="user-managed"/>
@@ -32,21 +28,20 @@
         <!--  <field:display field="maxDerogation" id="c_freedays_app_FDUser_maxderogation" object="${fduser}" z="user-managed"/>-->
         <field:display field="maxDerogation" id="s_freedays_app_FDUser_maxDerogation" object="${fduser}" z="user-managed"/>
     </page:show>
-    
-    <sec:authentication property="principal.username" var="username" />
+    <sec:authentication property="principal.username" var="username"/>
     <c:if test="${username eq fduser.regularUser.username}">
-    	<c:if test="${not empty remainingDaysCount }">
-	    	<br />
-	    	<spring:message code="fduser_personal_request_status" var="title" />
-	    	<util:panel title="${title}" id="personal_info" z="user-managed" >
-	    		<spring:message arguments="${remainingDaysCount}" code="request_remainingdays"/>
-	            <br/>
-	            <spring:message arguments="${remainingTotalDaysCount}" code="request_remainingtotaldays"/>
-	            <br/>
-	            <spring:message arguments="${request_currentlwspecificdays}" code="request_currentlwspecificdays" />
-	            <br/>
-	            <spring:message arguments="${activeRequestCount}" code="request_activerequests"/>
-	    	</util:panel>
-    	</c:if>
+        <c:if test="${not empty remainingDaysCount }">
+            <br/>
+            <spring:message code="fduser_personal_request_status" var="title"/>
+            <util:panel id="personal_info" title="${title}" z="user-managed">
+                <spring:message arguments="${remainingDaysCount}" code="request_remainingdays"/>
+                <br/>
+                <spring:message arguments="${remainingTotalDaysCount}" code="request_remainingtotaldays"/>
+                <br/>
+                <spring:message arguments="${request_currentlwspecificdays}" code="request_currentlwspecificdays"/>
+                <br/>
+                <spring:message arguments="${activeRequestCount}" code="request_activerequests"/>
+            </util:panel>
+        </c:if>
     </c:if>
 </div>

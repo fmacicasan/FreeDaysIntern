@@ -3,24 +3,24 @@
 
 package freedays.app.form;
 
-import freedays.app.FreeDayVacation.ConfidenceLevel;
+import freedays.app.FreeDayInterval.ConfidenceLevel;
 import java.util.Calendar;
 
-privileged aspect FreeDayRequestVacation_Roo_JavaBean {
+privileged aspect FreeDayRequestInterval_Roo_JavaBean {
     
-    public Calendar FreeDayRequestVacation.getFinish() {
+    public Calendar FreeDayRequestInterval.getFinish() {
         return this.finish;
     }
     
-    public void FreeDayRequestVacation.setFinish(Calendar finish) {
+    public void FreeDayRequestInterval.setFinish(Calendar finish) {
         this.finish = finish;
     }
     
-    public ConfidenceLevel FreeDayRequestVacation.getConfidence() {
+    public ConfidenceLevel FreeDayRequestInterval.getConfidence() {
         return this.confidence;
     }
     
-    public void FreeDayRequestVacation.setConfidence(ConfidenceLevel confidence) {
+    public void FreeDayRequestInterval.setConfidence(ConfidenceLevel confidence) {
         this.confidence = confidence;
     }
     

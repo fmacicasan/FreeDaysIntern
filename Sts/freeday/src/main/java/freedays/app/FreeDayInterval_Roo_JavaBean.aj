@@ -4,21 +4,21 @@
 package freedays.app;
 
 
-privileged aspect FreeDayVacation_Roo_JavaBean {
+privileged aspect FreeDayInterval_Roo_JavaBean {
     
-    public long FreeDayVacation.getSpan() {
+    public long FreeDayInterval.getSpan() {
         return this.span;
     }
     
-    public void FreeDayVacation.setSpan(long span) {
+    public void FreeDayInterval.setSpan(long span) {
         this.span = span;
     }
     
-    public ConfidenceLevel FreeDayVacation.getConfidence() {
+    public ConfidenceLevel FreeDayInterval.getConfidence() {
         return this.confidence;
     }
     
-    public void FreeDayVacation.setConfidence(ConfidenceLevel confidence) {
+    public void FreeDayInterval.setConfidence(ConfidenceLevel confidence) {
         this.confidence = confidence;
     }
     

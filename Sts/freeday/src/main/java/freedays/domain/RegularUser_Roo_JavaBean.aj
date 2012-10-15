@@ -9,10 +9,6 @@ import java.util.Calendar;
 
 privileged aspect RegularUser_Roo_JavaBean {
     
-    public String RegularUser.getUsername() {
-        return this.username;
-    }
-    
     public void RegularUser.setUsername(String username) {
         this.username = username;
     }
@@ -25,16 +21,8 @@ privileged aspect RegularUser_Roo_JavaBean {
         this.password = password;
     }
     
-    public String RegularUser.getSurename() {
-        return this.surename;
-    }
-    
     public void RegularUser.setSurename(String surename) {
         this.surename = surename;
-    }
-    
-    public String RegularUser.getFirstname() {
-        return this.firstname;
     }
     
     public void RegularUser.setFirstname(String firstname) {
@@ -71,10 +59,6 @@ privileged aspect RegularUser_Roo_JavaBean {
     
     public void RegularUser.setCreationdate(Calendar creationdate) {
         this.creationdate = creationdate;
-    }
-    
-    public String RegularUser.getUsermodifier() {
-        return this.usermodifier;
     }
     
     public void RegularUser.setUsermodifier(String usermodifier) {

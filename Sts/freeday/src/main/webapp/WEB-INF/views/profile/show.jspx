@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:sec="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <c:set value="false" var="var_delete"/>
+    <c:set value="false" var="var_create"/>
+    <c:set value="false" var="var_update"/>
+    <c:set value="false" var="var_list"/>
+    <sec:authorize access="hasAnyRole('ROLE_HRMANAGEMENT','ROLE_FDADMIN')">
+        <sec:authentication property="principal.username" var="username"/>
+        <!-- <c:out value="${fduser.regularUser.username}" />
+    	<c:out value="${username}"/> -->
+        <c:if test="${username ne fduser.regularUser.username }">
+            <c:set value="true" var="var_delete"/>
+        </c:if>
+        <c:set value="true" var="var_create"/>
+        <c:set value="true" var="var_update"/>
+        <c:set value="true" var="var_list"/>
+    </sec:authorize>
+    <sec:authentication property="principal.username" var="username"/>
+    <page:show id="ps_freedays_domain_Profile" object="${profile}" path="/profile" z="h/kgPhQVFHSYup+YL1uz/hKwH3g=">
+        <field:display field="document" id="s_freedays_domain_Profile_document" object="${profile}" render="${hasProfile}" z="user-managed"/>
+        <field:display field="regularUser" id="s_freedays_domain_Profile_regularUser" object="${profile}" z="xmSL2IkBVJlV+xXnvOphrCPi0G0="/>
+    </page:show>
+</div>

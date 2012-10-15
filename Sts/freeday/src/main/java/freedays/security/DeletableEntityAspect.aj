@@ -3,21 +3,21 @@ package freedays.security;
 import javax.persistence.Transient;
 
 public aspect DeletableEntityAspect {
-	
+
 	declare parents : freedays.domain.RegularUser implements DeletableEntity;
 	declare parents : freedays.app.FDUser implements DeletableEntity;
 	declare parents : freedays.app.FreeDayRL implements DeletableEntity;
 	declare parents : freedays.timesheet.* implements DeletableEntity;
-
+	declare parents : freedays.domain.Profile implements DeletableEntity;
 
 	@Transient
 	private transient boolean DeletableEntity.deletable = true;
-	
-	public boolean DeletableEntity.isDeletable(){
+
+	public boolean DeletableEntity.isDeletable() {
 		return deletable;
 	}
-	
-	public void DeletableEntity.setDeletable(boolean deletable){
+
+	public void DeletableEntity.setDeletable(boolean deletable) {
 		this.deletable = deletable;
 	}
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:sec="http://www.springframework.org/security/tags" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 	
+	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <c:set value="false" var="var_delete"/>
+    <c:set value="false" var="var_create"/>
+    <c:set value="false" var="var_update"/>
+    <sec:authorize ifAllGranted="ROLE_ADMIN">
+        <c:set value="true" var="var_delete"/>
+        <c:set value="true" var="var_create"/>
+        <c:set value="true" var="var_update"/>
+    </sec:authorize>
+    <page:list id="pl_freedays_domain_Profile" items="${profiles}" z="YPiWqyB2TjVngoYEAQ2R7pYb2a8=">
+        <table:table create="${var_create}" data="${profiles}" delete="${var_delete}" id="l_freedays_domain_Profile" path="/profile" update="${var_update}" z="user-managed" linkFromRows="profile">
+            <table:column id="c_freedays_domain_Profile_regularUser" maxLength="-1" property="regularUser" z="user-managed"/>
+            <sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT,ROLE_FDADMIN">
+                <table:column id="c_freedays_domain_Profile_document" maxLength="-1" property="document" z="user-managed"/>
+            </sec:authorize>
+        </table:table>
+    </page:list>
+	
+	      		<spring:message code="freedays_profile_explanation_title" var="paneltitle" />
+				
+       			<util:panel title="${paneltitle}" id="profiles_info_panel_id" openPane="true">
+       				<ul>
+       					<lh><spring:message code="freedays_profile_explanation_info" /> </lh>
+						<spring:message code="fdays_appinstance" var="allAppInstances"  />
+						<c:forTokens items="${allAppInstances}" delims=";" var="appInstance">
+							<li>
+							<b>
+							<a href="${fn:escapeXml(appInstance)}"
+								title="${fn:escapeXml(appInstance)}"> 
+								<c:out value="${appInstance}" />
+							</a>
+							</b>
+							</li>
+						</c:forTokens>
+       				</ul>
+       			</util:panel>
+	
+</div>

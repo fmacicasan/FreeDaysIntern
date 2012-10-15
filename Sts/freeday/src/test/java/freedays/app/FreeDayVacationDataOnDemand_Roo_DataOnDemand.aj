@@ -4,8 +4,8 @@
 package freedays.app;
 
 import freedays.app.FreeDay.FreeDayStatus;
+import freedays.app.FreeDayInterval.ConfidenceLevel;
 import freedays.app.FreeDayVacation;
-import freedays.app.FreeDayVacation.ConfidenceLevel;
 import freedays.domain.ApprovalStrategy;
 import java.lang.Integer;
 import java.lang.String;

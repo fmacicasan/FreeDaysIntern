@@ -33,13 +33,7 @@ privileged aspect RegularUserController_Roo_Controller {
 	    
 
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String RegularUserController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("regularUser", RegularUser.findRegularUser(id));
-        addDateTimeFormatPatterns(uiModel);
-        return "regularusers/update";
-    }
+
     
     @ModelAttribute("regularusers")
     public Collection<RegularUser> RegularUserController.populateRegularUsers() {

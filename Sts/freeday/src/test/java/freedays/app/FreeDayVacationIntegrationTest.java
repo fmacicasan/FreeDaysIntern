@@ -7,20 +7,24 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 
 import freedays.app.FreeDay.FreeDayStatus;
-import freedays.app.FreeDayVacation.ConfidenceLevel;
+import freedays.app.FreeDayInterval.ConfidenceLevel;
 import freedays.app.form.FreeDayRequest.RequestType;
-import freedays.app.form.FreeDayRequestVacation;
+import freedays.app.form.FreeDayRequestInterval;
 import freedays.domain.Request;
 import freedays.util.DateUtils;
 
 @RooIntegrationTest(entity = FreeDayVacation.class)
 public class FreeDayVacationIntegrationTest {
 
-	FreeDayRequestVacation fdrv;
+	FreeDayRequestInterval fdrv;
 	String username;
+	
+    @Autowired
+    private FreeDayVacationDataOnDemand dod;
 	
 	@Before
 	public void setUp(){
@@ -34,7 +38,7 @@ public class FreeDayVacationIntegrationTest {
 			username = null;
 		}
 		
-    	fdrv = new FreeDayRequestVacation();
+    	fdrv = new FreeDayRequestInterval();
 //    	Calendar c = DateUtils.generateFutureBusinessDay();
     	Calendar c = DateUtils.generateBusinessDay();
     	fdrv.setReqdate(c);
@@ -113,4 +117,14 @@ public class FreeDayVacationIntegrationTest {
     }
 
 
+
+	@Test
+    public void testFindAllFreeDayVacations() {
+        org.junit.Assert.assertNotNull("Data on demand for 'FreeDayVacation' failed to initialize correctly", dod.getRandomFreeDayVacation());
+        long count = freedays.app.FreeDayVacation.countFreeDayVacations();
+        org.junit.Assert.assertTrue("Too expensive to perform a find all test for 'FreeDayVacation', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 10000);
+        java.util.List<freedays.app.FreeDayVacation> result = freedays.app.FreeDayVacation.findAllFreeDayVacations();
+        org.junit.Assert.assertNotNull("Find all method for 'FreeDayVacation' illegally returned null", result);
+        org.junit.Assert.assertTrue("Find all method for 'FreeDayVacation' failed to return any data", result.size() > 0);
+    }
 }

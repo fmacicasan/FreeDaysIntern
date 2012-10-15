@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import freedays.app.FreeDay;
-import freedays.app.form.FreeDayRequestVacation;
+import freedays.app.form.FreeDayRequestInterval;
 import freedays.security.UserContextService;
 import freedays.util.ValidationUtils;
 import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
@@ -20,7 +20,7 @@ import freedays.validation.annotation.UniqueVacationPerActiveOrApprovedReq;
  * @see UniqueVacationPerActiveOrApprovedReq
  */
 @RooJavaBean
-public class CheckUniqueVacationPerActiveOrApprovedReqValidator implements ConstraintValidator<UniqueVacationPerActiveOrApprovedReq, FreeDayRequestVacation> {
+public class CheckUniqueVacationPerActiveOrApprovedReqValidator implements ConstraintValidator<UniqueVacationPerActiveOrApprovedReq, FreeDayRequestInterval> {
 
 	@Autowired
 	private UserContextService userContextService;
@@ -32,7 +32,7 @@ public class CheckUniqueVacationPerActiveOrApprovedReqValidator implements Const
 	}
 
 	@Override
-	public boolean isValid(FreeDayRequestVacation fdr, ConstraintValidatorContext arg1) {
+	public boolean isValid(FreeDayRequestInterval fdr, ConstraintValidatorContext arg1) {
 		List<FreeDay> lfd = FreeDay.getAllNotFailedRequestsByUsername(userContextService.getCurrentUser());
 		for (FreeDay freeDay : lfd) {
 				Calendar start = fdr.getReqdate();

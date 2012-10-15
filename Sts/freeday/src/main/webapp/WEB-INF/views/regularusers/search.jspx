@@ -12,14 +12,16 @@
     </page:create>
     
     <page:list id="pl_freedays_domain_RegularUser" items="${regularusers}" z="HYU6ZpOer09+VMedGUJG2GVBsLo=">
-        <table:table data="${regularusers}"  id="l_freedays_domain_RegularUser" path="/regularusers" z="qMrIW6AcsfL3GgNOM4N6mQflrgo=">
+        <table:table data="${regularusers}"  id="l_freedays_domain_RegularUser" path="/regularusers" z="qMrIW6AcsfL3GgNOM4N6mQflrgo=" linkFromRows="profile/fromregularuser">
             <table:column id="c_freedays_domain_RegularUser_username" maxLength="-1" property="username" z="zsEf2Sxo5GwCs/VOBUA6GYJm8JE="/>
             <table:column render="false" id="c_freedays_domain_RegularUser_password" property="password" z="eFI4SYezX5FdzmZTSbDr22KBjKI="/>
             <!-- <table:column id="c_freedays_domain_RegularUser_email" maxLength="-1" property="email" z="qyG0fpGjnyAjNEijzHsSX8m9BYg="/> -->
             <table:column id="c_freedays_domain_RegularUser_surename" maxLength="-1" property="surename" z="ccjjcKG658BF457vBWDS/78vxik="/>
             <table:column id="c_freedays_domain_RegularUser_firstname" maxLength="-1" property="firstname" z="VSC2sQYH91s/dMoZvF6Bv03NTZ8="/>
+            <!--
             <table:column id="c_freedays_domain_RegularUser_deleted" maxLength="-1"  property="deleted" z="r3Rb12SHqSNkiZO2lNBKHu6MHA8="/>
             <table:column id="c_freedays_domain_RegularUser_activ" maxLength="-1" property="activ" z=""/>
+            -->
             <table:column id="c_freedays_domain_RegularUser_lastmodified" maxLength="-1" property="lastmodified" calendar="true" dateTimePattern="${regularUser_lastmodified_date_format}" z=""/>
             <table:column id="c_freedays_domain_RegularUser_creationdate" maxLength="-1" property="creationdate" calendar="true" dateTimePattern="${regularUser_creationdate_date_format}" z=""/>
             <table:column id="c_freedays_domain_RegularUser_usermodifier" maxLength="-1" property="usermodifier" z=""/>

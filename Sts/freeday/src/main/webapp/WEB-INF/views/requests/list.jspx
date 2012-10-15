@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:sec="http://www.springframework.org/security/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <c:set value="false" var="var_delete"/>
-    <c:set value="false" var="var_create"/>
-    <c:set value="false" var="var_update"/>
-    <sec:authorize ifAnyGranted="ROLE_REQUESTGRANTER">
-        <!--         <c:set value="true" var="var_update"/> -->
-    </sec:authorize>
-    <page:list id="pl_freedays_domain_Request" items="${requests}" z="user-managed">
-        <table:table create="${var_create}" data="${requests}" delete="${var_delete}" id="l_freedays_domain_Request" path="/requests" update="${var_update}"  z="user-managed">
-            <table:column id="c_freedays_domain_Request_appreguser" label="Requester" maxLength="-1" property="appreguser" z="user-managed"/>
-            <!--             <table:column id="c_freedays_domain_Request_requestable" label="FreeDay" maxLength="-1" property="requestable" z="user-managed"/> -->
-            <table:column id="c_freedays_domain_request_requestable_type" maxLength="-1" property="type" z="user-managed"/>
-            <table:column id="c_freedays_domain_request_requestable_date" maxLength="-1" property="date" sortablekey="date" z="user-managed"/>
-            <table:column id="c_freedays_domain_request_requestable_reason" maxLength="-1" property="reason" z="user-managed"/>
-            <table:column id="c_freedays_domain_Request_status" maxLength="-1" property="status" z="user-managed"/>
-            <table:column id="c_freedays_domain_Request_approver" maxLength="-1" property="approver" z="user-managed"/>
-            <table:column render="false" id="c_freedays_domain_Request_requestable" property="requestable" z="user-managed"/>
-            <table:column render="false" id="c_freedays_domain_Request_feedback" property="feedback" z="user-managed"/>
-        </table:table>
-    </page:list>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<c:set value="false" var="var_delete" />
+	<c:set value="false" var="var_create" />
+	<c:set value="false" var="var_update" />
+	<sec:authorize ifAnyGranted="ROLE_REQUESTGRANTER">
+		<!--         <c:set value="true" var="var_update"/> -->
+	</sec:authorize>
+	<page:list id="pl_freedays_domain_Request" items="${requests}"
+		z="user-managed">
+		<table:table create="${var_create}" data="${requests}"
+			delete="${var_delete}" id="l_freedays_domain_Request"
+			path="/requests" update="${var_update}" z="user-managed">
+			<table:column id="c_freedays_domain_Request_appreguser"
+				label="Requester" maxLength="-1" property="appreguser"
+				z="user-managed" />
+			<!--             <table:column id="c_freedays_domain_Request_requestable" label="FreeDay" maxLength="-1" property="requestable" z="user-managed"/> -->
+			<table:column id="c_freedays_domain_request_requestable_type"
+				maxLength="-1" property="type" z="user-managed" />
+			<table:column id="c_freedays_domain_request_requestable_date"
+				maxLength="-1" property="date" sortablekey="date" z="user-managed" />
+			<table:column id="c_freedays_domain_request_requestable_reason"
+				maxLength="-1" property="reason" z="user-managed" />
+			<table:column id="c_freedays_domain_Request_status" maxLength="-1"
+				property="status" z="user-managed" />
+			<table:column id="c_freedays_domain_Request_approver" maxLength="-1"
+				property="approver" z="user-managed" />
+			<table:column render="false"
+				id="c_freedays_domain_Request_requestable" property="requestable"
+				z="user-managed" />
+			<table:column render="false" id="c_freedays_domain_Request_feedback"
+				property="feedback" z="user-managed" />
+		</table:table>
+	</page:list>
 </div>

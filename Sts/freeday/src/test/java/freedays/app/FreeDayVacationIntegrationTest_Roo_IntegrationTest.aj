@@ -3,10 +3,8 @@
 
 package freedays.app;
 
-import freedays.app.FreeDayVacationDataOnDemand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +16,6 @@ privileged aspect FreeDayVacationIntegrationTest_Roo_IntegrationTest {
     declare @type: FreeDayVacationIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml");
     
     declare @type: FreeDayVacationIntegrationTest: @Transactional;
-    
-    @Autowired
-    private FreeDayVacationDataOnDemand FreeDayVacationIntegrationTest.dod;
     
     @Test
     public void FreeDayVacationIntegrationTest.testCountFreeDayVacations() {
@@ -38,16 +33,6 @@ privileged aspect FreeDayVacationIntegrationTest_Roo_IntegrationTest {
         obj = freedays.app.FreeDayVacation.findFreeDayVacation(id);
         org.junit.Assert.assertNotNull("Find method for 'FreeDayVacation' illegally returned null for id '" + id + "'", obj);
         org.junit.Assert.assertEquals("Find method for 'FreeDayVacation' returned the incorrect identifier", id, obj.getId());
-    }
-    
-    @Test
-    public void FreeDayVacationIntegrationTest.testFindAllFreeDayVacations() {
-        org.junit.Assert.assertNotNull("Data on demand for 'FreeDayVacation' failed to initialize correctly", dod.getRandomFreeDayVacation());
-        long count = freedays.app.FreeDayVacation.countFreeDayVacations();
-        org.junit.Assert.assertTrue("Too expensive to perform a find all test for 'FreeDayVacation', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        java.util.List<freedays.app.FreeDayVacation> result = freedays.app.FreeDayVacation.findAllFreeDayVacations();
-        org.junit.Assert.assertNotNull("Find all method for 'FreeDayVacation' illegally returned null", result);
-        org.junit.Assert.assertTrue("Find all method for 'FreeDayVacation' failed to return any data", result.size() > 0);
     }
     
     @Test
