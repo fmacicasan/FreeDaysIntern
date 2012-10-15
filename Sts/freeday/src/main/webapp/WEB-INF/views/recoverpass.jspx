@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+ <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:spring="http://www.springframework.org/tags"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
