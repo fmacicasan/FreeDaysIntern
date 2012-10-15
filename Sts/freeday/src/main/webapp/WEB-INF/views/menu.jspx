@@ -9,9 +9,6 @@
                 <sec:authorize ifAnyGranted="ROLE_REQUESTGRANTER, ROLE_TEAMVIEWER" >
                 	<menu:item id="c_general_reportvacationteam" url="/report/vacation/team" z="user-managed" />
                 </sec:authorize>
-                <sec:authorize ifAllGranted="ROLE_AAA">
-                    <menu:item id="c_general_timesheet" url="/timesheet" z="user-managed"/>
-                </sec:authorize>
             </sec:authorize>
         </menu:category>
         <sec:authorize ifAnyGranted="ROLE_HRMANAGEMENT">
@@ -99,6 +96,10 @@
                 <menu:item id="i_schedule_list" messageCode="global_menu_list" url="/schedules?page=1&amp;size=${empty param.size ? 10 : param.size}" z="a/r1d6sKwcNadI1IqZ37gsZ4WRs="/>
             </menu:category>
         </sec:authorize>
-        
+        <sec:authorize ifAllGranted="ROLE_ADMIN">
+	        <menu:category id="c_general_timesheet_cat" z="user-managed">
+	        	<menu:item id="c_general_timesheet" url="/timesheet" z="user-managed"/>
+	        </menu:category>
+        </sec:authorize>
     </menu:menu>
 </div>

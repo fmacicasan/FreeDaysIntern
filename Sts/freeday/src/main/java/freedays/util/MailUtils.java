@@ -38,7 +38,7 @@ public class MailUtils {
 	private static final String DEFAULT_REGISTERNOTIFICATION_CONTENT = "New user registration!\nPlease process the account of %s.\n";
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_SUBJECT = "HRApp - Account activation";
 	private static final String DEFAULT_POSTPROCESSINGNOTIF_CONTENT = "Hello %s,\n your account has been processed.\n";
-	private static final String SOURCE = "hrapp@sdl.com";
+	private static final String SOURCE = PropertiesUtil.getProperty(PropertiesUtil.EMAIL_SOURCE);
 	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_SUBJECT = "HRApp - Request curtesy notification";
 	private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_CONTENT = "Hello %s,\n your subordinate %s has a new request to approve!\n %s \n\n";
     private static final String DEFAULT_UPPER_REQUESTNOTIFICATION_DENY_CONTENT="Hello %s,\n your subordinate %s denied the request!\n %s \n\n";
@@ -52,6 +52,7 @@ public class MailUtils {
     
 	private static final String DEFAULT_TIMESHEET_CONTENT = "Hello %s,\n You can find attached your auto-generated timesheet.\n This feature is still under construction so please report any problems.\n\n";
 	private static final String DEFAULT_TIMESHEET_SUBJECT = "HRApp - Timesheets";
+	
 	@Autowired
     private JavaMailSenderImpl mailSender;
 	
@@ -100,7 +101,6 @@ public class MailUtils {
     		helper.setText(finalizeContent(content),isHtml);
     		helper.setFrom(MailUtils.SOURCE);
     		if(f!=null){
-    			
     			helper.addAttachment(f.getName(), f);
     		}
     		mailSender.send(mm);

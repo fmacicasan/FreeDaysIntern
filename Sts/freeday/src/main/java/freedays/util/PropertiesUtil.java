@@ -31,5 +31,24 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 	public static Integer getInteger(String name){
 		return Integer.parseInt(getProperty(name));
 	}
+	
+    public static final String EMAIL_SOURCE = "email.source";
+    public static final String REGISTERNOTIFICATION_SUBJECT = "registrationnotification.subject";
+    public static final String REGISTERNOTIFICATION_CONTENT = "registrationnotification.content";
+    public static final String POSTPROCESSINGNOTIF_SUBJECT = "postprocessingnotif.subeject";
+    public static final String POSTPROCESSINGNOTIF_CONTENT = "postprocessingnotif.content";
+    public static final String UPPER_REQUESTNOTIFICATION_SUBJECT = "upper.requestnotification.subject";
+    public static final String UPPER_REQUESTNOTIFICATION_CONTENT = "upper.requestnotification.content";
+    public static final String UPPER_REQUESTNOTIFICATION_DENY_CONTENT = "upper.requestnotification.deny.content";
+    public static final String UPPER_REQUESTNOTIFICATION_CANCEL_CONTENT = "upper.requestnotification.cancel.content";
+    public static final String APPLICATION_LINK = "application.link";
+    public static final String LOWER_REQUESTNOTIFICATION_ONUPPEREVENT = "lower.requestnotification.onupperevent";
+
+    public static final String RESET_PASS_TITLE = "reset.pass.title";
+    public static final String RESET_PASS_MESSAGE = "reset.pass.message";
+    public static final String RESET_PASS_MESSAGE_TOKEN = "reset.pass.message.token";
+
+    public static final String TIMESHEET_CONTENT = "timesheet.content";
+    public static final String TIMESHEET_SUBJECT = "timesheet.subject";
 
 }

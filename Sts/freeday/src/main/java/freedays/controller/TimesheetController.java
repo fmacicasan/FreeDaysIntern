@@ -32,17 +32,17 @@ public class TimesheetController {
 	public String timesheetReportGeneration(Model uiModel){
 		MainClass mc = new MainClass();
 		//TimesheetUser us = TimesheetUser.findTimesheetUserByUsername(userContextService.getCurrentUser());
-//		List<TimesheetUser> lus = TimesheetUser.findAllTimesheetUsers();
-//		for(TimesheetUser tu : lus){
-//			try{
-//			System.out.println("====================generationg for:"+tu.getRegularUser().getFullName());
-//				//if(tu.getId() != 188L && tu.getId() != 189L){
-//					mc.doMain(tu,DateUtils.getCurrentMonth()-1);
-//				//}
-//			}catch(Exception e){
-//				System.out.println("FAULURE!!!!!!!!!!!!!!!!!!!!"+tu.getFduser().getRegularUser().getFullName());
-//			}
-//		}
+		List<TimesheetUser> lus = TimesheetUser.findAllTimesheetUsers();
+		for(TimesheetUser tu : lus){
+			try{
+			    System.out.println("====================generationg for:"+tu.getRegularUser().getFullName());
+				if(tu.getId() == 193L || tu.getId() == 188L){
+					mc.doMain(tu,DateUtils.getCurrentMonth()-1);
+				}
+			}catch(Exception e){
+				System.out.println("FAULURE!!!!!!!!!!!!!!!!!!!!"+tu.getFduser().getRegularUser().getFullName());
+			}
+		}
 //		System.out.println("test");
 		
 //	
