@@ -257,4 +257,109 @@ public class DateUtilsTest {
         Assert.assertFalse(DateUtils.isDayEqual(start, end));
     }
 	
+	@Test
+	public void testDateDifferenceInWokringDaysSameDay(){
+	    String day = "12/12/2012";
+        Calendar c = DateUtils.convString2Calendar(day);
+        Assert.assertEquals(0, DateUtils.dateDifferenceInWorkingDays(c, c).intValue());
+	}
+	
+	@Test
+    public void testDateDifferenceInWokringDaysConsecutive(){
+        String day = "12/12/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/13/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(1, DateUtils.dateDifferenceInWorkingDays(c1, c2).intValue());
+    }
+	
+	@Test
+    public void testDateDifferenceInWokringDaysWeekendInBetween(){
+        String day = "12/12/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/19/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(5, DateUtils.dateDifferenceInWorkingDays(c1, c2).intValue());
+    }
+	
+	@Test
+    public void testDateDifferenceInWokringDaysRomanianLegalDayInBetween(){
+        String day = "11/29/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/03/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(1, DateUtils.dateDifferenceInWorkingDays(c1, c2).intValue());
+    }
+	
+	@Test
+    public void testDateDifferenceInWokringDaysRomanianLegalDayStart(){
+        String day = "11/30/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/03/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(1, DateUtils.dateDifferenceInWorkingDays(c1, c2).intValue());
+    }
+	
+	@Test
+    public void testDateDifferenceInWokringDaysRomanianWeekendStart(){
+        String day = "12/01/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/03/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(1, DateUtils.dateDifferenceInWorkingDays(c1, c2).intValue());
+    }
+	
+	
+	@Test
+    public void testDateDifferenceInWokringDaysIncludingEndsSameDay(){
+        String day = "12/12/2012";
+        Calendar c = DateUtils.convString2Calendar(day);
+        Assert.assertEquals(1, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c, c).intValue());
+    }
+    
+    @Test
+    public void testDateDifferenceInWokringDaysIncludingEndsConsecutive(){
+        String day = "12/12/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/13/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(2, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c1, c2).intValue());
+    }
+    
+    @Test
+    public void testDateDifferenceInWokringDaysWeekendIncludingEndsInBetween(){
+        String day = "12/12/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/19/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(6, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c1, c2).intValue());
+    }
+    
+    @Test
+    public void testDateDifferenceInWokringDaysRomanianLegalIncludingEndsDayInBetween(){
+        String day = "11/29/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/03/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(2, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c1, c2).intValue());
+    }
+    
+    @Test
+    public void testDateDifferenceInWokringDaysRomanianIncludingEndsLegalDayStart(){
+        String day = "11/30/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/03/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(1, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c1, c2).intValue());
+    }
+    
+    @Test
+    public void testDateDifferenceInWokringDaysRomanianIncludingEndsWeekendStart(){
+        String day = "12/01/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "12/03/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(1, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c1, c2).intValue());
+    }
+	
 }

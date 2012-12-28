@@ -463,21 +463,12 @@ public abstract class FreeDay {
 	public void beforeCreate() {
 		this.year = this.getDate().get(Calendar.YEAR);
 
+		this.number = 0;
 		if (this.getDate().get(Calendar.YEAR) != this.getEnd().get(Calendar.YEAR)) {
-			// this.number =
-			// this.getDate().getActualMaximum(Calendar.DAY_OF_YEAR) -
-			// this.getDate().get(Calendar.DAY_OF_YEAR);
-			// Calendar end = (Calendar)this.getDate().clone();
-			// end.set(Calendar.DAY_OF_YEAR,
-			// end.getActualMaximum(Calendar.DAY_OF_YEAR));
-			// this.number =
-			// DateUtils.dateDifferenceInBusinessDays(this.getDate(),
-			// end).intValue();
 			Calendar start = (Calendar) this.getEnd().clone();
 			start.set(Calendar.DAY_OF_YEAR, 1);
-			this.number = DateUtils.dateDifferenceInBusinessDays(start, this.getEnd()).intValue();
-		} else {
-			this.number = 0;
+			// number of days in the new year (should be subtracted from span when computing the current's year used days)
+			this.number = DateUtils.dateDifferenceInWorkingDaysIncludingEnds(start, this.getEnd()).intValue();
 		}
 
 	}

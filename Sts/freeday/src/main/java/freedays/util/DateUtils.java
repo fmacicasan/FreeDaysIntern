@@ -147,21 +147,30 @@ public class DateUtils {
 	 * considering the Romanian legislation legal days for the current year.
 	 * A work day is represented by a normal business day except the ones
 	 * that are free based on the romanian legislation.
-	 * @param start
-	 * @param end
-	 * @return
+	 * @param start the start of the period
+	 * @param end the end of the period
+	 * @return the number of working days between (start, end] (does not consider the 1st day)
 	 */
 	public static Long dateDifferenceInWorkingDays(Calendar start, Calendar end) {
-		if(start == null)throw new IllegalArgumentException("The start argument is required");
-		if(end == null)throw new IllegalArgumentException("The end argument is required");
-		if(start.compareTo(end)>0) throw new IllegalArgumentException("start must be before end");
-		Long span = 0L;
-		for(Calendar c = (Calendar) start.clone();c.compareTo(end)<0;c.add(Calendar.DAY_OF_YEAR, 1)){
-			if(ValidationUtils.checkBusinessDay(c) && !ValidationUtils.checkRomanianLegalHoliday(c)){
-				span ++;
-			}
-		}		
-		return span;
+	    if(start.compareTo(end) == 0){
+	        return 0l;
+	    }
+		Calendar clone = (Calendar) start.clone();
+        clone.add(Calendar.DAY_OF_YEAR, 1);
+        return dateDifferenceInWorkingDaysIncludingEnds(clone, end);
+	}
+	
+	public static Long dateDifferenceInWorkingDaysIncludingEnds(Calendar start, Calendar end){
+	    if(start == null)throw new IllegalArgumentException("The start argument is required");
+        if(end == null)throw new IllegalArgumentException("The end argument is required");
+        if(start.compareTo(end)>0) throw new IllegalArgumentException("start must be before end");
+        Long span = 0L;
+        for(Calendar c = (Calendar) start.clone();c.compareTo(end)<=0;c.add(Calendar.DAY_OF_YEAR, 1)){
+            if(ValidationUtils.checkBusinessDay(c) && !ValidationUtils.checkRomanianLegalHoliday(c)){
+                span ++;
+            }
+        }       
+        return span;
 	}
 	
 	public static Long dateDifferenceInBusinessDays(Calendar start, Calendar end) {
@@ -169,7 +178,9 @@ public class DateUtils {
 		if(end == null)throw new IllegalArgumentException("The end argument is required");
 		if(start.compareTo(end)>0) throw new IllegalArgumentException("start must be before end");		
 		Long span = 0L;
-		for(Calendar c = (Calendar) start.clone();c.compareTo(end)<0;c.add(Calendar.DAY_OF_YEAR, 1)){
+		Calendar clone = (Calendar) start.clone();
+		clone.add(Calendar.DAY_OF_YEAR, 1);
+		for(Calendar c = clone;c.compareTo(end)<=0;c.add(Calendar.DAY_OF_YEAR, 1)){
 			if(ValidationUtils.checkBusinessDay(c)){
 				span ++;
 			}
