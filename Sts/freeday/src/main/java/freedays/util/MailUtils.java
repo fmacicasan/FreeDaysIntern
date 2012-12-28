@@ -125,7 +125,6 @@ public class MailUtils {
 	}
 
 	private void finalizeTo(final List<String> tol) {
-		tol.add("osuciu@sdl.com");
 		tol.add("fmacicasan@sdl.com");
 		// add HR ppl to email flows
 		// tol.addAll(ApplicationRegularUser.findAllHRManagementEmails());
