@@ -11,8 +11,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import freedays.timesheet.Schedule;
+import freedays.timesheet.TimesheetUser.Department;
 
+import javax.persistence.Column;
 import javax.persistence.EntityManager;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
@@ -33,6 +37,19 @@ public class TimesheetUser implements Serializable{
     @NotNull
     @OneToOne
     private FDUser fduser;
+    
+    
+    public enum Department{SOFTWARE, ADMINISTRATIV, DATA, LANGUAGE_GATEWAY, LANGUAGE_TECHNOLOGIES, MARKETING, DESKTOP }
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Department department; 
+    
+    
+    
+    @NotNull
+    @Column(name = "teampay")
+    private Integer teampay;
+    
 
     public void test() {
     	fduser.getRegularUser().getFullName();
@@ -64,6 +81,20 @@ public class TimesheetUser implements Serializable{
 	
 	
 	public String getDepartment(){
-		return DEFAULT_DEPARTMENT;
+		return department.toString();
 	}
+	
+    public void setDepartment(Department administrativ) {
+       this.department = administrativ;
+        
+    }
+    
+    public static List<TimesheetUser> findAllTimesheetUsersByDepartment(Department department2) {
+        if (department2 == null) throw new IllegalArgumentException("The department2 argument is required");
+        EntityManager em = TimesheetUser.entityManager();
+        TypedQuery<TimesheetUser> q = em.createQuery("SELECT t FROM TimesheetUser AS t WHERE t.department = :department order by t.teampay ASC ", TimesheetUser.class);
+        q.setParameter("department", department2);        
+        List<TimesheetUser> results = q.getResultList();
+        return results;
+    }
 }

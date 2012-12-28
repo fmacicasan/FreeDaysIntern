@@ -7,5 +7,5 @@ public interface TimesheetGenerator {
 
 	public File generateDoc(String wbname, int year, int month);
 	
-	public void generateDocHeader(Sheet sheet1, int month);
+	public int generateDocHeader(Sheet sheet1, int month);
 }

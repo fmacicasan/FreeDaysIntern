@@ -455,7 +455,7 @@ public class POIGenerator implements TimesheetGenerator {
 	 * Heder creation
 	 * @param sheet1 TODO
 	 */
-	public void generateDocHeader(Sheet sheet1, int month) {
+	public int generateDocHeader(Sheet sheet1, int month) {
 
 		CellRangeAddress region = CellRangeAddress.valueOf("A1:D1");
 		CellRangeAddress regionComp = CellRangeAddress.valueOf("G1:J1");
@@ -501,6 +501,8 @@ public class POIGenerator implements TimesheetGenerator {
 		Cell cellDepartment = row.createCell(10);
 		cellDepartment.setCellValue(pEmp.getDepartment().toString());
 
+		
+		return 1;
 	}
 
 	/**

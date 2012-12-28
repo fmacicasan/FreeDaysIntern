@@ -5,6 +5,7 @@ package freedays.timesheet;
 
 import freedays.app.FDUser;
 import freedays.timesheet.Schedule;
+import java.lang.Integer;
 import java.util.List;
 
 privileged aspect TimesheetUser_Roo_JavaBean {
@@ -23,6 +24,14 @@ privileged aspect TimesheetUser_Roo_JavaBean {
     
     public void TimesheetUser.setFduser(FDUser fduser) {
         this.fduser = fduser;
+    }
+    
+    public Integer TimesheetUser.getTeampay() {
+        return this.teampay;
+    }
+    
+    public void TimesheetUser.setTeampay(Integer teampay) {
+        this.teampay = teampay;
     }
     
 }
