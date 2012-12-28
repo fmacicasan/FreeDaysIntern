@@ -85,7 +85,7 @@ public class FreeDayAbstraction {
 		for(FreeDayM fd : lfd){
 			FreeDayAbstraction fda = new FreeDayAbstraction();
 			fda.setStart(fd.getDate());
-			fda.setEnd(fd.getDate());
+			fda.setEnd(fd.getEnd());
 			fda.setPattern(Pattern.getSpecialPattern(DEFAULT_PHASE_CODE_NOTAPPLICABLE,DEFAULT_PROJECT_CODE_MEDICAL,DEFAULT_LABORBILLING_CODE_NOTAPPLICABLE));
 			fda.setUsername(username);
 			lfda.add(fda);
