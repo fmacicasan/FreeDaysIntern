@@ -121,7 +121,7 @@ public class DateUtilsTest {
 	
 	@Test
 	public void testDateDifferenceInWorkingDays(){
-		Calendar date = Calendar.getInstance();
+		Calendar date = DateUtils.convString2Calendar("12/12/1989");
 		Integer i = new java.util.Random().nextInt(10)+1;
 		Calendar then = DateUtils.dateAddRomanianBusinessDay(date,i.longValue());
 		Assert.assertEquals(i.longValue(), DateUtils.dateDifferenceInWorkingDays(date, then).longValue());
@@ -360,6 +360,15 @@ public class DateUtilsTest {
         String day2 = "12/03/2012";
         Calendar c2 = DateUtils.convString2Calendar(day2);
         Assert.assertEquals(1, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c1, c2).intValue());
+    }
+    
+    @Test
+    public void testDateDifferenceInWokringDaysRomanianIncludingEndsNewYear(){
+        String day = "01/01/2012";
+        Calendar c1 = DateUtils.convString2Calendar(day);
+        String day2 = "01/04/2012";
+        Calendar c2 = DateUtils.convString2Calendar(day2);
+        Assert.assertEquals(2, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c1, c2).intValue());
     }
 	
 }
