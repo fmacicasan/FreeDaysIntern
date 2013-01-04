@@ -3,6 +3,7 @@ package freedays.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -310,7 +311,15 @@ public class RequestController {
     @PreAuthorize("hasRole('ROLE_REQUESTGRANTER') and hasPermission(0,'ApplicationRegularUser','superapprover')")
     @RequestMapping(params="superapprove", method = RequestMethod.GET)
     public String listSuperApprove(Model uiModel){
-    	uiModel.addAttribute("requests",processRequest(Request.findAllPendingSuperApprovalsByUsername(this.userContextService.getCurrentUser())));
+    	List<Request> findAllPendingSuperApprovalsByUsername = Request.findAllPendingSuperApprovalsByUsername(this.userContextService.getCurrentUser());
+        System.out.println(findAllPendingSuperApprovalsByUsername);
+        List<FriendlyRequest> requests;
+        if(findAllPendingSuperApprovalsByUsername != null){
+            requests = processRequest(findAllPendingSuperApprovalsByUsername);
+        } else {
+            requests = Collections.emptyList();
+        }
+    	uiModel.addAttribute("requests", requests);
     	return "requests/list";
     }
     
