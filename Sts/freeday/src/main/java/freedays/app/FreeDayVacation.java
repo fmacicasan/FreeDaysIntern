@@ -20,6 +20,7 @@ import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.app.form.FreeDayRequestInterval;
 import freedays.mongo.PersonRepository;
+import freedays.timesheet.ReportLegend;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
 import freedays.util.ValidationUtils;
@@ -52,5 +53,16 @@ public class FreeDayVacation extends FreeDayInterval {
 	public RequestType getType() {
 		return RequestType.V;
 	}
+	
+	//Added for report generation
+    @Override
+    public boolean hasReportLegend() {
+        return true;
+    }
+
+    @Override
+    public String getReportLegendCode() {
+        return ReportLegend.LEGAL.getTerm();
+    }
 
 }

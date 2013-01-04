@@ -10,6 +10,7 @@ import freedays.app.FreeDayInterval.ConfidenceLevel;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequestInterval;
 import freedays.app.form.FreeDayRequest.RequestType;
+import freedays.timesheet.ReportLegend;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
 
@@ -68,4 +69,15 @@ public class FreeDayNP extends FreeDayInterval {
 	public String getReportType() {
 		return PropertiesUtil.getProperty("freedaysreport_legend_typenp");
 	}
+	
+	//Added for report generation
+    @Override
+    public boolean hasReportLegend() {
+        return true;
+    }
+
+    @Override
+    public String getReportLegendCode() {
+        return ReportLegend.NO_PAY.getTerm();
+    }
 }

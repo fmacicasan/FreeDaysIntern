@@ -99,6 +99,8 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 			fdUser.setMaxFreeDays(newMaxValue);
 			fdUser.merge();			
 		}
+		
+		MailUtils.sendNewYearUpdate();
 	}
 
 }

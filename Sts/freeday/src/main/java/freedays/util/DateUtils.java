@@ -260,7 +260,7 @@ public class DateUtils {
 		return ls;
 	}
 	
-	private static int preprocessMonth(int month){
+	public static int preprocessMonth(int month){
 		return (month+12)%12;
 	}
 	
@@ -280,6 +280,9 @@ public class DateUtils {
 		return yearAdjuster;
 	}
 	
+	public static int getDaysInMonth112(int month){
+	    return getDaysInMonth(transformMonth(preprocessMonth(month)));
+	}
 	/**
 	 * Returns the number of days in a given month.
 	 * MOnth -1 is december and 12 is january
@@ -518,6 +521,31 @@ public class DateUtils {
 	    }
 	    return false;
 	}
+	
+	public static boolean isIntervalOverlapFilter(Calendar start, Calendar end, Calendar filterLeft, Calendar filterRight){
+	    return !(end.before(filterLeft) || start.after(filterRight));
+	}
+	
+	public static boolean isDateBetween(Calendar date, Calendar left, Calendar right){
+	    return date.compareTo(left) >= 0 && date.compareTo(right) <= 0;
+	}
+	
+	public static Calendar createFirstDayOfMonth(Integer month, Integer year){
+	    if(!isValidMonth(month)){
+	        month = preprocessMonth(month);
+	    }
+	    Calendar c = DateUtils.convString2Calendar(month+"/1/"+year);
+	    return c;
+	}
+	
+	public static Calendar createLastDayOfMonth(Integer month, Integer year){
+        if(!isValidMonth(month)){
+            month = preprocessMonth(month);
+        }
+        Calendar c = DateUtils.convString2Calendar(month+"/"+getDaysInMonth(transformMonth(month))+"/"+year);
+        return c;
+    }
+	
 
 	
 }

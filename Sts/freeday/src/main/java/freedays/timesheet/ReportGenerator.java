@@ -2,6 +2,7 @@ package freedays.timesheet;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import freedays.timesheet.TimesheetUser.Department;
 import freedays.util.DateUtils;
+import freedays.util.PropertiesUtil;
 
 //TODO: create structure for entities within report: START<COLUMN, ROW>, END, CONTENT and populate report with that 
 @Service
@@ -58,9 +60,12 @@ public class ReportGenerator implements TimesheetGenerator {
     private void generateDocContent(Sheet sheet, int rowcnt, int month) {
         // iterate over departments
         int nrcrt=0;
+     // iterate over teampays
+        // iterate over each timesheet user
+        // obtain array with status for each day
         for (Department department : Department.values()) {
             List<TimesheetUser> timesheetUsers = TimesheetUser.findAllTimesheetUsersByDepartment(department);
-            if (timesheetUsers.size() > 0) {
+//            if (timesheetUsers.size() > 0) {
                 int currentteampay = -1;
                 for(TimesheetUser timesheetUser : timesheetUsers) {
                     if(timesheetUser.getTeampay() != currentteampay){
@@ -68,23 +73,37 @@ public class ReportGenerator implements TimesheetGenerator {
                         currentteampay = timesheetUser.getTeampay();
                         populateCell(sheet, row,constructCellRange("A","AX",rowcnt),0,department+" "+currentteampay);
                     }
+                    String timesheetUserUsername = timesheetUser.getFduser().getRegularUser().getUsername();
+                    Integer noOfHours = timesheetUser.getScheduleLst().get(0).getPattern().getNoOfHours();
+                    
+                    List<FreeDayAbstraction> allGrantedFreeDays = FreeDayAbstraction.getAllGrantedFreeDayAbstractionsFilteredByMonth(month, PropertiesUtil.getInteger(PropertiesUtil.CURRENT_YEAR),timesheetUserUsername);
+                    System.out.println("Timesheet user"+timesheetUserUsername+noOfHours);
+                    
                     Row row = sheet.createRow((short) ++rowcnt);
                     populateCell(sheet, row,"A1:A1",0, ++nrcrt+"");
                     populateCell(sheet, row,constructCellRange("B","D", rowcnt),1,timesheetUser.getRegularUser().getFullName());
                     
-                    int offset = 3;
-                    int daysInMonthPlusOffset = DateUtils.getDaysInMonth(month)+offset;
-                    for(int day = offset;day <= daysInMonthPlusOffset; day++){
+                    int offset = 4;
+                    int daysInMonthPlusOffset = DateUtils.getDaysInMonth112(month)+offset;
+                    Map<Integer,Cell> dayToCell = new HashMap<Integer, Cell>();
+                    for(int day = offset;day < daysInMonthPlusOffset; day++){
                         Cell cellDayOfMonth = row.createCell(day);
-                        cellDayOfMonth.setCellValue(8);
+                        cellDayOfMonth.setCellValue(noOfHours);
+                        //start with 1
+                        dayToCell.put(day-offset+1, cellDayOfMonth);
                     }
-                }
+                    
+                    for(FreeDayAbstraction abstraction : allGrantedFreeDays){
+                        for(Calendar c = (Calendar)abstraction.getStart().clone(); c.compareTo(abstraction.getEnd()) <= 0;c.add(Calendar.DAY_OF_YEAR, 1)){
+                            dayToCell.get(c.get(Calendar.DAY_OF_MONTH)).setCellValue(abstraction.getLegendCode());
+                        }
+                    }
+//                }
                 
             }
         }
-        // iterate over teampays
-        // iterate over each timesheet user
-        // obtain array with status for each day        
+        // do ordering stuff 
+                
     }
 
 
@@ -145,7 +164,7 @@ public class ReportGenerator implements TimesheetGenerator {
 //        cellNameHuman.setCellValue("Numele si prenumele");
         populateCell(sheet1, row,constructCellRange("B","D", i),j,"Numele si prenumele");
         
-        int daysInMonth = DateUtils.getDaysInMonth(month);
+        int daysInMonth = DateUtils.getDaysInMonth112(month);
         
         j++;
         j++;

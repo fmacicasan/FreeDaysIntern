@@ -476,4 +476,13 @@ public abstract class FreeDay {
 	public Calendar getEnd() {
 		return this.getDate();
 	}
+	
+	//Added for report generation
+	public boolean hasReportLegend(){
+	    return false;
+	}
+	
+	public String getReportLegendCode(){
+	    return null;
+	}
 }

@@ -178,7 +178,7 @@ public class DateUtilsTest {
 	
 	@Test
 	public void testRomanianBusinessDayAdd(){
-		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int year = 2011;
 		Calendar c = new GregorianCalendar(year,Calendar.AUGUST,1);
 		Calendar cc = new GregorianCalendar(year,Calendar.AUGUST,DateUtils.getDaysInMonth(Calendar.AUGUST));
 		long dd = DateUtils.dateDifferenceInWorkingDays(c, cc);
@@ -370,5 +370,156 @@ public class DateUtilsTest {
         Calendar c2 = DateUtils.convString2Calendar(day2);
         Assert.assertEquals(2, DateUtils.dateDifferenceInWorkingDaysIncludingEnds(c1, c2).intValue());
     }
+    
+    private static final Integer MOCK_YEAR = 1989;
+    private static final Integer MOCK_MONTH = 12;
+    @Test
+    public void testCreateLastDayOfMonthNormalMonth(){
+        Calendar lastDay = DateUtils.convString2Calendar(MOCK_MONTH+"/31/"+MOCK_YEAR);
+        
+        Calendar supposedLastDay = DateUtils.createLastDayOfMonth(MOCK_MONTH, MOCK_YEAR);
+        
+        Assert.assertTrue(DateUtils.isDayEqual(lastDay, supposedLastDay));
+    }
+    
+    @Test
+    public void testCreateFirstDayOfMonthNormalMonth(){
+        Calendar lastDay = DateUtils.convString2Calendar(MOCK_MONTH+"/1/"+MOCK_YEAR);
+        
+        Calendar supposedLastDay = DateUtils.createFirstDayOfMonth(MOCK_MONTH, MOCK_YEAR);
+        
+        Assert.assertTrue(DateUtils.isDayEqual(lastDay, supposedLastDay));
+    }
+    
+    @Test
+    public void testIsDateBetweenInside(){
+        Calendar dateInside = DateUtils.convString2Calendar("12/13/1989");
+        Calendar dateLeft = DateUtils.convString2Calendar("12/11/1989");
+        Calendar dateRight = DateUtils.convString2Calendar("12/14/1989");
+        
+        boolean result = DateUtils.isDateBetween(dateInside, dateLeft, dateRight);
+        
+        Assert.assertTrue(result);
+    }
+    
+    @Test
+    public void testIsDateBetweenOutside(){
+        Calendar dateInside = DateUtils.convString2Calendar("12/10/1989");
+        Calendar dateLeft = DateUtils.convString2Calendar("12/11/1989");
+        Calendar dateRight = DateUtils.convString2Calendar("12/14/1989");
+        
+        boolean result = DateUtils.isDateBetween(dateInside, dateLeft, dateRight);
+        
+        Assert.assertFalse(result);
+    }
+    
+    @Test
+    public void testIsDateBetweenEdge(){
+        Calendar dateInside = DateUtils.convString2Calendar("12/11/1989");
+        Calendar dateLeft = DateUtils.convString2Calendar("12/11/1989");
+        Calendar dateRight = DateUtils.convString2Calendar("12/14/1989");
+        
+        boolean result = DateUtils.isDateBetween(dateInside, dateLeft, dateRight);
+        
+        Assert.assertTrue(result);
+    }
+    
+    @Test
+    public void testIsIntervalOverlapFilterFullInside() {
+        Calendar start = DateUtils.convString2Calendar("12/10/1989");
+        Calendar end = DateUtils.convString2Calendar("12/12/1989");
+        Calendar filterleft = DateUtils.convString2Calendar("12/09/1989");
+        Calendar filterRight = DateUtils.convString2Calendar("12/13/1989");
+        
+        boolean result = DateUtils.isIntervalOverlapFilter(start, end, filterleft, filterRight);
+        
+        Assert.assertTrue(result);
+    }
+    
+    @Test
+    public void testIsIntervalOverlapFilterOverlapLeft() {
+        Calendar start = DateUtils.convString2Calendar("12/07/1989");
+        Calendar end = DateUtils.convString2Calendar("12/12/1989");
+        Calendar filterleft = DateUtils.convString2Calendar("12/09/1989");
+        Calendar filterRight = DateUtils.convString2Calendar("12/13/1989");
+        
+        boolean result = DateUtils.isIntervalOverlapFilter(start, end, filterleft, filterRight);
+        
+        Assert.assertTrue(result);
+    }
+    
+    @Test
+    public void testIsIntervalOverlapFilterOverlapRight() {
+        Calendar start = DateUtils.convString2Calendar("12/10/1989");
+        Calendar end = DateUtils.convString2Calendar("12/15/1989");
+        Calendar filterleft = DateUtils.convString2Calendar("12/09/1989");
+        Calendar filterRight = DateUtils.convString2Calendar("12/13/1989");
+        
+        boolean result = DateUtils.isIntervalOverlapFilter(start, end, filterleft, filterRight);
+        
+        Assert.assertTrue(result);
+    }
+    
+    @Test
+    public void testIsIntervalOverlapFilterFullOutside() {
+        Calendar start = DateUtils.convString2Calendar("12/08/1989");
+        Calendar end = DateUtils.convString2Calendar("12/15/1989");
+        Calendar filterleft = DateUtils.convString2Calendar("12/09/1989");
+        Calendar filterRight = DateUtils.convString2Calendar("12/13/1989");
+        
+        boolean result = DateUtils.isIntervalOverlapFilter(start, end, filterleft, filterRight);
+        
+        Assert.assertTrue(result);
+    }
+    
+    @Test
+    public void testIsIntervalOverlapFilterDisjointLeft() {
+        Calendar start = DateUtils.convString2Calendar("12/06/1989");
+        Calendar end = DateUtils.convString2Calendar("12/07/1989");
+        Calendar filterleft = DateUtils.convString2Calendar("12/09/1989");
+        Calendar filterRight = DateUtils.convString2Calendar("12/13/1989");
+        
+        boolean result = DateUtils.isIntervalOverlapFilter(start, end, filterleft, filterRight);
+        
+        Assert.assertFalse(result);
+    }
+    
+    @Test
+    public void testIsIntervalOverlapFilterDisjointRight() {
+        Calendar start = DateUtils.convString2Calendar("12/15/1989");
+        Calendar end = DateUtils.convString2Calendar("12/16/1989");
+        Calendar filterleft = DateUtils.convString2Calendar("12/09/1989");
+        Calendar filterRight = DateUtils.convString2Calendar("12/13/1989");
+        
+        boolean result = DateUtils.isIntervalOverlapFilter(start, end, filterleft, filterRight);
+        
+        Assert.assertFalse(result);
+    }
+    
+    @Test
+    public void testIsIntervalOverlapFilterSame() {
+        Calendar filterleft = DateUtils.convString2Calendar("12/09/1989");
+        Calendar filterRight = DateUtils.convString2Calendar("12/13/1989");
+        
+        boolean result = DateUtils.isIntervalOverlapFilter(filterleft, filterRight, filterleft, filterRight);
+        
+        Assert.assertTrue(result);
+    }
+    
+    @Test
+    public void testIsIntervalOverlapFilterOverlap1Day() {
+        Calendar start = DateUtils.convString2Calendar("12/08/1989");
+        Calendar end = DateUtils.convString2Calendar("12/15/1989");
+        Calendar filterleft = DateUtils.convString2Calendar("12/15/1989");
+        Calendar filterRight = DateUtils.convString2Calendar("12/16/1989");
+        
+        boolean result = DateUtils.isIntervalOverlapFilter(start, end, filterleft, filterRight);
+        
+        Assert.assertTrue(result);
+    }
+    
+    
+    
+    
 	
 }

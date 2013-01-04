@@ -373,5 +373,9 @@ public class MailUtils {
 				+ person, content, f);
 
 	}
+	
+	public static void sendNewYearUpdate(){
+	    MailUtils.sendAsyncMail("fmacicasan@sdl.com", "New Year Updates", "New Year updates successful!");
+	}
 
 }

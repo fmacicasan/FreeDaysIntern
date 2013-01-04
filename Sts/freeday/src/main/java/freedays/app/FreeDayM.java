@@ -14,6 +14,7 @@ import freedays.app.FreeDay.FreeDayStatus;
 import freedays.app.form.FreeDayRequest;
 import freedays.app.form.FreeDayRequest.RequestType;
 import freedays.domain.RegularUser;
+import freedays.timesheet.ReportLegend;
 import freedays.util.PropertiesUtil;
 
 @RooJavaBean
@@ -71,4 +72,15 @@ public class FreeDayM extends FreeDayInterval {
 		q.setParameter("approveList", FreeDayStatus.getAllGrantedStatus());
 		return q.getResultList();
 	}
+	
+	//Added for report generation
+    @Override
+    public boolean hasReportLegend() {
+        return true;
+    }
+
+    @Override
+    public String getReportLegendCode() {
+        return ReportLegend.MEDICAL.getTerm();
+    }
 }

@@ -13,7 +13,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import freedays.app.FDUser;
+import freedays.domain.RegularUser;
 import freedays.timesheet.TimesheetUser.Department;
+import freedays.util.PropertiesUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml")
@@ -24,7 +27,7 @@ public class ReportGeneratorTest {
     
     @Test
     public void testCreation() {
-        File file = reportGenerator.generateDoc("D:\\Freedays\\report.xls", 10, 2012);
+        File file = reportGenerator.generateDoc(PropertiesUtil.getProperty(PropertiesUtil.TIMESHEET_LOCATION_ROOT)+"/10_2012.xls", 1, 2013);
         
         Assert.assertTrue(file.exists());
     }
@@ -51,6 +54,14 @@ public class ReportGeneratorTest {
             
             timesheetUser.persist();
             
+        }
+    }
+    
+//    @Test
+    public void reportRemainingDays2012(){
+        System.out.println("||Name||Remaining Days||");
+        for(FDUser fduser: FDUser.findAllReportableFDUsers()){
+            System.out.println("||"+fduser.getRegularUser().getFullName()+"||"+fduser.computeteAvailableFreeDaysTotal()+"||");
         }
     }
     

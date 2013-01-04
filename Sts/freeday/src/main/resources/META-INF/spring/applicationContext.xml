@@ -142,7 +142,7 @@
     	<!-- <task:scheduled ref="scheduleService" method="generateTimesheets"  cron="25 05 13 * * *"/> -->
     	<task:scheduled ref="scheduleService" method="verifyExpiredPasswordRequests" cron="0 15 0/6 * * *"/>
     	<!-- schedule new year updates at 04:43 on December 30st -->
-    	<!-- <task:scheduled ref="scheduleService" method="updateNewYearFreeDays" cron="0 43 4 30 12 ?" /> -->
+    	<task:scheduled ref="scheduleService" method="updateNewYearFreeDays" cron="0 46 15 31 12 ?" />
     </task:scheduled-tasks> 
     
     <!--  <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>

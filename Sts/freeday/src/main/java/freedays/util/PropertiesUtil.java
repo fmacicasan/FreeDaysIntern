@@ -50,5 +50,9 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 
     public static final String TIMESHEET_CONTENT = "timesheet.content";
     public static final String TIMESHEET_SUBJECT = "timesheet.subject";
+    
+    public static final String TIMESHEET_LOCATION_ROOT = "timesheet.generation.location";
+    
+    public static final String CURRENT_YEAR = "default.current.year";
 
 }
