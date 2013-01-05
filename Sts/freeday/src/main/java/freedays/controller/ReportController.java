@@ -158,7 +158,8 @@ public class ReportController {
 	 * @param uiModel
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') OR hasPermission(5, 'Menu', 'team')")
+//	@PreAuthorize("hasRole('ROLE_REQUESTGRANTER') OR hasPermission(5, 'Menu', 'team')")
+	@PreAuthorize("hasRole('ROLE_TEAMVIEWER')")
 	@RequestMapping(value = "/vacation/team", method = RequestMethod.GET)
 	public String reportVacationPlansTeam(
 			@RequestParam(value = "m", required = false) Integer m,

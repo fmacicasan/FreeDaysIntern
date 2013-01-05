@@ -94,7 +94,9 @@ public class AuthentificationController extends
 			    //TODO use LEFT JOIN FETCH
 				ApplicationRegularUser aruGranter = ApplicationRegularUser.findByUsernameWithRoles(aru.getGranter().getRegularUser().getUsername());
 				//check weather he is a request granter or is not in the super user's team
-				if(isRequestGranter || !aruGranter.isSuperUser()){
+//				if(isRequestGranter || !aruGranter.isSuperUser()){
+			    // permit all for a team view
+				if(isRequestGranter || aruGranter != null){
 					authorities.add(new GrantedAuthorityImpl("ROLE_TEAMVIEWER"));
 				} 
 			}
