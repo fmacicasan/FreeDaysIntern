@@ -499,7 +499,7 @@ public class POIGenerator implements TimesheetGenerator {
 				.setCellValue(DEFAULT_TIMESHEET_HEADER_LABEL_DEPARTMENT);
 
 		Cell cellDepartment = row.createCell(10);
-		cellDepartment.setCellValue(pEmp.getDepartment().toString());
+		cellDepartment.setCellValue(pEmp.getDepartmentString().toString());
 
 		
 		return 1;

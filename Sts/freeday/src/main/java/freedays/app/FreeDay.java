@@ -29,6 +29,7 @@ import freedays.app.form.FreeDayUserList;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.ApprovalStrategy;
 import freedays.domain.RegularUser;
+import freedays.timesheet.TimesheetUser;
 import freedays.util.DateUtils;
 import freedays.util.ValidationUtils;
 import freedays.validation.annotation.FreeDaySpecificDateConstraint;
@@ -397,6 +398,22 @@ public abstract class FreeDay {
 			fdrl.add(FreeDayUserList.generateAllFreeDays(fdu, month));
 		}
 		return fdrl;
+	}
+	
+	public static List<FreeDayUserList> getAllDepartmentUserFreeDays(int month, String username){
+	    List<FreeDayUserList> fdrl = new ArrayList<FreeDayUserList>();
+	    TimesheetUser currentTimehseetUser = TimesheetUser.findTimesheetUserByUsername(username);
+	    if(currentTimehseetUser != null ){
+	        //get the timesheet users
+	        List<TimesheetUser> sameDepartmentTimesheetUsers = TimesheetUser.findAllTimesheetUsersByDepartment(currentTimehseetUser.getDepartment());
+	        //iterate over timesheet users
+	        for(TimesheetUser timehseetUser : sameDepartmentTimesheetUsers){
+	            // generateAllFreeDays for timesheetUser.getFreeDayUser
+	            System.out.println(timehseetUser.getFduser());
+	            fdrl.add(FreeDayUserList.generateAllFreeDays(timehseetUser.getFduser(), month));
+	        }
+	    }
+	    return fdrl;
 	}
 
 	/**

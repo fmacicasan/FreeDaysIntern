@@ -181,7 +181,7 @@ public class ReportController {
 		uiModel.addAttribute("fullMonthNames",
 				DateUtils.getMonthNamesExtended());
 		uiModel.addAttribute("employeeCount", lfd.size());
-		log.info("Finish report creation!");
+		log.info("Finished team report creation!");
 
 		return "report/vacation";
 	}
@@ -191,5 +191,30 @@ public class ReportController {
 	public String goToProfile(@PathVariable("id") Long id, Model uiModel) {
 		return "redirect:/profile/" + id;
 	}
+	
+	@PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = "/vacation/department", method = RequestMethod.GET)
+    public String reportVacationPlansDepartment(
+            @RequestParam(value = "m", required = false) Integer m,
+            Model uiModel) {
+        if (!DateUtils.isValidMonth(m)) {
+            m = DateUtils.getCurrentMonth();
+            return "redirect:/report/vacation/department?m=" + m;
+        }
+        int month = DateUtils.transformMonth(m);
+        List<FreeDayUserList> lfd = FreeDay.getAllDepartmentUserFreeDays(month, userContextService.getCurrentUser());
+        uiModel.addAttribute("vacations", lfd);
+        uiModel.addAttribute("length", DateUtils.getDaysInMonth(month));
+        uiModel.addAttribute("daysDateList", DateUtils.getShortDateList(month));
+        uiModel.addAttribute("daysWeekdayList", DateUtils.getWeekdayInitialsList(month));
+        // modifyed to accustom january/december of adjacent years
+        // uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNames());
+        uiModel.addAttribute("fullMonthNames", DateUtils.getMonthNamesExtended());
+        uiModel.addAttribute("employeeCount", lfd.size());
+        // log.info("MONTH NAMES!!!!!!!!!!!!!!!!!!!!!!"+DateUtils.getMonthNamesExtended());
+        log.info("Finished department report creation!");
+
+        return "report/vacation";
+    }
 
 }

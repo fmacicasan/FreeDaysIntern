@@ -80,8 +80,12 @@ public class TimesheetUser implements Serializable{
 	}
 	
 	
-	public String getDepartment(){
+	public String getDepartmentString(){
 		return department.toString();
+	}
+	
+	public Department getDepartment(){
+	    return department;
 	}
 	
     public void setDepartment(Department administrativ) {
