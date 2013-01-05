@@ -179,7 +179,9 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 			team.add(me);
 			return team;
 		} else {
-			if(!me.getGranter().isSuperUser()){
+		    //(fmacicasan)05.01.2013: get team for all
+//			if(!me.getGranter().isSuperUser()){
+		    if(me.getGranter() != null){
 				//my granter is a team leadear so show my team
 				List<FDUser> team = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.granter = :granter AND o.jobrole != :jobRole AND o.regularUser.deleted = :deleted",FDUser.class).setParameter("granter", me.getGranter()).setParameter("jobRole", JobRole.OBS).setParameter("deleted", false).getResultList();
 				FDUser leader = FDUser.findFDUserByUsername(me.getGranter().getRegularUser().getUsername());
