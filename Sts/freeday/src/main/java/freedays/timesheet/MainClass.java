@@ -10,7 +10,7 @@ import freedays.util.PropertiesUtil;
 
 public class MainClass {
 
-	private static final int TIMESHEET_YEAR = 2012;
+	private static final int TIMESHEET_YEAR = PropertiesUtil.getInteger(PropertiesUtil.CURRENT_YEAR);
 
 	/**
 	 * @param args
