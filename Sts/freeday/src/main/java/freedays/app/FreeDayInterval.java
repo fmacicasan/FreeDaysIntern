@@ -170,6 +170,18 @@ public abstract class FreeDayInterval extends FreeDay {
 		Long sum = q.getSingleResult();
 		return sum == null ? 0 : sum;
 	}
+	
+	public static Long sumAllVacationNumbersByUsername(String username, Integer year) {
+	    if (username == null || username.length() == 0) throw new IllegalArgumentException("The username argument is required");
+	    EntityManager em = FreeDayVacation.entityManager();
+	    TypedQuery<Long> q = em.createQuery("SELECT SUM(o.number) FROM FreeDayVacation o, Request r where r.appreguser.regularUser.username = :username AND r.requestable = o AND o.status != :completedfailure AND o.year = :year", Long.class);
+	    q.setParameter("username", username);
+	    q.setParameter("completedfailure", FreeDayStatus.COMPLETED_FAILURE);
+	    q.setParameter("year", year);
+	    Long sum = q.getSingleResult();
+	    return sum == null? 0 : sum;
+	            
+	}
 
 	/**
 	 * Verifies weather or no the provided calendar instance can represent a

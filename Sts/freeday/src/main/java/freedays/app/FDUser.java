@@ -117,6 +117,8 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username,year);
 		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username,year);
 		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username,year);
+		// how many "number" were in the previous year
+        remainingDays -= FreeDayVacation.sumAllVacationNumbersByUsername(username, year-1);
 		return remainingDays;		
 	}
 	
@@ -139,6 +141,8 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 		remainingDays -= FreeDayL.countAllNotFailedRequestsByUsername(username,year);
 		remainingDays -= FreeDayVacation.countAllNotFailedRequestsByUsername(username,year); 
 		remainingDays -= FreeDayVacation.sumAllVacationSpansByUsername(username,year);
+		// how many "number" were in the previous year
+		remainingDays -= FreeDayVacation.sumAllVacationNumbersByUsername(username, year-1);
 		return remainingDays;
 	}
 	
@@ -215,7 +219,7 @@ public class FDUser extends ApplicationRegularUser implements Serializable {
 	 */
 	//@PostFilter("hasPermission(filterObject, 'list')")
 	public static List<FDUser> findAllReportableFDUsers() {
-		TypedQuery<FDUser> q = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.regularUser.deleted = :deleted AND o.jobrole != :jobRole", FDUser.class);
+		TypedQuery<FDUser> q = entityManager().createQuery("SELECT o FROM FDUser AS o WHERE o.regularUser.deleted = :deleted AND o.jobrole != :jobRole order by o.regularUser.surename", FDUser.class);
         q.setParameter("deleted", false);
         q.setParameter("jobRole", JobRole.OBS);
         List<FDUser> results = q.getResultList();
