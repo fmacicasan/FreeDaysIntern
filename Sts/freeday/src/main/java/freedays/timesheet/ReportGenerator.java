@@ -2,13 +2,16 @@ package freedays.timesheet;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -19,16 +22,18 @@ import org.springframework.stereotype.Service;
 import freedays.timesheet.TimesheetUser.Department;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
+import freedays.util.ValidationUtils;
 
 //TODO: create structure for entities within report: START<COLUMN, ROW>, END, CONTENT and populate report with that 
 @Service
 public class ReportGenerator implements TimesheetGenerator {
     
+    private static final int MONTH_MAX = 31;
     private static final int TABLE_SPACE_ALLIGNMENT = 3;
     private static final int UNIT_COLUMN = 0;
     private static final int TITLE_COLUMN = 8;
     private static final int LEGEND_COLUMN = 19;
-    private static final int REPORT_COLUMN_SIZE = 50;
+    private static final int REPORT_COLUMN_SIZE = 55;
     @Autowired
     private ReportService reportService;
     
@@ -41,7 +46,7 @@ public class ReportGenerator implements TimesheetGenerator {
         
         int row = generateDocHeader(sheet, genmonth);
         
-        generateDocContent(sheet, row, genmonth);
+        generateDocContent(wb, sheet, row, genmonth);
         
         
         
@@ -57,55 +62,145 @@ public class ReportGenerator implements TimesheetGenerator {
         
     }
 
-    private void generateDocContent(Sheet sheet, int rowcnt, int month) {
+    private void generateDocContent(Workbook wb, Sheet sheet, int rowcnt, int month) {
         // iterate over departments
         int nrcrt=0;
      // iterate over teampays
         // iterate over each timesheet user
         // obtain array with status for each day
+        CellStyle dashedCellStyle = wb.createCellStyle();
+        dashedCellStyle.setFillPattern(CellStyle.SPARSE_DOTS);
+        
+        int initRowCnt = rowcnt+1;
+        
         for (Department department : Department.values()) {
             List<TimesheetUser> timesheetUsers = TimesheetUser.findAllTimesheetUsersByDepartment(department);
-//            if (timesheetUsers.size() > 0) {
-                int currentteampay = -1;
-                for(TimesheetUser timesheetUser : timesheetUsers) {
-                    if(timesheetUser.getTeampay() != currentteampay){
-                        Row row = sheet.createRow((short) ++rowcnt);
-                        currentteampay = timesheetUser.getTeampay();
-                        populateCell(sheet, row,constructCellRange("A","AX",rowcnt),0,department+" "+currentteampay);
+            int currentteampay = -1;
+            for(TimesheetUser timesheetUser : timesheetUsers) {
+                if(timesheetUser.getTeampay() != currentteampay){
+                    rowcnt++;
+                    Row row = sheet.createRow((short) rowcnt);
+                    currentteampay = timesheetUser.getTeampay();
+                    populateCell(sheet, row,constructCellRange("A","AX",rowcnt),0,department+" "+currentteampay);
+                }
+                String timesheetUserUsername = timesheetUser.getFduser().getRegularUser().getUsername();
+                Integer noOfHours = timesheetUser.getScheduleLst().get(0).getPattern().getNoOfHours();
+                
+                Integer year = PropertiesUtil.getInteger(PropertiesUtil.CURRENT_YEAR);
+                List<FreeDayAbstraction> allGrantedFreeDays = FreeDayAbstraction.getAllGrantedFreeDayAbstractionsFilteredByMonth(month, year,timesheetUserUsername);
+                System.out.println("Timesheet user"+timesheetUserUsername+noOfHours);
+                
+                rowcnt++;
+                Row row = sheet.createRow((short) rowcnt);
+                populateCell(sheet, row,"A1:A1",0, ++nrcrt+"");
+                populateCell(sheet, row,constructCellRange("B","D", rowcnt),1,timesheetUser.getRegularUser().getFullName()+rowcnt);
+                
+                int offset = 4;
+                int daysInMonthPlusOffset = DateUtils.getDaysInMonth112(month)+offset;
+                Map<Integer,Cell> dayToCell = new HashMap<Integer, Cell>();
+                for(int day = offset;day < daysInMonthPlusOffset; day++){
+                    Cell cellDayOfMonth = row.createCell(day);
+                    cellDayOfMonth.setCellValue(noOfHours);
+                    //start with 1
+                    int dayInMonth = day-offset+1;
+                    dayToCell.put(dayInMonth, cellDayOfMonth);
+                    Calendar date = DateUtils.convString2Calendar(month+"/"+dayInMonth+"/"+year);
+                    if(ValidationUtils.checkWeekend(date)){
+                        cellDayOfMonth.setCellStyle(dashedCellStyle);
                     }
-                    String timesheetUserUsername = timesheetUser.getFduser().getRegularUser().getUsername();
-                    Integer noOfHours = timesheetUser.getScheduleLst().get(0).getPattern().getNoOfHours();
-                    
-                    List<FreeDayAbstraction> allGrantedFreeDays = FreeDayAbstraction.getAllGrantedFreeDayAbstractionsFilteredByMonth(month, PropertiesUtil.getInteger(PropertiesUtil.CURRENT_YEAR),timesheetUserUsername);
-                    System.out.println("Timesheet user"+timesheetUserUsername+noOfHours);
-                    
-                    Row row = sheet.createRow((short) ++rowcnt);
-                    populateCell(sheet, row,"A1:A1",0, ++nrcrt+"");
-                    populateCell(sheet, row,constructCellRange("B","D", rowcnt),1,timesheetUser.getRegularUser().getFullName());
-                    
-                    int offset = 4;
-                    int daysInMonthPlusOffset = DateUtils.getDaysInMonth112(month)+offset;
-                    Map<Integer,Cell> dayToCell = new HashMap<Integer, Cell>();
-                    for(int day = offset;day < daysInMonthPlusOffset; day++){
-                        Cell cellDayOfMonth = row.createCell(day);
-                        cellDayOfMonth.setCellValue(noOfHours);
-                        //start with 1
-                        dayToCell.put(day-offset+1, cellDayOfMonth);
+                }
+                
+                for(FreeDayAbstraction abstraction : allGrantedFreeDays){
+                    for(Calendar c = (Calendar)abstraction.getStart().clone(); c.compareTo(abstraction.getEnd()) <= 0;c.add(Calendar.DAY_OF_YEAR, 1)){
+                        dayToCell.get(c.get(Calendar.DAY_OF_MONTH)).setCellValue(abstraction.getLegendCode());
                     }
-                    
-                    for(FreeDayAbstraction abstraction : allGrantedFreeDays){
-                        for(Calendar c = (Calendar)abstraction.getStart().clone(); c.compareTo(abstraction.getEnd()) <= 0;c.add(Calendar.DAY_OF_YEAR, 1)){
-                            dayToCell.get(c.get(Calendar.DAY_OF_MONTH)).setCellValue(abstraction.getLegendCode());
-                        }
-                    }
-//                }
+                }
+                
+                int reportColumnCount = 31+offset;
+                
+                int rowcntFrom1 = rowcnt+1;
+                String range = "E"+rowcntFrom1+":AI"+rowcntFrom1;
+                Cell totalWorked = row.createCell(reportColumnCount);
+                totalWorked.setCellFormula("SUM("+range+")");
+                
+                reportColumnCount++;
+                Cell nightHours = row.createCell(reportColumnCount);
+                nightHours.setCellStyle(dashedCellStyle);
+                
+                reportColumnCount++;
+                Cell aggregateCo = row.createCell(reportColumnCount);
+                aggregateCo.setCellFormula("COUNTIF("+range+",AM"+initRowCnt+")*"+noOfHours);
+                
+                reportColumnCount++;
+                Cell aggregateCs = row.createCell(reportColumnCount);
+                aggregateCs.setCellFormula("COUNTIF("+range+",AN"+initRowCnt+")*"+noOfHours);
+                
+                reportColumnCount++;
+                Cell aggregateCfs = row.createCell(reportColumnCount);
+                aggregateCfs.setCellFormula("COUNTIF("+range+",AO"+initRowCnt+")*"+noOfHours);
+                
+                reportColumnCount++;
+                Cell aggregatBo = row.createCell(reportColumnCount);
+                aggregatBo.setCellFormula("COUNTIF("+range+",AP"+initRowCnt+")*"+noOfHours);
+                
+                reportColumnCount++;
+                Cell aggregateM = row.createCell(reportColumnCount);
+                aggregateM.setCellFormula("COUNTIF("+range+",AQ"+initRowCnt+")*"+noOfHours);
+                
+                reportColumnCount++;
+                Cell totalNr = row.createCell(reportColumnCount);
+                totalNr.setCellFormula("SUM(AM"+rowcntFrom1+":AQ"+rowcntFrom1+")");
+                
+                reportColumnCount++;
+                Cell daysCo = row.createCell(reportColumnCount);
+                daysCo.setCellFormula("AM"+initRowCnt+"/"+noOfHours);
+                
+                reportColumnCount++;
+                Cell ticketsCell = row.createCell(reportColumnCount);
+                ticketsCell.setCellFormula("AJ"+initRowCnt+"/"+noOfHours);
+                
+//                reportColumnCount++;
+//                Cell ticketsCell = row.createCell(reportColumnCount);
+//                ticketsCell.setCellFormula("AJ"+initRowCnt+"/"+noOfHours);
+                
+                //use generate range
+                
+                
+                
+                
                 
             }
         }
         // do ordering stuff 
-                
     }
-
+    
+    public static String convTo24(Integer number){
+        if(number == 0) return "A";
+        List<Integer> list = new ArrayList<Integer>();
+        int max = 'Z'-'A' + 1;
+        int nr = number;
+        System.out.println(max);
+        if(number < max){
+            list.add(number);
+        } else {
+            while(number != 0){
+                list.add(number%max - 1);
+                number /= max;
+            } 
+        }
+//        while(number > max - 1){
+//            list.add(number%max);
+//            number /= max;
+//        }
+        
+        Collections.reverse(list);
+        StringBuffer sb = new StringBuffer();
+        for(Integer value : list){
+            sb.append((char)('A'+value));
+        }
+        return list.toString()+"=>"+sb.toString()+"=>"+nr;
+    }
+    
 
 
     @Override
@@ -173,6 +268,7 @@ public class ReportGenerator implements TimesheetGenerator {
             cellDayOfMonth.setCellValue(monthDay);
         }
         j+= daysInMonth;
+        j+= (MONTH_MAX - daysInMonth);
         
         j++;
         Cell cellTotalWorked = row.createCell(j);
@@ -201,14 +297,14 @@ public class ReportGenerator implements TimesheetGenerator {
         cellDaysVacation.setCellValue("Zile Co");
         
         j++;
-        CellRangeAddress regionTicket = CellRangeAddress.valueOf(constructCellRange("AR","AR", i));
-        sheet1.addMergedRegion(regionTicket);
+//        CellRangeAddress regionTicket = CellRangeAddress.valueOf(constructCellRange("AR","AR", i));
+//        sheet1.addMergedRegion(regionTicket);
         Cell cellTickets = row.createCell(j);
         cellTickets.setCellValue("Tichete");
         
         j++;
-        CellRangeAddress regionCheck = CellRangeAddress.valueOf(constructCellRange("AS","AU", i));
-        sheet1.addMergedRegion(regionCheck);
+//        CellRangeAddress regionCheck = CellRangeAddress.valueOf(constructCellRange("AS","AS", i));
+//        sheet1.addMergedRegion(regionCheck);
         Cell cellCheck = row.createCell(j);
         cellCheck.setCellValue("Verificare");
         
