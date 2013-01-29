@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import freedays.app.FDUser;
 import freedays.app.form.FreeDayUserList;
@@ -50,9 +51,12 @@ public class FreeDayScheduleServiceImpl implements FreeDayScheduleService {
 		
 		String content = sb.toString();
 		String email = PropertiesUtil.getProperty("reportDestinationAddress");
-		
-		dailyReportRepository.insertDailyReport(email, FreeDayScheduleServiceImpl.SUBJECT, content);
-		MailUtils.sendHtml(email, FreeDayScheduleServiceImpl.SUBJECT, content);
+		if(StringUtils.hasText(email)){
+		    dailyReportRepository.insertDailyReport(email, FreeDayScheduleServiceImpl.SUBJECT, content);
+		    MailUtils.sendHtml(email, FreeDayScheduleServiceImpl.SUBJECT, content);
+		} else {
+		    log.info("Report Destination Address not supplied!");
+		}
 	}
 
 //	@Override
