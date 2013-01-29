@@ -23,10 +23,14 @@ public class ApplicationRegularUserIntegrationTest {
 	public void setUp(){
 		RegularUserDataOnDemand rudod = new RegularUserDataOnDemand();
 		RegularUser ru = rudod.getRandomRegularUser();
+		do {
+		    ru = rudod.getRandomRegularUser();
+		}while(JobRole.OBS.equals(ApplicationRegularUser.findByUsername(ru.getUsername()).getJobrole()));
+		
 		this.superbossusername = ru.getUsername();
 		boss = ApplicationRegularUser.findByUsername(superbossusername);
 		while(!boss.isSuperUser()){
-			ru = rudod.getRandomRegularUser();
+			ru = boss.getGranter().getRegularUser();
 			this.superbossusername = ru.getUsername();
 			boss = ApplicationRegularUser.findByUsername(superbossusername);
 		}
