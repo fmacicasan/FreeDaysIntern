@@ -16,7 +16,9 @@
 					<menu:item id="c_general_reportvacationteam"
 						url="/report/vacation/team" z="user-managed" />
 				</sec:authorize>
-				<menu:item id="c_general_reportvacationdepartment" url="/report/vacation/department" z="user-managed" />
+				<sec:authorize ifAllGranted="ROLE_DEPARTMENTVIEWER">
+					<menu:item id="c_general_reportvacationdepartment" url="/report/vacation/department" z="user-managed" />
+				</sec:authorize>
 				<!--
 				<sec:authorize ifAllGranted="ROLE_FDADMIN">
 					<menu:item id="c_general_timesheet" url="/timesheet"

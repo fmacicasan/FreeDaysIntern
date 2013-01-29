@@ -409,7 +409,6 @@ public abstract class FreeDay {
 	        //iterate over timesheet users
 	        for(TimesheetUser timehseetUser : sameDepartmentTimesheetUsers){
 	            // generateAllFreeDays for timesheetUser.getFreeDayUser
-	            System.out.println(timehseetUser.getFduser());
 	            fdrl.add(FreeDayUserList.generateAllFreeDays(timehseetUser.getFduser(), month));
 	        }
 	    }

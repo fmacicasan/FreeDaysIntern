@@ -418,7 +418,7 @@ public class RegularUser implements Serializable {
 	public static Collection<RegularUser> findAllRegularUsersUnasociated() {
 		return entityManager()
 				.createQuery(
-						"SELECT o FROM RegularUser o WHERE o.id NOT IN (SELECT f.regularUser FROM FDUser f) ",
+						"SELECT o FROM RegularUser o WHERE o.id NOT IN (SELECT f.regularUser FROM FDUser f) and o.deleted = false",
 						RegularUser.class).getResultList();
 	}
 

@@ -93,10 +93,21 @@ public class TimesheetUser implements Serializable{
         
     }
     
-    public static List<TimesheetUser> findAllTimesheetUsersByDepartment(Department department2) {
+    public static List<TimesheetUser> findAllTimesheetUsersByDepartmentOrdered(Department department2) {
         if (department2 == null) throw new IllegalArgumentException("The department2 argument is required");
         EntityManager em = TimesheetUser.entityManager();
         TypedQuery<TimesheetUser> q = em.createQuery("SELECT t FROM TimesheetUser AS t WHERE t.department = :department and t.fduser.jobrole != :jobRole and t.fduser.regularUser.deleted = :deleted order by t.teampay ASC ", TimesheetUser.class);
+        q.setParameter("department", department2);
+        q.setParameter("jobRole", JobRole.OBS);
+        q.setParameter("deleted", false);        
+        List<TimesheetUser> results = q.getResultList();
+        return results;
+    }
+    
+    public static List<TimesheetUser> findAllTimesheetUsersByDepartment(Department department2) {
+        if (department2 == null) throw new IllegalArgumentException("The department2 argument is required");
+        EntityManager em = TimesheetUser.entityManager();
+        TypedQuery<TimesheetUser> q = em.createQuery("SELECT t FROM TimesheetUser AS t WHERE t.department = :department and t.fduser.jobrole != :jobRole and t.fduser.regularUser.deleted = :deleted", TimesheetUser.class);
         q.setParameter("department", department2);
         q.setParameter("jobRole", JobRole.OBS);
         q.setParameter("deleted", false);        

@@ -193,7 +193,7 @@ public class ReportController {
 		return "redirect:/profile/" + id;
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_DEPARTMENTVIEWER')")
     @RequestMapping(value = "/vacation/department", method = RequestMethod.GET)
     public String reportVacationPlansDepartment(
             @RequestParam(value = "m", required = false) Integer m,

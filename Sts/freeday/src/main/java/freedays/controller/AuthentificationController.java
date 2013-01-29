@@ -26,6 +26,7 @@ import freedays.app.FDUser;
 import freedays.domain.AdvancedUserRole;
 import freedays.domain.ApplicationRegularUser;
 import freedays.domain.RegularUser;
+import freedays.timesheet.TimesheetUser;
 
 /**
  * Controller used to intercept authentication requests generated due to the
@@ -99,6 +100,10 @@ public class AuthentificationController extends
 				if(isRequestGranter || aruGranter != null){
 					authorities.add(new GrantedAuthorityImpl("ROLE_TEAMVIEWER"));
 				} 
+			}
+			TimesheetUser tu = TimesheetUser.findTimesheetUserByUsername(username);
+			if(tu != null && tu.getDepartment() != null){
+			    authorities.add(new GrantedAuthorityImpl("ROLE_DEPARTMENTVIEWER"));
 			}
 			
 		}catch (EmptyResultDataAccessException e){

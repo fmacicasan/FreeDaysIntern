@@ -74,7 +74,7 @@ public class ReportGenerator implements TimesheetGenerator {
         int initRowCnt = rowcnt+1;
         
         for (Department department : Department.values()) {
-            List<TimesheetUser> timesheetUsers = TimesheetUser.findAllTimesheetUsersByDepartment(department);
+            List<TimesheetUser> timesheetUsers = TimesheetUser.findAllTimesheetUsersByDepartmentOrdered(department);
             int currentteampay = -1;
             for(TimesheetUser timesheetUser : timesheetUsers) {
                 if(timesheetUser.getTeampay() != currentteampay){
