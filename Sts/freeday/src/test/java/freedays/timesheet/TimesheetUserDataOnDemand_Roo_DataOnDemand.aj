@@ -6,7 +6,7 @@ package freedays.timesheet;
 import freedays.app.FDUser;
 import freedays.app.FDUserDataOnDemand;
 import freedays.timesheet.TimesheetUser;
-import freedays.timesheet.TimesheetUser.Department;
+import freedays.timesheet.Department;
 import java.lang.Integer;
 import java.security.SecureRandom;
 import java.util.Random;

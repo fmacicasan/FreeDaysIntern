@@ -5,7 +5,7 @@ package freedays.app;
 
 import freedays.app.FDUser;
 import freedays.domain.ApplicationRegularUser;
-import freedays.domain.ApplicationRegularUser.JobRole;
+import freedays.domain.JobRole;
 import java.lang.Integer;
 import java.security.SecureRandom;
 import java.util.Calendar;

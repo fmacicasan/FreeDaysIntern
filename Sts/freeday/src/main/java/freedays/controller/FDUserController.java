@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import freedays.app.FDUser;
 import freedays.domain.ApplicationRegularUser;
-import freedays.domain.ApplicationRegularUser.JobRole;
+import freedays.domain.JobRole;
 import freedays.domain.RegularUser;
 import freedays.security.UserContextService;
 import freedays.util.MailUtils;

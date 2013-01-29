@@ -18,7 +18,7 @@ import freedays.app.FDUser;
 import freedays.app.RequestStatus;
 import freedays.domain.RegularUser;
 import freedays.domain.Request;
-import freedays.timesheet.TimesheetUser.Department;
+import freedays.timesheet.Department;
 import freedays.util.PropertiesUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -62,7 +62,7 @@ public class ReportGeneratorTest {
             
             int random = rand.nextInt() %2;
             if(random == 1){
-                timesheetUser.setDepartment(Department.ADMINISTRATIV);
+                timesheetUser.setDepartment(Department.ADMIN);
             } else {
                 timesheetUser.setDepartment(Department.SOFTWARE);
             }

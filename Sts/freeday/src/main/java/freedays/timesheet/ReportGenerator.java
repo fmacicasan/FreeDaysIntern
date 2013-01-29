@@ -19,7 +19,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import freedays.timesheet.TimesheetUser.Department;
+import freedays.timesheet.Department;
 import freedays.util.DateUtils;
 import freedays.util.PropertiesUtil;
 import freedays.util.ValidationUtils;

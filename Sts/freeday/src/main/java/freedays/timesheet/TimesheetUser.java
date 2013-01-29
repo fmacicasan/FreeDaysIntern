@@ -1,7 +1,7 @@
 package freedays.timesheet;
 
 import freedays.app.FDUser;
-import freedays.domain.ApplicationRegularUser.JobRole;
+import freedays.domain.JobRole;
 import freedays.domain.RegularUser;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import freedays.timesheet.Schedule;
-import freedays.timesheet.TimesheetUser.Department;
+import freedays.timesheet.Department;
 
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
@@ -39,7 +39,6 @@ public class TimesheetUser implements Serializable{
     private FDUser fduser;
     
     
-    public enum Department{SOFTWARE, ADMINISTRATIV, DATA, LANGUAGE_GATEWAY, LANGUAGE_TECHNOLOGIES, MARKETING, DESKTOP }
     @Enumerated(EnumType.STRING)
     @NotNull
     private Department department; 
@@ -55,6 +54,7 @@ public class TimesheetUser implements Serializable{
     	fduser.getRegularUser().getFullName();
     	fduser.getJobrole();
     }
+    
     public JobRole getJobrole(){
     	return fduser.getJobrole();
     }

@@ -20,6 +20,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.stereotype.Service;
 
 import freedays.domain.ApplicationRegularUser;
+import freedays.domain.JobRole;
 import freedays.domain.RegularUser;
 import freedays.domain.Request;
 import freedays.util.PropertiesUtil;

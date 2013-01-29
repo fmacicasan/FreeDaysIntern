@@ -58,7 +58,6 @@ public abstract class ApplicationRegularUser   implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "appreguser")
     private Set<Request> requests = new HashSet<Request>();
     
-    public enum JobRole{DEV, QA, SDET, PM, IT, EM, PO, SE, PS, OBS, DEV_JR, DEV_SR, QA_JR, QA_SR }
     @Enumerated
     private JobRole jobrole;
     
