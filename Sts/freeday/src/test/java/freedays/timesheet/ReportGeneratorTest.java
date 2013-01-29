@@ -78,6 +78,11 @@ public class ReportGeneratorTest {
         }
     }
     
+    @Test
+    public void gogo(){
+        
+    }
+    
 //    @Test
     public void reportRemainingDays2012(){
         System.out.println("||Name||Remaining Days||");
